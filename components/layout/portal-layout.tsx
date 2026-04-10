@@ -6,6 +6,7 @@ import { AppSidebar } from "@/components/layout/sidebar"
 import { Header } from "@/components/layout/header"
 import { useAuth } from "@/lib/auth-context"
 import { SidebarProvider } from "@/components/ui/sidebar"
+import { MobileNav } from "@/components/layout/mobile-nav"
 
 interface PortalLayoutProps {
   children: React.ReactNode
@@ -36,11 +37,12 @@ export function PortalLayout({ children, portal }: PortalLayoutProps) {
     <SidebarProvider>
       <div className="flex h-screen overflow-hidden bg-background w-full">
         <AppSidebar portal={portal} />
-        <div className="flex-1 flex flex-col overflow-hidden">
+        <div className="flex-1 flex flex-col overflow-hidden relative">
           <Header />
-          <main className="flex-1 overflow-y-auto px-[10px] py-4 md:py-6 lg:py-8">
+          <main className="flex-1 overflow-y-auto px-[10px] py-4 md:py-6 lg:py-8 pb-32 md:pb-6">
             {children}
           </main>
+          <MobileNav />
         </div>
       </div>
     </SidebarProvider>

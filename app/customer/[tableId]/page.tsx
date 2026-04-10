@@ -964,7 +964,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
         {/* ── Checkout Sheet Removed (Moved to dedicated /billing page) ── */}
 
         {/* ── Floating Action Bar ───────────────────────────────────── */}
-        <div className="fixed bottom-6 left-4 right-4 max-w-lg mx-auto z-50 flex items-stretch gap-2.5">
+        <div className="fixed bottom-28 md:bottom-6 left-4 right-4 max-w-lg mx-auto z-50 flex items-stretch gap-2.5 transition-all duration-500">
           {/* Live Session Banner */}
           {orderedItems.length > 0 && (
             <button

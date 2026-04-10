@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/next"
 import { Toaster } from "@/components/ui/sonner"
 import { AuthProvider } from "@/lib/auth-context"
 import { GlassLoader } from "@/components/ui/glass-loader"
+import { MobileNav } from "@/components/layout/mobile-nav"
 import "./globals.css"
 
 const nunito = Nunito({ 
@@ -41,6 +42,7 @@ export default function RootLayout({
         
         <AuthProvider>
           {children}
+          <MobileNav />
           <Toaster position="top-right" />
         </AuthProvider>
         <Analytics />
