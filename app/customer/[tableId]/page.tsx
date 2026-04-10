@@ -297,8 +297,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
       style={{ background:"#FDFCFF", borderColor:"oklch(0.45 0.12 285 / 0.12)" }}
     >
       <SheetHeader
-        className="px-6 pt-6 pb-4 border-b shrink-0"
-        style={{ borderColor:"oklch(0.45 0.12 285 / 0.1)" }}
+        className="px-6 pt-6 pb-4 shrink-0"
       >
         <div className="flex items-center gap-3">
           <div
@@ -354,8 +353,8 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
             {cart.map(item => (
               <div
                 key={item.id}
-                className="flex items-center gap-3 p-3 rounded-2xl border"
-                style={{ background:"white", borderColor:"oklch(0.45 0.12 285 / 0.1)" }}
+                className="flex items-center gap-3 p-3 rounded-2xl"
+                style={{ background:"white" }}
               >
                 {/* Item thumbnail */}
                 <div className="w-12 h-12 rounded-xl overflow-hidden shrink-0">
@@ -371,7 +370,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
 
                 <div
                   className="flex items-center gap-1.5 rounded-full p-1"
-                  style={{ background:"oklch(0.45 0.12 285 / 0.06)", border:"1px solid oklch(0.45 0.12 285 / 0.12)" }}
+                  style={{ background:"oklch(0.45 0.12 285 / 0.06)" }}
                 >
                   <button
                     className="flex items-center justify-center w-7 h-7 rounded-full transition-colors hover:bg-white"
@@ -411,7 +410,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
           {/* Total row */}
           <div
             className="flex justify-between items-center px-4 py-3 rounded-2xl"
-            style={{ background:"oklch(0.45 0.12 285 / 0.06)", border:"1px solid oklch(0.45 0.12 285 / 0.1)" }}
+            style={{ background:"oklch(0.45 0.12 285 / 0.06)" }}
           >
             <span className="text-sm font-semibold" style={{ color:"#3D374C" }}>Total</span>
             <span className="text-lg font-bold tabular-nums" style={{ color:"oklch(0.45 0.12 285)" }}>
@@ -458,64 +457,69 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
         {/* ── Welcome Overlay ─────────────────────────────────────── */}
         {!hasStarted && (
           <div 
-            className="fixed inset-0 z-[100] flex flex-col items-center justify-center p-6 text-center overflow-hidden animate-in fade-in duration-500"
+            className="fixed inset-0 z-[100] flex flex-col items-center justify-center p-6 text-center overflow-hidden animate-in fade-in duration-700"
             style={{ 
-              background: `linear-gradient(to top, #0D031B, rgba(13,3,27,0.7), transparent), url(${HERO_IMAGE})`,
+              background: `url(${HERO_IMAGE})`,
               backgroundSize: "cover",
               backgroundPosition: "center"
             }}
           >
-            <div className="absolute inset-0 bg-[#0D031B]/40 backdrop-blur-sm" />
+            {/* Elegant Glass Layer */}
+            <div 
+               className="absolute inset-0 backdrop-blur-md transition-all duration-1000"
+               style={{ background: "radial-gradient(circle at center, rgba(21, 10, 48, 0.4), rgba(13, 3, 27, 0.85))" }} 
+            />
             
-            <div className="relative space-y-12 animate-in slide-in-from-bottom-12 duration-700">
+            <div className="relative space-y-12 animate-in zoom-in-95 slide-in-from-bottom-12 duration-1000">
               <div className="flex flex-col items-center gap-6">
                 <div 
-                  className="flex items-center justify-center w-24 h-24 rounded-[2.5rem]"
+                  className="flex items-center justify-center w-28 h-28 rounded-[3rem] animate-pulse"
                   style={{ 
                     background:"oklch(0.45 0.12 285)", 
-                    boxShadow:"0 20px 50px oklch(0.45 0.12 285 / 0.6)",
-                    border: "2px solid rgba(255,255,255,0.2)"
+                    boxShadow:"0 20px 60px oklch(0.45 0.12 285 / 0.7)",
+                    border: "1px solid rgba(255,255,255,0.3)"
                   }}
                 >
-                  <UtensilsCrossed className="h-11 w-11 text-white" />
+                  <UtensilsCrossed className="h-12 w-12 text-white" />
                 </div>
-                <div className="space-y-1 text-center">
-                  <h1 className="text-6xl font-black text-white  uppercase pl-4">Resto</h1>
-                  <p className="text-white/40 text-[11px] font-bold uppercase  flex items-center gap-3 justify-center">
-                    <span className="w-8 h-px bg-white/20" />
-                    Experience Excellence
-                    <span className="w-8 h-px bg-white/20" />
+                <div className="space-y-2 text-center">
+                  <h1 className="text-7xl font-black text-white tracking-tighter uppercase ">Resto</h1>
+                  <p className="text-white/60 text-[11px] font-bold uppercase tracking-[0.4em] flex items-center gap-4 justify-center">
+                    <span className="w-10 h-px bg-white/20" />
+                    Bespoke Dining
+                    <span className="w-10 h-px bg-white/20" />
                   </p>
                 </div>
               </div>
 
-              <div className="space-y-3">
-                <p className="text-white/50 text-xs font-semibold uppercase  italic">
-                  Premium Dining · Table {tableId}
+              <div className="space-y-4">
+                <p className="text-white/70 text-[13px] font-medium">
+                  Welcome to <span className="font-bold text-white">Table {tableId}</span>
                 </p>
+                
+                <button
+                  onClick={() => attemptPlay()}
+                  className="group relative px-16 py-5 rounded-full transition-all hover:scale-105 active:scale-[0.98] overflow-hidden"
+                  style={{ 
+                    background: "white",
+                    boxShadow: "0 25px 50px rgba(0,0,0,0.4)"
+                  }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <span className="relative flex items-center gap-4 text-[15px] font-black uppercase tracking-widest text-[#0D031B]">
+                    Enjoy Experience
+                    <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center transition-transform group-hover:translate-x-1">
+                      <ChevronRight className="h-4 w-4 text-primary" />
+                    </div>
+                  </span>
+                </button>
               </div>
-
-              <button
-                onClick={() => attemptPlay()}
-                className="group relative px-14 py-5 rounded-[2.4rem] transition-all hover:scale-105 active:scale-[0.98] overflow-hidden"
-                style={{ 
-                  background: "white",
-                  boxShadow: "0 25px 60px rgba(0,0,0,0.5)"
-                }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                <span className="relative flex items-center gap-4 text-[14px] font-black uppercase  text-[#0D031B]">
-                  Explore Menu
-                  <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center transition-transform group-hover:translate-x-1">
-                    <ChevronRight className="h-4 w-4 text-primary" />
-                  </div>
-                </span>
-              </button>
             </div>
 
-            {/* Bottom info */}
-            <div className="absolute bottom-10 left-0 right-0 flex justify-center opacity-30 select-none">
-              <span className="text-[10px] text-white font-medium uppercase ">Tap to begin your experience</span>
+            {/* Premium Branding Footer */}
+            <div className="absolute bottom-12 left-0 right-0 flex flex-col items-center gap-3 opacity-40 select-none animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500">
+               <div className="w-1 h-12 bg-gradient-to-b from-transparent via-white/50 to-transparent rounded-full" />
+              <span className="text-[10px] text-white font-bold uppercase tracking-[0.3em]">Tap to begin</span>
             </div>
           </div>
         )}
@@ -684,7 +688,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                   style={
                     active
                       ? { background:"oklch(0.45 0.12 285)", boxShadow:"0 4px 16px oklch(0.45 0.12 285 / 0.35)", color:"white" }
-                      : { background:"rgba(255,255,255,0.8)", border:"1px solid oklch(0.45 0.12 285 / 0.15)", color:"#3D374C" }
+                      : { background:"rgba(255,255,255,0.8)", color:"#3D374C" }
                   }
                 >
                   <span style={{ fontSize:15 }}>{display.emoji}</span>
@@ -716,11 +720,10 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                 <div
                   key={item.id}
                   onClick={() => setSelectedItem(item)}
-                  className="group cursor-pointer rounded-lg overflow-hidden border transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl"
+                  className="group cursor-pointer rounded-lg overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl"
                   style={{
                     background:"rgba(255,255,255,0.88)",
                     backdropFilter:"blur(12px)",
-                    borderColor:"oklch(0.45 0.12 285 / 0.1)",
                     boxShadow:"0 2px 12px rgba(13,3,27,0.06)",
                     animationDelay:`${idx * 40}ms`,
                   }}

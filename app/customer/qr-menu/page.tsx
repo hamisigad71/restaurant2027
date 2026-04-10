@@ -48,7 +48,7 @@ function QRCardItem({ table, baseUrl }: { table: { id: string; number: number; s
 
   return (
     <Card className="group bg-card border-border/50 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-1 overflow-hidden rounded-2xl">
-      <CardHeader className="pb-2 border-b border-border/30 flex-row items-center justify-between">
+      <CardHeader className="pb-2 flex-row items-center justify-between">
         <CardTitle className="text-base font-heading  uppercase  text-secondary-foreground">
           Table {table.number}
         </CardTitle>
@@ -66,7 +66,7 @@ function QRCardItem({ table, baseUrl }: { table: { id: string; number: number; s
         {/* LIVE QR Code */}
         <div
           ref={canvasRef}
-          className="flex items-center justify-center p-4 bg-white rounded-2xl border border-border/20 shadow-inner"
+          className="flex items-center justify-center p-4 bg-white rounded-2xl shadow-inner"
         >
           <QRCodeCanvas
             value={menuUrl}
@@ -83,7 +83,7 @@ function QRCardItem({ table, baseUrl }: { table: { id: string; number: number; s
         </div>
 
         {/* URL pill */}
-        <div className="p-2.5 bg-primary/5 rounded-xl border border-primary/10 flex items-center gap-2">
+        <div className="p-2.5 bg-primary/5 rounded-xl flex items-center gap-2">
           <QrCode className="h-3 w-3 text-primary/40 shrink-0" />
           <p className="text-[9px] font-mono text-primary truncate">{menuUrl}</p>
         </div>
@@ -93,7 +93,7 @@ function QRCardItem({ table, baseUrl }: { table: { id: string; number: number; s
           <Button
             variant="outline"
             size="sm"
-            className="h-9 text-[9px]  font-heading uppercase  border-primary/10 text-primary hover:bg-primary/5 rounded-xl transition-all"
+            className="h-9 text-[9px]  font-heading uppercase  text-primary hover:bg-primary/5 rounded-xl transition-all"
             onClick={handleCopy}
           >
             {copied ? (
@@ -105,7 +105,7 @@ function QRCardItem({ table, baseUrl }: { table: { id: string; number: number; s
           <Button
             variant="outline"
             size="sm"
-            className="h-9 text-[9px]  font-heading uppercase  border-primary/10 text-primary hover:bg-primary/5 rounded-xl transition-all"
+            className="h-9 text-[9px]  font-heading uppercase text-primary hover:bg-primary/5 rounded-xl transition-all"
             onClick={handleDownload}
           >
             <Download className="h-3 w-3 mr-1.5" />
@@ -159,7 +159,7 @@ export default function QRMenuPage() {
             { icon: Eye,          label: "Scans Today",     value: 156,                                                                        color: "bg-warning/10 text-warning"  },
             { icon: ExternalLink, label: "QR Orders",       value: 23,                                                                         color: "bg-primary/10 text-primary"  },
           ].map(stat => (
-            <Card key={stat.label} className="bg-card border-border/50 shadow-sm rounded-2xl group hover:shadow-xl hover:-translate-y-0.5 transition-all">
+            <Card key={stat.label} className="bg-card shadow-sm rounded-2xl group hover:shadow-xl hover:-translate-y-0.5 transition-all">
               <CardContent className="p-4 flex items-center gap-3">
                 <div className={cn("p-2.5 rounded-xl shrink-0 group-hover:scale-110 transition-transform", stat.color)}>
                   <stat.icon className="h-5 w-5" />
@@ -182,7 +182,7 @@ export default function QRMenuPage() {
               placeholder="Filter by table number..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-64 pl-11 bg-card border-border/50 h-11 rounded-xl focus-visible:ring-primary/20"
+              className="w-64 pl-11 bg-card h-11 rounded-xl focus-visible:ring-primary/20"
             />
           </div>
           <Button
