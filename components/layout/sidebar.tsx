@@ -79,6 +79,7 @@ const allNavItems: NavItem[] = [
   { name: "Dashboard", href: "/waiter/dashboard", icon: IconLayoutDashboard, permission: "dashboard", portal: "waiter" },
   { name: "Service Floor", href: "/waiter/service-floor", icon: IconGridDots, permission: "orders", portal: "waiter" },
   { name: "Order Tracking", href: "/waiter/order-tracking", icon: IconToolsKitchen2, permission: "orders", portal: "waiter" },
+  { name: "Menu", href: "/waiter/menu", icon: IconToolsKitchen, permission: "orders", portal: "waiter" },
   { name: "Checkout", href: "/waiter/checkout", icon: IconDatabase, permission: "orders", portal: "waiter" },
   
   // Kitchen
