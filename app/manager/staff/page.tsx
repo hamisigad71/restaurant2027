@@ -335,10 +335,6 @@ export default function ManagerStaffPage() {
               <CardContent className="p-4 sm:p-5 relative overflow-hidden">
                 {/* Gradient background */}
                 <div 
-                  className={cn(
-                    "absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-500 bg-gradient-to-br",
-                    s.gradient
-                  )}
                   className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-500"
                   style={{ background: `linear-gradient(135deg, ${s.from} 0%, ${s.to} 100%)` }}
                 />
