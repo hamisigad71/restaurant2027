@@ -55,7 +55,7 @@ export function LowStockAlerts() {
                 <Badge
                   variant="outline"
                   className={cn(
-                    "text-[8px] uppercase tracking-tighter px-1.5 h-4 border-current/20 bg-card",
+                    "text-[8px] uppercase  px-1.5 h-4 border-current/20 bg-card",
                     item.status === "out" || item.status === "critical" ? "text-destructive" : "text-warning"
                   )}
                 >

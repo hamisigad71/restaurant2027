@@ -31,7 +31,7 @@ export function FilterBar({ active, counts, search, onFilter, onSearch }: Filter
           value={search}
           onChange={(e) => onSearch(e.target.value)}
           placeholder="Search table, waiter, or dish..."
-          className="w-full h-10 pl-10 pr-4 rounded-xl text-[12px] font-medium tracking-wide placeholder:text-[#AEA6BF] transition-all bg-white/50 focus:bg-white focus:outline-none focus:ring-1 focus:ring-[oklch(0.45_0.12_285_/_0.2)] border border-transparent focus:border-[oklch(0.45_0.12_285_/_0.15)]"
+          className="w-full h-10 pl-10 pr-4 rounded-xl text-[12px] font-medium  placeholder:text-[#AEA6BF] transition-all bg-white/50 focus:bg-white focus:outline-none focus:ring-1 focus:ring-[oklch(0.45_0.12_285_/_0.2)] border border-transparent focus:border-[oklch(0.45_0.12_285_/_0.15)]"
         />
       </div>
 
@@ -41,7 +41,7 @@ export function FilterBar({ active, counts, search, onFilter, onSearch }: Filter
             <TabsTrigger 
               key={f.id} 
               value={f.id} 
-              className="flex items-center gap-2 h-9 px-4 text-[11px] font-bold uppercase tracking-widest rounded-xl transition-all"
+              className="flex items-center gap-2 h-9 px-4 text-[11px] font-bold uppercase  rounded-xl transition-all"
               style={active === f.id ? { background: "oklch(0.45 0.12 285)", color: "white", boxShadow: "0 2px 8px oklch(0.45 0.12 285 / 0.25)" } : { color: "#736C83" }}
             >
               {f.label}

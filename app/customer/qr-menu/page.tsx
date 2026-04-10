@@ -49,14 +49,14 @@ function QRCardItem({ table, baseUrl }: { table: { id: string; number: number; s
   return (
     <Card className="group bg-card border-border/50 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-1 overflow-hidden rounded-2xl">
       <CardHeader className="pb-2 border-b border-border/30 flex-row items-center justify-between">
-        <CardTitle className="text-base font-heading  uppercase tracking-widest text-secondary-foreground">
+        <CardTitle className="text-base font-heading  uppercase  text-secondary-foreground">
           Table {table.number}
         </CardTitle>
         <div className="flex items-center gap-2">
-          <Badge variant="outline" className={cn("text-[8px]  uppercase tracking-widest border-none px-2 py-0.5", status.class)}>
+          <Badge variant="outline" className={cn("text-[8px]  uppercase  border-none px-2 py-0.5", status.class)}>
             {status.label}
           </Badge>
-          <Badge variant="outline" className="text-[8px]  uppercase tracking-widest border-primary/10 text-muted-foreground px-2 py-0.5">
+          <Badge variant="outline" className="text-[8px]  uppercase  border-primary/10 text-muted-foreground px-2 py-0.5">
             {table.seats} seats
           </Badge>
         </div>
@@ -93,7 +93,7 @@ function QRCardItem({ table, baseUrl }: { table: { id: string; number: number; s
           <Button
             variant="outline"
             size="sm"
-            className="h-9 text-[9px]  font-heading uppercase tracking-widest border-primary/10 text-primary hover:bg-primary/5 rounded-xl transition-all"
+            className="h-9 text-[9px]  font-heading uppercase  border-primary/10 text-primary hover:bg-primary/5 rounded-xl transition-all"
             onClick={handleCopy}
           >
             {copied ? (
@@ -105,7 +105,7 @@ function QRCardItem({ table, baseUrl }: { table: { id: string; number: number; s
           <Button
             variant="outline"
             size="sm"
-            className="h-9 text-[9px]  font-heading uppercase tracking-widest border-primary/10 text-primary hover:bg-primary/5 rounded-xl transition-all"
+            className="h-9 text-[9px]  font-heading uppercase  border-primary/10 text-primary hover:bg-primary/5 rounded-xl transition-all"
             onClick={handleDownload}
           >
             <Download className="h-3 w-3 mr-1.5" />
@@ -118,7 +118,7 @@ function QRCardItem({ table, baseUrl }: { table: { id: string; number: number; s
           asChild
           variant="ghost"
           size="sm"
-          className="w-full h-8 text-[9px]  font-heading uppercase tracking-widest text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-xl"
+          className="w-full h-8 text-[9px]  font-heading uppercase  text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-xl"
         >
           <Link href={`/customer/${table.number}`}>
             <ExternalLink className="h-3 w-3 mr-1.5" />
@@ -165,8 +165,8 @@ export default function QRMenuPage() {
                   <stat.icon className="h-5 w-5" />
                 </div>
                 <div>
-                  <p className="text-2xl font-heading  tracking-wider text-secondary-foreground">{stat.value}</p>
-                  <p className="text-[10px] font-heading uppercase tracking-widest text-muted-foreground">{stat.label}</p>
+                  <p className="text-2xl font-heading   text-secondary-foreground">{stat.value}</p>
+                  <p className="text-[10px] font-heading uppercase  text-muted-foreground">{stat.label}</p>
                 </div>
               </CardContent>
             </Card>
@@ -187,7 +187,7 @@ export default function QRMenuPage() {
           </div>
           <Button
             asChild
-            className="h-11 px-6 gap-2 bg-primary text-white font-heading uppercase tracking-widest rounded-xl shadow-lg shadow-primary/20 hover:opacity-90"
+            className="h-11 px-6 gap-2 bg-primary text-white font-heading uppercase  rounded-xl shadow-lg shadow-primary/20 hover:opacity-90"
           >
             <Link href="/customer/1">
               <ExternalLink className="h-4 w-4" />
@@ -206,7 +206,7 @@ export default function QRMenuPage() {
         {/* ── How-to ── */}
         <Card className="bg-gradient-to-r from-primary/5 via-primary/[0.02] to-transparent border-none rounded-2xl">
           <CardHeader className="pb-3">
-            <CardTitle className="text-[10px] font-heading  tracking-[0.25em] uppercase text-muted-foreground">How QR Ordering Works</CardTitle>
+            <CardTitle className="text-[10px] font-heading   uppercase text-muted-foreground">How QR Ordering Works</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid gap-6 sm:grid-cols-3">
@@ -220,7 +220,7 @@ export default function QRMenuPage() {
                     {step}
                   </div>
                   <div>
-                    <p className="font-heading  text-sm uppercase tracking-wide text-foreground">{title}</p>
+                    <p className="font-heading  text-sm uppercase  text-foreground">{title}</p>
                     <p className="text-xs text-muted-foreground mt-1 leading-relaxed">{desc}</p>
                   </div>
                 </div>

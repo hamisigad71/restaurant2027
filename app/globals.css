@@ -143,6 +143,6 @@
   [data-slot="dialog-title"],
   [data-slot="sheet-title"],
   .font-heading {
-    @apply font-heading tracking-tight;
+    @apply font-heading ;
   }
 }

@@ -27,23 +27,31 @@ export function MobileNav() {
 
   // Scroll logic: hide on scroll down, show on scroll up
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY
+    let lastY = 0
+    const handleScroll = (e: any) => {
+      // Robustly get scroll position from window or capturing container
+      const currentScrollY = e.target === document 
+        ? window.scrollY 
+        : (e.target.scrollTop || 0)
       
+      // Ignore tiny scrolls to prevent jitter
+      if (Math.abs(currentScrollY - lastY) < 5) return
+
       // Show when at the very top, or scrolling up
-      if (currentScrollY < 10 || currentScrollY < lastScrollY) {
+      if (currentScrollY < 20 || currentScrollY < lastY) {
         setIsVisible(true)
-      } else if (currentScrollY > lastScrollY && currentScrollY > 70) {
+      } else if (currentScrollY > lastY && currentScrollY > 70) {
         // Hide only after scrolling down a bit
         setIsVisible(false)
       }
       
-      setLastScrollY(currentScrollY)
+      lastY = currentScrollY
     }
 
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [lastScrollY])
+    // Capture: true allows detecting scrolls inside overflow-y-auto containers
+    window.addEventListener("scroll", handleScroll, { passive: true, capture: true })
+    return () => window.removeEventListener("scroll", handleScroll, { capture: true })
+  }, [])
 
   const role = user?.role || "customer"
 
@@ -100,8 +108,8 @@ export function MobileNav() {
   return (
     <nav 
       className={cn(
-        "fixed bottom-8 left-1/2 -translate-x-1/2 z-[100] w-[calc(100%-32px)] max-w-sm transition-all duration-700 ease-in-out md:hidden",
-        isVisible ? "translate-y-0 opacity-100" : "translate-y-28 opacity-0 pointer-events-none"
+        "fixed bottom-8 left-1/2 -translate-x-1/2 z-[100] w-[calc(100%-32px)] max-w-sm transition-all duration-500 cubic-bezier(0.16,1,0.3,1) md:hidden",
+        isVisible ? "translate-y-0 opacity-100" : "translate-y-32 opacity-0 pointer-events-none"
       )}
     >
       {/* Decorative background glow */}
@@ -153,7 +161,7 @@ export function MobileNav() {
               </div>
               
               <span className={cn(
-                "text-[8px] font-bold uppercase tracking-[0.15em] transition-all duration-500",
+                "text-[8px] font-bold uppercase  transition-all duration-500",
                 isActive ? "opacity-100 translate-y-0 text-oklch(0.42 0.14 285)" : "opacity-40 translate-y-0 text-[#736C83] group-hover:opacity-100"
               )}>
                 {item.label}

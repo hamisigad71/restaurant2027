@@ -53,7 +53,7 @@ export default function ManagerReportsPage() {
         <div className="grid gap-6 lg:grid-cols-3">
           <Card className="lg:col-span-2 bg-card border-border/50">
             <CardHeader className="pb-2">
-              <CardTitle className="text-lg font-heading tracking-wide uppercase">Hourly Sales Volume</CardTitle>
+              <CardTitle className="text-lg font-heading  uppercase">Hourly Sales Volume</CardTitle>
             </CardHeader>
             <CardContent className="h-[300px] w-full pt-4">
               <ResponsiveContainer width="100%" height="100%">
@@ -99,7 +99,7 @@ export default function ManagerReportsPage() {
 
           <Card className="bg-card border-border/50 flex flex-col">
             <CardHeader>
-              <CardTitle className="text-lg font-heading tracking-wide uppercase">Key Metrics</CardTitle>
+              <CardTitle className="text-lg font-heading  uppercase">Key Metrics</CardTitle>
             </CardHeader>
             <CardContent className="flex-1 space-y-6 pt-2">
               <div className="flex items-center justify-between">

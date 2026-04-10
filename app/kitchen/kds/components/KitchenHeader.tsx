@@ -24,8 +24,8 @@ export function KitchenHeader({
         </div>
         <div>
           <div className="flex items-center gap-2">
-            <p className="text-white font-bold tracking-[0.18em] uppercase text-[15px] leading-none">Kitchen Display</p>
-            <span className="flex items-center gap-1 text-[9px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full" style={{ background: "rgba(255,255,255,0.15)", borderColor: "rgba(255,255,255,0.2)", color: "white", border: "1px solid rgba(255,255,255,0.2)" }}>
+            <p className="text-white font-bold  uppercase text-[15px] leading-none">Kitchen Display</p>
+            <span className="flex items-center gap-1 text-[9px] font-bold uppercase  px-2.5 py-1 rounded-full" style={{ background: "rgba(255,255,255,0.15)", borderColor: "rgba(255,255,255,0.2)", color: "white", border: "1px solid rgba(255,255,255,0.2)" }}>
               <CircleDot className="h-2 w-2 animate-pulse" style={{ color: "oklch(0.7 0.15 150)" }} />
               Live
             </span>

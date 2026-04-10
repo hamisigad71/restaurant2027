@@ -232,7 +232,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
           <BellRing className="h-6 w-6 text-primary animate-pulse" />
         </div>
         <div className="flex-1">
-          <h4 className="text-sm font-bold text-zinc-900 dark:text-white uppercase tracking-tight">Request Sent</h4>
+          <h4 className="text-sm font-bold text-zinc-900 dark:text-white uppercase ">Request Sent</h4>
           <p className="text-[11px] text-zinc-500 dark:text-zinc-400 mt-0.5 leading-relaxed">
             A waiter is on their way to Table {tableId} right now.
           </p>
@@ -308,10 +308,10 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
             <ShoppingCart className="h-4 w-4" style={{ color:"oklch(0.45 0.12 285)" }} />
           </div>
           <div>
-            <SheetTitle className="text-[15px] font-bold tracking-tight" style={{ color:"#0D031B" }}>
+            <SheetTitle className="text-[15px] font-bold " style={{ color:"#0D031B" }}>
               Your Order
             </SheetTitle>
-            <SheetDescription className="text-[10px] uppercase tracking-[0.18em] font-semibold mt-0.5" style={{ color:"oklch(0.45 0.12 285)" }}>
+            <SheetDescription className="text-[10px] uppercase  font-semibold mt-0.5" style={{ color:"oklch(0.45 0.12 285)" }}>
               Table {tableId}
             </SheetDescription>
           </div>
@@ -333,7 +333,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
               </div>
             </div>
             <div>
-              <h3 className="font-bold text-lg tracking-tight" style={{ color:"#0D031B" }}>Order Confirmed!</h3>
+              <h3 className="font-bold text-lg " style={{ color:"#0D031B" }}>Order Confirmed!</h3>
               <p className="text-xs mt-1 leading-relaxed" style={{ color:"#736C83" }}>
                 Your selection is on its way to the kitchen.
               </p>
@@ -420,7 +420,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
           </div>
 
           <Button
-            className="w-full h-13 text-[13px] font-bold uppercase tracking-widest text-white rounded-2xl transition-all hover:opacity-90 hover:-translate-y-0.5 active:translate-y-0 border-none h-12"
+            className="w-full h-13 text-[13px] font-bold uppercase  text-white rounded-2xl transition-all hover:opacity-90 hover:-translate-y-0.5 active:translate-y-0 border-none h-12"
             style={{
               background:"oklch(0.45 0.12 285)",
               boxShadow:"0 6px 24px oklch(0.45 0.12 285 / 0.35)",
@@ -480,8 +480,8 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                   <UtensilsCrossed className="h-11 w-11 text-white" />
                 </div>
                 <div className="space-y-1 text-center">
-                  <h1 className="text-6xl font-black text-white tracking-[0.25em] uppercase pl-4">Resto</h1>
-                  <p className="text-white/40 text-[11px] font-bold uppercase tracking-[0.4em] flex items-center gap-3 justify-center">
+                  <h1 className="text-6xl font-black text-white  uppercase pl-4">Resto</h1>
+                  <p className="text-white/40 text-[11px] font-bold uppercase  flex items-center gap-3 justify-center">
                     <span className="w-8 h-px bg-white/20" />
                     Experience Excellence
                     <span className="w-8 h-px bg-white/20" />
@@ -490,7 +490,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
               </div>
 
               <div className="space-y-3">
-                <p className="text-white/50 text-xs font-semibold uppercase tracking-[0.2em] italic">
+                <p className="text-white/50 text-xs font-semibold uppercase  italic">
                   Premium Dining · Table {tableId}
                 </p>
               </div>
@@ -504,7 +504,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                 }}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                <span className="relative flex items-center gap-4 text-[14px] font-black uppercase tracking-[0.35em] text-[#0D031B]">
+                <span className="relative flex items-center gap-4 text-[14px] font-black uppercase  text-[#0D031B]">
                   Explore Menu
                   <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center transition-transform group-hover:translate-x-1">
                     <ChevronRight className="h-4 w-4 text-primary" />
@@ -515,7 +515,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
 
             {/* Bottom info */}
             <div className="absolute bottom-10 left-0 right-0 flex justify-center opacity-30 select-none">
-              <span className="text-[10px] text-white font-medium uppercase tracking-[0.3em]">Tap to begin your experience</span>
+              <span className="text-[10px] text-white font-medium uppercase ">Tap to begin your experience</span>
             </div>
           </div>
         )}
@@ -541,9 +541,9 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                   >
                     <UtensilsCrossed className="h-4.5 w-4.5 text-white" />
                   </div>
-                  <h1 className="text-3xl font-bold tracking-[0.15em] text-white uppercase">Resto</h1>
+                  <h1 className="text-3xl font-bold  text-white uppercase">Resto</h1>
                 </div>
-                <p className="text-[10px] text-white/70 uppercase tracking-[0.28em] font-medium flex items-center gap-2 pl-1">
+                <p className="text-[10px] text-white/70 uppercase  font-medium flex items-center gap-2 pl-1">
                   <span className="w-6 h-px bg-white/40 inline-block" />
                   Experience Excellence
                 </p>
@@ -558,7 +558,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                   border:"1px solid rgba(255,255,255,0.18)",
                 }}
               >
-                <span className="text-[9px] text-white/60 uppercase tracking-[0.2em] font-medium">Table</span>
+                <span className="text-[9px] text-white/60 uppercase  font-medium">Table</span>
                 <span className="text-2xl font-bold text-white leading-none mt-0.5">{tableId}</span>
               </div>
             </div>
@@ -678,7 +678,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
                   className={cn(
-                    "flex items-center gap-2 whitespace-nowrap px-4 h-10 rounded-xl text-[11px] font-bold uppercase tracking-wider transition-all duration-200 shrink-0",
+                    "flex items-center gap-2 whitespace-nowrap px-4 h-10 rounded-xl text-[11px] font-bold uppercase  transition-all duration-200 shrink-0",
                     active ? "text-white scale-105" : "hover:scale-105",
                   )}
                   style={
@@ -696,7 +696,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
 
           {/* ── Results count ─────────────────────────────────────────── */}
           <div className="flex items-center justify-between px-1">
-            <p className="text-[11px] font-medium uppercase tracking-[0.12em]" style={{ color:"#9A94AA" }}>
+            <p className="text-[11px] font-medium uppercase " style={{ color:"#9A94AA" }}>
               {filteredItems.length} {filteredItems.length === 1 ? "dish" : "dishes"}
               {activeCategory !== "All" && ` · ${CATEGORY_DISPLAY[activeCategory]?.label || activeCategory}`}
             </p>
@@ -708,7 +708,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
           </div>
 
           {/* ── Menu Grid ─────────────────────────────────────────────── */}
-          <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 pb-12">
+          <div className="grid gap-4 grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 pb-12">
             {filteredItems.map((item, idx) => {
               const inCart = cart.find(i => i.id === item.id)
               const qty    = inCart?.quantity || 0
@@ -716,7 +716,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                 <div
                   key={item.id}
                   onClick={() => setSelectedItem(item)}
-                  className="group cursor-pointer rounded-3xl overflow-hidden border transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl"
+                  className="group cursor-pointer rounded-lg overflow-hidden border transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl"
                   style={{
                     background:"rgba(255,255,255,0.88)",
                     backdropFilter:"blur(12px)",
@@ -726,21 +726,21 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                   }}
                 >
                   {/* Image */}
-                  <div className="relative aspect-[4/3] overflow-hidden mx-3 mt-3 rounded-2xl">
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-t-lg mx-0 shrink-0">
                     <img
                       src={getDishImage(item)}
                       alt={item.name}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                       loading="lazy"
                     />
                     {/* Scrim */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
 
                     {/* Top-left badges */}
                     <div className="absolute top-2.5 left-2.5 flex flex-col gap-1.5 items-start">
                       {item.popular && (
                         <span
-                          className="flex items-center gap-1 text-[9px] font-bold uppercase tracking-wider px-2 py-1 rounded-full"
+                          className="flex items-center gap-1 text-[9px] font-bold uppercase  px-2 py-1 rounded-full"
                           style={{ background:"oklch(0.45 0.12 285 / 0.85)", color:"white", backdropFilter:"blur(8px)" }}
                         >
                           <Crown className="h-2.5 w-2.5" />
@@ -749,7 +749,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                       )}
                       {item.vegetarian && (
                         <span
-                          className="flex items-center gap-1 text-[9px] font-bold uppercase tracking-wider px-2 py-1 rounded-full"
+                          className="flex items-center gap-1 text-[9px] font-bold uppercase  px-2 py-1 rounded-full"
                           style={{ background:"oklch(0.7 0.15 150 / 0.85)", color:"white", backdropFilter:"blur(8px)" }}
                         >
                           <Leaf className="h-2.5 w-2.5" />
@@ -758,74 +758,111 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                       )}
                     </div>
 
+                    {/* Category Label - Top Right */}
+                    <div className="absolute top-2.5 right-2.5">
+                      <span
+                        className="flex items-center gap-1 text-[9px] font-bold uppercase tracking-wider px-2 py-1 rounded-full text-white"
+                        style={{
+                          background: "oklch(0.45 0.12 285 / 0.7)",
+                          backdropFilter: "blur(6px)",
+                        }}
+                      >
+                        {item.category}
+                      </span>
+                    </div>
+
                     {/* Price bottom-left */}
-                    <div className="absolute bottom-3 left-3.5">
-                      <p className="text-white font-bold text-lg leading-none drop-shadow">
-                        <span className="text-[11px] font-medium text-white/75 mr-0.5">KSh</span>
+                    <div className="absolute bottom-2.5 left-3">
+                      <p className="text-white font-bold text-[15px] leading-none tabular-nums drop-shadow">
+                        <span className="text-[10px] font-medium text-white/75 mr-0.5 uppercase">KSh</span>
                         {item.price.toLocaleString()}
                       </p>
                     </div>
 
-                    {/* Rating bottom-centre */}
+                    {/* Rating bottom-right */}
                     <div
-                      className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1 px-2 py-0.5 rounded-full"
-                      style={{ background:"rgba(255,255,255,0.15)", backdropFilter:"blur(6px)" }}
+                      className="absolute bottom-2.5 right-2.5 flex items-center gap-1 px-2 py-1 rounded-xl"
+                      style={{ background:"rgba(0,0,0,0.35)", backdropFilter:"blur(6px)" }}
                     >
                       <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
-                      <span className="text-[10px] font-bold text-white">{item.rating}</span>
+                      <span className="text-white text-[10px] font-bold">{item.rating || 4.5}</span>
                     </div>
 
-                    {/* Add / qty control — bottom-right */}
-                    <div className="absolute bottom-3 right-3" onClick={e => e.stopPropagation()}>
-                      {inCart ? (
-                        <div
-                          className="flex items-center gap-1.5 rounded-full px-1.5 py-1"
-                          style={{ background:"rgba(255,255,255,0.95)", backdropFilter:"blur(12px)" }}
+                    {/* Quantity Control Overlay - Bottom Centre */}
+                    {inCart && (
+                        <div 
+                          className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                          onClick={e => e.stopPropagation()}
                         >
-                          <button
-                            className="flex items-center justify-center w-7 h-7 rounded-full transition-colors hover:bg-[#EBE6F8]"
-                            style={{ color:"oklch(0.45 0.12 285)" }}
-                            onClick={() => updateQuantity(item.id, -1)}
-                          >
-                            <Minus className="h-3 w-3" />
-                          </button>
-                          <span className="text-xs font-bold w-4 text-center" style={{ color:"#0D031B" }}>{qty}</span>
-                          <button
-                            className="flex items-center justify-center w-7 h-7 rounded-full text-white"
-                            style={{ background:"oklch(0.45 0.12 285)" }}
-                            onClick={() => updateQuantity(item.id, 1)}
-                          >
-                            <Plus className="h-3 w-3" />
-                          </button>
+                           <div
+                              className="flex items-center gap-1.5 rounded-full p-1 border shadow-xl"
+                              style={{ 
+                                background:"rgba(255,255,255,0.92)", 
+                                backdropFilter:"blur(12px)",
+                                borderColor:"oklch(0.45 0.12 285 / 0.15)"
+                              }}
+                            >
+                              <button
+                                className="flex items-center justify-center w-8 h-8 rounded-full transition-colors hover:bg-[#EBE6F8]"
+                                style={{ color:"oklch(0.45 0.12 285)" }}
+                                onClick={() => updateQuantity(item.id, -1)}
+                              >
+                                <Minus className="h-3.5 w-3.5" />
+                              </button>
+                              <span className="text-[13px] font-bold w-6 text-center" style={{ color:"#0D031B" }}>{qty}</span>
+                              <button
+                                className="flex items-center justify-center w-8 h-8 rounded-full text-white"
+                                style={{ background:"oklch(0.45 0.12 285)" }}
+                                onClick={() => updateQuantity(item.id, 1)}
+                              >
+                                <Plus className="h-3.5 w-3.5" />
+                              </button>
+                            </div>
                         </div>
-                      ) : (
-                        <button
-                          className="flex items-center justify-center w-9 h-9 rounded-full text-white transition-all hover:scale-110 active:scale-95"
-                          style={{
-                            background:"oklch(0.45 0.12 285)",
-                            boxShadow:"0 4px 16px oklch(0.45 0.12 285 / 0.45)",
-                          }}
-                          onClick={e => { e.stopPropagation(); addToCart(item) }}
-                        >
-                          <Plus className="h-4 w-4" />
-                        </button>
-                      )}
-                    </div>
+                    )}
                   </div>
 
-                  {/* Card body */}
-                  <div className="px-4 pt-3 pb-4">
-                    <h3 className="text-[14px] font-bold leading-tight truncate" style={{ color:"#0D031B" }}>
-                      {item.name}
-                    </h3>
-                    <p className="text-[11px] leading-relaxed mt-1 line-clamp-2" style={{ color:"#736C83" }}>
-                      {item.description}
+                  {/* Body */}
+                  <div className="flex flex-col flex-1 px-3 pt-3 pb-3 gap-2">
+                    <div className="flex items-start justify-between gap-1.5">
+                      <h3 className="text-[12px] font-bold leading-tight line-clamp-2 text-[#0D031B]">
+                        {item.name}
+                      </h3>
+                    </div>
+
+                    {/* Ingredients / Description strip */}
+                    <p className="text-[10px] text-muted-foreground/80 line-clamp-1 italic">
+                      {item.description || "Prepared with fresh local ingredients"}
                     </p>
-                    <div className="flex items-center gap-1.5 mt-3">
-                      <Clock className="h-3 w-3 shrink-0" style={{ color:"#AEA6BF" }} />
-                      <span className="text-[10px] font-medium uppercase tracking-wider" style={{ color:"#AEA6BF" }}>
-                        {item.prepTime}
-                      </span>
+
+                    {/* Action Strip */}
+                    <div className="flex flex-col gap-2 pt-2 mt-auto border-t" style={{ borderColor: "oklch(0.45 0.12 285 / 0.08)" }}>
+                      {!inCart ? (
+                        <button
+                          onClick={(e) => { e.stopPropagation(); addToCart(item); }}
+                          className="flex items-center justify-center gap-1.5 text-[9px] font-bold uppercase tracking-wider px-2 py-2 rounded-lg transition-all text-white active:scale-95"
+                          style={{
+                            background: "oklch(0.45 0.12 285)",
+                            boxShadow: "0 4px 12px oklch(0.45 0.12 285 / 0.25)"
+                          }}
+                        >
+                          <Plus className="h-3 w-3" />
+                          Add to Tray
+                        </button>
+                      ) : (
+                        <div className="flex items-center justify-between w-full px-1 py-1">
+                           <div className="flex items-center gap-1.5 text-[9px] font-bold uppercase text-emerald-600">
+                             <Check className="h-3 w-3" />
+                             In Tray
+                           </div>
+                           <button
+                             onClick={(e) => { e.stopPropagation(); setSelectedItem(item); }}
+                             className="text-[9px] font-bold uppercase text-muted-foreground/60 hover:text-primary transition-colors"
+                           >
+                             View Details
+                           </button>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -868,7 +905,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                   <div className="absolute top-3 left-3 flex gap-1.5">
                     {selectedItem.popular && (
                       <span
-                        className="flex items-center gap-1 text-[9px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full"
+                        className="flex items-center gap-1 text-[9px] font-bold uppercase  px-2.5 py-1 rounded-full"
                         style={{ background:"oklch(0.45 0.12 285 / 0.85)", color:"white" }}
                       >
                         <Crown className="h-2.5 w-2.5" />
@@ -877,7 +914,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                     )}
                     {selectedItem.vegetarian && (
                       <span
-                        className="flex items-center gap-1 text-[9px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full"
+                        className="flex items-center gap-1 text-[9px] font-bold uppercase  px-2.5 py-1 rounded-full"
                         style={{ background:"oklch(0.7 0.15 150 / 0.85)", color:"white" }}
                       >
                         <Leaf className="h-2.5 w-2.5" />
@@ -889,7 +926,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
 
                 <div className="px-5 pb-5 -mt-2">
                   <DialogHeader className="mb-4">
-                    <DialogTitle className="text-xl font-bold tracking-tight" style={{ color:"#0D031B" }}>
+                    <DialogTitle className="text-xl font-bold " style={{ color:"#0D031B" }}>
                       {selectedItem.name}
                     </DialogTitle>
                     <DialogDescription className="text-xs leading-relaxed mt-1" style={{ color:"#736C83" }}>
@@ -900,14 +937,14 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                   {/* Meta chips */}
                   <div className="flex items-center gap-2 mb-4">
                     <span
-                      className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider px-3 py-1.5 rounded-lg"
+                      className="flex items-center gap-1.5 text-[10px] font-semibold uppercase  px-3 py-1.5 rounded-lg"
                       style={{ background:"oklch(0.45 0.12 285 / 0.08)", color:"oklch(0.45 0.12 285)" }}
                     >
                       <Clock className="h-3 w-3" />
                       {selectedItem.prepTime}
                     </span>
                     <span
-                      className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider px-3 py-1.5 rounded-lg"
+                      className="flex items-center gap-1.5 text-[10px] font-semibold uppercase  px-3 py-1.5 rounded-lg"
                       style={{ background:"oklch(0.75 0.15 75 / 0.1)", color:"oklch(0.55 0.15 75)" }}
                     >
                       <Star className="h-3 w-3 fill-current" />
@@ -924,7 +961,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                   {/* Notes */}
                   <div className="space-y-2 mb-5">
                     <label
-                      className="text-[10px] font-bold uppercase tracking-[0.15em]"
+                      className="text-[10px] font-bold uppercase "
                       style={{ color:"#AEA6BF" }}
                     >
                       Special Instructions
@@ -944,7 +981,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
 
                   <DialogFooter>
                     <Button
-                      className="w-full h-12 text-[13px] font-bold uppercase tracking-widest text-white rounded-2xl border-none transition-all hover:opacity-90"
+                      className="w-full h-12 text-[13px] font-bold uppercase  text-white rounded-2xl border-none transition-all hover:opacity-90"
                       style={{
                         background:"oklch(0.45 0.12 285)",
                         boxShadow:"0 6px 24px oklch(0.45 0.12 285 / 0.35)",
@@ -1005,7 +1042,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
               </div>
 
               <div className="flex-1 text-left min-w-0 relative z-10">
-                <p className="text-[12px] font-bold text-white tracking-tight uppercase truncate">
+                <p className="text-[12px] font-bold text-white  uppercase truncate">
                   {showBillBanner ? "Bill Ready" : "Preparing Order"}
                 </p>
                 <p className="text-[10px] font-medium leading-tight opacity-80 truncate" style={{ color: "white" }}>
@@ -1048,7 +1085,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
               <Sheet>
                 <SheetTrigger asChild>
                   <button
-                    className="flex-1 flex items-center justify-center gap-2.5 h-[58px] rounded-[24px] text-[13px] font-bold uppercase tracking-widest text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl active:translate-y-0 relative overflow-hidden group"
+                    className="flex-1 flex items-center justify-center gap-2.5 h-[58px] rounded-[24px] text-[13px] font-bold uppercase  text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl active:translate-y-0 relative overflow-hidden group"
                     style={{
                       background: "linear-gradient(135deg, oklch(0.45 0.12 285) 0%, oklch(0.38 0.12 285) 100%)",
                       boxShadow: "0 10px 30px oklch(0.45 0.12 285 / 0.4)",

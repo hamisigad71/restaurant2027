@@ -106,7 +106,7 @@ export default function StaffPage() {
                 </div>
                 <div>
                   <p className="text-2xl font-heading text-foreground">{stats.total}</p>
-                  <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-medium">Total Staff</p>
+                  <p className="text-[10px] uppercase  text-muted-foreground font-medium">Total Staff</p>
                 </div>
               </div>
             </CardContent>

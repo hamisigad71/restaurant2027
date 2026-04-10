@@ -75,7 +75,7 @@ export default function InventoryPage() {
                 </div>
                 <div>
                   <p className="text-2xl font-heading text-foreground">{stats.total}</p>
-                  <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-medium">Total Items</p>
+                  <p className="text-[10px] uppercase  text-muted-foreground font-medium">Total Items</p>
                 </div>
               </div>
             </CardContent>

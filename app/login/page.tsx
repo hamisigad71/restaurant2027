@@ -138,8 +138,8 @@ export default function LoginPage() {
               <UtensilsCrossed className="h-5.5 w-5.5 text-white" strokeWidth={2.5} />
             </div>
             <div>
-              <p className="text-white text-[22px] font-bold tracking-[0.2em] uppercase leading-none">Resto</p>
-              <p className="text-[9px] uppercase tracking-[0.36em] mt-1 font-medium" style={{ color:"rgba(255,255,255,0.6)" }}>
+              <p className="text-white text-[22px] font-bold  uppercase leading-none">Resto</p>
+              <p className="text-[9px] uppercase  mt-1 font-medium" style={{ color:"rgba(255,255,255,0.6)" }}>
                 Grande Cuisine
               </p>
             </div>
@@ -156,7 +156,7 @@ export default function LoginPage() {
             </Badge>
 
             <div className="space-y-4">
-              <h2 className="text-white text-[2.8rem] xl:text-[3.2rem] font-bold leading-[1.08] tracking-tight">
+              <h2 className="text-white text-[2.8rem] xl:text-[3.2rem] font-bold leading-[1.08] ">
                 The operating system
                 <br />
                 <span style={{ color:"rgba(255,255,255,0.5)" }}>your restaurant</span>{" "}
@@ -272,8 +272,8 @@ export default function LoginPage() {
             <UtensilsCrossed className="h-5 w-5 text-white" strokeWidth={2.5} />
           </div>
           <div>
-            <p className="text-xl font-bold tracking-[0.18em] uppercase leading-none" style={{ color:"#0D031B" }}>Resto</p>
-            <p className="text-[9px] uppercase tracking-[0.32em] font-medium" style={{ color:"oklch(0.42 0.14 285)" }}>Grande Cuisine</p>
+            <p className="text-xl font-bold  uppercase leading-none" style={{ color:"#0D031B" }}>Resto</p>
+            <p className="text-[9px] uppercase  font-medium" style={{ color:"oklch(0.42 0.14 285)" }}>Grande Cuisine</p>
           </div>
         </div>
 
@@ -281,7 +281,7 @@ export default function LoginPage() {
 
           {/* Heading */}
           <div className="space-y-2">
-            <h1 className="text-[2rem] font-bold tracking-tight" style={{ color:"#0D031B" }}>
+            <h1 className="text-[2rem] font-bold " style={{ color:"#0D031B" }}>
               Welcome back
             </h1>
             <p className="text-[14px] leading-relaxed" style={{ color:"#736C83" }}>
@@ -302,7 +302,7 @@ export default function LoginPage() {
                     style={{ background:"oklch(0.42 0.14 285 / 0.1)" }}>
                     <Zap className="h-4 w-4" style={{ color:"oklch(0.42 0.14 285)" }} />
                   </div>
-                  <CardTitle className="text-[12px] font-semibold uppercase tracking-[0.14em]" style={{ color:"#3D374C" }}>
+                  <CardTitle className="text-[12px] font-semibold uppercase " style={{ color:"#3D374C" }}>
                     Quick Demo Access
                   </CardTitle>
                 </div>
@@ -324,7 +324,7 @@ export default function LoginPage() {
                 {showStaffPicker ? (
                   <div className="animate-in fade-in zoom-in-95 duration-300">
                     <div className="flex items-center justify-between mb-4">
-                      <p className="text-[12px] font-semibold uppercase tracking-[0.12em]" style={{ color:"#0D031B" }}>
+                      <p className="text-[12px] font-semibold uppercase " style={{ color:"#0D031B" }}>
                         Select Staff Role
                       </p>
                       <button
@@ -423,7 +423,7 @@ export default function LoginPage() {
           <div className="space-y-4">
             <div className="flex items-center gap-4">
               <Separator className="flex-1" style={{ background:"oklch(0.42 0.14 285 / 0.12)" }} />
-              <span className="text-[10px] font-bold uppercase tracking-[0.16em] whitespace-nowrap px-1" style={{ color:"#AEA6BF" }}>
+              <span className="text-[10px] font-bold uppercase  whitespace-nowrap px-1" style={{ color:"#AEA6BF" }}>
                 Social login
               </span>
               <Separator className="flex-1" style={{ background:"oklch(0.42 0.14 285 / 0.12)" }} />
@@ -468,7 +468,7 @@ export default function LoginPage() {
 
             <div className="flex items-center gap-4">
               <Separator className="flex-1" style={{ background:"oklch(0.42 0.14 285 / 0.12)" }} />
-              <span className="text-[10px] font-bold uppercase tracking-[0.16em] whitespace-nowrap px-1" style={{ color:"#AEA6BF" }}>
+              <span className="text-[10px] font-bold uppercase  whitespace-nowrap px-1" style={{ color:"#AEA6BF" }}>
                 or continue with email
               </span>
               <Separator className="flex-1" style={{ background:"oklch(0.42 0.14 285 / 0.12)" }} />
@@ -485,7 +485,7 @@ export default function LoginPage() {
 
                 {/* Email */}
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-[12px] font-bold uppercase tracking-[0.08em] flex items-center gap-2" style={{ color:"#3D374C" }}>
+                  <Label htmlFor="email" className="text-[12px] font-bold uppercase  flex items-center gap-2" style={{ color:"#3D374C" }}>
                     <Mail className="h-3.5 w-3.5" style={{ color:"oklch(0.42 0.14 285)" }} />
                     Email Address
                   </Label>
@@ -510,7 +510,7 @@ export default function LoginPage() {
                 {/* Password */}
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <Label htmlFor="password" className="text-[12px] font-bold uppercase tracking-[0.08em] flex items-center gap-2" style={{ color:"#3D374C" }}>
+                    <Label htmlFor="password" className="text-[12px] font-bold uppercase  flex items-center gap-2" style={{ color:"#3D374C" }}>
                       <Lock className="h-3.5 w-3.5" style={{ color:"oklch(0.42 0.14 285)" }} />
                       Password
                     </Label>
@@ -550,7 +550,7 @@ export default function LoginPage() {
 
                 {/* Portal selector */}
                 <div className="space-y-2.5">
-                  <Label className="text-[12px] font-bold uppercase tracking-[0.08em] flex items-center gap-2" style={{ color:"#3D374C" }}>
+                  <Label className="text-[12px] font-bold uppercase  flex items-center gap-2" style={{ color:"#3D374C" }}>
                     <Shield className="h-3.5 w-3.5" style={{ color:"oklch(0.42 0.14 285)" }} />
                     Select Portal
                   </Label>
@@ -594,7 +594,7 @@ export default function LoginPage() {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full flex items-center justify-center gap-3 h-12 rounded-2xl font-bold text-[13px] uppercase tracking-[0.12em] text-white transition-all duration-200 hover:-translate-y-1 hover:shadow-2xl active:translate-y-0 active:scale-[0.98] disabled:opacity-60 disabled:pointer-events-none relative overflow-hidden group"
+                  className="w-full flex items-center justify-center gap-3 h-12 rounded-2xl font-bold text-[13px] uppercase  text-white transition-all duration-200 hover:-translate-y-1 hover:shadow-2xl active:translate-y-0 active:scale-[0.98] disabled:opacity-60 disabled:pointer-events-none relative overflow-hidden group"
                   style={{
                     background:"linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)",
                     boxShadow:"0 8px 32px oklch(0.42 0.14 285 / 0.35)",

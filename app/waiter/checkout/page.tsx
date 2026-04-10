@@ -126,7 +126,7 @@ export default function CheckoutPage() {
                   <p className="text-[14px] font-bold leading-none tabular-nums" style={{ color: "#0D031B" }}>
                     {stat.value}
                   </p>
-                  <p className="text-[9px] font-bold uppercase tracking-[0.14em] mt-0.5" style={{ color: "#9A94AA" }}>
+                  <p className="text-[9px] font-bold uppercase  mt-0.5" style={{ color: "#9A94AA" }}>
                     {stat.label}
                   </p>
                 </div>
@@ -158,10 +158,10 @@ export default function CheckoutPage() {
                       <Wallet className="h-4 w-4" style={{ color: "oklch(0.45 0.12 285)" }} />
                     </div>
                     <div>
-                      <CardTitle className="text-[15px] font-bold tracking-tight" style={{ color: "#0D031B" }}>
+                      <CardTitle className="text-[15px] font-bold " style={{ color: "#0D031B" }}>
                         Payment Method
                       </CardTitle>
-                      <p className="text-[10px] font-medium uppercase tracking-[0.15em] mt-0.5" style={{ color: "#9A94AA" }}>
+                      <p className="text-[10px] font-medium uppercase  mt-0.5" style={{ color: "#9A94AA" }}>
                         Select how to settle
                       </p>
                     </div>
@@ -225,10 +225,10 @@ export default function CheckoutPage() {
                         <ShoppingBag className="h-4 w-4" style={{ color: "oklch(0.55 0.15 75)" }} />
                       </div>
                       <div>
-                        <CardTitle className="text-[15px] font-bold tracking-tight" style={{ color: "#0D031B" }}>
+                        <CardTitle className="text-[15px] font-bold " style={{ color: "#0D031B" }}>
                           Active Billing
                         </CardTitle>
-                        <p className="text-[10px] font-medium uppercase tracking-[0.15em] mt-0.5" style={{ color: "#9A94AA" }}>
+                        <p className="text-[10px] font-medium uppercase  mt-0.5" style={{ color: "#9A94AA" }}>
                           {activeTablesList.length} table{activeTablesList.length !== 1 ? "s" : ""} pending settlement
                         </p>
                       </div>
@@ -306,7 +306,7 @@ export default function CheckoutPage() {
                                 KES {table.amount.toLocaleString()}
                               </p>
                               <span
-                                className="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full"
+                                className="text-[9px] font-bold uppercase  px-2 py-0.5 rounded-full"
                                 style={{
                                   background: table.status === "ready" ? "oklch(0.62 0.16 150 / 0.1)" : "oklch(0.75 0.15 75 / 0.1)",
                                   color:      table.status === "ready" ? "oklch(0.42 0.14 150)"        : "oklch(0.55 0.15 75)",
@@ -344,8 +344,8 @@ export default function CheckoutPage() {
                     <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-white/15 mx-auto mb-2.5">
                       <Receipt className="h-5 w-5 text-white" />
                     </div>
-                    <p className="text-white font-bold text-xl tracking-[0.14em] uppercase">Resto</p>
-                    <p className="text-[9px] uppercase tracking-[0.22em] mt-0.5" style={{ color: "rgba(255,255,255,0.55)" }}>
+                    <p className="text-white font-bold text-xl  uppercase">Resto</p>
+                    <p className="text-[9px] uppercase  mt-0.5" style={{ color: "rgba(255,255,255,0.55)" }}>
                       Grande Cuisine · Nairobi
                     </p>
                   </div>
@@ -356,10 +356,10 @@ export default function CheckoutPage() {
                   className="px-5 py-2.5 flex items-center justify-between border-b"
                   style={{ background: "#FAFAF9", borderColor: "oklch(0.45 0.12 285 / 0.08)" }}
                 >
-                  <span className="text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color: "#9A94AA" }}>
+                  <span className="text-[10px] font-bold uppercase " style={{ color: "#9A94AA" }}>
                     {selectedTable ? formatLabel(selectedTable) : "No table selected"}
                   </span>
-                  <span className="text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color: "#9A94AA" }}>
+                  <span className="text-[10px] font-bold uppercase " style={{ color: "#9A94AA" }}>
                     {new Date().toLocaleDateString("en-KE", { day: "numeric", month: "short", year: "numeric" })}
                   </span>
                 </div>
@@ -421,7 +421,7 @@ export default function CheckoutPage() {
 
                   {/* Grand total */}
                   <div className="flex items-baseline justify-between">
-                    <span className="text-[13px] font-bold uppercase tracking-wider" style={{ color: "#0D031B" }}>
+                    <span className="text-[13px] font-bold uppercase " style={{ color: "#0D031B" }}>
                       Total
                     </span>
                     <span className="text-xl font-bold tabular-nums" style={{ color: "oklch(0.45 0.12 285)" }}>
@@ -453,7 +453,7 @@ export default function CheckoutPage() {
                       <Button
                         onClick={handleSettle}
                         disabled={!selectedTable || receiptItems.length === 0}
-                        className="w-full h-12 font-bold text-[12px] uppercase tracking-widest text-white rounded-2xl border-none transition-all duration-200 hover:opacity-90 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] disabled:opacity-40 disabled:pointer-events-none relative overflow-hidden group"
+                        className="w-full h-12 font-bold text-[12px] uppercase  text-white rounded-2xl border-none transition-all duration-200 hover:opacity-90 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] disabled:opacity-40 disabled:pointer-events-none relative overflow-hidden group"
                         style={{
                           background: "oklch(0.45 0.12 285)",
                           boxShadow: "0 6px 24px oklch(0.45 0.12 285 / 0.35)",

@@ -273,14 +273,14 @@ export function Header({
 
           <div className="min-w-0">
             <h1
-              className="text-[15px] tracking-tight leading-none truncate"
+              className="text-[15px]  leading-none truncate"
               style={{ color: "#0D031B" }}
             >
               {currentPage.title}
             </h1>
             {currentPage.subtitle && (
               <p
-                className="text-[10px] tracking-[0.12em] uppercase font-medium mt-0.5 hidden sm:block truncate"
+                className="text-[10px]  uppercase font-medium mt-0.5 hidden sm:block truncate"
                 style={{ color: "#9A94AA" }}
               >
                 {currentPage.subtitle}
@@ -427,7 +427,7 @@ export function Header({
                   </SheetTitle>
                   {unreadCount > 0 && (
                     <button
-                      className="text-[10px] font-medium uppercase tracking-wider hover:opacity-60 transition-opacity"
+                      className="text-[10px] font-medium uppercase  hover:opacity-60 transition-opacity"
                       style={{ color: "oklch(0.45 0.12 285)" }}
                       onClick={() =>
                         setDismissedNotifs(notifications.map((n) => n.id))
@@ -614,7 +614,7 @@ export function Header({
                       style={{ background: accent.dot }}
                     />
                     <span
-                      className="text-[9px] uppercase tracking-[0.1em]"
+                      className="text-[9px] uppercase "
                       style={{ color: accent.text }}
                     >
                       {roleLabels[user.role]}

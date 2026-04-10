@@ -157,9 +157,9 @@ export default function ManagerReservationsPage() {
                             </Button>
                           </DropdownMenuTrigger>
                           <DropdownMenuContent align="end" className="bg-white/95 backdrop-blur-xl border-primary/5 shadow-2xl rounded-xl">
-                            <DropdownMenuItem className="text-xs font-heading uppercase tracking-widest text-primary focus:bg-primary/5">Confirm Arrival</DropdownMenuItem>
-                            <DropdownMenuItem className="text-xs font-heading uppercase tracking-widest focus:bg-primary/5">Assign Table</DropdownMenuItem>
-                            <DropdownMenuItem className="text-xs font-heading uppercase tracking-widest text-destructive focus:bg-destructive/5">Cancel</DropdownMenuItem>
+                            <DropdownMenuItem className="text-xs font-heading uppercase  text-primary focus:bg-primary/5">Confirm Arrival</DropdownMenuItem>
+                            <DropdownMenuItem className="text-xs font-heading uppercase  focus:bg-primary/5">Assign Table</DropdownMenuItem>
+                            <DropdownMenuItem className="text-xs font-heading uppercase  text-destructive focus:bg-destructive/5">Cancel</DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
                       </td>
@@ -179,8 +179,8 @@ export default function ManagerReservationsPage() {
                 <CheckCircle2 className="h-6 w-6 text-white" />
               </div>
               <div className="space-y-1">
-                <h3 className="font-heading  text-xl tracking-widest uppercase text-indigo-900 leading-none">Evening Rush Readiness</h3>
-                <p className="text-[10px] font-heading uppercase tracking-widest text-indigo-700/60">Floor setup is optimized for the 19:00 - 21:00 peak.</p>
+                <h3 className="font-heading  text-xl  uppercase text-indigo-900 leading-none">Evening Rush Readiness</h3>
+                <p className="text-[10px] font-heading uppercase  text-indigo-700/60">Floor setup is optimized for the 19:00 - 21:00 peak.</p>
               </div>
             </div>
           </Card>
@@ -191,8 +191,8 @@ export default function ManagerReservationsPage() {
                 <Users className="h-6 w-6 text-white" />
               </div>
               <div className="space-y-1 text-white">
-                <h3 className="font-heading  text-xl tracking-widest uppercase leading-none">VIP Alert</h3>
-                <p className="text-[10px] font-heading uppercase tracking-widest text-white/60">2 VIP tables arriving in the next hour.</p>
+                <h3 className="font-heading  text-xl  uppercase leading-none">VIP Alert</h3>
+                <p className="text-[10px] font-heading uppercase  text-white/60">2 VIP tables arriving in the next hour.</p>
               </div>
             </div>
           </Card>

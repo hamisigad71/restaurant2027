@@ -15,7 +15,7 @@ export function StaffOnDuty() {
   return (
     <Card className="bg-card border-border/50 shadow-sm relative overflow-hidden">
       <div className="absolute top-0 right-0 w-1 h-full bg-blue-500 opacity-30" />
-      <CardHeader className="pb-6">
+      <CardHeader>
         <CardTitle className="text-xl font-heading text-foreground">Personnel on Duty</CardTitle>
         <p className="text-[10px] uppercase text-muted-foreground font-medium">Active shift oversight</p>
       </CardHeader>

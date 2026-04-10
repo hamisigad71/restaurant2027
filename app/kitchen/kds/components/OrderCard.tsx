@@ -130,7 +130,7 @@ export function OrderCard({ order, onUpdateStatus, listMode, animDelay = 0 }: Or
           </div>
           <button 
             onClick={() => onUpdateStatus(order.id, cfg.nextStatus)}
-            className="px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-widest text-white transition-all hover:scale-105 active:scale-95"
+            className="px-4 py-2 rounded-xl text-[10px] font-bold uppercase  text-white transition-all hover:scale-105 active:scale-95"
             style={{ background: cfg.nextBg }}
           >
             {cfg.nextLabel}
@@ -159,7 +159,7 @@ export function OrderCard({ order, onUpdateStatus, listMode, animDelay = 0 }: Or
 
       {order.priority === "urgent" && (
         <div className="absolute top-4 right-4 z-20">
-          <span className="flex items-center gap-1 text-[9px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full text-white" style={{ background: "oklch(0.65 0.18 25)", boxShadow: "0 2px 8px oklch(0.65 0.18 25 / 0.45)" }}>
+          <span className="flex items-center gap-1 text-[9px] font-bold uppercase  px-2.5 py-1 rounded-full text-white" style={{ background: "oklch(0.65 0.18 25)", boxShadow: "0 2px 8px oklch(0.65 0.18 25 / 0.45)" }}>
             <Zap className="h-2 w-2 fill-current" /> Urgent
           </span>
         </div>
@@ -177,7 +177,7 @@ export function OrderCard({ order, onUpdateStatus, listMode, animDelay = 0 }: Or
 
       <CardContent className="px-5 pt-4 pb-5 space-y-4">
         <div className="flex items-center justify-between">
-          <span className="text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full border" style={{ background: cfg.badgeBg, color: cfg.badgeText, borderColor: cfg.badgeBorder }}>{cfg.label}</span>
+          <span className="text-[10px] font-bold uppercase  px-2.5 py-1 rounded-full border" style={{ background: cfg.badgeBg, color: cfg.badgeText, borderColor: cfg.badgeBorder }}>{cfg.label}</span>
           <div className="flex items-center gap-1 text-[11px] font-mono font-semibold text-[#736C83]">
             <Timer className="h-3 w-3" /> {timer.display}
           </div>
@@ -193,13 +193,13 @@ export function OrderCard({ order, onUpdateStatus, listMode, animDelay = 0 }: Or
             </div>
           ))}
           {order.items.length > 3 && (
-            <p className="text-[10px] text-center font-bold text-[#AEA6BF] uppercase tracking-wider">+{order.items.length - 3} more items</p>
+            <p className="text-[10px] text-center font-bold text-[#AEA6BF] uppercase ">+{order.items.length - 3} more items</p>
           )}
         </div>
 
         <button
           onClick={() => onUpdateStatus(order.id, cfg.nextStatus)}
-          className="w-full flex items-center gap-2.5 px-4 py-4 rounded-2xl font-bold text-[11px] tracking-widest uppercase text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl active:translate-y-0 active:scale-[0.98] overflow-hidden relative group/btn mt-2"
+          className="w-full flex items-center gap-2.5 px-4 py-4 rounded-2xl font-bold text-[11px]  uppercase text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl active:translate-y-0 active:scale-[0.98] overflow-hidden relative group/btn mt-2"
           style={{ background: cfg.nextBg, boxShadow: `0 8px 24px ${cfg.nextShadow}` }}
         >
           <cfg.Icon className="h-4 w-4 relative z-10 transition-transform group-hover/btn:scale-125" />

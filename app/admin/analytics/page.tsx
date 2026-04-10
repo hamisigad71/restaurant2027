@@ -94,7 +94,7 @@ export default function AnalyticsPage() {
                 </div>
               </div>
               <p className="text-2xl font-heading text-foreground">KSh {stats.revenue.value.toLocaleString()}</p>
-              <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-medium">Total Revenue</p>
+              <p className="text-[10px] uppercase  text-muted-foreground font-medium">Total Revenue</p>
             </CardContent>
           </Card>
           <Card className="bg-card border-border/50 shadow-sm relative overflow-hidden group">
@@ -110,7 +110,7 @@ export default function AnalyticsPage() {
                 </div>
               </div>
               <p className="text-2xl font-heading text-foreground">{stats.orders.value}</p>
-              <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-medium">Total Orders</p>
+              <p className="text-[10px] uppercase  text-muted-foreground font-medium">Total Orders</p>
             </CardContent>
           </Card>
           <Card className="bg-card border-border/50 shadow-sm relative overflow-hidden group">
@@ -126,7 +126,7 @@ export default function AnalyticsPage() {
                 </div>
               </div>
               <p className="text-2xl font-heading text-foreground">KSh {stats.avgOrder.value.toLocaleString()}</p>
-              <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-medium">Avg Order Value</p>
+              <p className="text-[10px] uppercase  text-muted-foreground font-medium">Avg Order Value</p>
             </CardContent>
           </Card>
           <Card className="bg-card border-border/50 shadow-sm relative overflow-hidden group">
@@ -142,7 +142,7 @@ export default function AnalyticsPage() {
                 </div>
               </div>
               <p className="text-2xl font-heading text-foreground">{stats.customers.value}</p>
-              <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-medium">Unique Customers</p>
+              <p className="text-[10px] uppercase  text-muted-foreground font-medium">Unique Customers</p>
             </CardContent>
           </Card>
         </div>
@@ -154,7 +154,7 @@ export default function AnalyticsPage() {
             <div className="absolute top-0 left-0 w-full h-1 bg-primary/20" />
             <CardHeader className="pb-6">
               <CardTitle className="text-lg font-heading text-foreground">Revenue Trend</CardTitle>
-              <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-medium">Daily performance overview</p>
+              <p className="text-[10px] uppercase  text-muted-foreground font-medium">Daily performance overview</p>
             </CardHeader>
             <CardContent>
               <div className="h-[300px]">
@@ -186,7 +186,7 @@ export default function AnalyticsPage() {
             <div className="absolute top-0 left-0 w-full h-1 bg-chart-1/20" />
             <CardHeader className="pb-6">
               <CardTitle className="text-lg font-heading text-foreground">Peak Service Hours</CardTitle>
-              <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-medium">Order volume by hour</p>
+              <p className="text-[10px] uppercase  text-muted-foreground font-medium">Order volume by hour</p>
             </CardHeader>
             <CardContent>
               <div className="h-[300px]">
@@ -246,7 +246,7 @@ export default function AnalyticsPage() {
           <Card className="bg-card border-border lg:col-span-2">
             <CardHeader className="pb-6">
               <CardTitle className="text-lg font-heading text-foreground">Top Performing Items</CardTitle>
-              <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-medium">Revenue vs Profitability</p>
+              <p className="text-[10px] uppercase  text-muted-foreground font-medium">Revenue vs Profitability</p>
             </CardHeader>
             <CardContent>
               <div className="space-y-6">
@@ -271,7 +271,7 @@ export default function AnalyticsPage() {
                           style={{ width: `${(product.profit / product.revenue) * 100}%` }}
                         />
                       </div>
-                      <p className="text-[9px] uppercase tracking-tighter text-muted-foreground mt-1.5 font-medium">
+                      <p className="text-[9px] uppercase  text-muted-foreground mt-1.5 font-medium">
                         {product.sold} units sold • {Math.round((product.profit / product.revenue) * 100)}% Margin
                       </p>
                     </div>

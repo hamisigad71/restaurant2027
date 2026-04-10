@@ -65,7 +65,7 @@ export function KitchenOrderCard({ order, onUpdateStatus }: KitchenOrderCardProp
     >
       {/* Urgent indicator */}
       {isUrgent && order.status !== "ready" && (
-        <div className="bg-destructive text-destructive-foreground py-1 px-3 flex items-center justify-center gap-2 text-[10px] tracking-widest uppercase">
+        <div className="bg-destructive text-destructive-foreground py-1 px-3 flex items-center justify-center gap-2 text-[10px]  uppercase">
           <AlertTriangle className="h-3 w-3" />
           Urgent Attention Required
         </div>
@@ -77,7 +77,7 @@ export function KitchenOrderCard({ order, onUpdateStatus }: KitchenOrderCardProp
           <Badge
             variant="outline"
             className={cn(
-              "text-[10px] tracking-widest uppercase h-6 px-2 border-transparent",
+              "text-[10px]  uppercase h-6 px-2 border-transparent",
               order.status === "pending" && "bg-warning/10 text-warning",
               order.status === "cooking" && "bg-primary/10 text-primary",
               order.status === "ready" && "bg-success/10 text-success"
@@ -88,7 +88,7 @@ export function KitchenOrderCard({ order, onUpdateStatus }: KitchenOrderCardProp
             {order.status}
           </Badge>
         </div>
-        <div className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-muted-foreground font-medium">
+        <div className="flex items-center gap-2 text-[10px] uppercase  text-muted-foreground font-medium">
           <div className="flex items-center gap-1">
             <Clock className="h-3 w-3" />
             <span className={cn(isUrgent ? "text-destructive" : "")}>{elapsed}</span>
@@ -117,7 +117,7 @@ export function KitchenOrderCard({ order, onUpdateStatus }: KitchenOrderCardProp
         {/* Action Button */}
         {config.next && (
           <Button
-            className="w-full mt-4 tracking-widest uppercase text-[10px] h-9"
+            className="w-full mt-4  uppercase text-[10px] h-9"
             variant={order.status === "cooking" ? "default" : "outline"}
             onClick={handleAction}
           >

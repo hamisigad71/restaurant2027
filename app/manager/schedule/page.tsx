@@ -47,7 +47,7 @@ export default function ManagerSchedulePage() {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-1">
             <h1 className="text-3xl font-heading  uppercase text-foreground leading-none">Shift Planning</h1>
-            <div className="flex items-center gap-2 text-[10px] font-heading uppercase tracking-[0.25em] text-primary/60">
+            <div className="flex items-center gap-2 text-[10px] font-heading uppercase  text-primary/60">
               <div className="w-8 h-[1px] bg-primary/20" />
               Resource Allocation & Weekly Rostering
             </div>
@@ -149,7 +149,7 @@ export default function ManagerSchedulePage() {
           {/* ── Schedule Stats ───────────────────────────────────── */}
           <div className="space-y-6">
             <Card className="border-none bg-white shadow-xl shadow-primary/5 rounded-[2rem] overflow-hidden p-6">
-              <h3 className="font-heading  text-sm uppercase tracking-widest text-foreground/40 mb-6">Staffing Overview</h3>
+              <h3 className="font-heading  text-sm uppercase  text-foreground/40 mb-6">Staffing Overview</h3>
               <div className="space-y-6">
                 {[
                   { label: "On Duty", value: "14", icon: UserCheck, color: "text-emerald-500" },
@@ -159,7 +159,7 @@ export default function ManagerSchedulePage() {
                   <div key={i} className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <stat.icon className={cn("h-4 w-4", stat.color)} />
-                      <span className="text-[10px] font-heading uppercase tracking-widest text-muted-foreground">{stat.label}</span>
+                      <span className="text-[10px] font-heading uppercase  text-muted-foreground">{stat.label}</span>
                     </div>
                     <span className="text-xl font-heading  text-foreground">{stat.value}</span>
                   </div>
@@ -169,11 +169,11 @@ export default function ManagerSchedulePage() {
 
             <Card className="border-none bg-emerald-600 shadow-xl shadow-emerald-600/20 rounded-[2rem] overflow-hidden p-6 text-white text-center">
               <CheckCircle2 className="h-10 w-10 text-white/40 mx-auto mb-4" />
-              <h4 className="font-heading  text-lg tracking-widest uppercase mb-2">Quotas Satisfied</h4>
-              <p className="text-[10px] text-white/70 tracking-widest uppercase mb-6 leading-relaxed">
+              <h4 className="font-heading  text-lg  uppercase mb-2">Quotas Satisfied</h4>
+              <p className="text-[10px] text-white/70  uppercase mb-6 leading-relaxed">
                 All roles for the current shift period are fully staffed. No immediate action required.
               </p>
-              <Button className="w-full h-12 bg-white text-emerald-600 hover:bg-white/90 font-heading uppercase tracking-widest rounded-xl text-[10px] border-none">
+              <Button className="w-full h-12 bg-white text-emerald-600 hover:bg-white/90 font-heading uppercase  rounded-xl text-[10px] border-none">
                 Export Roster
               </Button>
             </Card>

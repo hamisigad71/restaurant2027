@@ -105,8 +105,8 @@ export default function SignupPage() {
               <UtensilsCrossed className="h-5 w-5 text-white" />
             </div>
             <div>
-              <p className="text-white text-xl font-bold tracking-[0.18em] uppercase leading-none">Resto</p>
-              <p className="text-[9px] uppercase tracking-[0.32em] mt-0.5" style={{ color:"rgba(255,255,255,0.5)" }}>
+              <p className="text-white text-xl font-bold  uppercase leading-none">Resto</p>
+              <p className="text-[9px] uppercase  mt-0.5" style={{ color:"rgba(255,255,255,0.5)" }}>
                 Grande Cuisine
               </p>
             </div>
@@ -123,7 +123,7 @@ export default function SignupPage() {
             </Badge>
 
             <div className="space-y-3">
-              <h2 className="text-white text-[2.5rem] font-bold leading-[1.1] tracking-tight">
+              <h2 className="text-white text-[2.5rem] font-bold leading-[1.1] ">
                 Start running your<br />
                 <span style={{ color:"rgba(255,255,255,0.45)" }}>restaurant</span>{" "}
                 <em className="not-italic" style={{ color:"rgba(255,255,255,0.9)" }}>smarter.</em>
@@ -183,8 +183,8 @@ export default function SignupPage() {
             <UtensilsCrossed className="h-5 w-5 text-white" />
           </div>
           <div>
-            <p className="text-lg font-bold tracking-[0.18em] uppercase leading-none" style={{ color:"#0D031B" }}>Resto</p>
-            <p className="text-[9px] uppercase tracking-[0.3em]" style={{ color:"oklch(0.45 0.12 285)" }}>Grande Cuisine</p>
+            <p className="text-lg font-bold  uppercase leading-none" style={{ color:"#0D031B" }}>Resto</p>
+            <p className="text-[9px] uppercase " style={{ color:"oklch(0.45 0.12 285)" }}>Grande Cuisine</p>
           </div>
         </div>
 
@@ -192,7 +192,7 @@ export default function SignupPage() {
 
           {/* Heading */}
           <div>
-            <h1 className="text-[1.7rem] font-bold tracking-tight" style={{ color:"#0D031B" }}>
+            <h1 className="text-[1.7rem] font-bold " style={{ color:"#0D031B" }}>
               Create your account
             </h1>
             <p className="text-sm mt-1" style={{ color:"#736C83" }}>
@@ -207,7 +207,7 @@ export default function SignupPage() {
           >
             <div className="h-[3px]" style={{ background:"oklch(0.45 0.12 285)" }} />
             <CardHeader className="px-5 pt-4 pb-2">
-              <CardTitle className="text-[11px] font-medium uppercase tracking-[0.18em]" style={{ color:"#9A94AA" }}>
+              <CardTitle className="text-[11px] font-medium uppercase " style={{ color:"#9A94AA" }}>
                 Choose your role
               </CardTitle>
               <CardDescription className="text-[11px] mt-0.5" style={{ color:"#AEA6BF" }}>
@@ -300,7 +300,7 @@ export default function SignupPage() {
 
             <div className="flex items-center gap-3">
               <Separator className="flex-1" style={{ background:"oklch(0.45 0.12 285 / 0.15)" }} />
-              <span className="text-[10px] font-medium uppercase tracking-wider whitespace-nowrap px-1" style={{ color:"#AEA6BF" }}>
+              <span className="text-[10px] font-medium uppercase  whitespace-nowrap px-1" style={{ color:"#AEA6BF" }}>
                 or create manually
               </span>
               <Separator className="flex-1" style={{ background:"oklch(0.45 0.12 285 / 0.15)" }} />
@@ -358,7 +358,7 @@ export default function SignupPage() {
                         </SelectItem>
                       ))}
                       <Separator className="my-1" style={{ background:"oklch(0.45 0.12 285 / 0.1)" }} />
-                      <div className="px-2 py-1.5 text-[9px] font-bold uppercase tracking-widest" style={{ color:"#AEA6BF" }}>
+                      <div className="px-2 py-1.5 text-[9px] font-bold uppercase " style={{ color:"#AEA6BF" }}>
                         Staff Members
                       </div>
                       {staffSubRoles.map(s => (
@@ -429,7 +429,7 @@ export default function SignupPage() {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full flex items-center justify-center gap-2.5 h-11 rounded-2xl font-bold text-[13px] uppercase tracking-widest text-white transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] disabled:opacity-60 disabled:pointer-events-none relative overflow-hidden group"
+                  className="w-full flex items-center justify-center gap-2.5 h-11 rounded-2xl font-bold text-[13px] uppercase  text-white transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] disabled:opacity-60 disabled:pointer-events-none relative overflow-hidden group"
                   style={{
                     background:"oklch(0.45 0.12 285)",
                     boxShadow:"0 6px 24px oklch(0.45 0.12 285 / 0.35)",

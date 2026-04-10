@@ -144,7 +144,7 @@ function StatCard({
           </div>
           {badge && (
             <Badge
-              className="text-[9px] uppercase tracking-[0.12em] rounded-full border px-2 py-0.5"
+              className="text-[9px] uppercase  rounded-full border px-2 py-0.5"
               style={{
                 background: "oklch(0.75 0.15 75 / 0.12)",
                 color: "oklch(0.75 0.15 75)",
@@ -157,13 +157,13 @@ function StatCard({
           )}
         </div>
         <p
-          className="text-3xl lg:text-[2rem] leading-none tracking-tight truncate"
+          className="text-3xl lg:text-[2rem] leading-none  truncate"
           style={{ color: "#0D031B" }}
         >
           {value}
         </p>
         <p
-          className="text-[10px] uppercase tracking-[0.15em] mt-1.5"
+          className="text-[10px] uppercase  mt-1.5"
           style={{ color: "#736C83" }}
         >
           {label}
@@ -316,14 +316,14 @@ export default function WaiterDashboard() {
                   style={{ background: "oklch(0.7 0.15 150)" }}
                 />
                 <span
-                  className="text-[10px] uppercase tracking-[0.2em]"
+                  className="text-[10px] uppercase "
                   style={{ color: "oklch(0.7 0.15 150)" }}
                 >
                   Live · Shift Active
                 </span>
               </div>
               <h1
-                className="text-2xl tracking-tight leading-none"
+                className="text-2xl  leading-none"
                 style={{ color: "#0D031B" }}
               >
                 Good afternoon, Waiter
@@ -425,7 +425,7 @@ export default function WaiterDashboard() {
                     </div>
                     <div>
                       <CardTitle
-                        className="text-sm uppercase tracking-wide"
+                        className="text-sm uppercase "
                         style={{ color: "#0D031B" }}
                       >
                         Service Alerts
@@ -440,7 +440,7 @@ export default function WaiterDashboard() {
                   </div>
 
                   <Badge
-                    className="flex items-center gap-1.5 text-[10px] uppercase tracking-wide rounded-full px-3 py-1 border"
+                    className="flex items-center gap-1.5 text-[10px] uppercase  rounded-full px-3 py-1 border"
                     style={{
                       background: "oklch(0.75 0.15 75 / 0.1)",
                       color: "oklch(0.75 0.15 75)",
@@ -494,7 +494,7 @@ export default function WaiterDashboard() {
                                 Table {alert.tableId}
                               </p>
                               <span
-                                className="inline-flex items-center gap-1 text-[9px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full"
+                                className="inline-flex items-center gap-1 text-[9px] uppercase font-bold  px-2 py-0.5 rounded-full"
                                 style={{
                                   background: isOrder ? "oklch(0.75 0.15 75 / 0.12)" : "oklch(0.45 0.12 285 / 0.12)",
                                   color: isOrder ? "oklch(0.75 0.15 75)" : "oklch(0.45 0.12 285)",
@@ -515,7 +515,7 @@ export default function WaiterDashboard() {
                           <div className="flex items-center gap-1.5 shrink-0">
                             <Button
                               size="sm"
-                              className="h-8 px-3 text-[10px] uppercase tracking-wider text-white hover:opacity-90 shadow-sm transition-all hover:-translate-y-0.5"
+                              className="h-8 px-3 text-[10px] uppercase  text-white hover:opacity-90 shadow-sm transition-all hover:-translate-y-0.5"
                               style={{ background: isOrder ? "oklch(0.45 0.12 285)" : "oklch(0.7 0.15 150)" }}
                               onClick={() => {
                                 if (isOrder) {
@@ -565,7 +565,7 @@ export default function WaiterDashboard() {
                     </div>
                     <div>
                       <CardTitle
-                        className="text-sm uppercase tracking-wide"
+                        className="text-sm uppercase "
                         style={{ color: "#0D031B" }}
                       >
                         My Tables
@@ -582,7 +582,7 @@ export default function WaiterDashboard() {
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="text-[10px] uppercase tracking-wider gap-1 hover:bg-[oklch(0.45_0.12_285)]/8 transition-colors"
+                    className="text-[10px] uppercase  gap-1 hover:bg-[oklch(0.45_0.12_285)]/8 transition-colors"
                     style={{ color: "oklch(0.45 0.12 285)" }}
                     asChild
                   >
@@ -641,7 +641,7 @@ export default function WaiterDashboard() {
                                 {tableNum}
                               </p>
                               <p
-                                className="text-[8px] uppercase tracking-wider mt-1 truncate w-full text-center"
+                                className="text-[8px] uppercase  mt-1 truncate w-full text-center"
                                 style={{ color: "#736C83" }}
                               >
                                 {t.status}
@@ -690,7 +690,7 @@ export default function WaiterDashboard() {
                 style={{ borderBottom: "1px solid oklch(0.45 0.12 285 / 0.08)" }}
               >
                 <CardTitle
-                  className="text-sm uppercase tracking-wide"
+                  className="text-sm uppercase "
                   style={{ color: "#0D031B" }}
                 >
                   Quick Actions
@@ -757,7 +757,7 @@ export default function WaiterDashboard() {
                   </div>
                   <div>
                     <CardTitle
-                      className="text-sm uppercase tracking-wide"
+                      className="text-sm uppercase "
                       style={{ color: "#0D031B" }}
                     >
                       Shift Progress
@@ -773,13 +773,13 @@ export default function WaiterDashboard() {
                 <div className="flex items-end justify-between">
                   <div>
                     <p
-                      className="text-[2.5rem] leading-none tracking-tight"
+                      className="text-[2.5rem] leading-none "
                       style={{ color: "#0D031B" }}
                     >
                       75%
                     </p>
                     <p
-                      className="text-[10px] uppercase tracking-[0.15em] mt-1"
+                      className="text-[10px] uppercase  mt-1"
                       style={{ color: "#736C83" }}
                     >
                       Daily Target
@@ -793,7 +793,7 @@ export default function WaiterDashboard() {
                       42
                     </p>
                     <p
-                      className="text-[10px] uppercase tracking-[0.15em] mt-1"
+                      className="text-[10px] uppercase  mt-1"
                       style={{ color: "#736C83" }}
                     >
                       Covers Served
@@ -834,7 +834,7 @@ export default function WaiterDashboard() {
                         {m.value}
                       </p>
                       <p
-                        className="text-[9px] uppercase tracking-wider mt-0.5"
+                        className="text-[9px] uppercase  mt-0.5"
                         style={{ color: "#736C83" }}
                       >
                         {m.label}
@@ -855,7 +855,7 @@ export default function WaiterDashboard() {
                 style={{ borderBottom: "1px solid oklch(0.45 0.12 285 / 0.08)" }}
               >
                 <CardTitle
-                  className="text-sm uppercase tracking-wide"
+                  className="text-sm uppercase "
                   style={{ color: "#0D031B" }}
                 >
                   Recent Activity

@@ -28,7 +28,7 @@ function ServedBanner({ count }: { count: number }) {
       </span>
       <span className="ml-auto flex items-center gap-1">
         <Utensils className="h-3 w-3" style={{ color: "oklch(0.62 0.16 150)" }} />
-        <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color: "oklch(0.46 0.14 150)" }}>
+        <span className="text-[10px] font-bold uppercase " style={{ color: "oklch(0.46 0.14 150)" }}>
           Great work!
         </span>
       </span>
@@ -178,7 +178,7 @@ export default function KDSPage() {
                 {/* Section header */}
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2">
-                    <span className="text-[11px] font-bold uppercase tracking-[0.16em]" style={{ color: "#AEA6BF" }}>
+                    <span className="text-[11px] font-bold uppercase " style={{ color: "#AEA6BF" }}>
                       {filter === "all" ? "Active Orders" : `${filter.charAt(0).toUpperCase()}${filter.slice(1)} Orders`}
                     </span>
                     <span

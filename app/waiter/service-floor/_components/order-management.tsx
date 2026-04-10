@@ -165,9 +165,9 @@ export function TableGrid({ tables, onSelectTable }: TableGridProps) {
               <div className="flex items-center justify-center w-8 h-8 rounded-xl bg-[oklch(0.45_0.12_285)] shadow-md">
                 <UtensilsCrossed className="h-4 w-4 text-white" />
               </div>
-              <h2 className="text-xl font-heading text-[#0D031B] tracking-tight">Interactive Floor Plan</h2>
+              <h2 className="text-xl font-heading text-[#0D031B] ">Interactive Floor Plan</h2>
             </div>
-            <p className="text-xs font-medium text-[#736C83] ml-10 tracking-wide">
+            <p className="text-xs font-medium text-[#736C83] ml-10 ">
               {counts.available} available • {counts.occupied} occupied
             </p>
           </div>
@@ -180,7 +180,7 @@ export function TableGrid({ tables, onSelectTable }: TableGridProps) {
                   key={z}
                   onClick={() => setFilterZone(z)}
                   className={cn(
-                    "px-3 py-1.5 rounded-lg text-[10px] uppercase tracking-widest transition-all",
+                    "px-3 py-1.5 rounded-lg text-[10px] uppercase  transition-all",
                     filterZone === z
                       ? "bg-[oklch(0.45_0.12_285)] text-white shadow-sm"
                       : "text-[#736C83] hover:text-[#0D031B] hover:bg-white/50"
@@ -209,7 +209,7 @@ export function TableGrid({ tables, onSelectTable }: TableGridProps) {
         {filteredTables.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 gap-4 opacity-40">
             <UtensilsCrossed className="h-12 w-12 text-[#AEA6BF]" />
-            <p className="text-sm font-medium uppercase tracking-widest text-[#736C83]">No tables in this zone</p>
+            <p className="text-sm font-medium uppercase  text-[#736C83]">No tables in this zone</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-6">
@@ -242,20 +242,20 @@ export function TableGrid({ tables, onSelectTable }: TableGridProps) {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                     
                     {/* Floating Info */}
-                    <div className="absolute top-2.5 right-2.5 flex items-center gap-1.5 px-2 py-1 bg-black/40 backdrop-blur-md rounded-lg text-white/90 text-[9px] uppercase tracking-wider border border-white/10">
+                    <div className="absolute top-2.5 right-2.5 flex items-center gap-1.5 px-2 py-1 bg-black/40 backdrop-blur-md rounded-lg text-white/90 text-[9px] uppercase  border border-white/10">
                       <Users className="h-3 w-3" />
                       <span>{table.seats}</span>
                     </div>
 
                     <div className="absolute top-2.5 left-2.5">
-                      <Badge className={cn("text-[8px] uppercase tracking-widest px-2 py-0.5 border-0 shadow-lg", config.badge)}>
+                      <Badge className={cn("text-[8px] uppercase  px-2 py-0.5 border-0 shadow-lg", config.badge)}>
                         {config.label}
                       </Badge>
                     </div>
 
                     {/* Table Name Overlay */}
                     <div className="absolute bottom-2.5 left-3">
-                      <span className="text-[10px] text-white/60 uppercase tracking-[0.2em] font-medium block leading-none mb-1">Table</span>
+                      <span className="text-[10px] text-white/60 uppercase  font-medium block leading-none mb-1">Table</span>
                       <span className="text-2xl text-white font-heading leading-none">
                         {String(table.number).padStart(2, "0")}
                       </span>
@@ -266,11 +266,11 @@ export function TableGrid({ tables, onSelectTable }: TableGridProps) {
                   <div className="p-4 flex-1 flex flex-col justify-between gap-4">
                     <div className="flex justify-between items-end">
                       <div className="space-y-1">
-                        <p className="text-[8px] uppercase tracking-[0.15em] text-[#736C83]">Zone</p>
+                        <p className="text-[8px] uppercase  text-[#736C83]">Zone</p>
                         <p className="text-xs font-semibold text-[#0D031B]">{table.zone || "-"}</p>
                       </div>
                       <div className="text-right space-y-1">
-                        <p className="text-[8px] uppercase tracking-[0.15em] text-[#736C83]">Status</p>
+                        <p className="text-[8px] uppercase  text-[#736C83]">Status</p>
                         <p className={cn("text-xs font-medium", config.numberClr)}>{config.label}</p>
                       </div>
                     </div>
@@ -278,7 +278,7 @@ export function TableGrid({ tables, onSelectTable }: TableGridProps) {
                     {/* Quick Action visual */}
                     {config.selectable && (
                       <div className="pt-2 border-t border-dashed border-[#D6D0EC] opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
-                         <span className="text-[9px] uppercase tracking-widest text-[oklch(0.45_0.12_285)] font-bold">Select Table</span>
+                         <span className="text-[9px] uppercase  text-[oklch(0.45_0.12_285)] font-bold">Select Table</span>
                          <ArrowRight className="h-3 w-3 text-[oklch(0.45_0.12_285)]" />
                       </div>
                     )}
@@ -344,7 +344,7 @@ export function MenuGrid({
 
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2">
-              <h2 className="text-lg font-heading  text-[#0D031B] tracking-tight">
+              <h2 className="text-lg font-heading  text-[#0D031B] ">
                 Grande Menu
               </h2>
               {selectedTable && (
@@ -353,7 +353,7 @@ export function MenuGrid({
                 </Badge>
               )}
             </div>
-            <p className="text-[10px] font-medium text-[#736C83] tracking-wide mt-0.5">
+            <p className="text-[10px] font-medium text-[#736C83]  mt-0.5">
               {filtered.length} items available
             </p>
           </div>
@@ -378,7 +378,7 @@ export function MenuGrid({
                 key={cat.id}
                 value={cat.id}
                 className={cn(
-                  "flex items-center gap-1.5 px-3 py-1.5 text-[10px] tracking-widest uppercase rounded-lg transition-all",
+                  "flex items-center gap-1.5 px-3 py-1.5 text-[10px]  uppercase rounded-lg transition-all",
                   "data-[state=active]:bg-[oklch(0.45_0.12_285)] data-[state=active]:text-white data-[state=active]:shadow-sm",
                   "data-[state=active]:hover:bg-white data-[state=active]:hover:text-primary data-[state=active]:hover:scale-110 data-[state=active]:hover:shadow-lg",
                   "text-[#736C83] hover:text-primary hover:bg-primary/5 hover:scale-105",
@@ -435,7 +435,7 @@ export function MenuGrid({
                     </div>
                     {/* Category chip on image */}
                     <div className="absolute top-2 left-2">
-                      <Badge className="bg-white/90 text-[#736C83] border-0 text-[9px] uppercase tracking-wide px-2 rounded-md shadow-sm">
+                      <Badge className="bg-white/90 text-[#736C83] border-0 text-[9px] uppercase  px-2 rounded-md shadow-sm">
                         {item.category}
                       </Badge>
                     </div>
@@ -502,10 +502,10 @@ export function OrderCart({
                 <ShoppingCart className="h-4 w-4 text-white" />
               </div>
               <div>
-                <p className="text-sm text-[#0D031B] leading-tight tracking-tight">
+                <p className="text-sm text-[#0D031B] leading-tight ">
                   Guest Order
                 </p>
-                <p className="text-[10px] font-medium text-[#736C83] tracking-wide mt-0.5">
+                <p className="text-[10px] font-medium text-[#736C83]  mt-0.5">
                   Guest selection overview
                 </p>
               </div>
@@ -657,10 +657,10 @@ export function OrderCart({
                     Total
                   </span>
                   <div className="text-right">
-                    <p className="text-xl text-[oklch(0.45_0.12_285)] leading-tight tracking-tight">
+                    <p className="text-xl text-[oklch(0.45_0.12_285)] leading-tight ">
                       KES {total.toLocaleString()}
                     </p>
-                    <p className="text-[9px] font-medium text-[#AEA6BF] tracking-wide mt-0.5">
+                    <p className="text-[9px] font-medium text-[#AEA6BF]  mt-0.5">
                       Inclusive of VAT
                     </p>
                   </div>
@@ -670,13 +670,13 @@ export function OrderCart({
               <div className="flex gap-2 px-3 pb-3 pt-2">
                 <Button
                   variant="outline"
-                  className="flex-1 h-9 text-[11px] tracking-wider uppercase rounded-lg border-[#E2DCF3] text-[#736C83] bg-transparent hover:border-red-300 hover:text-red-500 hover:bg-red-50 transition-all duration-150"
+                  className="flex-1 h-9 text-[11px]  uppercase rounded-lg border-[#E2DCF3] text-[#736C83] bg-transparent hover:border-red-300 hover:text-red-500 hover:bg-red-50 transition-all duration-150"
                   onClick={onClearCart}
                 >
                   Clear
                 </Button>
                 <Button
-                  className="flex-[2] h-9 text-[11px] tracking-wider uppercase rounded-lg gap-1.5 bg-[oklch(0.45_0.12_285)] text-white border-0 hover:opacity-90 hover:-translate-y-px disabled:opacity-40 disabled:cursor-not-allowed disabled:translate-y-0 transition-all duration-150"
+                  className="flex-[2] h-9 text-[11px]  uppercase rounded-lg gap-1.5 bg-[oklch(0.45_0.12_285)] text-white border-0 hover:opacity-90 hover:-translate-y-px disabled:opacity-40 disabled:cursor-not-allowed disabled:translate-y-0 transition-all duration-150"
                   onClick={onPlaceOrder}
                   disabled={!table}
                 >

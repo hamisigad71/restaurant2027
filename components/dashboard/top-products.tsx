@@ -18,7 +18,7 @@ export function TopProducts() {
   return (
     <Card className="bg-card border-border/50 shadow-sm relative overflow-hidden group">
       <div className="absolute top-0 left-0 w-1 h-full bg-primary opacity-50" />
-      <CardHeader className="pb-6">
+      <CardHeader>
         <CardTitle className="text-xl font-heading text-foreground">Top Performing Selection</CardTitle>
         <p className="text-[10px] uppercase text-muted-foreground font-medium">Best sellers this period</p>
       </CardHeader>

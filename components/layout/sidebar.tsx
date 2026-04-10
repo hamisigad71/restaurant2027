@@ -143,8 +143,8 @@ export function AppSidebar({
                   <IconToolsKitchen className="size-4.5" />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate  tracking-widest uppercase">Resto</span>
-                  <span className="truncate text-[10px] text-muted-foreground uppercase tracking-widest">Grande Cuisine</span>
+                  <span className="truncate   uppercase">Resto</span>
+                  <span className="truncate text-[10px] text-muted-foreground uppercase ">Grande Cuisine</span>
                 </div>
               </a>
             </SidebarMenuButton>

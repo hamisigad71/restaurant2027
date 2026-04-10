@@ -240,8 +240,8 @@ export default function ManagerStaffPage() {
               <BellRing className="h-4 w-4 animate-bounce" />
             </div>
             <div className="flex-1">
-              <p className="text-[11px] font-heading uppercase tracking-wide leading-none">Notification Sent</p>
-              <p className="text-[10px] font-heading uppercase text-white/70 mt-0.5 tracking-widest">
+              <p className="text-[11px] font-heading uppercase  leading-none">Notification Sent</p>
+              <p className="text-[10px] font-heading uppercase text-white/70 mt-0.5 ">
                 {summonBanner.name} has been asked to report to the manager's office
               </p>
             </div>
@@ -332,7 +332,7 @@ export default function ManagerStaffPage() {
                 {summoned[staff.id] && (
                   <div className="flex items-center gap-1.5 bg-amber-50 border border-amber-200 rounded-xl px-3 py-1.5 mb-2">
                     <BellRing className="h-3 w-3 text-amber-500 animate-pulse shrink-0" />
-                    <span className="text-[8px] font-heading uppercase tracking-wide text-amber-600 flex-1">Summoned to office</span>
+                    <span className="text-[8px] font-heading uppercase  text-amber-600 flex-1">Summoned to office</span>
                     <button onClick={() => dismissSummon(staff.id)} className="text-[7px] font-heading uppercase text-amber-400 hover:text-rose-500 transition-colors">
                       dismiss
                     </button>
@@ -354,7 +354,7 @@ export default function ManagerStaffPage() {
                   <div className="flex-1 min-w-0">
                     <h3 className="font-heading text-[11px] uppercase text-foreground truncate leading-tight">{staff.name}</h3>
                     <span className={cn(
-                      "inline-block mt-0.5 px-2 py-0.5 rounded-md text-[8px] font-heading uppercase tracking-wide",
+                      "inline-block mt-0.5 px-2 py-0.5 rounded-md text-[8px] font-heading uppercase ",
                       roleColor[staff.role] ?? "bg-slate-100 text-slate-500"
                     )}>
                       {staff.role}
@@ -368,9 +368,9 @@ export default function ManagerStaffPage() {
                       </button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end" className="text-xs">
-                      <DropdownMenuItem className="text-[9px] font-heading uppercase tracking-widest text-primary focus:bg-primary/5">View Profile</DropdownMenuItem>
-                      <DropdownMenuItem className="text-[9px] font-heading uppercase tracking-widest focus:bg-primary/5">Reassign Tables</DropdownMenuItem>
-                      <DropdownMenuItem className="text-[9px] font-heading uppercase tracking-widest text-destructive focus:bg-destructive/5">Remove</DropdownMenuItem>
+                      <DropdownMenuItem className="text-[9px] font-heading uppercase  text-primary focus:bg-primary/5">View Profile</DropdownMenuItem>
+                      <DropdownMenuItem className="text-[9px] font-heading uppercase  focus:bg-primary/5">Reassign Tables</DropdownMenuItem>
+                      <DropdownMenuItem className="text-[9px] font-heading uppercase  text-destructive focus:bg-destructive/5">Remove</DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </div>
@@ -422,7 +422,7 @@ export default function ManagerStaffPage() {
                 {/* Row 5: Award Stars */}
                 <div className="pt-2 border-t border-black/5 space-y-1">
                   <div className="flex items-center justify-between">
-                    <span className="text-[7.5px] font-heading uppercase text-muted-foreground/50 tracking-wide">Award Stars</span>
+                    <span className="text-[7.5px] font-heading uppercase text-muted-foreground/50 ">Award Stars</span>
                     {awardedFlash === staff.id && (
                       <span className="text-[7.5px] font-heading uppercase text-amber-500 animate-in fade-in zoom-in duration-300">⭐ Awarded!</span>
                     )}
@@ -476,7 +476,7 @@ export default function ManagerStaffPage() {
                   onClick={() => summonStaff(staff.id, staff.name)}
                   disabled={summoned[staff.id]}
                   className={cn(
-                    "w-full h-8 rounded-xl text-[8px] font-heading uppercase tracking-wide gap-1.5 border-none transition-all",
+                    "w-full h-8 rounded-xl text-[8px] font-heading uppercase  gap-1.5 border-none transition-all",
                     summoned[staff.id]
                       ? "bg-amber-100 text-amber-600 cursor-not-allowed"
                       : "bg-primary/8 text-primary hover:bg-primary hover:text-white shadow-none hover:shadow-md hover:shadow-primary/20 hover:scale-[1.02] active:scale-[0.98]"
@@ -507,7 +507,7 @@ export default function ManagerStaffPage() {
               </div>
               <div className="space-y-0.5 text-center md:text-left">
                 <h3 className="font-heading text-xl uppercase text-foreground leading-none">Operational Saturation</h3>
-                <p className="text-[10px] font-heading uppercase text-muted-foreground/60 tracking-wide">All station quotas met for the active shift cycle.</p>
+                <p className="text-[10px] font-heading uppercase text-muted-foreground/60 ">All station quotas met for the active shift cycle.</p>
               </div>
             </div>
             <div className="flex gap-3">
@@ -533,7 +533,7 @@ export default function ManagerStaffPage() {
                   <Activity className="h-6 w-6" />
                 </div>
                 <SheetTitle className="text-2xl font-heading uppercase text-foreground">Weekly Roster Audit</SheetTitle>
-                <SheetDescription className="text-[10px] font-heading uppercase tracking-widest text-primary/50">
+                <SheetDescription className="text-[10px] font-heading uppercase  text-primary/50">
                   Performance Analysis — Week 14, 2026
                 </SheetDescription>
               </SheetHeader>
@@ -563,7 +563,7 @@ export default function ManagerStaffPage() {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-1.5 mb-1">
                         <Star className="h-3 w-3 text-amber-400 fill-amber-400" />
-                        <span className="text-[8px] font-heading uppercase tracking-widest text-primary">MVP of the Week</span>
+                        <span className="text-[8px] font-heading uppercase  text-primary">MVP of the Week</span>
                       </div>
                       <h4 className="text-lg font-heading uppercase truncate">{auditMetrics.topPerformer.name}</h4>
                       <p className="text-[10px] text-white/50">{auditMetrics.topPerformer.role} · {auditMetrics.topPerformer.rating} High-score</p>
@@ -571,7 +571,7 @@ export default function ManagerStaffPage() {
                   </div>
                   
                   <div className="mt-4 pt-4 border-t border-white/10 flex items-center justify-between">
-                    <p className="text-[9px] text-white/40 uppercase tracking-wide">Incentive Award Eligible</p>
+                    <p className="text-[9px] text-white/40 uppercase ">Incentive Award Eligible</p>
                     <Button size="sm" className="h-7 px-3 bg-primary text-white text-[9px] uppercase font-heading rounded-lg border-none shadow-lg shadow-primary/20">
                       Reward
                     </Button>
@@ -580,7 +580,7 @@ export default function ManagerStaffPage() {
 
                 {/* Staff Attendance List */}
                 <div className="space-y-3">
-                  <h5 className="text-[10px] font-heading uppercase tracking-widest text-muted-foreground/60">Shift Compliance</h5>
+                  <h5 className="text-[10px] font-heading uppercase  text-muted-foreground/60">Shift Compliance</h5>
                   <div className="space-y-2">
                     {mockStaff.slice(0, 6).map(s => (
                       <div key={s.id} className="flex items-center gap-3 p-3 rounded-2xl bg-white border border-black/[0.03] hover:border-primary/20 transition-all group">
@@ -616,7 +616,7 @@ export default function ManagerStaffPage() {
                   toast.success("Roster finalized and synced with Payroll successfully!")
                   setIsAuditOpen(false)
                 }}
-                className="w-full h-12 bg-primary text-white font-heading uppercase text-xs tracking-widest rounded-2xl shadow-xl shadow-primary/25 border-none"
+                className="w-full h-12 bg-primary text-white font-heading uppercase text-xs  rounded-2xl shadow-xl shadow-primary/25 border-none"
                >
                  Finalize & Release Roster
                </Button>

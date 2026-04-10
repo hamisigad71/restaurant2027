@@ -8,7 +8,7 @@ export default function CustomerBaseError() {
           <path d="M9 21V9"/>
         </svg>
       </div>
-      <h1 className="font-heading text-2xl uppercase tracking-[0.1em] text-secondary-foreground mb-3">
+      <h1 className="font-heading text-2xl uppercase  text-secondary-foreground mb-3">
         Table Required
       </h1>
       <p className="text-muted-foreground text-sm max-w-sm mb-8 leading-relaxed">

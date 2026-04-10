@@ -23,7 +23,7 @@ export function ActiveOrders() {
   return (
     <Card className="bg-card border-border/50 shadow-sm relative overflow-hidden">
       <div className="absolute top-0 left-0 w-1 h-full bg-primary opacity-50" />
-      <CardHeader className="pb-6">
+      <CardHeader>
         <div className="flex items-center justify-between mb-1">
           <CardTitle className="text-xl font-heading text-foreground">Active Orders</CardTitle>
           <Badge variant="outline" className="text-[10px] uppercase text-primary border-primary/20 bg-primary/5">
@@ -39,7 +39,7 @@ export function ActiveOrders() {
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-1">
                   <span className="text-sm font-heading text-foreground">Table {order.tableId}</span>
-                  <Badge variant="outline" className="text-[8px] uppercase tracking-tighter px-1.5 h-4 border-primary/20 text-primary">
+                  <Badge variant="outline" className="text-[8px] uppercase  px-1.5 h-4 border-primary/20 text-primary">
                     {order.id}
                   </Badge>
                 </div>
@@ -50,7 +50,7 @@ export function ActiveOrders() {
               </div>
               <div className="text-right">
                 <Badge className={cn(
-                  "text-[9px] uppercase tracking-tighter px-2 h-5",
+                  "text-[9px] uppercase  px-2 h-5",
                   order.status === "ready" ? "bg-success text-success-foreground" : "bg-primary text-primary-foreground"
                 )}>
                   {order.status}

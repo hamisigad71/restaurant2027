@@ -26,7 +26,7 @@ export function PortalLayout({ children, portal }: PortalLayoutProps) {
   if (!isAuthenticated || !user) {
     return (
       <div className="flex h-screen items-center justify-center bg-background">
-        <div className="animate-pulse text-[10px] uppercase tracking-widest text-muted-foreground font-heading">
+        <div className="animate-pulse text-[10px] uppercase  text-muted-foreground font-heading">
           Grande Cuisine Loading...
         </div>
       </div>

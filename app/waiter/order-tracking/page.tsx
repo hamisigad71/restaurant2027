@@ -130,7 +130,7 @@ function OrderCard({ order, onServe }: { order: LiveOrder; onServe:(id:string)=>
               }
             </div>
             <span
-              className="text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full border"
+              className="text-[10px] font-bold uppercase  px-2.5 py-1 rounded-full border"
               style={{ background:badgeBg, color:badgeText, borderColor:badgeBorder }}
             >
               {isReady ? "Service Ready" : "In Preparation"}
@@ -170,7 +170,7 @@ function OrderCard({ order, onServe }: { order: LiveOrder; onServe:(id:string)=>
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-[12px] font-semibold truncate" style={{ color:"#0D031B" }}>{item.name}</p>
-                <p className="text-[10px] font-medium uppercase tracking-wider mt-0.5" style={{ color:"#AEA6BF" }}>
+                <p className="text-[10px] font-medium uppercase  mt-0.5" style={{ color:"#AEA6BF" }}>
                   {item.quantity} × {item.category || "item"}
                 </p>
               </div>
@@ -191,7 +191,7 @@ function OrderCard({ order, onServe }: { order: LiveOrder; onServe:(id:string)=>
         {isReady && (
           <button
             onClick={() => onServe(order.id)}
-            className="w-full flex items-center gap-2.5 px-4 py-3.5 rounded-2xl font-bold text-[11px] tracking-widest uppercase text-white transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] relative overflow-hidden group/btn"
+            className="w-full flex items-center gap-2.5 px-4 py-3.5 rounded-2xl font-bold text-[11px]  uppercase text-white transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] relative overflow-hidden group/btn"
             style={{
               background:"oklch(0.62 0.16 150)",
               boxShadow:"0 4px 16px oklch(0.62 0.16 150 / 0.35)",
@@ -282,8 +282,8 @@ export default function OrderStatusPage() {
               <Utensils className="h-4 w-4" style={{ color:"oklch(0.45 0.12 285)" }} />
             </div>
             <div>
-              <p className="text-[15px] font-bold tracking-tight" style={{ color:"#0D031B" }}>Service Tracker</p>
-              <p className="text-[10px] font-medium uppercase tracking-[0.15em]" style={{ color:"#9A94AA" }}>
+              <p className="text-[15px] font-bold " style={{ color:"#0D031B" }}>Service Tracker</p>
+              <p className="text-[10px] font-medium uppercase " style={{ color:"#9A94AA" }}>
                 Real-time preparation status
               </p>
             </div>
@@ -299,7 +299,7 @@ export default function OrderStatusPage() {
                 <button
                   key={f}
                   onClick={() => setActiveFilter(f)}
-                  className="flex items-center gap-1.5 h-8 px-3 rounded-xl text-[11px] font-bold uppercase tracking-wider transition-all duration-200 border"
+                  className="flex items-center gap-1.5 h-8 px-3 rounded-xl text-[11px] font-bold uppercase  transition-all duration-200 border"
                   style={
                     active
                       ? { background:"oklch(0.45 0.12 285)", color:"white", borderColor:"transparent", boxShadow:"0 2px 10px oklch(0.45 0.12 285 / 0.3)" }

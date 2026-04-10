@@ -86,10 +86,10 @@ export default function CleanersPage() {
           </div>
 
           <div className="min-w-0 flex-1">
-            <h1 className="text-[15px] font-bold tracking-tight leading-none" style={{ color:"#0D031B" }}>
+            <h1 className="text-[15px] font-bold  leading-none" style={{ color:"#0D031B" }}>
               Housekeeping
             </h1>
-            <p className="text-[10px] font-bold uppercase tracking-[0.18em] mt-0.5" style={{ color:"#9A94AA" }}>
+            <p className="text-[10px] font-bold uppercase  mt-0.5" style={{ color:"#9A94AA" }}>
               Active Queue · {tables.length} pending
             </p>
           </div>
@@ -165,7 +165,7 @@ export default function CleanersPage() {
                   >
                     <s.icon className="h-4 w-4 mb-1.5" style={{ color:s.color }} />
                     <p className="text-xl font-bold tabular-nums" style={{ color:"#0D031B" }}>{s.value}</p>
-                    <p className="text-[9px] font-bold uppercase tracking-wider mt-0.5" style={{ color:"#9A94AA" }}>{s.label}</p>
+                    <p className="text-[9px] font-bold uppercase  mt-0.5" style={{ color:"#9A94AA" }}>{s.label}</p>
                   </div>
                 ))}
               </div>
@@ -232,7 +232,7 @@ export default function CleanersPage() {
                                 Table {table.id.replace("T","")}
                               </p>
                               <span
-                                className="flex items-center gap-1 text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full"
+                                className="flex items-center gap-1 text-[9px] font-bold uppercase  px-2 py-0.5 rounded-full"
                                 style={{ background:cfg.bg, color:cfg.accent }}
                               >
                                 <Icon className="h-2.5 w-2.5" />
@@ -279,7 +279,7 @@ export default function CleanersPage() {
                               style={{ background:"#F5F2FB" }}
                             >
                               <step.icon className="h-3.5 w-3.5" style={{ color:"#AEA6BF" }} />
-                              <p className="text-[9px] font-bold uppercase tracking-wider text-center" style={{ color:"#9A94AA" }}>
+                              <p className="text-[9px] font-bold uppercase  text-center" style={{ color:"#9A94AA" }}>
                                 {step.label}
                               </p>
                             </div>
@@ -289,7 +289,7 @@ export default function CleanersPage() {
                         {/* CTA */}
                         <button
                           onClick={() => handleClean(table)}
-                          className="w-full flex items-center justify-center gap-2.5 h-12 rounded-2xl mt-4 font-bold text-[12px] uppercase tracking-widest text-white transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] relative overflow-hidden group"
+                          className="w-full flex items-center justify-center gap-2.5 h-12 rounded-2xl mt-4 font-bold text-[12px] uppercase  text-white transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] relative overflow-hidden group"
                           style={{
                             background: cfg.ctaBg,
                             boxShadow: `0 4px 16px ${cfg.accent}40`,

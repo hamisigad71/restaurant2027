@@ -26,28 +26,28 @@ export default function SettingsPage() {
           <TabsList className="bg-secondary/50 p-1">
             <TabsTrigger
               value="profile"
-              className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground tracking-widest uppercase text-[10px]"
+              className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground  uppercase text-[10px]"
             >
               <Building2 className="h-3.5 w-3.5" />
               Profile
             </TabsTrigger>
             <TabsTrigger
               value="notifications"
-              className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground tracking-widest uppercase text-[10px]"
+              className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground  uppercase text-[10px]"
             >
               <Bell className="h-3.5 w-3.5" />
               Notifications
             </TabsTrigger>
             <TabsTrigger
               value="appearance"
-              className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground tracking-widest uppercase text-[10px]"
+              className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground  uppercase text-[10px]"
             >
               <Palette className="h-3.5 w-3.5" />
               Appearance
             </TabsTrigger>
             <TabsTrigger
               value="regional"
-              className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground tracking-widest uppercase text-[10px]"
+              className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground  uppercase text-[10px]"
             >
               <Globe className="h-3.5 w-3.5" />
               Regional
@@ -60,7 +60,7 @@ export default function SettingsPage() {
               <div className="absolute top-0 left-0 w-1 h-full bg-primary opacity-50" />
               <CardHeader className="pb-6">
                 <CardTitle className="text-xl font-heading text-foreground">Restaurant Profile</CardTitle>
-                <CardDescription className="text-xs uppercase tracking-widest font-medium opacity-70">Core Identity and Branding</CardDescription>
+                <CardDescription className="text-xs uppercase  font-medium opacity-70">Core Identity and Branding</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <FieldGroup>
@@ -279,7 +279,7 @@ export default function SettingsPage() {
           <Button 
             onClick={handleSave} 
             disabled={isSaving}
-            className="px-8 tracking-widest uppercase text-[11px] h-11"
+            className="px-8  uppercase text-[11px] h-11"
           >
             <Save className="h-4 w-4 mr-2" />
             {isSaving ? "Saving..." : "Apply Global Settings"}

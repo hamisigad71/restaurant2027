@@ -82,10 +82,10 @@ export function StatsCards() {
             </div>
 
             <div className="space-y-1">
-              <p className="text-3xl font-heading  tracking-wider text-foreground leading-none">
+              <p className="text-3xl font-heading   text-foreground leading-none">
                 {stat.value}
               </p>
-              <p className="text-[10px] font-heading uppercase tracking-[0.2em] text-muted-foreground/80">
+              <p className="text-[10px] font-heading uppercase  text-muted-foreground/80">
                 {stat.title}
               </p>
             </div>

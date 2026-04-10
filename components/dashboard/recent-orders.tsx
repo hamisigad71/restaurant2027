@@ -40,7 +40,7 @@ export function RecentOrders() {
   return (
     <Card className="bg-card border-border/50 shadow-sm relative overflow-hidden group">
       <div className="absolute top-0 left-0 w-1 h-full bg-primary opacity-50" />
-      <CardHeader className="pb-6">
+      <CardHeader>
         <CardTitle className="text-xl font-heading text-foreground">Recent Activity</CardTitle>
         <p className="text-[10px] uppercase text-muted-foreground font-medium">Real-time order log</p>
       </CardHeader>
@@ -67,7 +67,7 @@ export function RecentOrders() {
                   <TableCell>
                     <Badge
                       variant="outline"
-                      className={cn("text-[9px] uppercase tracking-tighter px-2 h-5 border-current/20", config.color, config.bgColor)}
+                      className={cn("text-[9px] uppercase  px-2 h-5 border-current/20", config.color, config.bgColor)}
                     >
                       {config.label}
                     </Badge>

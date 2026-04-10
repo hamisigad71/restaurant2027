@@ -160,7 +160,7 @@ export default function ManagerExpensesPage() {
           <div className="space-y-6">
             <Card className="border-none bg-white shadow-xl shadow-primary/5 rounded-[2rem] overflow-hidden">
                <CardHeader className="px-6 py-5 border-b border-primary/5">
-                <CardTitle className="text-sm font-heading uppercase tracking-[0.14em]">Budget Allocation</CardTitle>
+                <CardTitle className="text-sm font-heading uppercase ">Budget Allocation</CardTitle>
               </CardHeader>
               <CardContent className="p-6 space-y-6">
                 {[
@@ -175,7 +175,7 @@ export default function ManagerExpensesPage() {
                         <div className={cn("p-1.5 rounded-lg", item.bg)}>
                           <item.icon className={cn("h-3.5 w-3.5", item.color)} />
                         </div>
-                        <span className="text-[10px] font-heading uppercase tracking-widest text-foreground">{item.label}</span>
+                        <span className="text-[10px] font-heading uppercase  text-foreground">{item.label}</span>
                       </div>
                       <span className="text-[10px]  font-sans tabular-nums text-primary">{item.val}%</span>
                     </div>
@@ -190,12 +190,12 @@ export default function ManagerExpensesPage() {
                 <div className="p-2 rounded-xl bg-white/10">
                   <AlertCircle className="h-5 w-5" />
                 </div>
-                <h4 className="font-heading  text-lg tracking-widest uppercase">Budget Warning</h4>
+                <h4 className="font-heading  text-lg  uppercase">Budget Warning</h4>
               </div>
-              <p className="text-[10px] leading-relaxed text-white/70 uppercase tracking-widest mb-4">
+              <p className="text-[10px] leading-relaxed text-white/70 uppercase  mb-4">
                 Produce expenditure is 12% over projection for this week. Audit required for Batch A inventory.
               </p>
-              <Button variant="outline" className="w-full h-11 border-white/20 bg-white/10 hover:bg-white/20 text-white font-heading uppercase tracking-[0.18em] rounded-xl text-[10px]">
+              <Button variant="outline" className="w-full h-11 border-white/20 bg-white/10 hover:bg-white/20 text-white font-heading uppercase  rounded-xl text-[10px]">
                 Create Resolution Plan
               </Button>
             </Card>

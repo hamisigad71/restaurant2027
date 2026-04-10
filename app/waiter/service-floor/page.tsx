@@ -56,7 +56,7 @@ function POSLoader() {
           />
         </div>
         <p
-          className="text-[11px] font-bold uppercase tracking-[0.2em]"
+          className="text-[11px] font-bold uppercase "
           style={{ color: "#9A94AA" }}
         >
           Loading POS…
@@ -331,7 +331,7 @@ function OrdersContent() {
                   {/* Label */}
                   <div className="text-left flex flex-col min-w-0 flex-1">
                     <span
-                      className="text-[13px] font-bold leading-tight tracking-tight truncate"
+                      className="text-[13px] font-bold leading-tight  truncate"
                       style={{ color: "#0D031B" }}
                     >
                       Guest Order
@@ -382,7 +382,7 @@ function OrdersContent() {
                     style={{ color: "oklch(0.45 0.12 285)" }}
                   />
                   <span
-                    className="text-[13px] font-bold tracking-tight"
+                    className="text-[13px] font-bold "
                     style={{ color: "#0D031B" }}
                   >
                     Current Order

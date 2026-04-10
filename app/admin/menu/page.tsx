@@ -23,7 +23,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { Plus, Search, Pencil, Trash2, UtensilsCrossed, Leaf } from "lucide-react"
+import { Plus, Search, Pencil, Trash2, UtensilsCrossed, Leaf, Eye, EyeOff } from "lucide-react"
 import { mockMenuItems, mockInventory } from "@/lib/mock-data"
 import type { MenuItem } from "@/lib/types"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -197,72 +197,139 @@ export default function MenuPage() {
         </Tabs>
 
         {/* Menu Grid */}
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid gap-4 grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {filteredItems.map((item) => (
-            <Card key={item.id} className="overflow-hidden bg-card border-border">
-              <div className="aspect-video bg-secondary/50 relative flex items-center justify-center">
-                <UtensilsCrossed className="h-12 w-12 text-muted-foreground/30" />
-                {!item.available && (
-                  <div className="absolute inset-0 bg-background/80 flex items-center justify-center">
-                    <Badge variant="secondary">Unavailable</Badge>
+            <div
+              key={item.id}
+              className="group relative flex flex-col overflow-hidden rounded-lg border bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+              style={{
+                borderColor: "oklch(0.45 0.12 285 / 0.1)",
+                boxShadow: "0 2px 10px rgba(13,3,27,0.06)",
+              }}
+            >
+              {/* Image Section */}
+              <div className="relative aspect-[4/3] overflow-hidden rounded-t-lg shrink-0 bg-secondary/30">
+                {item.image ? (
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center">
+                    <UtensilsCrossed className="h-12 w-12 text-muted-foreground/20" />
                   </div>
                 )}
-              </div>
-              <CardContent className="p-4">
-                <div className="flex items-start justify-between mb-2">
-                  <div>
-                    <h3 className="">{item.name}</h3>
-                    <p className="text-sm text-muted-foreground line-clamp-1">{item.description}</p>
-                  </div>
-                  <Badge variant="outline" className="capitalize shrink-0 font-medium tracking-wider">
-                    {item.category}
-                  </Badge>
+                
+                {/* Scrim */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+
+                {/* Status Badge - Top Left */}
+                <div className="absolute top-2.5 left-2.5">
+                  <span
+                    className="flex items-center gap-1 text-[9px] font-bold uppercase tracking-wider px-2 py-1 rounded-full text-white"
+                    style={{
+                      background: item.available
+                        ? "oklch(0.62 0.16 150 / 0.85)"
+                        : "oklch(0.55 0.18 25 / 0.85)",
+                      backdropFilter: "blur(6px)",
+                    }}
+                  >
+                    {item.available ? "Live" : "86'd"}
+                  </span>
                 </div>
-                <div className="flex flex-wrap gap-1 mt-2">
-                  {item.ingredients.slice(0, 3).map((ing) => (
-                    <Badge key={ing} variant="secondary" className="text-[9px] py-0 px-1.5 h-4 bg-muted/40 uppercase tracking-tighter">
+
+                {/* Categories/Tags - Top Right */}
+                <div className="absolute top-2.5 right-2.5">
+                   <span
+                      className="flex items-center gap-1 text-[9px] font-bold uppercase tracking-wider px-2 py-1 rounded-full text-white"
+                      style={{
+                        background: "oklch(0.45 0.12 285 / 0.7)",
+                        backdropFilter: "blur(6px)",
+                      }}
+                    >
+                      {item.category}
+                    </span>
+                </div>
+
+                {/* Price Overlay - Bottom Left */}
+                <div className="absolute bottom-2.5 left-3">
+                  <p className="text-white font-bold text-[15px] leading-none tabular-nums drop-shadow">
+                    KSh {item.price.toLocaleString()}
+                  </p>
+                </div>
+
+                {/* Edit Pencil - Hover Overlay */}
+                <div 
+                  className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 cursor-pointer"
+                  onClick={() => handleEdit(item)}
+                >
+                  <div
+                    className="flex items-center gap-2 px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider text-white"
+                    style={{
+                      background: "oklch(0.45 0.12 285 / 0.9)",
+                      backdropFilter: "blur(8px)",
+                      boxShadow: "0 4px 16px rgba(0,0,0,0.2)",
+                    }}
+                  >
+                    <Pencil className="h-3.5 w-3.5" />
+                    Edit Item
+                  </div>
+                </div>
+              </div>
+
+              {/* Card Body */}
+              <div className="flex flex-col flex-1 px-3 pt-3 pb-3 gap-2">
+                <div className="flex items-start justify-between gap-1.5">
+                  <h3 className="text-[12px] font-bold leading-tight line-clamp-2 text-[#0D031B]">
+                    {item.name}
+                  </h3>
+                </div>
+
+                {/* Ingredients strip */}
+                <div className="flex flex-wrap gap-1">
+                  {item.ingredients.slice(0, 2).map((ing) => (
+                    <span key={ing} className="text-[9px] px-1.5 py-0.5 rounded-md bg-secondary/50 text-muted-foreground uppercase font-bold">
                       {ing}
-                    </Badge>
+                    </span>
                   ))}
-                  {item.ingredients.length > 3 && (
-                    <span className="text-[9px] text-muted-foreground ml-1">+{item.ingredients.length - 3}</span>
+                  {item.ingredients.length > 2 && (
+                    <span className="text-[9px] text-muted-foreground/60 font-bold">+{item.ingredients.length - 2}</span>
                   )}
                 </div>
-                <div className="flex items-center justify-between mt-4 pb-1">
-                  <span className="text-lg font-heading text-primary">
-                    KSh {item.price.toLocaleString()}
-                  </span>
-                  <div className="flex items-center gap-1">
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="h-8 w-8"
-                      onClick={() => handleToggleAvailability(item.id)}
-                    >
-                      <span className={item.available ? "text-success" : "text-muted-foreground"}>
-                        {item.available ? "ON" : "OFF"}
-                      </span>
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="h-8 w-8"
+
+                {/* Action Strip */}
+                <div className="flex flex-col gap-2 pt-2 mt-auto border-t" style={{ borderColor: "oklch(0.45 0.12 285 / 0.08)" }}>
+                  <button
+                    onClick={() => handleToggleAvailability(item.id)}
+                    className="flex items-center justify-center gap-1.5 text-[9px] font-bold uppercase tracking-wider px-2 py-1.5 rounded-lg transition-colors w-full"
+                    style={
+                      item.available
+                        ? { color: "oklch(0.42 0.14 150)", background: "oklch(0.62 0.16 150 / 0.08)" }
+                        : { color: "oklch(0.55 0.18 25)", background: "oklch(0.65 0.18 25 / 0.08)" }
+                    }
+                  >
+                    {item.available ? <Eye className="h-3 w-3" /> : <EyeOff className="h-3 w-3" />}
+                    {item.available ? "Visible" : "Hidden"}
+                  </button>
+                  <div className="flex gap-2">
+                    <button
                       onClick={() => handleEdit(item)}
+                      className="flex-1 flex items-center justify-center gap-1.5 text-[9px] font-bold uppercase tracking-wider px-2 py-1.5 rounded-lg transition-colors hover:bg-secondary bg-secondary/30 text-muted-foreground"
                     >
-                      <Pencil className="h-4 w-4" />
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="h-8 w-8 text-destructive hover:text-destructive"
+                      <Pencil className="h-3 w-3" />
+                      Edit
+                    </button>
+                    <button
                       onClick={() => handleDelete(item.id)}
+                      className="flex items-center justify-center w-8 h-8 rounded-lg transition-colors hover:bg-destructive/10 text-destructive bg-destructive/5"
                     >
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
+                      <Trash2 className="h-3.5 w-3.5" />
+                    </button>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           ))}
         </div>
       </div>

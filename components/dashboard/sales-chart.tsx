@@ -18,9 +18,9 @@ export function SalesChart() {
         <div className="flex items-center justify-between">
           <div>
             <CardTitle className="text-lg font-heading text-foreground">Revenue Overview</CardTitle>
-            <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-medium">Daily sales for the last 7 days</p>
+            <p className="text-[10px] uppercase  text-muted-foreground font-medium">Daily sales for the last 7 days</p>
           </div>
-          <div className="px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] tracking-widest uppercase">
+          <div className="px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px]  uppercase">
             Live Records
           </div>
         </div>

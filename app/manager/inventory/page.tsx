@@ -101,11 +101,11 @@ export default function ManagerInventoryPage() {
                       "transition-colors hover:bg-primary/[0.02] group",
                       idx % 2 === 1 ? "bg-muted/5" : "bg-transparent"
                     )}>
-                      <td className="px-6 py-4 font-heading text-base tracking-wide text-foreground uppercase">{item.item}</td>
+                      <td className="px-6 py-4 font-heading text-base  text-foreground uppercase">{item.item}</td>
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-2">
                           <span className={cn(
-                            "text-sm tracking-tight",
+                            "text-sm ",
                             item.status === "low" ? "text-destructive" : "text-foreground"
                           )}>
                             {item.stock} {item.unit}

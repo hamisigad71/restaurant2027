@@ -130,7 +130,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
             </div>
           </div>
 
-          <h1 className="text-4xl font-bold tracking-tight" style={{ color: "#0D031B" }}>
+          <h1 className="text-4xl font-bold " style={{ color: "#0D031B" }}>
             Paid Successfully!
           </h1>
           <p className="text-sm mt-2 mb-8" style={{ color: "#736C83" }}>
@@ -150,7 +150,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
             {/* Receipt header */}
             <div className="flex items-center justify-between mb-4">
               <div>
-                <p className="text-[9px] font-bold uppercase tracking-[0.28em]" style={{ color: "#AEA6BF" }}>
+                <p className="text-[9px] font-bold uppercase " style={{ color: "#AEA6BF" }}>
                   Official Receipt
                 </p>
                 <p className="text-[11px] font-semibold mt-0.5" style={{ color: "#3D374C" }}>
@@ -216,7 +216,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
           </div>
 
           {/* Star rating */}
-          <p className="text-[10px] font-bold uppercase tracking-[0.2em] mb-3" style={{ color: "#AEA6BF" }}>
+          <p className="text-[10px] font-bold uppercase  mb-3" style={{ color: "#AEA6BF" }}>
             How was everything today?
           </p>
           <div className="flex gap-2.5 justify-center mb-3">
@@ -243,7 +243,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
 
           <div className="flex items-center gap-2 mb-8" style={{ color: "oklch(0.45 0.12 285 / 0.45)" }}>
             <UtensilsCrossed className="h-4 w-4" />
-            <span className="text-[10px] font-medium uppercase tracking-[0.25em]">
+            <span className="text-[10px] font-medium uppercase ">
               Resto · Experience Excellence
             </span>
           </div>
@@ -251,7 +251,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
           <Button
             onClick={() => router.push(`/customer/${tableId}`)}
             className={cn(
-              "group rounded-2xl font-bold text-[11px] uppercase tracking-widest h-11 px-6 transition-all duration-300 text-white",
+              "group rounded-2xl font-bold text-[11px] uppercase  h-11 px-6 transition-all duration-300 text-white",
               "hover:-translate-y-1 hover:scale-[1.03] active:translate-y-0 active:scale-[0.98]",
               "relative overflow-hidden border-0"
             )}
@@ -304,13 +304,13 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
 
           <div className="text-center">
             <h1
-              className="text-[15px] font-bold tracking-tight leading-none"
+              className="text-[15px] font-bold  leading-none"
               style={{ color: "#0D031B" }}
             >
               Checkout
             </h1>
             <p
-              className="text-[10px] font-bold uppercase tracking-[0.18em] mt-0.5"
+              className="text-[10px] font-bold uppercase  mt-0.5"
               style={{ color: "oklch(0.45 0.12 285)" }}
             >
               Table {tableId}
@@ -338,7 +338,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
             <section>
               <div className="flex items-center justify-between mb-3">
                 <p
-                  className="text-[9px] font-bold uppercase tracking-[0.24em]"
+                  className="text-[9px] font-bold uppercase "
                   style={{ color: "#AEA6BF" }}
                 >
                   Items Ordered
@@ -416,7 +416,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
             {/* ── Tip section ────────────────────────────────────── */}
             <section>
               <p
-                className="text-[9px] font-bold uppercase tracking-[0.24em] mb-3"
+                className="text-[9px] font-bold uppercase  mb-3"
                 style={{ color: "#AEA6BF" }}
               >
                 Express Gratitude
@@ -434,7 +434,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
                         if (t.pct === -1) { setIsCustomTip(true); setSelectedTip(0) }
                         else { setIsCustomTip(false); setSelectedTip(t.pct) }
                       }}
-                      className="h-12 rounded-2xl text-[11px] font-bold uppercase tracking-wider transition-all duration-200 border"
+                      className="h-12 rounded-2xl text-[11px] font-bold uppercase  transition-all duration-200 border"
                       style={
                         isActive
                           ? {
@@ -484,7 +484,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
             {/* ── Payment method ─────────────────────────────────── */}
             <section>
               <p
-                className="text-[9px] font-bold uppercase tracking-[0.24em] mb-3"
+                className="text-[9px] font-bold uppercase  mb-3"
                 style={{ color: "#AEA6BF" }}
               >
                 Payment Method
@@ -595,7 +595,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
                 </div>
               </div>
               <div className="text-right">
-                <p className="text-[10px] font-bold uppercase tracking-wider" style={{ color: "#AEA6BF" }}>
+                <p className="text-[10px] font-bold uppercase " style={{ color: "#AEA6BF" }}>
                   Grand Total
                 </p>
                 <p
@@ -611,7 +611,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
             <button
               onClick={handlePay}
               disabled={orderedItems.length === 0}
-              className="w-full flex items-center gap-3 justify-center h-14 rounded-2xl font-bold text-[13px] uppercase tracking-widest text-white transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden group"
+              className="w-full flex items-center gap-3 justify-center h-14 rounded-2xl font-bold text-[13px] uppercase  text-white transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden group"
               style={{
                 background: "oklch(0.45 0.12 285)",
                 boxShadow: "0 8px 28px oklch(0.45 0.12 285 / 0.4)",

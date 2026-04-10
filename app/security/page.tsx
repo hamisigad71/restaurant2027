@@ -92,10 +92,10 @@ export default function SecurityPage() {
           </div>
 
           <div className="min-w-0 flex-1">
-            <h1 className="text-[15px] font-bold tracking-tight leading-none" style={{ color:"#0D031B" }}>
+            <h1 className="text-[15px] font-bold  leading-none" style={{ color:"#0D031B" }}>
               SecOps Center
             </h1>
-            <p className="text-[10px] font-bold uppercase tracking-[0.18em] mt-0.5" style={{ color:"#9A94AA" }}>
+            <p className="text-[10px] font-bold uppercase  mt-0.5" style={{ color:"#9A94AA" }}>
               Resto HQ · {liveTime}
             </p>
           </div>
@@ -163,7 +163,7 @@ export default function SecurityPage() {
                     </div>
                     {k.label === "Capacity" && (
                       <span
-                        className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full"
+                        className="text-[9px] font-bold uppercase  px-1.5 py-0.5 rounded-full"
                         style={{ background:"oklch(0.65 0.18 25 / 0.12)", color:"oklch(0.55 0.18 25)" }}
                       >
                         High
@@ -171,7 +171,7 @@ export default function SecurityPage() {
                     )}
                   </div>
                   <p className="text-2xl font-bold leading-none tabular-nums" style={{ color:"#0D031B" }}>{k.val}</p>
-                  <p className="text-[10px] font-bold uppercase tracking-[0.12em] mt-1" style={{ color:"#9A94AA" }}>{k.label}</p>
+                  <p className="text-[10px] font-bold uppercase  mt-1" style={{ color:"#9A94AA" }}>{k.label}</p>
                   {k.label === "Capacity" && (
                     <Progress value={capacity} className="h-1.5 mt-2 rounded-full" style={{ background:"rgba(0,0,0,0.06)" }} />
                   )}
@@ -205,7 +205,7 @@ export default function SecurityPage() {
                     </div>
                     <div>
                       <CardTitle className="text-[13px] font-bold" style={{ color:"#0D031B" }}>Live Monitor</CardTitle>
-                      <p className="text-[10px] uppercase tracking-wider font-medium mt-0.5" style={{ color:"#9A94AA" }}>
+                      <p className="text-[10px] uppercase  font-medium mt-0.5" style={{ color:"#9A94AA" }}>
                         {CAMERAS.find(c => c.id === activeCamera)?.label}
                       </p>
                     </div>
@@ -241,7 +241,7 @@ export default function SecurityPage() {
                       <div key={pos} className={cn("absolute w-4 h-4 border-2 border-white/20", pos.includes("right") ? "border-l-0 border-t-0" : "border-r-0 border-b-0", pos.includes("bottom") ? "border-t-0" : "border-b-0")} style={{ borderRadius:"2px" }} />
                     ))}
                     <Crosshair className="h-10 w-10 mb-3" style={{ color:"rgba(255,255,255,0.2)" }} />
-                    <p className="text-[11px] font-bold uppercase tracking-widest" style={{ color:"rgba(255,255,255,0.4)" }}>
+                    <p className="text-[11px] font-bold uppercase " style={{ color:"rgba(255,255,255,0.4)" }}>
                       Encrypted Stream Active
                     </p>
                     <p className="text-[9px] mt-1 font-mono" style={{ color:"rgba(255,255,255,0.25)" }}>
@@ -267,7 +267,7 @@ export default function SecurityPage() {
                       </div>
                       <CardTitle className="text-[13px] font-bold" style={{ color:"#0D031B" }}>Camera Matrix</CardTitle>
                     </div>
-                    <div className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-wider">
+                    <div className="flex items-center gap-3 text-[10px] font-bold uppercase ">
                       <span className="flex items-center gap-1" style={{ color:"oklch(0.42 0.14 150)" }}>
                         <span className="w-2 h-2 rounded-full" style={{ background:"oklch(0.62 0.16 150)" }} />
                         {onlineCams} Online
@@ -311,7 +311,7 @@ export default function SecurityPage() {
                             {cam.label}
                           </p>
                           <span
-                            className="text-[8px] font-bold uppercase tracking-wider mt-1.5 px-1.5 py-0.5 rounded-full"
+                            className="text-[8px] font-bold uppercase  mt-1.5 px-1.5 py-0.5 rounded-full"
                             style={{ background:`${zoneColor}18`, color:zoneColor }}
                           >
                             {cam.zone}
@@ -410,7 +410,7 @@ export default function SecurityPage() {
                       {/* Clear all */}
                       <button
                         onClick={() => setAlerts([])}
-                        className="w-full text-[10px] font-bold uppercase tracking-wider py-2 rounded-xl transition-colors hover:bg-[#EBE6F8]"
+                        className="w-full text-[10px] font-bold uppercase  py-2 rounded-xl transition-colors hover:bg-[#EBE6F8]"
                         style={{ color:"#AEA6BF" }}
                       >
                         Dismiss all
