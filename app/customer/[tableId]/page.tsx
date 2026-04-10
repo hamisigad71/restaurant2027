@@ -166,12 +166,12 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
 
   // ─── Playback handling ──────────────────────────────────────────────────────
   const attemptPlay = useCallback(() => {
+    setHasStarted(true) // Instant transition on first tap
     if (audioRef.current) {
       audioRef.current.muted = false
       audioRef.current.play()
         .then(() => {
           setIsMuted(false)
-          setHasStarted(true)
           // Success! Remove all possible triggers
           window.removeEventListener("click", attemptPlay, true)
           window.removeEventListener("touchstart", attemptPlay, true)
@@ -179,6 +179,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
         })
         .catch((err) => {
           console.log("Audio still blocked:", err)
+          setHasStarted(true) // Ensure menu opens even if audio fails
         })
     }
   }, [])
@@ -457,17 +458,19 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
         {/* ── Welcome Overlay ─────────────────────────────────────── */}
         {!hasStarted && (
           <div 
-            className="fixed inset-0 z-[100] flex flex-col items-center justify-center p-6 text-center overflow-hidden animate-in fade-in duration-700"
+            className="fixed inset-0 z-[100] flex flex-col items-center justify-center p-6 text-center overflow-hidden animate-in fade-in duration-1000"
             style={{ 
-              background: `url(${HERO_IMAGE})`,
+              background: `oklch(0.45 0.12 285) url(${HERO_IMAGE})`,
               backgroundSize: "cover",
               backgroundPosition: "center"
             }}
           >
-            {/* Elegant Glass Layer */}
+            {/* Bright Premium Glass Layer */}
             <div 
-               className="absolute inset-0 backdrop-blur-md transition-all duration-1000"
-               style={{ background: "radial-gradient(circle at center, rgba(21, 10, 48, 0.4), rgba(13, 3, 27, 0.85))" }} 
+               className="absolute inset-0 backdrop-blur-xl transition-all duration-1000"
+               style={{ 
+                 background: "linear-gradient(135deg, oklch(0.6 0.15 285 / 0.4), oklch(0.45 0.12 285 / 0.8))" 
+               }} 
             />
             
             <div className="relative space-y-12 animate-in zoom-in-95 slide-in-from-bottom-12 duration-1000">
