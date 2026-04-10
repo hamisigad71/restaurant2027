@@ -68,7 +68,7 @@ export function MobileNav() {
         { label: "Orders", icon: ClipboardList, href: "/manager/orders" },
         { label: "Menu", icon: Utensils, href: "/manager/menu" },
         { label: "Staff", icon: Users, href: "/manager/staff" },
-        { label: "Tools", icon: LayoutGrid, href: "/manager/reports" },
+        { label: "Reports", icon: BarChart3, href: "/manager/reports" },
       ],
       waiter: [
         { label: "Home", icon: Home, href: "/waiter/dashboard" },

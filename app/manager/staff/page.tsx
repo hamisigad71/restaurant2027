@@ -23,6 +23,14 @@ import {
   BellRing,
   X,
   AlertTriangle,
+  Award,
+  Users,
+  Target,
+  Zap,
+  ArrowUpRight,
+  UserCircle,
+  History,
+  MessageSquare,
 } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
@@ -39,6 +47,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu"
 import {
   Sheet,
@@ -151,19 +160,19 @@ const mockStaff = [
   },
 ]
 
-const roleColor: Record<string, string> = {
-  Waiter:    "bg-sky-50 text-sky-600",
-  Kitchen:   "bg-orange-50 text-orange-600",
-  Manager:   "bg-primary/10 text-primary",
-  Host:      "bg-purple-50 text-purple-600",
-  Bartender: "bg-rose-50 text-rose-600",
+const roleConfig: Record<string, { bg: string; text: string; icon: any }> = {
+  Waiter:    { bg: "bg-sky-50", text: "text-sky-600", icon: Users },
+  Kitchen:   { bg: "bg-orange-50", text: "text-orange-600", icon: Target },
+  Manager:   { bg: "bg-purple-50", text: "text-purple-600", icon: Award },
+  Host:      { bg: "bg-pink-50", text: "text-pink-600", icon: Heart },
+  Bartender: { bg: "bg-rose-50", text: "text-rose-600", icon: Zap },
 }
 
 const stats = [
-  { label: "Active Duty",  value: "48",  sub: "85% capacity",  icon: Activity,   color: "bg-primary/10 text-primary" },
-  { label: "Avg. Rating",  value: "4.8", sub: "Top performers", icon: Star,       color: "bg-amber-100 text-amber-600" },
-  { label: "Attendance",   value: "96%", sub: "Weekly avg",     icon: Heart,      color: "bg-emerald-100 text-emerald-600" },
-  { label: "Open Shifts",  value: "3",   sub: "Needs action",   icon: TrendingUp, color: "bg-blue-100 text-blue-600" },
+  { label: "Active Duty",  value: "48",  sub: "85% capacity",  icon: Activity,   from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)" },
+  { label: "Avg. Rating",  value: "4.8", sub: "Top performers", icon: Star,       from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)" },
+  { label: "Attendance",   value: "96%", sub: "Weekly avg",     icon: Heart,      from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)" },
+  { label: "Open Shifts",  value: "3",   sub: "Needs action",   icon: TrendingUp, from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)" },
 ]
 
 export default function ManagerStaffPage() {
@@ -188,15 +197,17 @@ export default function ManagerStaffPage() {
   const giveAward = useCallback((staffId: number, stars: number) => {
     setAwards(prev => ({ ...prev, [staffId]: stars }))
     setAwardedFlash(staffId)
-    setTimeout(() => setAwardedFlash(null), 1500)
+    toast.success(`${stars} star${stars > 1 ? 's' : ''} awarded!`, {
+      description: `Performance recognition recorded`,
+      icon: <Star className="h-4 w-4 fill-amber-400 text-amber-400" />,
+    })
+    setTimeout(() => setAwardedFlash(null), 2000)
   }, [])
 
   const summonStaff = useCallback(async (staffId: number, name: string) => {
-    // Optimistic UI
     setSummoned(prev => ({ ...prev, [staffId]: true }))
     setSummonBanner({ id: staffId, name })
 
-    // Database Insert
     const { error } = await supabase
       .from('summons')
       .insert([
@@ -205,11 +216,18 @@ export default function ManagerStaffPage() {
 
     if (error) {
       console.error('Staff Summon Error:', error)
-      toast.error(`Summon failed: ${error.message === 'Could not find the table \'public.summons\' in the schema cache' ? 'Database table missing. Run the SQL setup script.' : error.message}`)
-
-      // Rollback on error
+      toast.error(`Summon failed`, {
+        description: error.message.includes('table') 
+          ? 'Database table missing. Run the SQL setup script.' 
+          : error.message,
+      })
       setSummoned(prev => ({ ...prev, [staffId]: false }))
       setSummonBanner(null)
+    } else {
+      toast.success(`${name} summoned`, {
+        description: "Notification sent to staff member",
+        icon: <BellRing className="h-4 w-4" />,
+      })
     }
   }, [])
 
@@ -230,375 +248,708 @@ export default function ManagerStaffPage() {
   )
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <div className="flex-1 py-4 space-y-6">
+    <div className="flex flex-col min-h-screen" style={{ background: "linear-gradient(135deg, #F8F6FC 0%, #F0EBF8 50%, #E8E3F5 100%)" }}>
+      <div className="flex-1 p-4 sm:p-6 lg:p-8 space-y-6 lg:space-y-8">
 
-        {/* ── Summon Banner ── */}
+        {/* ── Enhanced Summon Banner ── */}
         {summonBanner && (
-          <div className="flex items-center gap-4 bg-amber-500 text-white px-5 py-3.5 rounded-2xl shadow-lg shadow-amber-500/30 animate-in slide-in-from-top-2 duration-300">
-            <div className="w-8 h-8 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
-              <BellRing className="h-4 w-4 animate-bounce" />
+          <div 
+            className="flex items-center gap-3 sm:gap-4 px-4 sm:px-6 py-4 rounded-[20px] shadow-xl animate-in slide-in-from-top-2 duration-500 overflow-hidden relative"
+            style={{
+              background: "linear-gradient(135deg, oklch(0.75 0.15 50) 0%, oklch(0.70 0.15 45) 100%)",
+            }}
+          >
+            {/* Animated background glow */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-pulse" />
+            
+            <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center shrink-0 border border-white/30">
+              <BellRing className="h-5 w-5 sm:h-6 sm:w-6 text-white animate-bounce" strokeWidth={2.5} />
             </div>
-            <div className="flex-1">
-              <p className="text-[11px] font-heading uppercase  leading-none">Notification Sent</p>
-              <p className="text-[10px] font-heading uppercase text-white/70 mt-0.5 ">
-                {summonBanner.name} has been asked to report to the manager's office
+            
+            <div className="flex-1 min-w-0 relative">
+              <p className="text-[13px] sm:text-sm font-medium uppercase tracking-wide leading-none text-white">
+                Notification Sent
+              </p>
+              <p className="text-[11px] sm:text-xs font-medium text-white/80 mt-1.5 line-clamp-1">
+                {summonBanner.name} requested to report to manager's office
               </p>
             </div>
+            
             <button
               onClick={() => setSummonBanner(null)}
-              className="shrink-0 h-7 w-7 rounded-lg bg-white/20 hover:bg-white/30 flex items-center justify-center transition-all"
+              className="relative shrink-0 h-9 w-9 rounded-xl bg-white/20 backdrop-blur-sm hover:bg-white/30 flex items-center justify-center transition-all duration-200 border border-white/20 hover:scale-105 active:scale-95"
             >
-              <X className="h-3.5 w-3.5" />
+              <X className="h-4 w-4 text-white" strokeWidth={2.5} />
             </button>
           </div>
         )}
 
-        {/* ── Header ── */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div className="space-y-0.5">
-            <h1 className="text-3xl font-heading uppercase text-foreground leading-none">Personnel Hub</h1>
-            <div className="flex items-center gap-2 text-[10px] font-medium font-heading uppercase text-primary/50">
-              <div className="w-8 h-[1px] bg-primary/20" />
-              Operational Control &amp; Performance
+        {/* ── Enhanced Header ── */}
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 lg:gap-6">
+          <div className="space-y-3">
+            <div className="flex items-center gap-3">
+              <div 
+                className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center shadow-lg"
+                style={{
+                  background: "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)",
+                }}
+              >
+                <Users className="h-6 w-6 sm:h-7 sm:w-7 text-white" strokeWidth={2.5} />
+              </div>
+              <div>
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight leading-none" style={{ color: "#0D031B" }}>
+                  Personnel Hub
+                </h1>
+                <div className="flex items-center gap-2 mt-1.5">
+                  <div className="h-px w-8 bg-gradient-to-r from-oklch(0.42 0.14 285) to-transparent" />
+                  <p className="text-[10px] sm:text-[11px] font-medium uppercase tracking-wider" style={{ color: "#736C83" }}>
+                    Operational Control & Performance
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
-          <Button className="h-11 px-7 gap-2.5 bg-primary text-white font-heading uppercase rounded-xl shadow-lg shadow-primary/25 hover:scale-105 hover:-translate-y-0.5 transition-all duration-300 border-none text-[10px]">
-            <UserPlus className="h-4 w-4" /> Recruit Staff
+          
+          <Button 
+            className="h-12 px-6 sm:px-8 gap-2.5 text-white font-medium rounded-[16px] shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:shadow-2xl active:translate-y-0 active:scale-95 border-0 text-[11px] sm:text-xs uppercase tracking-wide"
+            style={{
+              background: "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)",
+              boxShadow: "0 8px 32px oklch(0.42 0.14 285 / 0.35)",
+            }}
+          >
+            <UserPlus className="h-4 w-4 sm:h-4.5 sm:w-4.5" strokeWidth={2.5} />
+            Recruit Staff
           </Button>
         </div>
 
-        {/* ── Stats ── */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-          {stats.map(s => (
-            <Card key={s.label} className="bg-white border-primary/5 rounded-2xl shadow-sm group hover:shadow-md transition-all overflow-hidden">
-              <CardContent className="p-4 flex items-center gap-3">
-                <div className={cn("p-2.5 rounded-xl group-hover:scale-110 transition-transform shrink-0", s.color)}>
-                  <s.icon className="h-4 w-4" />
-                </div>
-                <div>
-                  <p className="text-xl font-heading text-foreground leading-none tabular-nums">{s.value}</p>
-                  <p className="text-[8px] font-heading uppercase text-muted-foreground/60 mt-0.5">{s.label}</p>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-
-        {/* ── Filters ── */}
-        <div className="flex flex-col sm:flex-row gap-3 items-center bg-white/60 backdrop-blur-xl p-2.5 rounded-2xl border border-primary/5">
-          <div className="relative w-full sm:flex-1 group">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-primary/30 group-focus-within:text-primary transition-colors" />
-            <Input
-              placeholder="Search by name or role..."
-              value={searchQuery}
-              onChange={e => setSearchQuery(e.target.value)}
-              className="pl-10 bg-white border-primary/5 h-10 rounded-xl focus-visible:ring-primary/10 text-sm shadow-sm"
-            />
-          </div>
-          <div className="flex items-center gap-2 w-full sm:w-auto">
-            <Select value={roleFilter} onValueChange={setRoleFilter}>
-              <SelectTrigger className="h-10 w-full sm:w-36 bg-white border-primary/5 rounded-xl text-[9px] font-heading uppercase text-muted-foreground focus:ring-primary/10">
-                <SelectValue placeholder="Role" />
-              </SelectTrigger>
-              <SelectContent className="bg-white/95 backdrop-blur-xl border-primary/10">
-                {["all","waiter","kitchen","manager","host","bartender"].map(r => (
-                  <SelectItem key={r} value={r} className="text-[9px] uppercase">{r === "all" ? "All Roles" : r}</SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <Button variant="outline" size="icon" className="h-10 w-10 rounded-xl bg-white border-primary/5 text-primary/60 shrink-0">
-              <Filter className="h-3.5 w-3.5" />
-            </Button>
-          </div>
-        </div>
-
-        {/* ── Staff Grid ── */}
-        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-          {filtered.map(staff => (
-            <Card
-              key={staff.id}
-              className="group relative bg-white border-0 ring-1 ring-black/5 shadow-sm hover:shadow-xl hover:shadow-primary/8 hover:-translate-y-1 transition-all duration-400 rounded-2xl overflow-hidden"
+        {/* ── Enhanced Stats Grid ── */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+          {stats.map((s, i) => (
+            <Card 
+              key={s.label} 
+              className="group bg-white border-0 rounded-[20px] shadow-md hover:shadow-2xl transition-all duration-500 overflow-hidden hover:-translate-y-1"
+              style={{
+                boxShadow: "0 4px 20px rgba(0,0,0,0.06)",
+              }}
             >
-              {/* Subtle top accent bar */}
-              <div className={cn(
-                "h-0.5 w-full",
-                staff.status === "active" ? "bg-gradient-to-r from-emerald-400 to-emerald-300" : "bg-gradient-to-r from-amber-400 to-amber-300"
-              )} />
-
-              <CardContent className="p-4 space-y-3">
-
-                {/* Summoned badge */}
-                {summoned[staff.id] && (
-                  <div className="flex items-center gap-1.5 bg-amber-50 border border-amber-200 rounded-xl px-3 py-1.5 mb-2">
-                    <BellRing className="h-3 w-3 text-amber-500 animate-pulse shrink-0" />
-                    <span className="text-[8px] font-heading uppercase  text-amber-600 flex-1">Summoned to office</span>
-                    <button onClick={() => dismissSummon(staff.id)} className="text-[7px] font-heading uppercase text-amber-400 hover:text-rose-500 transition-colors">
-                      dismiss
-                    </button>
-                  </div>
-                )}
-
-                {/* Row 1: Avatar + Name + Menu */}
-                <div className="flex items-center gap-3">
-                  <div className="relative shrink-0">
-                    <div className="w-11 h-11 rounded-xl overflow-hidden ring-2 ring-white shadow-md group-hover:scale-105 transition-transform duration-500">
-                      <img src={staff.avatar} alt={staff.name} className="w-full h-full object-cover" />
-                    </div>
-                    <div className={cn(
-                      "absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 border-white",
-                      staff.status === "active" ? "bg-emerald-500" : "bg-amber-400"
-                    )} />
-                  </div>
-
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-heading text-[11px] uppercase text-foreground truncate leading-tight">{staff.name}</h3>
-                    <span className={cn(
-                      "inline-block mt-0.5 px-2 py-0.5 rounded-md text-[8px] font-heading uppercase ",
-                      roleColor[staff.role] ?? "bg-slate-100 text-slate-500"
-                    )}>
-                      {staff.role}
-                    </span>
-                  </div>
-
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <button className="shrink-0 h-6 w-6 flex items-center justify-center rounded-lg text-muted-foreground/30 hover:text-primary hover:bg-primary/5 transition-all">
-                        <MoreHorizontal className="h-3.5 w-3.5" />
-                      </button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end" className="text-xs">
-                      <DropdownMenuItem className="text-[9px] font-heading uppercase  text-primary focus:bg-primary/5">View Profile</DropdownMenuItem>
-                      <DropdownMenuItem className="text-[9px] font-heading uppercase  focus:bg-primary/5">Reassign Tables</DropdownMenuItem>
-                      <DropdownMenuItem className="text-[9px] font-heading uppercase  text-destructive focus:bg-destructive/5">Remove</DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </div>
-
-                {/* Row 2: Rating + Shift */}
-                <div className="grid grid-cols-2 gap-2">
-                  <div className="bg-amber-50 rounded-xl px-2.5 py-2 flex items-center gap-1.5">
-                    <Star className="h-3 w-3 text-amber-400 fill-amber-400 shrink-0" />
-                    <div>
-                      <p className="text-[10px] font-heading text-amber-700 leading-none">{staff.rating}</p>
-                      <p className="text-[7px] font-heading uppercase text-amber-500/70 mt-0.5">Rating</p>
-                    </div>
-                  </div>
-                  <div className="bg-primary/5 rounded-xl px-2.5 py-2 flex items-center gap-1.5">
-                    <Clock className="h-3 w-3 text-primary/50 shrink-0" />
-                    <div>
-                      <p className="text-[8px] font-heading text-foreground/80 leading-tight">{staff.shift}</p>
-                      <p className="text-[7px] font-heading uppercase text-primary/40 mt-0.5">Shift</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Row 3: P/wk + Tables (waiter only) */}
-                <div className="flex items-center justify-between text-[8px] font-heading uppercase">
-                  <span className="text-muted-foreground/50 flex items-center gap-1">
-                    <Calendar className="h-2.5 w-2.5" /> {staff.shiftsThisWeek} shifts/wk
-                  </span>
-                  {staff.role === "Waiter" && staff.tables.length > 0 && (
-                    <div className="flex items-center gap-1">
-                      {staff.tables.slice(0, 3).map(t => (
-                        <span key={t} className="px-1.5 py-0.5 rounded-md bg-primary/8 text-primary text-[8px] border border-primary/10">{t}</span>
-                      ))}
-                      {staff.tables.length > 3 && (
-                        <span className="text-[7px] text-muted-foreground/50">+{staff.tables.length - 3}</span>
-                      )}
-                    </div>
-                  )}
-                </div>
-
-                {/* Row 4: Progress */}
-                <div className="space-y-1">
-                  <div className="flex justify-between items-center text-[7.5px] font-heading uppercase text-muted-foreground/50">
-                    <span>Performance</span>
-                    <span className="tabular-nums">{Math.round(staff.rating * 20)}%</span>
-                  </div>
-                  <Progress value={staff.rating * 20} className="h-1 bg-primary/5" />
-                </div>
-
-                {/* Row 5: Award Stars */}
-                <div className="pt-2 border-t border-black/5 space-y-1">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[7.5px] font-heading uppercase text-muted-foreground/50 ">Award Stars</span>
-                    {awardedFlash === staff.id && (
-                      <span className="text-[7.5px] font-heading uppercase text-amber-500 animate-in fade-in zoom-in duration-300">⭐ Awarded!</span>
-                    )}
-                  </div>
-                  <div className="flex gap-1">
-                    {[1, 2, 3, 4, 5].map(n => (
-                      <button
-                        key={n}
-                        onClick={() => giveAward(staff.id, n)}
-                        className="transition-all duration-200 hover:scale-125 active:scale-95"
-                        title={`Give ${n} star${n > 1 ? 's' : ''}`}
-                      >
-                        <Star
-                          className={`h-4 w-4 transition-colors duration-150 ${
-                            (awards[staff.id] ?? 0) >= n
-                              ? "text-amber-400 fill-amber-400"
-                              : "text-muted-foreground/20 hover:text-amber-300"
-                          }`}
-                        />
-                      </button>
-                    ))}
-                    {awards[staff.id] && (
-                      <button
-                        onClick={() => setAwards(prev => { const n = {...prev}; delete n[staff.id]; return n })}
-                        className="ml-auto text-[7px] font-heading uppercase text-muted-foreground/30 hover:text-rose-400 transition-colors"
-                      >
-                        clear
-                      </button>
-                    )}
-                  </div>
-                </div>
-
-                {/* Row 6: Actions */}
-                <div className="grid grid-cols-2 gap-1.5 pt-1 border-t border-black/5">
-                  <Button
-                    variant="ghost"
-                    className="h-7 rounded-lg text-[8px] font-heading uppercase gap-1 text-primary/60 hover:text-primary hover:bg-primary/5 transition-all"
-                  >
-                    <Phone className="h-3 w-3" /> Call
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    className="h-7 rounded-lg text-[8px] font-heading uppercase gap-1 text-primary/60 hover:text-primary hover:bg-primary/5 transition-all"
-                  >
-                    <Mail className="h-3 w-3" /> Email
-                  </Button>
-                </div>
-
-                {/* Summon button */}
-                <Button
-                  onClick={() => summonStaff(staff.id, staff.name)}
-                  disabled={summoned[staff.id]}
+              <CardContent className="p-4 sm:p-5 relative overflow-hidden">
+                {/* Gradient background */}
+                <div 
                   className={cn(
-                    "w-full h-8 rounded-xl text-[8px] font-heading uppercase  gap-1.5 border-none transition-all",
-                    summoned[staff.id]
-                      ? "bg-amber-100 text-amber-600 cursor-not-allowed"
-                      : "bg-primary/8 text-primary hover:bg-primary hover:text-white shadow-none hover:shadow-md hover:shadow-primary/20 hover:scale-[1.02] active:scale-[0.98]"
+                    "absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-500 bg-gradient-to-br",
+                    s.gradient
                   )}
-                >
-                  <BellRing className={cn("h-3 w-3", summoned[staff.id] && "animate-pulse")} />
-                  {summoned[staff.id] ? "Summoned" : "Report to Office"}
-                </Button>
-
-                <Button
-                  variant="ghost"
-                  className="w-full h-6 text-[7px] font-heading uppercase text-muted-foreground/35 hover:text-primary hover:bg-primary/5 transition-all rounded-lg gap-1"
-                >
-                  Full Analytics <ChevronRight className="h-2.5 w-2.5" />
-                </Button>
-
+                  className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-500"
+                  style={{ background: `linear-gradient(135deg, ${s.from} 0%, ${s.to} 100%)` }}
+                />
+                
+                <div className="flex items-start justify-between relative z-10">
+                  <div className="flex-1 space-y-2">
+                    <div 
+                      className="w-10 h-10 sm:w-12 sm:h-12 rounded-[18px] flex items-center justify-center shrink-0 shadow-lg"
+                      style={{ background: `linear-gradient(135deg, ${s.from} 0%, ${s.to} 100%)` }}
+                    >
+                      <s.icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" strokeWidth={2.5} />
+                    </div>
+                    <div className="space-y-1">
+                      <p className="text-2xl sm:text-3xl font-medium leading-none tabular-nums" style={{ color: "#0D031B" }}>
+                        {s.value}
+                      </p>
+                      <p className="text-[10px] sm:text-[11px] font-medium uppercase tracking-wide" style={{ color: "#736C83" }}>
+                        {s.label}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="mt-3 pt-3 border-t relative z-10" style={{ borderColor: "oklch(0.42 0.14 285 / 0.08)" }}>
+                  <p className="text-[10px] font-medium flex items-center gap-1.5" style={{ color: "#9A94AA" }}>
+                    <TrendingUp className="h-3 w-3" />
+                    {s.sub}
+                  </p>
+                </div>
               </CardContent>
             </Card>
           ))}
         </div>
 
-        {/* ── Footer ── */}
-        <Card className="border-none bg-white shadow-lg shadow-primary/5 rounded-2xl overflow-hidden">
-          <CardContent className="p-6 flex flex-col md:flex-row items-center justify-between gap-5">
-            <div className="flex items-center gap-5">
-              <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center shadow-inner shrink-0">
-                <CheckCircle2 className="h-7 w-7" />
+        {/* ── Enhanced Filters ── */}
+        <Card 
+          className="border-0 rounded-[20px] shadow-lg overflow-hidden"
+          style={{ background: "rgba(255,255,255,0.95)", backdropFilter: "blur(20px)" }}
+        >
+          <CardContent className="p-4 sm:p-5">
+            <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
+              {/* Search */}
+              <div className="relative flex-1 group">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 transition-colors" style={{ color: "oklch(0.42 0.14 285 / 0.4)" }} />
+                <Input
+                  placeholder="Search by name or role..."
+                  value={searchQuery}
+                  onChange={e => setSearchQuery(e.target.value)}
+                  className="pl-11 pr-4 h-11 sm:h-12 bg-white border-2 rounded-xl sm:rounded-2xl text-sm transition-all duration-200 focus-visible:ring-0"
+                  style={{
+                    borderColor: "oklch(0.42 0.14 285 / 0.12)",
+                    color: "#0D031B",
+                  }}
+                />
               </div>
-              <div className="space-y-0.5 text-center md:text-left">
-                <h3 className="font-heading text-xl uppercase text-foreground leading-none">Operational Saturation</h3>
-                <p className="text-[10px] font-heading uppercase text-muted-foreground/60 ">All station quotas met for the active shift cycle.</p>
+
+              {/* Filters */}
+              <div className="flex items-center gap-2 sm:gap-3">
+                <Select value={roleFilter} onValueChange={setRoleFilter}>
+                  <SelectTrigger className="h-11 sm:h-12 w-full sm:w-40 bg-white border-2 rounded-xl sm:rounded-2xl text-xs font-medium uppercase tracking-wide transition-all"
+                    style={{
+                      borderColor: "oklch(0.42 0.14 285 / 0.12)",
+                      color: "#736C83",
+                    }}>
+                    <SelectValue placeholder="Role" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white/98 backdrop-blur-xl border-0 rounded-2xl shadow-2xl">
+                    {["all","waiter","kitchen","manager","host","bartender"].map(r => (
+                      <SelectItem 
+                        key={r} 
+                        value={r} 
+                        className="text-xs uppercase font-medium focus:bg-oklch(0.42 0.14 285 / 0.08) rounded-xl m-1"
+                      >
+                        {r === "all" ? "All Roles" : r}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+
+                <Button 
+                  variant="outline" 
+                  size="icon" 
+                  className="h-11 sm:h-12 w-11 sm:w-12 rounded-xl sm:rounded-2xl bg-white border-2 transition-all hover:scale-105 active:scale-95"
+                  style={{
+                    borderColor: "oklch(0.42 0.14 285 / 0.12)",
+                    color: "oklch(0.42 0.14 285)",
+                  }}
+                >
+                  <Filter className="h-4 w-4" strokeWidth={2.5} />
+                </Button>
               </div>
             </div>
-            <div className="flex gap-3">
-              <Button variant="outline" className="h-11 px-6 border-primary/10 text-muted-foreground font-heading uppercase rounded-xl hover:bg-primary/5 transition-all text-[10px]">
-                Archive
+          </CardContent>
+        </Card>
+
+        {/* ── Enhanced Staff Grid ── */}
+        <div className="grid gap-4 sm:gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+          {filtered.map(staff => {
+            const roleInfo = roleConfig[staff.role] || roleConfig.Waiter
+            const RoleIcon = roleInfo.icon
+
+            return (
+              <Card
+                key={staff.id}
+                className="group relative bg-white border-0 rounded-[24px] shadow-md hover:shadow-2xl transition-all duration-500 overflow-hidden hover:-translate-y-2"
+                style={{
+                  boxShadow: "0 4px 24px rgba(0,0,0,0.08)",
+                }}
+              >
+                {/* Status indicator bar */}
+                <div 
+                  className="h-1 w-full"
+                  style={{
+                    background: staff.status === "active" 
+                      ? "linear-gradient(90deg, oklch(0.65 0.18 150) 0%, oklch(0.70 0.20 160) 100%)"
+                      : "linear-gradient(90deg, oklch(0.75 0.15 50) 0%, oklch(0.70 0.15 45) 100%)"
+                  }}
+                />
+
+                <CardContent className="p-5 space-y-4">
+
+                  {/* Summoned Alert */}
+                  {summoned[staff.id] && (
+                    <div 
+                      className="flex items-center gap-2 px-3 py-2 rounded-xl border animate-in fade-in zoom-in-95 duration-300"
+                      style={{
+                        background: "oklch(0.95 0.05 50 / 0.5)",
+                        borderColor: "oklch(0.75 0.15 50 / 0.3)",
+                      }}
+                    >
+                      <BellRing className="h-3.5 w-3.5 animate-pulse shrink-0" style={{ color: "oklch(0.65 0.15 45)" }} />
+                      <span className="text-[10px] font-medium uppercase tracking-wide flex-1" style={{ color: "oklch(0.45 0.15 45)" }}>
+                        Summoned to office
+                      </span>
+                      <button 
+                        onClick={() => dismissSummon(staff.id)} 
+                        className="text-[9px] font-medium uppercase transition-colors hover:opacity-70"
+                        style={{ color: "oklch(0.65 0.15 45)" }}
+                      >
+                        Clear
+                      </button>
+                    </div>
+                  )}
+
+                  {/* Header: Avatar + Info + Menu */}
+                  <div className="flex items-start gap-3">
+                    <div className="relative shrink-0">
+                      <div 
+                        className="w-14 h-14 rounded-2xl overflow-hidden ring-2 ring-white shadow-lg transition-all duration-500 group-hover:scale-105 group-hover:rotate-3"
+                        style={{ boxShadow: "0 4px 16px rgba(0,0,0,0.12)" }}
+                      >
+                        <img src={staff.avatar} alt={staff.name} className="w-full h-full object-cover" />
+                      </div>
+                      <div 
+                        className={cn(
+                          "absolute -bottom-1 -right-1 w-4 h-4 rounded-full border-2 border-white shadow-md",
+                          staff.status === "active" ? "bg-emerald-500" : "bg-amber-500"
+                        )}
+                      />
+                    </div>
+
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-medium text-sm uppercase truncate leading-tight" style={{ color: "#0D031B" }}>
+                        {staff.name}
+                      </h3>
+                      <div className="flex items-center gap-1.5 mt-1.5">
+                        <div 
+                          className={cn(
+                            "flex items-center gap-1 px-2 py-1 rounded-lg text-[10px] font-medium uppercase tracking-wide",
+                            roleInfo.bg,
+                            roleInfo.text
+                          )}
+                        >
+                          <RoleIcon className="h-3 w-3" strokeWidth={2.5} />
+                          {staff.role}
+                        </div>
+                      </div>
+                    </div>
+
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <button className="shrink-0 h-8 w-8 flex items-center justify-center rounded-xl transition-all hover:bg-oklch(0.42 0.14 285 / 0.08) active:scale-90"
+                          style={{ color: "#9A94AA" }}>
+                          <MoreHorizontal className="h-4 w-4" />
+                        </button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end" className="bg-white/98 backdrop-blur-xl border-0 rounded-2xl shadow-2xl w-48">
+                        <DropdownMenuItem className="text-xs font-medium rounded-xl m-1 focus:bg-oklch(0.42 0.14 285 / 0.08)" style={{ color: "oklch(0.42 0.14 285)" }}>
+                          <UserCircle className="h-3.5 w-3.5 mr-2" />
+                          Full Profile
+                        </DropdownMenuItem>
+                        <DropdownMenuItem className="text-xs font-medium rounded-xl m-1 focus:bg-oklch(0.42 0.14 285 / 0.08)">
+                          <History className="h-3.5 w-3.5 mr-2" />
+                          Duty Log
+                        </DropdownMenuItem>
+                        <DropdownMenuItem className="text-xs font-medium rounded-xl m-1 focus:bg-oklch(0.42 0.14 285 / 0.08)">
+                          <MessageSquare className="h-3.5 w-3.5 mr-2" />
+                          Send Ping
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator className="bg-oklch(0.42 0.14 285 / 0.05)" />
+                        <DropdownMenuItem className="text-xs font-medium rounded-xl m-1 focus:bg-rose-50" style={{ color: "oklch(0.55 0.20 25)" }}>
+                          Remove Staff
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </div>
+
+                  {/* Stats Row */}
+                  <div className="grid grid-cols-2 gap-2">
+                    <div 
+                      className="rounded-xl px-3 py-2.5 flex items-center gap-2 transition-all hover:scale-105"
+                      style={{ background: "oklch(0.95 0.05 50 / 0.4)" }}
+                    >
+                      <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400 shrink-0" />
+                      <div className="min-w-0">
+                        <p className="text-sm font-medium leading-none" style={{ color: "oklch(0.45 0.15 45)" }}>
+                          {staff.rating}
+                        </p>
+                        <p className="text-[9px] font-medium uppercase mt-0.5" style={{ color: "oklch(0.60 0.10 45)" }}>
+                          Rating
+                        </p>
+                      </div>
+                    </div>
+
+                    <div 
+                      className="rounded-xl px-3 py-2.5 flex items-center gap-2 transition-all hover:scale-105"
+                      style={{ background: "oklch(0.42 0.14 285 / 0.06)" }}
+                    >
+                      <Clock className="h-3.5 w-3.5 shrink-0" style={{ color: "oklch(0.42 0.14 285)" }} />
+                      <div className="min-w-0">
+                        <p className="text-[10px] font-medium leading-tight line-clamp-1" style={{ color: "#0D031B" }}>
+                          {staff.shift}
+                        </p>
+                        <p className="text-[9px] font-medium uppercase mt-0.5" style={{ color: "#9A94AA" }}>
+                          Shift
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Details Row */}
+                  <div className="flex items-center justify-between text-[10px] font-medium uppercase tracking-wide">
+                    <span className="flex items-center gap-1.5" style={{ color: "#9A94AA" }}>
+                      <Calendar className="h-3 w-3" />
+                      {staff.shiftsThisWeek} shifts/wk
+                    </span>
+                    
+                    {staff.role === "Waiter" && staff.tables.length > 0 && (
+                      <div className="flex items-center gap-1">
+                        {staff.tables.slice(0, 3).map(t => (
+                          <span 
+                            key={t} 
+                            className="px-2 py-0.5 rounded-lg text-[10px] font-medium border"
+                            style={{
+                              background: "oklch(0.42 0.14 285 / 0.08)",
+                              color: "oklch(0.42 0.14 285)",
+                              borderColor: "oklch(0.42 0.14 285 / 0.2)",
+                            }}
+                          >
+                            {t}
+                          </span>
+                        ))}
+                        {staff.tables.length > 3 && (
+                          <span className="text-[9px]" style={{ color: "#C4BAD8" }}>
+                            +{staff.tables.length - 3}
+                          </span>
+                        )}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Performance Progress */}
+                  <div className="space-y-2">
+                    <div className="flex justify-between items-center text-[9px] font-medium uppercase tracking-wide">
+                      <span style={{ color: "#9A94AA" }}>Performance</span>
+                      <span className="tabular-nums" style={{ color: "oklch(0.42 0.14 285)" }}>
+                        {Math.round(staff.rating * 20)}%
+                      </span>
+                    </div>
+                    <div className="h-2 rounded-full overflow-hidden" style={{ background: "oklch(0.42 0.14 285 / 0.08)" }}>
+                      <div 
+                        className="h-full rounded-full transition-all duration-1000"
+                        style={{ 
+                          width: `${staff.rating * 20}%`,
+                          background: "linear-gradient(90deg, oklch(0.42 0.14 285) 0%, oklch(0.55 0.18 270) 100%)",
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Award Stars Section */}
+                  <div className="pt-3 border-t space-y-2" style={{ borderColor: "oklch(0.42 0.14 285 / 0.08)" }}>
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-medium uppercase tracking-wide" style={{ color: "#9A94AA" }}>
+                        Performance Award
+                      </span>
+                      {awardedFlash === staff.id && (
+                        <span className="text-[10px] font-medium uppercase animate-in fade-in zoom-in-95 duration-300" style={{ color: "oklch(0.65 0.15 45)" }}>
+                          ⭐ Awarded!
+                        </span>
+                      )}
+                    </div>
+                    
+                    <div className="flex items-center gap-1.5">
+                      {[1, 2, 3, 4, 5].map(n => (
+                        <button
+                          key={n}
+                          onClick={() => giveAward(staff.id, n)}
+                          className="transition-all duration-200 hover:scale-125 active:scale-90"
+                          title={`Give ${n} star${n > 1 ? 's' : ''}`}
+                        >
+                          <Star
+                            className={cn(
+                              "h-5 w-5 transition-colors duration-200",
+                              (awards[staff.id] ?? 0) >= n
+                                ? "text-amber-400 fill-amber-400 drop-shadow-md"
+                                : "text-muted-foreground/20 hover:text-amber-300"
+                            )}
+                          />
+                        </button>
+                      ))}
+                      
+                      {awards[staff.id] && (
+                        <button
+                          onClick={() => setAwards(prev => { const n = {...prev}; delete n[staff.id]; return n })}
+                          className="ml-auto text-[9px] font-medium uppercase tracking-wide transition-colors hover:opacity-70"
+                          style={{ color: "#C4BAD8" }}
+                        >
+                          Clear
+                        </button>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="grid grid-cols-2 gap-2 pt-2">
+                    <Button
+                      variant="ghost"
+                      className="h-9 rounded-xl text-[10px] font-bold uppercase gap-1.5 transition-all hover:scale-105 active:scale-95"
+                      style={{ color: "oklch(0.42 0.14 285)" }}
+                    >
+                      <Phone className="h-3.5 w-3.5" />
+                      Call
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      className="h-9 rounded-xl text-[10px] font-bold uppercase gap-1.5 transition-all hover:scale-105 active:scale-95"
+                      style={{ color: "oklch(0.42 0.14 285)" }}
+                    >
+                      <Mail className="h-3.5 w-3.5" />
+                      Email
+                    </Button>
+                  </div>
+
+                  {/* Summon Button */}
+                  <Button
+                    onClick={() => summonStaff(staff.id, staff.name)}
+                    disabled={summoned[staff.id]}
+                    className={cn(
+                      "w-full h-10 rounded-xl text-[11px] font-bold uppercase tracking-wide gap-2 border-0 transition-all duration-300",
+                      summoned[staff.id]
+                        ? "bg-amber-100 text-amber-600 cursor-not-allowed"
+                        : "text-white shadow-lg hover:shadow-xl hover:-translate-y-0.5 hover:scale-[1.02] active:translate-y-0 active:scale-95"
+                    )}
+                    style={
+                      !summoned[staff.id]
+                        ? {
+                            background: "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)",
+                            boxShadow: "0 4px 16px oklch(0.42 0.14 285 / 0.3)",
+                          }
+                        : undefined
+                    }
+                  >
+                    <BellRing className={cn("h-4 w-4", summoned[staff.id] && "animate-pulse")} strokeWidth={2.5} />
+                    {summoned[staff.id] ? "Summoned" : "Report to Office"}
+                  </Button>
+
+                  {/* View Analytics Link */}
+                  <button className="w-full h-8 flex items-center justify-center gap-1 text-[10px] font-medium uppercase tracking-wide transition-all hover:opacity-70 rounded-xl"
+                    style={{ color: "#9A94AA" }}>
+                    View Full Analytics
+                    <ChevronRight className="h-3 w-3" />
+                  </button>
+
+                </CardContent>
+              </Card>
+            )
+          })}
+        </div>
+
+        {/* ── Enhanced Footer Card ── */}
+        <Card 
+          className="border-0 rounded-[24px] shadow-xl overflow-hidden"
+          style={{
+            background: "white",
+            boxShadow: "0 8px 32px rgba(0,0,0,0.08)",
+          }}
+        >
+          <CardContent className="p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex items-center gap-5 text-center md:text-left">
+              <div 
+                className="w-14 h-14 sm:w-16 sm:h-16 rounded-[20px] flex items-center justify-center shadow-lg shrink-0"
+                style={{
+                  background: "linear-gradient(135deg, oklch(0.65 0.18 150) 0%, oklch(0.70 0.20 160) 100%)",
+                }}
+              >
+                <CheckCircle2 className="h-7 w-7 sm:h-8 sm:w-8 text-white" strokeWidth={2.5} />
+              </div>
+              <div className="space-y-1.5">
+                <h3 className="font-normal text-lg sm:text-xl uppercase tracking-tight leading-none" style={{ color: "#0D031B" }}>
+                  Operational Saturation
+                </h3>
+                <p className="text-[11px] sm:text-xs font-medium" style={{ color: "#736C83" }}>
+                  All station quotas met for the active shift cycle
+                </p>
+              </div>
+            </div>
+            
+            <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+              <Button 
+                variant="outline" 
+                className="h-11 sm:h-12 px-6 sm:px-8 border-2 font-bold rounded-[14px] text-xs uppercase tracking-wide transition-all hover:scale-105 active:scale-95"
+                style={{
+                  borderColor: "oklch(0.42 0.14 285 / 0.15)",
+                  color: "#736C83",
+                }}
+              >
+                View Archive
               </Button>
               <Button 
                 onClick={() => setIsAuditOpen(true)}
-                className="h-11 px-7 bg-primary text-white font-heading uppercase rounded-xl shadow-lg shadow-primary/20 hover:opacity-90 transition-all border-none text-[10px]"
+                className="h-11 sm:h-12 px-6 sm:px-8 text-white font-bold rounded-[14px] shadow-xl border-0 text-xs uppercase tracking-wide transition-all hover:-translate-y-0.5 hover:shadow-2xl active:translate-y-0 active:scale-95"
+                style={{
+                  background: "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)",
+                  boxShadow: "0 8px 32px oklch(0.42 0.14 285 / 0.35)",
+                }}
               >
+                <Activity className="h-4 w-4 mr-2" strokeWidth={2.5} />
                 Weekly Roster Audit
               </Button>
             </div>
           </CardContent>
         </Card>
 
-        {/* ── Roster Audit Sheet ── */}
+        {/* ── Enhanced Roster Audit Sheet ── */}
         <Sheet open={isAuditOpen} onOpenChange={setIsAuditOpen}>
-          <SheetContent className="sm:max-w-md bg-white/95 backdrop-blur-xl border-l border-primary/10 p-0 overflow-hidden flex flex-col">
-            <div className="p-6 space-y-6 flex-1 overflow-y-auto custom-scrollbar">
-              <SheetHeader className="text-left">
-                <div className="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-4">
-                  <Activity className="h-6 w-6" />
+          <SheetContent 
+            className="sm:max-w-lg p-0 overflow-hidden flex flex-col border-0"
+            style={{
+              background: "linear-gradient(135deg, #FFFFFF 0%, #F8F6FC 100%)",
+            }}
+          >
+            {/* Gradient header bar */}
+            <div 
+              className="h-1.5 w-full"
+              style={{
+                background: "linear-gradient(90deg, oklch(0.42 0.14 285) 0%, oklch(0.55 0.18 270) 50%, oklch(0.42 0.14 285) 100%)"
+              }}
+            />
+
+            <div className="p-6 sm:p-8 space-y-6 flex-1 overflow-y-auto">
+              <SheetHeader className="text-left space-y-4">
+                <div 
+                  className="w-14 h-14 rounded-[18px] flex items-center justify-center shadow-lg"
+                  style={{
+                    background: "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)",
+                  }}
+                >
+                  <Activity className="h-7 w-7 text-white" strokeWidth={2.5} />
                 </div>
-                <SheetTitle className="text-2xl font-heading uppercase text-foreground">Weekly Roster Audit</SheetTitle>
-                <SheetDescription className="text-[10px] font-heading uppercase  text-primary/50">
-                  Performance Analysis — Week 14, 2026
-                </SheetDescription>
+                <div>
+                  <SheetTitle className="text-2xl sm:text-3xl font-normal uppercase tracking-tight leading-none" style={{ color: "#0D031B" }}>
+                    Weekly Roster Audit
+                  </SheetTitle>
+                  <SheetDescription className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider mt-2" style={{ color: "#736C83" }}>
+                    Performance Analysis — Week 14, 2026
+                  </SheetDescription>
+                </div>
               </SheetHeader>
 
-              <div className="space-y-5">
+              <div className="space-y-6">
                 {/* Metrics Grid */}
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="p-4 rounded-3xl bg-emerald-50 border border-emerald-100/50">
-                    <p className="text-2xl font-heading text-emerald-600 leading-none tabular-nums">{auditMetrics.avgRating}</p>
-                    <p className="text-[9px] font-heading uppercase text-emerald-600/60 mt-1">Avg Service Rating</p>
+                <div className="grid grid-cols-2 gap-4">
+                  <div 
+                    className="p-5 rounded-[20px] border-2 transition-all hover:scale-105"
+                    style={{
+                      background: "oklch(0.65 0.18 150 / 0.08)",
+                      borderColor: "oklch(0.65 0.18 150 / 0.2)",
+                    }}
+                  >
+                    <p className="text-3xl font-normal leading-none tabular-nums" style={{ color: "oklch(0.45 0.18 150)" }}>
+                      {auditMetrics.avgRating}
+                    </p>
+                    <p className="text-[10px] font-normal uppercase tracking-wide mt-2" style={{ color: "oklch(0.55 0.15 150)" }}>
+                      Avg Service Rating
+                    </p>
                   </div>
-                  <div className="p-4 rounded-3xl bg-primary/5 border border-primary/10">
-                    <p className="text-2xl font-heading text-primary leading-none tabular-nums">{auditMetrics.totalShifts}</p>
-                    <p className="text-[9px] font-heading uppercase text-primary/40 mt-1">Total Team Shifts</p>
+                  <div 
+                    className="p-5 rounded-[20px] border-2 transition-all hover:scale-105"
+                    style={{
+                      background: "oklch(0.42 0.14 285 / 0.08)",
+                      borderColor: "oklch(0.42 0.14 285 / 0.2)",
+                    }}
+                  >
+                    <p className="text-3xl font-normal leading-none tabular-nums" style={{ color: "oklch(0.42 0.14 285)" }}>
+                      {auditMetrics.totalShifts}
+                    </p>
+                    <p className="text-[10px] font-normal uppercase tracking-wide mt-2" style={{ color: "#9A94AA" }}>
+                      Total Team Shifts
+                    </p>
                   </div>
                 </div>
 
-                {/* Top Performer Section */}
-                <div className="p-5 rounded-[2rem] bg-[#0D031B] text-white overflow-hidden relative group">
-                  {/* Decorative Sparkle */}
-                  <div className="absolute -top-6 -right-6 w-24 h-24 bg-primary/20 rounded-full blur-2xl group-hover:bg-primary/30 transition-all duration-500" />
+                {/* Enhanced Top Performer Card */}
+                <div 
+                  className="p-6 rounded-[24px] overflow-hidden relative group"
+                  style={{
+                    background: "linear-gradient(135deg, #0D031B 0%, oklch(0.15 0.10 285) 100%)",
+                  }}
+                >
+                  {/* Decorative orbs */}
+                  <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full opacity-20 blur-3xl bg-gradient-to-br from-amber-400 to-amber-600" />
+                  <div className="absolute -bottom-8 -left-8 w-32 h-32 rounded-full opacity-10 blur-3xl" style={{ background: "oklch(0.42 0.14 285)" }} />
                   
-                  <div className="relative z-10 flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-2xl overflow-hidden ring-2 ring-primary/20 shrink-0">
-                      <img src={auditMetrics.topPerformer.avatar} alt="" className="w-full h-full object-cover" />
+                  <div className="relative z-10">
+                    <div className="flex items-center gap-2 mb-3">
+                      <Award className="h-4 w-4 text-amber-400 fill-amber-400" />
+                      <span className="text-[10px] font-normal uppercase tracking-wider text-amber-400">
+                        MVP of the Week
+                      </span>
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-1.5 mb-1">
-                        <Star className="h-3 w-3 text-amber-400 fill-amber-400" />
-                        <span className="text-[8px] font-heading uppercase  text-primary">MVP of the Week</span>
+
+                    <div className="flex items-center gap-4 mb-4">
+                      <div 
+                        className="w-16 h-16 rounded-[18px] overflow-hidden ring-2 ring-white/20 shadow-xl shrink-0"
+                      >
+                        <img src={auditMetrics.topPerformer.avatar} alt="" className="w-full h-full object-cover" />
                       </div>
-                      <h4 className="text-lg font-heading uppercase truncate">{auditMetrics.topPerformer.name}</h4>
-                      <p className="text-[10px] text-white/50">{auditMetrics.topPerformer.role} · {auditMetrics.topPerformer.rating} High-score</p>
+                      <div className="flex-1 min-w-0">
+                        <h4 className="text-xl font-normal uppercase truncate text-white leading-tight">
+                          {auditMetrics.topPerformer.name}
+                        </h4>
+                        <p className="text-[11px] text-white/60 mt-1">
+                          {auditMetrics.topPerformer.role} · {auditMetrics.topPerformer.rating} Rating
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                  
-                  <div className="mt-4 pt-4 border-t border-white/10 flex items-center justify-between">
-                    <p className="text-[9px] text-white/40 uppercase ">Incentive Award Eligible</p>
-                    <Button size="sm" className="h-7 px-3 bg-primary text-white text-[9px] uppercase font-heading rounded-lg border-none shadow-lg shadow-primary/20">
-                      Reward
-                    </Button>
+                    
+                    <div className="pt-4 border-t border-white/10 flex items-center justify-between">
+                      <p className="text-[10px] text-white/50 uppercase tracking-wide">
+                        Incentive Award Eligible
+                      </p>
+                      <Button 
+                        size="sm" 
+                        className="h-9 px-5 text-white font-normal text-[10px] uppercase rounded-xl border-0 shadow-lg"
+                        style={{
+                          background: "linear-gradient(135deg, oklch(0.65 0.15 45) 0%, oklch(0.70 0.15 50) 100%)",
+                        }}
+                      >
+                        <Award className="h-3 w-3 mr-1.5" />
+                        Send Reward
+                      </Button>
+                    </div>
                   </div>
                 </div>
 
-                {/* Staff Attendance List */}
+                {/* Enhanced Staff List */}
                 <div className="space-y-3">
-                  <h5 className="text-[10px] font-heading uppercase  text-muted-foreground/60">Shift Compliance</h5>
+                  <h5 className="text-[11px] font-normal uppercase tracking-wider" style={{ color: "#9A94AA" }}>
+                    Shift Compliance Overview
+                  </h5>
                   <div className="space-y-2">
                     {mockStaff.slice(0, 6).map(s => (
-                      <div key={s.id} className="flex items-center gap-3 p-3 rounded-2xl bg-white border border-black/[0.03] hover:border-primary/20 transition-all group">
-                        <div className="w-8 h-8 rounded-xl bg-slate-100 overflow-hidden shrink-0">
-                          <img src={s.avatar} alt="" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all" />
+                      <div 
+                        key={s.id} 
+                        className="flex items-center gap-3 p-4 rounded-[16px] border-2 transition-all hover:scale-[1.02] hover:shadow-md group"
+                        style={{
+                          background: "white",
+                          borderColor: "oklch(0.42 0.14 285 / 0.08)",
+                        }}
+                      >
+                        <div className="w-11 h-11 rounded-xl overflow-hidden shrink-0 ring-2 ring-white shadow-sm">
+                          <img 
+                            src={s.avatar} 
+                            alt="" 
+                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all" 
+                          />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-[11px] font-heading uppercase text-foreground truncate">{s.name}</p>
-                          <div className="flex items-center gap-2 mt-0.5">
-                            <span className="text-[8px] text-muted-foreground/50">{s.shiftsThisWeek} shifts completed</span>
+                          <p className="text-[12px] font-normal uppercase truncate leading-tight" style={{ color: "#0D031B" }}>
+                            {s.name}
+                          </p>
+                          <div className="flex items-center gap-2 mt-1">
+                            <span className="text-[10px] font-medium" style={{ color: "#9A94AA" }}>
+                              {s.shiftsThisWeek} shifts
+                            </span>
                             {s.shiftsThisWeek > 5 && (
-                              <Badge className="bg-amber-100 text-amber-600 border-none text-[7px] py-0 px-1.5 h-auto uppercase">Overtime</Badge>
+                              <Badge 
+                                className="text-[8px] py-0 px-2 h-auto font-normal uppercase border"
+                                style={{
+                                  background: "oklch(0.95 0.05 50 / 0.5)",
+                                  color: "oklch(0.55 0.15 45)",
+                                  borderColor: "oklch(0.75 0.15 50 / 0.3)",
+                                }}
+                              >
+                                Overtime
+                              </Badge>
                             )}
                           </div>
                         </div>
-                        <div className="flex items-center gap-1">
-                           <CheckCircle2 className="h-3 w-3 text-emerald-400" />
-                        </div>
+                        <CheckCircle2 className="h-5 w-5 shrink-0" style={{ color: "oklch(0.65 0.18 150)" }} />
                       </div>
                     ))}
                   </div>
@@ -606,20 +957,41 @@ export default function ManagerStaffPage() {
               </div>
             </div>
 
-            <div className="p-6 pt-2 border-t border-primary/5 space-y-3 shrink-0">
-               <div className="flex items-center gap-2 text-[9px] text-muted-foreground/60 italic leading-relaxed">
-                  <AlertTriangle className="h-3 w-3 text-amber-400 shrink-0" />
-                  Audit checks verified by AI Core. All shifts accounted for.
-               </div>
-               <Button 
+            {/* Enhanced Footer */}
+            <div 
+              className="p-6 border-t space-y-4 shrink-0"
+              style={{
+                background: "white",
+                borderColor: "oklch(0.42 0.14 285 / 0.08)",
+              }}
+            >
+              <div 
+                className="flex items-start gap-3 p-4 rounded-xl"
+                style={{ background: "oklch(0.95 0.05 50 / 0.3)" }}
+              >
+                <AlertTriangle className="h-4 w-4 shrink-0 mt-0.5" style={{ color: "oklch(0.65 0.15 45)" }} />
+                <p className="text-[10px] leading-relaxed font-medium" style={{ color: "#736C83" }}>
+                  Audit checks verified by AI Core. All shifts accounted for and validated.
+                </p>
+              </div>
+              
+              <Button 
                 onClick={() => {
-                  toast.success("Roster finalized and synced with Payroll successfully!")
+                  toast.success("Roster finalized!", {
+                    description: "Successfully synced with Payroll system",
+                    icon: <CheckCircle2 className="h-4 w-4" />,
+                  })
                   setIsAuditOpen(false)
                 }}
-                className="w-full h-12 bg-primary text-white font-heading uppercase text-xs  rounded-2xl shadow-xl shadow-primary/25 border-none"
-               >
-                 Finalize & Release Roster
-               </Button>
+                className="w-full h-13 text-white font-normal text-xs uppercase tracking-wide rounded-[16px] shadow-2xl border-0 transition-all hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
+                style={{
+                  background: "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)",
+                  boxShadow: "0 8px 32px oklch(0.42 0.14 285 / 0.4)",
+                }}
+              >
+                <CheckCircle2 className="h-4 w-4 mr-2" strokeWidth={2.5} />
+                Finalize & Release Roster
+              </Button>
             </div>
           </SheetContent>
         </Sheet>

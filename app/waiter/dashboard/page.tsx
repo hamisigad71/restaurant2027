@@ -548,33 +548,41 @@ export default function WaiterDashboard() {
 
             {/* My Tables Overview */}
             <Card
-              className="overflow-hidden border bg-white/75 backdrop-blur-md shadow-sm"
-              style={{ borderColor: "oklch(0.45 0.12 285 / 0.12)" }}
+              className="overflow-hidden border-0 bg-white/80 backdrop-blur-xl shadow-2xl relative"
+              style={{ 
+                boxShadow: "0 10px 40px -10px oklch(0.45 0.12 285 / 0.15)",
+                border: "1px solid oklch(0.45 0.12 285 / 0.08)" 
+              }}
             >
+              {/* Subtle accent line */}
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-oklch(0.45 0.12 285) to-oklch(0.55 0.15 275) opacity-40" />
+              
               <CardHeader
-                className="px-5 py-4"
-                style={{ borderBottom: "1px solid oklch(0.45 0.12 285 / 0.08)" }}
+                className="px-6 py-5"
+                style={{ borderBottom: "1px solid oklch(0.45 0.12 285 / 0.05)" }}
               >
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-4">
                     <div
-                      className="w-9 h-9 rounded-xl flex items-center justify-center"
-                      style={{ background: "oklch(0.45 0.12 285 / 0.1)" }}
+                      className="w-11 h-11 rounded-[14px] flex items-center justify-center shadow-inner"
+                      style={{ 
+                        background: "linear-gradient(135deg, oklch(0.45 0.12 285 / 0.1) 0%, oklch(0.45 0.12 285 / 0.05) 100%)",
+                      }}
                     >
-                      <UserCheck className="h-4 w-4" style={{ color: "oklch(0.45 0.12 285)" }} />
+                      <UserCheck className="h-5 w-5" style={{ color: "oklch(0.45 0.12 285)" }} />
                     </div>
                     <div>
                       <CardTitle
-                        className="text-sm uppercase "
+                        className="text-[13px] font-bold uppercase tracking-[0.1em]"
                         style={{ color: "#0D031B" }}
                       >
-                        My Tables
+                        My Service Floor
                       </CardTitle>
                       <p
-                        className="text-[10px] uppercase font-medium"
+                        className="text-[10px] font-semibold uppercase tracking-wider mt-1 opacity-60"
                         style={{ color: "#736C83" }}
                       >
-                        8 tables assigned
+                        8 ACTIVE SECTIONS
                       </p>
                     </div>
                   </div>
@@ -582,90 +590,128 @@ export default function WaiterDashboard() {
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="text-[10px] uppercase  gap-1 hover:bg-[oklch(0.45_0.12_285)]/8 transition-colors"
+                    className="text-[10px] font-bold uppercase tracking-widest gap-2 hover:bg-black/5 transition-all h-9 px-4 rounded-xl"
                     style={{ color: "oklch(0.45 0.12 285)" }}
                     asChild
                   >
                     <Link href="/waiter/service-floor">
-                      Floor Plan <ChevronRight className="h-3.5 w-3.5" />
+                      Map View <ChevronRight className="h-3.5 w-3.5" />
                     </Link>
                   </Button>
                 </div>
               </CardHeader>
 
-              <CardContent className="p-3">
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              <CardContent className="p-5">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
                   {activeOrders.length === 0 ? (
-                    <div className="col-span-full py-8 text-center" style={{ color: "#736C83" }}>
-                      <p className="text-xs">No active tables assigned to you.</p>
+                    <div className="col-span-full py-12 text-center flex flex-col items-center gap-3">
+                      <div className="w-12 h-12 rounded-full bg-black/5 flex items-center justify-center">
+                        <UserCheck className="h-6 w-6 opacity-20" />
+                      </div>
+                      <p className="text-[11px] font-bold uppercase tracking-widest opacity-40">No active assignments</p>
                     </div>
-                  ) : activeOrders.map((t, index) => {
-                    const isOccupied  = true
+                  ) : activeOrders.map((t) => {
                     const tableNum    = parseInt(t.tableId) || 0
-                    const guests      = t.items.reduce((sum, i) => sum + i.quantity, 0) // Approximation
-                    const elapsed     = "Live"
+                    const status      = t.status || "pending"
                     const imgSrc      = tableImages[tableNum % tableImages.length]
-
-                    const borderColor = "oklch(0.45 0.12 285 / 0.3)"
-                    const textColor   = "oklch(0.45 0.12 285)"
-                    const dotColor    = "oklch(0.45 0.12 285)"
+                    
+                    // Status color logic (Professional palette)
+                    const statusColors = {
+                      pending:   { bg: "oklch(0.45 0.12 285)", text: "Violet", hex: "#6366f1" },
+                      ready:     { bg: "oklch(0.7 0.15 150)",  text: "Ready",  hex: "#10b981" },
+                      occupied:  { bg: "oklch(0.6 0.16 285)",  text: "Live",   hex: "#8b5cf6" },
+                      served:    { bg: "oklch(0.45 0.12 285)", text: "Served", hex: "#6366f1" },
+                      cancelled: { bg: "oklch(0.65 0.18 25)",  text: "Void",   hex: "#ef4444" },
+                    }
+                    const currentStatus = statusColors[status as keyof typeof statusColors] || statusColors.pending
 
                     return (
-                      <HoverCard key={t.id}>
+                      <HoverCard key={t.id} openDelay={200}>
                         <HoverCardTrigger asChild>
                           <div
-                            className="group relative flex flex-col rounded-xl border overflow-hidden transition-all duration-300 cursor-pointer hover:-translate-y-1 hover:shadow-md p-0"
-                            style={{ borderColor }}
+                            className="group relative flex flex-col rounded-[22px] border-0 bg-white shadow-md transition-all duration-500 cursor-pointer hover:-translate-y-2 hover:shadow-2xl overflow-hidden"
+                            style={{ 
+                              boxShadow: "0 4px 20px -5px rgba(0,0,0,0.08)"
+                            }}
                           >
-                            <div className="relative h-20 w-full overflow-hidden shrink-0">
+                            {/* Image Header */}
+                            <div className="relative h-24 w-full overflow-hidden shrink-0">
                               <img 
                                 src={imgSrc} 
                                 alt={`Table ${tableNum}`}
-                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
                               />
-                              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                              <div 
-                                className="absolute bottom-1.5 left-2 w-1.5 h-1.5 rounded-full" 
-                                style={{ background: dotColor }}
-                              />
-                              <span className="absolute bottom-1 right-2 text-[8px]  text-white/90 uppercase">
-                                Table {tableNum}
-                              </span>
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                              
+                              {/* Glowing Status Dot */}
+                              <div className="absolute top-3 left-3 flex items-center gap-2 px-2 py-1 rounded-full bg-black/30 backdrop-blur-md border border-white/10">
+                                <div 
+                                  className="w-1.5 h-1.5 rounded-full animate-pulse shadow-[0_0_8px_rgba(255,255,255,0.8)]" 
+                                  style={{ background: "white" }}
+                                />
+                                <span className="text-[8px] font-black text-white uppercase tracking-[0.15em]">
+                                  T-{tableNum}
+                                </span>
+                              </div>
                             </div>
                             
-                            <div className="p-2 flex flex-col items-center justify-center bg-white">
-                              <p
-                                className="text-xl  leading-none"
-                                style={{ color: textColor }}
-                              >
-                                {tableNum}
-                              </p>
-                              <p
-                                className="text-[8px] uppercase  mt-1 truncate w-full text-center"
-                                style={{ color: "#736C83" }}
-                              >
-                                {t.status}
-                              </p>
+                            {/* Card Body */}
+                            <div className="p-4 flex flex-col items-center justify-center bg-white relative">
+                              <div className="absolute -top-6 w-12 h-12 rounded-2xl bg-white shadow-xl flex items-center justify-center border-4 border-[#F8F6FC] z-10">
+                                <span className="text-xl font-black tabular-nums" style={{ color: "oklch(0.45 0.12 285)" }}>
+                                  {tableNum}
+                                </span>
+                              </div>
+
+                              <div className="mt-6 text-center space-y-1">
+                                <p
+                                  className="text-[10px] font-black uppercase tracking-[0.2em]"
+                                  style={{ color: currentStatus.bg }}
+                                >
+                                  {status}
+                                </p>
+                                <div className="flex items-center justify-center gap-1 opacity-40">
+                                  <Clock className="h-2.5 w-2.5" />
+                                  <span className="text-[9px] font-bold uppercase tracking-wider">Live</span>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </HoverCardTrigger>
                         <HoverCardContent
-                          className="w-56 p-3 border text-xs bg-white/95 backdrop-blur-md rounded-xl"
-                          style={{ borderColor: "oklch(0.45 0.12 285 / 0.2)" }}
+                          className="w-64 p-0 border-0 bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden"
+                          sideOffset={15}
                         >
-                          <div className="flex items-center gap-2 mb-2">
-                            <div
-                              className="w-6 h-6 rounded-lg flex items-center justify-center text-xs text-white"
-                              style={{ background: "oklch(0.45 0.12 285)" }}
-                            >
-                              {tableNum}
+                          <div className="p-4 space-y-4">
+                            <div className="flex items-center gap-3">
+                              <div
+                                className="w-10 h-10 rounded-xl flex items-center justify-center text-sm font-black text-white shadow-lg"
+                                style={{ background: "oklch(0.45 0.12 285)" }}
+                              >
+                                {tableNum}
+                              </div>
+                              <div>
+                                <p className="text-xs font-black uppercase tracking-wider" style={{ color: "#0D031B" }}>Table {tableNum}</p>
+                                <p className="text-[10px] font-bold uppercase tracking-widest opacity-40">Section Alpha</p>
+                              </div>
                             </div>
-                            <span className="" style={{ color: "#0D031B" }}>Table {tableNum}</span>
-                          </div>
-                          <div className="space-y-1" style={{ color: "#736C83" }}>
-                            <p>Order: <span className="font-medium" style={{ color: "#3D374C" }}>{t.id}</span></p>
-                            <p>Items: <span className="font-medium" style={{ color: "#3D374C" }}>{t.items.length}</span></p>
-                            <p>Status: <span className="font-medium text-capitalize" style={{ color: "#3D374C" }}>{t.status}</span></p>
+                            
+                            <div className="space-y-2.5">
+                              <div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-wide px-3 py-2 rounded-lg bg-black/5">
+                                <span className="opacity-50">Order ID</span>
+                                <span className="tabular-nums" style={{ color: "#3D374C" }}>{t.id.slice(-6)}</span>
+                              </div>
+                              <div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-wide px-3 py-2 rounded-lg bg-black/5">
+                                <span className="opacity-50">Items</span>
+                                <span style={{ color: "#3D374C" }}>{t.items.length} Units</span>
+                              </div>
+                              <div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-wide px-3 py-2 rounded-lg bg-black/5">
+                                <span className="opacity-50">Status</span>
+                                <Badge className="text-[8px] h-4 rounded-md capitalize border-0 shadow-none" style={{ background: currentStatus.bg, color: 'white' }}>
+                                  {t.status}
+                                </Badge>
+                              </div>
+                            </div>
                           </div>
                         </HoverCardContent>
                       </HoverCard>

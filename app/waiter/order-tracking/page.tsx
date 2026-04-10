@@ -1,16 +1,16 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import {
   Tooltip, TooltipContent, TooltipProvider, TooltipTrigger,
 } from "@/components/ui/tooltip"
 import {
   Clock, CheckCircle2, Flame, Timer, ChefHat,
-  Utensils, Bell, AlertTriangle,
+  Utensils, Bell, AlertTriangle, TrendingUp, Sparkles,
+  Users, ArrowUpRight,
 } from "lucide-react"
 import { OrderService, LiveOrder } from "@/lib/order-service"
 import { cn } from "@/lib/utils"
@@ -60,106 +60,156 @@ function useElapsed(initialDate: string) {
   return { minutes, overdue: minutes >= 20 }
 }
 
-// ─── Order card ───────────────────────────────────────────────────────────────
+// ─── Enhanced Order Card ──────────────────────────────────────────────────────
 function OrderCard({ order, onServe }: { order: LiveOrder; onServe:(id:string)=>void }) {
   const { minutes, overdue } = useElapsed(order.createdAt)
   const isReady = order.status === "ready"
   const primaryDish = order.items[0]?.name || "Order"
 
-  const accent      = isReady ? "oklch(0.62 0.16 150)" : "oklch(0.45 0.12 285)"
-  const badgeBg     = isReady ? "oklch(0.62 0.16 150 / 0.1)" : "oklch(0.45 0.12 285 / 0.1)"
-  const badgeText   = isReady ? "oklch(0.42 0.14 150)"        : "oklch(0.38 0.12 285)"
-  const badgeBorder = isReady ? "oklch(0.62 0.16 150 / 0.25)" : "oklch(0.45 0.12 285 / 0.25)"
-
   return (
     <Card
-      className="relative overflow-hidden border transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl group rounded-3xl p-0"
+      className="group relative overflow-hidden border-0 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl rounded-2xl"
       style={{
-        background:"rgba(255,255,255,0.9)",
-        backdropFilter:"blur(16px)",
-        borderColor:`${accent}28`,
-        boxShadow:"0 2px 12px rgba(13,3,27,0.07)",
+        background: "white",
+        boxShadow: "0 4px 24px rgba(0,0,0,0.08)",
       }}
     >
-      {/* Top accent strip */}
-      <div className="absolute top-0 inset-x-0 h-[3px] rounded-t-3xl" style={{ background: accent }} />
+      {/* Status indicator bar with gradient */}
+      <div 
+        className="h-1.5 w-full"
+        style={{
+          background: isReady
+            ? "linear-gradient(90deg, oklch(0.65 0.18 150) 0%, oklch(0.70 0.20 160) 100%)"
+            : "linear-gradient(90deg, oklch(0.42 0.14 285) 0%, oklch(0.55 0.18 270) 100%)"
+        }}
+      />
 
-      {/* Hero image */}
-      <div className="relative h-40 overflow-hidden mx-3 mt-4 rounded-2xl">
+      {/* Enhanced Hero Image */}
+      <div className="relative h-44 sm:h-48 overflow-hidden mx-4 mt-4 rounded-xl">
         <img
           src={order.items[0]?.image || getDishImage(primaryDish)}
           alt={primaryDish}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+        
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-        {/* Table pill */}
+        {/* Animated glow on hover */}
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500 bg-gradient-to-br from-white via-transparent to-transparent" />
+
+        {/* Table badge - Enhanced */}
         <div className="absolute bottom-3 left-3">
           <div
-            className="px-3 py-1 rounded-xl text-white font-bold text-sm"
-            style={{ background: accent, boxShadow:`0 2px 10px ${accent}55` }}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-white font-bold text-sm shadow-xl"
+            style={{
+              background: isReady
+                ? "linear-gradient(135deg, oklch(0.65 0.18 150) 0%, oklch(0.70 0.20 160) 100%)"
+                : "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)",
+              boxShadow: isReady
+                ? "0 4px 16px oklch(0.65 0.18 150 / 0.4)"
+                : "0 4px 16px oklch(0.42 0.14 285 / 0.4)",
+            }}
           >
+            <Users className="h-3.5 w-3.5" strokeWidth={2.5} />
             T{order.tableId.padStart(2, '0')}
           </div>
         </div>
 
-        {/* Order ID */}
+        {/* Order ID - Enhanced */}
         <div className="absolute bottom-3 right-3">
           <span
-            className="text-[9px] font-mono text-white/75 px-2 py-0.5 rounded-lg"
-            style={{ background:"rgba(0,0,0,0.35)", backdropFilter:"blur(6px)" }}
+            className="text-[9px] font-mono font-bold text-white/90 px-2.5 py-1 rounded-lg backdrop-blur-md border border-white/20"
+            style={{ background: "rgba(0,0,0,0.4)" }}
           >
             {order.id}
           </span>
         </div>
-      </div>
 
-      <CardContent className="px-4 pt-3.5 pb-4 space-y-3.5">
-
-        {/* Status + timer row */}
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div
-              className="flex items-center justify-center w-7 h-7 rounded-lg"
-              style={{ background: badgeBg }}
-            >
-              {isReady
-                ? <CheckCircle2 className="h-3.5 w-3.5" style={{ color: badgeText }} />
-                : <Flame       className="h-3.5 w-3.5" style={{ color: badgeText }} />
-              }
-            </div>
-            <span
-              className="text-[10px] font-bold uppercase  px-2.5 py-1 rounded-full border"
-              style={{ background:badgeBg, color:badgeText, borderColor:badgeBorder }}
-            >
-              {isReady ? "Service Ready" : "In Preparation"}
-            </span>
-          </div>
-
-          {/* Timer */}
+        {/* Timer badge - top right */}
+        <div className="absolute top-3 right-3">
           <div
-            className="flex items-center gap-1 text-[11px] font-mono font-semibold px-2.5 py-1 rounded-lg"
-            style={{
-              background: overdue ? "oklch(0.65 0.18 25 / 0.1)" : "rgba(0,0,0,0.04)",
-              color: overdue ? "oklch(0.55 0.18 25)" : "#736C83",
-            }}
+            className={cn(
+              "flex items-center gap-1 text-[11px] font-mono font-bold px-2.5 py-1.5 rounded-xl backdrop-blur-md border",
+              overdue ? "bg-red-500/90 text-white border-red-300/30" : "bg-black/40 text-white/90 border-white/20"
+            )}
           >
-            {overdue && <AlertTriangle className="h-3 w-3" />}
-            <Timer className="h-3 w-3" />
+            {overdue && <AlertTriangle className="h-3 w-3" strokeWidth={2.5} />}
+            <Timer className="h-3 w-3" strokeWidth={2.5} />
             {minutes}m
           </div>
         </div>
+      </div>
 
-        <Separator style={{ background:"rgba(0,0,0,0.06)" }} />
+      <CardContent className="px-4 sm:px-5 pt-4 pb-5 space-y-4">
 
-        {/* Item list */}
-        <div className="space-y-2">
+        {/* Status Row - Enhanced */}
+        <div className="flex items-center justify-between">
+          <Badge
+            className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-bold uppercase border-2 rounded-xl"
+            style={
+              isReady
+                ? {
+                    background: "oklch(0.65 0.18 150 / 0.08)",
+                    color: "oklch(0.45 0.18 150)",
+                    borderColor: "oklch(0.65 0.18 150 / 0.25)",
+                  }
+                : {
+                    background: "oklch(0.42 0.14 285 / 0.08)",
+                    color: "oklch(0.42 0.14 285)",
+                    borderColor: "oklch(0.42 0.14 285 / 0.25)",
+                  }
+            }
+          >
+            {isReady ? (
+              <>
+                <CheckCircle2 className="h-3.5 w-3.5" strokeWidth={2.5} />
+                Service Ready
+              </>
+            ) : (
+              <>
+                <Flame className="h-3.5 w-3.5" strokeWidth={2.5} />
+                In Preparation
+              </>
+            )}
+          </Badge>
+
+          <div className="flex items-center gap-1.5">
+            <div
+              className="w-8 h-8 rounded-xl flex items-center justify-center"
+              style={{
+                background: isReady
+                  ? "oklch(0.65 0.18 150 / 0.1)"
+                  : "oklch(0.42 0.14 285 / 0.1)",
+              }}
+            >
+              {isReady ? (
+                <CheckCircle2 
+                  className="h-4 w-4" 
+                  style={{ color: "oklch(0.45 0.18 150)" }} 
+                  strokeWidth={2.5}
+                />
+              ) : (
+                <Flame 
+                  className="h-4 w-4" 
+                  style={{ color: "oklch(0.42 0.14 285)" }} 
+                  strokeWidth={2.5}
+                />
+              )}
+            </div>
+          </div>
+        </div>
+
+        <Separator style={{ background: "oklch(0.42 0.14 285 / 0.08)" }} />
+
+        {/* Item List - Enhanced */}
+        <div className="space-y-2.5">
           {order.items.map((item, i) => (
-            <div key={i} className="flex items-center gap-2.5">
+            <div key={i} className="flex items-center gap-3 group/item">
               <div
-                className="w-10 h-10 rounded-xl overflow-hidden shrink-0 border"
-                style={{ borderColor:"rgba(0,0,0,0.06)" }}
+                className="relative w-12 h-12 rounded-xl overflow-hidden shrink-0 border-2 transition-all group-hover/item:scale-105"
+                style={{ borderColor: "oklch(0.42 0.14 285 / 0.08)" }}
               >
                 <img
                   src={item.image || getDishImage(item.name)}
@@ -167,61 +217,86 @@ function OrderCard({ order, onServe }: { order: LiveOrder; onServe:(id:string)=>
                   className="w-full h-full object-cover"
                   loading="lazy"
                 />
+                <div className="absolute inset-0 bg-gradient-to-br from-transparent to-black/20" />
               </div>
+              
               <div className="flex-1 min-w-0">
-                <p className="text-[12px] font-semibold truncate" style={{ color:"#0D031B" }}>{item.name}</p>
-                <p className="text-[10px] font-medium uppercase  mt-0.5" style={{ color:"#AEA6BF" }}>
-                  {item.quantity} × {item.category || "item"}
+                <p className="text-[13px] font-bold truncate leading-tight" style={{ color: "#0D031B" }}>
+                  {item.name}
+                </p>
+                <p className="text-[10px] font-semibold uppercase tracking-wide mt-1" style={{ color: "#9A94AA" }}>
+                  {item.quantity}× {item.category || "item"}
                 </p>
               </div>
+              
               <div
-                className="w-5 h-5 rounded-full flex items-center justify-center shrink-0"
-                style={{ background: isReady ? "oklch(0.62 0.16 150 / 0.15)" : "oklch(0.45 0.12 285 / 0.1)" }}
+                className="w-6 h-6 rounded-lg flex items-center justify-center shrink-0 transition-all group-hover/item:scale-110"
+                style={{
+                  background: isReady
+                    ? "oklch(0.65 0.18 150 / 0.15)"
+                    : "oklch(0.42 0.14 285 / 0.1)",
+                }}
               >
-                {isReady
-                  ? <CheckCircle2 className="h-3 w-3" style={{ color:"oklch(0.42 0.14 150)" }} />
-                  : <Flame        className="h-3 w-3" style={{ color:"oklch(0.45 0.12 285)" }} />
-                }
+                {isReady ? (
+                  <CheckCircle2 
+                    className="h-3.5 w-3.5" 
+                    style={{ color: "oklch(0.45 0.18 150)" }} 
+                    strokeWidth={2.5}
+                  />
+                ) : (
+                  <Flame 
+                    className="h-3.5 w-3.5" 
+                    style={{ color: "oklch(0.42 0.14 285)" }} 
+                    strokeWidth={2.5}
+                  />
+                )}
               </div>
             </div>
           ))}
         </div>
 
-        {/* CTA — only for ready orders */}
-        {isReady && (
+        {/* Action Button - Enhanced for Ready Orders */}
+        {isReady ? (
           <button
             onClick={() => onServe(order.id)}
-            className="w-full flex items-center gap-2.5 px-4 py-3.5 rounded-2xl font-bold text-[11px]  uppercase text-white transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] relative overflow-hidden group/btn"
+            className="w-full flex items-center justify-center gap-2.5 px-4 py-3.5 rounded-[16px] font-bold text-xs uppercase text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl active:translate-y-0 active:scale-95 relative overflow-hidden group/btn"
             style={{
-              background:"oklch(0.62 0.16 150)",
-              boxShadow:"0 4px 16px oklch(0.62 0.16 150 / 0.35)",
+              background: "linear-gradient(135deg, oklch(0.65 0.18 150) 0%, oklch(0.70 0.20 160) 100%)",
+              boxShadow: "0 8px 32px oklch(0.65 0.18 150 / 0.4)",
             }}
           >
-            <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-40 group-hover/btn:opacity-60 transition-opacity" />
-            <CheckCircle2 className="h-4 w-4 relative z-10" />
-            <span className="relative z-10 flex-1 text-left">Mark as Served</span>
-            <Bell className="h-4 w-4 relative z-10" />
+            {/* Shine effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover/btn:translate-x-[200%] transition-transform duration-1000" />
+            
+            <CheckCircle2 className="h-4.5 w-4.5 relative z-10" strokeWidth={2.5} />
+            <span className="relative z-10">Mark as Served</span>
+            <Bell className="h-4.5 w-4.5 relative z-10" strokeWidth={2.5} />
           </button>
-        )}
-
-        {/* Cooking state — progress indicator */}
-        {!isReady && (
+        ) : (
+          // Cooking Progress Indicator
           <div
-            className="flex items-center gap-2 px-3 py-2.5 rounded-xl"
-            style={{ background:"oklch(0.45 0.12 285 / 0.06)", border:"1px solid oklch(0.45 0.12 285 / 0.12)" }}
+            className="flex items-center gap-2.5 px-4 py-3 rounded-[16px] border-2"
+            style={{
+              background: "oklch(0.42 0.14 285 / 0.04)",
+              borderColor: "oklch(0.42 0.14 285 / 0.12)",
+            }}
           >
-            <ChefHat className="h-4 w-4 shrink-0" style={{ color:"oklch(0.45 0.12 285)" }} />
-            <span className="text-[11px] font-semibold" style={{ color:"oklch(0.38 0.12 285)" }}>
-              Kitchen is preparing this order
+            <ChefHat 
+              className="h-4.5 w-4.5 shrink-0" 
+              style={{ color: "oklch(0.42 0.14 285)" }} 
+              strokeWidth={2.5}
+            />
+            <span className="text-[11px] font-bold flex-1" style={{ color: "oklch(0.38 0.12 285)" }}>
+              Kitchen is preparing
             </span>
-            <span className="flex gap-0.5 ml-auto">
-              {[0,1,2].map(i => (
+            <span className="flex gap-1 ml-auto">
+              {[0, 1, 2].map(i => (
                 <span
                   key={i}
-                  className="w-1 h-1 rounded-full"
+                  className="w-1.5 h-1.5 rounded-full"
                   style={{
-                    background:"oklch(0.45 0.12 285)",
-                    animation:`fade-dots 1.4s ease-in-out ${i*0.2}s infinite`,
+                    background: "oklch(0.42 0.14 285)",
+                    animation: `fade-dots 1.4s ease-in-out ${i * 0.2}s infinite`,
                   }}
                 />
               ))}
@@ -233,14 +308,13 @@ function OrderCard({ order, onServe }: { order: LiveOrder; onServe:(id:string)=>
   )
 }
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
+// ─── Enhanced Page ────────────────────────────────────────────────────────────
 export default function OrderStatusPage() {
   const [orders, setOrders] = useState<LiveOrder[]>([])
   const [activeFilter, setActiveFilter] = useState<"all"|"cooking"|"ready">("all")
 
   useEffect(() => {
     const unsubscribe = OrderService.subscribe(allOrders => {
-      // For Waiter Status, we only show non-served orders
       setOrders(allOrders.filter(o => o.status !== "served" && o.status !== "cancelled"))
     })
     return unsubscribe
@@ -266,57 +340,135 @@ export default function OrderStatusPage() {
         @keyframes fade-dots { 0%,100%{opacity:.3} 50%{opacity:1} }
       `}</style>
 
-      <div className="flex flex-col min-h-screen" style={{ background:"#F0EBF8" }}>
+      <div 
+        className="flex flex-col min-h-screen" 
+        style={{ background: "linear-gradient(135deg, #F8F6FC 0%, #F0EBF8 50%, #E8E3F5 100%)" }}
+      >
 
-        {/* ── Sub-header ─────────────────────────────────────────────── */}
+        {/* ── Enhanced Header ──────────────────────────────────────────── */}
         <div
-          className="px-5 py-3.5 border-b flex items-center justify-between gap-4"
-          style={{ background:"rgba(255,255,255,0.75)", backdropFilter:"blur(12px)", borderColor:"oklch(0.45 0.12 285 / 0.1)" }}
+          className="px-4 sm:px-6 py-4 sm:py-5 border-b backdrop-blur-xl sticky top-0 z-10"
+          style={{
+            background: "rgba(255,255,255,0.92)",
+            borderColor: "oklch(0.42 0.14 285 / 0.08)",
+            boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
+          }}
         >
-          {/* Title */}
-          <div className="flex items-center gap-3">
-            <div
-              className="flex items-center justify-center w-9 h-9 rounded-xl"
-              style={{ background:"oklch(0.45 0.12 285 / 0.1)" }}
-            >
-              <Utensils className="h-4 w-4" style={{ color:"oklch(0.45 0.12 285)" }} />
+          {/* Gradient accent line */}
+          <div 
+            className="absolute top-0 left-0 right-0 h-[2px]"
+            style={{
+              background: "linear-gradient(90deg, oklch(0.42 0.14 285) 0%, oklch(0.55 0.18 270) 50%, oklch(0.42 0.14 285) 100%)"
+            }}
+          />
+
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+            {/* Title Section */}
+            <div className="flex items-center gap-3 sm:gap-4">
+              <div
+                className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center shadow-lg"
+                style={{
+                  background: "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)",
+                }}
+              >
+                <Utensils className="h-6 w-6 sm:h-7 sm:w-7 text-white" strokeWidth={2.5} />
+              </div>
+              <div>
+                <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight leading-none" style={{ color: "#0D031B" }}>
+                  Service Tracker
+                </h1>
+                <div className="flex items-center gap-2 mt-1.5">
+                  <div className="h-px w-8 bg-gradient-to-r from-oklch(0.42 0.14 285) to-transparent" />
+                  <p className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider" style={{ color: "#736C83" }}>
+                    Real-time preparation status
+                  </p>
+                </div>
+              </div>
             </div>
-            <div>
-              <p className="text-[15px] font-bold " style={{ color:"#0D031B" }}>Service Tracker</p>
-              <p className="text-[10px] font-medium uppercase " style={{ color:"#9A94AA" }}>
-                Real-time preparation status
-              </p>
+
+            {/* Stats Pills - Mobile Responsive */}
+            <div className="flex items-center gap-2 overflow-x-auto pb-2 lg:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0">
+              <div 
+                className="flex items-center gap-2 px-3 py-2 rounded-xl border whitespace-nowrap"
+                style={{
+                  background: "oklch(0.42 0.14 285 / 0.06)",
+                  borderColor: "oklch(0.42 0.14 285 / 0.15)",
+                }}
+              >
+                <TrendingUp className="h-3.5 w-3.5" style={{ color: "oklch(0.42 0.14 285)" }} strokeWidth={2.5} />
+                <span className="text-[11px] font-bold" style={{ color: "oklch(0.42 0.14 285)" }}>
+                  {orders.length} Active
+                </span>
+              </div>
+              
+              <div 
+                className="flex items-center gap-2 px-3 py-2 rounded-xl border whitespace-nowrap"
+                style={{
+                  background: "oklch(0.65 0.18 150 / 0.06)",
+                  borderColor: "oklch(0.65 0.18 150 / 0.15)",
+                }}
+              >
+                <CheckCircle2 className="h-3.5 w-3.5" style={{ color: "oklch(0.45 0.18 150)" }} strokeWidth={2.5} />
+                <span className="text-[11px] font-bold" style={{ color: "oklch(0.45 0.18 150)" }}>
+                  {readyCount} Ready
+                </span>
+              </div>
             </div>
           </div>
 
-          {/* Filter pills */}
-          <div className="flex items-center gap-1.5">
-            {(["all","cooking","ready"] as const).map(f => {
+          {/* Enhanced Filter Pills - Fully Responsive */}
+          <div className="flex items-center gap-2 mt-4 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0">
+            {(["all", "cooking", "ready"] as const).map(f => {
               const count = f === "all" ? orders.length : f === "cooking" ? cookingCount : readyCount
-              const accent = f === "ready" ? "oklch(0.62 0.16 150)" : f === "cooking" ? "oklch(0.45 0.12 285)" : "#736C83"
               const active = activeFilter === f
+              
               return (
                 <button
                   key={f}
                   onClick={() => setActiveFilter(f)}
-                  className="flex items-center gap-1.5 h-8 px-3 rounded-xl text-[11px] font-bold uppercase  transition-all duration-200 border"
+                  className="flex items-center gap-2 h-9 sm:h-10 px-3 sm:px-4 rounded-xl text-[11px] sm:text-xs font-bold uppercase tracking-wide transition-all duration-300 border-2 whitespace-nowrap hover:scale-105 active:scale-95"
                   style={
                     active
-                      ? { background:"oklch(0.45 0.12 285)", color:"white", borderColor:"transparent", boxShadow:"0 2px 10px oklch(0.45 0.12 285 / 0.3)" }
-                      : { background:"#F5F2FB", color:"#736C83", borderColor:"oklch(0.45 0.12 285 / 0.12)" }
+                      ? {
+                          background: "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)",
+                          color: "white",
+                          borderColor: "transparent",
+                          boxShadow: "0 4px 16px oklch(0.42 0.14 285 / 0.3)",
+                        }
+                      : {
+                          background: "white",
+                          color: "#736C83",
+                          borderColor: "oklch(0.42 0.14 285 / 0.12)",
+                        }
                   }
                 >
                   {f !== "all" && (
-                    <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: active ? "rgba(255,255,255,0.6)" : accent }} />
+                    <span 
+                      className="w-2 h-2 rounded-full shrink-0" 
+                      style={{
+                        background: active 
+                          ? "rgba(255,255,255,0.6)" 
+                          : f === "ready" 
+                            ? "oklch(0.65 0.18 150)" 
+                            : "oklch(0.42 0.14 285)"
+                      }}
+                    />
                   )}
-                  {f.charAt(0).toUpperCase() + f.slice(1)}
+                  
+                  <span className="hidden xs:inline">
+                    {f.charAt(0).toUpperCase() + f.slice(1)}
+                  </span>
+                  <span className="xs:hidden">
+                    {f.charAt(0).toUpperCase()}
+                  </span>
+                  
                   {count > 0 && (
                     <span
-                      className="min-w-[16px] h-4 rounded-full flex items-center justify-center text-[9px] font-bold px-1"
+                      className="min-w-[18px] h-5 rounded-full flex items-center justify-center text-[10px] font-bold px-1.5"
                       style={
                         active
-                          ? { background:"rgba(255,255,255,0.22)", color:"white" }
-                          : { background:"oklch(0.45 0.12 285 / 0.1)", color:"oklch(0.45 0.12 285)" }
+                          ? { background: "rgba(255,255,255,0.25)", color: "white" }
+                          : { background: "oklch(0.42 0.14 285 / 0.1)", color: "oklch(0.42 0.14 285)" }
                       }
                     >
                       {count}
@@ -328,23 +480,31 @@ export default function OrderStatusPage() {
           </div>
         </div>
 
-        {/* ── Grid ───────────────────────────────────────────────────── */}
-        <div className="flex-1 p-5">
+        {/* ── Enhanced Grid - Fully Responsive ─────────────────────────── */}
+        <div className="flex-1 p-4 sm:p-6 lg:p-8 pb-24">
           {filtered.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-24 gap-4">
+            <div className="flex flex-col items-center justify-center py-16 sm:py-24 gap-4 px-4">
               <div
-                className="w-16 h-16 rounded-2xl flex items-center justify-center border"
-                style={{ background:"rgba(255,255,255,0.8)", borderColor:"oklch(0.45 0.12 285 / 0.15)" }}
+                className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl flex items-center justify-center border-2 shadow-lg"
+                style={{
+                  background: "white",
+                  borderColor: "oklch(0.42 0.14 285 / 0.15)",
+                }}
               >
-                <CheckCircle2 className="h-7 w-7" style={{ color:"#AEA6BF" }} />
+                <CheckCircle2 className="h-8 w-8 sm:h-10 sm:w-10" style={{ color: "#AEA6BF" }} strokeWidth={2.5} />
               </div>
               <div className="text-center">
-                <p className="font-bold text-lg" style={{ color:"#0D031B" }}>All served!</p>
-                <p className="text-sm mt-1" style={{ color:"#736C83" }}>No active orders right now.</p>
+                <p className="font-bold text-lg sm:text-xl" style={{ color: "#0D031B" }}>
+                  All Caught Up!
+                </p>
+                <p className="text-sm sm:text-base mt-2" style={{ color: "#736C83" }}>
+                  No active orders right now.
+                </p>
               </div>
             </div>
           ) : (
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            // **2 columns on mobile, 3 on desktop**
+            <div className="grid gap-4 sm:gap-5 lg:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {filtered.map(order => (
                 <OrderCard key={order.id} order={order} onServe={handleServe} />
               ))}
@@ -352,6 +512,18 @@ export default function OrderStatusPage() {
           )}
         </div>
       </div>
+
+      {/* Custom breakpoint styles */}
+      <style jsx global>{`
+        @media (min-width: 375px) {
+          .xs\:inline {
+            display: inline;
+          }
+          .xs\:hidden {
+            display: none;
+          }
+        }
+      `}</style>
     </TooltipProvider>
   )
 }
