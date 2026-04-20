@@ -1,11 +1,17 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import {
-  SprayCan, CheckCircle2, Clock, Sparkles,
-  AlertTriangle, Zap, Users, CircleDot,
-  ClipboardList, Droplets, Wind, Coffee
-} from "lucide-react"
+import { 
+  SparklesIcon, 
+  CheckCircleIcon as CheckCircle2, 
+  ClockIcon, 
+  ExclamationTriangleIcon, 
+  BoltIcon, 
+  UserGroupIcon, 
+  ClipboardDocumentListIcon, 
+  CloudIcon, 
+  SunIcon 
+} from "@heroicons/react/24/outline"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge }     from "@/components/ui/badge"
 import { Button }    from "@/components/ui/button"
@@ -35,9 +41,9 @@ const INITIAL_TABLES: DirtyTable[] = [
 ]
 
 const URGENCY_CONFIG = {
-  high:   { label:"Urgent",  accent:"oklch(0.65 0.18 25)", bg:"oklch(0.65 0.18 25 / 0.08)", border:"oklch(0.65 0.18 25 / 0.3)", icon:Zap,          barBg:"oklch(0.65 0.18 25)", ctaBg:"oklch(0.65 0.18 25)" },
-  medium: { label:"Due",     accent:"oklch(0.75 0.15 75)", bg:"oklch(0.75 0.15 75 / 0.06)", border:"oklch(0.75 0.15 75 / 0.2)", icon:Clock,        barBg:"oklch(0.75 0.15 75)", ctaBg:"oklch(0.45 0.12 285)" },
-  low:    { label:"Routine", accent:"oklch(0.45 0.12 285)", bg:"oklch(0.45 0.12 285 / 0.05)", border:"oklch(0.45 0.12 285 / 0.15)", icon:SprayCan, barBg:"oklch(0.45 0.12 285)", ctaBg:"oklch(0.45 0.12 285)" },
+  high:   { label:"Urgent",  accent:"oklch(0.65 0.18 25)", bg:"oklch(0.65 0.18 25 / 0.08)", border:"oklch(0.65 0.18 25 / 0.3)", icon:BoltIcon,          barBg:"oklch(0.65 0.18 25)", ctaBg:"oklch(0.65 0.18 25)" },
+  medium: { label:"Due",     accent:"oklch(0.75 0.15 75)", bg:"oklch(0.75 0.15 75 / 0.06)", border:"oklch(0.75 0.15 75 / 0.2)", icon:ClockIcon,        barBg:"oklch(0.75 0.15 75)", ctaBg:"oklch(0.45 0.12 285)" },
+  low:    { label:"Routine", accent:"oklch(0.45 0.12 285)", bg:"oklch(0.45 0.12 285 / 0.05)", border:"oklch(0.45 0.12 285 / 0.15)", icon:SparklesIcon, barBg:"oklch(0.45 0.12 285)", ctaBg:"oklch(0.45 0.12 285)" },
 }
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
@@ -55,7 +61,7 @@ export default function CleanersPage() {
     setAnimatingId(table.id)
     toast.success(`Table ${table.id.replace("T","")} marked clean`, {
       description: table.zone,
-      icon: <SprayCan className="h-4 w-4" />,
+      icon: <SparklesIcon className="h-4 w-4" />,
     })
     setTimeout(() => {
       setTables(prev => prev.filter(t => t.id !== table.id))
@@ -82,7 +88,7 @@ export default function CleanersPage() {
             className="flex items-center justify-center w-10 h-10 rounded-xl shrink-0"
             style={{ background:"oklch(0.45 0.12 285)", boxShadow:"0 4px 14px oklch(0.45 0.12 285 / 0.35)" }}
           >
-            <SprayCan className="h-5 w-5 text-white" strokeWidth={2} />
+            <SparklesIcon className="h-5 w-5 text-white" strokeWidth={2} />
           </div>
 
           <div className="min-w-0 flex-1">
@@ -105,7 +111,7 @@ export default function CleanersPage() {
                   borderColor:"oklch(0.65 0.18 25 / 0.25)",
                 }}
               >
-                <Zap className="h-2.5 w-2.5 fill-current" />
+                <BoltIcon className="h-2.5 w-2.5 fill-current" />
                 {highCount} urgent
               </Badge>
             )}
@@ -137,7 +143,7 @@ export default function CleanersPage() {
                     className="flex items-center justify-center w-8 h-8 rounded-lg"
                     style={{ background:"oklch(0.45 0.12 285 / 0.1)" }}
                   >
-                    <ClipboardList className="h-3.5 w-3.5" style={{ color:"oklch(0.45 0.12 285)" }} />
+                    <ClipboardDocumentListIcon className="h-3.5 w-3.5" style={{ color:"oklch(0.45 0.12 285)" }} />
                   </div>
                   <div>
                     <p className="text-[13px] font-bold" style={{ color:"#0D031B" }}>Shift Progress</p>
@@ -155,8 +161,8 @@ export default function CleanersPage() {
               <div className="grid grid-cols-3 gap-3 mt-4">
                 {[
                   { label:"Cleaned",  value:cleanedCount, icon:CheckCircle2, color:"oklch(0.62 0.16 150)" },
-                  { label:"Pending",  value:tables.length, icon:Clock,        color:"oklch(0.75 0.15 75)"  },
-                  { label:"Urgent",   value:highCount,     icon:Zap,          color:"oklch(0.65 0.18 25)"  },
+                  { label:"Pending",  value:tables.length, icon:ClockIcon,        color:"oklch(0.75 0.15 75)"  },
+                  { label:"Urgent",   value:highCount,     icon:BoltIcon,         color:"oklch(0.65 0.18 25)"  },
                 ].map(s => (
                   <div
                     key={s.label}
@@ -179,7 +185,7 @@ export default function CleanersPage() {
                 className="w-20 h-20 rounded-3xl flex items-center justify-center border"
                 style={{ background:"rgba(255,255,255,0.9)", borderColor:"oklch(0.45 0.12 285 / 0.15)" }}
               >
-                <Coffee className="h-10 w-10" style={{ color:"oklch(0.45 0.12 285)" }} />
+                <SunIcon className="h-10 w-10" style={{ color:"oklch(0.45 0.12 285)" }} />
               </div>
               <div className="text-center">
                 <p className="text-lg font-bold" style={{ color:"#0D031B" }}>All areas spotless!</p>
@@ -247,12 +253,12 @@ export default function CleanersPage() {
                               </span>
                               <span style={{ color:"#D0CBE4" }}>·</span>
                               <span className="flex items-center gap-1 text-[11px]" style={{ color:"#9A94AA" }}>
-                                <Users className="h-3 w-3" />
+                                <UserGroupIcon className="h-3 w-3" />
                                 {table.guests} guests
                               </span>
                               <span style={{ color:"#D0CBE4" }}>·</span>
                               <span className="flex items-center gap-1 text-[11px]" style={{ color:"#9A94AA" }}>
-                                <Clock className="h-3 w-3" />
+                                <ClockIcon className="h-3 w-3" />
                                 {table.time}
                               </span>
                             </div>
@@ -269,9 +275,9 @@ export default function CleanersPage() {
                           className="grid grid-cols-3 gap-2 mt-4 px-1"
                         >
                           {[
-                            { label:"Wipe surfaces", icon:Droplets },
-                            { label:"Clear dishes",  icon:SprayCan },
-                            { label:"Air & reset",   icon:Wind      },
+                            { label:"Wipe surfaces", icon:CloudIcon },
+                            { label:"Clear dishes",  icon:SparklesIcon },
+                            { label:"Air & reset",   icon:SunIcon      },
                           ].map(step => (
                             <div
                               key={step.label}
@@ -296,7 +302,7 @@ export default function CleanersPage() {
                           }}
                         >
                           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-                          <CheckCircle2 className="h-4 w-4 relative z-10" />
+                          <CheckCircleIcon className="h-4 w-4 relative z-10" />
                           <span className="relative z-10">Mark as Clean</span>
                         </button>
                       </CardContent>

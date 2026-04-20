@@ -2,17 +2,17 @@
 
 import { useState } from "react"
 import { 
-  FileText, 
-  Download, 
-  Calendar, 
-  TrendingUp, 
-  Users, 
-  ShoppingCart, 
-  DollarSign,
-  BarChart3,
-  PieChart,
-  Clock
-} from "lucide-react"
+  DocumentTextIcon as FileText, 
+  ArrowDownTrayIcon as Download, 
+  CalendarIcon as Calendar, 
+  ArrowTrendingUpIcon as TrendingUp, 
+  UserGroupIcon as Users, 
+  ShoppingCartIcon as ShoppingCart, 
+  CurrencyDollarIcon as DollarSign,
+  ChartBarIcon as BarChart3,
+  ChartPieIcon as PieChart,
+  ClockIcon as Clock
+} from "@heroicons/react/24/outline"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"

@@ -1,7 +1,14 @@
 "use client"
 
 import { Card, CardContent } from "@/components/ui/card"
-import { TrendingUp, TrendingDown, DollarSign, ShoppingBag, Users, AlertTriangle } from "lucide-react"
+import { 
+  ArrowTrendingUpIcon, 
+  ArrowTrendingDownIcon, 
+  CurrencyDollarIcon, 
+  ShoppingBagIcon, 
+  UserGroupIcon, 
+  ExclamationTriangleIcon 
+} from "@heroicons/react/24/outline"
 import { Badge } from "@/components/ui/badge"
 import { mockDashboardStats } from "@/lib/mock-data"
 
@@ -11,42 +18,42 @@ const stats = [
     value: `KES ${mockDashboardStats.todayRevenue.toLocaleString()}`,
     change: "+12.5%",
     trend: "up" as const,
-    icon: DollarSign,
+    icon: CurrencyDollarIcon,
   },
   {
     title: "Weekly Revenue",
     value: `KES ${mockDashboardStats.weeklyRevenue.toLocaleString()}`,
     change: "+8.2%",
     trend: "up" as const,
-    icon: DollarSign,
+    icon: CurrencyDollarIcon,
   },
   {
     title: "Today's Orders",
     value: mockDashboardStats.todayOrders.toString(),
     change: "+5",
     trend: "up" as const,
-    icon: ShoppingBag,
+    icon: ShoppingBagIcon,
   },
   {
     title: "Active Staff",
     value: mockDashboardStats.activeStaff.toString(),
     change: "on duty",
     trend: "neutral" as const,
-    icon: Users,
+    icon: UserGroupIcon,
   },
   {
     title: "Pending Orders",
     value: mockDashboardStats.pendingOrders.toString(),
     change: "in queue",
     trend: "neutral" as const,
-    icon: ShoppingBag,
+    icon: ShoppingBagIcon,
   },
   {
     title: "Low Stock Items",
     value: mockDashboardStats.lowStockItems.toString(),
     change: "need attention",
     trend: "down" as const,
-    icon: AlertTriangle,
+    icon: ExclamationTriangleIcon,
   },
 ]
 
@@ -66,13 +73,13 @@ export function StatsCards() {
               
               {stat.trend === "up" && (
                 <Badge variant="outline" className="border-success/20 bg-success/5 text-success text-[9px] px-2 py-0">
-                  <TrendingUp className="h-3 w-3 mr-1" />
+                  <ArrowTrendingUpIcon className="h-3 w-3 mr-1" />
                   {stat.change}
                 </Badge>
               )}
               {stat.trend === "down" && (
                 <Badge variant="outline" className="border-destructive/20 bg-destructive/5 text-destructive text-[9px] px-2 py-0">
-                  <TrendingDown className="h-3 w-3 mr-1" />
+                  <ArrowTrendingDownIcon className="h-3 w-3 mr-1" />
                   {stat.change}
                 </Badge>
               )}

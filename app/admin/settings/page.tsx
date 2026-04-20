@@ -8,7 +8,13 @@ import { Switch } from "@/components/ui/switch"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { FieldGroup, Field, FieldLabel } from "@/components/ui/field"
 import { Separator } from "@/components/ui/separator"
-import { Building2, Bell, Palette, Globe, Save } from "lucide-react"
+import { 
+  BuildingStorefrontIcon, 
+  BellIcon, 
+  PaintBrushIcon, 
+  GlobeAltIcon, 
+  CheckBadgeIcon 
+} from "@heroicons/react/24/outline"
 
 export default function SettingsPage() {
   const [isSaving, setIsSaving] = useState(false)
@@ -28,28 +34,28 @@ export default function SettingsPage() {
               value="profile"
               className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground  uppercase text-[10px]"
             >
-              <Building2 className="h-3.5 w-3.5" />
+              <BuildingStorefrontIcon className="h-3.5 w-3.5" />
               Profile
             </TabsTrigger>
             <TabsTrigger
               value="notifications"
               className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground  uppercase text-[10px]"
             >
-              <Bell className="h-3.5 w-3.5" />
+              <BellIcon className="h-3.5 w-3.5" />
               Notifications
             </TabsTrigger>
             <TabsTrigger
               value="appearance"
               className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground  uppercase text-[10px]"
             >
-              <Palette className="h-3.5 w-3.5" />
+              <PaintBrushIcon className="h-3.5 w-3.5" />
               Appearance
             </TabsTrigger>
             <TabsTrigger
               value="regional"
               className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground  uppercase text-[10px]"
             >
-              <Globe className="h-3.5 w-3.5" />
+              <GlobeAltIcon className="h-3.5 w-3.5" />
               Regional
             </TabsTrigger>
           </TabsList>
@@ -281,7 +287,7 @@ export default function SettingsPage() {
             disabled={isSaving}
             className="px-8  uppercase text-[11px] h-11"
           >
-            <Save className="h-4 w-4 mr-2" />
+            <CheckBadgeIcon className="h-4 w-4 mr-2" />
             {isSaving ? "Saving..." : "Apply Global Settings"}
           </Button>
         </div>

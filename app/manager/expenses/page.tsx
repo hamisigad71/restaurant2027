@@ -2,33 +2,33 @@
 
 import { useState } from "react"
 import { 
-  Plus, 
-  Search, 
-  TrendingUp, 
-  TrendingDown,
-  DollarSign,
-  ArrowUpRight,
-  ArrowDownRight,
-  PieChart,
-  Filter,
-  CheckCircle2,
-  AlertCircle,
-  MoreVertical,
-  Banknote,
-  ShoppingCart,
-  Zap,
-  Users,
-  Download,
-  Calendar,
-  Eye,
-  Edit,
-  Trash2,
-  FileText,
-  Clock,
-  CreditCard,
-  Target,
-  Activity
-} from "lucide-react"
+  PlusIcon, 
+  MagnifyingGlassIcon, 
+  ArrowTrendingUpIcon, 
+  ArrowTrendingDownIcon,
+  CurrencyDollarIcon,
+  ArrowUpRightIcon,
+  ArrowDownRightIcon,
+  ChartPieIcon,
+  FunnelIcon,
+  CheckCircleIcon,
+  ExclamationCircleIcon,
+  EllipsisHorizontalIcon,
+  BanknotesIcon,
+  ShoppingCartIcon,
+  BoltIcon,
+  UserGroupIcon,
+  CloudArrowDownIcon,
+  CalendarIcon,
+  EyeIcon,
+  PencilIcon,
+  TrashIcon,
+  DocumentTextIcon,
+  ClockIcon,
+  CreditCardIcon,
+  CheckBadgeIcon,
+  ChartBarIcon
+} from "@heroicons/react/24/outline"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
@@ -53,16 +53,16 @@ const mockExpenses = [
 ]
 
 const budgetStats = [
-  { label: "Daily Revenue", value: "142,500", icon: TrendingUp, from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)", delta: "+12%", trend: "up" },
-  { label: "Daily Expenses", value: "89,400", icon: TrendingDown, from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)", delta: "-4%", trend: "down" },
-  { label: "Net Profit", value: "53,100", icon: DollarSign, from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)", delta: "+8%", trend: "up" },
+  { label: "Daily Revenue", value: "142,500", icon: ArrowTrendingUpIcon, from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)", delta: "+12%", trend: "up" },
+  { label: "Daily Expenses", value: "89,400", icon: ArrowTrendingDownIcon, from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)", delta: "-4%", trend: "down" },
+  { label: "Net Profit", value: "53,100", icon: CurrencyDollarIcon, from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)", delta: "+8%", trend: "up" },
 ]
 
 const budgetCategories = [
-  { label: "Inventory", val: 65, icon: ShoppingCart, from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)", amount: "KES 182,500" },
-  { label: "Labor", val: 45, icon: Users, from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)", amount: "KES 126,450" },
-  { label: "Utilities", val: 15, icon: Zap, from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)", amount: "KES 42,150" },
-  { label: "Misc", val: 10, icon: Banknote, from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)", amount: "KES 28,100" },
+  { label: "Inventory", val: 65, icon: ShoppingCartIcon, from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)", amount: "KES 182,500" },
+  { label: "Labor", val: 45, icon: UserGroupIcon, from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)", amount: "KES 126,450" },
+  { label: "Utilities", val: 15, icon: BoltIcon, from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)", amount: "KES 42,150" },
+  { label: "Misc", val: 10, icon: BanknotesIcon, from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)", amount: "KES 28,100" },
 ]
 
 export default function ManagerExpensesPage() {
@@ -90,7 +90,7 @@ export default function ManagerExpensesPage() {
                   background: "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)",
                 }}
               >
-                <PieChart className="h-6 w-6 sm:h-7 sm:w-7 text-white" strokeWidth={2.5} />
+                <ChartPieIcon className="h-6 w-6 sm:h-7 sm:w-7 text-white" strokeWidth={2.5} />
               </div>
               <div>
                 <h1 className="text-2xl sm:text-3xl lg:text-4xl font-normal tracking-tight leading-none" style={{ color: "#0D031B" }}>
@@ -115,7 +115,7 @@ export default function ManagerExpensesPage() {
                 color: "#736C83",
               }}
             >
-              <Download className="h-4 w-4" strokeWidth={2.5} />
+              <CloudArrowDownIcon className="h-4 w-4" strokeWidth={2.5} />
               <span className="hidden sm:inline">Export</span>
             </Button>
             <Button 
@@ -125,7 +125,7 @@ export default function ManagerExpensesPage() {
                 boxShadow: "0 8px 32px oklch(0.42 0.14 285 / 0.35)",
               }}
             >
-              <Plus className="h-4 w-4" strokeWidth={2.5} />
+              <PlusIcon className="h-4 w-4" strokeWidth={2.5} />
               Log Expense
             </Button>
           </div>
@@ -174,9 +174,9 @@ export default function ManagerExpensesPage() {
                     )}
                   >
                     {s.trend === "up" ? (
-                      <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={2.5} />
+                      <ArrowUpRightIcon className="h-3.5 w-3.5" strokeWidth={2.5} />
                     ) : (
-                      <ArrowDownRight className="h-3.5 w-3.5" strokeWidth={2.5} />
+                      <ArrowDownRightIcon className="h-3.5 w-3.5" strokeWidth={2.5} />
                     )}
                     {s.delta}
                   </div>
@@ -185,7 +185,7 @@ export default function ManagerExpensesPage() {
                 {/* Bottom accent line */}
                 <div className="mt-4 pt-4 border-t relative z-10" style={{ borderColor: "oklch(0.42 0.14 285 / 0.08)" }}>
                   <p className="text-[10px] font-medium flex items-center gap-1.5" style={{ color: "#9A94AA" }}>
-                    <Activity className="h-3 w-3" />
+                    <ChartBarIcon className="h-3 w-3" />
                     vs. last period
                   </p>
                 </div>
@@ -207,7 +207,7 @@ export default function ManagerExpensesPage() {
                     className="w-10 h-10 rounded-xl flex items-center justify-center"
                     style={{ background: "oklch(0.42 0.14 285 / 0.1)" }}
                   >
-                    <FileText className="h-5 w-5" style={{ color: "oklch(0.42 0.14 285)" }} strokeWidth={2.5} />
+                    <DocumentTextIcon className="h-5 w-5" style={{ color: "oklch(0.42 0.14 285)" }} strokeWidth={2.5} />
                   </div>
                   <div>
                     <CardTitle className="text-sm sm:text-base font-normal uppercase tracking-tight" style={{ color: "#0D031B" }}>
@@ -221,7 +221,7 @@ export default function ManagerExpensesPage() {
 
                 <div className="flex gap-2">
                   <div className="relative flex-1 sm:flex-none sm:w-64">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4" style={{ color: "oklch(0.42 0.14 285 / 0.4)" }} />
+                    <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4" style={{ color: "oklch(0.42 0.14 285 / 0.4)" }} />
                     <Input
                       placeholder="Search transactions..."
                       value={searchQuery}
@@ -245,7 +245,7 @@ export default function ManagerExpensesPage() {
                           color: "oklch(0.42 0.14 285)",
                         }}
                       >
-                        <Filter className="h-4 w-4" strokeWidth={2.5} />
+                        <FunnelIcon className="h-4 w-4" strokeWidth={2.5} />
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end" className="bg-white/98 backdrop-blur-xl border-0 rounded-2xl shadow-2xl w-48">
@@ -317,7 +317,7 @@ export default function ManagerExpensesPage() {
                             KES {exp.amount.toLocaleString()}
                           </div>
                           <div className="flex items-center gap-1.5 text-[10px] font-medium mt-1" style={{ color: "#9A94AA" }}>
-                            <Calendar className="h-3 w-3" />
+                            <CalendarIcon className="h-3 w-3" />
                             {exp.date}
                           </div>
                         </td>
@@ -331,16 +331,16 @@ export default function ManagerExpensesPage() {
                             )}
                           >
                             {exp.status === "paid" ? (
-                              <CheckCircle2 className="h-3 w-3" strokeWidth={2.5} />
+                              <CheckCircleIcon className="h-3 w-3" strokeWidth={2.5} />
                             ) : (
-                              <Clock className="h-3 w-3" strokeWidth={2.5} />
+                              <ClockIcon className="h-3 w-3" strokeWidth={2.5} />
                             )}
                             {exp.status}
                           </Badge>
                         </td>
                         <td className="px-5 sm:px-6 py-4">
                           <div className="flex items-center gap-1.5 text-[10px] font-semibold uppercase" style={{ color: "#9A94AA" }}>
-                            <CreditCard className="h-3 w-3" />
+                            <CreditCardIcon className="h-3 w-3" />
                             {exp.method}
                           </div>
                         </td>
@@ -370,7 +370,7 @@ export default function ManagerExpensesPage() {
                               </DropdownMenuItem>
                               <DropdownMenuSeparator className="my-1" style={{ background: "oklch(0.42 0.14 285 / 0.08)" }} />
                               <DropdownMenuItem className="text-xs font-semibold rounded-xl m-1 focus:bg-rose-50 text-rose-600">
-                                <Trash2 className="h-3.5 w-3.5 mr-2" />
+                                <TrashIcon className="h-3.5 w-3.5 mr-2" />
                                 Delete
                               </DropdownMenuItem>
                             </DropdownMenuContent>
@@ -416,7 +416,7 @@ export default function ManagerExpensesPage() {
                     className="w-10 h-10 rounded-xl flex items-center justify-center"
                     style={{ background: "oklch(0.42 0.14 285 / 0.1)" }}
                   >
-                    <Target className="h-5 w-5" style={{ color: "oklch(0.42 0.14 285)" }} strokeWidth={2.5} />
+                    <CheckBadgeIcon className="h-5 w-5" style={{ color: "oklch(0.42 0.14 285)" }} strokeWidth={2.5} />
                   </div>
                   <CardTitle className="text-sm font-normal uppercase tracking-tight" style={{ color: "#0D031B" }}>
                     Budget Allocation
@@ -484,7 +484,7 @@ export default function ManagerExpensesPage() {
                     className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg"
                     style={{ background: "rgba(255,255,255,0.15)", backdropFilter: "blur(10px)" }}
                   >
-                    <AlertCircle className="h-6 w-6 text-white" strokeWidth={2.5} />
+                    <ExclamationCircleIcon className="h-6 w-6 text-white" strokeWidth={2.5} />
                   </div>
                   <div className="flex-1">
                     <h4 className="font-medium text-lg uppercase leading-tight text-white">

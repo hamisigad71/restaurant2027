@@ -27,17 +27,17 @@ import {
 } from "@/components/ui/tooltip";
 import { OrderService, LiveOrder } from "@/lib/order-service";
 import {
-  ShoppingCart,
-  ChevronDown,
-  ChevronRight,
-  UtensilsCrossed,
-  Sparkles,
-  Receipt,
-  X,
-  ArrowLeft,
-  TrendingUp,
-  Clock,
-} from "lucide-react";
+  ShoppingCartIcon as ShoppingCart,
+  ChevronDownIcon as ChevronDown,
+  ChevronRightIcon as ChevronRight,
+  SparklesIcon as UtensilsCrossed,
+  SparklesIcon as Sparkles,
+  DocumentTextIcon as Receipt,
+  XMarkIcon as X,
+  ArrowLeftIcon as ArrowLeft,
+  ArrowTrendingUpIcon as TrendingUp,
+  ClockIcon as Clock,
+} from "@heroicons/react/24/outline";
 import { useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
 

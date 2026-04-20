@@ -4,11 +4,27 @@ import { useState, useEffect, useMemo } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { 
-  Home, Utensils, ShoppingCart, Bell, 
-  Users, Settings, ClipboardList, LayoutGrid,
-  MapPin, ShoppingBag, Calculator, BarChart3,
-  Shield, Brush, ChefHat
-} from "lucide-react"
+  HomeIcon, 
+  CakeIcon, 
+  ShoppingCartIcon, 
+  BellIcon, 
+  UserGroupIcon, 
+  Cog6ToothIcon, 
+  ClipboardDocumentListIcon, 
+  Squares2X2Icon,
+  MapPinIcon, 
+  ShoppingBagIcon, 
+  CalculatorIcon, 
+  ChartBarIcon,
+  ShieldCheckIcon, 
+  PaintBrushIcon, 
+  FireIcon 
+} from "@heroicons/react/24/outline"
+import { 
+  HomeIcon as HomeIconSolid,
+  ShoppingCartIcon as ShoppingCartIconSolid,
+  BellIcon as BellIconSolid
+} from "@heroicons/react/24/solid"
 import { useAuth, UserRole } from "@/lib/auth-context"
 import { cn } from "@/lib/utils"
 
@@ -58,43 +74,43 @@ export function MobileNav() {
 
     const configs: Record<UserRole, NavItem[]> = {
       admin: [
-        { label: "Home", icon: Home, href: "/admin/dashboard" },
-        { label: "Staff", icon: Users, href: "/admin/staff" },
-        { label: "Menu", icon: Utensils, href: "/admin/menu" },
-        { label: "Config", icon: Settings, href: "/admin/settings" },
+        { label: "Home", icon: HomeIcon, href: "/admin/dashboard" },
+        { label: "Staff", icon: UserGroupIcon, href: "/admin/staff" },
+        { label: "Menu", icon: CakeIcon, href: "/admin/menu" },
+        { label: "Config", icon: Cog6ToothIcon, href: "/admin/settings" },
       ],
       manager: [
-        { label: "Home", icon: Home, href: "/manager/dashboard" },
-        { label: "Orders", icon: ClipboardList, href: "/manager/orders" },
-        { label: "Menu", icon: Utensils, href: "/manager/menu" },
-        { label: "Staff", icon: Users, href: "/manager/staff" },
-        { label: "Reports", icon: BarChart3, href: "/manager/reports" },
+        { label: "Home", icon: HomeIcon, href: "/manager/dashboard" },
+        { label: "Orders", icon: ClipboardDocumentListIcon, href: "/manager/orders" },
+        { label: "Menu", icon: CakeIcon, href: "/manager/menu" },
+        { label: "Staff", icon: UserGroupIcon, href: "/manager/staff" },
+        { label: "Reports", icon: ChartBarIcon, href: "/manager/reports" },
       ],
       waiter: [
-        { label: "Home", icon: Home, href: "/waiter/dashboard" },
-        { label: "Floor", icon: MapPin, href: "/waiter/service-floor" },
-        { label: "Menu", icon: Utensils, href: "/waiter/menu" },
-        { label: "Status", icon: ShoppingBag, href: "/waiter/order-tracking" },
-        { label: "Pay", icon: Calculator, href: "/waiter/checkout" },
+        { label: "Home", icon: HomeIcon, href: "/waiter/dashboard" },
+        { label: "Floor", icon: MapPinIcon, href: "/waiter/service-floor" },
+        { label: "Menu", icon: CakeIcon, href: "/waiter/menu" },
+        { label: "Status", icon: ShoppingBagIcon, href: "/waiter/order-tracking" },
+        { label: "Pay", icon: CalculatorIcon, href: "/waiter/checkout" },
       ],
       kitchen: [
-        { label: "KDS", icon: ChefHat, href: "/kitchen/kds" },
-        { label: "Stats", icon: BarChart3, href: "/kitchen/kds" },
-        { label: "System", icon: Settings, href: "/kitchen/kds" },
+        { label: "KDS", icon: FireIcon, href: "/kitchen/kds" },
+        { label: "Stats", icon: ChartBarIcon, href: "/kitchen/kds" },
+        { label: "System", icon: Cog6ToothIcon, href: "/kitchen/kds" },
       ],
       customer: [
-        { label: "Home", icon: Home, href: customerPrefix },
-        { label: "Menu", icon: Utensils, href: customerPrefix },
-        { label: "Orders", icon: ClipboardList, href: `${customerPrefix}/status` },
-        { label: "Pay", icon: ShoppingCart, href: `${customerPrefix}/billing` },
+        { label: "Home", icon: HomeIcon, href: customerPrefix },
+        { label: "Menu", icon: CakeIcon, href: customerPrefix },
+        { label: "Orders", icon: ClipboardDocumentListIcon, href: `${customerPrefix}/status` },
+        { label: "Pay", icon: ShoppingCartIcon, href: `${customerPrefix}/billing` },
       ],
       cleaner: [
-        { label: "Tasks", icon: Brush, href: "/cleaners" },
-        { label: "Alerts", icon: Bell, href: "/cleaners" },
+        { label: "Tasks", icon: PaintBrushIcon, href: "/cleaners" },
+        { label: "Alerts", icon: BellIcon, href: "/cleaners" },
       ],
       security: [
-        { label: "Watch", icon: Shield, href: "/security" },
-        { label: "Logs", icon: ClipboardList, href: "/security" },
+        { label: "Watch", icon: ShieldCheckIcon, href: "/security" },
+        { label: "Logs", icon: ClipboardDocumentListIcon, href: "/security" },
       ]
     }
     return configs[role] || configs.customer

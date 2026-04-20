@@ -22,7 +22,16 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Search, CreditCard, Smartphone, Banknote, DollarSign, CheckCircle, Clock, Receipt } from "lucide-react"
+import { 
+  MagnifyingGlassIcon as Search, 
+  CreditCardIcon as CreditCard, 
+  DevicePhoneMobileIcon as Smartphone, 
+  BanknotesIcon as Banknote, 
+  CurrencyDollarIcon as DollarSign, 
+  CheckCircleIcon as CheckCircle, 
+  ClockIcon as Clock, 
+  DocumentTextIcon as Receipt 
+} from "@heroicons/react/24/outline"
 import { mockOrders, mockPayments } from "@/lib/mock-data"
 import type { Payment, PaymentMethod, PaymentStatus, OrderItem } from "@/lib/types"
 

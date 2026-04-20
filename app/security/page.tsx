@@ -2,10 +2,24 @@
 
 import { useState, useEffect } from "react"
 import {
-  ShieldCheck, Crosshair, Users, Activity, AlertCircle,
-  Camera, Check, Wifi, WifiOff, Zap, Eye, Bell,
-  TrendingUp, Circle, CircleDot, Clock, X,
-} from "lucide-react"
+  ShieldCheckIcon as ShieldCheck, 
+  ViewfinderCircleIcon as Crosshair, 
+  UserGroupIcon as Users, 
+  ChartBarIcon as Activity, 
+  ExclamationCircleIcon as AlertCircle,
+  VideoCameraIcon as Camera, 
+  CheckIcon as Check, 
+  WifiIcon as Wifi, 
+  SignalIcon as WifiOff, 
+  BoltIcon as Zap, 
+  EyeIcon as Eye, 
+  BellIcon as Bell,
+  ArrowTrendingUpIcon as TrendingUp, 
+  StopIcon as Circle, 
+  CheckCircleIcon as CircleDot, 
+  ClockIcon as Clock, 
+  XMarkIcon as X,
+} from "@heroicons/react/24/outline"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge }     from "@/components/ui/badge"
 import { Button }    from "@/components/ui/button"

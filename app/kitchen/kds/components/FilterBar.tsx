@@ -1,5 +1,5 @@
 "use client"
-import { Search } from "lucide-react"
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 export type FilterId = 'all' | 'pending' | 'cooking' | 'ready'
@@ -26,7 +26,7 @@ export function FilterBar({ active, counts, search, onFilter, onSearch }: Filter
       style={{ background: "rgba(255,255,255,0.6)", backdropFilter: "blur(12px)", borderColor: "oklch(0.45 0.12 285 / 0.1)" }}
     >
       <div className="flex-1 max-w-sm relative">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4" style={{ color: "#736C83" }} />
+        <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4" style={{ color: "#736C83" }} />
         <input 
           value={search}
           onChange={(e) => onSearch(e.target.value)}

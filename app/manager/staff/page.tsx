@@ -6,32 +6,31 @@ import { supabase } from "@/lib/supabase"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import {
-  Clock,
-  UserPlus,
-  Phone,
-  CheckCircle2,
-  Search,
-  Filter,
-  Star,
-  Mail,
-  Calendar,
-  ChevronRight,
-  TrendingUp,
-  Activity,
-  Heart,
-  MoreHorizontal,
-  BellRing,
-  X,
-  AlertTriangle,
-  Award,
-  Users,
-  Target,
-  Zap,
-  ArrowUpRight,
-  UserCircle,
-  History,
-  MessageSquare,
-} from "lucide-react"
+  ClockIcon,
+  UserPlusIcon,
+  PhoneIcon,
+  CheckCircleIcon,
+  MagnifyingGlassIcon,
+  FunnelIcon,
+  StarIcon,
+  EnvelopeIcon,
+  CalendarIcon,
+  ChevronRightIcon,
+  ArrowTrendingUpIcon,
+  SparklesIcon,
+  HeartIcon,
+  EllipsisHorizontalIcon,
+  BellAlertIcon,
+  XMarkIcon,
+  ExclamationTriangleIcon,
+  TrophyIcon,
+  UserGroupIcon,
+  FlagIcon,
+  BoltIcon,
+  ArrowUpRightIcon,
+  UserCircleIcon,
+  ChatBubbleLeftRightIcon,
+} from "@heroicons/react/24/outline"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { Input } from "@/components/ui/input"
@@ -161,18 +160,18 @@ const mockStaff = [
 ]
 
 const roleConfig: Record<string, { bg: string; text: string; icon: any }> = {
-  Waiter:    { bg: "bg-sky-50", text: "text-sky-600", icon: Users },
-  Kitchen:   { bg: "bg-orange-50", text: "text-orange-600", icon: Target },
-  Manager:   { bg: "bg-purple-50", text: "text-purple-600", icon: Award },
-  Host:      { bg: "bg-pink-50", text: "text-pink-600", icon: Heart },
-  Bartender: { bg: "bg-rose-50", text: "text-rose-600", icon: Zap },
+  Waiter:    { bg: "bg-sky-50", text: "text-sky-600", icon: UserGroupIcon },
+  Kitchen:   { bg: "bg-orange-50", text: "text-orange-600", icon: FlagIcon },
+  Manager:   { bg: "bg-purple-50", text: "text-purple-600", icon: TrophyIcon },
+  Host:      { bg: "bg-pink-50", text: "text-pink-600", icon: HeartIcon },
+  Bartender: { bg: "bg-rose-50", text: "text-rose-600", icon: BoltIcon },
 }
 
 const stats = [
-  { label: "Active Duty",  value: "48",  sub: "85% capacity",  icon: Activity,   from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)" },
-  { label: "Avg. Rating",  value: "4.8", sub: "Top performers", icon: Star,       from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)" },
-  { label: "Attendance",   value: "96%", sub: "Weekly avg",     icon: Heart,      from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)" },
-  { label: "Open Shifts",  value: "3",   sub: "Needs action",   icon: TrendingUp, from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)" },
+  { label: "Active Duty",  value: "48",  sub: "85% capacity",  icon: SparklesIcon,   from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)" },
+  { label: "Avg. Rating",  value: "4.8", sub: "Top performers", icon: StarIcon,       from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)" },
+  { label: "Attendance",   value: "96%", sub: "Weekly avg",     icon: HeartIcon,      from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)" },
+  { label: "Open Shifts",  value: "3",   sub: "Needs action",   icon: ArrowTrendingUpIcon, from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)" },
 ]
 
 export default function ManagerStaffPage() {
@@ -199,7 +198,7 @@ export default function ManagerStaffPage() {
     setAwardedFlash(staffId)
     toast.success(`${stars} star${stars > 1 ? 's' : ''} awarded!`, {
       description: `Performance recognition recorded`,
-      icon: <Star className="h-4 w-4 fill-amber-400 text-amber-400" />,
+      icon: <StarIcon className="h-4 w-4 fill-amber-400 text-amber-400" />,
     })
     setTimeout(() => setAwardedFlash(null), 2000)
   }, [])
@@ -226,7 +225,7 @@ export default function ManagerStaffPage() {
     } else {
       toast.success(`${name} summoned`, {
         description: "Notification sent to staff member",
-        icon: <BellRing className="h-4 w-4" />,
+        icon: <BellAlertIcon className="h-4 w-4" />,
       })
     }
   }, [])
@@ -263,7 +262,7 @@ export default function ManagerStaffPage() {
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-pulse" />
             
             <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center shrink-0 border border-white/30">
-              <BellRing className="h-5 w-5 sm:h-6 sm:w-6 text-white animate-bounce" strokeWidth={2.5} />
+              <BellAlertIcon className="h-5 w-5 sm:h-6 sm:w-6 text-white animate-bounce" strokeWidth={2.5} />
             </div>
             
             <div className="flex-1 min-w-0 relative">
@@ -279,7 +278,7 @@ export default function ManagerStaffPage() {
               onClick={() => setSummonBanner(null)}
               className="relative shrink-0 h-9 w-9 rounded-xl bg-white/20 backdrop-blur-sm hover:bg-white/30 flex items-center justify-center transition-all duration-200 border border-white/20 hover:scale-105 active:scale-95"
             >
-              <X className="h-4 w-4 text-white" strokeWidth={2.5} />
+              <XMarkIcon className="h-4 w-4 text-white" strokeWidth={2.5} />
             </button>
           </div>
         )}
@@ -294,7 +293,7 @@ export default function ManagerStaffPage() {
                   background: "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)",
                 }}
               >
-                <Users className="h-6 w-6 sm:h-7 sm:w-7 text-white" strokeWidth={2.5} />
+                <UserGroupIcon className="h-6 w-6 sm:h-7 sm:w-7 text-white" strokeWidth={2.5} />
               </div>
               <div>
                 <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight leading-none" style={{ color: "#0D031B" }}>
@@ -317,7 +316,7 @@ export default function ManagerStaffPage() {
               boxShadow: "0 8px 32px oklch(0.42 0.14 285 / 0.35)",
             }}
           >
-            <UserPlus className="h-4 w-4 sm:h-4.5 sm:w-4.5" strokeWidth={2.5} />
+            <UserPlusIcon className="h-4 w-4 sm:h-4.5 sm:w-4.5" strokeWidth={2.5} />
             Recruit Staff
           </Button>
         </div>
@@ -360,7 +359,7 @@ export default function ManagerStaffPage() {
                 
                 <div className="mt-3 pt-3 border-t relative z-10" style={{ borderColor: "oklch(0.42 0.14 285 / 0.08)" }}>
                   <p className="text-[10px] font-medium flex items-center gap-1.5" style={{ color: "#9A94AA" }}>
-                    <TrendingUp className="h-3 w-3" />
+                    <ArrowTrendingUpIcon className="h-3 w-3" />
                     {s.sub}
                   </p>
                 </div>
@@ -378,7 +377,7 @@ export default function ManagerStaffPage() {
             <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
               {/* Search */}
               <div className="relative flex-1 group">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 transition-colors" style={{ color: "oklch(0.42 0.14 285 / 0.4)" }} />
+                <MagnifyingGlassIcon className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 transition-colors" style={{ color: "oklch(0.42 0.14 285 / 0.4)" }} />
                 <Input
                   placeholder="Search by name or role..."
                   value={searchQuery}
@@ -423,7 +422,7 @@ export default function ManagerStaffPage() {
                     color: "oklch(0.42 0.14 285)",
                   }}
                 >
-                  <Filter className="h-4 w-4" strokeWidth={2.5} />
+                  <FunnelIcon className="h-4 w-4" strokeWidth={2.5} />
                 </Button>
               </div>
             </div>
@@ -465,7 +464,7 @@ export default function ManagerStaffPage() {
                         borderColor: "oklch(0.75 0.15 50 / 0.3)",
                       }}
                     >
-                      <BellRing className="h-3.5 w-3.5 animate-pulse shrink-0" style={{ color: "oklch(0.65 0.15 45)" }} />
+                      <BellAlertIcon className="h-3.5 w-3.5 animate-pulse shrink-0" style={{ color: "oklch(0.65 0.15 45)" }} />
                       <span className="text-[10px] font-medium uppercase tracking-wide flex-1" style={{ color: "oklch(0.45 0.15 45)" }}>
                         Summoned to office
                       </span>
@@ -518,20 +517,20 @@ export default function ManagerStaffPage() {
                       <DropdownMenuTrigger asChild>
                         <button className="shrink-0 h-8 w-8 flex items-center justify-center rounded-xl transition-all hover:bg-oklch(0.42 0.14 285 / 0.08) active:scale-90"
                           style={{ color: "#9A94AA" }}>
-                          <MoreHorizontal className="h-4 w-4" />
+                          <EllipsisHorizontalIcon className="h-4 w-4" />
                         </button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end" className="bg-white/98 backdrop-blur-xl border-0 rounded-2xl shadow-2xl w-48">
                         <DropdownMenuItem className="text-xs font-medium rounded-xl m-1 focus:bg-oklch(0.42 0.14 285 / 0.08)" style={{ color: "oklch(0.42 0.14 285)" }}>
-                          <UserCircle className="h-3.5 w-3.5 mr-2" />
+                          <UserCircleIcon className="h-3.5 w-3.5 mr-2" />
                           Full Profile
                         </DropdownMenuItem>
                         <DropdownMenuItem className="text-xs font-medium rounded-xl m-1 focus:bg-oklch(0.42 0.14 285 / 0.08)">
-                          <History className="h-3.5 w-3.5 mr-2" />
+                          <ClockIcon className="h-3.5 w-3.5 mr-2" />
                           Duty Log
                         </DropdownMenuItem>
                         <DropdownMenuItem className="text-xs font-medium rounded-xl m-1 focus:bg-oklch(0.42 0.14 285 / 0.08)">
-                          <MessageSquare className="h-3.5 w-3.5 mr-2" />
+                          <ChatBubbleLeftRightIcon className="h-3.5 w-3.5 mr-2" />
                           Send Ping
                         </DropdownMenuItem>
                         <DropdownMenuSeparator className="bg-oklch(0.42 0.14 285 / 0.05)" />
@@ -548,7 +547,7 @@ export default function ManagerStaffPage() {
                       className="rounded-xl px-3 py-2.5 flex items-center gap-2 transition-all hover:scale-105"
                       style={{ background: "oklch(0.95 0.05 50 / 0.4)" }}
                     >
-                      <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400 shrink-0" />
+                      <StarIcon className="h-3.5 w-3.5 fill-amber-400 text-amber-400 shrink-0" />
                       <div className="min-w-0">
                         <p className="text-sm font-medium leading-none" style={{ color: "oklch(0.45 0.15 45)" }}>
                           {staff.rating}
@@ -563,7 +562,7 @@ export default function ManagerStaffPage() {
                       className="rounded-xl px-3 py-2.5 flex items-center gap-2 transition-all hover:scale-105"
                       style={{ background: "oklch(0.42 0.14 285 / 0.06)" }}
                     >
-                      <Clock className="h-3.5 w-3.5 shrink-0" style={{ color: "oklch(0.42 0.14 285)" }} />
+                      <ClockIcon className="h-3.5 w-3.5 shrink-0" style={{ color: "oklch(0.42 0.14 285)" }} />
                       <div className="min-w-0">
                         <p className="text-[10px] font-medium leading-tight line-clamp-1" style={{ color: "#0D031B" }}>
                           {staff.shift}
@@ -578,7 +577,7 @@ export default function ManagerStaffPage() {
                   {/* Details Row */}
                   <div className="flex items-center justify-between text-[10px] font-medium uppercase tracking-wide">
                     <span className="flex items-center gap-1.5" style={{ color: "#9A94AA" }}>
-                      <Calendar className="h-3 w-3" />
+                      <CalendarIcon className="h-3 w-3" />
                       {staff.shiftsThisWeek} shifts/wk
                     </span>
                     
@@ -646,7 +645,7 @@ export default function ManagerStaffPage() {
                           className="transition-all duration-200 hover:scale-125 active:scale-90"
                           title={`Give ${n} star${n > 1 ? 's' : ''}`}
                         >
-                          <Star
+                          <StarIcon
                             className={cn(
                               "h-5 w-5 transition-colors duration-200",
                               (awards[staff.id] ?? 0) >= n
@@ -676,7 +675,7 @@ export default function ManagerStaffPage() {
                       className="h-9 rounded-xl text-[10px] font-bold uppercase gap-1.5 transition-all hover:scale-105 active:scale-95"
                       style={{ color: "oklch(0.42 0.14 285)" }}
                     >
-                      <Phone className="h-3.5 w-3.5" />
+                      <PhoneIcon className="h-3.5 w-3.5" />
                       Call
                     </Button>
                     <Button
@@ -684,7 +683,7 @@ export default function ManagerStaffPage() {
                       className="h-9 rounded-xl text-[10px] font-bold uppercase gap-1.5 transition-all hover:scale-105 active:scale-95"
                       style={{ color: "oklch(0.42 0.14 285)" }}
                     >
-                      <Mail className="h-3.5 w-3.5" />
+                      <EnvelopeIcon className="h-3.5 w-3.5" />
                       Email
                     </Button>
                   </div>
@@ -708,7 +707,7 @@ export default function ManagerStaffPage() {
                         : undefined
                     }
                   >
-                    <BellRing className={cn("h-4 w-4", summoned[staff.id] && "animate-pulse")} strokeWidth={2.5} />
+                    <BellAlertIcon className={cn("h-4 w-4", summoned[staff.id] && "animate-pulse")} strokeWidth={2.5} />
                     {summoned[staff.id] ? "Summoned" : "Report to Office"}
                   </Button>
 
@@ -716,7 +715,7 @@ export default function ManagerStaffPage() {
                   <button className="w-full h-8 flex items-center justify-center gap-1 text-[10px] font-medium uppercase tracking-wide transition-all hover:opacity-70 rounded-xl"
                     style={{ color: "#9A94AA" }}>
                     View Full Analytics
-                    <ChevronRight className="h-3 w-3" />
+                    <ChevronRightIcon className="h-3 w-3" />
                   </button>
 
                 </CardContent>
@@ -741,7 +740,7 @@ export default function ManagerStaffPage() {
                   background: "linear-gradient(135deg, oklch(0.65 0.18 150) 0%, oklch(0.70 0.20 160) 100%)",
                 }}
               >
-                <CheckCircle2 className="h-7 w-7 sm:h-8 sm:w-8 text-white" strokeWidth={2.5} />
+                <CheckCircleIcon className="h-7 w-7 sm:h-8 sm:w-8 text-white" strokeWidth={2.5} />
               </div>
               <div className="space-y-1.5">
                 <h3 className="font-normal text-lg sm:text-xl uppercase tracking-tight leading-none" style={{ color: "#0D031B" }}>
@@ -803,7 +802,7 @@ export default function ManagerStaffPage() {
                     background: "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)",
                   }}
                 >
-                  <Activity className="h-7 w-7 text-white" strokeWidth={2.5} />
+                  <SparklesIcon className="h-7 w-7 text-white" strokeWidth={2.5} />
                 </div>
                 <div>
                   <SheetTitle className="text-2xl sm:text-3xl font-normal uppercase tracking-tight leading-none" style={{ color: "#0D031B" }}>
@@ -861,7 +860,7 @@ export default function ManagerStaffPage() {
                   
                   <div className="relative z-10">
                     <div className="flex items-center gap-2 mb-3">
-                      <Award className="h-4 w-4 text-amber-400 fill-amber-400" />
+                      <TrophyIcon className="h-4 w-4 text-amber-400 fill-amber-400" />
                       <span className="text-[10px] font-normal uppercase tracking-wider text-amber-400">
                         MVP of the Week
                       </span>
@@ -894,7 +893,7 @@ export default function ManagerStaffPage() {
                           background: "linear-gradient(135deg, oklch(0.65 0.15 45) 0%, oklch(0.70 0.15 50) 100%)",
                         }}
                       >
-                        <Award className="h-3 w-3 mr-1.5" />
+                        <TrophyIcon className="h-3 w-3 mr-1.5" />
                         Send Reward
                       </Button>
                     </div>
@@ -945,7 +944,7 @@ export default function ManagerStaffPage() {
                             )}
                           </div>
                         </div>
-                        <CheckCircle2 className="h-5 w-5 shrink-0" style={{ color: "oklch(0.65 0.18 150)" }} />
+                        <CheckCircleIcon className="h-5 w-5 shrink-0" style={{ color: "oklch(0.65 0.18 150)" }} />
                       </div>
                     ))}
                   </div>
@@ -965,7 +964,7 @@ export default function ManagerStaffPage() {
                 className="flex items-start gap-3 p-4 rounded-xl"
                 style={{ background: "oklch(0.95 0.05 50 / 0.3)" }}
               >
-                <AlertTriangle className="h-4 w-4 shrink-0 mt-0.5" style={{ color: "oklch(0.65 0.15 45)" }} />
+                <ExclamationTriangleIcon className="h-4 w-4 shrink-0 mt-0.5" style={{ color: "oklch(0.65 0.15 45)" }} />
                 <p className="text-[10px] leading-relaxed font-medium" style={{ color: "#736C83" }}>
                   Audit checks verified by AI Core. All shifts accounted for and validated.
                 </p>
@@ -975,7 +974,7 @@ export default function ManagerStaffPage() {
                 onClick={() => {
                   toast.success("Roster finalized!", {
                     description: "Successfully synced with Payroll system",
-                    icon: <CheckCircle2 className="h-4 w-4" />,
+                    icon: <CheckCircleIcon className="h-4 w-4" />,
                   })
                   setIsAuditOpen(false)
                 }}
@@ -985,7 +984,7 @@ export default function ManagerStaffPage() {
                   boxShadow: "0 8px 32px oklch(0.42 0.14 285 / 0.4)",
                 }}
               >
-                <CheckCircle2 className="h-4 w-4 mr-2" strokeWidth={2.5} />
+                <CheckCircleIcon className="h-4 w-4 mr-2" strokeWidth={2.5} />
                 Finalize & Release Roster
               </Button>
             </div>

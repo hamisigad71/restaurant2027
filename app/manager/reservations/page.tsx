@@ -2,28 +2,29 @@
 
 import { useState } from "react"
 import { 
-  Plus, 
-  Search, 
-  Calendar, 
-  Clock, 
-  Users, 
-  ChevronRight,
-  Filter,
-  CheckCircle2,
-  XCircle,
-  MoreVertical,
-  Table as TableIcon,
-  Star,
-  TrendingUp,
-  Activity,
-  AlertCircle,
-  Eye,
-  Edit,
-  Trash2,
-  Phone,
-  Mail,
-  MapPin,
-} from "lucide-react"
+  PlusIcon, 
+  MagnifyingGlassIcon, 
+  CalendarIcon, 
+  ClockIcon, 
+  UserGroupIcon, 
+  MapPinIcon, 
+  FunnelIcon, 
+  EllipsisHorizontalIcon, 
+  PencilIcon, 
+  TrashIcon, 
+  CheckCircleIcon,
+  PhoneIcon,
+  EnvelopeIcon,
+  ArrowRightOnRectangleIcon,
+  ArrowPathIcon,
+  EyeIcon,
+  StarIcon,
+  ChartBarIcon,
+  ExclamationCircleIcon,
+  TableCellsIcon,
+  ChevronRightIcon,
+  XMarkIcon
+} from "@heroicons/react/24/outline"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
@@ -48,10 +49,10 @@ const mockReservations = [
 ]
 
 const stats = [
-  { label: "Today's Bookings", value: "18", icon: Calendar, from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)", change: "+12%" },
-  { label: "Total Guests", value: "54", icon: Users, from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)", change: "+8%" },
-  { label: "Pending Requests", value: "4", icon: Clock, from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)", change: "+2" },
-  { label: "VIP Arrivals", value: "2", icon: Star, from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)", change: "Today" },
+  { label: "Today's Bookings", value: "18", icon: CalendarIcon, from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)", change: "+12%" },
+  { label: "Total Guests", value: "54", icon: UserGroupIcon, from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)", change: "+8%" },
+  { label: "Pending Requests", value: "4", icon: ClockIcon, from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)", change: "+2" },
+  { label: "VIP Arrivals", value: "2", icon: StarIcon, from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)", change: "Today" },
 ]
 
 export default function ManagerReservationsPage() {
@@ -79,7 +80,7 @@ export default function ManagerReservationsPage() {
                   background: "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)",
                 }}
               >
-                <Calendar className="h-6 w-6 sm:h-7 sm:w-7 text-white" strokeWidth={2.5} />
+                <CalendarIcon className="h-6 w-6 sm:h-7 sm:w-7 text-white" strokeWidth={2.5} />
               </div>
               <div>
                 <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight leading-none" style={{ color: "#0D031B" }}>
@@ -102,7 +103,7 @@ export default function ManagerReservationsPage() {
               boxShadow: "0 8px 32px oklch(0.42 0.14 285 / 0.35)",
             }}
           >
-            <Plus className="h-4 w-4" strokeWidth={2.5} />
+            <PlusIcon className="h-4 w-4" strokeWidth={2.5} />
             New Booking
           </Button>
         </div>
@@ -154,7 +155,7 @@ export default function ManagerReservationsPage() {
 
                 <div className="mt-3 pt-3 border-t relative z-10" style={{ borderColor: "oklch(0.42 0.14 285 / 0.08)" }}>
                   <p className="text-[10px] font-medium flex items-center gap-1.5" style={{ color: "#9A94AA" }}>
-                    <Activity className="h-3 w-3" />
+                    <ChartBarIcon className="h-3 w-3" />
                     vs. yesterday
                   </p>
                 </div>
@@ -170,7 +171,7 @@ export default function ManagerReservationsPage() {
             <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
               {/* Search */}
               <div className="relative flex-1 group">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 transition-colors" 
+                <MagnifyingGlassIcon className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 transition-colors" 
                   style={{ color: "oklch(0.42 0.14 285 / 0.4)" }} strokeWidth={2.5} />
                 <Input 
                   placeholder="Search by guest name or ID..." 
@@ -195,7 +196,7 @@ export default function ManagerReservationsPage() {
                       color: "#736C83",
                     }}
                   >
-                    <Filter className="h-4 w-4" strokeWidth={2.5} />
+                    <FunnelIcon className="h-4 w-4" strokeWidth={2.5} />
                     <span className="hidden sm:inline">Filter</span>
                   </Button>
                 </DropdownMenuTrigger>
@@ -235,7 +236,7 @@ export default function ManagerReservationsPage() {
                 className="w-10 h-10 rounded-xl flex items-center justify-center"
                 style={{ background: "oklch(0.42 0.14 285 / 0.1)" }}
               >
-                <Users className="h-5 w-5" style={{ color: "oklch(0.42 0.14 285)" }} strokeWidth={2.5} />
+                <UserGroupIcon className="h-5 w-5" style={{ color: "oklch(0.42 0.14 285)" }} strokeWidth={2.5} />
               </div>
               <div>
                 <CardTitle className="text-sm sm:text-base font-normal uppercase tracking-tight" style={{ color: "#0D031B" }}>
@@ -271,20 +272,20 @@ export default function ManagerReservationsPage() {
                             {res.guest}
                           </div>
                           {res.vip && (
-                            <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" strokeWidth={2.5} />
+                            <StarIcon className="h-3.5 w-3.5 fill-amber-400 text-amber-400" strokeWidth={2.5} />
                           )}
                         </div>
                         <div className="text-[10px] font-medium mt-1" style={{ color: "#9A94AA" }}>{res.id}</div>
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-1.5 text-xs font-medium" style={{ color: "#0D031B" }}>
-                          <Users className="h-3.5 w-3.5" style={{ color: "oklch(0.42 0.14 285)" }} strokeWidth={2.5} />
+                          <UserGroupIcon className="h-3.5 w-3.5" style={{ color: "oklch(0.42 0.14 285)" }} strokeWidth={2.5} />
                           {res.partySize} guests
                         </div>
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-1.5 text-xs font-medium" style={{ color: "#0D031B" }}>
-                          <Clock className="h-3.5 w-3.5" style={{ color: "oklch(0.42 0.14 285)" }} strokeWidth={2.5} />
+                          <ClockIcon className="h-3.5 w-3.5" style={{ color: "oklch(0.42 0.14 285)" }} strokeWidth={2.5} />
                           {res.time}
                         </div>
                         <div className="text-[10px] font-medium mt-1" style={{ color: "#9A94AA" }}>{res.date}</div>
@@ -299,12 +300,12 @@ export default function ManagerReservationsPage() {
                               borderColor: "oklch(0.42 0.14 285 / 0.2)",
                             }}
                           >
-                            <TableIcon className="h-3 w-3" strokeWidth={2.5} />
+                            <TableCellsIcon className="h-3 w-3" strokeWidth={2.5} />
                             Table {res.table}
                           </Badge>
                         ) : (
                           <Badge className="text-[10px] font-medium uppercase px-2.5 py-1 rounded-lg border bg-amber-50 text-amber-600 border-amber-200">
-                            <AlertCircle className="h-3 w-3 mr-1" strokeWidth={2.5} />
+                            <ExclamationCircleIcon className="h-3 w-3 mr-1" strokeWidth={2.5} />
                             Unassigned
                           </Badge>
                         )}
@@ -319,9 +320,9 @@ export default function ManagerReservationsPage() {
                           )}
                         >
                           {res.status === "confirmed" ? (
-                            <CheckCircle2 className="h-3 w-3 mr-1 inline" strokeWidth={2.5} />
+                            <CheckCircleIcon className="h-3 w-3 mr-1 inline" strokeWidth={2.5} />
                           ) : (
-                            <Clock className="h-3 w-3 mr-1 inline" strokeWidth={2.5} />
+                            <ClockIcon className="h-3 w-3 mr-1 inline" strokeWidth={2.5} />
                           )}
                           {res.status}
                         </Badge>
@@ -334,29 +335,29 @@ export default function ManagerReservationsPage() {
                               size="icon" 
                               className="h-9 w-9 rounded-xl transition-all hover:bg-oklch(0.42 0.14 285 / 0.08) active:scale-90"
                             >
-                              <MoreVertical className="h-4 w-4" style={{ color: "#9A94AA" }} />
+                              <EllipsisHorizontalIcon className="h-4 w-4" style={{ color: "#9A94AA" }} />
                             </Button>
                           </DropdownMenuTrigger>
                           <DropdownMenuContent align="end" className="bg-white/98 backdrop-blur-xl border-0 rounded-2xl shadow-2xl w-48">
                             <DropdownMenuItem className="text-xs font-semibold rounded-xl m-1 focus:bg-oklch(0.42 0.14 285 / 0.08)">
-                              <Eye className="h-3.5 w-3.5 mr-2" />
+                              <EyeIcon className="h-3.5 w-3.5 mr-2" />
                               View Details
                             </DropdownMenuItem>
                             <DropdownMenuItem className="text-xs font-semibold rounded-xl m-1 focus:bg-oklch(0.42 0.14 285 / 0.08)">
-                              <CheckCircle2 className="h-3.5 w-3.5 mr-2" />
+                              <CheckCircleIcon className="h-3.5 w-3.5 mr-2" />
                               Confirm Arrival
                             </DropdownMenuItem>
                             <DropdownMenuItem className="text-xs font-semibold rounded-xl m-1 focus:bg-oklch(0.42 0.14 285 / 0.08)">
-                              <TableIcon className="h-3.5 w-3.5 mr-2" />
+                              <TableCellsIcon className="h-3.5 w-3.5 mr-2" />
                               Assign Table
                             </DropdownMenuItem>
                             <DropdownMenuItem className="text-xs font-semibold rounded-xl m-1 focus:bg-oklch(0.42 0.14 285 / 0.08)">
-                              <Edit className="h-3.5 w-3.5 mr-2" />
+                              <PencilIcon className="h-3.5 w-3.5 mr-2" />
                               Edit Booking
                             </DropdownMenuItem>
                             <DropdownMenuSeparator className="my-1" style={{ background: "oklch(0.42 0.14 285 / 0.08)" }} />
                             <DropdownMenuItem className="text-xs font-semibold rounded-xl m-1 focus:bg-rose-50 text-rose-600">
-                              <XCircle className="h-3.5 w-3.5 mr-2" />
+                              <XMarkIcon className="h-3.5 w-3.5 mr-2" />
                               Cancel Booking
                             </DropdownMenuItem>
                           </DropdownMenuContent>
@@ -382,7 +383,7 @@ export default function ManagerReservationsPage() {
                       <div className="flex-1">
                         <div className="flex items-center gap-2">
                           <h3 className="font-medium text-sm" style={{ color: "#0D031B" }}>{res.guest}</h3>
-                          {res.vip && <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />}
+                          {res.vip && <StarIcon className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />}
                         </div>
                         <p className="text-[10px] font-medium mt-0.5" style={{ color: "#9A94AA" }}>{res.id}</p>
                       </div>
@@ -403,11 +404,11 @@ export default function ManagerReservationsPage() {
                     {/* Details Grid */}
                     <div className="grid grid-cols-2 gap-3">
                       <div className="flex items-center gap-1.5">
-                        <Users className="h-3.5 w-3.5" style={{ color: "oklch(0.42 0.14 285)" }} />
+                        <UserGroupIcon className="h-3.5 w-3.5" style={{ color: "oklch(0.42 0.14 285)" }} />
                         <span className="text-xs font-medium" style={{ color: "#0D031B" }}>{res.partySize} guests</span>
                       </div>
                       <div className="flex items-center gap-1.5">
-                        <Clock className="h-3.5 w-3.5" style={{ color: "oklch(0.42 0.14 285)" }} />
+                        <ClockIcon className="h-3.5 w-3.5" style={{ color: "oklch(0.42 0.14 285)" }} />
                         <span className="text-xs font-medium" style={{ color: "#0D031B" }}>{res.time}</span>
                       </div>
                     </div>
@@ -421,12 +422,12 @@ export default function ManagerReservationsPage() {
                           borderColor: "oklch(0.42 0.14 285 / 0.2)",
                         }}
                       >
-                        <TableIcon className="h-3 w-3" />
+                        <TableCellsIcon className="h-3 w-3" />
                         Table {res.table}
                       </Badge>
                     ) : (
                       <Badge className="text-[10px] font-medium uppercase px-2.5 py-1 rounded-lg border bg-amber-50 text-amber-600 border-amber-200 w-fit">
-                        <AlertCircle className="h-3 w-3 mr-1" />
+                        <ExclamationCircleIcon className="h-3 w-3 mr-1" />
                         Unassigned
                       </Badge>
                     )}
@@ -440,32 +441,32 @@ export default function ManagerReservationsPage() {
                           color: "white",
                         }}
                       >
-                        <CheckCircle2 className="h-3.5 w-3.5 mr-1.5" />
+                        <CheckCircleIcon className="h-3.5 w-3.5 mr-1.5" />
                         Confirm
                       </Button>
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                           <Button variant="outline" size="icon" className="h-9 w-9 rounded-xl border-2"
                             style={{ borderColor: "oklch(0.42 0.14 285 / 0.15)" }}>
-                            <MoreVertical className="h-4 w-4" style={{ color: "#9A94AA" }} />
+                            <EllipsisHorizontalIcon className="h-4 w-4" style={{ color: "#9A94AA" }} />
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end" className="bg-white/98 backdrop-blur-xl border-0 rounded-2xl shadow-2xl w-48">
                           <DropdownMenuItem className="text-xs font-semibold rounded-xl m-1">
-                            <Eye className="h-3.5 w-3.5 mr-2" />
+                            <EyeIcon className="h-3.5 w-3.5 mr-2" />
                             View Details
                           </DropdownMenuItem>
                           <DropdownMenuItem className="text-xs font-semibold rounded-xl m-1">
-                            <TableIcon className="h-3.5 w-3.5 mr-2" />
+                            <TableCellsIcon className="h-3.5 w-3.5 mr-2" />
                             Assign Table
                           </DropdownMenuItem>
                           <DropdownMenuItem className="text-xs font-semibold rounded-xl m-1">
-                            <Edit className="h-3.5 w-3.5 mr-2" />
+                            <PencilIcon className="h-3.5 w-3.5 mr-2" />
                             Edit
                           </DropdownMenuItem>
                           <DropdownMenuSeparator />
                           <DropdownMenuItem className="text-xs font-semibold rounded-xl m-1 text-rose-600">
-                            <XCircle className="h-3.5 w-3.5 mr-2" />
+                            <XMarkIcon className="h-3.5 w-3.5 mr-2" />
                             Cancel
                           </DropdownMenuItem>
                         </DropdownMenuContent>
@@ -497,7 +498,7 @@ export default function ManagerReservationsPage() {
                   className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg shrink-0"
                   style={{ background: "rgba(255,255,255,0.2)", backdropFilter: "blur(10px)" }}
                 >
-                  <CheckCircle2 className="h-7 w-7 text-white" strokeWidth={2.5} />
+                  <CheckCircleIcon className="h-7 w-7 text-white" strokeWidth={2.5} />
                 </div>
                 <div className="flex-1 text-white">
                   <h3 className="font-normal text-xl uppercase leading-tight">Evening Rush Readiness</h3>
@@ -526,7 +527,7 @@ export default function ManagerReservationsPage() {
                   className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg shrink-0"
                   style={{ background: "rgba(255,255,255,0.2)", backdropFilter: "blur(10px)" }}
                 >
-                  <Star className="h-7 w-7 text-white fill-white" strokeWidth={2.5} />
+                  <StarIcon className="h-7 w-7 text-white fill-white" strokeWidth={2.5} />
                 </div>
                 <div className="flex-1 text-white">
                   <h3 className="font-normal text-xl uppercase leading-tight">VIP Alert</h3>

@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { ShoppingCart, Clock, User } from "lucide-react"
+import { ShoppingCartIcon, ClockIcon, UserIcon } from "@heroicons/react/24/outline"
 import { Progress } from "@/components/ui/progress"
 import { OrderService, LiveOrder } from "@/lib/order-service"
 import { useState, useEffect } from "react"
@@ -44,8 +44,8 @@ export function ActiveOrders() {
                   </Badge>
                 </div>
                 <div className="flex items-center gap-3 text-[10px] font-medium text-muted-foreground">
-                  <span className="flex items-center gap-1"><ShoppingCart className="h-3 w-3" /> {order.items.length} items</span>
-                  <span className="flex items-center gap-1"><Clock className="h-3 w-3" /> 12m elapsed</span>
+                  <span className="flex items-center gap-1"><ShoppingCartIcon className="h-3 w-3" /> {order.items.length} items</span>
+                  <span className="flex items-center gap-1"><ClockIcon className="h-3 w-3" /> 12m elapsed</span>
                 </div>
               </div>
               <div className="text-right">

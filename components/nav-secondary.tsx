@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-import { type LucideIcon } from "lucide-react"
 import { type TablerIcon } from "@tabler/icons-react"
 
 import {
@@ -19,7 +18,7 @@ export function NavSecondary({
   items: {
     title: string
     url: string
-    icon: LucideIcon | TablerIcon
+    icon: React.ComponentType<React.SVGProps<SVGSVGElement>> | TablerIcon
   }[]
 } & React.ComponentPropsWithoutRef<typeof SidebarGroup>) {
   return (

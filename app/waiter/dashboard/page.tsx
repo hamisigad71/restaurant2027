@@ -5,24 +5,23 @@ import { supabase } from "@/lib/supabase"
 import { toast } from "sonner"
 import Link from "next/link"
 import {
-  Bell,
-  ShoppingCart,
-  Clock,
-  CheckCircle2,
-  AlertCircle,
-  TrendingUp,
-  UserCheck,
-  ArrowRight,
-  ChevronRight,
-  Crown,
-  Flame,
-  Coffee,
-  UtensilsCrossed,
-  CircleDot,
-  Activity,
-  X,
-  Zap,
-} from "lucide-react"
+  BellIcon,
+  ShoppingCartIcon,
+  ClockIcon,
+  CheckCircleIcon,
+  ExclamationCircleIcon,
+  ArrowTrendingUpIcon,
+  CheckBadgeIcon,
+  ArrowRightIcon as ArrowRight,
+  ChevronRightIcon,
+  SparklesIcon as Crown,
+  FireIcon,
+  HomeIcon,
+  BuildingStorefrontIcon,
+  ChartBarIcon,
+  XMarkIcon,
+  BoltIcon,
+} from "@heroicons/react/24/outline"
 import { Badge }   from "@/components/ui/badge"
 import { Button }  from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -95,17 +94,17 @@ const myTables = [
 ]
 
 const recentActivity = [
-  { icon: CheckCircle2,    color: "text-[oklch(0.7_0.15_150)]",  bg: "bg-[oklch(0.7_0.15_150)]/10",  text: "Table 6 payment processed",   sub: "KES 2,100 · 4m ago",  dot: "oklch(0.7 0.15 150)" },
-  { icon: ShoppingCart,    color: "text-[oklch(0.45_0.12_285)]", bg: "bg-[oklch(0.45_0.12_285)]/10", text: "New order placed — Table 3",   sub: "6 items · 8m ago",    dot: "oklch(0.45 0.12 285)" },
-  { icon: AlertCircle,     color: "text-[oklch(0.75_0.15_75)]",  bg: "bg-[oklch(0.75_0.15_75)]/10",  text: "Table 9 — guests arrived",     sub: "Reserved · 12m ago",  dot: "oklch(0.75 0.15 75)" },
-  { icon: UtensilsCrossed, color: "text-[oklch(0.45_0.12_285)]", bg: "bg-[oklch(0.45_0.12_285)]/10", text: "Table 2 order updated",        sub: "+2 items · 18m ago",  dot: "oklch(0.45 0.12 285)" },
+  { icon: CheckCircleIcon,    color: "text-[oklch(0.7_0.15_150)]",  bg: "bg-[oklch(0.7_0.15_150)]/10",  text: "Table 6 payment processed",   sub: "KES 2,100 · 4m ago",  dot: "oklch(0.7 0.15 150)" },
+  { icon: ShoppingCartIcon,    color: "text-[oklch(0.45_0.12_285)]", bg: "bg-[oklch(0.45_0.12_285)]/10", text: "New order placed — Table 3",   sub: "6 items · 8m ago",    dot: "oklch(0.45 0.12 285)" },
+  { icon: ExclamationCircleIcon,     color: "text-[oklch(0.75_0.15_75)]",  bg: "bg-[oklch(0.75_0.15_75)]/10",  text: "Table 9 — guests arrived",     sub: "Reserved · 12m ago",  dot: "oklch(0.75 0.15 75)" },
+  { icon: BuildingStorefrontIcon, color: "text-[oklch(0.45_0.12_285)]", bg: "bg-[oklch(0.45_0.12_285)]/10", text: "Table 2 order updated",        sub: "+2 items · 18m ago",  dot: "oklch(0.45 0.12 285)" },
 ]
 
 const quickActions = [
-  { href: "/waiter/service-floor",   icon: ShoppingCart, label: "New Order",      primary: true  },
-  { href: "/waiter/service-floor",   icon: UserCheck,    label: "Floor Plan",     primary: false },
-  { href: "/waiter/order-tracking",  icon: Coffee,       label: "Order Status",   primary: false },
-  { href: "/waiter/checkout",        icon: CheckCircle2, label: "Settlements",    primary: false },
+  { href: "/waiter/service-floor",   icon: ShoppingCartIcon, label: "New Order",      primary: true  },
+  { href: "/waiter/service-floor",   icon: CheckBadgeIcon,    label: "Floor Plan",     primary: false },
+  { href: "/waiter/order-tracking",  icon: HomeIcon,       label: "Order Status",   primary: false },
+  { href: "/waiter/checkout",        icon: CheckCircleIcon, label: "Settlements",    primary: false },
 ]
 
 // ─── Sub-components ──────────────────────────────────────────────────────────
@@ -140,7 +139,7 @@ function StatCard({
             className="flex items-center justify-center w-10 h-10 rounded-xl transition-transform group-hover:scale-105"
             style={{ background: `color-mix(in oklch, ${accentColor} 12%, transparent)` }}
           >
-            <Icon className="h-5 w-5" color={accentColor} />
+            <Icon className="h-5 w-5" style={{ color: accentColor }} />
           </div>
           {badge && (
             <Badge
@@ -151,7 +150,7 @@ function StatCard({
                 borderColor: "oklch(0.75 0.15 75 / 0.3)",
               }}
             >
-              <Zap className="h-2.5 w-2.5 mr-1" />
+              <BoltIcon className="h-2.5 w-2.5 mr-1" />
               {badge}
             </Badge>
           )}
@@ -347,7 +346,7 @@ export default function WaiterDashboard() {
                     color: "#3D374C",
                   }}
                 >
-                  <Activity className="h-3.5 w-3.5" />
+                  <ChartBarIcon className="h-3.5 w-3.5" />
                   <span className="hidden sm:inline">Live View</span>
                 </Button>
               </TooltipTrigger>
@@ -364,7 +363,7 @@ export default function WaiterDashboard() {
               asChild
             >
               <Link href="/waiter/service-floor">
-                <ShoppingCart className="h-3.5 w-3.5" />
+                <ShoppingCartIcon className="h-3.5 w-3.5" />
                 New Order
               </Link>
             </Button>
@@ -374,26 +373,26 @@ export default function WaiterDashboard() {
         {/* ── Stat Row ─────────────────────────────────────────────────── */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
           <StatCard
-            icon={Bell}
+            icon={BellIcon}
             value={combinedAlerts.length.toString()}
             label="Service Alerts"
             accentColor="oklch(0.75 0.15 75)"
             badge={combinedAlerts.length > 0 ? "Action" : undefined}
           />
           <StatCard
-            icon={ShoppingCart}
+            icon={ShoppingCartIcon}
             value={activeTablesCount.toString()}
             label="Active Tables"
             accentColor="oklch(0.45 0.12 285)"
           />
           <StatCard
-            icon={TrendingUp}
+            icon={ArrowTrendingUpIcon}
             value="KES 4,250"
             label="Today's Sales"
             accentColor="oklch(0.7 0.15 150)"
           />
           <StatCard
-            icon={Clock}
+            icon={ClockIcon}
             value="3.5m"
             label="Avg Speed"
             accentColor="#AEA6BF"
@@ -421,7 +420,7 @@ export default function WaiterDashboard() {
                       className="w-9 h-9 rounded-xl flex items-center justify-center"
                       style={{ background: "oklch(0.75 0.15 75 / 0.12)" }}
                     >
-                      <Bell className="h-4 w-4" style={{ color: "oklch(0.75 0.15 75)" }} />
+                      <BellIcon className="h-4 w-4" style={{ color: "oklch(0.75 0.15 75)" }} />
                     </div>
                     <div>
                       <CardTitle
@@ -438,7 +437,7 @@ export default function WaiterDashboard() {
                       </p>
                     </div>
                   </div>
-
+ 
                   <Badge
                     className="flex items-center gap-1.5 text-[10px] uppercase  rounded-full px-3 py-1 border"
                     style={{
@@ -447,7 +446,7 @@ export default function WaiterDashboard() {
                       borderColor: "oklch(0.75 0.15 75 / 0.25)",
                     }}
                   >
-                    <CircleDot className="h-2.5 w-2.5 animate-pulse" />
+                    <FireIcon className="h-2.5 w-2.5 animate-pulse" />
                     Live
                   </Badge>
                 </div>
@@ -460,7 +459,7 @@ export default function WaiterDashboard() {
                       className="w-14 h-14 rounded-2xl flex items-center justify-center"
                       style={{ background: "oklch(0.7 0.15 150 / 0.1)" }}
                     >
-                      <CheckCircle2 className="h-7 w-7" style={{ color: "oklch(0.7 0.15 150)" }} />
+                      <CheckCircleIcon className="h-7 w-7" style={{ color: "oklch(0.7 0.15 150)" }} />
                     </div>
                     <div className="text-center">
                       <p className="text-sm" style={{ color: "#3D374C" }}>All caught up!</p>
@@ -500,7 +499,7 @@ export default function WaiterDashboard() {
                                   color: isOrder ? "oklch(0.75 0.15 75)" : "oklch(0.45 0.12 285)",
                                 }}
                               >
-                                {isOrder ? <Flame className="h-2.5 w-2.5" /> : <Bell className="h-2.5 w-2.5" />}
+                                {isOrder ? <FireIcon className="h-2.5 w-2.5" /> : <BellIcon className="h-2.5 w-2.5" />}
                                 {isOrder ? "Ready" : "Assistance"}
                               </span>
                             </div>
@@ -535,7 +534,7 @@ export default function WaiterDashboard() {
                               style={{ color: "#AEA6BF" }}
                               onClick={() => setDismissed((d) => [...d, alert.id])}
                             >
-                              <X className="h-3.5 w-3.5" />
+                              <XMarkIcon className="h-3.5 w-3.5" />
                             </Button>
                           </div>
                         </div>
@@ -569,7 +568,7 @@ export default function WaiterDashboard() {
                         background: "linear-gradient(135deg, oklch(0.45 0.12 285 / 0.1) 0%, oklch(0.45 0.12 285 / 0.05) 100%)",
                       }}
                     >
-                      <UserCheck className="h-5 w-5" style={{ color: "oklch(0.45 0.12 285)" }} />
+                      <CheckBadgeIcon className="h-5 w-5" style={{ color: "oklch(0.45 0.12 285)" }} />
                     </div>
                     <div>
                       <CardTitle
@@ -595,7 +594,7 @@ export default function WaiterDashboard() {
                     asChild
                   >
                     <Link href="/waiter/service-floor">
-                      Map View <ChevronRight className="h-3.5 w-3.5" />
+                      Map View <ChevronRightIcon className="h-3.5 w-3.5" />
                     </Link>
                   </Button>
                 </div>
@@ -606,7 +605,7 @@ export default function WaiterDashboard() {
                   {activeOrders.length === 0 ? (
                     <div className="col-span-full py-12 text-center flex flex-col items-center gap-3">
                       <div className="w-12 h-12 rounded-full bg-black/5 flex items-center justify-center">
-                        <UserCheck className="h-6 w-6 opacity-20" />
+                        <CheckBadgeIcon className="h-6 w-6 opacity-20" />
                       </div>
                       <p className="text-[11px] font-bold uppercase tracking-widest opacity-40">No active assignments</p>
                     </div>
@@ -671,7 +670,7 @@ export default function WaiterDashboard() {
                                   {status}
                                 </p>
                                 <div className="flex items-center justify-center gap-1 opacity-40">
-                                  <Clock className="h-2.5 w-2.5" />
+                                  <ClockIcon className="h-2.5 w-2.5" />
                                   <span className="text-[9px] font-bold uppercase tracking-wider">Live</span>
                                 </div>
                               </div>
@@ -753,7 +752,7 @@ export default function WaiterDashboard() {
                   }}
                 >
                   <Link href="/waiter/service-floor" className="flex items-center gap-2.5">
-                    <ShoppingCart className="h-5 w-5" />
+                    <ShoppingCartIcon className="h-5 w-5" />
                     New Order
                   </Link>
                 </Button>

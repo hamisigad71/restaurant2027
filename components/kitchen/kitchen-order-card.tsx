@@ -4,7 +4,12 @@ import { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Clock, ChefHat, CheckCircle, AlertTriangle } from "lucide-react"
+import { 
+  ClockIcon as Clock, 
+  SparklesIcon as ChefHat, 
+  CheckCircleIcon as CheckCircle, 
+  ExclamationTriangleIcon as AlertTriangle 
+} from "@heroicons/react/24/outline"
 import type { Order, OrderStatus } from "@/lib/types"
 import { cn } from "@/lib/utils"
 

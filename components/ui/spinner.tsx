@@ -1,4 +1,4 @@
-import { Loader2Icon } from 'lucide-react'
+import { ArrowPathIcon as Loader2Icon } from "@heroicons/react/24/outline"
 
 import { cn } from '@/lib/utils'
 

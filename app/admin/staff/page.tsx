@@ -31,7 +31,16 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { FieldGroup, Field, FieldLabel } from "@/components/ui/field"
-import { Plus, Search, Pencil, UserPlus, Users, UserCheck, ChefHat, Shield } from "lucide-react"
+import { 
+  PlusIcon, 
+  MagnifyingGlassIcon, 
+  PencilIcon, 
+  UserPlusIcon, 
+  UserGroupIcon as Users, 
+  CheckBadgeIcon as UserCheck, 
+  AcademicCapIcon as ChefHat, 
+  ShieldCheckIcon as Shield 
+} from "@heroicons/react/24/outline"
 import { mockStaff } from "@/lib/mock-data"
 import type { User, UserRole } from "@/lib/types"
 
@@ -152,7 +161,7 @@ export default function StaffPage() {
               <CardTitle className="text-base font-medium">Team Members</CardTitle>
               <div className="flex items-center gap-3 w-full sm:w-auto">
                 <div className="relative flex-1 sm:flex-initial">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
                     type="search"
                     placeholder="Search staff..."
@@ -164,7 +173,7 @@ export default function StaffPage() {
                 <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                   <DialogTrigger asChild>
                     <Button size="sm" onClick={handleAddNew}>
-                      <UserPlus className="h-4 w-4 mr-2" />
+                      <UserPlusIcon className="h-4 w-4 mr-2" />
                       Add Staff
                     </Button>
                   </DialogTrigger>
@@ -287,7 +296,7 @@ export default function StaffPage() {
                             className="h-8 w-8"
                             onClick={() => handleEdit(member)}
                           >
-                            <Pencil className="h-4 w-4" />
+                            <PencilIcon className="h-4 w-4" />
                           </Button>
                         </div>
                       </TableCell>

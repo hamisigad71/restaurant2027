@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { User, Shield, Briefcase } from "lucide-react"
+import { UserIcon, ShieldCheckIcon, BriefcaseIcon } from "@heroicons/react/24/outline"
 
 const staffOnDuty = [
   { id: "1", name: "John Doe", role: "waiter", status: "Active", tables: [4, 5, 6] },

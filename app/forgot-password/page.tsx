@@ -2,7 +2,11 @@
 
 import Link from "next/link"
 import { useState } from "react"
-import { UtensilsCrossed, ArrowLeft, Mail } from "lucide-react"
+import { 
+  SparklesIcon as UtensilsCrossed, 
+  ArrowLeftIcon as ArrowLeft, 
+  EnvelopeIcon as Mail 
+} from "@heroicons/react/24/outline"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"

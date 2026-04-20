@@ -4,11 +4,26 @@ import { useState, useMemo, useEffect, useRef, useCallback } from "react"
 import { use } from "react"
 import { useRouter, usePathname } from "next/navigation"
 import {
-  ShoppingCart, Plus, Minus, Search, X,
-  UtensilsCrossed, Clock, Star, Receipt,
-  Check, ChevronRight, Volume2, VolumeX,
-  Flame, Leaf, ChefHat, Crown, Loader2, BellRing
-} from "lucide-react"
+  ShoppingCartIcon as ShoppingCart, 
+  PlusIcon as Plus, 
+  MinusIcon as Minus, 
+  MagnifyingGlassIcon as Search, 
+  XMarkIcon as X,
+  SparklesIcon as UtensilsCrossed, 
+  ClockIcon as Clock, 
+  StarIcon as Star, 
+  DocumentTextIcon as Receipt,
+  CheckIcon as Check, 
+  ChevronRightIcon as ChevronRight, 
+  SpeakerWaveIcon as Volume2, 
+  SpeakerXMarkIcon as VolumeX,
+  FireIcon as Flame, 
+  HandThumbUpIcon as Leaf, 
+  AcademicCapIcon as ChefHat, 
+  SparklesIcon as Crown, 
+  ArrowPathIcon as Loader2, 
+  BellAlertIcon as BellRing
+} from "@heroicons/react/24/outline"
 import { MenuItem, CartItem } from "@/lib/types"
 import { OrderService, LiveOrder } from "@/lib/order-service"
 import { supabase } from "@/lib/supabase"

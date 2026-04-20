@@ -7,7 +7,14 @@ import {
   AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell,
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend
 } from "recharts"
-import { TrendingUp, TrendingDown, DollarSign, ShoppingBag, Users, Clock } from "lucide-react"
+import { 
+  ArrowTrendingUpIcon, 
+  ArrowTrendingDownIcon, 
+  CurrencyDollarIcon, 
+  ShoppingBagIcon, 
+  UserGroupIcon, 
+  ClockIcon 
+} from "@heroicons/react/24/outline"
 import { mockDailySales, mockMenuItems } from "@/lib/mock-data"
 
 // Extended mock data for analytics
@@ -86,10 +93,10 @@ export default function AnalyticsPage() {
             <CardContent className="p-5">
               <div className="flex items-center justify-between mb-4">
                 <div className="p-2 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                  <DollarSign className="h-5 w-5 text-primary" />
+                  <CurrencyDollarIcon className="h-5 w-5 text-primary" />
                 </div>
                 <div className={`flex items-center text-[10px] font-medium px-2 py-0.5 rounded-full ${stats.revenue.trend === "up" ? "bg-success/10 text-success" : "bg-destructive/10 text-destructive"}`}>
-                  {stats.revenue.trend === "up" ? <TrendingUp className="h-3 w-3 mr-1" /> : <TrendingDown className="h-3 w-3 mr-1" />}
+                  {stats.revenue.trend === "up" ? <ArrowTrendingUpIcon className="h-3 w-3 mr-1" /> : <ArrowTrendingDownIcon className="h-3 w-3 mr-1" />}
                   {stats.revenue.change}%
                 </div>
               </div>
@@ -102,10 +109,10 @@ export default function AnalyticsPage() {
             <CardContent className="p-5">
               <div className="flex items-center justify-between mb-4">
                 <div className="p-2 rounded-lg bg-chart-2/10 group-hover:bg-chart-2/20 transition-colors">
-                  <ShoppingBag className="h-5 w-5 text-chart-2" />
+                  <ShoppingBagIcon className="h-5 w-5 text-chart-2" />
                 </div>
                 <div className={`flex items-center text-[10px] font-medium px-2 py-0.5 rounded-full ${stats.orders.trend === "up" ? "bg-success/10 text-success" : "bg-destructive/10 text-destructive"}`}>
-                  {stats.orders.trend === "up" ? <TrendingUp className="h-3 w-3 mr-1" /> : <TrendingDown className="h-3 w-3 mr-1" />}
+                  {stats.orders.trend === "up" ? <ArrowTrendingUpIcon className="h-3 w-3 mr-1" /> : <ArrowTrendingDownIcon className="h-3 w-3 mr-1" />}
                   {stats.orders.change}%
                 </div>
               </div>
@@ -118,10 +125,10 @@ export default function AnalyticsPage() {
             <CardContent className="p-5">
               <div className="flex items-center justify-between mb-4">
                 <div className="p-2 rounded-lg bg-chart-4/10 group-hover:bg-chart-4/20 transition-colors">
-                  <Clock className="h-5 w-5 text-chart-4" />
+                  <ClockIcon className="h-5 w-5 text-chart-4" />
                 </div>
                 <div className={`flex items-center text-[10px] font-medium px-2 py-0.5 rounded-full ${stats.avgOrder.trend === "up" ? "bg-success/10 text-success" : "bg-destructive/10 text-destructive"}`}>
-                  {stats.avgOrder.trend === "up" ? <TrendingUp className="h-3 w-3 mr-1" /> : <TrendingDown className="h-3 w-3 mr-1" />}
+                  {stats.avgOrder.trend === "up" ? <ArrowTrendingUpIcon className="h-3 w-3 mr-1" /> : <ArrowTrendingDownIcon className="h-3 w-3 mr-1" />}
                   {stats.avgOrder.change}%
                 </div>
               </div>
@@ -134,10 +141,10 @@ export default function AnalyticsPage() {
             <CardContent className="p-5">
               <div className="flex items-center justify-between mb-4">
                 <div className="p-2 rounded-lg bg-chart-5/10 group-hover:bg-chart-5/20 transition-colors">
-                  <Users className="h-5 w-5 text-chart-5" />
+                  <UserGroupIcon className="h-5 w-5 text-chart-5" />
                 </div>
                 <div className={`flex items-center text-[10px] font-medium px-2 py-0.5 rounded-full ${stats.customers.trend === "up" ? "bg-success/10 text-success" : "bg-destructive/10 text-destructive"}`}>
-                  {stats.customers.trend === "up" ? <TrendingUp className="h-3 w-3 mr-1" /> : <TrendingDown className="h-3 w-3 mr-1" />}
+                  {stats.customers.trend === "up" ? <ArrowTrendingUpIcon className="h-3 w-3 mr-1" /> : <ArrowTrendingDownIcon className="h-3 w-3 mr-1" />}
                   {Math.abs(stats.customers.change)}%
                 </div>
               </div>

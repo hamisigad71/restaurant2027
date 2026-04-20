@@ -1,17 +1,23 @@
 "use client";
 
 import {
-  Bell,
-  Search,
-  Settings,
-  User,
-  LogOut,
-  Package,
-  ShoppingCart,
-  ChefHat,
-  X,
-  ChevronDown,
-} from "lucide-react";
+  BellIcon,
+  MagnifyingGlassIcon,
+  Cog6ToothIcon,
+  UserIcon,
+  ArrowRightOnRectangleIcon,
+  CubeIcon,
+  ShoppingCartIcon,
+  SparklesIcon,
+  XMarkIcon,
+  ChevronDownIcon,
+} from "@heroicons/react/24/outline";
+import {
+  BellIcon as BellIconSolid,
+  MagnifyingGlassIcon as MagnifyingGlassIconSolid,
+  UserIcon as UserIconSolid,
+  SparklesIcon as SparklesIconSolid,
+} from "@heroicons/react/24/solid";
 import { useRouter, usePathname } from "next/navigation";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -183,7 +189,7 @@ const pageTitle: Record<string, { title: string; subtitle?: string }> = {
 const notifications = [
   {
     id: "1",
-    icon: Package,
+    icon: CubeIcon,
     iconColor: "oklch(0.55 0.15 75)",
     iconBg: "oklch(0.75 0.15 75 / 0.1)",
     title: "Low Stock Alert",
@@ -193,7 +199,7 @@ const notifications = [
   },
   {
     id: "2",
-    icon: ShoppingCart,
+    icon: ShoppingCartIcon,
     iconColor: "oklch(0.45 0.12 285)",
     iconBg: "oklch(0.45 0.12 285 / 0.08)",
     title: "New Order",
@@ -203,7 +209,7 @@ const notifications = [
   },
   {
     id: "3",
-    icon: ChefHat,
+    icon: SparklesIcon,
     iconColor: "oklch(0.42 0.14 150)",
     iconBg: "oklch(0.7 0.15 150 / 0.1)",
     title: "Order Ready",
@@ -293,7 +299,7 @@ export function Header({
         <div className="flex items-center gap-1 shrink-0">
           {/* Search — desktop */}
           <div className="hidden md:flex items-center relative mr-1">
-            <Search
+            <MagnifyingGlassIcon
               className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 pointer-events-none"
               style={{ color: "#B8B2C8" }}
             />
@@ -322,7 +328,7 @@ export function Header({
                 style={{ color: "#736C83" }}
                 onClick={() => setSearchOpen((v) => !v)}
               >
-                <Search className="h-4 w-4" />
+                <MagnifyingGlassIcon className="h-4 w-4" />
               </Button>
             </TooltipTrigger>
             <TooltipContent side="bottom" className="text-xs">
@@ -340,7 +346,7 @@ export function Header({
               }}
             >
               <div className="relative flex-1">
-                <Search
+                <MagnifyingGlassIcon
                   className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 pointer-events-none"
                   style={{ color: "#B8B2C8" }}
                 />
@@ -358,7 +364,7 @@ export function Header({
                 style={{ color: "#736C83" }}
                 aria-label="Close search"
               >
-                <X className="h-3.5 w-3.5" />
+                <XMarkIcon className="h-3.5 w-3.5" />
               </button>
             </div>
           )}
@@ -376,7 +382,7 @@ export function Header({
                 className="relative h-8 w-8 rounded-lg hover:bg-[#EBE6F8] transition-colors"
                 style={{ color: "#736C83" }}
               >
-                <Bell className="h-4 w-4" />
+                <BellIcon className="h-4 w-4" />
                 {unreadCount > 0 && (
                   <span
                     className="absolute -top-0.5 -right-0.5 flex items-center justify-center rounded-full text-[9px] text-white"
@@ -408,7 +414,7 @@ export function Header({
                     className="flex items-center gap-2 text-[13px]"
                     style={{ color: "#0D031B" }}
                   >
-                    <Bell
+                    <BellIcon
                       className="h-3.5 w-3.5"
                       style={{ color: "oklch(0.45 0.12 285)" }}
                     />
@@ -446,7 +452,7 @@ export function Header({
                       className="w-12 h-12 rounded-xl flex items-center justify-center"
                       style={{ background: "oklch(0.7 0.15 150 / 0.1)" }}
                     >
-                      <Bell
+                      <BellIcon
                         className="h-5 w-5"
                         style={{ color: "oklch(0.42 0.14 150)" }}
                       />
@@ -516,7 +522,7 @@ export function Header({
                               setDismissedNotifs((d) => [...d, notif.id])
                             }
                           >
-                            <X className="h-3 w-3" />
+                            <XMarkIcon className="h-3 w-3" />
                           </button>
                         </div>
                       );
@@ -562,7 +568,7 @@ export function Header({
                   </span>
                 </div>
 
-                <ChevronDown
+                <ChevronDownIcon
                   className="h-3 w-3 hidden lg:block"
                   style={{ color: "#B8B2C8" }}
                 />
@@ -633,7 +639,7 @@ export function Header({
                   className="flex items-center justify-center w-6 h-6 rounded-md"
                   style={{ background: "oklch(0.45 0.12 285 / 0.08)" }}
                 >
-                  <User
+                  <UserIcon
                     className="h-3.5 w-3.5"
                     style={{ color: "oklch(0.45 0.12 285)" }}
                   />
@@ -650,7 +656,7 @@ export function Header({
                   className="flex items-center justify-center w-6 h-6 rounded-md"
                   style={{ background: "oklch(0.45 0.12 285 / 0.08)" }}
                 >
-                  <Settings
+                  <Cog6ToothIcon
                     className="h-3.5 w-3.5"
                     style={{ color: "oklch(0.45 0.12 285)" }}
                   />
@@ -665,7 +671,7 @@ export function Header({
                 onClick={handleLogout}
               >
                 <span className="flex items-center justify-center w-6 h-6 rounded-md bg-red-50 group-hover:bg-red-100">
-                  <LogOut className="h-3.5 w-3.5 text-red-400" />
+                  <ArrowRightOnRectangleIcon className="h-3.5 w-3.5 text-red-400" />
                 </span>
                 Sign out
               </DropdownMenuItem>

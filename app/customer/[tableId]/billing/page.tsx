@@ -3,10 +3,17 @@
 import { useState, useMemo, useEffect, use } from "react"
 import { useRouter } from "next/navigation"
 import {
-  Receipt, ShoppingCart, ChevronLeft, Check,
-  Smartphone, Banknote, CreditCard, Star,
-  UtensilsCrossed, ArrowRight,
-} from "lucide-react"
+  DocumentTextIcon as Receipt, 
+  ShoppingCartIcon as ShoppingCart, 
+  ChevronLeftIcon as ChevronLeft, 
+  CheckIcon as Check,
+  DevicePhoneMobileIcon as Smartphone, 
+  BanknotesIcon as Banknote, 
+  CreditCardIcon as CreditCard, 
+  StarIcon as Star,
+  SparklesIcon as UtensilsCrossed, 
+  ArrowRightIcon as ArrowRight,
+} from "@heroicons/react/24/outline"
 import { OrderService, LiveOrder } from "@/lib/order-service"
 import { Button }    from "@/components/ui/button"
 import { Input }     from "@/components/ui/input"

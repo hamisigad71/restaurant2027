@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { Nunito, PT_Sans } from "next/font/google"
+import { Quicksand } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { Toaster } from "@/components/ui/sonner"
 import { AuthProvider } from "@/lib/auth-context"
@@ -7,16 +7,10 @@ import { GlassLoader } from "@/components/ui/glass-loader"
 import { MobileNav } from "@/components/layout/mobile-nav"
 import "./globals.css"
 
-const nunito = Nunito({ 
+const quicksand = Quicksand({ 
   subsets: ["latin"], 
-  variable: "--font-heading",
-  weight: ["200", "300", "400", "500", "600", "700", "800", "900"]
-})
-
-const ptSans = PT_Sans({ 
-  subsets: ["latin"], 
-  variable: "--font-sans",
-  weight: ["400", "700"]
+  variable: "--font-quicksand",
+  weight: ["300", "400", "500", "600", "700"]
 })
 
 export const metadata: Metadata = {
@@ -35,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${nunito.variable} ${ptSans.variable}`} suppressHydrationWarning>
+    <html lang="en" className={quicksand.variable} suppressHydrationWarning>
       <body className="font-sans antialiased" suppressHydrationWarning>
         {/* Forces the 7-second auto-hiding loader on initial app load */}
         <GlassLoader autoHideDuration={7000} />

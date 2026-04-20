@@ -1,6 +1,5 @@
 import Link from "next/link"
-import { ChevronRight, type LucideIcon } from "lucide-react"
-import type { TablerIcon } from "@tabler/icons-react"
+import { ChevronRightIcon } from "@heroicons/react/24/outline"
 
 import {
   Collapsible,
@@ -25,7 +24,7 @@ export function NavMain({
   items: {
     title: string
     url: string
-    icon?: LucideIcon | TablerIcon
+    icon?: any
     isActive?: boolean
     badge?: string
     items?: {
@@ -48,7 +47,7 @@ export function NavMain({
                   {item.icon && <item.icon />}
                   <span>{item.title}</span>
                   {item.badge && <SidebarMenuBadge className="ml-auto">{item.badge}</SidebarMenuBadge>}
-                  <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                  <ChevronRightIcon className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90 h-4 w-4" />
                 </>
               ) : (
                 <Link href={item.url}>

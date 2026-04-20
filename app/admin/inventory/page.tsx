@@ -23,7 +23,15 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { FieldGroup, Field, FieldLabel } from "@/components/ui/field"
-import { Plus, Search, Pencil, Package, AlertTriangle, AlertCircle, XCircle } from "lucide-react"
+import { 
+  PlusIcon, 
+  MagnifyingGlassIcon, 
+  PencilIcon, 
+  CubeIcon as Package, 
+  ExclamationTriangleIcon as AlertTriangle, 
+  ExclamationCircleIcon as AlertCircle, 
+  XCircleIcon as XCircle 
+} from "@heroicons/react/24/outline"
 import { mockInventory } from "@/lib/mock-data"
 import type { InventoryItem, StockStatus } from "@/lib/types"
 
@@ -128,7 +136,7 @@ export default function InventoryPage() {
               <CardTitle className="text-base font-medium">Inventory Items</CardTitle>
               <div className="flex items-center gap-3 w-full sm:w-auto">
                 <div className="relative flex-1 sm:flex-initial">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
                     type="search"
                     placeholder="Search items..."
@@ -140,7 +148,7 @@ export default function InventoryPage() {
                 <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                   <DialogTrigger asChild>
                     <Button size="sm" onClick={handleAddNew}>
-                      <Plus className="h-4 w-4 mr-2" />
+                      <PlusIcon className="h-4 w-4 mr-2" />
                       Add
                     </Button>
                   </DialogTrigger>
@@ -245,7 +253,7 @@ export default function InventoryPage() {
                           className="h-8 w-8"
                           onClick={() => handleEdit(item)}
                         >
-                          <Pencil className="h-4 w-4" />
+                          <PencilIcon className="h-4 w-4" />
                         </Button>
                       </TableCell>
                     </TableRow>

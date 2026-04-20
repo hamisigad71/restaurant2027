@@ -4,13 +4,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { 
-  Search, 
-  Package, 
-  ArrowUpRight,
-  TrendingDown,
-  AlertTriangle,
-  History
-} from "lucide-react"
+  MagnifyingGlassIcon, 
+  CubeIcon, 
+  ArrowUpRightIcon,
+  ArrowTrendingDownIcon,
+  ExclamationTriangleIcon,
+  ClockIcon
+} from "@heroicons/react/24/outline"
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 
@@ -35,7 +35,7 @@ export default function ManagerInventoryPage() {
                 <p className="text-3xl font-heading  text-destructive">8</p>
               </div>
               <div className="p-3.5 rounded-2xl bg-destructive/10 text-destructive group-hover:scale-110 transition-transform">
-                <AlertTriangle className="h-6 w-6" />
+                <ExclamationTriangleIcon className="h-6 w-6" />
               </div>
             </div>
             <div className="absolute bottom-0 left-0 w-full h-[2px] bg-destructive/20 scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
@@ -49,7 +49,7 @@ export default function ManagerInventoryPage() {
                 <p className="text-3xl font-heading  text-primary">3</p>
               </div>
               <div className="p-3.5 rounded-2xl bg-primary/10 text-primary group-hover:scale-110 transition-transform">
-                <History className="h-6 w-6" />
+                <ClockIcon className="h-6 w-6" />
               </div>
             </div>
             <div className="absolute bottom-0 left-0 w-full h-[2px] bg-primary/20 scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
@@ -62,7 +62,7 @@ export default function ManagerInventoryPage() {
                 <p className="text-3xl font-heading  text-foreground">142</p>
               </div>
               <div className="p-3.5 rounded-2xl bg-muted text-muted-foreground group-hover:scale-110 transition-transform">
-                <Package className="h-6 w-6" />
+                <CubeIcon className="h-6 w-6" />
               </div>
             </div>
           </Card>
@@ -70,11 +70,11 @@ export default function ManagerInventoryPage() {
 
         <div className="flex flex-col sm:flex-row gap-4 items-center justify-between pt-2">
           <div className="relative w-full sm:w-96 group">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-primary/40 group-focus-within:text-primary transition-colors" />
+            <MagnifyingGlassIcon className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-primary/40 group-focus-within:text-primary transition-colors" />
             <Input placeholder="Search inventory catalog..." className="pl-11 bg-card border-border/50 h-12 rounded-xl focus-visible:ring-primary/20" />
           </div>
           <Button className="w-full sm:w-auto h-12 px-6 gap-2 bg-primary text-white font-heading uppercase rounded-xl shadow-lg shadow-primary/20 hover:opacity-90">
-            <ArrowUpRight className="h-4 w-4" />
+            <ArrowUpRightIcon className="h-4 w-4" />
             Request Resupply
           </Button>
         </div>
@@ -110,7 +110,7 @@ export default function ManagerInventoryPage() {
                           )}>
                             {item.stock} {item.unit}
                           </span>
-                          {item.status === "low" && <TrendingDown className="h-3 w-3 text-destructive animate-pulse" />}
+                          {item.status === "low" && <ArrowTrendingDownIcon className="h-3 w-3 text-destructive animate-pulse" />}
                         </div>
                       </td>
                       <td className="px-6 py-4 text-xs font-heading text-muted-foreground">KES {item.price.toLocaleString()}</td>

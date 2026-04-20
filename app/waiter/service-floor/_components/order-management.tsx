@@ -9,26 +9,26 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
 import {
-  Users,
-  ArrowLeft,
-  Plus,
-  UtensilsCrossed,
-  Wine,
-  Cookie,
-  IceCream,
-  ArrowRight,
-  Minus,
-  Trash2,
-  ShoppingCart,
-  Search,
-  ChefHat,
-  Crown,
-  Sparkles,
-  TrendingUp,
-  Clock,
-  X,
-  Check,
-} from "lucide-react";
+  UserGroupIcon as Users,
+  ArrowLeftIcon as ArrowLeft,
+  PlusIcon as Plus,
+  SparklesIcon as UtensilsCrossed,
+  SparklesIcon as Wine,
+  SparklesIcon as Cookie,
+  SparklesIcon as IceCream,
+  ArrowRightIcon as ArrowRight,
+  MinusIcon as Minus,
+  TrashIcon as Trash2,
+  ShoppingCartIcon as ShoppingCart,
+  MagnifyingGlassIcon as Search,
+  SparklesIcon as ChefHat,
+  SparklesIcon as Crown,
+  SparklesIcon as Sparkles,
+  ArrowTrendingUpIcon as TrendingUp,
+  ClockIcon as Clock,
+  XMarkIcon as X,
+  CheckIcon as Check,
+} from "@heroicons/react/24/outline";
 import type { Table, TableStatus, MenuItem, OrderItem } from "@/lib/types";
 import { cn } from "@/lib/utils";
 

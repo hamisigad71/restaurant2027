@@ -7,7 +7,15 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
-import { QrCode, Download, Copy, ExternalLink, Eye, Table as TableIcon, CheckCircle2 } from "lucide-react"
+import { 
+  SquaresPlusIcon as QrCodeIcon, 
+  ArrowDownTrayIcon as DownloadIcon, 
+  ClipboardDocumentIcon as CopyIcon, 
+  ArrowTopRightOnSquareIcon as ExternalLinkIcon, 
+  EyeIcon, 
+  RectangleGroupIcon as TableIcon, 
+  CheckCircleIcon 
+} from "@heroicons/react/24/outline"
 import { mockTables } from "@/lib/mock-data"
 import { cn } from "@/lib/utils"
 import { QRCodeCanvas } from "qrcode.react"
@@ -84,7 +92,7 @@ function QRCardItem({ table, baseUrl }: { table: { id: string; number: number; s
 
         {/* URL pill */}
         <div className="p-2.5 bg-primary/5 rounded-xl flex items-center gap-2">
-          <QrCode className="h-3 w-3 text-primary/40 shrink-0" />
+          <QrCodeIcon className="h-3 w-3 text-primary/40 shrink-0" />
           <p className="text-[9px] font-mono text-primary truncate">{menuUrl}</p>
         </div>
 
@@ -97,9 +105,9 @@ function QRCardItem({ table, baseUrl }: { table: { id: string; number: number; s
             onClick={handleCopy}
           >
             {copied ? (
-              <><CheckCircle2 className="h-3 w-3 mr-1.5 text-success" /> Copied!</>
+              <><CheckCircleIcon className="h-3 w-3 mr-1.5 text-success" /> Copied!</>
             ) : (
-              <><Copy className="h-3 w-3 mr-1.5" /> Copy Link</>
+              <><CopyIcon className="h-3 w-3 mr-1.5" /> Copy Link</>
             )}
           </Button>
           <Button
@@ -108,7 +116,7 @@ function QRCardItem({ table, baseUrl }: { table: { id: string; number: number; s
             className="h-9 text-[9px]  font-heading uppercase text-primary hover:bg-primary/5 rounded-xl transition-all"
             onClick={handleDownload}
           >
-            <Download className="h-3 w-3 mr-1.5" />
+            <DownloadIcon className="h-3 w-3 mr-1.5" />
             Download
           </Button>
         </div>
@@ -121,7 +129,7 @@ function QRCardItem({ table, baseUrl }: { table: { id: string; number: number; s
           className="w-full h-8 text-[9px]  font-heading uppercase  text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-xl"
         >
           <Link href={`/customer/${table.number}`}>
-            <ExternalLink className="h-3 w-3 mr-1.5" />
+            <ExternalLinkIcon className="h-3 w-3 mr-1.5" />
             Preview Guest Menu
           </Link>
         </Button>
@@ -154,10 +162,10 @@ export default function QRMenuPage() {
         {/* ── Stats ── */}
         <div className="grid gap-4 grid-cols-2 lg:grid-cols-4">
           {[
-            { icon: QrCode,       label: "Total QR Codes", value: mockTables.length,                                                           color: "bg-primary/10 text-primary"  },
+            { icon: QrCodeIcon,       label: "Total QR Codes", value: mockTables.length,                                                           color: "bg-primary/10 text-primary"  },
             { icon: TableIcon,    label: "Active Tables",   value: mockTables.filter(t => t.status === "occupied").length,                     color: "bg-success/10 text-success"  },
-            { icon: Eye,          label: "Scans Today",     value: 156,                                                                        color: "bg-warning/10 text-warning"  },
-            { icon: ExternalLink, label: "QR Orders",       value: 23,                                                                         color: "bg-primary/10 text-primary"  },
+            { icon: EyeIcon,          label: "Scans Today",     value: 156,                                                                        color: "bg-warning/10 text-warning"  },
+            { icon: ExternalLinkIcon, label: "QR Orders",       value: 23,                                                                         color: "bg-primary/10 text-primary"  },
           ].map(stat => (
             <Card key={stat.label} className="bg-card shadow-sm rounded-2xl group hover:shadow-xl hover:-translate-y-0.5 transition-all">
               <CardContent className="p-4 flex items-center gap-3">
@@ -176,7 +184,7 @@ export default function QRMenuPage() {
         {/* ── Toolbar ── */}
         <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
           <div className="relative group">
-            <QrCode className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-primary/30 group-focus-within:text-primary transition-colors" />
+            <QrCodeIcon className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-primary/30 group-focus-within:text-primary transition-colors" />
             <Input
               type="search"
               placeholder="Filter by table number..."
@@ -190,7 +198,7 @@ export default function QRMenuPage() {
             className="h-11 px-6 gap-2 bg-primary text-white font-heading uppercase  rounded-xl shadow-lg shadow-primary/20 hover:opacity-90"
           >
             <Link href="/customer/1">
-              <ExternalLink className="h-4 w-4" />
+              <ExternalLinkIcon className="h-4 w-4" />
               Preview Menu (Table 1)
             </Link>
           </Button>

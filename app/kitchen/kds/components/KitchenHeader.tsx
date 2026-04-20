@@ -1,5 +1,11 @@
 "use client"
-import { ChefHat, CircleDot, Bell, LayoutGrid, List } from "lucide-react"
+import { 
+  FireIcon, 
+  SignalIcon, 
+  BellIcon, 
+  Squares2X2Icon, 
+  Bars3Icon 
+} from "@heroicons/react/24/outline"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
 interface KitchenHeaderProps {
@@ -20,13 +26,13 @@ export function KitchenHeader({
       {/* Brand */}
       <div className="relative z-10 flex items-center gap-3">
         <div className="w-10 h-10 rounded-xl flex items-center justify-center border" style={{ background: "rgba(255,255,255,0.12)", borderColor: "rgba(255,255,255,0.2)" }}>
-          <ChefHat className="h-5 w-5 text-white" />
+          <FireIcon className="h-5 w-5 text-white" />
         </div>
         <div>
           <div className="flex items-center gap-2">
             <p className="text-white font-bold  uppercase text-[15px] leading-none">Kitchen Display</p>
             <span className="flex items-center gap-1 text-[9px] font-bold uppercase  px-2.5 py-1 rounded-full" style={{ background: "rgba(255,255,255,0.15)", borderColor: "rgba(255,255,255,0.2)", color: "white", border: "1px solid rgba(255,255,255,0.2)" }}>
-              <CircleDot className="h-2 w-2 animate-pulse" style={{ color: "oklch(0.7 0.15 150)" }} />
+              <SignalIcon className="h-3 w-3 animate-pulse" style={{ color: "oklch(0.7 0.15 150)" }} />
               Live
             </span>
           </div>
@@ -40,7 +46,7 @@ export function KitchenHeader({
           style={{ background: "rgba(255,255,255,0.12)", borderColor: "rgba(255,255,255,0.2)", color: "white" }}
           onClick={onBellClick}
         >
-          <Bell className="h-4 w-4" />
+          <BellIcon className="h-4 w-4" />
           {readyCount > 0 && (
             <span
               className="absolute -top-1 -right-1 w-4 h-4 flex items-center justify-center text-[9px] font-bold text-white rounded-full"
@@ -58,14 +64,14 @@ export function KitchenHeader({
             style={{ background: viewMode === "grid" ? "rgba(255,255,255,0.22)" : "transparent" }}
             onClick={() => onViewMode("grid")}
           >
-            <LayoutGrid className="h-4 w-4" />
+            <Squares2X2Icon className="h-4 w-4" />
           </button>
           <button
             className="flex items-center justify-center px-3 py-2 transition-colors text-white"
             style={{ background: viewMode === "list" ? "rgba(255,255,255,0.22)" : "transparent" }}
             onClick={() => onViewMode("list")}
           >
-            <List className="h-4 w-4" />
+            <Bars3Icon className="h-4 w-4" />
           </button>
         </div>
       </div>

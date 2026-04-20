@@ -4,14 +4,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { 
-  Search, 
-  Filter, 
-  MoreVertical, 
-  Eye, 
-  CheckCircle2,
-  XCircle,
-  Clock
-} from "lucide-react"
+  MagnifyingGlassIcon, 
+  FunnelIcon, 
+  EllipsisHorizontalIcon, 
+  EyeIcon, 
+  CheckCircleIcon,
+  XMarkIcon,
+  ClockIcon
+} from "@heroicons/react/24/outline"
 import { Input } from "@/components/ui/input"
 import { 
   DropdownMenu,
@@ -35,12 +35,12 @@ export default function ManagerOrdersPage() {
       <div className="flex-1 py-4 px-0 space-y-6">
         <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
           <div className="relative w-full sm:w-96">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input placeholder="Search by Order ID or Table..." className="pl-9 bg-card border-border/50" />
           </div>
           <div className="flex gap-2 w-full sm:w-auto">
             <Button variant="outline" className="flex-1 sm:flex-none gap-2 border-border/50">
-              <Filter className="h-4 w-4" />
+              <FunnelIcon className="h-4 w-4" />
               Filter
             </Button>
           <Button className="flex-1 sm:flex-none gap-2 bg-primary text-white hover:bg-primary/95 hover:scale-[1.05] hover:-translate-y-0.5 active:scale-[0.95] transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-primary/20">
@@ -96,20 +96,20 @@ export default function ManagerOrdersPage() {
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
                             <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-primary/10">
-                              <MoreVertical className="h-4 w-4" />
+                              <EllipsisHorizontalIcon className="h-4 w-4" />
                             </Button>
                           </DropdownMenuTrigger>
                           <DropdownMenuContent align="end" className="w-40">
                             <DropdownMenuItem className="gap-2 cursor-pointer">
-                              <Eye className="h-4 w-4" />
+                               <EyeIcon className="h-4 w-4" />
                               View Details
                             </DropdownMenuItem>
                             <DropdownMenuItem className="gap-2 cursor-pointer text-success">
-                              <CheckCircle2 className="h-4 w-4" />
+                               <CheckCircleIcon className="h-4 w-4" />
                               Approve
                             </DropdownMenuItem>
                             <DropdownMenuItem className="gap-2 cursor-pointer text-destructive">
-                              <XCircle className="h-4 w-4" />
+                               <XMarkIcon className="h-4 w-4" />
                               Cancel Order
                             </DropdownMenuItem>
                           </DropdownMenuContent>

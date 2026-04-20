@@ -85,8 +85,8 @@
 }
 
 @theme inline {
-  --font-sans: var(--font-sans), 'PT Sans', system-ui, sans-serif;
-  --font-heading: var(--font-heading), 'Nunito', sans-serif;
+  --font-sans: var(--font-quicksand), 'Quicksand', system-ui, sans-serif;
+  --font-heading: var(--font-quicksand), 'Quicksand', sans-serif;
   --font-mono: var(--font-mono), monospace;
   
   --color-success: var(--success);

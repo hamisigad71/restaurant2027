@@ -1,13 +1,13 @@
 "use client"
 
 import {
-  BadgeCheck,
-  Bell,
-  ChevronsUpDown,
-  CreditCard,
-  LogOut,
-  Sparkles,
-} from "lucide-react"
+  CheckBadgeIcon,
+  BellIcon,
+  ChevronUpDownIcon,
+  CreditCardIcon,
+  ArrowRightOnRectangleIcon,
+  SparklesIcon,
+} from "@heroicons/react/24/outline"
 
 import {
   Avatar,
@@ -62,7 +62,7 @@ export function NavUser({
                 <span className="truncate">{user.name}</span>
                 <span className="truncate text-xs">{user.email}</span>
               </div>
-              <ChevronsUpDown className="ml-auto size-4" />
+              <ChevronUpDownIcon className="ml-auto size-4" />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent
@@ -86,22 +86,22 @@ export function NavUser({
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem>
-                <Sparkles className="mr-2" />
+                <SparklesIcon className="mr-2 h-4 w-4" />
                 Upgrade to Pro
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem>
-                <BadgeCheck className="mr-2" />
+                <CheckBadgeIcon className="mr-2 h-4 w-4" />
                 Account
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <CreditCard className="mr-2" />
+                <CreditCardIcon className="mr-2 h-4 w-4" />
                 Billing
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <Bell className="mr-2" />
+                <BellIcon className="mr-2 h-4 w-4" />
                 Notifications
               </DropdownMenuItem>
             </DropdownMenuGroup>
@@ -110,7 +110,7 @@ export function NavUser({
               logout()
               window.location.href = "/login"
             }}>
-              <LogOut className="mr-2" />
+              <ArrowRightOnRectangleIcon className="mr-2 h-4 w-4" />
               Log out
             </DropdownMenuItem>
           </DropdownMenuContent>

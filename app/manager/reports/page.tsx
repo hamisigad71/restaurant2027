@@ -2,13 +2,13 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { 
-  FileText, 
-  BarChart3, 
-  TrendingUp, 
-  Download,
-  Calendar,
-  ChevronRight
-} from "lucide-react"
+  DocumentTextIcon, 
+  ChartBarIcon, 
+  ArrowTrendingUpIcon, 
+  CloudArrowDownIcon,
+  CalendarIcon,
+  ChevronRightIcon
+} from "@heroicons/react/24/outline"
 import { Button } from "@/components/ui/button"
 import { 
   AreaChart, 
@@ -37,7 +37,7 @@ export default function ManagerReportsPage() {
         <div className="flex flex-col sm:flex-row gap-4 items-center justify-between bg-card p-4 rounded-xl border border-border/50">
           <div className="flex items-center gap-3">
             <div className="p-2 rounded-lg bg-primary/10 text-primary">
-              <Calendar className="h-5 w-5" />
+              <CalendarIcon className="h-5 w-5" />
             </div>
             <div>
               <p className="text-[10px] uppercase text-muted-foreground">Reporting Period</p>
@@ -45,7 +45,7 @@ export default function ManagerReportsPage() {
             </div>
           </div>
           <Button variant="outline" className="w-full sm:w-auto gap-2 border-border/50 hover:bg-muted">
-            <Download className="h-4 w-4" />
+            <CloudArrowDownIcon className="h-4 w-4" />
             Download Summary
           </Button>
         </div>
@@ -128,13 +128,13 @@ export default function ManagerReportsPage() {
                   <p className="text-2xl font-heading">Peter O.</p>
                 </div>
                 <div className="p-2 rounded-lg bg-primary/10 text-primary">
-                  <BarChart3 className="h-5 w-5" />
+                  <ChartBarIcon className="h-5 w-5" />
                 </div>
               </div>
               
               <Button variant="outline" className="w-full justify-between group border-border/50 hover:bg-muted uppercase text-[10px] h-10 px-4">
                 Full Report Details
-                <ChevronRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                <ChevronRightIcon className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Button>
             </CardContent>
           </Card>

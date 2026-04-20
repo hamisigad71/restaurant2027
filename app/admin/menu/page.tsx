@@ -23,7 +23,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { Plus, Search, Pencil, Trash2, UtensilsCrossed, Leaf, Eye, EyeOff } from "lucide-react"
+import { 
+  PlusIcon, 
+  MagnifyingGlassIcon, 
+  PencilIcon, 
+  TrashIcon, 
+  CakeIcon,
+  EyeIcon,
+  EyeSlashIcon
+} from "@heroicons/react/24/outline"
 import { mockMenuItems, mockInventory } from "@/lib/mock-data"
 import type { MenuItem } from "@/lib/types"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -79,7 +87,7 @@ export default function MenuPage() {
         <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
           <div className="flex items-center gap-4 w-full sm:w-auto">
             <div className="relative flex-1 sm:flex-initial">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
                 type="search"
                 placeholder="Search menu..."
@@ -93,7 +101,7 @@ export default function MenuPage() {
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogTrigger asChild>
               <Button onClick={handleAddNew}>
-                <Plus className="h-4 w-4 mr-2" />
+                <PlusIcon className="h-4 w-4 mr-2" />
                 Add Item
               </Button>
             </DialogTrigger>
@@ -217,7 +225,7 @@ export default function MenuPage() {
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
-                    <UtensilsCrossed className="h-12 w-12 text-muted-foreground/20" />
+                    <CakeIcon className="h-12 w-12 text-muted-foreground/20" />
                   </div>
                 )}
                 
@@ -272,7 +280,7 @@ export default function MenuPage() {
                       boxShadow: "0 4px 16px rgba(0,0,0,0.2)",
                     }}
                   >
-                    <Pencil className="h-3.5 w-3.5" />
+                    <PencilIcon className="h-3.5 w-3.5" />
                     Edit Item
                   </div>
                 </div>
@@ -309,7 +317,7 @@ export default function MenuPage() {
                         : { color: "oklch(0.55 0.18 25)", background: "oklch(0.65 0.18 25 / 0.08)" }
                     }
                   >
-                    {item.available ? <Eye className="h-3 w-3" /> : <EyeOff className="h-3 w-3" />}
+                    {item.available ? <EyeIcon className="h-3 w-3" /> : <EyeSlashIcon className="h-3 w-3" />}
                     {item.available ? "Visible" : "Hidden"}
                   </button>
                   <div className="flex gap-2">
@@ -317,14 +325,14 @@ export default function MenuPage() {
                       onClick={() => handleEdit(item)}
                       className="flex-1 flex items-center justify-center gap-1.5 text-[9px] font-bold uppercase tracking-wider px-2 py-1.5 rounded-lg transition-colors hover:bg-secondary bg-secondary/30 text-muted-foreground"
                     >
-                      <Pencil className="h-3 w-3" />
+                      <PencilIcon className="h-3 w-3" />
                       Edit
                     </button>
                     <button
                       onClick={() => handleDelete(item.id)}
                       className="flex items-center justify-center w-8 h-8 rounded-lg transition-colors hover:bg-destructive/10 text-destructive bg-destructive/5"
                     >
-                      <Trash2 className="h-3.5 w-3.5" />
+                      <TrashIcon className="h-3.5 w-3.5" />
                     </button>
                   </div>
                 </div>

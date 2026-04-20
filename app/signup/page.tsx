@@ -3,11 +3,22 @@
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
-import {
-  UtensilsCrossed, Eye, EyeOff, Shield, Users,
-  ChefHat, ShoppingCart, ArrowRight, CheckCircle2,
-  Lock, Crown, Check,
-} from "lucide-react"
+import { 
+  BuildingStorefrontIcon, 
+  EyeIcon, 
+  EyeSlashIcon, 
+  ShieldCheckIcon, 
+  UserGroupIcon, 
+  AcademicCapIcon, 
+  ShoppingCartIcon, 
+  ArrowRightIcon, 
+  CheckCircleIcon, 
+  LockClosedIcon, 
+  SparklesIcon, 
+  CheckIcon 
+} from "@heroicons/react/24/outline"
+
+const UtensilsCrossed = SparklesIcon
 import { Button }    from "@/components/ui/button"
 import { Input }     from "@/components/ui/input"
 import { Label }     from "@/components/ui/label"
@@ -22,17 +33,17 @@ import { cn } from "@/lib/utils"
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const perks = [
-  { icon:Shield,       text:"Role-based access control"        },
-  { icon:CheckCircle2, text:"Real-time kitchen sync"           },
-  { icon:Lock,         text:"Enterprise-grade security"        },
-  { icon:Crown,        text:"AI-powered demand forecasting"    },
+  { icon:ShieldCheckIcon,       text:"Role-based access control"        },
+  { icon:CheckCircleIcon, text:"Real-time kitchen sync"           },
+  { icon:LockClosedIcon,         text:"Enterprise-grade security"        },
+  { icon:SparklesIcon,        text:"AI-powered demand forecasting"    },
 ]
 
 const roles = [
-  { value:"admin",   label:"Admin (Owner)", icon:Shield,       description:"Full system control"  },
-  { value:"manager", label:"Manager",       icon:Users,        description:"Operations & reports" },
-  { value:"staff",   label:"Staff",         icon:ShoppingCart, description:"Waiters & Support"    },
-  { value:"kitchen", label:"Kitchen",       icon:ChefHat,      description:"Preparation & KDS"   },
+  { value:"admin",   label:"Admin (Owner)", icon:ShieldCheckIcon,       description:"Full system control"  },
+  { value:"manager", label:"Manager",       icon:UserGroupIcon,        description:"Operations & reports" },
+  { value:"staff",   label:"Staff",         icon:ShoppingCartIcon, description:"Waiters & Support"    },
+  { value:"kitchen", label:"Kitchen",       icon:AcademicCapIcon,      description:"Preparation & KDS"   },
 ]
 
 const staffSubRoles = [
@@ -102,7 +113,7 @@ export default function SignupPage() {
               className="flex items-center justify-center w-11 h-11 rounded-xl border"
               style={{ background:"rgba(255,255,255,0.12)", borderColor:"rgba(255,255,255,0.2)" }}
             >
-              <UtensilsCrossed className="h-5 w-5 text-white" />
+              <BuildingStorefrontIcon className="h-5 w-5 text-white" />
             </div>
             <div>
               <p className="text-white text-xl font-bold  uppercase leading-none">Resto</p>
@@ -118,7 +129,7 @@ export default function SignupPage() {
               className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-bold rounded-full border w-fit"
               style={{ background:"rgba(255,255,255,0.1)", borderColor:"rgba(255,255,255,0.2)", color:"white" }}
             >
-              <Crown className="h-3 w-3" style={{ color:"#FDE68A" }} />
+              <SparklesIcon className="h-3 w-3" style={{ color:"#FDE68A" }} />
               Join 500+ restaurants on Resto
             </Badge>
 
@@ -162,7 +173,7 @@ export default function SignupPage() {
               className="w-9 h-9 rounded-full flex items-center justify-center shrink-0 mt-0.5"
               style={{ background:"oklch(0.62 0.16 150 / 0.25)" }}
             >
-              <CheckCircle2 className="h-5 w-5" style={{ color:"oklch(0.62 0.16 150)" }} />
+              <CheckCircleIcon className="h-5 w-5" style={{ color:"oklch(0.62 0.16 150)" }} />
             </div>
             <div>
               <p className="text-white text-sm font-semibold">Free to get started</p>
@@ -392,7 +403,7 @@ export default function SignupPage() {
                       className="absolute right-3 top-1/2 -translate-y-1/2 transition-opacity hover:opacity-70"
                       style={{ color:"#AEA6BF" }}
                     >
-                      {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      {showPassword ? <EyeSlashIcon className="h-4 w-4" /> : <EyeIcon className="h-4 w-4" />}
                     </button>
                   </div>
 
@@ -444,7 +455,7 @@ export default function SignupPage() {
                   ) : (
                     <>
                       <span className="relative z-10">Create account</span>
-                      <ArrowRight className="h-4 w-4 relative z-10 transition-transform group-hover:translate-x-1" />
+                      <ArrowRightIcon className="h-4 w-4 relative z-10 transition-transform group-hover:translate-x-1" />
                     </>
                   )}
                 </button>

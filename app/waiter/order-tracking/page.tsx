@@ -8,10 +8,22 @@ import {
   Tooltip, TooltipContent, TooltipProvider, TooltipTrigger,
 } from "@/components/ui/tooltip"
 import {
-  Clock, CheckCircle2, Flame, Timer, ChefHat,
-  Utensils, Bell, AlertTriangle, TrendingUp, Sparkles,
-  Users, ArrowUpRight,
-} from "lucide-react"
+  ClockIcon,
+  CheckCircleIcon,
+  FireIcon,
+  BellIcon,
+  ExclamationTriangleIcon,
+  ArrowTrendingUpIcon,
+  SparklesIcon,
+  UserGroupIcon,
+  ArrowUpRightIcon,
+  CakeIcon,
+} from "@heroicons/react/24/outline"
+import {
+  CheckCircleIcon as CheckCircleIconSolid,
+  FireIcon as FireIconSolid,
+  ClockIcon as ClockIconSolid,
+} from "@heroicons/react/24/solid"
 import { OrderService, LiveOrder } from "@/lib/order-service"
 import { cn } from "@/lib/utils"
 
@@ -112,7 +124,7 @@ function OrderCard({ order, onServe }: { order: LiveOrder; onServe:(id:string)=>
                 : "0 4px 16px oklch(0.42 0.14 285 / 0.4)",
             }}
           >
-            <Users className="h-3.5 w-3.5" strokeWidth={2.5} />
+            <UserGroupIcon className="h-3.5 w-3.5" strokeWidth={2.5} />
             T{order.tableId.padStart(2, '0')}
           </div>
         </div>
@@ -135,8 +147,8 @@ function OrderCard({ order, onServe }: { order: LiveOrder; onServe:(id:string)=>
               overdue ? "bg-red-500/90 text-white border-red-300/30" : "bg-black/40 text-white/90 border-white/20"
             )}
           >
-            {overdue && <AlertTriangle className="h-3 w-3" strokeWidth={2.5} />}
-            <Timer className="h-3 w-3" strokeWidth={2.5} />
+            {overdue && <ExclamationTriangleIcon className="h-3 w-3" strokeWidth={2.5} />}
+            <ClockIcon className="h-3 w-3" strokeWidth={2.5} />
             {minutes}m
           </div>
         </div>
@@ -164,12 +176,12 @@ function OrderCard({ order, onServe }: { order: LiveOrder; onServe:(id:string)=>
           >
             {isReady ? (
               <>
-                <CheckCircle2 className="h-3.5 w-3.5" strokeWidth={2.5} />
+                <CheckCircleIcon className="h-3.5 w-3.5" strokeWidth={2.5} />
                 Service Ready
               </>
             ) : (
               <>
-                <Flame className="h-3.5 w-3.5" strokeWidth={2.5} />
+                <FireIcon className="h-3.5 w-3.5" strokeWidth={2.5} />
                 In Preparation
               </>
             )}
@@ -185,13 +197,13 @@ function OrderCard({ order, onServe }: { order: LiveOrder; onServe:(id:string)=>
               }}
             >
               {isReady ? (
-                <CheckCircle2 
+                <CheckCircleIcon 
                   className="h-4 w-4" 
                   style={{ color: "oklch(0.45 0.18 150)" }} 
                   strokeWidth={2.5}
                 />
               ) : (
-                <Flame 
+                <FireIcon 
                   className="h-4 w-4" 
                   style={{ color: "oklch(0.42 0.14 285)" }} 
                   strokeWidth={2.5}
@@ -238,13 +250,13 @@ function OrderCard({ order, onServe }: { order: LiveOrder; onServe:(id:string)=>
                 }}
               >
                 {isReady ? (
-                  <CheckCircle2 
+                  <CheckCircleIcon 
                     className="h-3.5 w-3.5" 
                     style={{ color: "oklch(0.45 0.18 150)" }} 
                     strokeWidth={2.5}
                   />
                 ) : (
-                  <Flame 
+                  <FireIcon 
                     className="h-3.5 w-3.5" 
                     style={{ color: "oklch(0.42 0.14 285)" }} 
                     strokeWidth={2.5}
@@ -268,9 +280,9 @@ function OrderCard({ order, onServe }: { order: LiveOrder; onServe:(id:string)=>
             {/* Shine effect */}
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover/btn:translate-x-[200%] transition-transform duration-1000" />
             
-            <CheckCircle2 className="h-4.5 w-4.5 relative z-10" strokeWidth={2.5} />
+            <CheckCircleIconSolid className="h-4.5 w-4.5 relative z-10" />
             <span className="relative z-10">Mark as Served</span>
-            <Bell className="h-4.5 w-4.5 relative z-10" strokeWidth={2.5} />
+            <BellIcon className="h-4.5 w-4.5 relative z-10" strokeWidth={2.5} />
           </button>
         ) : (
           // Cooking Progress Indicator
@@ -281,10 +293,9 @@ function OrderCard({ order, onServe }: { order: LiveOrder; onServe:(id:string)=>
               borderColor: "oklch(0.42 0.14 285 / 0.12)",
             }}
           >
-            <ChefHat 
+            <FireIconSolid 
               className="h-4.5 w-4.5 shrink-0" 
               style={{ color: "oklch(0.42 0.14 285)" }} 
-              strokeWidth={2.5}
             />
             <span className="text-[11px] font-bold flex-1" style={{ color: "oklch(0.38 0.12 285)" }}>
               Kitchen is preparing
@@ -371,7 +382,7 @@ export default function OrderStatusPage() {
                   background: "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)",
                 }}
               >
-                <Utensils className="h-6 w-6 sm:h-7 sm:w-7 text-white" strokeWidth={2.5} />
+                <CakeIcon className="h-6 w-6 sm:h-7 sm:w-7 text-white" strokeWidth={2.5} />
               </div>
               <div>
                 <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight leading-none" style={{ color: "#0D031B" }}>
@@ -395,7 +406,7 @@ export default function OrderStatusPage() {
                   borderColor: "oklch(0.42 0.14 285 / 0.15)",
                 }}
               >
-                <TrendingUp className="h-3.5 w-3.5" style={{ color: "oklch(0.42 0.14 285)" }} strokeWidth={2.5} />
+                <ArrowTrendingUpIcon className="h-3.5 w-3.5" style={{ color: "oklch(0.42 0.14 285)" }} strokeWidth={2.5} />
                 <span className="text-[11px] font-bold" style={{ color: "oklch(0.42 0.14 285)" }}>
                   {orders.length} Active
                 </span>
@@ -408,7 +419,7 @@ export default function OrderStatusPage() {
                   borderColor: "oklch(0.65 0.18 150 / 0.15)",
                 }}
               >
-                <CheckCircle2 className="h-3.5 w-3.5" style={{ color: "oklch(0.45 0.18 150)" }} strokeWidth={2.5} />
+                <CheckCircleIcon className="h-3.5 w-3.5" style={{ color: "oklch(0.45 0.18 150)" }} strokeWidth={2.5} />
                 <span className="text-[11px] font-bold" style={{ color: "oklch(0.45 0.18 150)" }}>
                   {readyCount} Ready
                 </span>
@@ -491,7 +502,7 @@ export default function OrderStatusPage() {
                   borderColor: "oklch(0.42 0.14 285 / 0.15)",
                 }}
               >
-                <CheckCircle2 className="h-8 w-8 sm:h-10 sm:w-10" style={{ color: "#AEA6BF" }} strokeWidth={2.5} />
+                <CheckCircleIcon className="h-8 w-8 sm:h-10 sm:w-10" style={{ color: "#AEA6BF" }} strokeWidth={2.5} />
               </div>
               <div className="text-center">
                 <p className="font-bold text-lg sm:text-xl" style={{ color: "#0D031B" }}>

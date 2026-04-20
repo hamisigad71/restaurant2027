@@ -1,9 +1,8 @@
 "use client"
 
-import { type LucideIcon } from "lucide-react"
 import type { TablerIcon } from "@tabler/icons-react"
-
-import {
+ 
+ import {
   SidebarGroup,
   SidebarGroupLabel,
   SidebarMenu,
@@ -18,7 +17,7 @@ export function NavDocuments({
   items: {
     name: string
     url: string
-    icon: LucideIcon | TablerIcon
+    icon: React.ComponentType<React.SVGProps<SVGSVGElement>> | TablerIcon
   }[]
 }) {
   return (

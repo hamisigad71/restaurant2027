@@ -2,7 +2,11 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { AlertTriangle, AlertCircle, XCircle } from "lucide-react"
+import { 
+  ExclamationTriangleIcon, 
+  ExclamationCircleIcon, 
+  XCircleIcon 
+} from "@heroicons/react/24/outline"
 import { mockInventory } from "@/lib/mock-data"
 import type { StockStatus } from "@/lib/types"
 import { cn } from "@/lib/utils"
@@ -11,10 +15,10 @@ const lowStockItems = mockInventory.filter(
   item => item.status === "low" || item.status === "critical" || item.status === "out"
 )
 
-const statusConfig: Record<Exclude<StockStatus, "good">, { icon: typeof AlertTriangle; color: string; bg: string }> = {
-  low: { icon: AlertTriangle, color: "text-warning", bg: "bg-warning/5 border-warning/10" },
-  critical: { icon: AlertCircle, color: "text-destructive", bg: "bg-destructive/5 border-destructive/10" },
-  out: { icon: XCircle, color: "text-destructive", bg: "bg-destructive/5 border-destructive/10" },
+const statusConfig: Record<Exclude<StockStatus, "good">, { icon: any; color: string; bg: string }> = {
+  low: { icon: ExclamationTriangleIcon, color: "text-warning", bg: "bg-warning/5 border-warning/10" },
+  critical: { icon: ExclamationCircleIcon, color: "text-destructive", bg: "bg-destructive/5 border-destructive/10" },
+  out: { icon: XCircleIcon, color: "text-destructive", bg: "bg-destructive/5 border-destructive/10" },
 }
 
 export function LowStockAlerts() {

@@ -2,11 +2,25 @@
 
 import { useState, useEffect } from "react"
 import {
-  Plus, Search, Filter, DollarSign, TrendingUp,
-  AlertCircle, Eye, EyeOff, ChevronRight, Flame,
-  Star, Leaf, Zap, Edit3, MoreHorizontal, Sparkles,
-  UtensilsCrossed, Package,
-} from "lucide-react"
+  PlusIcon as Plus, 
+  MagnifyingGlassIcon as Search, 
+  FunnelIcon as Filter, 
+  CurrencyDollarIcon as DollarSign, 
+  ArrowTrendingUpIcon as TrendingUp,
+  ExclamationCircleIcon as AlertCircle, 
+  EyeIcon as Eye, 
+  EyeSlashIcon as EyeOff, 
+  ChevronRightIcon as ChevronRight, 
+  FireIcon as Flame,
+  StarIcon as Star, 
+  HandThumbUpIcon as Leaf, 
+  BoltIcon as Zap, 
+  PencilSquareIcon as Edit3, 
+  EllipsisHorizontalIcon as MoreHorizontal, 
+  SparklesIcon as Sparkles,
+  SparklesIcon as UtensilsCrossed, 
+  CubeIcon as Package,
+} from "@heroicons/react/24/outline"
 import { Button }  from "@/components/ui/button"
 import { Input }   from "@/components/ui/input"
 import { Badge }   from "@/components/ui/badge"

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect, useCallback, useMemo } from "react";
-import { Utensils } from "lucide-react";
+import { CakeIcon } from "@heroicons/react/24/outline";
 import { KitchenHeader } from "./components/KitchenHeader";
 import { ThroughputBar } from "./components/ThroughputBar";
 import { FilterBar, type FilterId } from "./components/FilterBar";
@@ -27,7 +27,7 @@ function ServedBanner({ count }: { count: number }) {
         {count} order{count !== 1 ? "s" : ""} served this session
       </span>
       <span className="ml-auto flex items-center gap-1">
-        <Utensils className="h-3 w-3" style={{ color: "oklch(0.62 0.16 150)" }} />
+        <CakeIcon className="h-3 w-3" style={{ color: "oklch(0.62 0.16 150)" }} />
         <span className="text-[10px] font-bold uppercase " style={{ color: "oklch(0.46 0.14 150)" }}>
           Great work!
         </span>

@@ -10,10 +10,20 @@ import {
   Tooltip, TooltipContent, TooltipProvider, TooltipTrigger,
 } from "@/components/ui/tooltip"
 import {
-  CreditCard, Banknote, Smartphone, Receipt,
-  ChevronRight, Check, Users, ShoppingBag,
-  Sparkles, CircleDot, TrendingUp, Wallet, CheckCircle2
-} from "lucide-react"
+  CreditCardIcon as CreditCard, 
+  BanknotesIcon as Banknote, 
+  DevicePhoneMobileIcon as Smartphone, 
+  DocumentTextIcon as Receipt,
+  ChevronRightIcon as ChevronRight, 
+  CheckIcon as Check, 
+  UserGroupIcon as Users, 
+  ShoppingBagIcon as ShoppingBag,
+  SparklesIcon as Sparkles, 
+  CheckCircleIcon as CircleDot, 
+  ArrowTrendingUpIcon as TrendingUp, 
+  WalletIcon as Wallet, 
+  CheckCircleIcon as CheckCircle2
+} from "@heroicons/react/24/outline"
 import { cn } from "@/lib/utils"
 import { OrderService, LiveOrder } from "@/lib/order-service"
 

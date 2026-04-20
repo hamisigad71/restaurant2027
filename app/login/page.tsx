@@ -4,11 +4,25 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import {
-  UtensilsCrossed, Eye, EyeOff, Shield, Users,
-  ChefHat, ShoppingCart, ArrowRight, Crown,
-  Star, Zap, Check, X, Sparkles, TrendingUp,
-  Lock, Mail, ChevronRight,
-} from "lucide-react"
+  SparklesIcon as UtensilsCrossed, 
+  EyeIcon as Eye, 
+  EyeSlashIcon as EyeOff, 
+  ShieldCheckIcon as Shield, 
+  UserGroupIcon as Users,
+  CakeIcon as ChefHat, 
+  ShoppingCartIcon as ShoppingCart, 
+  ArrowRightIcon as ArrowRight, 
+  TrophyIcon as Crown,
+  StarIcon as Star, 
+  BoltIcon as Zap, 
+  CheckIcon as Check, 
+  XMarkIcon as X, 
+  SparklesIcon as Sparkles, 
+  ArrowTrendingUpIcon as TrendingUp,
+  LockClosedIcon as Lock, 
+  EnvelopeIcon as Mail, 
+  ChevronRightIcon as ChevronRight,
+} from "@heroicons/react/24/outline"
 import { Button }    from "@/components/ui/button"
 import { Input }     from "@/components/ui/input"
 import { Label }     from "@/components/ui/label"

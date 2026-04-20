@@ -1,6 +1,18 @@
 "use client"
 import { useState, useEffect } from "react"
-import { Clock, Flame, CheckCircle2, Timer, Utensils, ArrowRight, Zap } from "lucide-react"
+import { 
+  ClockIcon, 
+  FireIcon, 
+  CheckCircleIcon, 
+  ArrowRightIcon, 
+  BoltIcon,
+  CakeIcon
+} from "@heroicons/react/24/outline"
+import {
+  FireIcon as FireIconSolid,
+  CheckCircleIcon as CheckCircleIconSolid,
+  BoltIcon as BoltIconSolid
+} from "@heroicons/react/24/solid"
 import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { cn } from "@/lib/utils"
@@ -43,7 +55,7 @@ function getDishImage(name: string) {
 // ─── Status config ────────────────────────────────────────────────────────────
 const STATUS_CONFIG = {
   pending: {
-    label: "New Order", Icon: Clock,
+    label: "New Order", Icon: ClockIcon,
     cardAccent: "oklch(0.45 0.12 285)",
     cardBg: "rgba(255,255,255,0.85)",
     badgeBg: "oklch(0.45 0.12 285 / 0.08)", badgeText: "oklch(0.45 0.12 285)", badgeBorder: "oklch(0.45 0.12 285 / 0.15)",
@@ -53,7 +65,7 @@ const STATUS_CONFIG = {
     nextBg: "oklch(0.45 0.12 285)", nextShadow: "oklch(0.45 0.12 285 / 0.3)",
   },
   cooking: {
-    label: "Preparing", Icon: Flame,
+    label: "Preparing", Icon: FireIcon,
     cardAccent: "oklch(0.45 0.12 285)",
     cardBg: "rgba(255,255,255,0.85)",
     badgeBg: "oklch(0.45 0.12 285 / 0.1)", badgeText: "oklch(0.45 0.12 285)", badgeBorder: "oklch(0.45 0.12 285 / 0.2)",
@@ -63,7 +75,7 @@ const STATUS_CONFIG = {
     nextBg: "oklch(0.62 0.16 150)", nextShadow: "oklch(0.62 0.16 150 / 0.3)",
   },
   ready: {
-    label: "Ready", Icon: CheckCircle2,
+    label: "Ready", Icon: CheckCircleIcon,
     cardAccent: "oklch(0.62 0.16 150)",
     cardBg: "rgba(255,255,255,0.92)",
     badgeBg: "oklch(0.62 0.16 150 / 0.1)", badgeText: "oklch(0.42 0.14 150)", badgeBorder: "oklch(0.62 0.16 150 / 0.2)",
@@ -125,7 +137,7 @@ export function OrderCard({ order, onUpdateStatus, listMode, animDelay = 0 }: Or
         </div>
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-1.5 px-2 py-1 rounded-lg bg-black/5 font-mono text-[11px]">
-            <Timer className="h-3 w-3" />
+            <ClockIcon className="h-3 w-3" />
             {timer.display}
           </div>
           <button 
@@ -160,7 +172,7 @@ export function OrderCard({ order, onUpdateStatus, listMode, animDelay = 0 }: Or
       {order.priority === "urgent" && (
         <div className="absolute top-4 right-4 z-20">
           <span className="flex items-center gap-1 text-[9px] font-bold uppercase  px-2.5 py-1 rounded-full text-white" style={{ background: "oklch(0.65 0.18 25)", boxShadow: "0 2px 8px oklch(0.65 0.18 25 / 0.45)" }}>
-            <Zap className="h-2 w-2 fill-current" /> Urgent
+            <BoltIconSolid className="h-2 w-2" /> Urgent
           </span>
         </div>
       )}
@@ -179,7 +191,7 @@ export function OrderCard({ order, onUpdateStatus, listMode, animDelay = 0 }: Or
         <div className="flex items-center justify-between">
           <span className="text-[10px] font-bold uppercase  px-2.5 py-1 rounded-full border" style={{ background: cfg.badgeBg, color: cfg.badgeText, borderColor: cfg.badgeBorder }}>{cfg.label}</span>
           <div className="flex items-center gap-1 text-[11px] font-mono font-semibold text-[#736C83]">
-            <Timer className="h-3 w-3" /> {timer.display}
+            <ClockIcon className="h-3 w-3" /> {timer.display}
           </div>
         </div>
 
@@ -204,7 +216,7 @@ export function OrderCard({ order, onUpdateStatus, listMode, animDelay = 0 }: Or
         >
           <cfg.Icon className="h-4 w-4 relative z-10 transition-transform group-hover/btn:scale-125" />
           <span className="relative z-10 flex-1 text-left">{cfg.nextLabel}</span>
-          <ArrowRight className="h-3 w-3 relative z-10 transition-transform group-hover/btn:translate-x-0.5" />
+          <ArrowRightIcon className="h-3 w-3 relative z-10 transition-transform group-hover/btn:translate-x-0.5" />
         </button>
       </CardContent>
     </Card>
