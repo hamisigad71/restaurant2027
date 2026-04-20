@@ -57,17 +57,8 @@ export function AuthPanel({
       style={{ background: "#F8F6FC" }}
     >
       {/* Mobile logo */}
-      <div className="flex lg:hidden items-center gap-3 mb-10">
-        <div
-          className="flex items-center justify-center w-11 h-11 rounded-xl shadow-lg"
-          style={{ background: "oklch(0.42 0.14 285)" }}
-        >
-          <UtensilsCrossed className="h-5 w-5 text-white" strokeWidth={2.5} />
-        </div>
-        <div>
-          <p className="text-xl font-bold uppercase leading-none" style={{ color: "#0D031B" }}>Resto</p>
-          <p className="text-[9px] uppercase font-medium" style={{ color: "oklch(0.42 0.14 285)" }}>Grande Cuisine</p>
-        </div>
+      <div className="flex lg:hidden items-center mb-10">
+        <img src="/logo-full.svg" alt="Resto Logo" className="h-12 w-auto" />
       </div>
 
       <div className="w-full max-w-[440px] mx-auto space-y-7">

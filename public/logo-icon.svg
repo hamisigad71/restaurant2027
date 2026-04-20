@@ -1,0 +1,15 @@
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(15, 15) scale(0.7)">
+    <!-- Knife -->
+    <path d="M10 10 L80 80" stroke="#473383" stroke-width="12" stroke-linecap="round"/>
+    <path d="M10 10 C5 5 25 25 35 35" stroke="#473383" stroke-width="12" stroke-linecap="round"/>
+    
+    <!-- Fork handle -->
+    <path d="M90 10 L20 80" stroke="#473383" stroke-width="12" stroke-linecap="round"/>
+    <!-- Fork prongs -->
+    <path d="M78 2 L78 22" stroke="#473383" stroke-width="8" stroke-linecap="round"/>
+    <path d="M90 2 L90 22" stroke="#473383" stroke-width="8" stroke-linecap="round"/>
+    <path d="M102 2 L102 22" stroke="#473383" stroke-width="8" stroke-linecap="round" />
+    <path d="M78 22 Q78 35 90 35 Q102 35 102 22" stroke="#473383" stroke-width="8" stroke-linecap="round" fill="none"/>
+  </g>
+</svg>

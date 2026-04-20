@@ -232,11 +232,12 @@ export function GlassLoader({ className, fullScreen = true, autoHideDuration = 7
             >
               {/* Knife + fork SVG icon */}
               <svg width="38" height="38" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <line x1="28" y1="22" x2="68" y2="78" stroke="white" strokeWidth="7" strokeLinecap="round"/>
-                <line x1="68" y1="22" x2="28" y2="78" stroke="white" strokeWidth="7" strokeLinecap="round"/>
-                <path d="M54 22 L54 46 Q54 54 62 54 L70 54" stroke="white" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-                <path d="M62 22 L62 46" stroke="white" strokeWidth="7" strokeLinecap="round" fill="none"/>
-                <path d="M70 22 L70 46" stroke="white" strokeWidth="7" strokeLinecap="round" fill="none"/>
+                <line x1="20" y1="20" x2="80" y2="80" stroke="white" strokeWidth="10" strokeLinecap="round"/>
+                <line x1="80" y1="20" x2="20" y2="80" stroke="white" strokeWidth="10" strokeLinecap="round"/>
+                <path d="M72 12 V28" stroke="white" strokeWidth="8" strokeLinecap="round"/>
+                <path d="M80 12 V28" stroke="white" strokeWidth="8" strokeLinecap="round"/>
+                <path d="M88 12 V28" stroke="white" strokeWidth="8" strokeLinecap="round"/>
+                <path d="M72 28 Q72 36 80 36 Q88 36 88 28" stroke="white" strokeWidth="8" strokeLinecap="round" fill="none"/>
               </svg>
             </div>
           </div>
