@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { 
   SparklesIcon, 
-  CheckCircleIcon as CheckCircle2, 
+  CheckCircleIcon, 
   ClockIcon, 
   ExclamationTriangleIcon, 
   BoltIcon, 
@@ -160,7 +160,7 @@ export default function CleanersPage() {
 
               <div className="grid grid-cols-3 gap-3 mt-4">
                 {[
-                  { label:"Cleaned",  value:cleanedCount, icon:CheckCircle2, color:"oklch(0.62 0.16 150)" },
+                  { label:"Cleaned",  value:cleanedCount, icon:CheckCircleIcon, color:"oklch(0.62 0.16 150)" },
                   { label:"Pending",  value:tables.length, icon:ClockIcon,        color:"oklch(0.75 0.15 75)"  },
                   { label:"Urgent",   value:highCount,     icon:BoltIcon,         color:"oklch(0.65 0.18 25)"  },
                 ].map(s => (
