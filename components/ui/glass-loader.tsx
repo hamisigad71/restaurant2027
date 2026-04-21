@@ -220,7 +220,7 @@ export function GlassLoader({ className, fullScreen = true, autoHideDuration = 7
                 width:        96,
                 height:       96,
                 borderRadius: 24,
-                background:   "oklch(0.45 0.12 285)", // Primary deep purple
+             // Primary deep purple
                 display:      "flex",
                 alignItems:   "center",
                 justifyContent:"center",

@@ -407,18 +407,17 @@ export function MenuGrid({
                     key={cat.id}
                     value={cat.id}
                     className={cn(
-                      "flex items-center gap-1.5 px-3 py-2 text-[10px] font-bold uppercase rounded-lg transition-all duration-300",
+                      "px-3 py-2 text-[10px] font-bold uppercase rounded-lg transition-all duration-300 whitespace-nowrap",
                       "data-[state=active]:text-white data-[state=active]:shadow-md",
-                      "text-[#736C83] hover:bg-oklch(0.42 0.14 285)/5"
+                      "text-[#736C83]"
                     )}
                     style={{
-                      background: activeCategory === cat.id 
+                      background: activeCategory === cat.id
                         ? "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)"
                         : "transparent"
                     }}
                   >
-                    <cat.icon className="h-3 w-3" strokeWidth={2.5} />
-                    <span className="hidden xs:inline">{cat.label}</span>
+                    {cat.label}
                   </TabsTrigger>
                 ))}
               </TabsList>
