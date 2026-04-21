@@ -262,7 +262,7 @@ export default function WaiterMenuPage() {
               className="flex items-center justify-center w-9 h-9 rounded-xl p-1.5"
               style={{ background:"oklch(0.45 0.12 285)", boxShadow:"0 4px 12px oklch(0.45 0.12 285 / 0.35)" }}
             >
-              <img src="/menu-nav.png" className="w-full h-full brightness-0 invert object-contain" alt="Menu" />
+              <img src="/menu-nav.png" className="w-full h-full brightness-0 invert object-contain" alt="Menu" style={{ filter: "brightness(0) invert(1)" }} />
             </div>
             <div>
               <h1 className="text-[17px] font-bold tracking-tight leading-none" style={{ color:"#0D031B" }}>

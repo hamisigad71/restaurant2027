@@ -45,7 +45,7 @@ export function NavMain({
               {hasSubItems ? (
                 <>
                   {item.icon && (typeof item.icon === 'string' ? (
-                    <img src={item.icon} className="size-4 shrink-0 transition-all duration-200" style={{ filter: item.isActive ? 'brightness(0) invert(1)' : 'grayscale(1) opacity(0.7)' }} />
+                    <img src={item.icon} className="size-4 shrink-0 transition-all duration-200" style={{ filter: 'invert(31%) sepia(68%) saturate(1116%) hue-rotate(221deg) brightness(91%) contrast(89%)', opacity: item.isActive ? 1 : 0.7 }} />
                   ) : (
                     <item.icon className="size-4" />
                   ))}
@@ -56,7 +56,7 @@ export function NavMain({
               ) : (
                 <Link href={item.url}>
                   {item.icon && (typeof item.icon === 'string' ? (
-                    <img src={item.icon} className="size-4 shrink-0 transition-all duration-200" style={{ filter: item.isActive ? 'brightness(0) invert(1)' : 'grayscale(1) opacity(0.7)' }} />
+                    <img src={item.icon} className="size-4 shrink-0 transition-all duration-200" style={{ filter: 'invert(31%) sepia(68%) saturate(1116%) hue-rotate(221deg) brightness(91%) contrast(89%)', opacity: item.isActive ? 1 : 0.7 }} />
                   ) : (
                     <item.icon className="size-4" />
                   ))}

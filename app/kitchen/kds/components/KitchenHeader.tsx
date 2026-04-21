@@ -25,8 +25,8 @@ export function KitchenHeader({
     <div className="relative overflow-hidden px-5 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shrink-0" style={{ background: "oklch(0.45 0.12 285)" }}>
       {/* Brand */}
       <div className="relative z-10 flex items-center gap-3">
-        <div className="w-10 h-10 rounded-xl flex items-center justify-center border" style={{ background: "rgba(255,255,255,0.12)", borderColor: "rgba(255,255,255,0.2)" }}>
-          <FireIcon className="h-5 w-5 text-white" />
+        <div className="w-10 h-10 rounded-xl flex items-center justify-center border p-1.5" style={{ background: "rgba(255,255,255,0.12)", borderColor: "rgba(255,255,255,0.2)" }}>
+          <img src="/chef-icon.png" alt="Chef" className="w-full h-full brightness-0 invert object-contain" />
         </div>
         <div>
           <div className="flex items-center gap-2">

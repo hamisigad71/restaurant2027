@@ -78,10 +78,10 @@ const allNavItems: NavItem[] = [
   { name: "Service Floor", href: "/waiter/service-floor", icon: "/service-floor-nav.png", permission: "orders", portal: "waiter" },
   { name: "Order Tracking", href: "/waiter/order-tracking", icon: "/order-tracking-nav.png", permission: "orders", portal: "waiter" },
   { name: "Menu", href: "/waiter/menu", icon: "/menu-nav.png", permission: "orders", portal: "waiter" },
-  { name: "Checkout", href: "/waiter/checkout", icon: BanknotesIcon, permission: "orders", portal: "waiter" },
+  { name: "Checkout", href: "/waiter/checkout", icon: "/checkout-nav.png", permission: "orders", portal: "waiter" },
   
   // Kitchen
-  { name: "Kitchen Display", href: "/kitchen/kds", icon: "/live-view-nav.png", permission: "kitchen", portal: "kitchen", badge: "Live" },
+  { name: "Kitchen Display", href: "/kitchen/kds", icon: "/chef-icon.png", permission: "kitchen", portal: "kitchen", badge: "Live" },
 ];
 
 export function AppSidebar({
@@ -138,8 +138,8 @@ export function AppSidebar({
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild className="hover:bg-primary/5">
               <a href="#">
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-lg shadow-primary/20 p-1.5 shrink-0">
-                  <img src="/logo-icon.png" alt="Resto" className="size-full brightness-0 invert object-contain" />
+                <div className="flex aspect-square size-20 items-center justify-center rounded-xl text-primary-foreground shadow-lg shadow-primary/20 p-1.5 shrink-0">
+                  <img src="/logo-icon.png" alt="Resto" className="size-full object-contain" />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate   uppercase">Resto</span>

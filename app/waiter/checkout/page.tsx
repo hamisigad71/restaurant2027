@@ -108,6 +108,25 @@ export default function CheckoutPage() {
   return (
     <TooltipProvider>
       <div className="flex flex-col min-h-screen" style={{ background: "#F0EBF8" }}>
+        {/* ── Page Header ────────────────────────────────────────── */}
+        <div className="max-w-5xl mx-auto w-full px-4 lg:px-6 pt-6">
+          <div className="flex items-center gap-3 mb-6">
+            <div
+              className="flex items-center justify-center w-11 h-11 rounded-xl p-2"
+              style={{ background: "oklch(0.45 0.12 285)", boxShadow: "0 4px 12px oklch(0.45 0.12 285 / 0.35)" }}
+            >
+              <img src="/checkout-nav.png" className="w-full h-full brightness-0 invert object-contain" alt="Checkout" />
+            </div>
+            <div>
+              <h1 className="text-[19px] font-bold tracking-tight leading-none" style={{ color: "#0D031B" }}>
+                Billing & Settlement
+              </h1>
+              <p className="text-[10px] font-bold uppercase tracking-[0.18em] mt-1" style={{ color: "#9A94AA" }}>
+                Manage payments and close tables
+              </p>
+            </div>
+          </div>
+        </div>
 
         {/* ── Summary stat bar ────────────────────────────────────── */}
         <div

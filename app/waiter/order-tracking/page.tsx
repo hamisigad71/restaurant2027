@@ -382,7 +382,7 @@ export default function OrderStatusPage() {
                   background: "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)",
                 }}
               >
-                <img src="/order-tracking-nav.png" className="w-full h-full brightness-0 invert object-contain" alt="Order Tracking" />
+                <img src="/order-tracking-nav.png" className="w-full h-full brightness-0 invert object-contain" alt="Order Tracking" style={{ filter: "brightness(0) invert(1)" }} />
               </div>
               <div>
                 <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight leading-none" style={{ color: "#0D031B" }}>

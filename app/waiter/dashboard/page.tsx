@@ -104,7 +104,7 @@ const quickActions = [
   { href: "/waiter/service-floor",   icon: "/service-floor-nav.png", label: "New Order",      primary: true  },
   { href: "/waiter/service-floor",   icon: "/service-floor-nav.png", label: "Floor Plan",     primary: false },
   { href: "/waiter/order-tracking",  icon: "/order-tracking-nav.png",       label: "Order Status",   primary: false },
-  { href: "/waiter/checkout",        icon: CheckCircleIcon, label: "Settlements",    primary: false },
+  { href: "/waiter/checkout",        icon: "/checkout-nav.png", label: "Settlements",    primary: false },
 ]
 
 // ─── Sub-components ──────────────────────────────────────────────────────────
@@ -346,7 +346,12 @@ export default function WaiterDashboard() {
                     color: "#3D374C",
                   }}
                 >
-                  <img src="/live-view-nav.png" className="h-3.5 w-3.5 brightness-0 invert object-contain" alt="Live View" />
+                  <img 
+                    src="/live-view-nav.png" 
+                    className="h-3.5 w-3.5 object-contain" 
+                    alt="Live View" 
+                    style={{ filter: "invert(31%) sepia(68%) saturate(1116%) hue-rotate(221deg) brightness(91%) contrast(89%)" }} 
+                  />
                   <span className="hidden sm:inline">Live View</span>
                 </Button>
               </TooltipTrigger>
@@ -363,7 +368,12 @@ export default function WaiterDashboard() {
               asChild
             >
               <Link href="/waiter/service-floor">
-                <img src="/service-floor-nav.png" className="h-3.5 w-3.5 brightness-0 invert object-contain" alt="New Order" />
+                <img 
+                  src="/service-floor-nav.png" 
+                  className="h-3.5 w-3.5 brightness-0 invert object-contain" 
+                  alt="New Order" 
+                  style={{ filter: "brightness(0) invert(1)" }}
+                />
                 New Order
               </Link>
             </Button>
@@ -775,7 +785,12 @@ export default function WaiterDashboard() {
                       >
                         <Link href={action.href} className="flex flex-col items-center gap-1.5">
                           {typeof Icon === "string" ? (
-                            <img src={Icon} className="h-4 w-4 brightness-0 invert object-contain" alt={action.label} style={{ filter: "brightness(0.45) saturate(0.5)" }} />
+                            <img 
+                              src={Icon} 
+                              className="h-4 w-4 object-contain" 
+                              alt={action.label} 
+                              style={{ filter: "invert(31%) sepia(68%) saturate(1116%) hue-rotate(221deg) brightness(91%) contrast(89%)" }} 
+                            />
                           ) : (
                             <Icon className="h-4 w-4" style={{ color: "oklch(0.45 0.12 285)" }} />
                           )}

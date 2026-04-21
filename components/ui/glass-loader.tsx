@@ -217,9 +217,9 @@ export function GlassLoader({ className, fullScreen = true, autoHideDuration = 7
             <div
               style={{
                 position:     "absolute",
-                width:        64,
-                height:       64,
-                borderRadius: 16,
+                width:        96,
+                height:       96,
+                borderRadius: 24,
                 background:   "oklch(0.45 0.12 285)", // Primary deep purple
                 display:      "flex",
                 alignItems:   "center",
@@ -234,7 +234,7 @@ export function GlassLoader({ className, fullScreen = true, autoHideDuration = 7
               <img 
                 src="/logo-icon.png" 
                 alt="Resto Logo" 
-                className="w-10 h-10 brightness-0 invert object-contain -mt-0.5" 
+                className="w-16 h-16 object-contain" 
               />
             </div>
           </div>

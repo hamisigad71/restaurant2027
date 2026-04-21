@@ -76,33 +76,33 @@ export function MobileNav() {
       admin: [
         { label: "Home", icon: HomeIcon, href: "/admin/dashboard" },
         { label: "Staff", icon: UserGroupIcon, href: "/admin/staff" },
-        { label: "Menu", icon: CakeIcon, href: "/admin/menu" },
+        { label: "Menu", icon: "/menu-nav.png", href: "/admin/menu" },
         { label: "Config", icon: Cog6ToothIcon, href: "/admin/settings" },
       ],
       manager: [
         { label: "Home", icon: HomeIcon, href: "/manager/dashboard" },
-        { label: "Orders", icon: ClipboardDocumentListIcon, href: "/manager/orders" },
-        { label: "Menu", icon: CakeIcon, href: "/manager/menu" },
+        { label: "Orders", icon: "/order-tracking-nav.png", href: "/manager/orders" },
+        { label: "Menu", icon: "/menu-nav.png", href: "/manager/menu" },
         { label: "Staff", icon: UserGroupIcon, href: "/manager/staff" },
         { label: "Reports", icon: ChartBarIcon, href: "/manager/reports" },
       ],
       waiter: [
         { label: "Home", icon: HomeIcon, href: "/waiter/dashboard" },
-        { label: "Floor", icon: MapPinIcon, href: "/waiter/service-floor" },
-        { label: "Menu", icon: CakeIcon, href: "/waiter/menu" },
-        { label: "Status", icon: ShoppingBagIcon, href: "/waiter/order-tracking" },
-        { label: "Pay", icon: CalculatorIcon, href: "/waiter/checkout" },
+        { label: "Floor", icon: "/service-floor-nav.png", href: "/waiter/service-floor" },
+        { label: "Menu", icon: "/menu-nav.png", href: "/waiter/menu" },
+        { label: "Status", icon: "/order-tracking-nav.png", href: "/waiter/order-tracking" },
+        { label: "Pay", icon: "/checkout-nav.png", href: "/waiter/checkout" },
       ],
       kitchen: [
-        { label: "KDS", icon: FireIcon, href: "/kitchen/kds" },
+        { label: "KDS", icon: "/chef-icon.png", href: "/kitchen/kds" },
         { label: "Stats", icon: ChartBarIcon, href: "/kitchen/kds" },
         { label: "System", icon: Cog6ToothIcon, href: "/kitchen/kds" },
       ],
       customer: [
         { label: "Home", icon: HomeIcon, href: customerPrefix },
-        { label: "Menu", icon: CakeIcon, href: customerPrefix },
-        { label: "Orders", icon: ClipboardDocumentListIcon, href: `${customerPrefix}/status` },
-        { label: "Pay", icon: ShoppingCartIcon, href: `${customerPrefix}/billing` },
+        { label: "Menu", icon: "/menu-nav.png", href: customerPrefix },
+        { label: "Orders", icon: "/order-tracking-nav.png", href: `${customerPrefix}/status` },
+        { label: "Pay", icon: "/checkout-nav.png", href: `${customerPrefix}/billing` },
       ],
       cleaner: [
         { label: "Tasks", icon: PaintBrushIcon, href: "/cleaners" },
@@ -271,13 +271,26 @@ export function MobileNav() {
                     >
                       {/* Icon glow removed */}
                       
-                      <Icon 
-                        className={cn(
-                          "h-5.5 w-5.5 transition-all duration-500 relative z-10",
-                          isActive && "drop-shadow-[0_2px_8px_oklch(0.42_0.14_285_/_0.4)]"
-                        )} 
-                        strokeWidth={isActive ? 2.5 : 2} 
-                      />
+                      {typeof Icon === 'string' ? (
+                        <img 
+                          src={Icon} 
+                          className="h-5.5 w-5.5 transition-all duration-500 relative z-10 object-contain" 
+                          style={{ 
+                            filter: isActive 
+                              ? "invert(24%) sepia(86%) saturate(1450%) hue-rotate(242deg) brightness(91%) contrast(92%)" 
+                              : "invert(31%) sepia(68%) saturate(1116%) hue-rotate(221deg) brightness(91%) contrast(89%)",
+                            opacity: isActive ? 1 : 0.7
+                          }} 
+                        />
+                      ) : (
+                        <Icon 
+                          className={cn(
+                            "h-5.5 w-5.5 transition-all duration-500 relative z-10",
+                            isActive && "drop-shadow-[0_2px_8px_oklch(0.42_0.14_285_/_0.4)]"
+                          )} 
+                          strokeWidth={isActive ? 2.5 : 2} 
+                        />
+                      )}
                     </div>
                   </div>
                   

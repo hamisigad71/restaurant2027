@@ -75,7 +75,7 @@ const testimonials = [
 
 const STAFF_SUB_ROLES = [
   { id:"waiter",   label:"Waiter",   icon:"/staff.png",  desc:"Orders & Tables",       path:"/waiter/dashboard" },
-  { id:"kitchen",  label:"Chef",     icon:ChefHat,       desc:"Kitchen KDS",            path:"/kitchen/kds"      },
+  { id:"kitchen",  label:"Chef",     icon:"/chef-icon.png",       desc:"Kitchen KDS",            path:"/kitchen/kds"      },
   { id:"cleaner",  label:"Cleaner",  icon:UtensilsCrossed, desc:"Facility Maintenance", path:"/cleaners"         },
   { id:"security", label:"Security", icon:Shield,        desc:"Safety & Access",        path:"/security"         },
 ]
