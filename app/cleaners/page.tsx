@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { 
-  SparklesIcon, 
+  BoltIcon as SparklesIcon, 
   CheckCircleIcon, 
   ClockIcon, 
   ExclamationTriangleIcon, 

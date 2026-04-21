@@ -12,22 +12,25 @@ import {
   UserGroupIcon as Users,
   ArrowLeftIcon as ArrowLeft,
   PlusIcon as Plus,
-  SparklesIcon as UtensilsCrossed,
-  SparklesIcon as Wine,
-  SparklesIcon as Cookie,
-  SparklesIcon as IceCream,
+  AcademicCapIcon as ChefHat,
+  BeakerIcon as Wine,
+  CakeIcon as Cookie,
+  GiftIcon as IceCream,
   ArrowRightIcon as ArrowRight,
   MinusIcon as Minus,
   TrashIcon as Trash2,
   ShoppingCartIcon as ShoppingCart,
   MagnifyingGlassIcon as Search,
-  SparklesIcon as ChefHat,
+  BriefcaseIcon as UtensilsCrossed,
   SparklesIcon as Crown,
-  SparklesIcon as Sparkles,
+  BoltIcon as Sparkles,
+  Squares2X2Icon as AllIcon,
+  ShoppingBagIcon as MainIcon,
   ArrowTrendingUpIcon as TrendingUp,
   ClockIcon as Clock,
   XMarkIcon as X,
   CheckIcon as Check,
+  QueueListIcon as SeafoodIcon,
 } from "@heroicons/react/24/outline";
 import type { Table, TableStatus, MenuItem, OrderItem } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -75,13 +78,13 @@ const statusConfig: Record<
 };
 
 const categories = [
-  { id: "all", label: "All", icon: UtensilsCrossed },
+  { id: "all", label: "All", icon: AllIcon },
   { id: "starters", label: "Appetizers", icon: ChefHat },
-  { id: "main", label: "Main Dishes", icon: UtensilsCrossed },
+  { id: "main", label: "Main Dishes", icon: MainIcon },
   { id: "drinks", label: "Beverages", icon: Wine },
   { id: "snacks", label: "Snacks", icon: Cookie },
   { id: "desserts", label: "Desserts", icon: IceCream },
-  { id: "seafood", label: "Seafood", icon: Crown },
+  { id: "seafood", label: "Seafood", icon: SeafoodIcon },
 ];
 
 const categoryImages: Record<string, string> = {
@@ -128,15 +131,15 @@ export function TableGrid({ tables, onSelectTable }: TableGridProps) {
   return (
     <div className="p-4 sm:p-6 lg:p-8">
       {/* Interactive Floor Plan Header */}
-      <div className="mb-8 space-y-6">
+      <div className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div className="flex items-center gap-4">
           <div 
-            className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg"
+            className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg p-2"
             style={{
               background: "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)",
             }}
           >
-            <UtensilsCrossed className="h-7 w-7 text-white" strokeWidth={2.5} />
+            <img src="/service-floor-nav.png" className="w-full h-full brightness-0 invert object-contain" alt="Service Floor" />
           </div>
           <div>
             <h1 className="text-2xl sm:text-3xl font-bold tracking-tight" style={{ color: "#0D031B" }}>
@@ -149,7 +152,7 @@ export function TableGrid({ tables, onSelectTable }: TableGridProps) {
         </div>
 
         {/* Zone Filter */}
-        <div className="flex bg-white/50 backdrop-blur-sm p-1.5 rounded-2xl w-fit border border-oklch(0.42 0.14 285 / 0.08)">
+        <div className="flex bg-white/50 backdrop-blur-sm p-1.5 rounded-2xl w-fit border border-oklch(0.42 0.14 285 / 0.08) shrink-0">
           {zones.map(zone => (
             <button
               key={zone}
@@ -157,7 +160,7 @@ export function TableGrid({ tables, onSelectTable }: TableGridProps) {
               className={cn(
                 "px-5 py-2.5 rounded-xl text-[11px] font-bold uppercase tracking-wider transition-all duration-300",
                 activeZone === zone 
-                  ? "bg-oklch(0.42 0.14 285) text-white shadow-lg" 
+                  ? "bg-white text-oklch(0.42 0.14 285) shadow-lg" 
                   : "text-[#736C83] hover:text-oklch(0.42 0.14 285)"
               )}
             >
@@ -165,21 +168,21 @@ export function TableGrid({ tables, onSelectTable }: TableGridProps) {
             </button>
           ))}
         </div>
+      </div>
 
-        {/* Legend */}
-        <div className="flex items-center gap-6 flex-wrap">
-          {[
-            { label: "Available", color: "bg-emerald-500" },
-            { label: "Occupied", color: "bg-purple-500" },
-            { label: "Reserved", color: "bg-amber-500" },
-            { label: "Cleaning", color: "bg-blue-500" },
-          ].map(item => (
-            <div key={item.label} className="flex items-center gap-2">
-              <div className={cn("w-2 h-2 rounded-full shadow-sm", item.color)} />
-              <span className="text-xs font-bold text-[#736C83] tracking-wide">{item.label}</span>
-            </div>
-          ))}
-        </div>
+      {/* Legend */}
+      <div className="flex items-center gap-6 flex-wrap mb-8">
+        {[
+          { label: "Available", color: "bg-emerald-500" },
+          { label: "Occupied", color: "bg-purple-500" },
+          { label: "Reserved", color: "bg-amber-500" },
+          { label: "Cleaning", color: "bg-blue-500" },
+        ].map(item => (
+          <div key={item.label} className="flex items-center gap-2">
+            <div className={cn("w-2 h-2 rounded-full shadow-sm", item.color)} />
+            <span className="text-xs font-bold text-[#736C83] tracking-wide">{item.label}</span>
+          </div>
+        ))}
       </div>
 
       {/* Enhanced Grid - 2 columns on mobile */}
@@ -210,10 +213,7 @@ export function TableGrid({ tables, onSelectTable }: TableGridProps) {
                 )}
                 style={{ boxShadow: "0 4px 24px rgba(0,0,0,0.08)" }}
               >
-                {/* Status indicator bar */}
-                <div 
-                  className={cn("h-1.5 w-full bg-gradient-to-r", config.gradient)}
-                />
+
 
                 {/* Enhanced Image */}
                 <div className="relative h-32 sm:h-40 overflow-hidden">

@@ -31,7 +31,7 @@ import {
   ChevronDownIcon as ChevronDown,
   ChevronRightIcon as ChevronRight,
   SparklesIcon as UtensilsCrossed,
-  SparklesIcon as Sparkles,
+  BoltIcon as Sparkles,
   DocumentTextIcon as Receipt,
   XMarkIcon as X,
   ArrowLeftIcon as ArrowLeft,

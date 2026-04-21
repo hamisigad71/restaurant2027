@@ -8,7 +8,7 @@ import {
   ArrowRightOnRectangleIcon,
   CubeIcon,
   ShoppingCartIcon,
-  SparklesIcon,
+  BoltIcon,
   XMarkIcon,
   ChevronDownIcon,
 } from "@heroicons/react/24/outline";
@@ -16,7 +16,7 @@ import {
   BellIcon as BellIconSolid,
   MagnifyingGlassIcon as MagnifyingGlassIconSolid,
   UserIcon as UserIconSolid,
-  SparklesIcon as SparklesIconSolid,
+  BoltIcon as BoltIconSolid,
 } from "@heroicons/react/24/solid";
 import { useRouter, usePathname } from "next/navigation";
 import { useState } from "react";
@@ -209,7 +209,7 @@ const notifications = [
   },
   {
     id: "3",
-    icon: SparklesIcon,
+    icon: BoltIcon,
     iconColor: "oklch(0.42 0.14 150)",
     iconBg: "oklch(0.7 0.15 150 / 0.1)",
     title: "Order Ready",

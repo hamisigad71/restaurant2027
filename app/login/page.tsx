@@ -14,10 +14,10 @@ import {
   ArrowRightIcon as ArrowRight, 
   TrophyIcon as Crown,
   StarIcon as Star, 
-  BoltIcon as Zap, 
+  BoltIcon as Bolt, 
   CheckIcon as Check, 
   XMarkIcon as X, 
-  SparklesIcon as Sparkles, 
+  BoltIcon as Sparkles, 
   ArrowTrendingUpIcon as TrendingUp,
   LockClosedIcon as Lock, 
   EnvelopeIcon as Mail, 
@@ -35,9 +35,9 @@ import { cn } from "@/lib/utils"
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const roleOptions = [
   { role:"admin"   as UserRole, label:"Admin",   description:"Full access",      icon:Shield       },
-  { role:"manager" as UserRole, label:"Manager", description:"Ops & reports",    icon:Users        },
-  { role:"waiter"  as UserRole, label:"Staff",   description:"Waiter & support", icon:ShoppingCart },
-  { role:"kitchen" as UserRole, label:"Kitchen", description:"Preparation",      icon:ChefHat      },
+  { role:"manager" as UserRole, label:"Manager", description:"Ops & reports",    icon:"/manager.png" },
+  { role:"waiter"  as UserRole, label:"Staff",   description:"Waiter & support", icon:"/staff.png" },
+  { role:"kitchen" as UserRole, label:"Kitchen", description:"Preparation",      icon:"/kitchen.png" },
 ]
 
 const defaultRedirects: Record<UserRole, string> = {
@@ -53,7 +53,7 @@ const defaultRedirects: Record<UserRole, string> = {
 const stats = [
   { value:"5",          label:"Portals",  icon:Sparkles },
   { value:"99.9%",      label:"Uptime",   icon:TrendingUp },
-  { value:"Real-time",  label:"Sync",     icon:Zap },
+  { value:"Real-time",  label:"Sync",     icon:Bolt },
 ]
 
 const testimonials = [
@@ -74,7 +74,7 @@ const testimonials = [
 ]
 
 const STAFF_SUB_ROLES = [
-  { id:"waiter",   label:"Waiter",   icon:ShoppingCart,  desc:"Orders & Tables",       path:"/waiter/dashboard" },
+  { id:"waiter",   label:"Waiter",   icon:"/staff.png",  desc:"Orders & Tables",       path:"/waiter/dashboard" },
   { id:"kitchen",  label:"Chef",     icon:ChefHat,       desc:"Kitchen KDS",            path:"/kitchen/kds"      },
   { id:"cleaner",  label:"Cleaner",  icon:UtensilsCrossed, desc:"Facility Maintenance", path:"/cleaners"         },
   { id:"security", label:"Security", icon:Shield,        desc:"Safety & Access",        path:"/security"         },
@@ -143,20 +143,9 @@ export default function LoginPage() {
 
         <div className="relative z-10 flex flex-col h-full justify-between gap-12">
 
-          {/* Logo */}
-          <div className="flex items-center gap-3.5">
-            <div
-              className="flex items-center justify-center w-12 h-12 rounded-2xl border backdrop-blur-sm"
-              style={{ background:"rgba(255,255,255,0.14)", borderColor:"rgba(255,255,255,0.25)", boxShadow:"0 8px 32px rgba(0,0,0,0.12)" }}
-            >
-              <UtensilsCrossed className="h-5.5 w-5.5 text-white" strokeWidth={2.5} />
-            </div>
-            <div>
-              <p className="text-white text-[22px] font-bold  uppercase leading-none">Resto</p>
-              <p className="text-[9px] uppercase  mt-1 font-medium" style={{ color:"rgba(255,255,255,0.6)" }}>
-                Grande Cuisine
-              </p>
-            </div>
+          {/* Project Logo */}
+          <div className="flex items-center gap-4">
+            <img src="/logo-full.png" alt="Resto Logo" className="h-16 w-auto brightness-0 invert" />
           </div>
 
           {/* Hero */}
@@ -277,18 +266,9 @@ export default function LoginPage() {
         className="flex flex-col justify-center px-6 py-10 lg:px-10 xl:px-14"
         style={{ background:"#F8F6FC" }}
       >
-        {/* Mobile logo */}
-        <div className="flex lg:hidden items-center gap-3 mb-10">
-          <div
-            className="flex items-center justify-center w-11 h-11 rounded-xl shadow-lg"
-            style={{ background:"oklch(0.42 0.14 285)" }}
-          >
-            <UtensilsCrossed className="h-5 w-5 text-white" strokeWidth={2.5} />
-          </div>
-          <div>
-            <p className="text-xl font-bold  uppercase leading-none" style={{ color:"#0D031B" }}>Resto</p>
-            <p className="text-[9px] uppercase  font-medium" style={{ color:"oklch(0.42 0.14 285)" }}>Grande Cuisine</p>
-          </div>
+        {/* Project Logo Mobile */}
+        <div className="flex lg:hidden items-center mb-10">
+          <img src="/logo-full.png" alt="Resto Logo" className="h-12 w-auto" />
         </div>
 
         <div className="w-full max-w-[440px] mx-auto space-y-7">
@@ -314,7 +294,7 @@ export default function LoginPage() {
                 <div className="flex items-center gap-2.5">
                   <div className="w-8 h-8 rounded-lg flex items-center justify-center" 
                     style={{ background:"oklch(0.42 0.14 285 / 0.1)" }}>
-                    <Zap className="h-4 w-4" style={{ color:"oklch(0.42 0.14 285)" }} />
+                    <Bolt className="h-4 w-4" style={{ color:"oklch(0.42 0.14 285)" }} />
                   </div>
                   <CardTitle className="text-[12px] font-semibold uppercase " style={{ color:"#3D374C" }}>
                     Quick Demo Access
@@ -367,7 +347,11 @@ export default function LoginPage() {
                               color:"oklch(0.42 0.14 285)"
                             }}
                           >
-                            <sub.icon className="h-4 w-4 transition-transform group-hover:scale-110" />
+                            {typeof sub.icon === 'string' ? (
+                              <img src={sub.icon} className="h-5 w-5 brightness-0" style={{ filter: 'invert(37%) sepia(93%) saturate(541%) hue-rotate(221deg) brightness(85%) contrast(89%)' }} />
+                            ) : (
+                              <sub.icon className="h-4 w-4 transition-transform group-hover:scale-110" />
+                            )}
                           </div>
                           <div className="min-w-0">
                             <p className="text-[13px] font-medium leading-none text-[#0D031B]">{sub.label}</p>
@@ -417,7 +401,11 @@ export default function LoginPage() {
                           >
                             {busy
                               ? <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                              : <Icon className="h-4.5 w-4.5 transition-transform group-hover:scale-110" />
+                              : typeof opt.icon === 'string' ? (
+                                <img src={opt.icon} className="h-5 w-5 brightness-0" style={{ filter: 'invert(37%) sepia(93%) saturate(541%) hue-rotate(221deg) brightness(85%) contrast(89%)' }} />
+                              ) : (
+                                <opt.icon className="h-4.5 w-4.5 transition-transform group-hover:scale-110" />
+                              )
                             }
                           </div>
                           <div className="min-w-0 relative z-10">
@@ -596,7 +584,11 @@ export default function LoginPage() {
                           {active && (
                             <div className="absolute inset-0 bg-gradient-to-br from-oklch(0.42 0.14 285 / 0.05) to-transparent" />
                           )}
-                          <Icon className={cn("h-4 w-4 relative z-10 transition-transform", active && "scale-110")} />
+                          {typeof opt.icon === 'string' ? (
+                            <img src={opt.icon} className={cn("h-4 w-4 relative z-10 transition-transform", active && "scale-110 brightness-0")} style={active ? { filter: 'invert(37%) sepia(93%) saturate(541%) hue-rotate(221deg) brightness(85%) contrast(89%)' } : { opacity: 0.7 }} />
+                          ) : (
+                            <Icon className={cn("h-4 w-4 relative z-10 transition-transform", active && "scale-110")} />
+                          )}
                           <span className="relative z-10">{opt.label}</span>
                         </button>
                       )

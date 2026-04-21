@@ -230,15 +230,12 @@ export function GlassLoader({ className, fullScreen = true, autoHideDuration = 7
                 outline:      "none",
               }}
             >
-              {/* Knife + fork SVG icon */}
-              <svg width="38" height="38" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <line x1="20" y1="20" x2="80" y2="80" stroke="white" strokeWidth="10" strokeLinecap="round"/>
-                <line x1="80" y1="20" x2="20" y2="80" stroke="white" strokeWidth="10" strokeLinecap="round"/>
-                <path d="M72 12 V28" stroke="white" strokeWidth="8" strokeLinecap="round"/>
-                <path d="M80 12 V28" stroke="white" strokeWidth="8" strokeLinecap="round"/>
-                <path d="M88 12 V28" stroke="white" strokeWidth="8" strokeLinecap="round"/>
-                <path d="M72 28 Q72 36 80 36 Q88 36 88 28" stroke="white" strokeWidth="8" strokeLinecap="round" fill="none"/>
-              </svg>
+              {/* Project Logo Icon */}
+              <img 
+                src="/logo-icon.png" 
+                alt="Resto Logo" 
+                className="w-10 h-10 brightness-0 invert object-contain -mt-0.5" 
+              />
             </div>
           </div>
 

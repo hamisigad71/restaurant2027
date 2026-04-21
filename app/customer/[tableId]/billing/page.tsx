@@ -11,7 +11,7 @@ import {
   BanknotesIcon as Banknote, 
   CreditCardIcon as CreditCard, 
   StarIcon as Star,
-  SparklesIcon as UtensilsCrossed, 
+  BoltIcon as UtensilsCrossed, 
   ArrowRightIcon as ArrowRight,
 } from "@heroicons/react/24/outline"
 import { OrderService, LiveOrder } from "@/lib/order-service"

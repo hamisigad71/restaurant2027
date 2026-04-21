@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { useState } from "react"
 import { 
-  SparklesIcon as UtensilsCrossed, 
+  BoltIcon as UtensilsCrossed, 
   ArrowLeftIcon as ArrowLeft, 
   EnvelopeIcon as Mail 
 } from "@heroicons/react/24/outline"

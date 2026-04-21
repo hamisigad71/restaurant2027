@@ -10,7 +10,7 @@ import {
   BellIcon,
   ExclamationCircleIcon,
   ChartBarIcon, 
-  SparklesIcon
+  BoltIcon
 } from "@heroicons/react/24/outline"
 import { 
   CheckCircleIcon as CheckCircleIconSolid, 
@@ -50,7 +50,7 @@ export default function IconDemo() {
               <CheckCircleIconSolid className="h-10 w-10 text-emerald-500" />
               <ExclamationCircleIconSolid className="h-10 w-10 text-rose-500" />
               <FireIconSolid className="h-10 w-10 text-orange-500" />
-              <SparklesIcon className="h-10 w-10 text-indigo-500" />
+              <BoltIcon className="h-10 w-10 text-indigo-500" />
             </div>
             <p className="mt-4 text-sm text-slate-500">Great for badges, active states, and focus areas.</p>
           </div>

@@ -14,7 +14,7 @@ import {
   CheckBadgeIcon,
   ArrowRightIcon as ArrowRight,
   ChevronRightIcon,
-  SparklesIcon as Crown,
+  BoltIcon as Crown,
   FireIcon,
   HomeIcon,
   BuildingStorefrontIcon,
@@ -101,9 +101,9 @@ const recentActivity = [
 ]
 
 const quickActions = [
-  { href: "/waiter/service-floor",   icon: ShoppingCartIcon, label: "New Order",      primary: true  },
-  { href: "/waiter/service-floor",   icon: CheckBadgeIcon,    label: "Floor Plan",     primary: false },
-  { href: "/waiter/order-tracking",  icon: HomeIcon,       label: "Order Status",   primary: false },
+  { href: "/waiter/service-floor",   icon: "/service-floor-nav.png", label: "New Order",      primary: true  },
+  { href: "/waiter/service-floor",   icon: "/service-floor-nav.png", label: "Floor Plan",     primary: false },
+  { href: "/waiter/order-tracking",  icon: "/order-tracking-nav.png",       label: "Order Status",   primary: false },
   { href: "/waiter/checkout",        icon: CheckCircleIcon, label: "Settlements",    primary: false },
 ]
 
@@ -346,7 +346,7 @@ export default function WaiterDashboard() {
                     color: "#3D374C",
                   }}
                 >
-                  <ChartBarIcon className="h-3.5 w-3.5" />
+                  <img src="/live-view-nav.png" className="h-3.5 w-3.5 brightness-0 invert object-contain" alt="Live View" />
                   <span className="hidden sm:inline">Live View</span>
                 </Button>
               </TooltipTrigger>
@@ -363,7 +363,7 @@ export default function WaiterDashboard() {
               asChild
             >
               <Link href="/waiter/service-floor">
-                <ShoppingCartIcon className="h-3.5 w-3.5" />
+                <img src="/service-floor-nav.png" className="h-3.5 w-3.5 brightness-0 invert object-contain" alt="New Order" />
                 New Order
               </Link>
             </Button>
@@ -752,7 +752,7 @@ export default function WaiterDashboard() {
                   }}
                 >
                   <Link href="/waiter/service-floor" className="flex items-center gap-2.5">
-                    <ShoppingCartIcon className="h-5 w-5" />
+                    <img src="/service-floor-nav.png" className="h-5 w-5 brightness-0 invert object-contain" alt="New Order" />
                     New Order
                   </Link>
                 </Button>
@@ -774,7 +774,11 @@ export default function WaiterDashboard() {
                         }}
                       >
                         <Link href={action.href} className="flex flex-col items-center gap-1.5">
-                          <Icon className="h-4 w-4" style={{ color: "oklch(0.45 0.12 285)" }} />
+                          {typeof Icon === "string" ? (
+                            <img src={Icon} className="h-4 w-4 brightness-0 invert object-contain" alt={action.label} style={{ filter: "brightness(0.45) saturate(0.5)" }} />
+                          ) : (
+                            <Icon className="h-4 w-4" style={{ color: "oklch(0.45 0.12 285)" }} />
+                          )}
                           {action.label}
                         </Link>
                       </Button>

@@ -14,7 +14,7 @@ import {
   BellIcon,
   ExclamationTriangleIcon,
   ArrowTrendingUpIcon,
-  SparklesIcon,
+  BoltIcon,
   UserGroupIcon,
   ArrowUpRightIcon,
   CakeIcon,
@@ -376,13 +376,13 @@ export default function OrderStatusPage() {
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
             {/* Title Section */}
             <div className="flex items-center gap-3 sm:gap-4">
-              <div
-                className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center shadow-lg"
+                <div
+                className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center shadow-lg p-2"
                 style={{
                   background: "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)",
                 }}
               >
-                <CakeIcon className="h-6 w-6 sm:h-7 sm:w-7 text-white" strokeWidth={2.5} />
+                <img src="/order-tracking-nav.png" className="w-full h-full brightness-0 invert object-contain" alt="Order Tracking" />
               </div>
               <div>
                 <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight leading-none" style={{ color: "#0D031B" }}>

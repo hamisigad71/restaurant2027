@@ -6,7 +6,7 @@ import {
   ChevronUpDownIcon,
   CreditCardIcon,
   ArrowRightOnRectangleIcon,
-  SparklesIcon,
+  BoltIcon,
 } from "@heroicons/react/24/outline"
 
 import {
@@ -86,7 +86,7 @@ export function NavUser({
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem>
-                <SparklesIcon className="mr-2 h-4 w-4" />
+                <BoltIcon className="mr-2 h-4 w-4" />
                 Upgrade to Pro
               </DropdownMenuItem>
             </DropdownMenuGroup>

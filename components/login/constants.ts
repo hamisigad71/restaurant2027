@@ -6,16 +6,16 @@ import {
   SparklesIcon as Sparkles, 
   ArrowTrendingUpIcon as TrendingUp, 
   BoltIcon as Zap, 
-  SparklesIcon as UtensilsCrossed 
+  BoltIcon as UtensilsCrossed 
 } from "@heroicons/react/24/outline"
 
 export type UserRole = 'admin' | 'manager' | 'waiter' | 'kitchen' | 'customer' | 'cleaner' | 'security'
 
 export const roleOptions = [
   { role: "admin" as UserRole, label: "Admin", description: "Full access", icon: Shield },
-  { role: "manager" as UserRole, label: "Manager", description: "Ops & reports", icon: Users },
-  { role: "waiter" as UserRole, label: "Staff", description: "Waiter & support", icon: ShoppingCart },
-  { role: "kitchen" as UserRole, label: "Kitchen", description: "Preparation", icon: ChefHat },
+  { role: "manager" as UserRole, label: "Manager", description: "Ops & reports", icon: "/manager.png" },
+  { role: "waiter" as UserRole, label: "Staff", description: "Waiter & support", icon: "/staff.png" },
+  { role: "kitchen" as UserRole, label: "Kitchen", description: "Preparation", icon: "/kitchen.png" },
 ]
 
 export const defaultRedirects: Record<UserRole, string> = {
@@ -52,8 +52,8 @@ export const testimonials = [
 ]
 
 export const STAFF_SUB_ROLES = [
-  { id: "waiter", label: "Waiter", icon: ShoppingCart, desc: "Orders & Tables", path: "/waiter/dashboard" },
-  { id: "kitchen", label: "Chef", icon: ChefHat, desc: "Kitchen KDS", path: "/kitchen/kds" },
+  { id: "waiter", label: "Waiter", icon: "/staff.png", desc: "Orders & Tables", path: "/waiter/dashboard" },
+  { id: "kitchen", label: "Chef", icon: "/kitchen.png", desc: "Kitchen KDS", path: "/kitchen/kds" },
   { id: "cleaner", label: "Cleaner", icon: UtensilsCrossed, desc: "Facility Maintenance", path: "/cleaners" },
   { id: "security", label: "Security", icon: Shield, desc: "Safety & Access", path: "/security" },
 ]

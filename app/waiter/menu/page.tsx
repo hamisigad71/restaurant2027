@@ -14,7 +14,7 @@ import {
   BoltIcon as Zap, 
   EllipsisHorizontalIcon as MoreHorizontal, 
   FireIcon as Flame,
-  SparklesIcon as UtensilsCrossed, 
+  BoltIcon as UtensilsCrossed, 
   CubeIcon as Package,
 } from "@heroicons/react/24/outline"
 import { Button }  from "@/components/ui/button"
@@ -259,10 +259,10 @@ export default function WaiterMenuPage() {
           {/* ── Page header ──────────────────────────────────────── */}
           <div className="flex items-center gap-2 mb-1.5">
             <div
-              className="flex items-center justify-center w-9 h-9 rounded-xl"
+              className="flex items-center justify-center w-9 h-9 rounded-xl p-1.5"
               style={{ background:"oklch(0.45 0.12 285)", boxShadow:"0 4px 12px oklch(0.45 0.12 285 / 0.35)" }}
             >
-              <UtensilsCrossed className="h-4.5 w-4.5 text-white" />
+              <img src="/menu-nav.png" className="w-full h-full brightness-0 invert object-contain" alt="Menu" />
             </div>
             <div>
               <h1 className="text-[17px] font-bold tracking-tight leading-none" style={{ color:"#0D031B" }}>

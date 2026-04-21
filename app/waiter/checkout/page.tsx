@@ -18,7 +18,7 @@ import {
   CheckIcon as Check, 
   UserGroupIcon as Users, 
   ShoppingBagIcon as ShoppingBag,
-  SparklesIcon as Sparkles, 
+  BoltIcon as Sparkles, 
   CheckCircleIcon as CircleDot, 
   ArrowTrendingUpIcon as TrendingUp, 
   WalletIcon as Wallet, 

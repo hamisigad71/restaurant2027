@@ -17,8 +17,8 @@ import {
   BoltIcon as Zap, 
   PencilSquareIcon as Edit3, 
   EllipsisHorizontalIcon as MoreHorizontal, 
-  SparklesIcon as Sparkles,
-  SparklesIcon as UtensilsCrossed, 
+  BoltIcon as Sparkles,
+  ArrowRightIcon as UtensilsCrossed, 
   CubeIcon as Package,
 } from "@heroicons/react/24/outline"
 import { Button }  from "@/components/ui/button"

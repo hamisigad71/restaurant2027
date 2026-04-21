@@ -1,6 +1,6 @@
 import { 
-  SparklesIcon as UtensilsCrossed, 
-  SparklesIcon as Crown, 
+  BoltIcon as UtensilsCrossed, 
+  BoltIcon as Crown, 
   StarIcon as Star, 
   CheckIcon as Check 
 } from "@heroicons/react/24/outline"

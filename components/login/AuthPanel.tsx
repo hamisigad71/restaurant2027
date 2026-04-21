@@ -6,8 +6,10 @@ import {
   LockClosedIcon as Lock, 
   EyeIcon as Eye, 
   EyeSlashIcon as EyeOff, 
-  SparklesIcon as UtensilsCrossed, 
-  ShieldCheckIcon as Shield 
+  BoltIcon as UtensilsCrossed, 
+  ShieldCheckIcon as Shield,
+  ArrowRightIcon,
+  BoltIcon
 } from "@heroicons/react/24/outline"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -57,8 +59,8 @@ export function AuthPanel({
       style={{ background: "#F8F6FC" }}
     >
       {/* Mobile logo */}
-      <div className="flex lg:hidden items-center mb-10">
-        <img src="/logo-full.svg" alt="Resto Logo" className="h-12 w-auto" />
+      <div className="flex lg:hidden items-center mb-10 shrink-0">
+        <img src="/logo-full.png" alt="Resto Logo" className="h-12 w-auto object-contain" />
       </div>
 
       <div className="w-full max-w-[440px] mx-auto space-y-7">
@@ -129,7 +131,11 @@ export function AuthPanel({
                           className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 transition-all duration-200"
                           style={{ background: "oklch(0.42 0.14 285 / 0.08)", color: "oklch(0.42 0.14 285)" }}
                         >
-                          <sub.icon className="h-4 w-4 transition-transform group-hover:scale-110" />
+                          {typeof sub.icon === 'string' ? (
+                            <img src={sub.icon} className="h-5 w-5 brightness-0" style={{ filter: 'invert(37%) sepia(93%) saturate(541%) hue-rotate(221deg) brightness(85%) contrast(89%)' }} />
+                          ) : (
+                            <sub.icon className="h-4 w-4 transition-transform group-hover:scale-110" />
+                          )}
                         </div>
                         <div className="min-w-0">
                           <p className="text-[13px] font-medium leading-none text-[#0D031B]">{sub.label}</p>
@@ -172,7 +178,11 @@ export function AuthPanel({
                         >
                           {busy
                             ? <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                            : <Icon className="h-4.5 w-4.5 transition-transform group-hover:scale-110" />
+                            : typeof opt.icon === 'string' ? (
+                              <img src={opt.icon} className={cn("h-5 w-5 brightness-0", busy && "invert")} style={!busy ? { filter: 'invert(37%) sepia(93%) saturate(541%) hue-rotate(221deg) brightness(85%) contrast(89%)' } : undefined} />
+                            ) : (
+                              <opt.icon className="h-4.5 w-4.5 transition-transform group-hover:scale-110" />
+                            )
                           }
                         </div>
                         <div className="min-w-0 relative z-10">
@@ -277,7 +287,11 @@ export function AuthPanel({
                         }
                       >
                         {active && <div className="absolute inset-0 bg-gradient-to-br from-oklch(0.42 0.14 285 / 0.05) to-transparent" />}
-                        <Icon className={cn("h-4 w-4 relative z-10 transition-transform", active && "scale-110")} />
+                        {typeof opt.icon === 'string' ? (
+                          <img src={opt.icon} className={cn("h-4 w-4 relative z-10 transition-transform", active && "scale-110 brightness-0")} style={active ? { filter: 'invert(37%) sepia(93%) saturate(541%) hue-rotate(221deg) brightness(85%) contrast(89%)' } : { opacity: 0.7 }} />
+                        ) : (
+                          <Icon className={cn("h-4 w-4 relative z-10 transition-transform", active && "scale-110")} />
+                        )}
                         <span className="relative z-10">{opt.label}</span>
                       </button>
                     )

@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { 
   ClockIcon as Clock, 
-  SparklesIcon as ChefHat, 
+  BoltIcon as ChefHat, 
   CheckCircleIcon as CheckCircle, 
   ExclamationTriangleIcon as AlertTriangle 
 } from "@heroicons/react/24/outline"

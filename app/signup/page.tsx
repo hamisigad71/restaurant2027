@@ -14,11 +14,11 @@ import {
   ArrowRightIcon, 
   CheckCircleIcon, 
   LockClosedIcon, 
-  SparklesIcon, 
+  BoltIcon, 
   CheckIcon 
 } from "@heroicons/react/24/outline"
 
-const UtensilsCrossed = SparklesIcon
+const UtensilsCrossed = BoltIcon
 import { Button }    from "@/components/ui/button"
 import { Input }     from "@/components/ui/input"
 import { Label }     from "@/components/ui/label"
@@ -36,14 +36,14 @@ const perks = [
   { icon:ShieldCheckIcon,       text:"Role-based access control"        },
   { icon:CheckCircleIcon, text:"Real-time kitchen sync"           },
   { icon:LockClosedIcon,         text:"Enterprise-grade security"        },
-  { icon:SparklesIcon,        text:"AI-powered demand forecasting"    },
+  { icon:BoltIcon,        text:"AI-powered demand forecasting"    },
 ]
 
 const roles = [
   { value:"admin",   label:"Admin (Owner)", icon:ShieldCheckIcon,       description:"Full system control"  },
-  { value:"manager", label:"Manager",       icon:UserGroupIcon,        description:"Operations & reports" },
-  { value:"staff",   label:"Staff",         icon:ShoppingCartIcon, description:"Waiters & Support"    },
-  { value:"kitchen", label:"Kitchen",       icon:AcademicCapIcon,      description:"Preparation & KDS"   },
+  { value:"manager", label:"Manager",       icon:"/manager.png",        description:"Operations & reports" },
+  { value:"staff",   label:"Staff",         icon:"/staff.png", description:"Waiters & Support"    },
+  { value:"kitchen", label:"Kitchen",       icon:"/kitchen.png",      description:"Preparation & KDS"   },
 ]
 
 const staffSubRoles = [
@@ -107,20 +107,9 @@ export default function SignupPage() {
 
         <div className="relative z-10 flex flex-col h-full justify-between gap-10">
 
-          {/* Logo */}
-          <div className="flex items-center gap-3">
-            <div
-              className="flex items-center justify-center w-11 h-11 rounded-xl border"
-              style={{ background:"rgba(255,255,255,0.12)", borderColor:"rgba(255,255,255,0.2)" }}
-            >
-              <BuildingStorefrontIcon className="h-5 w-5 text-white" />
-            </div>
-            <div>
-              <p className="text-white text-xl font-bold  uppercase leading-none">Resto</p>
-              <p className="text-[9px] uppercase  mt-0.5" style={{ color:"rgba(255,255,255,0.5)" }}>
-                Grande Cuisine
-              </p>
-            </div>
+          {/* Project Logo */}
+          <div className="flex items-center gap-4">
+            <img src="/logo-full.png" alt="Resto Logo" className="h-14 w-auto brightness-0 invert" />
           </div>
 
           {/* Hero */}
@@ -129,7 +118,7 @@ export default function SignupPage() {
               className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-bold rounded-full border w-fit"
               style={{ background:"rgba(255,255,255,0.1)", borderColor:"rgba(255,255,255,0.2)", color:"white" }}
             >
-              <SparklesIcon className="h-3 w-3" style={{ color:"#FDE68A" }} />
+              <BoltIcon className="h-3 w-3" style={{ color:"#FDE68A" }} />
               Join 500+ restaurants on Resto
             </Badge>
 
@@ -188,15 +177,9 @@ export default function SignupPage() {
       {/* ── RIGHT — form panel ───────────────────────────────────── */}
       <div className="flex flex-col justify-center px-8 py-10" style={{ background:"#EBE6F8" }}>
 
-        {/* Mobile logo */}
-        <div className="flex lg:hidden items-center gap-3 mb-8">
-          <div className="flex items-center justify-center w-10 h-10 rounded-xl" style={{ background:"oklch(0.45 0.12 285)" }}>
-            <UtensilsCrossed className="h-5 w-5 text-white" />
-          </div>
-          <div>
-            <p className="text-lg font-bold  uppercase leading-none" style={{ color:"#0D031B" }}>Resto</p>
-            <p className="text-[9px] uppercase " style={{ color:"oklch(0.45 0.12 285)" }}>Grande Cuisine</p>
-          </div>
+        {/* Project Logo Mobile */}
+        <div className="flex lg:hidden items-center mb-8">
+          <img src="/logo-full.png" alt="Resto Logo" className="h-10 w-auto" />
         </div>
 
         <div className="w-full max-w-[380px] mx-auto space-y-6">
@@ -242,19 +225,23 @@ export default function SignupPage() {
                           : "border-[oklch(0.45_0.12_285)/0.12] bg-white hover:border-[oklch(0.45_0.12_285)/0.35] hover:bg-[oklch(0.45_0.12_285)/0.03]"
                       )}
                     >
-                      <div
-                        className={cn(
-                          "flex items-center justify-center w-8 h-8 rounded-md shrink-0 transition-all",
-                          !active && "bg-[oklch(0.45_0.12_285)/0.06] text-[oklch(0.45_0.12_285)] group-hover:bg-[oklch(0.45_0.12_285)] group-hover:text-white"
-                        )}
-                        style={
-                          active
-                            ? { background:"oklch(0.45 0.12 285)", color:"white" }
-                            : undefined
-                        }
-                      >
-                        <Icon className="h-3.5 w-3.5" />
-                      </div>
+                        <div
+                          className={cn(
+                            "flex items-center justify-center w-8 h-8 rounded-md shrink-0 transition-all",
+                            !active && "bg-[oklch(0.45_0.12_285)/0.06] text-[oklch(0.45_0.12_285)] group-hover:bg-[oklch(0.45_0.12_285)] group-hover:text-white"
+                          )}
+                          style={
+                            active
+                              ? { background:"oklch(0.45 0.12 285)", color:"white" }
+                              : undefined
+                          }
+                        >
+                          {typeof r.icon === 'string' ? (
+                            <img src={r.icon} className={cn("h-4 w-4", !active && "brightness-0 opacity-70")} style={active ? { filter: 'brightness(0) invert(1)' } : undefined} />
+                          ) : (
+                            <Icon className="h-3.5 w-3.5" />
+                          )}
+                        </div>
                       <div className="min-w-0">
                         <p
                           className="text-[12px] font-medium leading-none"

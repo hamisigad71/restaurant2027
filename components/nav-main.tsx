@@ -44,14 +44,22 @@ export function NavMain({
             <SidebarMenuButton tooltip={item.title} asChild={!hasSubItems} isActive={item.isActive}>
               {hasSubItems ? (
                 <>
-                  {item.icon && <item.icon />}
+                  {item.icon && (typeof item.icon === 'string' ? (
+                    <img src={item.icon} className="size-4 shrink-0 transition-all duration-200" style={{ filter: item.isActive ? 'brightness(0) invert(1)' : 'grayscale(1) opacity(0.7)' }} />
+                  ) : (
+                    <item.icon className="size-4" />
+                  ))}
                   <span>{item.title}</span>
                   {item.badge && <SidebarMenuBadge className="ml-auto">{item.badge}</SidebarMenuBadge>}
                   <ChevronRightIcon className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90 h-4 w-4" />
                 </>
               ) : (
                 <Link href={item.url}>
-                  {item.icon && <item.icon />}
+                  {item.icon && (typeof item.icon === 'string' ? (
+                    <img src={item.icon} className="size-4 shrink-0 transition-all duration-200" style={{ filter: item.isActive ? 'brightness(0) invert(1)' : 'grayscale(1) opacity(0.7)' }} />
+                  ) : (
+                    <item.icon className="size-4" />
+                  ))}
                   <span>{item.title}</span>
                   {item.badge && <SidebarMenuBadge className="ml-auto">{item.badge}</SidebarMenuBadge>}
                 </Link>

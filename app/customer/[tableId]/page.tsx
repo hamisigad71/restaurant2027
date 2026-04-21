@@ -9,7 +9,7 @@ import {
   MinusIcon as Minus, 
   MagnifyingGlassIcon as Search, 
   XMarkIcon as X,
-  SparklesIcon as UtensilsCrossed, 
+  BoltIcon as UtensilsCrossed, 
   ClockIcon as Clock, 
   StarIcon as Star, 
   DocumentTextIcon as Receipt,
