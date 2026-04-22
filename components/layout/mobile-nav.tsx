@@ -74,42 +74,42 @@ export function MobileNav() {
 
     const configs: Record<UserRole, NavItem[]> = {
       admin: [
-        { label: "Home", icon: HomeIcon, href: "/admin/dashboard" },
-        { label: "Staff", icon: UserGroupIcon, href: "/admin/staff" },
+        { label: "Home", icon: "/home.png", href: "/admin/dashboard" },
+        { label: "Staff", icon: "/staff.png", href: "/admin/staff" },
         { label: "Menu", icon: "/menu-nav.png", href: "/admin/menu" },
-        { label: "Config", icon: Cog6ToothIcon, href: "/admin/settings" },
+        { label: "Config", icon: "/system-administration.png", href: "/admin/settings" },
       ],
       manager: [
-        { label: "Home", icon: HomeIcon, href: "/manager/dashboard" },
-        { label: "Orders", icon: "/order-tracking-nav.png", href: "/manager/orders" },
+        { label: "Home", icon: "/home.png", href: "/manager/dashboard" },
+        { label: "Orders", icon: "/food-delivery.png", href: "/manager/orders" },
         { label: "Menu", icon: "/menu-nav.png", href: "/manager/menu" },
-        { label: "Staff", icon: UserGroupIcon, href: "/manager/staff" },
-        { label: "Reports", icon: ChartBarIcon, href: "/manager/reports" },
+        { label: "Staff", icon: "/staff.png", href: "/manager/staff" },
+        { label: "Reports", icon: "/report.png", href: "/manager/reports" },
       ],
       waiter: [
-        { label: "Home", icon: HomeIcon, href: "/waiter/dashboard" },
+        { label: "Home", icon: "/home.png", href: "/waiter/dashboard" },
         { label: "Floor", icon: "/service-floor-nav.png", href: "/waiter/service-floor" },
         { label: "Menu", icon: "/menu-nav.png", href: "/waiter/menu" },
-        { label: "Status", icon: "/order-tracking-nav.png", href: "/waiter/order-tracking" },
+        { label: "Status", icon: "/food-delivery.png", href: "/waiter/order-tracking" },
         { label: "Pay", icon: "/checkout-nav.png", href: "/waiter/checkout" },
       ],
       kitchen: [
         { label: "KDS", icon: "/chef-icon.png", href: "/kitchen/kds" },
-        { label: "Stats", icon: ChartBarIcon, href: "/kitchen/kds" },
-        { label: "System", icon: Cog6ToothIcon, href: "/kitchen/kds" },
+        { label: "Stats", icon: "/report.png", href: "/kitchen/kds" },
+        { label: "System", icon: "/operation.png", href: "/kitchen/kds" },
       ],
       customer: [
-        { label: "Home", icon: HomeIcon, href: customerPrefix },
+        { label: "Home", icon: "/home.png", href: customerPrefix },
         { label: "Menu", icon: "/menu-nav.png", href: customerPrefix },
-        { label: "Orders", icon: "/order-tracking-nav.png", href: `${customerPrefix}/status` },
+        { label: "Orders", icon: "/food-delivery.png", href: `${customerPrefix}/status` },
         { label: "Pay", icon: "/checkout-nav.png", href: `${customerPrefix}/billing` },
       ],
       cleaner: [
-        { label: "Tasks", icon: PaintBrushIcon, href: "/cleaners" },
+        { label: "Tasks", icon: "/office.png", href: "/cleaners" },
         { label: "Alerts", icon: BellIcon, href: "/cleaners" },
       ],
       security: [
-        { label: "Watch", icon: ShieldCheckIcon, href: "/security" },
+        { label: "Watch", icon: "/policeman.png", href: "/security" },
         { label: "Logs", icon: ClipboardDocumentListIcon, href: "/security" },
       ]
     }
@@ -170,7 +170,7 @@ export function MobileNav() {
 
       <nav 
         className={cn(
-          "fixed bottom-0 left-0 right-0 z-[100] pb-safe md:hidden transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]",
+          "fixed bottom-0 left-0 right-0 z-[100] pb-safe md:hidden transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] rounded-t-[32px]",
           isVisible ? "translate-y-0 opacity-100" : "translate-y-[calc(100%+20px)] opacity-0 pointer-events-none"
         )}
       >
@@ -178,13 +178,13 @@ export function MobileNav() {
         <div className="absolute top-0 left-0 right-0 h-8 bg-gradient-to-t from-transparent to-[#F8F6FC] pointer-events-none" />
 
         {/* Main container with refined design - NOW FULL WIDTH */}
-        <div className="relative mx-0 mb-0 overflow-hidden">
+        <div className="relative mx-0 mb-0 overflow-hidden rounded-t-[32px]">
           
           {/* Sophisticated multi-layer background */}
-          <div className="absolute inset-0">
+          <div className="absolute inset-0 rounded-t-[32px] overflow-hidden">
             {/* Base layer - frosted glass effect */}
             <div 
-              className="absolute inset-0 backdrop-blur-2xl"
+              className="absolute inset-0 backdrop-blur-2xl rounded-t-[32px]"
               style={{ 
                 background: "linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.92) 100%)"
               }}
@@ -192,7 +192,7 @@ export function MobileNav() {
             
             {/* Noise texture overlay for premium feel */}
             <div 
-              className="absolute inset-0 opacity-[0.015] mix-blend-overlay"
+              className="absolute inset-0 opacity-[0.015] mix-blend-overlay rounded-t-[32px]"
               style={{ 
                 backgroundImage: "url(data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E)",
                 backgroundSize: "128px 128px"
@@ -272,13 +272,14 @@ export function MobileNav() {
                       {/* Icon glow removed */}
                       
                       {typeof Icon === 'string' ? (
-                        <img 
-                          src={Icon} 
-                          className="h-5.5 w-5.5 transition-all duration-500 relative z-10 object-contain" 
+                        <div 
+                          className="h-5.5 w-5.5 transition-all duration-500 relative z-10" 
                           style={{ 
-                            filter: isActive 
-                              ? "invert(24%) sepia(86%) saturate(1450%) hue-rotate(242deg) brightness(91%) contrast(92%)" 
-                              : "invert(31%) sepia(68%) saturate(1116%) hue-rotate(221deg) brightness(91%) contrast(89%)",
+                            backgroundColor: isActive ? "oklch(0.42 0.14 285)" : "#736C83",
+                            WebkitMaskImage: `url(${Icon})`,
+                            WebkitMaskSize: "contain",
+                            WebkitMaskRepeat: "no-repeat",
+                            WebkitMaskPosition: "center",
                             opacity: isActive ? 1 : 0.7
                           }} 
                         />

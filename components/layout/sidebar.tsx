@@ -54,29 +54,29 @@ interface NavItem {
 const allNavItems: NavItem[] = [
   // Admin
   { name: "Dashboard", href: "/admin/dashboard", icon: "/dashboard.png", permission: "dashboard", portal: "admin" },
-  { name: "Analytics", href: "/admin/analytics", icon: ChartBarIcon, permission: "analytics", portal: "admin" },
-  { name: "Inventory", href: "/admin/inventory", icon: CubeIcon, permission: "inventory", portal: "admin" },
+  { name: "Analytics", href: "/admin/analytics", icon: "/report.png", permission: "analytics", portal: "admin" },
+  { name: "Inventory", href: "/admin/inventory", icon: "/logistics.png", permission: "inventory", portal: "admin" },
   { name: "Menu", href: "/admin/menu", icon: "/menu-nav.png", permission: "menu", portal: "admin" },
   { name: "Staff", href: "/admin/staff", icon: "/staff.png", permission: "staff", portal: "admin" },
   { name: "Payments", href: "/admin/payments", icon: CreditCardIcon, permission: "payments", portal: "admin" },
-  { name: "Reports", href: "/admin/reports", icon: DocumentChartBarIcon, permission: "reports", portal: "admin" },
-  { name: "Settings", href: "/admin/settings", icon: Cog6ToothIcon, permission: "settings", portal: "admin" },
+  { name: "Reports", href: "/admin/reports", icon: "/report.png", permission: "reports", portal: "admin" },
+  { name: "Settings", href: "/admin/settings", icon: "/system-administration.png", permission: "settings", portal: "admin" },
   
   // Manager
   { name: "Dashboard", href: "/manager/dashboard", icon: "/dashboard.png", permission: "dashboard", portal: "manager" },
-  { name: "Orders", href: "/manager/orders", icon: ShoppingCartIcon, permission: "orders", portal: "manager" },
-  { name: "Inventory", href: "/manager/inventory", icon: CubeIcon, permission: "inventory", portal: "manager" },
+  { name: "Orders", href: "/manager/orders", icon: "/food-delivery.png", permission: "orders", portal: "manager" },
+  { name: "Inventory", href: "/manager/inventory", icon: "/logistics.png", permission: "inventory", portal: "manager" },
   { name: "Menu", href: "/manager/menu", icon: "/menu-nav.png", permission: "menu", portal: "manager" },
   { name: "Staff Oversight", href: "/manager/staff", icon: "/staff.png", permission: "staff", portal: "manager" },
-  { name: "Reservations", href: "/manager/reservations", icon: CalendarIcon, permission: "reservations", portal: "manager" },
-  { name: "Expenses", href: "/manager/expenses", icon: BanknotesIcon, permission: "expenses", portal: "manager" },
-  { name: "Shift Planning", href: "/manager/schedule", icon: ClockIcon, permission: "schedule", portal: "manager" },
-  { name: "Reports", href: "/manager/reports", icon: DocumentChartBarIcon, permission: "reports", portal: "manager" },
+  { name: "Reservations", href: "/manager/reservations", icon: "/calendar.png", permission: "reservations", portal: "manager" },
+  { name: "Expenses", href: "/manager/expenses", icon: "/expences.png", permission: "expenses", portal: "manager" },
+  { name: "Shift Planning", href: "/manager/schedule", icon: "/shift.png", permission: "schedule", portal: "manager" },
+  { name: "Reports", href: "/manager/reports", icon: "/report.png", permission: "reports", portal: "manager" },
   
   // Waiter
   { name: "Dashboard", href: "/waiter/dashboard", icon: "/dashboard.png", permission: "dashboard", portal: "waiter" },
   { name: "Service Floor", href: "/waiter/service-floor", icon: "/service-floor-nav.png", permission: "orders", portal: "waiter" },
-  { name: "Order Tracking", href: "/waiter/order-tracking", icon: "/order-tracking-nav.png", permission: "orders", portal: "waiter" },
+  { name: "Order Tracking", href: "/waiter/order-tracking", icon: "/food-delivery.png", permission: "orders", portal: "waiter" },
   { name: "Menu", href: "/waiter/menu", icon: "/menu-nav.png", permission: "orders", portal: "waiter" },
   { name: "Checkout", href: "/waiter/checkout", icon: "/checkout-nav.png", permission: "orders", portal: "waiter" },
   

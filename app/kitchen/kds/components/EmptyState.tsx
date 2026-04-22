@@ -1,5 +1,5 @@
 "use client"
-import { CakeIcon } from "@heroicons/react/24/outline"
+
 
 interface EmptyStateProps {
   filter: string;
@@ -13,7 +13,20 @@ export function EmptyState({ filter, search }: EmptyStateProps) {
         className="w-20 h-20 rounded-[2.5rem] flex items-center justify-center border"
         style={{ background: "rgba(255,255,255,0.8)", borderColor: "oklch(0.45 0.12 285 / 0.15)", boxShadow: "0 8px 32px rgba(13,3,27,0.06)" }}
       >
-        <CakeIcon className="h-8 w-8" style={{ color: "#AEA6BF" }} />
+        <div
+          className="h-8 w-8"
+          style={{
+            backgroundColor: "#AEA6BF",
+            WebkitMaskImage: `url("/tray.png")`,
+            WebkitMaskSize: "contain",
+            WebkitMaskRepeat: "no-repeat",
+            WebkitMaskPosition: "center",
+            maskImage: `url("/tray.png")`,
+            maskSize: "contain",
+            maskRepeat: "no-repeat",
+            maskPosition: "center",
+          }}
+        />
       </div>
       <div className="text-center">
         <p className="font-bold text-xl" style={{ color: "#0D031B" }}>All caught up!</p>

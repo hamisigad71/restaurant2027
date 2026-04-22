@@ -15,38 +15,38 @@ import { mockDashboardStats } from "@/lib/mock-data"
 const stats = [
   {
     title: "Today's Revenue",
-    value: `KES ${mockDashboardStats.todayRevenue.toLocaleString()}`,
+    value: `KES\u00A0\u00A0\u00A0\u00A0${mockDashboardStats.todayRevenue.toLocaleString()}`,
     change: "+12.5%",
     trend: "up" as const,
-    icon: CurrencyDollarIcon,
+    icon: "/wallet.png" as any,
   },
   {
     title: "Weekly Revenue",
-    value: `KES ${mockDashboardStats.weeklyRevenue.toLocaleString()}`,
+    value: `KES\u00A0\u00A0\u00A0\u00A0${mockDashboardStats.weeklyRevenue.toLocaleString()}`,
     change: "+8.2%",
     trend: "up" as const,
-    icon: CurrencyDollarIcon,
+    icon: "/wallet.png" as any,
   },
   {
     title: "Today's Orders",
     value: mockDashboardStats.todayOrders.toString(),
     change: "+5",
     trend: "up" as const,
-    icon: ShoppingBagIcon,
+    icon: "/food-delivery.png" as any,
   },
   {
     title: "Active Staff",
     value: mockDashboardStats.activeStaff.toString(),
     change: "on duty",
     trend: "neutral" as const,
-    icon: UserGroupIcon,
+    icon: "/staff.png" as any,
   },
   {
     title: "Pending Orders",
     value: mockDashboardStats.pendingOrders.toString(),
     change: "in queue",
     trend: "neutral" as const,
-    icon: ShoppingBagIcon,
+    icon: "/food-delivery.png" as any,
   },
   {
     title: "Low Stock Items",
@@ -68,7 +68,20 @@ export function StatsCards() {
           <CardContent className="p-5 relative z-10">
             <div className="flex items-center justify-between mb-4">
               <div className="p-2.5 rounded-xl bg-primary/10 text-primary group-hover:scale-110 transition-transform duration-300">
-                <stat.icon className="h-4 w-4" />
+                {typeof stat.icon === 'string' ? (
+                  <div 
+                    className="h-5 w-5" 
+                    style={{ 
+                      backgroundColor: "oklch(0.45 0.12 285)",
+                      WebkitMaskImage: `url(${stat.icon})`,
+                      WebkitMaskSize: "contain",
+                      WebkitMaskRepeat: "no-repeat",
+                      WebkitMaskPosition: "center"
+                    }} 
+                  />
+                ) : (
+                  <stat.icon className="h-4 w-4" />
+                )}
               </div>
               
               {stat.trend === "up" && (
@@ -89,7 +102,7 @@ export function StatsCards() {
             </div>
 
             <div className="space-y-1">
-              <p className="text-3xl font-heading   text-foreground leading-none">
+              <p className="text-xl md:text-2xl font-heading text-foreground leading-none whitespace-nowrap tracking-tight">
                 {stat.value}
               </p>
               <p className="text-[10px] font-heading uppercase  text-muted-foreground/80">

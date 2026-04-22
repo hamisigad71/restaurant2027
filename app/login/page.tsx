@@ -34,7 +34,7 @@ import { cn } from "@/lib/utils"
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const roleOptions = [
-  { role:"admin"   as UserRole, label:"Admin",   description:"Full access",      icon:Shield       },
+  { role:"admin"   as UserRole, label:"Admin",   description:"Full access",      icon:"/system-administration.png" },
   { role:"manager" as UserRole, label:"Manager", description:"Ops & reports",    icon:"/manager.png" },
   { role:"waiter"  as UserRole, label:"Staff",   description:"Waiter & support", icon:"/staff.png" },
   { role:"kitchen" as UserRole, label:"Kitchen", description:"Preparation",      icon:"/kitchen.png" },
@@ -76,8 +76,8 @@ const testimonials = [
 const STAFF_SUB_ROLES = [
   { id:"waiter",   label:"Waiter",   icon:"/staff.png",  desc:"Orders & Tables",       path:"/waiter/dashboard" },
   { id:"kitchen",  label:"Chef",     icon:"/chef-icon.png",       desc:"Kitchen KDS",            path:"/kitchen/kds"      },
-  { id:"cleaner",  label:"Cleaner",  icon:UtensilsCrossed, desc:"Facility Maintenance", path:"/cleaners"         },
-  { id:"security", label:"Security", icon:Shield,        desc:"Safety & Access",        path:"/security"         },
+  { id:"cleaner",  label:"Cleaner",  icon:"/office.png", desc:"Facility Maintenance", path:"/cleaners"         },
+  { id:"security", label:"Security", icon:"/policeman.png",        desc:"Safety & Access",        path:"/security"         },
 ]
 
 const features = [

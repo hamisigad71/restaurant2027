@@ -246,7 +246,7 @@ export function GlassLoader({ className, fullScreen = true, autoHideDuration = 7
               style={{
                 fontSize:      28,
                 fontWeight:    800,
-                letterSpacing: "0.18em",
+                letterSpacing: "normal",
                 color:         "#0D031B", // Dark text for light mode
                 textTransform: "uppercase",
                 lineHeight:    1,
@@ -259,7 +259,7 @@ export function GlassLoader({ className, fullScreen = true, autoHideDuration = 7
               className="font-sans"
               style={{
                 fontSize:      10,
-                letterSpacing: "0.22em",
+                letterSpacing: "normal",
                 textTransform: "uppercase",
                 color:         "#5b4fa8", // Primary purple
                 fontWeight:    700,
@@ -288,7 +288,7 @@ export function GlassLoader({ className, fullScreen = true, autoHideDuration = 7
               fontSize:   14,
               fontWeight: 600,
               color:      "#736C83", // Gray for light mode
-              letterSpacing:"0.04em",
+              letterSpacing:"normal",
               minHeight:  20,
               textAlign:  "center",
               opacity:    visible ? 1 : 0,
@@ -302,7 +302,7 @@ export function GlassLoader({ className, fullScreen = true, autoHideDuration = 7
           {/* ── Progress bar ─────────────────────────────────────── */}
           <div className="font-sans" style={{ display:"flex", flexDirection:"column", alignItems:"center", gap:8, width:"100%" }}>
             <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", width:220 }}>
-              <span style={{ fontSize:12, color:"#736C83", letterSpacing:"0.08em", fontWeight: 700, textTransform:"uppercase" }}>Loading</span>
+              <span style={{ fontSize:12, color:"#736C83", letterSpacing:"normal", fontWeight: 700, textTransform:"uppercase" }}>Loading</span>
               <span
                 style={{
                   fontSize:   14,

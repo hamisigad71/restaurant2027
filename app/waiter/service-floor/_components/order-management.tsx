@@ -57,8 +57,8 @@ const statusConfig: Record<
   occupied: {
     label: "Occupied",
     Icon: Users,
-    gradient: "from-purple-500 to-purple-600",
-    badge: "bg-purple-500",
+    gradient: "from-slate-500 to-slate-600",
+    badge: "bg-slate-500",
     selectable: true,
   },
   reserved: {
@@ -206,7 +206,7 @@ export function TableGrid({ tables, onSelectTable }: TableGridProps) {
                 key={table.id}
                 onClick={() => config.selectable && onSelectTable(table)}
                 className={cn(
-                  "group relative overflow-hidden border-0 rounded-2xl shadow-md transition-all duration-500",
+                  "group relative overflow-hidden border-0 rounded-xl shadow-md transition-all duration-500",
                   config.selectable
                     ? "cursor-pointer hover:shadow-2xl hover:-translate-y-2 active:translate-y-0 active:scale-95"
                     : "cursor-not-allowed opacity-60"
