@@ -75,10 +75,15 @@ function POSLoader() {
               boxShadow: "0 8px 32px oklch(0.42 0.14 285 / 0.2)"
             }}
           >
-            <UtensilsCrossed
+            <div 
               className="h-7 w-7 animate-pulse"
-              style={{ color: "oklch(0.42 0.14 285)" }}
-              strokeWidth={2.5}
+              style={{
+                backgroundColor: "oklch(0.42 0.14 285)",
+                WebkitMaskImage: `url('/dining-table.png')`,
+                WebkitMaskRepeat: "no-repeat",
+                WebkitMaskSize: "contain",
+                WebkitMaskPosition: "center"
+              }}
             />
           </div>
         </div>
@@ -172,7 +177,18 @@ function OrdersContent() {
     setSelectedTable(table);
     setCartItems([]);
     toast.success(`Table ${table.number} selected`, {
-      icon: <UtensilsCrossed className="h-4 w-4" />,
+      icon: (
+        <div 
+          className="h-4 w-4" 
+          style={{
+            backgroundColor: "currentColor",
+            WebkitMaskImage: `url('/dining-table.png')`,
+            WebkitMaskRepeat: "no-repeat",
+            WebkitMaskSize: "contain",
+            WebkitMaskPosition: "center"
+          }}
+        />
+      ),
     });
   };
 
@@ -237,7 +253,18 @@ function OrdersContent() {
 
     toast.success("Order sent to kitchen!", {
       description: `Table ${tableLabel} · ${cartCount} item${cartCount > 1 ? "s" : ""} · KES ${total.toLocaleString()}`,
-      icon: <UtensilsCrossed className="h-4 w-4" />,
+      icon: (
+        <div 
+          className="h-4 w-4" 
+          style={{
+            backgroundColor: "currentColor",
+            WebkitMaskImage: `url('/dining-table.png')`,
+            WebkitMaskRepeat: "no-repeat",
+            WebkitMaskSize: "contain",
+            WebkitMaskPosition: "center"
+          }}
+        />
+      ),
       duration: 3000,
     });
 
@@ -287,16 +314,11 @@ function OrdersContent() {
 
   return (
     <TooltipProvider>
-      <div
-        className="flex flex-col h-full overflow-hidden"
-        style={{
-          background: "linear-gradient(135deg, #F8F6FC 0%, #F0EBF8 50%, #E8E3F5 100%)",
-        }}
-      >
+      <div className="flex flex-col min-h-screen">
         {/* ── Enhanced Breadcrumb bar ────────────────────────────── */}
         {selectedTable && (
           <div
-            className="flex items-center justify-between px-4 sm:px-6 py-3.5 border-b shrink-0 backdrop-blur-xl relative overflow-hidden"
+            className="flex items-center justify-between px-4 sm:px-6 py-3.5 border-b shrink-0 backdrop-blur-xl sticky top-[-16px] md:top-[-24px] lg:top-[-32px] z-30"
             style={{
               background: "rgba(255,255,255,0.92)",
               borderColor: "oklch(0.42 0.14 285 / 0.08)",
@@ -332,7 +354,16 @@ function OrdersContent() {
                   borderColor: "oklch(0.42 0.14 285 / 0.2)",
                 }}
               >
-                <UtensilsCrossed className="h-3 w-3" />
+                <div 
+                  className="h-3 w-3" 
+                  style={{
+                    backgroundColor: "currentColor",
+                    WebkitMaskImage: `url('/dining-table.png')`,
+                    WebkitMaskRepeat: "no-repeat",
+                    WebkitMaskSize: "contain",
+                    WebkitMaskPosition: "center"
+                  }}
+                />
                 Table {selectedTable.number.toString().padStart(2, "0")}
               </Badge>
             </div>
@@ -375,25 +406,25 @@ function OrdersContent() {
         )}
 
         {/* ── Main view (Table grid or Menu grid) ─────────────────── */}
-        <ScrollArea className="flex-1 min-h-0">
-          <div className={cn(selectedTable ? "pb-32 sm:pb-28" : "pb-28")}>
-            {!selectedTable ? (
-              <TableGrid
-                tables={enrichedTables}
-                onSelectTable={handleTableSelect}
-              />
-            ) : (
-              <MenuGrid
-                items={filteredMenuItems}
-                activeCategory={activeCategory}
-                onCategoryChange={setActiveCategory}
-                onAddItem={handleAddToCart}
-                onBack={() => setSelectedTable(null)}
-                selectedTable={selectedTable}
-              />
-            )}
+        {!selectedTable ? (
+          <div className="pb-28">
+            <TableGrid
+              tables={enrichedTables}
+              onSelectTable={handleTableSelect}
+            />
           </div>
-        </ScrollArea>
+        ) : (
+          <div className="pb-28">
+            <MenuGrid
+              items={filteredMenuItems}
+              activeCategory={activeCategory}
+              onCategoryChange={setActiveCategory}
+              onAddItem={handleAddToCart}
+              onBack={() => setSelectedTable(null)}
+              selectedTable={selectedTable}
+            />
+          </div>
+        )}
 
         {/* ── Floating Cart Pill (Enhanced) ────────────────────────── */}
         <div className="fixed bottom-6 right-4 sm:bottom-8 sm:right-6 z-50">
@@ -507,7 +538,7 @@ function OrdersContent() {
                       "h-4.5 w-4.5 ml-1 shrink-0 transition-all duration-300",
                       cartOpen && "rotate-180"
                     )}
-                    style={{ color: "#AEA6BF" }}
+                    style={{ color: "var(--icon-primary)" }}
                   />
                 </div>
               </Button>

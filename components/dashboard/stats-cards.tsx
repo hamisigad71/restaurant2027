@@ -72,7 +72,7 @@ export function StatsCards() {
                   <div 
                     className="h-5 w-5" 
                     style={{ 
-                      backgroundColor: "oklch(0.45 0.12 285)",
+                      backgroundColor: "oklch(0.42 0.14 285)",
                       WebkitMaskImage: `url(${stat.icon})`,
                       WebkitMaskSize: "contain",
                       WebkitMaskRepeat: "no-repeat",

@@ -202,7 +202,7 @@ export function AuthPanel({
         <div className="space-y-4">
            <div className="flex items-center gap-4">
               <Separator className="flex-1" style={{ background:"oklch(0.42 0.14 285 / 0.12)" }} />
-              <span className="text-[10px] font-bold uppercase whitespace-nowrap px-1" style={{ color:"#AEA6BF" }}>
+              <span className="text-[10px] font-bold uppercase whitespace-nowrap px-1" style={{ color:"var(--icon-primary)" }}>
                 or continue with
               </span>
               <Separator className="flex-1" style={{ background:"oklch(0.42 0.14 285 / 0.12)" }} />
@@ -258,7 +258,7 @@ export function AuthPanel({
                     type="button"
                     onClick={() => setShowPassword(v => !v)}
                     className="absolute right-4 top-1/2 -translate-y-1/2 transition-all hover:scale-110 active:scale-95"
-                    style={{ color: "#AEA6BF" }}
+                    style={{ color: "var(--icon-primary)" }}
                   >
                     {showPassword ? <EyeOff className="h-4.5 w-4.5" /> : <Eye className="h-4.5 w-4.5" />}
                   </button>

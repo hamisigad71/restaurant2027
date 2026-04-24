@@ -502,7 +502,7 @@ export default function OrderStatusPage() {
                   borderColor: "oklch(0.42 0.14 285 / 0.15)",
                 }}
               >
-                <CheckCircleIcon className="h-8 w-8 sm:h-10 sm:w-10" style={{ color: "#AEA6BF" }} strokeWidth={2.5} />
+                <CheckCircleIcon className="h-8 w-8 sm:h-10 sm:w-10" style={{ color: "var(--icon-primary)" }} strokeWidth={2.5} />
               </div>
               <div className="text-center">
                 <p className="font-bold text-lg sm:text-xl" style={{ color: "#0D031B" }}>

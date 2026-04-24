@@ -8,7 +8,7 @@ export function ScheduleHeader() {
       <div className="flex items-center gap-3">
         <div
           className="flex items-center justify-center w-10 h-10 rounded-xl shrink-0"
-          style={{ background: "oklch(0.45 0.12 285)", boxShadow: "0 4px 14px oklch(0.45 0.12 285 / 0.35)" }}
+          style={{ background: "oklch(0.42 0.14 285)", boxShadow: "0 4px 14px oklch(0.45 0.12 285 / 0.35)" }}
         >
           <Calendar className="h-5 w-5 text-white" />
         </div>
@@ -39,7 +39,7 @@ export function ScheduleHeader() {
 
         <Button
           className="h-10 px-4 gap-2 text-white font-bold rounded-xl border-none text-[11px] uppercase tracking-wider transition-all hover:-translate-y-0.5"
-          style={{ background: "oklch(0.45 0.12 285)", boxShadow: "0 4px 16px oklch(0.45 0.12 285 / 0.35)" }}
+          style={{ background: "oklch(0.42 0.14 285)", boxShadow: "0 4px 16px oklch(0.45 0.12 285 / 0.35)" }}
         >
           <Plus className="h-3.5 w-3.5" />
           Add Shift

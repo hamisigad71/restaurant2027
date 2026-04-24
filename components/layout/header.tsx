@@ -68,7 +68,7 @@ const roleAccent: Record<
   admin: {
     bg: "oklch(0.45 0.12 285 / 0.08)",
     text: "oklch(0.38 0.12 285)",
-    dot: "oklch(0.45 0.12 285)",
+    dot: "oklch(0.42 0.14 285)",
     avatarBg: "oklch(0.45 0.12 285 / 0.1)",
   },
   manager: {
@@ -200,7 +200,7 @@ const notifications = [
   {
     id: "2",
     icon: ShoppingCartIcon,
-    iconColor: "oklch(0.45 0.12 285)",
+    iconColor: "oklch(0.42 0.14 285)",
     iconBg: "oklch(0.45 0.12 285 / 0.08)",
     title: "New Order",
     body: "Table 3 placed a new order",
@@ -416,7 +416,7 @@ export function Header({
                   >
                     <BellIcon
                       className="h-3.5 w-3.5"
-                      style={{ color: "oklch(0.45 0.12 285)" }}
+                      style={{ color: "oklch(0.42 0.14 285)" }}
                     />
                     Notifications
                     {unreadCount > 0 && (
@@ -424,7 +424,7 @@ export function Header({
                         className="text-[9px] px-1.5 py-0.5 rounded-full"
                         style={{
                           background: "oklch(0.45 0.12 285 / 0.1)",
-                          color: "oklch(0.45 0.12 285)",
+                          color: "oklch(0.42 0.14 285)",
                         }}
                       >
                         {unreadCount} new
@@ -434,7 +434,7 @@ export function Header({
                   {unreadCount > 0 && (
                     <button
                       className="text-[10px] font-medium uppercase  hover:opacity-60 transition-opacity"
-                      style={{ color: "oklch(0.45 0.12 285)" }}
+                      style={{ color: "oklch(0.42 0.14 285)" }}
                       onClick={() =>
                         setDismissedNotifs(notifications.map((n) => n.id))
                       }
@@ -479,7 +479,7 @@ export function Header({
                           {notif.unread && (
                             <span
                               className="absolute left-1.5 top-[22px] w-1.5 h-1.5 rounded-full"
-                              style={{ background: "oklch(0.45 0.12 285)" }}
+                              style={{ background: "oklch(0.42 0.14 285)" }}
                             />
                           )}
 
@@ -641,7 +641,7 @@ export function Header({
                 >
                   <UserIcon
                     className="h-3.5 w-3.5"
-                    style={{ color: "oklch(0.45 0.12 285)" }}
+                    style={{ color: "oklch(0.42 0.14 285)" }}
                   />
                 </span>
                 Profile
@@ -658,7 +658,7 @@ export function Header({
                 >
                   <Cog6ToothIcon
                     className="h-3.5 w-3.5"
-                    style={{ color: "oklch(0.45 0.12 285)" }}
+                    style={{ color: "oklch(0.42 0.14 285)" }}
                   />
                 </span>
                 Settings

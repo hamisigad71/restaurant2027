@@ -42,8 +42,8 @@ const INITIAL_TABLES: DirtyTable[] = [
 
 const URGENCY_CONFIG = {
   high:   { label:"Urgent",  accent:"oklch(0.65 0.18 25)", bg:"oklch(0.65 0.18 25 / 0.08)", border:"oklch(0.65 0.18 25 / 0.3)", icon:BoltIcon,          barBg:"oklch(0.65 0.18 25)", ctaBg:"oklch(0.65 0.18 25)" },
-  medium: { label:"Due",     accent:"oklch(0.75 0.15 75)", bg:"oklch(0.75 0.15 75 / 0.06)", border:"oklch(0.75 0.15 75 / 0.2)", icon:ClockIcon,        barBg:"oklch(0.75 0.15 75)", ctaBg:"oklch(0.45 0.12 285)" },
-  low:    { label:"Routine", accent:"oklch(0.45 0.12 285)", bg:"oklch(0.45 0.12 285 / 0.05)", border:"oklch(0.45 0.12 285 / 0.15)", icon:SparklesIcon, barBg:"oklch(0.45 0.12 285)", ctaBg:"oklch(0.45 0.12 285)" },
+  medium: { label:"Due",     accent:"oklch(0.75 0.15 75)", bg:"oklch(0.75 0.15 75 / 0.06)", border:"oklch(0.75 0.15 75 / 0.2)", icon:ClockIcon,        barBg:"oklch(0.75 0.15 75)", ctaBg:"oklch(0.42 0.14 285)" },
+  low:    { label:"Routine", accent:"oklch(0.42 0.14 285)", bg:"oklch(0.45 0.12 285 / 0.05)", border:"oklch(0.45 0.12 285 / 0.15)", icon:SparklesIcon, barBg:"oklch(0.42 0.14 285)", ctaBg:"oklch(0.42 0.14 285)" },
 }
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
@@ -86,7 +86,7 @@ export default function CleanersPage() {
         >
           <div
             className="flex items-center justify-center w-10 h-10 rounded-xl shrink-0"
-            style={{ background:"oklch(0.45 0.12 285)", boxShadow:"0 4px 14px oklch(0.45 0.12 285 / 0.35)" }}
+            style={{ background:"oklch(0.42 0.14 285)", boxShadow:"0 4px 14px oklch(0.45 0.12 285 / 0.35)" }}
           >
             <SparklesIcon className="h-5 w-5 text-white" strokeWidth={2} />
           </div>
@@ -119,7 +119,7 @@ export default function CleanersPage() {
               className="text-[10px] font-bold px-2.5 py-1 rounded-full border"
               style={{
                 background:"oklch(0.45 0.12 285 / 0.1)",
-                color:"oklch(0.45 0.12 285)",
+                color:"oklch(0.42 0.14 285)",
                 borderColor:"oklch(0.45 0.12 285 / 0.2)",
               }}
             >
@@ -135,7 +135,7 @@ export default function CleanersPage() {
             className="border rounded-3xl overflow-hidden shadow-sm"
             style={{ background:"rgba(255,255,255,0.9)", borderColor:"oklch(0.45 0.12 285 / 0.12)" }}
           >
-            <div className="h-[3px]" style={{ background:"oklch(0.45 0.12 285)" }} />
+            <div className="h-[3px]" style={{ background:"oklch(0.42 0.14 285)" }} />
             <CardContent className="px-5 py-4">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2.5">
@@ -143,7 +143,7 @@ export default function CleanersPage() {
                     className="flex items-center justify-center w-8 h-8 rounded-lg"
                     style={{ background:"oklch(0.45 0.12 285 / 0.1)" }}
                   >
-                    <ClipboardDocumentListIcon className="h-3.5 w-3.5" style={{ color:"oklch(0.45 0.12 285)" }} />
+                    <ClipboardDocumentListIcon className="h-3.5 w-3.5" style={{ color:"oklch(0.42 0.14 285)" }} />
                   </div>
                   <div>
                     <p className="text-[13px] font-bold" style={{ color:"#0D031B" }}>Shift Progress</p>
@@ -152,7 +152,7 @@ export default function CleanersPage() {
                     </p>
                   </div>
                 </div>
-                <p className="text-2xl font-bold tabular-nums" style={{ color:"oklch(0.45 0.12 285)" }}>
+                <p className="text-2xl font-bold tabular-nums" style={{ color:"oklch(0.42 0.14 285)" }}>
                   {cleanPct}%
                 </p>
               </div>
@@ -185,7 +185,7 @@ export default function CleanersPage() {
                 className="w-20 h-20 rounded-3xl flex items-center justify-center border"
                 style={{ background:"rgba(255,255,255,0.9)", borderColor:"oklch(0.45 0.12 285 / 0.15)" }}
               >
-                <SunIcon className="h-10 w-10" style={{ color:"oklch(0.45 0.12 285)" }} />
+                <SunIcon className="h-10 w-10" style={{ color:"oklch(0.42 0.14 285)" }} />
               </div>
               <div className="text-center">
                 <p className="text-lg font-bold" style={{ color:"#0D031B" }}>All areas spotless!</p>
@@ -284,7 +284,7 @@ export default function CleanersPage() {
                               className="flex flex-col items-center gap-1 py-2 rounded-xl"
                               style={{ background:"#F5F2FB" }}
                             >
-                              <step.icon className="h-3.5 w-3.5" style={{ color:"#AEA6BF" }} />
+                              <step.icon className="h-3.5 w-3.5" style={{ color:"var(--icon-primary)" }} />
                               <p className="text-[9px] font-bold uppercase  text-center" style={{ color:"#9A94AA" }}>
                                 {step.label}
                               </p>

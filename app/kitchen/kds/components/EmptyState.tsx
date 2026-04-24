@@ -16,7 +16,7 @@ export function EmptyState({ filter, search }: EmptyStateProps) {
         <div
           className="h-8 w-8"
           style={{
-            backgroundColor: "#AEA6BF",
+            backgroundColor: "var(--icon-primary)",
             WebkitMaskImage: `url("/tray.png")`,
             WebkitMaskSize: "contain",
             WebkitMaskRepeat: "no-repeat",

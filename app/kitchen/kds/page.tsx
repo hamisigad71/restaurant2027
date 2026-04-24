@@ -178,12 +178,12 @@ export default function KDSPage() {
                 {/* Section header */}
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2">
-                    <span className="text-[11px] font-bold uppercase " style={{ color: "#AEA6BF" }}>
+                    <span className="text-[11px] font-bold uppercase " style={{ color: "var(--icon-primary)" }}>
                       {filter === "all" ? "Active Orders" : `${filter.charAt(0).toUpperCase()}${filter.slice(1)} Orders`}
                     </span>
                     <span
                       className="text-[10px] font-bold px-2 py-0.5 rounded-full"
-                      style={{ background: "oklch(0.45 0.12 285 / 0.08)", color: "oklch(0.45 0.12 285)" }}
+                      style={{ background: "oklch(0.45 0.12 285 / 0.08)", color: "oklch(0.42 0.14 285)" }}
                     >
                       {displayed.length}
                     </span>

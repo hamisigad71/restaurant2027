@@ -31,6 +31,8 @@ import {
   XMarkIcon as X,
   CheckIcon as Check,
   QueueListIcon as SeafoodIcon,
+  StarIcon as Star,
+  EllipsisHorizontalIcon as MoreHorizontal,
 } from "@heroicons/react/24/outline";
 import type { Table, TableStatus, MenuItem, OrderItem } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -185,8 +187,8 @@ export function TableGrid({ tables, onSelectTable }: TableGridProps) {
         ))}
       </div>
 
-      {/* Enhanced Grid - 2 columns on mobile */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-3 sm:gap-4 lg:gap-5">
+      {/* Enhanced Grid - 1 column on small mobile, 2 columns on larger mobile */}
+      <div className="grid grid-cols-2 min-[480px]:grid-cols-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-2.5 sm:gap-4 lg:gap-5">
         {filteredTables.length === 0 ? (
           <div className="col-span-full flex flex-col items-center justify-center py-16 sm:py-24 gap-4">
             <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl flex items-center justify-center" 
@@ -216,7 +218,7 @@ export function TableGrid({ tables, onSelectTable }: TableGridProps) {
 
 
                 {/* Enhanced Image */}
-                <div className="relative h-32 sm:h-40 overflow-hidden">
+                <div className="relative h-24 sm:h-40 overflow-hidden">
                   <img
                     src={imgSrc}
                     alt={`Table ${table.number}`}
@@ -242,14 +244,14 @@ export function TableGrid({ tables, onSelectTable }: TableGridProps) {
                   {/* Table number */}
                   <div className="absolute bottom-2 left-2.5">
                     <span className="text-[9px] text-white/60 uppercase font-semibold block leading-none mb-0.5">Table</span>
-                    <span className="text-2xl sm:text-3xl text-white font-bold leading-none">
+                    <span className="text-xl sm:text-3xl text-white font-bold leading-none">
                       {String(table.number).padStart(2, "0")}
                     </span>
                   </div>
                 </div>
 
                 {/* Details */}
-                <CardContent className="p-3 sm:p-4 space-y-3">
+                <CardContent className="p-2 sm:p-4 space-y-2">
                   <div className="flex justify-between items-end">
                     <div>
                       <p className="text-[9px] uppercase font-semibold tracking-wide" style={{ color: "#9A94AA" }}>Zone</p>
@@ -319,10 +321,10 @@ export function MenuGrid({
   });
 
   return (
-    <div className="flex-1 flex flex-col overflow-hidden">
+    <div className="flex flex-col">
       {/* Enhanced Header */}
       <div 
-        className="px-4 sm:px-6 py-4 sm:py-5 border-b backdrop-blur-xl sticky top-0 z-10"
+        className="px-3 sm:px-6 py-4 sm:py-5 border-b backdrop-blur-xl sticky top-[40px] md:top-[44px] lg:top-[54px] z-20"
         style={{
           background: "rgba(255,255,255,0.92)",
           borderColor: "oklch(0.42 0.14 285 / 0.08)",
@@ -426,14 +428,22 @@ export function MenuGrid({
         </div>
       </div>
 
-      {/* Menu Grid - 2 columns on mobile */}
-      <ScrollArea className="flex-1">
-        <div className="p-4 sm:p-6 lg:p-8 pb-24">
+      <div className="flex-1">
+        <div className="px-3 sm:px-6 lg:px-8 py-4 sm:py-8 pb-24 w-full">
           {filtered.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-16 sm:py-24 gap-4">
               <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl flex items-center justify-center"
                 style={{ background: "oklch(0.42 0.14 285 / 0.08)" }}>
-                <UtensilsCrossed className="h-8 w-8 sm:h-10 sm:w-10" style={{ color: "#AEA6BF" }} strokeWidth={2.5} />
+                <div 
+                  className="h-8 w-8 sm:h-10 sm:w-10" 
+                  style={{ 
+                    backgroundColor: "#AEA6BF",
+                    WebkitMaskImage: `url('/dining-table.png')`,
+                    WebkitMaskRepeat: "no-repeat",
+                    WebkitMaskSize: "contain",
+                    WebkitMaskPosition: "center"
+                  }} 
+                />
               </div>
               <div className="text-center">
                 <p className="text-sm font-bold" style={{ color: "#0D031B" }}>No items found</p>
@@ -441,7 +451,7 @@ export function MenuGrid({
               </div>
             </div>
           ) : (
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-5">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-5">
               {filtered.map((item) => {
                 const imgSrc = item.image || categoryImages[item.category] || 
                   "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=300&h=200&fit=crop";
@@ -449,65 +459,96 @@ export function MenuGrid({
                 return (
                   <Card
                     key={item.id}
-                    onClick={() => onAddItem(item)}
-                    className="group overflow-hidden border-0 rounded-2xl cursor-pointer transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 active:translate-y-0 active:scale-95"
-                    style={{ boxShadow: "0 4px 24px rgba(0,0,0,0.08)" }}
+                    className="group relative flex flex-col overflow-hidden rounded-xl border bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                    style={{
+                      borderColor: "oklch(0.45 0.12 285 / 0.1)",
+                      boxShadow: "0 2px 10px rgba(13,3,27,0.06)",
+                    }}
                   >
-                    {/* Image */}
-                    <div className="relative aspect-[4/3] overflow-hidden">
+                    {/* ── Image section ──────────────────────────────────────── */}
+                    <div className="relative aspect-[4/3] overflow-hidden rounded-t-lg mx-0 shrink-0">
                       <img
                         src={imgSrc}
                         alt={item.name}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                         loading="lazy"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                      {/* Scrim */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-80" />
 
-                      {/* Hover overlay */}
-                      <div className="absolute inset-0 bg-oklch(0.42 0.14 285)/0 group-hover:bg-oklch(0.42 0.14 285)/20 transition-all duration-500 flex items-center justify-center">
-                        <div className="opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300">
-                          <div className="w-12 h-12 rounded-full flex items-center justify-center shadow-xl"
-                            style={{ background: "white" }}>
-                            <Plus className="h-6 w-6" style={{ color: "oklch(0.42 0.14 285)" }} strokeWidth={2.5} />
-                          </div>
-                        </div>
+                      {/* Live badge — top-left */}
+                      <div className="absolute top-2 left-2">
+                        <span
+                          className="flex items-center gap-1 text-[8px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full text-white"
+                          style={{
+                            background: "oklch(0.62 0.16 150 / 0.85)",
+                            backdropFilter: "blur(6px)",
+                          }}
+                        >
+                          <span className="w-1 h-1 rounded-full bg-white animate-pulse" />
+                          Live
+                        </span>
                       </div>
 
-                      {/* Category badge */}
-                      <div className="absolute top-2 left-2">
-                        <Badge className="text-[9px] font-bold uppercase px-2 py-0.5 rounded-lg border-0 shadow-md"
-                          style={{ background: "rgba(255,255,255,0.9)", color: "#736C83" }}>
+                      {/* Price — bottom-left */}
+                      <div className="absolute bottom-2 left-2">
+                        <p className="text-white font-bold text-[14px] leading-none tabular-nums drop-shadow-sm">
+                          KES {item.price.toLocaleString()}
+                        </p>
+                        <p className="text-white/70 text-[8px] font-bold uppercase tracking-wider mt-0.5">
                           {item.category}
-                        </Badge>
+                        </p>
+                      </div>
+
+                      {/* Rating — bottom-right */}
+                      <div
+                        className="absolute bottom-2 right-2 flex items-center gap-0.5 px-1.5 py-0.5 rounded-lg"
+                        style={{ background:"rgba(0,0,0,0.35)", backdropFilter:"blur(4px)" }}
+                      >
+                        <Star className="h-2.5 w-2.5 fill-yellow-400 text-yellow-400" />
+                        <span className="text-white text-[9px] font-bold">4.8</span>
                       </div>
                     </div>
 
-                    {/* Content */}
-                    <CardContent className="p-3 sm:p-4">
-                      <h3 className="font-bold text-sm truncate leading-tight transition-colors group-hover:text-oklch(0.42 0.14 285)"
-                        style={{ color: "#0D031B" }}>
-                        {item.name}
-                      </h3>
-                      <div className="flex items-center justify-between mt-2.5">
-                        <p className="text-sm font-bold" style={{ color: "oklch(0.42 0.14 285)" }}>
-                          KES {item.price.toLocaleString()}
-                        </p>
-                        <div className="w-7 h-7 rounded-lg flex items-center justify-center border-2 transition-all group-hover:scale-110"
-                          style={{
-                            background: "oklch(0.42 0.14 285 / 0.08)",
-                            borderColor: "oklch(0.42 0.14 285 / 0.2)",
-                          }}>
-                          <Plus className="h-3.5 w-3.5" style={{ color: "oklch(0.42 0.14 285)" }} strokeWidth={2.5} />
-                        </div>
+                    {/* ── Card body ──────────────────────────────────────────── */}
+                    <div className="flex flex-col flex-1 p-2 gap-2">
+                      <div className="flex items-start justify-between gap-1">
+                        <h3
+                          className="text-[12px] font-bold leading-tight line-clamp-2 flex-1"
+                          style={{ color: "#0D031B" }}
+                        >
+                          {item.name}
+                        </h3>
+                        <MoreHorizontal className="h-3.5 w-3.5 opacity-40 shrink-0" />
                       </div>
-                    </CardContent>
+
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-1 text-[8px] font-bold uppercase tracking-wider opacity-60" style={{ color: "oklch(0.42 0.14 285)" }}>
+                          <TrendingUp className="h-2.5 w-2.5" /> High Demand
+                        </div>
+                        <span className="text-[8px] opacity-40 font-bold uppercase">50+ orders</span>
+                      </div>
+
+                      <button
+                        onClick={() => onAddItem(item)}
+                        className="mt-auto flex items-center justify-center gap-1 text-[9px] font-bold uppercase tracking-wider py-1.5 rounded-lg transition-all active:scale-95"
+                        style={{ 
+                          color:"oklch(0.42 0.14 150)", 
+                          background:"oklch(0.62 0.16 150 / 0.08)",
+                          border: "1px solid oklch(0.62 0.16 150 / 0.15)"
+                        }}
+                      >
+                        <ShoppingCart className="h-3 w-3" />
+                        Add to Order
+                      </button>
+                    </div>
                   </Card>
                 );
               })}
             </div>
           )}
         </div>
-      </ScrollArea>
+      </div>
     </div>
   );
 }

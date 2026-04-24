@@ -102,7 +102,7 @@ export function GlassLoader({ className, fullScreen = true, autoHideDuration = 7
           transform-origin: 80px 80px;
         }
         .rl-ring2 {
-          stroke: #AEA6BF;
+          stroke: var(--icon-primary);
           stroke-dasharray: 377;
           stroke-dashoffset: -80;
           animation: spin-ring2 1.8s cubic-bezier(.55,.1,.45,.9) infinite reverse;

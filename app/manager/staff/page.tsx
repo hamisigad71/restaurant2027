@@ -169,8 +169,8 @@ const roleConfig: Record<string, { bg: string; text: string; icon: any }> = {
 }
 
 const stats = [
-  { label: "Active Duty",  value: "48",  sub: "85% capacity",  icon: SparklesIcon,   from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)" },
-  { label: "Avg. Rating",  value: "4.8", sub: "Top performers", icon: StarIcon,       from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)" },
+  { label: "Active Duty",  value: "48",  sub: "85% capacity",  icon: "/employee.png",   from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)" },
+  { label: "Avg. Rating",  value: "4.8", sub: "Top performers", icon: "/rating.png",       from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)" },
   { label: "Attendance",   value: "96%", sub: "Weekly avg",     icon: HeartIcon,      from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)" },
   { label: "Open Shifts",  value: "3",   sub: "Needs action",   icon: ArrowTrendingUpIcon, from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)" },
 ]
@@ -294,7 +294,7 @@ export default function ManagerStaffPage() {
                   background: "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)",
                 }}
               >
-                <UserGroupIcon className="h-6 w-6 sm:h-7 sm:w-7 text-white" strokeWidth={2.5} />
+                <img src="/service (1).png" className="h-7 w-7 text-white brightness-0 invert" alt="Service" />
               </div>
               <div>
                 <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight leading-none" style={{ color: "#0D031B" }}>
@@ -327,42 +327,52 @@ export default function ManagerStaffPage() {
           {stats.map((s, i) => (
             <Card 
               key={s.label} 
-              className="group bg-white border-0 rounded-[20px] shadow-md hover:shadow-2xl transition-all duration-500 overflow-hidden hover:-translate-y-1"
+              className="group bg-white border-0 rounded-[28px] shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden hover:-translate-y-2 aspect-square"
               style={{
                 boxShadow: "0 4px 20px rgba(0,0,0,0.06)",
               }}
             >
-              <CardContent className="p-4 sm:p-5 relative overflow-hidden">
-                {/* Gradient background */}
+              <CardContent className="p-5 h-full relative flex flex-col items-start justify-between overflow-hidden text-left">
+                {/* Multi-layered background */}
                 <div 
-                  className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-500"
+                  className="absolute inset-0 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity duration-500"
                   style={{ background: `linear-gradient(135deg, ${s.from} 0%, ${s.to} 100%)` }}
                 />
+                <div className="absolute top-0 right-0 w-24 h-24 blur-3xl opacity-20 -mr-12 -mt-12 rounded-full"
+                  style={{ background: s.from }} />
                 
-                <div className="flex items-start justify-between relative z-10">
-                  <div className="flex-1 space-y-2">
-                    <div 
-                      className="w-10 h-10 sm:w-12 sm:h-12 rounded-[18px] flex items-center justify-center shrink-0 shadow-lg"
-                      style={{ background: `linear-gradient(135deg, ${s.from} 0%, ${s.to} 100%)` }}
-                    >
-                      <s.icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" strokeWidth={2.5} />
-                    </div>
-                    <div className="space-y-1">
-                      <p className="text-2xl sm:text-3xl font-medium leading-none tabular-nums" style={{ color: "#0D031B" }}>
-                        {s.value}
-                      </p>
-                      <p className="text-[10px] sm:text-[11px] font-medium uppercase tracking-wide" style={{ color: "#736C83" }}>
-                        {s.label}
-                      </p>
-                    </div>
+                <div className="relative z-10 flex flex-col items-start gap-3 w-full h-full justify-between">
+                  {/* Icon with glow */}
+                  <div 
+                    className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center shrink-0 shadow-lg relative group-hover:scale-110 transition-transform duration-500 overflow-hidden"
+                    style={{ 
+                      background: `linear-gradient(135deg, ${s.from} 0%, ${s.to} 100%)`,
+                      boxShadow: `0 8px 16px ${s.from}40`
+                    }}
+                  >
+                    {typeof s.icon === 'string' ? (
+                      <img src={s.icon} className="w-full h-full object-contain p-2.5 brightness-0 invert" alt={s.label} />
+                    ) : (
+                      <s.icon className="h-5.5 w-5.5 sm:h-6 sm:w-6 text-white" strokeWidth={2.5} />
+                    )}
                   </div>
-                </div>
-                
-                <div className="mt-3 pt-3 border-t relative z-10" style={{ borderColor: "oklch(0.42 0.14 285 / 0.08)" }}>
-                  <p className="text-[10px] font-medium flex items-center gap-1.5" style={{ color: "#9A94AA" }}>
-                    <ArrowTrendingUpIcon className="h-3 w-3" />
-                    {s.sub}
-                  </p>
+
+                  <div className="space-y-1">
+                    <p className="text-3xl sm:text-4xl font-semibold leading-none tabular-nums tracking-tight" style={{ color: "#0D031B" }}>
+                      {s.value}
+                    </p>
+                    <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.1em]" style={{ color: "#736C83" }}>
+                      {s.label}
+                    </p>
+                  </div>
+
+                  {/* Sub-metric badge */}
+                  <div className="px-3 py-1 rounded-full bg-slate-50 border border-slate-100 flex items-center gap-1.5 transition-colors group-hover:bg-white w-fit">
+                    <ArrowTrendingUpIcon className="h-2.5 w-2.5" style={{ color: s.from }} />
+                    <span className="text-[9px] font-bold uppercase tracking-wider" style={{ color: "#9A94AA" }}>
+                      {s.sub}
+                    </span>
+                  </div>
                 </div>
               </CardContent>
             </Card>
@@ -772,7 +782,7 @@ export default function ManagerStaffPage() {
                   boxShadow: "0 8px 32px oklch(0.42 0.14 285 / 0.35)",
                 }}
               >
-                <Activity className="h-4 w-4 mr-2" strokeWidth={2.5} />
+                <ArrowTrendingUpIcon className="h-4 w-4 mr-2" strokeWidth={2.5} />
                 Weekly Roster Audit
               </Button>
             </div>

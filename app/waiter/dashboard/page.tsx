@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { supabase } from "@/lib/supabase"
 import { toast } from "sonner"
 import Link from "next/link"
@@ -21,6 +21,8 @@ import {
   ChartBarIcon,
   XMarkIcon,
   BoltIcon,
+  PlusIcon,
+  CameraIcon,
 } from "@heroicons/react/24/outline"
 import { Badge }   from "@/components/ui/badge"
 import { Button }  from "@/components/ui/button"
@@ -124,22 +126,26 @@ function StatCard({
 }) {
   return (
     <Card
-      className="relative overflow-hidden border bg-white/75 backdrop-blur-md shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 group"
-      style={{ borderColor: "oklch(0.45 0.12 285 / 0.12)" }}
+      className="relative overflow-hidden border-0 bg-white shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group rounded-[22px]"
+      style={{ 
+        boxShadow: "0 10px 30px -10px rgba(0,0,0,0.08)",
+      }}
     >
-      {/* Subtle top gradient strip */}
-      <div
-        className="absolute top-0 left-0 right-0 h-[2px] rounded-t-xl"
+      {/* Subtle background glow */}
+      <div 
+        className="absolute -right-4 -top-4 w-24 h-24 rounded-full opacity-0 group-hover:opacity-10 transition-opacity duration-700 blur-2xl"
         style={{ background: accentColor }}
       />
 
-      <CardContent className="p-5 pt-6">
-        <div className="flex items-start justify-between mb-4">
+      <CardContent className="p-6">
+        <div className="flex items-center justify-between mb-6">
           <div
-            className="flex items-center justify-center w-10 h-10 rounded-xl transition-transform group-hover:scale-105"
-            style={{ background: `color-mix(in oklch, ${accentColor} 12%, transparent)` }}
+            className="flex items-center justify-center w-12 h-12 rounded-[14px] shadow-inner transition-all duration-500 group-hover:scale-110 group-hover:rotate-3"
+            style={{ 
+              background: `linear-gradient(135deg, color-mix(in oklch, ${accentColor} 15%, transparent) 0%, color-mix(in oklch, ${accentColor} 5%, transparent) 100%)`,
+            }}
           >
-            <Icon className="h-5 w-5" style={{ color: accentColor }} />
+            <Icon className="h-5.5 w-5.5" style={{ color: accentColor }} />
           </div>
           {badge && (
             <Badge
@@ -155,18 +161,20 @@ function StatCard({
             </Badge>
           )}
         </div>
-        <p
-          className="text-3xl lg:text-[2rem] leading-none  truncate"
-          style={{ color: "#0D031B" }}
-        >
-          {value}
-        </p>
-        <p
-          className="text-[10px] uppercase  mt-1.5"
-          style={{ color: "#736C83" }}
-        >
-          {label}
-        </p>
+        <div className="space-y-1">
+          <p
+            className="text-3xl lg:text-[2.2rem] tracking-tight leading-none"
+            style={{ color: "#0D031B" }}
+          >
+            {value}
+          </p>
+          <p
+            className="text-[10px] uppercase tracking-[0.1em] opacity-50"
+            style={{ color: "#736C83" }}
+          >
+            {label}
+          </p>
+        </div>
       </CardContent>
     </Card>
   )
@@ -178,6 +186,23 @@ export default function WaiterDashboard() {
   const [orders, setOrders] = useState<LiveOrder[]>([])
   const [customerCalls, setCustomerCalls] = useState<{ id: string; tableId: string; createdAt: string }[]>([])
   const [dismissed, setDismissed] = useState<string[]>([])
+  const [avatarImage, setAvatarImage] = useState<string | null>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
+
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (file) {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        setAvatarImage(reader.result as string)
+      }
+      reader.readAsDataURL(file)
+    }
+  }
+
+  const triggerUpload = () => {
+    fileInputRef.current?.click()
+  }
 
   // Derived data
   const readyOrders = orders.filter(o => o.status === "ready" && !dismissed.includes(o.id))
@@ -295,86 +320,98 @@ export default function WaiterDashboard() {
         style={{ background: "#EBE6F8" }}
       >
 
-        {/* ── Page Header ──────────────────────────────────────────────── */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
-            {/* Avatar */}
-            <Avatar className="h-11 w-11 border-2" style={{ borderColor: "oklch(0.45 0.12 285 / 0.25)" }}>
-              <AvatarFallback
-                className="text-sm"
-                style={{ background: "oklch(0.45 0.12 285 / 0.12)", color: "oklch(0.45 0.12 285)" }}
-              >
-                WA
-              </AvatarFallback>
-            </Avatar>
-
-            <div>
-              <div className="flex items-center gap-2 mb-0.5">
-                <div
-                  className="w-1.5 h-1.5 rounded-full animate-pulse"
-                  style={{ background: "oklch(0.7 0.15 150)" }}
-                />
-                <span
-                  className="text-[10px] uppercase "
-                  style={{ color: "oklch(0.7 0.15 150)" }}
-                >
-                  Live · Shift Active
-                </span>
+        {/* ── Professional Command Header ────────────────────────────────── */}
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-6 py-4 lg:py-6 px-2">
+          <div className="flex flex-col sm:flex-row items-center gap-6">
+            {/* Premium Avatar with Depth and Upload Capability */}
+            <div className="relative group cursor-pointer shrink-0" onClick={triggerUpload}>
+              <div className="absolute inset-0 bg-oklch(0.45 0.12 285) blur-3xl opacity-20 group-hover:opacity-30 transition-opacity duration-700" />
+              <div className="relative h-24 w-24 sm:h-32 sm:w-32 rounded-[32px] sm:rounded-[42px] p-1.5 bg-gradient-to-tr from-oklch(0.45 0.12 285) via-white to-oklch(0.45 0.12 285 / 0.1) shadow-2xl transition-transform duration-500 group-hover:scale-105">
+                <Avatar className="h-full w-full rounded-[26px] sm:rounded-[36px] border-[3px] border-white overflow-hidden shadow-inner bg-white">
+                  {avatarImage ? (
+                    <img src={avatarImage} alt="User" className="h-full w-full object-cover" />
+                  ) : (
+                    <AvatarFallback 
+                      className="text-xl sm:text-2xl font-medium text-white"
+                      style={{ background: "linear-gradient(135deg, oklch(0.45 0.12 285) 0%, oklch(0.35 0.15 275) 100%)" }}
+                    >
+                      WA
+                    </AvatarFallback>
+                  )}
+                </Avatar>
+                
+                {/* Edit Overlay */}
+                <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[26px] sm:rounded-[36px] m-1.5">
+                  <CameraIcon className="h-7 w-7 sm:h-9 sm:w-9 text-white" />
+                </div>
               </div>
-              <h1
-                className="text-2xl  leading-none"
-                style={{ color: "#0D031B" }}
-              >
-                Good afternoon, Waiter
-              </h1>
-              <p className="text-sm mt-0.5" style={{ color: "#736C83" }}>
-                {new Date().toLocaleDateString("en-KE", { weekday: "long", day: "numeric", month: "long" })}
-              </p>
+
+              {/* Hidden File Input */}
+              <input
+                type="file"
+                ref={fileInputRef}
+                onChange={handleImageUpload}
+                accept="image/*"
+                className="hidden"
+              />
+
+            </div>
+
+            <div className="flex flex-col items-center sm:items-start text-center sm:text-left space-y-1">
+              <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 sm:gap-4">
+                <h1 className="text-2xl sm:text-4xl tracking-tight text-[#0D031B] font-light">
+                  Welcome back, <span className="font-medium" style={{ color: "oklch(0.45 0.12 285)" }}>Waiter</span>
+                </h1>
+                <Badge 
+                  variant="outline" 
+                  className="h-7 px-4 rounded-full border-[#10B981]/20 bg-[#10B981]/5 text-[#10B981] text-[10px] uppercase tracking-[0.2em] shadow-[0_0_10px_rgba(16,185,129,0.1)]"
+                >
+                  <span className="relative flex h-2 w-2 mr-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#10B981]"></span>
+                  </span>
+                  Shift Active
+                </Badge>
+              </div>
+              <div className="flex items-center gap-3">
+                <p className="text-[11px] uppercase tracking-[0.2em] text-[#736C83] opacity-50">
+                  {new Date().toLocaleDateString("en-KE", { weekday: "long", day: "numeric", month: "long" })}
+                </p>
+                <div className="h-1 w-1 rounded-full bg-[#736C83] opacity-20" />
+                <p className="text-[11px] uppercase tracking-[0.2em] text-[#736C83] opacity-50">
+                  Alpha Station
+                </p>
+              </div>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-3 sm:gap-4">
             <Tooltip>
               <TooltipTrigger asChild>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="gap-1.5 text-[11px] uppercase hover:bg-white/80 transition-colors"
-                  style={{
-                    borderColor: "oklch(0.45 0.12 285 / 0.3)",
-                    background: "white/60",
-                    color: "#3D374C",
-                  }}
+                <Button 
+                  variant="outline" 
+                  size="icon" 
+                  className="h-12 w-12 sm:h-14 sm:w-14 rounded-xl sm:rounded-2xl border-0 bg-white shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 group"
                 >
-                  <img 
-                    src="/live-view-nav.png" 
-                    className="h-3.5 w-3.5 object-contain" 
-                    alt="Live View" 
-                    style={{ filter: "invert(31%) sepia(68%) saturate(1116%) hue-rotate(221deg) brightness(91%) contrast(89%)" }} 
-                  />
-                  <span className="hidden sm:inline">Live View</span>
+                  <ChartBarIcon className="h-4.5 w-4.5 sm:h-5 sm:w-5 text-oklch(0.45 0.12 285 / 0.6) group-hover:text-oklch(0.45 0.12 285) transition-colors" />
                 </Button>
               </TooltipTrigger>
-              <TooltipContent>View full floor activity</TooltipContent>
+              <TooltipContent>Performance Insights</TooltipContent>
             </Tooltip>
 
             <Button
-              size="sm"
-              className="gap-1.5 text-[11px] uppercase text-white hover:opacity-90 shadow-md transition-all hover:-translate-y-0.5"
-              style={{
-                background: "oklch(0.45 0.12 285)",
-                boxShadow: "0 4px 16px oklch(0.45 0.12 285 / 0.35)",
-              }}
               asChild
+              className="h-12 sm:h-14 px-5 sm:px-8 rounded-xl sm:rounded-2xl gap-3 sm:gap-4 text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-white border-0 shadow-2xl transition-all duration-500 hover:-translate-y-2 active:translate-y-0 group overflow-hidden relative"
+              style={{
+                background: "linear-gradient(135deg, oklch(0.45 0.12 285) 0%, oklch(0.35 0.15 275) 100%)",
+              }}
             >
               <Link href="/waiter/service-floor">
-                <img 
-                  src="/service-floor-nav.png" 
-                  className="h-3.5 w-3.5 brightness-0 invert object-contain" 
-                  alt="New Order" 
-                  style={{ filter: "brightness(0) invert(1)" }}
-                />
-                New Order
+                <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="h-7 w-7 rounded-lg bg-white/20 flex items-center justify-center backdrop-blur-md transition-transform group-hover:rotate-12">
+                  <PlusIcon className="h-4 w-4 text-white" />
+                </div>
+                <span>New Order Ticket</span>
               </Link>
             </Button>
           </div>
@@ -417,34 +454,42 @@ export default function WaiterDashboard() {
 
             {/* Service Alerts */}
             <Card
-              className="overflow-hidden border bg-white/75 backdrop-blur-md shadow-sm"
-              style={{ borderColor: "oklch(0.45 0.12 285 / 0.12)" }}
+              className="overflow-hidden border-0 bg-white/80 backdrop-blur-xl shadow-2xl relative"
+              style={{ 
+                boxShadow: "0 10px 40px -10px oklch(0.45 0.12 285 / 0.1)",
+                border: "1px solid oklch(0.45 0.12 285 / 0.08)" 
+              }}
             >
+              <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-oklch(0.75 0.15 75) to-transparent opacity-40" />
+              
               <CardHeader
-                className="px-5 py-4"
-                style={{ borderBottom: "1px solid oklch(0.45 0.12 285 / 0.08)" }}
+                className="px-6 py-5"
+                style={{ borderBottom: "1px solid oklch(0.45 0.12 285 / 0.05)" }}
               >
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-4">
                     <div
-                      className="w-9 h-9 rounded-xl flex items-center justify-center"
-                      style={{ background: "oklch(0.75 0.15 75 / 0.12)" }}
+                      className="w-11 h-11 rounded-[14px] flex items-center justify-center shadow-inner"
+                      style={{ background: "oklch(0.75 0.15 75 / 0.1)" }}
                     >
-                      <BellIcon className="h-4 w-4" style={{ color: "oklch(0.75 0.15 75)" }} />
+                      <BellIcon className="h-5 w-5" style={{ color: "oklch(0.75 0.15 75)" }} />
                     </div>
                     <div>
                       <CardTitle
-                        className="text-sm uppercase "
+                        className="text-[13px] uppercase tracking-[0.1em]"
                         style={{ color: "#0D031B" }}
                       >
                         Service Alerts
                       </CardTitle>
-                      <p
-                        className="text-[10px] uppercase font-medium"
-                        style={{ color: "#736C83" }}
-                      >
-                        Kitchen ready · Pick up now
-                      </p>
+                      <div className="flex items-center gap-2 mt-1">
+                        <span className="w-1 h-1 rounded-full bg-oklch(0.75 0.15 75)" />
+                        <p
+                          className="text-[10px] uppercase tracking-wider opacity-60"
+                          style={{ color: "#736C83" }}
+                        >
+                          Kitchen ready · Pick up now
+                        </p>
+                      </div>
                     </div>
                   </div>
  
@@ -464,16 +509,19 @@ export default function WaiterDashboard() {
 
               <CardContent className="p-0">
                 {combinedAlerts.length === 0 ? (
-                  <div className="flex flex-col items-center justify-center py-14 gap-3">
-                    <div
-                      className="w-14 h-14 rounded-2xl flex items-center justify-center"
-                      style={{ background: "oklch(0.7 0.15 150 / 0.1)" }}
-                    >
-                      <CheckCircleIcon className="h-7 w-7" style={{ color: "oklch(0.7 0.15 150)" }} />
+                  <div className="flex flex-col items-center justify-center py-20 gap-5">
+                    <div className="relative">
+                      <div className="absolute inset-0 bg-oklch(0.7 0.15 150) blur-2xl opacity-20 animate-pulse" />
+                      <div
+                        className="relative w-20 h-20 rounded-[28px] flex items-center justify-center border-4 border-white shadow-xl"
+                        style={{ background: "linear-gradient(135deg, oklch(0.7 0.15 150 / 0.1) 0%, oklch(0.7 0.15 150 / 0.05) 100%)" }}
+                      >
+                        <CheckCircleIcon className="h-10 w-10" style={{ color: "oklch(0.7 0.15 150)" }} />
+                      </div>
                     </div>
-                    <div className="text-center">
-                      <p className="text-sm" style={{ color: "#3D374C" }}>All caught up!</p>
-                      <p className="text-xs mt-0.5" style={{ color: "#736C83" }}>No pending alerts right now.</p>
+                    <div className="text-center space-y-1">
+                      <p className="text-sm uppercase tracking-wider" style={{ color: "#0D031B" }}>All caught up!</p>
+                      <p className="text-[10px] uppercase tracking-widest opacity-40" style={{ color: "#736C83" }}>No pending alerts right now</p>
                     </div>
                   </div>
                 ) : (
@@ -640,87 +688,102 @@ export default function WaiterDashboard() {
                           <div
                             className="group relative flex flex-col rounded-[22px] border-0 bg-white shadow-md transition-all duration-500 cursor-pointer hover:-translate-y-2 hover:shadow-2xl overflow-hidden"
                             style={{ 
-                              boxShadow: "0 4px 20px -5px rgba(0,0,0,0.08)"
+                              boxShadow: "0 10px 25px -5px rgba(0,0,0,0.05)"
                             }}
                           >
-                            {/* Image Header */}
-                            <div className="relative h-24 w-full overflow-hidden shrink-0">
+                            {/* Image Header with sophisticated overlay */}
+                            <div className="relative h-28 w-full overflow-hidden shrink-0">
                               <img 
                                 src={imgSrc} 
                                 alt={`Table ${tableNum}`}
-                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" 
                               />
-                              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
                               
                               {/* Glowing Status Dot */}
-                              <div className="absolute top-3 left-3 flex items-center gap-2 px-2 py-1 rounded-full bg-black/30 backdrop-blur-md border border-white/10">
+                              <div className="absolute top-3 left-3 flex items-center gap-2 px-2.5 py-1 rounded-full bg-black/40 backdrop-blur-md border border-white/10">
                                 <div 
-                                  className="w-1.5 h-1.5 rounded-full animate-pulse shadow-[0_0_8px_rgba(255,255,255,0.8)]" 
-                                  style={{ background: "white" }}
+                                  className="w-1.5 h-1.5 rounded-full animate-pulse shadow-[0_0_10px_rgba(255,255,255,1)]" 
+                                  style={{ background: currentStatus.hex }}
                                 />
-                                <span className="text-[8px] font-black text-white uppercase tracking-[0.15em]">
-                                  T-{tableNum}
+                                <span className="text-[9px] text-white uppercase tracking-[0.15em]">
+                                  SEC-A
                                 </span>
+                              </div>
+
+                              {/* Capacity Badge */}
+                              <div className="absolute bottom-3 right-3 flex items-center gap-1.5 px-2 py-1 rounded-lg bg-white/10 backdrop-blur-md border border-white/5">
+                                <Crown className="h-3 w-3 text-white/60" />
+                                <span className="text-[10px] text-white">4</span>
                               </div>
                             </div>
                             
-                            {/* Card Body */}
-                            <div className="p-4 flex flex-col items-center justify-center bg-white relative">
-                              <div className="absolute -top-6 w-12 h-12 rounded-2xl bg-white shadow-xl flex items-center justify-center border-4 border-[#F8F6FC] z-10">
-                                <span className="text-xl font-black tabular-nums" style={{ color: "oklch(0.45 0.12 285)" }}>
+                            {/* Card Body with floating table number */}
+                            <div className="p-4 pt-8 flex flex-col items-center justify-center bg-white relative">
+                              <div 
+                                className="absolute -top-7 w-14 h-14 rounded-2xl bg-white shadow-2xl flex items-center justify-center border-[5px] border-[#EBE6F8] transition-all duration-500 group-hover:scale-110 group-hover:-rotate-3"
+                                style={{ zIndex: 10 }}
+                              >
+                                <span className="text-2xl tabular-nums" style={{ color: "oklch(0.45 0.12 285)" }}>
                                   {tableNum}
                                 </span>
                               </div>
 
-                              <div className="mt-6 text-center space-y-1">
+                              <div className="text-center space-y-1.5">
                                 <p
-                                  className="text-[10px] font-black uppercase tracking-[0.2em]"
+                                  className="text-[11px] uppercase tracking-[0.25em]"
                                   style={{ color: currentStatus.bg }}
                                 >
                                   {status}
                                 </p>
-                                <div className="flex items-center justify-center gap-1 opacity-40">
-                                  <ClockIcon className="h-2.5 w-2.5" />
-                                  <span className="text-[9px] font-bold uppercase tracking-wider">Live</span>
+                                <div className="flex items-center justify-center gap-2">
+                                  <div className="w-1 h-1 rounded-full bg-slate-300" />
+                                  <span className="text-[9px] uppercase tracking-wider text-slate-400">18 min elapsed</span>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </HoverCardTrigger>
                         <HoverCardContent
-                          className="w-64 p-0 border-0 bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden"
+                          className="w-72 p-0 border-0 bg-white/95 backdrop-blur-2xl rounded-[28px] shadow-2xl overflow-hidden"
                           sideOffset={15}
                         >
-                          <div className="p-4 space-y-4">
-                            <div className="flex items-center gap-3">
-                              <div
-                                className="w-10 h-10 rounded-xl flex items-center justify-center text-sm font-black text-white shadow-lg"
-                                style={{ background: "oklch(0.45 0.12 285)" }}
-                              >
-                                {tableNum}
-                              </div>
-                              <div>
-                                <p className="text-xs font-black uppercase tracking-wider" style={{ color: "#0D031B" }}>Table {tableNum}</p>
-                                <p className="text-[10px] font-bold uppercase tracking-widest opacity-40">Section Alpha</p>
+                          <div className="p-6 space-y-5">
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center gap-4">
+                                <div
+                                  className="w-12 h-12 rounded-2xl flex items-center justify-center text-lg font-black text-white shadow-2xl rotate-3"
+                                  style={{ background: "linear-gradient(135deg, oklch(0.45 0.12 285) 0%, oklch(0.35 0.15 275) 100%)" }}
+                                >
+                                  {tableNum}
+                                </div>
+                                <div className="space-y-0.5">
+                                  <p className="text-sm uppercase tracking-wider" style={{ color: "#0D031B" }}>Table {tableNum}</p>
+                                  <div className="flex items-center gap-1.5">
+                                    <div className="w-1.5 h-1.5 rounded-full" style={{ background: currentStatus.hex }} />
+                                    <p className="text-[10px] uppercase tracking-widest opacity-40">Section Alpha</p>
+                                  </div>
+                                </div>
                               </div>
                             </div>
                             
-                            <div className="space-y-2.5">
-                              <div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-wide px-3 py-2 rounded-lg bg-black/5">
-                                <span className="opacity-50">Order ID</span>
-                                <span className="tabular-nums" style={{ color: "#3D374C" }}>{t.id.slice(-6)}</span>
+                            <div className="grid grid-cols-2 gap-3">
+                              <div className="p-3 rounded-[18px] bg-black/5 space-y-1">
+                                <span className="text-[9px] uppercase tracking-widest opacity-40">Order ID</span>
+                                <p className="text-xs tabular-nums" style={{ color: "#0D031B" }}>#{t.id.slice(-6).toUpperCase()}</p>
                               </div>
-                              <div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-wide px-3 py-2 rounded-lg bg-black/5">
-                                <span className="opacity-50">Items</span>
-                                <span style={{ color: "#3D374C" }}>{t.items.length} Units</span>
-                              </div>
-                              <div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-wide px-3 py-2 rounded-lg bg-black/5">
-                                <span className="opacity-50">Status</span>
-                                <Badge className="text-[8px] h-4 rounded-md capitalize border-0 shadow-none" style={{ background: currentStatus.bg, color: 'white' }}>
-                                  {t.status}
-                                </Badge>
+                              <div className="p-3 rounded-[18px] bg-black/5 space-y-1">
+                                <span className="text-[9px] uppercase tracking-widest opacity-40">Active Items</span>
+                                <p className="text-xs" style={{ color: "#0D031B" }}>{t.items.length} Units</p>
                               </div>
                             </div>
+
+                            <Button 
+                              className="w-full h-11 rounded-xl text-[10px] uppercase tracking-widest gap-2 text-white border-0"
+                              style={{ background: "oklch(0.45 0.12 285)" }}
+                            >
+                              Manage Table <ArrowRight className="h-3.5 w-3.5" />
+                            </Button>
                           </div>
                         </HoverCardContent>
                       </HoverCard>
@@ -752,157 +815,140 @@ export default function WaiterDashboard() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-4 space-y-2.5">
-                {/* Primary CTA */}
+                {/* Primary CTA with rich gradient */}
                 <Button
                   asChild
-                  className="w-full h-14 gap-2.5 text-[11px] uppercase text-white hover:opacity-90 shadow-md transition-all hover:-translate-y-0.5"
+                  className="w-full h-14 rounded-2xl gap-3 text-[11px] uppercase tracking-widest text-white border-0 shadow-xl transition-all duration-300 hover:-translate-y-1 active:translate-y-0 active:scale-95"
                   style={{
-                    background: "oklch(0.45 0.12 285)",
-                    boxShadow: "0 4px 16px oklch(0.45 0.12 285 / 0.3)",
+                    background: "linear-gradient(135deg, oklch(0.45 0.12 285) 0%, oklch(0.35 0.15 275) 100%)",
+                    boxShadow: "0 8px 25px -5px oklch(0.45 0.12 285 / 0.4)",
                   }}
                 >
-                  <Link href="/waiter/service-floor" className="flex items-center gap-2.5">
-                    <img src="/service-floor-nav.png" className="h-5 w-5 brightness-0 invert object-contain" alt="New Order" />
-                    New Order
+                  <Link href="/waiter/service-floor" className="flex items-center justify-center">
+                    <img 
+                      src="/service-floor-nav.png" 
+                      className="h-5 w-5 brightness-0 invert object-contain" 
+                      alt="New Order" 
+                    />
+                    <span className="ml-1">Initiate New Order</span>
                   </Link>
                 </Button>
 
                 {/* Secondary actions grid */}
-                <div className="grid grid-cols-3 gap-2">
-                  {quickActions.slice(1).map((action) => {
-                    const Icon = action.icon
-                    return (
-                      <Button
-                        key={action.href}
-                        asChild
-                        variant="outline"
-                        className="h-16 flex-col gap-1.5 text-[9px] uppercase transition-all hover:-translate-y-0.5 hover:bg-[#EBE6F8]"
-                        style={{
-                          borderColor: "oklch(0.45 0.12 285 / 0.2)",
-                          background: "#EBE6F8/50",
-                          color: "#3D374C",
-                        }}
-                      >
-                        <Link href={action.href} className="flex flex-col items-center gap-1.5">
-                          {typeof Icon === "string" ? (
-                            <img 
-                              src={Icon} 
-                              className="h-4 w-4 object-contain" 
-                              alt={action.label} 
-                              style={{ filter: "invert(31%) sepia(68%) saturate(1116%) hue-rotate(221deg) brightness(91%) contrast(89%)" }} 
-                            />
-                          ) : (
-                            <Icon className="h-4 w-4" style={{ color: "oklch(0.45 0.12 285)" }} />
-                          )}
-                          {action.label}
-                        </Link>
-                      </Button>
-                    )
-                  })}
+                <div className="grid grid-cols-3 gap-2.5">
+                  {[
+                    { href: "/waiter/service-floor", label: "Floor Plan", icon: "/service-floor-nav.png" },
+                    { href: "/waiter/order-tracking", label: "Tracker", icon: "/order-tracking-nav.png" },
+                    { href: "/waiter/checkout", label: "Cashier", icon: "/checkout-nav.png" },
+                  ].map((action) => (
+                    <Button
+                      key={action.href}
+                      asChild
+                      variant="ghost"
+                      className="h-20 flex-col gap-2 text-[9px] uppercase tracking-wider transition-all duration-300 hover:bg-[#EBE6F8] hover:shadow-lg rounded-2xl border"
+                      style={{
+                        borderColor: "oklch(0.45 0.12 285 / 0.1)",
+                        background: "rgba(235, 230, 248, 0.4)",
+                        color: "#3D374C",
+                      }}
+                    >
+                      <Link href={action.href} className="flex flex-col items-center justify-center">
+                        <div className="w-8 h-8 rounded-xl flex items-center justify-center bg-white shadow-sm border border-black/5 group-hover:scale-110 transition-transform">
+                          <img 
+                            src={action.icon} 
+                            className="h-4 w-4 object-contain" 
+                            alt={action.label} 
+                            style={{ filter: "invert(31%) sepia(68%) saturate(1116%) hue-rotate(221deg) brightness(91%) contrast(89%)" }} 
+                          />
+                        </div>
+                        {action.label}
+                      </Link>
+                    </Button>
+                  ))}
                 </div>
               </CardContent>
             </Card>
 
             {/* Shift Progress */}
             <Card
-              className="overflow-hidden border bg-white/75 backdrop-blur-md shadow-sm"
-              style={{ borderColor: "oklch(0.45 0.12 285 / 0.12)" }}
+              className="overflow-hidden border-0 bg-white shadow-xl rounded-[28px] relative"
+              style={{ border: "1px solid oklch(0.45 0.12 285 / 0.08)" }}
             >
-              <CardHeader
-                className="px-5 py-4"
-                style={{ borderBottom: "1px solid oklch(0.45 0.12 285 / 0.08)" }}
-              >
-                <div className="flex items-center gap-3">
+              <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-oklch(0.45 0.12 285) to-transparent opacity-40" />
+              
+              <CardHeader className="px-6 py-5" style={{ borderBottom: "1px solid oklch(0.45 0.12 285 / 0.05)" }}>
+                <div className="flex items-center gap-4">
                   <div
-                    className="w-9 h-9 rounded-xl flex items-center justify-center"
+                    className="w-11 h-11 rounded-[14px] flex items-center justify-center shadow-inner"
                     style={{ background: "oklch(0.45 0.12 285 / 0.1)" }}
                   >
-                    <Crown className="h-4 w-4" style={{ color: "oklch(0.45 0.12 285)" }} />
+                    <Crown className="h-5 w-5" style={{ color: "oklch(0.45 0.12 285)" }} />
                   </div>
                   <div>
-                    <CardTitle
-                      className="text-sm uppercase "
-                      style={{ color: "#0D031B" }}
-                    >
+                    <CardTitle className="text-[13px] uppercase tracking-[0.1em]" style={{ color: "#0D031B" }}>
                       Shift Progress
                     </CardTitle>
-                    <p className="text-[10px] uppercase font-medium" style={{ color: "#736C83" }}>
-                      14 covers to target
+                    <p className="text-[10px] uppercase tracking-wider mt-1 opacity-60" style={{ color: "#736C83" }}>
+                      14 COVERS TO TARGET
                     </p>
                   </div>
                 </div>
               </CardHeader>
-              <CardContent className="p-5 space-y-5">
-                {/* Big numbers */}
-                <div className="flex items-end justify-between">
-                  <div>
-                    <p
-                      className="text-[2.5rem] leading-none "
-                      style={{ color: "#0D031B" }}
-                    >
+
+              <CardContent className="p-6 space-y-6">
+                <div className="flex items-end justify-between px-2">
+                  <div className="space-y-1">
+                    <p className="text-[2.8rem] tracking-tight leading-none" style={{ color: "#0D031B" }}>
                       75%
                     </p>
-                    <p
-                      className="text-[10px] uppercase  mt-1"
-                      style={{ color: "#736C83" }}
-                    >
-                      Daily Target
+                    <p className="text-[10px] uppercase tracking-widest opacity-40" style={{ color: "#736C83" }}>
+                      Quota Met
                     </p>
                   </div>
-                  <div className="text-right">
-                    <p
-                      className="text-3xl leading-none"
-                      style={{ color: "oklch(0.45 0.12 285)" }}
-                    >
+                  <div className="text-right space-y-1">
+                    <p className="text-3xl tabular-nums" style={{ color: "oklch(0.45 0.12 285)" }}>
                       42
                     </p>
-                    <p
-                      className="text-[10px] uppercase  mt-1"
-                      style={{ color: "#736C83" }}
-                    >
-                      Covers Served
+                    <p className="text-[10px] uppercase tracking-widest opacity-40" style={{ color: "#736C83" }}>
+                      Served Today
                     </p>
                   </div>
                 </div>
 
-                {/* Progress bar */}
-                <div className="space-y-2">
-                  <Progress
-                    value={75}
-                    className="h-2.5 rounded-full"
-                    style={{ background: "oklch(0.45 0.12 285 / 0.12)" }}
-                  />
-                  <p className="text-[10px]" style={{ color: "#736C83" }}>
-                    Excellent pace · 14 covers to hit your target of 56
-                  </p>
+                <div className="space-y-3">
+                  <div className="h-3 w-full bg-slate-100 rounded-full overflow-hidden p-0.5 shadow-inner">
+                    <div 
+                      className="h-full rounded-full transition-all duration-1000 shadow-[0_0_10px_oklch(0.45_0.12_285_/_0.3)]"
+                      style={{ 
+                        width: "75%",
+                        background: "linear-gradient(90deg, oklch(0.45 0.12 285) 0%, oklch(0.55 0.15 275) 100%)" 
+                      }}
+                    />
+                  </div>
+                  <div className="flex items-center gap-2 px-1">
+                    <div className="w-1.5 h-1.5 rounded-full bg-oklch(0.7 0.15 150) animate-pulse" />
+                    <p className="text-[10px] uppercase tracking-wider text-slate-500">
+                      Excellent pace <span className="opacity-40">· 14 to hit daily target of 56</span>
+                    </p>
+                  </div>
                 </div>
 
-                <Separator style={{ background: "oklch(0.45 0.12 285 / 0.1)" }} />
-
-                {/* Mini metrics */}
-                <div className="grid grid-cols-3 gap-2.5 text-center">
+                <div className="grid grid-cols-3 gap-3">
                   {[
-                    { value: "4.8",     label: "Rating",    color: "oklch(0.7 0.15 150)"  },
-                    { value: "3.5m",    label: "Avg Time",  color: "oklch(0.45 0.12 285)" },
-                    { value: "KES 850", label: "Avg Bill",  color: "oklch(0.75 0.15 75)"  },
+                    { value: "4.8",     label: "Rating",    color: "oklch(0.7 0.15 150)", bg: "oklch(0.7 0.15 150 / 0.08)" },
+                    { value: "3.5m",    label: "Wait",      color: "oklch(0.45 0.12 285)", bg: "oklch(0.45 0.12 285 / 0.08)" },
+                    { value: "KES 850", label: "PPC",       color: "oklch(0.75 0.15 75)", bg: "oklch(0.75 0.15 75 / 0.08)" },
                   ].map((m) => (
                     <div
                       key={m.label}
-                      className="rounded-xl p-3"
-                      style={{ background: "#EBE6F8/70", border: "1px solid oklch(0.45 0.12 285 / 0.08)" }}
+                      className="rounded-2xl p-4 transition-all hover:scale-105 border flex flex-col items-center justify-center gap-1"
+                      style={{ 
+                        background: m.bg,
+                        borderColor: "oklch(0.45 0.12 285 / 0.05)"
+                      }}
                     >
-                      <p
-                        className="text-sm tabular-nums"
-                        style={{ color: m.color }}
-                      >
-                        {m.value}
-                      </p>
-                      <p
-                        className="text-[9px] uppercase  mt-0.5"
-                        style={{ color: "#736C83" }}
-                      >
-                        {m.label}
-                      </p>
+                      <p className="text-sm tabular-nums" style={{ color: m.color }}>{m.value}</p>
+                      <p className="text-[8px] uppercase tracking-widest opacity-40">{m.label}</p>
                     </div>
                   ))}
                 </div>
@@ -911,51 +957,59 @@ export default function WaiterDashboard() {
 
             {/* Recent Activity */}
             <Card
-              className="overflow-hidden border bg-white/75 backdrop-blur-md shadow-sm"
-              style={{ borderColor: "oklch(0.45 0.12 285 / 0.12)" }}
+              className="overflow-hidden border-0 bg-white/70 backdrop-blur-xl shadow-2xl relative"
+              style={{ 
+                boxShadow: "0 10px 40px -10px oklch(0.45 0.12 285 / 0.1)",
+                border: "1px solid oklch(0.45 0.12 285 / 0.08)" 
+              }}
             >
+              <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-oklch(0.45 0.12 285 / 0.4) to-transparent opacity-20" />
+              
               <CardHeader
-                className="px-5 py-4"
-                style={{ borderBottom: "1px solid oklch(0.45 0.12 285 / 0.08)" }}
+                className="px-6 py-5"
+                style={{ borderBottom: "1px solid oklch(0.45 0.12 285 / 0.05)" }}
               >
                 <CardTitle
-                  className="text-sm uppercase "
+                  className="text-[13px] uppercase tracking-[0.1em]"
                   style={{ color: "#0D031B" }}
                 >
-                  Recent Activity
+                  Activity Stream
                 </CardTitle>
               </CardHeader>
-              <ScrollArea className="h-[220px]">
+              <ScrollArea className="h-[260px]">
                 <CardContent className="p-0">
-                  <div className="divide-y" style={{ borderColor: "oklch(0.45 0.12 285 / 0.06)" }}>
+                  <div className="divide-y" style={{ borderColor: "oklch(0.45 0.12 285 / 0.05)" }}>
                     {recentActivity.map((item, i) => {
                       const Icon = item.icon
                       return (
                         <div
                           key={i}
-                          className="flex items-center gap-3 px-5 py-3.5 transition-colors hover:bg-[#EBE6F8]/50 cursor-pointer group"
+                          className="flex items-center gap-4 px-6 py-4 transition-all duration-300 hover:bg-white cursor-pointer group"
                         >
-                          {/* Icon */}
+                          {/* Icon Container */}
                           <div
-                            className={cn("w-8 h-8 rounded-xl flex items-center justify-center shrink-0 transition-transform group-hover:scale-105", item.bg)}
+                            className={cn("w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 transition-all duration-500 group-hover:scale-110 shadow-sm", item.bg)}
                           >
-                            <Icon className={cn("h-3.5 w-3.5", item.color)} />
+                            <Icon className={cn("h-4.5 w-4.5", item.color)} />
                           </div>
-
+ 
                           <div className="flex-1 min-w-0">
                             <p
-                              className="text-xs truncate"
+                              className="text-[13px] truncate tracking-tight transition-colors group-hover:text-oklch(0.45 0.12 285)"
                               style={{ color: "#3D374C" }}
                             >
                               {item.text}
                             </p>
-                            <p className="text-[10px] mt-0.5" style={{ color: "#AEA6BF" }}>
-                              {item.sub}
-                            </p>
+                            <div className="flex items-center gap-2 mt-1">
+                               <div className="w-1 h-1 rounded-full bg-slate-300" />
+                               <p className="text-[10px] uppercase tracking-widest opacity-40" style={{ color: "#736C83" }}>
+                                  {item.sub}
+                               </p>
+                            </div>
                           </div>
-
+ 
                           <ArrowRight
-                            className="h-3.5 w-3.5 shrink-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                            className="h-4 w-4 shrink-0 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
                             style={{ color: "oklch(0.45 0.12 285)" }}
                           />
                         </div>

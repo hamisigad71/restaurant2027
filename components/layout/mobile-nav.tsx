@@ -26,6 +26,7 @@ import {
   BellIcon as BellIconSolid
 } from "@heroicons/react/24/solid"
 import { useAuth, UserRole } from "@/lib/auth-context"
+import { useSidebar } from "@/components/ui/sidebar"
 import { cn } from "@/lib/utils"
 
 interface NavItem {
@@ -36,6 +37,8 @@ interface NavItem {
 
 export function MobileNav() {
   const { user } = useAuth()
+  const sidebar = useSidebar()
+  const openMobile = sidebar?.openMobile ?? false
   const pathname = usePathname()
   
   const [isVisible, setIsVisible] = useState(true)
@@ -170,21 +173,18 @@ export function MobileNav() {
 
       <nav 
         className={cn(
-          "fixed bottom-0 left-0 right-0 z-[100] pb-safe md:hidden transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] rounded-t-[32px]",
-          isVisible ? "translate-y-0 opacity-100" : "translate-y-[calc(100%+20px)] opacity-0 pointer-events-none"
+          "fixed bottom-6 left-4 right-4 z-40 max-w-md mx-auto md:hidden transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] rounded-[32px] shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)]",
+          (isVisible && !openMobile) ? "translate-y-0 opacity-100" : "translate-y-[calc(100%+40px)] opacity-0 invisible pointer-events-none"
         )}
       >
-        {/* Gradient fade at top */}
-        <div className="absolute top-0 left-0 right-0 h-8 bg-gradient-to-t from-transparent to-[#F8F6FC] pointer-events-none" />
-
-        {/* Main container with refined design - NOW FULL WIDTH */}
-        <div className="relative mx-0 mb-0 overflow-hidden rounded-t-[32px]">
+        {/* Main container with floating design */}
+        <div className="relative overflow-hidden rounded-[32px]">
           
           {/* Sophisticated multi-layer background */}
-          <div className="absolute inset-0 rounded-t-[32px] overflow-hidden">
+          <div className="absolute inset-0 rounded-[32px] overflow-hidden">
             {/* Base layer - frosted glass effect */}
             <div 
-              className="absolute inset-0 backdrop-blur-2xl rounded-t-[32px]"
+              className="absolute inset-0 backdrop-blur-2xl rounded-[32px]"
               style={{ 
                 background: "linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.92) 100%)"
               }}
@@ -192,26 +192,24 @@ export function MobileNav() {
             
             {/* Noise texture overlay for premium feel */}
             <div 
-              className="absolute inset-0 opacity-[0.015] mix-blend-overlay rounded-t-[32px]"
+              className="absolute inset-0 opacity-[0.015] mix-blend-overlay rounded-[32px]"
               style={{ 
                 backgroundImage: "url(data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E)",
                 backgroundSize: "128px 128px"
               }}
             />
-
-            {/* Ambient glow effect removed */}
           </div>
 
           {/* Elegant border system */}
-          <div className="absolute inset-0 rounded-t-[32px] border-t-2 border-x-2" 
+          <div className="absolute inset-0 rounded-[32px] border-2" 
             style={{ borderColor: "rgba(115, 108, 131, 0.06)" }} />
-          <div className="absolute inset-0 rounded-t-[32px] border-t border-x border-white/60" />
+          <div className="absolute inset-0 rounded-[32px] border border-white/60" />
           
           {/* Top highlight */}
-          <div className="absolute top-0 left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-white to-transparent" />
+          <div className="absolute top-0 left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-white/50 to-transparent" />
 
           {/* Content */}
-          <div className="relative flex items-center justify-around px-1.5 py-1.5">
+          <div className="relative flex items-center justify-around px-2 py-2">
             
             {/* Animated Active Indicator - NOW A PERFECT SQUARE */}
             <div 
@@ -275,12 +273,12 @@ export function MobileNav() {
                         <div 
                           className="h-5.5 w-5.5 transition-all duration-500 relative z-10" 
                           style={{ 
-                            backgroundColor: isActive ? "oklch(0.42 0.14 285)" : "#736C83",
+                            backgroundColor: isActive ? "oklch(0.42 0.14 285)" : "oklch(0.42 0.14 285 / 0.65)",
                             WebkitMaskImage: `url(${Icon})`,
                             WebkitMaskSize: "contain",
                             WebkitMaskRepeat: "no-repeat",
                             WebkitMaskPosition: "center",
-                            opacity: isActive ? 1 : 0.7
+                            opacity: isActive ? 1 : 0.8
                           }} 
                         />
                       ) : (
@@ -301,7 +299,7 @@ export function MobileNav() {
                       "text-[9px] font-bold uppercase tracking-[0.08em] transition-all duration-500 relative",
                       isActive 
                         ? "text-oklch(0.42 0.14 285) opacity-100 translate-y-0" 
-                        : "text-[#736C83] opacity-50 translate-y-0.5 group-hover:opacity-100 group-hover:translate-y-0"
+                        : "text-oklch(0.42 0.14 285 / 0.65) opacity-65 translate-y-0.5 group-hover:opacity-100 group-hover:translate-y-0"
                     )}
                     style={isActive ? { 
                       textShadow: "0 0 8px oklch(0.42 0.14 285 / 0.3)"

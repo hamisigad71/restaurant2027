@@ -56,20 +56,20 @@ function getDishImage(name: string) {
 const STATUS_CONFIG = {
   pending: {
     label: "New Order", Icon: ClockIcon,
-    cardAccent: "oklch(0.45 0.12 285)",
+    cardAccent: "oklch(0.42 0.14 285)",
     cardBg: "rgba(255,255,255,0.85)",
-    badgeBg: "oklch(0.45 0.12 285 / 0.08)", badgeText: "oklch(0.45 0.12 285)", badgeBorder: "oklch(0.45 0.12 285 / 0.15)",
-    iconBg: "oklch(0.45 0.12 285 / 0.1)", iconColor: "oklch(0.45 0.12 285)",
+    badgeBg: "oklch(0.45 0.12 285 / 0.08)", badgeText: "oklch(0.42 0.14 285)", badgeBorder: "oklch(0.45 0.12 285 / 0.15)",
+    iconBg: "oklch(0.45 0.12 285 / 0.1)", iconColor: "oklch(0.42 0.14 285)",
     statusText: "Waiting to start",
     nextLabel: "Start Cooking", nextStatus: "cooking" as OrderStatus,
-    nextBg: "oklch(0.45 0.12 285)", nextShadow: "oklch(0.45 0.12 285 / 0.3)",
+    nextBg: "oklch(0.42 0.14 285)", nextShadow: "oklch(0.45 0.12 285 / 0.3)",
   },
   cooking: {
     label: "Preparing", Icon: FireIcon,
-    cardAccent: "oklch(0.45 0.12 285)",
+    cardAccent: "oklch(0.42 0.14 285)",
     cardBg: "rgba(255,255,255,0.85)",
-    badgeBg: "oklch(0.45 0.12 285 / 0.1)", badgeText: "oklch(0.45 0.12 285)", badgeBorder: "oklch(0.45 0.12 285 / 0.2)",
-    iconBg: "oklch(0.45 0.12 285 / 0.12)", iconColor: "oklch(0.45 0.12 285)",
+    badgeBg: "oklch(0.45 0.12 285 / 0.1)", badgeText: "oklch(0.42 0.14 285)", badgeBorder: "oklch(0.45 0.12 285 / 0.2)",
+    iconBg: "oklch(0.45 0.12 285 / 0.12)", iconColor: "oklch(0.42 0.14 285)",
     statusText: "In the kitchen",
     nextLabel: "Mark Ready", nextStatus: "ready" as OrderStatus,
     nextBg: "oklch(0.62 0.16 150)", nextShadow: "oklch(0.62 0.16 150 / 0.3)",
@@ -205,7 +205,7 @@ export function OrderCard({ order, onUpdateStatus, listMode, animDelay = 0 }: Or
             </div>
           ))}
           {order.items.length > 3 && (
-            <p className="text-[10px] text-center font-bold text-[#AEA6BF] uppercase ">+{order.items.length - 3} more items</p>
+            <p className="text-[10px] text-center font-bold text-[var(--icon-primary)] uppercase ">+{order.items.length - 3} more items</p>
           )}
         </div>
 

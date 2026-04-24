@@ -165,7 +165,7 @@ function MenuCard({
             className="flex items-center gap-2 px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider"
             style={{
               background: "rgba(255,255,255,0.92)",
-              color: "oklch(0.45 0.12 285)",
+              color: "oklch(0.42 0.14 285)",
               backdropFilter: "blur(8px)",
               boxShadow: "0 4px 16px rgba(0,0,0,0.2)",
             }}
@@ -191,7 +191,7 @@ function MenuCard({
             <DropdownMenuTrigger asChild>
               <button
                 className="flex items-center justify-center w-6 h-6 rounded-lg shrink-0 transition-colors hover:bg-[#EBE6F8]"
-                style={{ color: "#AEA6BF" }}
+                style={{ color: "var(--icon-primary)" }}
               >
                 <MoreHorizontal className="h-3.5 w-3.5" />
               </button>
@@ -207,7 +207,7 @@ function MenuCard({
             >
               <DropdownMenuItem
                 className="flex items-center gap-2 text-[11px] font-semibold rounded-xl px-2.5 py-2 cursor-pointer"
-                style={{ color:"oklch(0.45 0.12 285)" }}
+                style={{ color:"oklch(0.42 0.14 285)" }}
               >
                 <Edit3 className="h-3.5 w-3.5" />
                 Edit Details
@@ -234,14 +234,14 @@ function MenuCard({
         <div className="flex items-center justify-between">
           <div
             className="flex items-center gap-1 text-[9px] font-bold uppercase tracking-wider"
-            style={{ color: item.popular ? "oklch(0.55 0.15 75)" : "#AEA6BF" }}
+            style={{ color: item.popular ? "oklch(0.55 0.15 75)" : "var(--icon-primary)" }}
           >
             {item.popular
               ? <><TrendingUp className="h-3 w-3" /> High Demand</>
               : <><Zap className="h-3 w-3" /> Medium</>
             }
           </div>
-          <span className="text-[9px] font-medium" style={{ color:"#AEA6BF" }}>
+          <span className="text-[9px] font-medium" style={{ color:"var(--icon-primary)" }}>
             {item.popular ? "100+" : "50+"} orders
           </span>
         </div>
@@ -267,7 +267,7 @@ function MenuCard({
           </button>
           <button
             className="flex items-center justify-center gap-0.5 text-[9px] font-bold uppercase tracking-wider px-2 py-1.5 rounded-lg transition-colors hover:bg-[#EBE6F8] w-full"
-            style={{ color:"oklch(0.45 0.12 285)" }}
+            style={{ color:"oklch(0.42 0.14 285)" }}
           >
             Strategy
             <ChevronRight className="h-3 w-3" />
@@ -323,7 +323,7 @@ export default function ManagerMenuPage() {
               <div className="flex items-center gap-2 mb-1.5">
                 <div
                   className="flex items-center justify-center w-9 h-9 rounded-xl"
-                  style={{ background:"oklch(0.45 0.12 285)", boxShadow:"0 4px 12px oklch(0.45 0.12 285 / 0.35)" }}
+                  style={{ background:"oklch(0.42 0.14 285)", boxShadow:"0 4px 12px oklch(0.45 0.12 285 / 0.35)" }}
                 >
                   <UtensilsCrossed className="h-4.5 w-4.5 text-white" />
                 </div>
@@ -340,7 +340,7 @@ export default function ManagerMenuPage() {
 
             <Button
               className="flex items-center gap-2 h-10 px-5 rounded-xl font-bold text-[12px] uppercase tracking-widest text-white border-none transition-all hover:opacity-90 hover:-translate-y-0.5 self-start sm:self-auto"
-              style={{ background:"oklch(0.45 0.12 285)", boxShadow:"0 4px 16px oklch(0.45 0.12 285 / 0.35)" }}
+              style={{ background:"oklch(0.42 0.14 285)", boxShadow:"0 4px 16px oklch(0.45 0.12 285 / 0.35)" }}
             >
               <Plus className="h-4 w-4" />
               Add Item
@@ -386,7 +386,7 @@ export default function ManagerMenuPage() {
                   className="flex items-center h-9 px-4 rounded-xl text-[10px] font-bold uppercase tracking-wider whitespace-nowrap shrink-0 border transition-all duration-200"
                   style={
                     active
-                      ? { background:"oklch(0.45 0.12 285)", color:"white", borderColor:"transparent", boxShadow:"0 3px 10px oklch(0.45 0.12 285 / 0.3)" }
+                      ? { background:"oklch(0.42 0.14 285)", color:"white", borderColor:"transparent", boxShadow:"0 3px 10px oklch(0.45 0.12 285 / 0.3)" }
                       : { background:"rgba(255,255,255,0.8)", color:"#736C83", borderColor:"oklch(0.45 0.12 285 / 0.12)" }
                   }
                 >
@@ -401,7 +401,7 @@ export default function ManagerMenuPage() {
             <div className="relative flex-1">
               <Search
                 className="absolute left-3.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 pointer-events-none"
-                style={{ color:"#AEA6BF" }}
+                style={{ color:"var(--icon-primary)" }}
               />
               <Input
                 placeholder="Search dishes…"
@@ -430,7 +430,7 @@ export default function ManagerMenuPage() {
           </div>
 
           {/* Count label */}
-          <p className="text-[10px] font-bold uppercase tracking-[0.16em] -mt-2" style={{ color:"#AEA6BF" }}>
+          <p className="text-[10px] font-bold uppercase tracking-[0.16em] -mt-2" style={{ color:"var(--icon-primary)" }}>
             {filtered.length} of {menuItems.length} items
           </p>
 
@@ -441,7 +441,7 @@ export default function ManagerMenuPage() {
                 className="w-16 h-16 rounded-2xl flex items-center justify-center border"
                 style={{ background:"rgba(255,255,255,0.8)", borderColor:"oklch(0.45 0.12 285 / 0.15)" }}
               >
-                <Package className="h-7 w-7" style={{ color:"#AEA6BF" }} />
+                <Package className="h-7 w-7" style={{ color:"var(--icon-primary)" }} />
               </div>
               <div className="text-center">
                 <p className="font-bold text-base" style={{ color:"#0D031B" }}>No items found</p>

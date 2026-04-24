@@ -63,7 +63,7 @@ function getStrength(pw: string) {
   if (/[^A-Za-z0-9]/.test(pw)) s++
   if (s <= 1) return { level:1, label:"Weak",   color:"oklch(0.55 0.18 25)"  }
   if (s === 2) return { level:2, label:"Fair",   color:"oklch(0.75 0.15 75)"  }
-  if (s === 3) return { level:3, label:"Good",   color:"oklch(0.45 0.12 285)" }
+  if (s === 3) return { level:3, label:"Good",   color:"oklch(0.42 0.14 285)" }
   return              { level:4, label:"Strong", color:"oklch(0.62 0.16 150)" }
 }
 
@@ -95,7 +95,7 @@ export default function SignupPage() {
       <div
         className="hidden lg:flex flex-col justify-between p-14 relative overflow-hidden"
         style={{
-          background:"linear-gradient(145deg, oklch(0.45 0.12 285) 0%, oklch(0.30 0.15 285) 55%, oklch(0.15 0.10 285) 100%)",
+          background:"linear-gradient(145deg, oklch(0.42 0.14 285) 0%, oklch(0.30 0.15 285) 55%, oklch(0.15 0.10 285) 100%)",
         }}
       >
         {/* Orbs */}
@@ -199,12 +199,12 @@ export default function SignupPage() {
             className="border rounded-3xl shadow-sm overflow-hidden"
             style={{ background:"rgba(255,255,255,0.82)", borderColor:"oklch(0.45 0.12 285 / 0.14)" }}
           >
-            <div className="h-[3px]" style={{ background:"oklch(0.45 0.12 285)" }} />
+            <div className="h-[3px]" style={{ background:"oklch(0.42 0.14 285)" }} />
             <CardHeader className="px-5 pt-4 pb-2">
               <CardTitle className="text-[11px] font-medium uppercase " style={{ color:"#9A94AA" }}>
                 Choose your role
               </CardTitle>
-              <CardDescription className="text-[11px] mt-0.5" style={{ color:"#AEA6BF" }}>
+              <CardDescription className="text-[11px] mt-0.5" style={{ color:"var(--icon-primary)" }}>
                 This determines which portal you access
               </CardDescription>
             </CardHeader>
@@ -232,7 +232,7 @@ export default function SignupPage() {
                           )}
                           style={
                             active
-                              ? { background:"oklch(0.45 0.12 285)", color:"white" }
+                              ? { background:"oklch(0.42 0.14 285)", color:"white" }
                               : undefined
                           }
                         >
@@ -245,7 +245,7 @@ export default function SignupPage() {
                       <div className="min-w-0">
                         <p
                           className="text-[12px] font-medium leading-none"
-                          style={{ color: active ? "oklch(0.45 0.12 285)" : "#0D031B" }}
+                          style={{ color: active ? "oklch(0.42 0.14 285)" : "#0D031B" }}
                         >
                           {r.label}
                         </p>
@@ -298,7 +298,7 @@ export default function SignupPage() {
 
             <div className="flex items-center gap-3">
               <Separator className="flex-1" style={{ background:"oklch(0.45 0.12 285 / 0.15)" }} />
-              <span className="text-[10px] font-medium uppercase  whitespace-nowrap px-1" style={{ color:"#AEA6BF" }}>
+              <span className="text-[10px] font-medium uppercase  whitespace-nowrap px-1" style={{ color:"var(--icon-primary)" }}>
                 or create manually
               </span>
               <Separator className="flex-1" style={{ background:"oklch(0.45 0.12 285 / 0.15)" }} />
@@ -356,7 +356,7 @@ export default function SignupPage() {
                         </SelectItem>
                       ))}
                       <Separator className="my-1" style={{ background:"oklch(0.45 0.12 285 / 0.1)" }} />
-                      <div className="px-2 py-1.5 text-[9px] font-bold uppercase " style={{ color:"#AEA6BF" }}>
+                      <div className="px-2 py-1.5 text-[9px] font-bold uppercase " style={{ color:"var(--icon-primary)" }}>
                         Staff Members
                       </div>
                       {staffSubRoles.map(s => (
@@ -388,7 +388,7 @@ export default function SignupPage() {
                       type="button"
                       onClick={() => setShowPassword(v => !v)}
                       className="absolute right-3 top-1/2 -translate-y-1/2 transition-opacity hover:opacity-70"
-                      style={{ color:"#AEA6BF" }}
+                      style={{ color:"var(--icon-primary)" }}
                     >
                       {showPassword ? <EyeSlashIcon className="h-4 w-4" /> : <EyeIcon className="h-4 w-4" />}
                     </button>
@@ -417,7 +417,7 @@ export default function SignupPage() {
                       </p>
                     </div>
                   ) : (
-                    <p className="text-[10px]" style={{ color:"#AEA6BF" }}>
+                    <p className="text-[10px]" style={{ color:"var(--icon-primary)" }}>
                       Must be at least 8 characters
                     </p>
                   )}
@@ -429,7 +429,7 @@ export default function SignupPage() {
                   disabled={isLoading}
                   className="w-full flex items-center justify-center gap-2.5 h-11 rounded-2xl font-bold text-[13px] uppercase  text-white transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] disabled:opacity-60 disabled:pointer-events-none relative overflow-hidden group"
                   style={{
-                    background:"oklch(0.45 0.12 285)",
+                    background:"oklch(0.42 0.14 285)",
                     boxShadow:"0 6px 24px oklch(0.45 0.12 285 / 0.35)",
                   }}
                 >
@@ -447,11 +447,11 @@ export default function SignupPage() {
                   )}
                 </button>
 
-                <p className="text-center text-[10px] leading-relaxed" style={{ color:"#AEA6BF" }}>
+                <p className="text-center text-[10px] leading-relaxed" style={{ color:"var(--icon-primary)" }}>
                   By creating an account you agree to our{" "}
-                  <Link href="/terms" className="font-semibold hover:opacity-70" style={{ color:"oklch(0.45 0.12 285)" }}>Terms</Link>
+                  <Link href="/terms" className="font-semibold hover:opacity-70" style={{ color:"oklch(0.42 0.14 285)" }}>Terms</Link>
                   {" "}and{" "}
-                  <Link href="/privacy" className="font-semibold hover:opacity-70" style={{ color:"oklch(0.45 0.12 285)" }}>Privacy Policy</Link>.
+                  <Link href="/privacy" className="font-semibold hover:opacity-70" style={{ color:"oklch(0.42 0.14 285)" }}>Privacy Policy</Link>.
                 </p>
               </form>
             </CardContent>
@@ -459,7 +459,7 @@ export default function SignupPage() {
 
           <p className="text-center text-xs" style={{ color:"#736C83" }}>
             Already have an account?{" "}
-            <Link href="/login" className="font-semibold transition-opacity hover:opacity-70" style={{ color:"oklch(0.45 0.12 285)" }}>
+            <Link href="/login" className="font-semibold transition-opacity hover:opacity-70" style={{ color:"oklch(0.42 0.14 285)" }}>
               Sign in
             </Link>
           </p>

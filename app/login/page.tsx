@@ -274,7 +274,7 @@ export default function LoginPage() {
         <div className="w-full max-w-[440px] mx-auto space-y-7">
 
           {/* Heading */}
-          <div className="space-y-2">
+          <div className="space-y-4">
             <h1 className="text-[2rem] font-bold " style={{ color:"#0D031B" }}>
               Welcome back
             </h1>
@@ -331,32 +331,37 @@ export default function LoginPage() {
                     </div>
                     <div className="grid grid-cols-2 gap-2.5">
                       {STAFF_SUB_ROLES.map((sub) => (
-                        <button
+                          <button
                           key={sub.id}
                           onClick={() => { setShowStaffPicker(false); handleQuickLogin(sub.id as UserRole) }}
-                          className="group flex items-center gap-2.5 p-3.5 rounded-xl border transition-all duration-200 text-left hover:shadow-md active:scale-[0.98]"
-                          style={{
-                            background:"white",
-                            borderColor:"oklch(0.42 0.14 285 / 0.14)"
-                          }}
+                          className="group relative flex flex-col items-start justify-between p-3.5 rounded-[18px] border-0 transition-all duration-500 text-left overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 active:scale-[0.98] min-h-[90px]"
+                          style={{ background: "white" }}
                         >
-                          <div
-                            className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 transition-all duration-200"
-                            style={{
-                              background:"oklch(0.42 0.14 285 / 0.08)",
-                              color:"oklch(0.42 0.14 285)"
-                            }}
-                          >
-                            {typeof sub.icon === 'string' ? (
-                              <img src={sub.icon} className="h-5 w-5 brightness-0" style={{ filter: 'invert(37%) sepia(93%) saturate(541%) hue-rotate(221deg) brightness(85%) contrast(89%)' }} />
-                            ) : (
-                              <sub.icon className="h-4 w-4 transition-transform group-hover:scale-110" />
-                            )}
+                          {/* Premium Background Accents */}
+                          <div 
+                            className="absolute inset-0 opacity-0 group-hover:opacity-[0.03] transition-opacity duration-500"
+                            style={{ background: "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)" }}
+                          />
+
+                          <div className="relative z-10 flex flex-row items-center gap-3 w-full">
+                            <div
+                              className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 transition-all duration-500 shadow-md relative"
+                              style={{
+                                background: "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)",
+                                boxShadow: "0 4px 8px oklch(0.42 0.14 285 / 0.25)"
+                              }}
+                            >
+                              {typeof sub.icon === 'string' ? (
+                                <img src={sub.icon} className="h-4.5 w-4.5 brightness-0 invert group-hover:scale-110 transition-transform duration-500" alt={sub.label} />
+                              ) : (() => {
+                                const DynamicIcon = sub.icon as any
+                                return <DynamicIcon className="h-3.5 w-3.5 text-white transition-transform group-hover:scale-110" />
+                              })()}
+                            </div>
+                            <p className="text-[12px] font-medium leading-none text-[#0D031B] uppercase tracking-tight">{sub.label}</p>
                           </div>
-                          <div className="min-w-0">
-                            <p className="text-[13px] font-medium leading-none text-[#0D031B]">{sub.label}</p>
-                            <p className="text-[10px] mt-1.5 truncate text-[#9A94AA]">{sub.desc}</p>
-                          </div>
+                          
+                          <p className="relative z-10 text-[9px] font-medium uppercase tracking-wider text-[#9A94AA] truncate w-full">{sub.desc}</p>
                         </button>
                       ))}
                     </div>
@@ -364,7 +369,6 @@ export default function LoginPage() {
                 ) : (
                   <div className="grid grid-cols-2 gap-2.5 animate-in fade-in zoom-in-95 duration-300">
                     {roleOptions.map((opt) => {
-                      const Icon  = opt.icon
                       const busy  = loadingRole === opt.role
                       return (
                         <button
@@ -372,46 +376,43 @@ export default function LoginPage() {
                           onClick={() => handleQuickLogin(opt.role)}
                           disabled={!!loadingRole}
                           className={cn(
-                            "group relative flex items-center gap-2.5 p-4 rounded-xl border transition-all duration-200 text-left overflow-hidden",
+                            "group relative flex flex-col items-start justify-between p-4 rounded-[20px] border-0 transition-all duration-500 text-left overflow-hidden shadow-sm min-h-[110px]",
                             "disabled:opacity-60 disabled:cursor-not-allowed",
-                            !busy && "hover:shadow-md active:scale-[0.98]",
+                            !busy && "hover:shadow-2xl hover:-translate-y-1 active:scale-[0.98]",
                             busy && "ring-2 ring-[oklch(0.42_0.14_285_/_0.2)]",
                           )}
-                          style={
-                            busy
-                              ? { 
-                                  borderColor:"oklch(0.42 0.14 285 / 0.4)", 
-                                  background:"oklch(0.42 0.14 285 / 0.06)",
-                                }
-                              : { borderColor:"oklch(0.42 0.14 285 / 0.14)", background:"white" }
-                          }
+                          style={{
+                            background: busy ? "oklch(0.42 0.14 285 / 0.04)" : "white",
+                          }}
                         >
-                          {!busy && (
-                            <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-[oklch(0.42_0.14_285_/_0.03)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                          )}
-                          <div
-                            className={cn(
-                              "flex items-center justify-center w-10 h-10 rounded-lg shrink-0 transition-all duration-200 relative z-10",
-                            )}
-                            style={
-                              busy
-                                ? { background:"oklch(0.42 0.14 285)", color:"white" }
-                                : { background:"oklch(0.42 0.14 285 / 0.08)", color:"oklch(0.42 0.14 285)" }
-                            }
-                          >
-                            {busy
-                              ? <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                              : typeof opt.icon === 'string' ? (
-                                <img src={opt.icon} className="h-5 w-5 brightness-0" style={{ filter: 'invert(37%) sepia(93%) saturate(541%) hue-rotate(221deg) brightness(85%) contrast(89%)' }} />
+                          {/* Premium Background Accents */}
+                          <div 
+                            className="absolute inset-0 opacity-0 group-hover:opacity-[0.03] transition-opacity duration-500"
+                            style={{ background: "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)" }}
+                          />
+                          
+                          <div className="relative z-10 flex flex-row items-center gap-3.5 w-full">
+                            {/* Icon with glow */}
+                            <div 
+                              className={cn(
+                                "flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-xl shrink-0 transition-all duration-500 shadow-lg relative",
+                              )}
+                              style={{ 
+                                background: "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)",
+                                boxShadow: "0 6px 12px oklch(0.42 0.14 285 / 0.25)"
+                              }}
+                            >
+                              {busy ? (
+                                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                               ) : (
-                                <opt.icon className="h-4.5 w-4.5 transition-transform group-hover:scale-110" />
-                              )
-                            }
+                                <img src={opt.icon} className="h-5.5 w-5.5 brightness-0 invert group-hover:scale-110 transition-transform duration-500" alt={opt.label} />
+                              )}
+                            </div>
+
+                            <p className="text-[14px] font-medium tracking-tight text-[#0D031B] uppercase leading-none">{opt.label}</p>
                           </div>
-                          <div className="min-w-0 relative z-10">
-                            <p className="text-[13px] font-medium leading-none text-[#0D031B]">{opt.label}</p>
-                            <p className="text-[10.5px] mt-1.5 truncate text-[#9A94AA]">{opt.description}</p>
-                          </div>
+
+                          <p className="relative z-10 text-[10px] font-medium uppercase tracking-wider text-[#9A94AA] truncate w-full">{opt.description}</p>
                         </button>
                       )
                     })}
@@ -425,7 +426,7 @@ export default function LoginPage() {
           <div className="space-y-4">
             <div className="flex items-center gap-4">
               <Separator className="flex-1" style={{ background:"oklch(0.42 0.14 285 / 0.12)" }} />
-              <span className="text-[10px] font-bold uppercase  whitespace-nowrap px-1" style={{ color:"#AEA6BF" }}>
+              <span className="text-[10px] font-bold uppercase  whitespace-nowrap px-1" style={{ color:"var(--icon-primary)" }}>
                 Social login
               </span>
               <Separator className="flex-1" style={{ background:"oklch(0.42 0.14 285 / 0.12)" }} />
@@ -470,7 +471,7 @@ export default function LoginPage() {
 
             <div className="flex items-center gap-4">
               <Separator className="flex-1" style={{ background:"oklch(0.42 0.14 285 / 0.12)" }} />
-              <span className="text-[10px] font-bold uppercase  whitespace-nowrap px-1" style={{ color:"#AEA6BF" }}>
+              <span className="text-[10px] font-bold uppercase  whitespace-nowrap px-1" style={{ color:"var(--icon-primary)" }}>
                 or continue with email
               </span>
               <Separator className="flex-1" style={{ background:"oklch(0.42 0.14 285 / 0.12)" }} />
@@ -543,7 +544,7 @@ export default function LoginPage() {
                       type="button"
                       onClick={() => setShowPassword(v => !v)}
                       className="absolute right-4 top-1/2 -translate-y-1/2 transition-all hover:scale-110 active:scale-95"
-                      style={{ color:"#AEA6BF" }}
+                      style={{ color:"var(--icon-primary)" }}
                     >
                       {showPassword ? <EyeOff className="h-4.5 w-4.5" /> : <Eye className="h-4.5 w-4.5" />}
                     </button>
@@ -585,10 +586,23 @@ export default function LoginPage() {
                             <div className="absolute inset-0 bg-gradient-to-br from-oklch(0.42 0.14 285 / 0.05) to-transparent" />
                           )}
                           {typeof opt.icon === 'string' ? (
-                            <img src={opt.icon} className={cn("h-4 w-4 relative z-10 transition-transform", active && "scale-110 brightness-0")} style={active ? { filter: 'invert(37%) sepia(93%) saturate(541%) hue-rotate(221deg) brightness(85%) contrast(89%)' } : { opacity: 0.7 }} />
-                          ) : (
-                            <Icon className={cn("h-4 w-4 relative z-10 transition-transform", active && "scale-110")} />
-                          )}
+                            <img 
+                              src={opt.icon} 
+                              className={cn("h-4 w-4 relative z-10 transition-transform brightness-0", active && "scale-110")} 
+                              style={{ 
+                                filter: 'invert(37%) sepia(93%) saturate(541%) hue-rotate(221deg) brightness(85%) contrast(89%)',
+                                opacity: active ? 1 : 0.45
+                              }} 
+                            />
+                          ) : (() => {
+                            const DynamicIcon = opt.icon as any
+                            return (
+                              <DynamicIcon 
+                                className={cn("h-4 w-4 relative z-10 transition-transform", active && "scale-110")} 
+                                style={{ color: "oklch(0.42 0.14 285)", opacity: active ? 1 : 0.45 }}
+                              />
+                            )
+                          })()}
                           <span className="relative z-10">{opt.label}</span>
                         </button>
                       )

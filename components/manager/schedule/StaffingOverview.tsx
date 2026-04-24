@@ -43,7 +43,7 @@ export function StaffingOverview({ activeDay, completedCount, activeCount, upcom
         <CardContent className="px-5 py-4 space-y-3">
           {[
             { label: "On Duty", value: "14", icon: UserCheck, accent: "oklch(0.62 0.16 150)" },
-            { label: "Stations Covered", value: "100%", icon: Briefcase, accent: "oklch(0.45 0.12 285)" },
+            { label: "Stations Covered", value: "100%", icon: Briefcase, accent: "oklch(0.42 0.14 285)" },
             { label: "Overtime Risk", value: "2", icon: AlertCircle, accent: "oklch(0.65 0.18 25)" },
           ].map(stat => (
             <div
@@ -82,7 +82,7 @@ export function StaffingOverview({ activeDay, completedCount, activeCount, upcom
 
           {[
             { label: "Completed", count: completedCount, total: totalShifts, accent: "oklch(0.62 0.16 150)", icon: CheckCircle2 },
-            { label: "Active", count: activeCount, total: totalShifts, accent: "oklch(0.45 0.12 285)", icon: Activity },
+            { label: "Active", count: activeCount, total: totalShifts, accent: "oklch(0.42 0.14 285)", icon: Activity },
             { label: "Upcoming", count: upcomingCount, total: totalShifts, accent: "oklch(0.75 0.15 75)", icon: Timer },
           ].map(row => {
             const pct = totalShifts > 0 ? Math.round((row.count / totalShifts) * 100) : 0
@@ -112,7 +112,7 @@ export function StaffingOverview({ activeDay, completedCount, activeCount, upcom
       {/* Quotas Card */}
       <Card
         className="rounded-3xl shadow-sm overflow-hidden"
-        style={{ background: "oklch(0.45 0.12 285)", borderColor: "transparent" }}
+        style={{ background: "oklch(0.42 0.14 285)", borderColor: "transparent" }}
       >
         <CardContent className="px-5 py-5 text-center relative">
           <div

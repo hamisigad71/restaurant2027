@@ -34,7 +34,7 @@ export function WeekNavigator({ activeDay, setActiveDay }: WeekNavigatorProps) {
                   className="relative flex flex-col items-center gap-0.5 px-3 sm:px-5 py-2.5 rounded-xl text-[10px] font-bold uppercase tracking-wider transition-all duration-200 shrink-0"
                   style={
                     active
-                      ? { background: "oklch(0.45 0.12 285)", color: "white", borderColor: "transparent", boxShadow: "0 3px 10px oklch(0.45 0.12 285 / 0.3)" }
+                      ? { background: "oklch(0.42 0.14 285)", color: "white", borderColor: "transparent", boxShadow: "0 3px 10px oklch(0.45 0.12 285 / 0.3)" }
                       : { background: "transparent", color: "#9A94AA", borderColor: "transparent" }
                   }
                 >
@@ -44,7 +44,7 @@ export function WeekNavigator({ activeDay, setActiveDay }: WeekNavigatorProps) {
                   {dayShifts.length > 0 && (
                     <span
                       className="text-[8px] leading-none font-bold"
-                      style={{ color: active ? "rgba(255,255,255,0.7)" : "#AEA6BF" }}
+                      style={{ color: active ? "rgba(255,255,255,0.7)" : "var(--icon-primary)" }}
                     >
                       {dayShifts.length}
                     </span>

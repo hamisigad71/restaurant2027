@@ -46,7 +46,7 @@ export function ShiftList({ activeDay, todayShifts, activeCount, upcomingCount }
                 className="flex items-center justify-center w-9 h-9 rounded-xl"
                 style={{ background: "oklch(0.45 0.12 285 / 0.1)" }}
               >
-                <Clock className="h-4 w-4" style={{ color: "oklch(0.45 0.12 285)" }} />
+                <Clock className="h-4 w-4" style={{ color: "oklch(0.42 0.14 285)" }} />
               </div>
               <div>
                 <CardTitle className="text-[14px] font-bold" style={{ color: "#0D031B" }}>
@@ -88,7 +88,7 @@ export function ShiftList({ activeDay, todayShifts, activeCount, upcomingCount }
                 className="w-14 h-14 rounded-2xl flex items-center justify-center"
                 style={{ background: "#F5F2FB", borderColor: "oklch(0.45 0.12 285 / 0.15)" }}
               >
-                <Calendar className="h-7 w-7" style={{ color: "#AEA6BF" }} />
+                <Calendar className="h-7 w-7" style={{ color: "var(--icon-primary)" }} />
               </div>
               <div className="text-center">
                 <p className="text-sm font-semibold" style={{ color: "#0D031B" }}>No shifts scheduled</p>
@@ -148,7 +148,7 @@ export function ShiftList({ activeDay, todayShifts, activeCount, upcomingCount }
                       <DropdownMenuTrigger asChild>
                         <button
                           className="opacity-0 group-hover:opacity-100 flex items-center justify-center w-8 h-8 rounded-xl shrink-0 transition-all hover:bg-[#EBE6F8]"
-                          style={{ color: "#AEA6BF" }}
+                          style={{ color: "var(--icon-primary)" }}
                         >
                           <MoreVertical className="h-4 w-4" />
                         </button>
@@ -158,7 +158,7 @@ export function ShiftList({ activeDay, todayShifts, activeCount, upcomingCount }
                         className="w-44 rounded-2xl p-1.5"
                         style={{ background: "#FDFCFF", borderColor: "oklch(0.45 0.12 285 / 0.15)", boxShadow: "0 8px 28px rgba(13,3,27,0.12)" }}
                       >
-                        <DropdownMenuItem className="flex items-center gap-2 text-[11px] font-semibold rounded-xl px-2.5 py-2 cursor-pointer" style={{ color: "oklch(0.45 0.12 285)" }}>
+                        <DropdownMenuItem className="flex items-center gap-2 text-[11px] font-semibold rounded-xl px-2.5 py-2 cursor-pointer" style={{ color: "oklch(0.42 0.14 285)" }}>
                           <Eye className="h-3.5 w-3.5" /> View Details
                         </DropdownMenuItem>
                         <DropdownMenuItem className="flex items-center gap-2 text-[11px] font-semibold rounded-xl px-2.5 py-2 cursor-pointer" style={{ color: "#3D374C" }}>
