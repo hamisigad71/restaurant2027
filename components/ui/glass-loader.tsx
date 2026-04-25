@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useLayoutEffect, useState, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
@@ -29,6 +29,16 @@ export function GlassLoader({ className, fullScreen = true, autoHideDuration = 7
   const pathname = usePathname();
   const isFirstLoad = useRef(true);
 
+  // Set data-loading SYNCHRONOUSLY before paint so MobileNav never sees a
+  // frame without it — useEffect fires too late (after the first paint).
+  useLayoutEffect(() => {
+    document.body.setAttribute("data-loading", "true");
+    return () => {
+      // Cleanup only if the component unmounts entirely (isComplete → null).
+      // The timed removeAttribute in useEffect handles the normal hide path.
+    };
+  }, [pathname]);
+
   // Hook into route changes to restart the loader
   useEffect(() => {
     // Reset loader whenever the route changes
@@ -37,8 +47,6 @@ export function GlassLoader({ className, fullScreen = true, autoHideDuration = 7
     setIsFadingOut(false);
     setIsComplete(false);
 
-    // Signal to other components (e.g. MobileNav) that the loader is active
-    document.body.setAttribute("data-loading", "true");
 
     // If it's a route change (not the first load), we might want a shorter duration,
     // but we will respect the autoHideDuration unless overwritten.

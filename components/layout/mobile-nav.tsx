@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useMemo } from "react"
+import { useState, useEffect, useLayoutEffect, useMemo } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { 
@@ -44,11 +44,15 @@ export function MobileNav() {
   const [isVisible, setIsVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
   const [ripples, setRipples] = useState<{ id: number; x: number; y: number }[]>([])
-  const [isLoaderActive, setIsLoaderActive] = useState(
-    () => typeof document !== "undefined" && document.body.hasAttribute("data-loading")
-  )
+  const [isLoaderActive, setIsLoaderActive] = useState(true)
 
-  // Watch for GlassLoader's data-loading attribute on body
+  // Sync with GlassLoader's useLayoutEffect: both fire before paint on pathname change.
+  // This ensures isLoaderActive is true before the first frame renders on any route change.
+  useLayoutEffect(() => {
+    setIsLoaderActive(document.body.hasAttribute("data-loading"))
+  }, [pathname])
+
+  // Also watch for the attribute being removed (when loader finishes)
   useEffect(() => {
     const observer = new MutationObserver(() => {
       setIsLoaderActive(document.body.hasAttribute("data-loading"))
