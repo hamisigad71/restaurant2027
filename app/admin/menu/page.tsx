@@ -235,7 +235,7 @@ export default function MenuPage() {
                 {/* Status Badge - Top Left */}
                 <div className="absolute top-2.5 left-2.5">
                   <span
-                    className="flex items-center gap-1 text-[9px] font-bold uppercase tracking-wider px-2 py-1 rounded-full text-white"
+                    className="flex items-center gap-1 text-[9px] font-bold uppercase px-2 py-1 rounded-full text-white"
                     style={{
                       background: item.available
                         ? "oklch(0.62 0.16 150 / 0.85)"
@@ -250,7 +250,7 @@ export default function MenuPage() {
                 {/* Categories/Tags - Top Right */}
                 <div className="absolute top-2.5 right-2.5">
                    <span
-                      className="flex items-center gap-1 text-[9px] font-bold uppercase tracking-wider px-2 py-1 rounded-full text-white"
+                      className="flex items-center gap-1 text-[9px] font-bold uppercase px-2 py-1 rounded-full text-white"
                       style={{
                         background: "oklch(0.45 0.12 285 / 0.7)",
                         backdropFilter: "blur(6px)",
@@ -273,7 +273,7 @@ export default function MenuPage() {
                   onClick={() => handleEdit(item)}
                 >
                   <div
-                    className="flex items-center gap-2 px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider text-white"
+                    className="flex items-center gap-2 px-4 py-2 rounded-xl text-[10px] font-bold uppercase text-white"
                     style={{
                       background: "oklch(0.45 0.12 285 / 0.9)",
                       backdropFilter: "blur(8px)",
@@ -310,7 +310,7 @@ export default function MenuPage() {
                 <div className="flex flex-col gap-2 pt-2 mt-auto border-t" style={{ borderColor: "oklch(0.45 0.12 285 / 0.08)" }}>
                   <button
                     onClick={() => handleToggleAvailability(item.id)}
-                    className="flex items-center justify-center gap-1.5 text-[9px] font-bold uppercase tracking-wider px-2 py-1.5 rounded-lg transition-colors w-full"
+                    className="flex items-center justify-center gap-1.5 text-[9px] font-bold uppercase px-2 py-1.5 rounded-lg transition-colors w-full"
                     style={
                       item.available
                         ? { color: "oklch(0.42 0.14 150)", background: "oklch(0.62 0.16 150 / 0.08)" }
@@ -323,7 +323,7 @@ export default function MenuPage() {
                   <div className="flex gap-2">
                     <button
                       onClick={() => handleEdit(item)}
-                      className="flex-1 flex items-center justify-center gap-1.5 text-[9px] font-bold uppercase tracking-wider px-2 py-1.5 rounded-lg transition-colors hover:bg-secondary bg-secondary/30 text-muted-foreground"
+                      className="flex-1 flex items-center justify-center gap-1.5 text-[9px] font-bold uppercase px-2 py-1.5 rounded-lg transition-colors hover:bg-secondary bg-secondary/30 text-muted-foreground"
                     >
                       <PencilIcon className="h-3 w-3" />
                       Edit

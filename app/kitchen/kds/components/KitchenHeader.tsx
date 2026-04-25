@@ -22,7 +22,7 @@ export function KitchenHeader({
   viewMode, onViewMode, onBellClick 
 }: KitchenHeaderProps) {
   return (
-    <div className="relative overflow-hidden px-5 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shrink-0" style={{ background: "oklch(0.42 0.14 285)" }}>
+    <div className="relative overflow-hidden px-5 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shrink-0" style={{ background: "#3F3D8F" }}>
       {/* Brand */}
       <div className="relative z-10 flex items-center gap-3">
         <div className="w-10 h-10 rounded-xl flex items-center justify-center border p-1.5" style={{ background: "rgba(255,255,255,0.12)", borderColor: "rgba(255,255,255,0.2)" }}>

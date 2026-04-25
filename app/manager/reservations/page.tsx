@@ -49,10 +49,10 @@ const mockReservations = [
 ]
 
 const stats = [
-  { label: "Today's Bookings", value: "18", icon: CalendarIcon, from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)", change: "+12%" },
-  { label: "Total Guests", value: "54", icon: UserGroupIcon, from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)", change: "+8%" },
-  { label: "Pending Requests", value: "4", icon: ClockIcon, from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)", change: "+2" },
-  { label: "VIP Arrivals", value: "2", icon: StarIcon, from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)", change: "Today" },
+  { label: "Today's Bookings", value: "18", icon: CalendarIcon, from: "#3F3D8F", to: "oklch(0.38 0.16 275)", change: "+12%" },
+  { label: "Total Guests", value: "54", icon: UserGroupIcon, from: "#3F3D8F", to: "oklch(0.38 0.16 275)", change: "+8%" },
+  { label: "Pending Requests", value: "4", icon: ClockIcon, from: "#3F3D8F", to: "oklch(0.38 0.16 275)", change: "+2" },
+  { label: "VIP Arrivals", value: "2", icon: StarIcon, from: "#3F3D8F", to: "oklch(0.38 0.16 275)", change: "Today" },
 ]
 
 export default function ManagerReservationsPage() {
@@ -77,18 +77,18 @@ export default function ManagerReservationsPage() {
               <div 
                 className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center shadow-lg"
                 style={{
-                  background: "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)",
+                  background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.16 275) 100%)",
                 }}
               >
                 <CalendarIcon className="h-6 w-6 sm:h-7 sm:w-7 text-white" strokeWidth={2.5} />
               </div>
               <div>
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight leading-none" style={{ color: "#0D031B" }}>
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium leading-none" style={{ color: "#0D031B" }}>
                   Reservations
                 </h1>
                 <div className="flex items-center gap-2 mt-1.5">
-                  <div className="h-px w-8 bg-gradient-to-r from-oklch(0.42 0.14 285) to-transparent" />
-                  <p className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider" style={{ color: "#736C83" }}>
+                  <div className="h-px w-8 bg-gradient-to-r from-[#3F3D8F] to-transparent" />
+                  <p className="text-[10px] sm:text-[11px] font-semibold uppercase" style={{ color: "#736C83" }}>
                     Guest Booking & Table Management
                   </p>
                 </div>
@@ -97,9 +97,9 @@ export default function ManagerReservationsPage() {
           </div>
           
           <Button 
-            className="h-11 sm:h-12 px-5 sm:px-8 gap-2.5 text-white font-medium rounded-[14px] shadow-xl border-0 text-xs uppercase tracking-wide transition-all hover:-translate-y-0.5 hover:shadow-2xl active:translate-y-0 active:scale-95"
+            className="h-11 sm:h-12 px-5 sm:px-8 gap-2.5 text-white font-medium rounded-[14px] shadow-xl border-0 text-xs uppercase transition-all hover:-translate-y-0.5 hover:shadow-2xl active:translate-y-0 active:scale-95"
             style={{
-              background: "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)",
+              background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.16 275) 100%)",
               boxShadow: "0 8px 32px oklch(0.42 0.14 285 / 0.35)",
             }}
           >
@@ -135,7 +135,7 @@ export default function ManagerReservationsPage() {
                       <p className="text-2xl sm:text-3xl font-normal leading-none tabular-nums" style={{ color: "#0D031B" }}>
                         {s.value}
                       </p>
-                      <p className="text-[10px] sm:text-[11px] font-medium uppercase tracking-wide mt-1" style={{ color: "#9A94AA" }}>
+                      <p className="text-[10px] sm:text-[11px] font-medium uppercase mt-1" style={{ color: "#9A94AA" }}>
                         {s.label}
                       </p>
                     </div>
@@ -145,7 +145,7 @@ export default function ManagerReservationsPage() {
                     className="text-[9px] font-medium px-2 py-0.5 rounded-lg border"
                     style={{
                       background: "oklch(0.42 0.14 285 / 0.08)",
-                      color: "oklch(0.42 0.14 285)",
+                      color: "#3F3D8F",
                       borderColor: "oklch(0.42 0.14 285 / 0.2)",
                     }}
                   >
@@ -190,7 +190,7 @@ export default function ManagerReservationsPage() {
                 <DropdownMenuTrigger asChild>
                   <Button 
                     variant="outline"
-                    className="h-11 sm:h-12 px-5 sm:px-6 gap-2 font-medium rounded-xl text-xs uppercase tracking-wide transition-all hover:scale-105 active:scale-95 border-2"
+                    className="h-11 sm:h-12 px-5 sm:px-6 gap-2 font-medium rounded-xl text-xs uppercase transition-all hover:scale-105 active:scale-95 border-2"
                     style={{
                       borderColor: "oklch(0.42 0.14 285 / 0.15)",
                       color: "#736C83",
@@ -236,10 +236,10 @@ export default function ManagerReservationsPage() {
                 className="w-10 h-10 rounded-xl flex items-center justify-center"
                 style={{ background: "oklch(0.42 0.14 285 / 0.1)" }}
               >
-                <UserGroupIcon className="h-5 w-5" style={{ color: "oklch(0.42 0.14 285)" }} strokeWidth={2.5} />
+                <UserGroupIcon className="h-5 w-5" style={{ color: "#3F3D8F" }} strokeWidth={2.5} />
               </div>
               <div>
-                <CardTitle className="text-sm sm:text-base font-normal uppercase tracking-tight" style={{ color: "#0D031B" }}>
+                <CardTitle className="text-sm sm:text-base font-normal uppercase" style={{ color: "#0D031B" }}>
                   Scheduled Guests
                 </CardTitle>
                 <p className="text-[10px] font-medium mt-0.5" style={{ color: "#9A94AA" }}>
@@ -254,7 +254,7 @@ export default function ManagerReservationsPage() {
             <div className="hidden lg:block overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead style={{ background: "oklch(0.42 0.14 285 / 0.03)" }}>
-                  <tr className="text-[10px] font-medium uppercase tracking-wider" style={{ color: "#9A94AA" }}>
+                  <tr className="text-[10px] font-medium uppercase" style={{ color: "#9A94AA" }}>
                     <th className="px-6 py-4">Guest Details</th>
                     <th className="px-6 py-4">Party Size</th>
                     <th className="px-6 py-4">Date & Time</th>
@@ -279,13 +279,13 @@ export default function ManagerReservationsPage() {
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-1.5 text-xs font-medium" style={{ color: "#0D031B" }}>
-                          <UserGroupIcon className="h-3.5 w-3.5" style={{ color: "oklch(0.42 0.14 285)" }} strokeWidth={2.5} />
+                          <UserGroupIcon className="h-3.5 w-3.5" style={{ color: "#3F3D8F" }} strokeWidth={2.5} />
                           {res.partySize} guests
                         </div>
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-1.5 text-xs font-medium" style={{ color: "#0D031B" }}>
-                          <ClockIcon className="h-3.5 w-3.5" style={{ color: "oklch(0.42 0.14 285)" }} strokeWidth={2.5} />
+                          <ClockIcon className="h-3.5 w-3.5" style={{ color: "#3F3D8F" }} strokeWidth={2.5} />
                           {res.time}
                         </div>
                         <div className="text-[10px] font-medium mt-1" style={{ color: "#9A94AA" }}>{res.date}</div>
@@ -296,7 +296,7 @@ export default function ManagerReservationsPage() {
                             className="flex items-center gap-1.5 text-[10px] font-medium uppercase px-2.5 py-1 rounded-lg border w-fit"
                             style={{
                               background: "oklch(0.42 0.14 285 / 0.08)",
-                              color: "oklch(0.42 0.14 285)",
+                              color: "#3F3D8F",
                               borderColor: "oklch(0.42 0.14 285 / 0.2)",
                             }}
                           >
@@ -404,11 +404,11 @@ export default function ManagerReservationsPage() {
                     {/* Details Grid */}
                     <div className="grid grid-cols-2 gap-3">
                       <div className="flex items-center gap-1.5">
-                        <UserGroupIcon className="h-3.5 w-3.5" style={{ color: "oklch(0.42 0.14 285)" }} />
+                        <UserGroupIcon className="h-3.5 w-3.5" style={{ color: "#3F3D8F" }} />
                         <span className="text-xs font-medium" style={{ color: "#0D031B" }}>{res.partySize} guests</span>
                       </div>
                       <div className="flex items-center gap-1.5">
-                        <ClockIcon className="h-3.5 w-3.5" style={{ color: "oklch(0.42 0.14 285)" }} />
+                        <ClockIcon className="h-3.5 w-3.5" style={{ color: "#3F3D8F" }} />
                         <span className="text-xs font-medium" style={{ color: "#0D031B" }}>{res.time}</span>
                       </div>
                     </div>
@@ -418,7 +418,7 @@ export default function ManagerReservationsPage() {
                         className="flex items-center gap-1.5 text-[10px] font-medium uppercase px-2.5 py-1 rounded-lg border w-fit"
                         style={{
                           background: "oklch(0.42 0.14 285 / 0.08)",
-                          color: "oklch(0.42 0.14 285)",
+                          color: "#3F3D8F",
                           borderColor: "oklch(0.42 0.14 285 / 0.2)",
                         }}
                       >
@@ -437,7 +437,7 @@ export default function ManagerReservationsPage() {
                       <Button 
                         className="flex-1 h-9 text-xs font-medium uppercase rounded-xl"
                         style={{
-                          background: "oklch(0.42 0.14 285)",
+                          background: "#3F3D8F",
                           color: "white",
                         }}
                       >
@@ -513,7 +513,7 @@ export default function ManagerReservationsPage() {
           <Card 
             className="border-0 rounded-[24px] shadow-xl overflow-hidden relative"
             style={{
-              background: "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.35 0.15 280) 100%)",
+              background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.35 0.15 280) 100%)",
               boxShadow: "0 12px 40px oklch(0.42 0.14 285 / 0.4)",
             }}
           >

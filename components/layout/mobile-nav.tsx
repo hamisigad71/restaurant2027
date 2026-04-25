@@ -296,7 +296,7 @@ export function MobileNav() {
                   {/* Label with refined typography */}
                   <span 
                     className={cn(
-                      "text-[9px] font-bold uppercase tracking-[0.08em] transition-all duration-500 relative",
+                      "text-[9px] font-bold uppercase transition-all duration-500 relative",
                       isActive 
                         ? "text-oklch(0.42 0.14 285) opacity-100 translate-y-0" 
                         : "text-oklch(0.42 0.14 285 / 0.65) opacity-65 translate-y-0.5 group-hover:opacity-100 group-hover:translate-y-0"

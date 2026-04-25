@@ -320,13 +320,26 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
             className="flex items-center justify-center w-9 h-9 rounded-xl"
             style={{ background:"oklch(0.45 0.12 285 / 0.1)" }}
           >
-            <ShoppingCart className="h-4 w-4" style={{ color:"oklch(0.45 0.12 285)" }} />
+            <div 
+              className="h-4 w-4" 
+              style={{ 
+                backgroundColor: "#3F3D8F",
+                maskImage: 'url(/shopping-cart.png)',
+                maskSize: 'contain',
+                maskRepeat: 'no-repeat',
+                maskPosition: 'center',
+                WebkitMaskImage: 'url(/shopping-cart.png)',
+                WebkitMaskSize: 'contain',
+                WebkitMaskRepeat: 'no-repeat',
+                WebkitMaskPosition: 'center'
+              }} 
+            />
           </div>
           <div>
             <SheetTitle className="text-[15px] font-bold " style={{ color:"#0D031B" }}>
               Your Order
             </SheetTitle>
-            <SheetDescription className="text-[10px] uppercase  font-semibold mt-0.5" style={{ color:"oklch(0.45 0.12 285)" }}>
+            <SheetDescription className="text-[10px] uppercase  font-semibold mt-0.5" style={{ color:"#3F3D8F" }}>
               Table {tableId}
             </SheetDescription>
           </div>
@@ -357,7 +370,20 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
         ) : cart.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 text-center gap-4">
             <div className="w-16 h-16 rounded-2xl flex items-center justify-center" style={{ background:"oklch(0.45 0.12 285 / 0.08)" }}>
-              <ShoppingCart className="h-8 w-8" style={{ color:"oklch(0.45 0.12 285 / 0.4)" }} />
+              <div 
+                className="h-8 w-8" 
+                style={{ 
+                  backgroundColor: "oklch(0.45 0.12 285 / 0.4)",
+                  maskImage: 'url(/shopping-cart.png)',
+                  maskSize: 'contain',
+                  maskRepeat: 'no-repeat',
+                  maskPosition: 'center',
+                  WebkitMaskImage: 'url(/shopping-cart.png)',
+                  WebkitMaskSize: 'contain',
+                  WebkitMaskRepeat: 'no-repeat',
+                  WebkitMaskPosition: 'center'
+                }} 
+              />
             </div>
             <div>
               <p className="font-semibold text-sm" style={{ color:"#3D374C" }}>Nothing here yet</p>
@@ -379,7 +405,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
 
                 <div className="flex-1 min-w-0">
                   <p className="text-[13px] font-semibold truncate" style={{ color:"#0D031B" }}>{item.name}</p>
-                  <p className="text-[11px] font-medium mt-0.5" style={{ color:"oklch(0.45 0.12 285)" }}>
+                  <p className="text-[11px] font-medium mt-0.5" style={{ color:"#3F3D8F" }}>
                     KSh {(item.price * item.quantity).toLocaleString()}
                   </p>
                 </div>
@@ -390,7 +416,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                 >
                   <button
                     className="flex items-center justify-center w-7 h-7 rounded-full transition-colors hover:bg-white"
-                    style={{ color:"oklch(0.45 0.12 285)" }}
+                    style={{ color:"#3F3D8F" }}
                     onClick={() => updateQuantity(item.id, -1)}
                   >
                     <Minus className="h-3 w-3" />
@@ -398,7 +424,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                   <span className="w-5 text-center text-xs font-bold" style={{ color:"#0D031B" }}>{item.quantity}</span>
                   <button
                     className="flex items-center justify-center w-7 h-7 rounded-full text-white transition-colors"
-                    style={{ background:"oklch(0.45 0.12 285)" }}
+                    style={{ background:"#3F3D8F" }}
                     onClick={() => updateQuantity(item.id, 1)}
                   >
                     <Plus className="h-3 w-3" />
@@ -429,7 +455,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
             style={{ background:"oklch(0.45 0.12 285 / 0.06)" }}
           >
             <span className="text-sm font-semibold" style={{ color:"#3D374C" }}>Total</span>
-            <span className="text-lg font-bold tabular-nums" style={{ color:"oklch(0.45 0.12 285)" }}>
+            <span className="text-lg font-bold tabular-nums" style={{ color:"#3F3D8F" }}>
               KSh {cartTotal.toLocaleString()}
             </span>
           </div>
@@ -437,7 +463,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
           <Button
             className="w-full h-13 text-[13px] font-bold uppercase  text-white rounded-2xl transition-all hover:opacity-90 hover:-translate-y-0.5 active:translate-y-0 border-none h-12"
             style={{
-              background:"oklch(0.45 0.12 285)",
+              background:"#3F3D8F",
               boxShadow:"0 6px 24px oklch(0.45 0.12 285 / 0.35)",
             }}
             onClick={handlePlaceOrder}
@@ -475,7 +501,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
           <div 
             className="fixed inset-0 z-[100] flex flex-col items-center justify-center p-6 text-center overflow-hidden animate-in fade-in duration-1000"
             style={{ 
-              background: `oklch(0.45 0.12 285) url(${HERO_IMAGE})`,
+              background: `#3F3D8F url(${HERO_IMAGE})`,
               backgroundSize: "cover",
               backgroundPosition: "center"
             }}
@@ -493,7 +519,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                 <div 
                   className="flex items-center justify-center w-28 h-28 rounded-[3rem] animate-pulse"
                   style={{ 
-                    background:"oklch(0.45 0.12 285)", 
+                    background:"#3F3D8F", 
                     boxShadow:"0 20px 60px oklch(0.45 0.12 285 / 0.7)",
                     border: "1px solid rgba(255,255,255,0.3)"
                   }}
@@ -501,8 +527,8 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                   <UtensilsCrossed className="h-12 w-12 text-white" />
                 </div>
                 <div className="space-y-2 text-center">
-                  <h1 className="text-7xl font-black text-white tracking-tighter uppercase ">Resto</h1>
-                  <p className="text-white/60 text-[11px] font-bold uppercase tracking-[0.4em] flex items-center gap-4 justify-center">
+                  <h1 className="text-7xl font-black text-white uppercase ">Resto</h1>
+                  <p className="text-white/60 text-[11px] font-bold uppercase flex items-center gap-4 justify-center">
                     <span className="w-10 h-px bg-white/20" />
                     Bespoke Dining
                     <span className="w-10 h-px bg-white/20" />
@@ -524,7 +550,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                   }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <span className="relative flex items-center gap-4 text-[15px] font-black uppercase tracking-widest text-[#0D031B]">
+                  <span className="relative flex items-center gap-4 text-[15px] font-black uppercase text-[#0D031B]">
                     Enjoy Experience
                     <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center transition-transform group-hover:translate-x-1">
                       <ChevronRight className="h-4 w-4 text-primary" />
@@ -537,7 +563,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
             {/* Premium Branding Footer */}
             <div className="absolute bottom-12 left-0 right-0 flex flex-col items-center gap-3 opacity-40 select-none animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500">
                <div className="w-1 h-12 bg-gradient-to-b from-transparent via-white/50 to-transparent rounded-full" />
-              <span className="text-[10px] text-white font-bold uppercase tracking-[0.3em]">Tap to begin</span>
+              <span className="text-[10px] text-white font-bold uppercase">Tap to begin</span>
             </div>
           </div>
         )}
@@ -559,7 +585,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                 <div className="flex items-center gap-3 mb-1.5">
                   <div
                     className="flex items-center justify-center w-9 h-9 rounded-xl"
-                    style={{ background:"oklch(0.45 0.12 285)", boxShadow:"0 4px 16px oklch(0.45 0.12 285 / 0.5)" }}
+                    style={{ background:"#3F3D8F", boxShadow:"0 4px 16px oklch(0.45 0.12 285 / 0.5)" }}
                   >
                     <UtensilsCrossed className="h-4.5 w-4.5 text-white" />
                   </div>
@@ -617,7 +643,20 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                     color:"white",
                   }}
                 >
-                  <ShoppingCart className="h-4 w-4" />
+                  <div 
+                    className="h-4 w-4" 
+                    style={{ 
+                      backgroundColor: "white",
+                      maskImage: 'url(/shopping-cart.png)',
+                      maskSize: 'contain',
+                      maskRepeat: 'no-repeat',
+                      maskPosition: 'center',
+                      WebkitMaskImage: 'url(/shopping-cart.png)',
+                      WebkitMaskSize: 'contain',
+                      WebkitMaskRepeat: 'no-repeat',
+                      WebkitMaskPosition: 'center'
+                    }} 
+                  />
                   {cartItemCount > 0 && (
                     <span
                       className="absolute -top-1.5 -right-1.5 flex items-center justify-center rounded-full text-[10px] font-bold text-white"
@@ -705,7 +744,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                   )}
                   style={
                     active
-                      ? { background:"oklch(0.45 0.12 285)", boxShadow:"0 4px 16px oklch(0.45 0.12 285 / 0.35)", color:"white" }
+                      ? { background:"#3F3D8F", boxShadow:"0 4px 16px oklch(0.45 0.12 285 / 0.35)", color:"white" }
                       : { background:"rgba(255,255,255,0.8)", color:"#3D374C" }
                   }
                 >
@@ -724,7 +763,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
             </p>
             {searchQuery && (
               <p className="text-[11px]" style={{ color:"#9A94AA" }}>
-                Showing results for "<span style={{ color:"oklch(0.45 0.12 285)" }}>{searchQuery}</span>"
+                Showing results for "<span style={{ color:"#3F3D8F" }}>{searchQuery}</span>"
               </p>
             )}
           </div>
@@ -782,7 +821,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                     {/* Category Label - Top Right */}
                     <div className="absolute top-2.5 right-2.5">
                       <span
-                        className="flex items-center gap-1 text-[9px] font-bold uppercase tracking-wider px-2 py-1 rounded-full text-white"
+                        className="flex items-center gap-1 text-[9px] font-bold uppercase px-2 py-1 rounded-full text-white"
                         style={{
                           background: "oklch(0.45 0.12 285 / 0.7)",
                           backdropFilter: "blur(6px)",
@@ -825,7 +864,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                             >
                               <button
                                 className="flex items-center justify-center w-8 h-8 rounded-full transition-colors hover:bg-[#EBE6F8]"
-                                style={{ color:"oklch(0.45 0.12 285)" }}
+                                style={{ color:"#3F3D8F" }}
                                 onClick={() => updateQuantity(item.id, -1)}
                               >
                                 <Minus className="h-3.5 w-3.5" />
@@ -833,7 +872,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                               <span className="text-[13px] font-bold w-6 text-center" style={{ color:"#0D031B" }}>{qty}</span>
                               <button
                                 className="flex items-center justify-center w-8 h-8 rounded-full text-white"
-                                style={{ background:"oklch(0.45 0.12 285)" }}
+                                style={{ background:"#3F3D8F" }}
                                 onClick={() => updateQuantity(item.id, 1)}
                               >
                                 <Plus className="h-3.5 w-3.5" />
@@ -861,9 +900,9 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                       {!inCart ? (
                         <button
                           onClick={(e) => { e.stopPropagation(); addToCart(item); }}
-                          className="flex items-center justify-center gap-1.5 text-[9px] font-bold uppercase tracking-wider px-2 py-2 rounded-lg transition-all text-white active:scale-95"
+                          className="flex items-center justify-center gap-1.5 text-[9px] font-bold uppercase px-2 py-2 rounded-lg transition-all text-white active:scale-95"
                           style={{
-                            background: "oklch(0.45 0.12 285)",
+                            background: "#3F3D8F",
                             boxShadow: "0 4px 12px oklch(0.45 0.12 285 / 0.25)"
                           }}
                         >
@@ -959,7 +998,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                   <div className="flex items-center gap-2 mb-4">
                     <span
                       className="flex items-center gap-1.5 text-[10px] font-semibold uppercase  px-3 py-1.5 rounded-lg"
-                      style={{ background:"oklch(0.45 0.12 285 / 0.08)", color:"oklch(0.45 0.12 285)" }}
+                      style={{ background:"oklch(0.45 0.12 285 / 0.08)", color:"#3F3D8F" }}
                     >
                       <Clock className="h-3 w-3" />
                       {selectedItem.prepTime}
@@ -973,7 +1012,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                     </span>
                     <span
                       className="ml-auto text-[15px] font-bold"
-                      style={{ color:"oklch(0.45 0.12 285)" }}
+                      style={{ color:"#3F3D8F" }}
                     >
                       KSh {selectedItem.price.toLocaleString()}
                     </span>
@@ -1004,7 +1043,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                     <Button
                       className="w-full h-12 text-[13px] font-bold uppercase  text-white rounded-2xl border-none transition-all hover:opacity-90"
                       style={{
-                        background:"oklch(0.45 0.12 285)",
+                        background:"#3F3D8F",
                         boxShadow:"0 6px 24px oklch(0.45 0.12 285 / 0.35)",
                       }}
                       onClick={() => { addToCart(selectedItem, itemNotes); setSelectedItem(null); setItemNotes("") }}
@@ -1031,7 +1070,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
               style={{
                 background: showBillBanner 
                   ? "linear-gradient(135deg, oklch(0.62 0.16 150) 0%, oklch(0.55 0.14 150) 100%)"
-                  : "oklch(0.45 0.12 285)",
+                  : "#3F3D8F",
                 backdropFilter: "blur(20px)",
                 borderColor: showBillBanner ? "oklch(0.62 0.16 150 / 0.4)" : "rgba(255,255,255,0.12)",
                 boxShadow: showBillBanner 
@@ -1090,7 +1129,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                     backdropFilter: "blur(16px)",
                     borderColor: "oklch(0.45 0.12 285 / 0.25)",
                     boxShadow: "0 8px 24px rgba(13,3,27,0.12)",
-                    color: "oklch(0.45 0.12 285)",
+                    color: "#3F3D8F",
                   }}
                   onClick={handleCallWaiter}
                 >
@@ -1108,7 +1147,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                   <button
                     className="flex-1 flex items-center justify-center gap-2.5 h-[58px] rounded-[24px] text-[13px] font-bold uppercase  text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl active:translate-y-0 relative overflow-hidden group"
                     style={{
-                      background: "linear-gradient(135deg, oklch(0.45 0.12 285) 0%, oklch(0.38 0.12 285) 100%)",
+                      background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.12 285) 100%)",
                       boxShadow: "0 10px 30px oklch(0.45 0.12 285 / 0.4)",
                       border: "1px solid oklch(0.45 0.12 285 / 0.15)",
                     }}

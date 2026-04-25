@@ -53,12 +53,12 @@ const INITIAL_ALERTS = [
 ]
 
 const ZONE_COLORS: Record<string,string> = {
-  Entry:    "oklch(0.42 0.14 285)",
+  Entry:    "#3F3D8F",
   Dining:   "oklch(0.62 0.16 150)",
   Bar:      "oklch(0.75 0.15 75)",
   Kitchen:  "oklch(0.65 0.18 25)",
   Outdoor:  "oklch(0.62 0.16 150)",
-  VIP:      "oklch(0.42 0.14 285)",
+  VIP:      "#3F3D8F",
   Staff:    "#9A94AA",
   Facility: "#9A94AA",
 }
@@ -100,7 +100,7 @@ export default function SecurityPage() {
         >
           <div
             className="flex items-center justify-center w-10 h-10 rounded-xl shrink-0"
-            style={{ background:"oklch(0.42 0.14 285)", boxShadow:"0 4px 14px oklch(0.45 0.12 285 / 0.35)" }}
+            style={{ background:"#3F3D8F", boxShadow:"0 4px 14px oklch(0.45 0.12 285 / 0.35)" }}
           >
             <ShieldCheck className="h-5 w-5 text-white" strokeWidth={2} />
           </div>
@@ -157,7 +157,7 @@ export default function SecurityPage() {
           {/* ── KPI row ──────────────────────────────────────────── */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
-              { label:"Total Guests", val:totalGuests,          suffix:"",       icon:Users,      accent:"oklch(0.42 0.14 285)", sub:"Of 160 capacity"        },
+              { label:"Total Guests", val:totalGuests,          suffix:"",       icon:Users,      accent:"#3F3D8F", sub:"Of 160 capacity"        },
               { label:"Capacity",     val:`${capacity}%`,        suffix:"",       icon:Crosshair,  accent:"oklch(0.65 0.18 25)",  sub:"18 seats remaining"     },
               { label:"Live Cameras", val:`${onlineCams}/12`,    suffix:"",       icon:Camera,     accent:"oklch(0.62 0.16 150)", sub:`${offlineCams} offline` },
               { label:"Incidents",    val:"0",                   suffix:"today",  icon:Activity,   accent:"oklch(0.62 0.16 150)", sub:"All clear"              },
@@ -215,7 +215,7 @@ export default function SecurityPage() {
                       className="flex items-center justify-center w-8 h-8 rounded-lg"
                       style={{ background:"oklch(0.45 0.12 285 / 0.1)" }}
                     >
-                      <Eye className="h-3.5 w-3.5" style={{ color:"oklch(0.42 0.14 285)" }} />
+                      <Eye className="h-3.5 w-3.5" style={{ color:"#3F3D8F" }} />
                     </div>
                     <div>
                       <CardTitle className="text-[13px] font-bold" style={{ color:"#0D031B" }}>Live Monitor</CardTitle>
@@ -277,7 +277,7 @@ export default function SecurityPage() {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2.5">
                       <div className="flex items-center justify-center w-8 h-8 rounded-lg" style={{ background:"oklch(0.45 0.12 285 / 0.1)" }}>
-                        <Camera className="h-3.5 w-3.5" style={{ color:"oklch(0.42 0.14 285)" }} />
+                        <Camera className="h-3.5 w-3.5" style={{ color:"#3F3D8F" }} />
                       </div>
                       <CardTitle className="text-[13px] font-bold" style={{ color:"#0D031B" }}>Camera Matrix</CardTitle>
                     </div>
@@ -318,7 +318,7 @@ export default function SecurityPage() {
                             className={cn("w-1.5 h-1.5 rounded-full mb-2", isOnline ? "animate-pulse" : "")}
                             style={{ background: isOnline ? "oklch(0.62 0.16 150)" : "oklch(0.65 0.18 25)" }}
                           />
-                          <p className="text-[10px] font-bold leading-tight" style={{ color: isActive ? "oklch(0.42 0.14 285)" : "#0D031B" }}>
+                          <p className="text-[10px] font-bold leading-tight" style={{ color: isActive ? "#3F3D8F" : "#0D031B" }}>
                             {cam.id}
                           </p>
                           <p className="text-[9px] truncate w-full mt-0.5" style={{ color:"#9A94AA" }}>
@@ -400,7 +400,7 @@ export default function SecurityPage() {
                           {/* Severity dot */}
                           <span
                             className="w-2 h-2 rounded-full shrink-0 mt-1.5"
-                            style={{ background: a.severity === "warning" ? "oklch(0.65 0.18 25)" : "oklch(0.42 0.14 285)" }}
+                            style={{ background: a.severity === "warning" ? "oklch(0.65 0.18 25)" : "#3F3D8F" }}
                           />
                           <div className="flex-1 min-w-0">
                             <p className="text-[12px] font-bold leading-tight" style={{ color:"#0D031B" }}>{a.title}</p>

@@ -97,9 +97,9 @@ const myTables = [
 
 const recentActivity = [
   { icon: CheckCircleIcon,    color: "text-[oklch(0.7_0.15_150)]",  bg: "bg-[oklch(0.7_0.15_150)]/10",  text: "Table 6 payment processed",   sub: "KES 2,100 · 4m ago",  dot: "oklch(0.7 0.15 150)" },
-  { icon: ShoppingCartIcon,    color: "text-[oklch(0.45_0.12_285)]", bg: "bg-[oklch(0.45_0.12_285)]/10", text: "New order placed — Table 3",   sub: "6 items · 8m ago",    dot: "oklch(0.45 0.12 285)" },
+  { icon: "/shopping-cart.png" as any,    color: "text-[#3F3D8F]", bg: "bg-[#3F3D8F]/10", text: "New order placed — Table 3",   sub: "6 items · 8m ago",    dot: "#3F3D8F" },
   { icon: ExclamationCircleIcon,     color: "text-[oklch(0.75_0.15_75)]",  bg: "bg-[oklch(0.75_0.15_75)]/10",  text: "Table 9 — guests arrived",     sub: "Reserved · 12m ago",  dot: "oklch(0.75 0.15 75)" },
-  { icon: BuildingStorefrontIcon, color: "text-[oklch(0.45_0.12_285)]", bg: "bg-[oklch(0.45_0.12_285)]/10", text: "Table 2 order updated",        sub: "+2 items · 18m ago",  dot: "oklch(0.45 0.12 285)" },
+  { icon: BuildingStorefrontIcon, color: "text-[oklch(0.45_0.12_285)]", bg: "bg-[oklch(0.45_0.12_285)]/10", text: "Table 2 order updated",        sub: "+2 items · 18m ago",  dot: "#3F3D8F" },
 ]
 
 const quickActions = [
@@ -118,7 +118,7 @@ function StatCard({
   accentColor,
   badge,
 }: {
-  icon: React.ComponentType<{ className?: string; color?: string; style?: React.CSSProperties }>
+  icon: React.ComponentType<{ className?: string; color?: string; style?: React.CSSProperties }> | string
   value: string
   label: string
   accentColor: string
@@ -145,7 +145,24 @@ function StatCard({
               background: `linear-gradient(135deg, color-mix(in oklch, ${accentColor} 15%, transparent) 0%, color-mix(in oklch, ${accentColor} 5%, transparent) 100%)`,
             }}
           >
-            <Icon className="h-5.5 w-5.5" style={{ color: accentColor }} />
+            {typeof Icon === 'string' ? (
+              <div 
+                className="h-8 w-8" 
+                style={{ 
+                  backgroundColor: accentColor,
+                  maskImage: `url(${Icon})`,
+                  maskSize: 'contain',
+                  maskRepeat: 'no-repeat',
+                  maskPosition: 'center',
+                  WebkitMaskImage: `url(${Icon})`,
+                  WebkitMaskSize: 'contain',
+                  WebkitMaskRepeat: 'no-repeat',
+                  WebkitMaskPosition: 'center'
+                }} 
+              />
+            ) : (
+              <Icon className="h-8 w-8" style={{ color: accentColor }} />
+            )}
           </div>
           {badge && (
             <Badge
@@ -163,13 +180,13 @@ function StatCard({
         </div>
         <div className="space-y-1">
           <p
-            className="text-3xl lg:text-[2.2rem] tracking-tight leading-none"
+            className="text-3xl lg:text-[2.2rem] leading-none"
             style={{ color: "#0D031B" }}
           >
             {value}
           </p>
           <p
-            className="text-[10px] uppercase tracking-[0.1em] opacity-50"
+            className="text-[10px] uppercase opacity-50"
             style={{ color: "#736C83" }}
           >
             {label}
@@ -321,19 +338,19 @@ export default function WaiterDashboard() {
       >
 
         {/* ── Professional Command Header ────────────────────────────────── */}
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-6 py-4 lg:py-6 px-2">
-          <div className="flex flex-col sm:flex-row items-center gap-6">
+        <div className="flex flex-col items-start justify-between gap-4 py-4 px-3">
+          <div className="flex flex-row items-center gap-4 w-full">
             {/* Premium Avatar with Depth and Upload Capability */}
             <div className="relative group cursor-pointer shrink-0" onClick={triggerUpload}>
-              <div className="absolute inset-0 bg-oklch(0.45 0.12 285) blur-3xl opacity-20 group-hover:opacity-30 transition-opacity duration-700" />
-              <div className="relative h-24 w-24 sm:h-32 sm:w-32 rounded-[32px] sm:rounded-[42px] p-1.5 bg-gradient-to-tr from-oklch(0.45 0.12 285) via-white to-oklch(0.45 0.12 285 / 0.1) shadow-2xl transition-transform duration-500 group-hover:scale-105">
-                <Avatar className="h-full w-full rounded-[26px] sm:rounded-[36px] border-[3px] border-white overflow-hidden shadow-inner bg-white">
+              <div className="absolute inset-0 bg-[#3F3D8F] blur-3xl opacity-20 group-hover:opacity-30 transition-opacity duration-700" />
+              <div className="relative h-20 w-20 sm:h-32 sm:w-32 rounded-3xl sm:rounded-[42px] p-1 bg-gradient-to-tr from-[#3F3D8F] via-white to-oklch(0.45 0.12 285 / 0.1) shadow-2xl transition-transform duration-500 group-hover:scale-105">
+                <Avatar className="h-full w-full rounded-[20px] sm:rounded-[36px] border-0 overflow-hidden shadow-inner bg-white">
                   {avatarImage ? (
                     <img src={avatarImage} alt="User" className="h-full w-full object-cover" />
                   ) : (
                     <AvatarFallback 
-                      className="text-xl sm:text-2xl font-medium text-white"
-                      style={{ background: "linear-gradient(135deg, oklch(0.45 0.12 285) 0%, oklch(0.35 0.15 275) 100%)" }}
+                      className="text-sm sm:text-2xl font-medium text-white"
+                      style={{ background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.35 0.15 275) 100%)" }}
                     >
                       WA
                     </AvatarFallback>
@@ -341,8 +358,8 @@ export default function WaiterDashboard() {
                 </Avatar>
                 
                 {/* Edit Overlay */}
-                <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[26px] sm:rounded-[36px] m-1.5">
-                  <CameraIcon className="h-7 w-7 sm:h-9 sm:w-9 text-white" />
+                <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[20px] sm:rounded-[36px] m-1">
+                  <CameraIcon className="h-4 w-4 sm:h-9 sm:w-9 text-white" />
                 </div>
               </div>
 
@@ -357,28 +374,30 @@ export default function WaiterDashboard() {
 
             </div>
 
-            <div className="flex flex-col items-center sm:items-start text-center sm:text-left space-y-1">
-              <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 sm:gap-4">
-                <h1 className="text-2xl sm:text-4xl tracking-tight text-[#0D031B] font-light">
-                  Welcome back, <span className="font-medium" style={{ color: "oklch(0.45 0.12 285)" }}>Waiter</span>
+            <div className="flex flex-col items-start text-left">
+              <div className="flex flex-col gap-1">
+                <h1 className="text-xl sm:text-4xl text-[#0D031B] font-light">
+                  Welcome back, <span className="font-medium" style={{ color: "#3F3D8F" }}>Waiter</span>
                 </h1>
-                <Badge 
-                  variant="outline" 
-                  className="h-7 px-4 rounded-full border-[#10B981]/20 bg-[#10B981]/5 text-[#10B981] text-[10px] uppercase tracking-[0.2em] shadow-[0_0_10px_rgba(16,185,129,0.1)]"
-                >
-                  <span className="relative flex h-2 w-2 mr-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#10B981]"></span>
-                  </span>
-                  Shift Active
-                </Badge>
+                <div className="flex items-center gap-2">
+                  <Badge 
+                    variant="outline" 
+                    className="h-5 px-2 rounded-full border-[#10B981]/20 bg-[#10B981]/5 text-[#10B981] text-[8px] uppercase"
+                  >
+                    <span className="relative flex h-1.5 w-1.5 mr-1.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#10B981]"></span>
+                    </span>
+                    Shift Active
+                  </Badge>
+                </div>
               </div>
-              <div className="flex items-center gap-3">
-                <p className="text-[11px] uppercase tracking-[0.2em] text-[#736C83] opacity-50">
-                  {new Date().toLocaleDateString("en-KE", { weekday: "long", day: "numeric", month: "long" })}
+              <div className="flex items-center gap-2 mt-1">
+                <p className="text-[10px] uppercase text-[#736C83] opacity-50">
+                  {new Date().toLocaleDateString("en-KE", { weekday: "short", day: "numeric", month: "short" })}
                 </p>
                 <div className="h-1 w-1 rounded-full bg-[#736C83] opacity-20" />
-                <p className="text-[11px] uppercase tracking-[0.2em] text-[#736C83] opacity-50">
+                <p className="text-[10px] uppercase text-[#736C83] opacity-50">
                   Alpha Station
                 </p>
               </div>
@@ -393,7 +412,7 @@ export default function WaiterDashboard() {
                   size="icon" 
                   className="h-12 w-12 sm:h-14 sm:w-14 rounded-xl sm:rounded-2xl border-0 bg-white shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 group"
                 >
-                  <ChartBarIcon className="h-4.5 w-4.5 sm:h-5 sm:w-5 text-oklch(0.45 0.12 285 / 0.6) group-hover:text-oklch(0.45 0.12 285) transition-colors" />
+                  <ChartBarIcon className="h-4.5 w-4.5 sm:h-5 sm:w-5 text-oklch(0.45 0.12 285 / 0.6) group-hover:text-[#3F3D8F] transition-colors" />
                 </Button>
               </TooltipTrigger>
               <TooltipContent>Performance Insights</TooltipContent>
@@ -401,9 +420,9 @@ export default function WaiterDashboard() {
 
             <Button
               asChild
-              className="h-12 sm:h-14 px-5 sm:px-8 rounded-xl sm:rounded-2xl gap-3 sm:gap-4 text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-white border-0 shadow-2xl transition-all duration-500 hover:-translate-y-2 active:translate-y-0 group overflow-hidden relative"
+              className="h-12 sm:h-14 px-5 sm:px-8 rounded-xl sm:rounded-2xl gap-3 sm:gap-4 text-[10px] sm:text-[11px] uppercase text-white border-0 shadow-2xl transition-all duration-500 hover:-translate-y-2 active:translate-y-0 group overflow-hidden relative"
               style={{
-                background: "linear-gradient(135deg, oklch(0.45 0.12 285) 0%, oklch(0.35 0.15 275) 100%)",
+                background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.35 0.15 275) 100%)",
               }}
             >
               <Link href="/waiter/service-floor">
@@ -420,17 +439,17 @@ export default function WaiterDashboard() {
         {/* ── Stat Row ─────────────────────────────────────────────────── */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
           <StatCard
-            icon={BellIcon}
+            icon="/rebell.png"
             value={combinedAlerts.length.toString()}
             label="Service Alerts"
             accentColor="oklch(0.75 0.15 75)"
             badge={combinedAlerts.length > 0 ? "Action" : undefined}
           />
           <StatCard
-            icon={ShoppingCartIcon}
+            icon="/shopping-cart.png"
             value={activeTablesCount.toString()}
             label="Active Tables"
-            accentColor="oklch(0.45 0.12 285)"
+            accentColor="#3F3D8F"
           />
           <StatCard
             icon={ArrowTrendingUpIcon}
@@ -439,7 +458,7 @@ export default function WaiterDashboard() {
             accentColor="oklch(0.7 0.15 150)"
           />
           <StatCard
-            icon={ClockIcon}
+            icon="/time.png"
             value="3.5m"
             label="Avg Speed"
             accentColor="#AEA6BF"
@@ -472,11 +491,24 @@ export default function WaiterDashboard() {
                       className="w-11 h-11 rounded-[14px] flex items-center justify-center shadow-inner"
                       style={{ background: "oklch(0.75 0.15 75 / 0.1)" }}
                     >
-                      <BellIcon className="h-5 w-5" style={{ color: "oklch(0.75 0.15 75)" }} />
+                      <div 
+                        className="h-5 w-5" 
+                        style={{ 
+                          backgroundColor: "oklch(0.75 0.15 75)",
+                          maskImage: 'url(/rebell.png)',
+                          maskSize: 'contain',
+                          maskRepeat: 'no-repeat',
+                          maskPosition: 'center',
+                          WebkitMaskImage: 'url(/rebell.png)',
+                          WebkitMaskSize: 'contain',
+                          WebkitMaskRepeat: 'no-repeat',
+                          WebkitMaskPosition: 'center'
+                        }} 
+                      />
                     </div>
                     <div>
                       <CardTitle
-                        className="text-[13px] uppercase tracking-[0.1em]"
+                        className="text-[13px] uppercase"
                         style={{ color: "#0D031B" }}
                       >
                         Service Alerts
@@ -484,7 +516,7 @@ export default function WaiterDashboard() {
                       <div className="flex items-center gap-2 mt-1">
                         <span className="w-1 h-1 rounded-full bg-oklch(0.75 0.15 75)" />
                         <p
-                          className="text-[10px] uppercase tracking-wider opacity-60"
+                          className="text-[10px] uppercase opacity-60"
                           style={{ color: "#736C83" }}
                         >
                           Kitchen ready · Pick up now
@@ -520,8 +552,8 @@ export default function WaiterDashboard() {
                       </div>
                     </div>
                     <div className="text-center space-y-1">
-                      <p className="text-sm uppercase tracking-wider" style={{ color: "#0D031B" }}>All caught up!</p>
-                      <p className="text-[10px] uppercase tracking-widest opacity-40" style={{ color: "#736C83" }}>No pending alerts right now</p>
+                      <p className="text-sm uppercase" style={{ color: "#0D031B" }}>All caught up!</p>
+                      <p className="text-[10px] uppercase opacity-40" style={{ color: "#736C83" }}>No pending alerts right now</p>
                     </div>
                   </div>
                 ) : (
@@ -538,7 +570,7 @@ export default function WaiterDashboard() {
                           <div
                             className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl text-white shrink-0 shadow-sm"
                             style={{
-                              background: isOrder ? "oklch(0.45 0.12 285)" : "oklch(0.75 0.15 75)",
+                              background: isOrder ? "#3F3D8F" : "oklch(0.75 0.15 75)",
                               boxShadow: `0 4px 12px ${isOrder ? "oklch(0.45 0.12 285 / 0.3)" : "oklch(0.75 0.15 75 / 0.3)"}`,
                             }}
                           >
@@ -554,10 +586,25 @@ export default function WaiterDashboard() {
                                 className="inline-flex items-center gap-1 text-[9px] uppercase font-bold  px-2 py-0.5 rounded-full"
                                 style={{
                                   background: isOrder ? "oklch(0.75 0.15 75 / 0.12)" : "oklch(0.45 0.12 285 / 0.12)",
-                                  color: isOrder ? "oklch(0.75 0.15 75)" : "oklch(0.45 0.12 285)",
+                                  color: isOrder ? "oklch(0.75 0.15 75)" : "#3F3D8F",
                                 }}
                               >
-                                {isOrder ? <FireIcon className="h-2.5 w-2.5" /> : <BellIcon className="h-2.5 w-2.5" />}
+                                {isOrder ? <FireIcon className="h-2.5 w-2.5" /> : (
+                                  <div 
+                                    className="h-2.5 w-2.5" 
+                                    style={{ 
+                                      backgroundColor: "oklch(0.45 0.12 285)",
+                                      maskImage: 'url(/rebell.png)',
+                                      maskSize: 'contain',
+                                      maskRepeat: 'no-repeat',
+                                      maskPosition: 'center',
+                                      WebkitMaskImage: 'url(/rebell.png)',
+                                      WebkitMaskSize: 'contain',
+                                      WebkitMaskRepeat: 'no-repeat',
+                                      WebkitMaskPosition: 'center'
+                                    }} 
+                                  />
+                                )}
                                 {isOrder ? "Ready" : "Assistance"}
                               </span>
                             </div>
@@ -573,7 +620,7 @@ export default function WaiterDashboard() {
                             <Button
                               size="sm"
                               className="h-8 px-3 text-[10px] uppercase  text-white hover:opacity-90 shadow-sm transition-all hover:-translate-y-0.5"
-                              style={{ background: isOrder ? "oklch(0.45 0.12 285)" : "oklch(0.7 0.15 150)" }}
+                              style={{ background: isOrder ? "#3F3D8F" : "oklch(0.7 0.15 150)" }}
                               onClick={() => {
                                 if (isOrder) {
                                   OrderService.updateOrderStatus(alert.id, "served")
@@ -612,7 +659,7 @@ export default function WaiterDashboard() {
               }}
             >
               {/* Subtle accent line */}
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-oklch(0.45 0.12 285) to-oklch(0.55 0.15 275) opacity-40" />
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#3F3D8F] to-oklch(0.55 0.15 275) opacity-40" />
               
               <CardHeader
                 className="px-6 py-5"
@@ -626,17 +673,17 @@ export default function WaiterDashboard() {
                         background: "linear-gradient(135deg, oklch(0.45 0.12 285 / 0.1) 0%, oklch(0.45 0.12 285 / 0.05) 100%)",
                       }}
                     >
-                      <CheckBadgeIcon className="h-5 w-5" style={{ color: "oklch(0.45 0.12 285)" }} />
+                      <CheckBadgeIcon className="h-5 w-5" style={{ color: "#3F3D8F" }} />
                     </div>
                     <div>
                       <CardTitle
-                        className="text-[13px] font-bold uppercase tracking-[0.1em]"
+                        className="text-[13px] font-bold uppercase"
                         style={{ color: "#0D031B" }}
                       >
                         My Service Floor
                       </CardTitle>
                       <p
-                        className="text-[10px] font-semibold uppercase tracking-wider mt-1 opacity-60"
+                        className="text-[10px] font-semibold uppercase mt-1 opacity-60"
                         style={{ color: "#736C83" }}
                       >
                         8 ACTIVE SECTIONS
@@ -647,8 +694,8 @@ export default function WaiterDashboard() {
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="text-[10px] font-bold uppercase tracking-widest gap-2 hover:bg-black/5 transition-all h-9 px-4 rounded-xl"
-                    style={{ color: "oklch(0.45 0.12 285)" }}
+                    className="text-[10px] font-bold uppercase gap-2 hover:bg-black/5 transition-all h-9 px-4 rounded-xl"
+                    style={{ color: "#3F3D8F" }}
                     asChild
                   >
                     <Link href="/waiter/service-floor">
@@ -665,7 +712,7 @@ export default function WaiterDashboard() {
                       <div className="w-12 h-12 rounded-full bg-black/5 flex items-center justify-center">
                         <CheckBadgeIcon className="h-6 w-6 opacity-20" />
                       </div>
-                      <p className="text-[11px] font-bold uppercase tracking-widest opacity-40">No active assignments</p>
+                      <p className="text-[11px] font-bold uppercase opacity-40">No active assignments</p>
                     </div>
                   ) : activeOrders.map((t) => {
                     const tableNum    = parseInt(t.tableId) || 0
@@ -674,10 +721,10 @@ export default function WaiterDashboard() {
                     
                     // Status color logic (Professional palette)
                     const statusColors = {
-                      pending:   { bg: "oklch(0.45 0.12 285)", text: "Violet", hex: "#6366f1" },
+                      pending:   { bg: "#3F3D8F", text: "Violet", hex: "#6366f1" },
                       ready:     { bg: "oklch(0.7 0.15 150)",  text: "Ready",  hex: "#10b981" },
                       occupied:  { bg: "oklch(0.6 0.16 285)",  text: "Live",   hex: "#8b5cf6" },
-                      served:    { bg: "oklch(0.45 0.12 285)", text: "Served", hex: "#6366f1" },
+                      served:    { bg: "#3F3D8F", text: "Served", hex: "#6366f1" },
                       cancelled: { bg: "oklch(0.65 0.18 25)",  text: "Void",   hex: "#ef4444" },
                     }
                     const currentStatus = statusColors[status as keyof typeof statusColors] || statusColors.pending
@@ -706,7 +753,7 @@ export default function WaiterDashboard() {
                                   className="w-1.5 h-1.5 rounded-full animate-pulse shadow-[0_0_10px_rgba(255,255,255,1)]" 
                                   style={{ background: currentStatus.hex }}
                                 />
-                                <span className="text-[9px] text-white uppercase tracking-[0.15em]">
+                                <span className="text-[9px] text-white uppercase">
                                   SEC-A
                                 </span>
                               </div>
@@ -724,21 +771,21 @@ export default function WaiterDashboard() {
                                 className="absolute -top-7 w-14 h-14 rounded-2xl bg-white shadow-2xl flex items-center justify-center border-[5px] border-[#EBE6F8] transition-all duration-500 group-hover:scale-110 group-hover:-rotate-3"
                                 style={{ zIndex: 10 }}
                               >
-                                <span className="text-2xl tabular-nums" style={{ color: "oklch(0.45 0.12 285)" }}>
+                                <span className="text-2xl tabular-nums" style={{ color: "#3F3D8F" }}>
                                   {tableNum}
                                 </span>
                               </div>
 
                               <div className="text-center space-y-1.5">
                                 <p
-                                  className="text-[11px] uppercase tracking-[0.25em]"
+                                  className="text-[11px] uppercase"
                                   style={{ color: currentStatus.bg }}
                                 >
                                   {status}
                                 </p>
                                 <div className="flex items-center justify-center gap-2">
                                   <div className="w-1 h-1 rounded-full bg-slate-300" />
-                                  <span className="text-[9px] uppercase tracking-wider text-slate-400">18 min elapsed</span>
+                                  <span className="text-[9px] uppercase text-slate-400">18 min elapsed</span>
                                 </div>
                               </div>
                             </div>
@@ -753,15 +800,15 @@ export default function WaiterDashboard() {
                               <div className="flex items-center gap-4">
                                 <div
                                   className="w-12 h-12 rounded-2xl flex items-center justify-center text-lg font-black text-white shadow-2xl rotate-3"
-                                  style={{ background: "linear-gradient(135deg, oklch(0.45 0.12 285) 0%, oklch(0.35 0.15 275) 100%)" }}
+                                  style={{ background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.35 0.15 275) 100%)" }}
                                 >
                                   {tableNum}
                                 </div>
                                 <div className="space-y-0.5">
-                                  <p className="text-sm uppercase tracking-wider" style={{ color: "#0D031B" }}>Table {tableNum}</p>
+                                  <p className="text-sm uppercase" style={{ color: "#0D031B" }}>Table {tableNum}</p>
                                   <div className="flex items-center gap-1.5">
                                     <div className="w-1.5 h-1.5 rounded-full" style={{ background: currentStatus.hex }} />
-                                    <p className="text-[10px] uppercase tracking-widest opacity-40">Section Alpha</p>
+                                    <p className="text-[10px] uppercase opacity-40">Section Alpha</p>
                                   </div>
                                 </div>
                               </div>
@@ -769,18 +816,18 @@ export default function WaiterDashboard() {
                             
                             <div className="grid grid-cols-2 gap-3">
                               <div className="p-3 rounded-[18px] bg-black/5 space-y-1">
-                                <span className="text-[9px] uppercase tracking-widest opacity-40">Order ID</span>
+                                <span className="text-[9px] uppercase opacity-40">Order ID</span>
                                 <p className="text-xs tabular-nums" style={{ color: "#0D031B" }}>#{t.id.slice(-6).toUpperCase()}</p>
                               </div>
                               <div className="p-3 rounded-[18px] bg-black/5 space-y-1">
-                                <span className="text-[9px] uppercase tracking-widest opacity-40">Active Items</span>
+                                <span className="text-[9px] uppercase opacity-40">Active Items</span>
                                 <p className="text-xs" style={{ color: "#0D031B" }}>{t.items.length} Units</p>
                               </div>
                             </div>
 
                             <Button 
-                              className="w-full h-11 rounded-xl text-[10px] uppercase tracking-widest gap-2 text-white border-0"
-                              style={{ background: "oklch(0.45 0.12 285)" }}
+                              className="w-full h-11 rounded-xl text-[10px] uppercase gap-2 text-white border-0"
+                              style={{ background: "#3F3D8F" }}
                             >
                               Manage Table <ArrowRight className="h-3.5 w-3.5" />
                             </Button>
@@ -818,9 +865,9 @@ export default function WaiterDashboard() {
                 {/* Primary CTA with rich gradient */}
                 <Button
                   asChild
-                  className="w-full h-14 rounded-2xl gap-3 text-[11px] uppercase tracking-widest text-white border-0 shadow-xl transition-all duration-300 hover:-translate-y-1 active:translate-y-0 active:scale-95"
+                  className="w-full h-14 rounded-2xl gap-3 text-[11px] uppercase text-white border-0 shadow-xl transition-all duration-300 hover:-translate-y-1 active:translate-y-0 active:scale-95"
                   style={{
-                    background: "linear-gradient(135deg, oklch(0.45 0.12 285) 0%, oklch(0.35 0.15 275) 100%)",
+                    background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.35 0.15 275) 100%)",
                     boxShadow: "0 8px 25px -5px oklch(0.45 0.12 285 / 0.4)",
                   }}
                 >
@@ -845,7 +892,7 @@ export default function WaiterDashboard() {
                       key={action.href}
                       asChild
                       variant="ghost"
-                      className="h-20 flex-col gap-2 text-[9px] uppercase tracking-wider transition-all duration-300 hover:bg-[#EBE6F8] hover:shadow-lg rounded-2xl border"
+                      className="h-20 flex-col gap-2 text-[9px] uppercase transition-all duration-300 hover:bg-[#EBE6F8] hover:shadow-lg rounded-2xl border"
                       style={{
                         borderColor: "oklch(0.45 0.12 285 / 0.1)",
                         background: "rgba(235, 230, 248, 0.4)",
@@ -874,7 +921,7 @@ export default function WaiterDashboard() {
               className="overflow-hidden border-0 bg-white shadow-xl rounded-[28px] relative"
               style={{ border: "1px solid oklch(0.45 0.12 285 / 0.08)" }}
             >
-              <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-oklch(0.45 0.12 285) to-transparent opacity-40" />
+              <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-[#3F3D8F] to-transparent opacity-40" />
               
               <CardHeader className="px-6 py-5" style={{ borderBottom: "1px solid oklch(0.45 0.12 285 / 0.05)" }}>
                 <div className="flex items-center gap-4">
@@ -882,13 +929,26 @@ export default function WaiterDashboard() {
                     className="w-11 h-11 rounded-[14px] flex items-center justify-center shadow-inner"
                     style={{ background: "oklch(0.45 0.12 285 / 0.1)" }}
                   >
-                    <Crown className="h-5 w-5" style={{ color: "oklch(0.45 0.12 285)" }} />
+                    <div
+                        className="h-5 w-5"
+                        style={{
+                          backgroundColor: "#3F3D8F",
+                          maskImage: "url(/shift.png)",
+                          maskSize: "contain",
+                          maskRepeat: "no-repeat",
+                          maskPosition: "center",
+                          WebkitMaskImage: "url(/shift.png)",
+                          WebkitMaskSize: "contain",
+                          WebkitMaskRepeat: "no-repeat",
+                          WebkitMaskPosition: "center",
+                        }}
+                      />
                   </div>
                   <div>
-                    <CardTitle className="text-[13px] uppercase tracking-[0.1em]" style={{ color: "#0D031B" }}>
+                    <CardTitle className="text-[13px] uppercase" style={{ color: "#0D031B" }}>
                       Shift Progress
                     </CardTitle>
-                    <p className="text-[10px] uppercase tracking-wider mt-1 opacity-60" style={{ color: "#736C83" }}>
+                    <p className="text-[10px] uppercase mt-1 opacity-60" style={{ color: "#736C83" }}>
                       14 COVERS TO TARGET
                     </p>
                   </div>
@@ -898,18 +958,18 @@ export default function WaiterDashboard() {
               <CardContent className="p-6 space-y-6">
                 <div className="flex items-end justify-between px-2">
                   <div className="space-y-1">
-                    <p className="text-[2.8rem] tracking-tight leading-none" style={{ color: "#0D031B" }}>
+                    <p className="text-[2.8rem] leading-none" style={{ color: "#0D031B" }}>
                       75%
                     </p>
-                    <p className="text-[10px] uppercase tracking-widest opacity-40" style={{ color: "#736C83" }}>
+                    <p className="text-[10px] uppercase opacity-40" style={{ color: "#736C83" }}>
                       Quota Met
                     </p>
                   </div>
                   <div className="text-right space-y-1">
-                    <p className="text-3xl tabular-nums" style={{ color: "oklch(0.45 0.12 285)" }}>
+                    <p className="text-3xl tabular-nums" style={{ color: "#3F3D8F" }}>
                       42
                     </p>
-                    <p className="text-[10px] uppercase tracking-widest opacity-40" style={{ color: "#736C83" }}>
+                    <p className="text-[10px] uppercase opacity-40" style={{ color: "#736C83" }}>
                       Served Today
                     </p>
                   </div>
@@ -921,13 +981,13 @@ export default function WaiterDashboard() {
                       className="h-full rounded-full transition-all duration-1000 shadow-[0_0_10px_oklch(0.45_0.12_285_/_0.3)]"
                       style={{ 
                         width: "75%",
-                        background: "linear-gradient(90deg, oklch(0.45 0.12 285) 0%, oklch(0.55 0.15 275) 100%)" 
+                        background: "linear-gradient(90deg, #3F3D8F 0%, oklch(0.55 0.15 275) 100%)" 
                       }}
                     />
                   </div>
                   <div className="flex items-center gap-2 px-1">
                     <div className="w-1.5 h-1.5 rounded-full bg-oklch(0.7 0.15 150) animate-pulse" />
-                    <p className="text-[10px] uppercase tracking-wider text-slate-500">
+                    <p className="text-[10px] uppercase text-slate-500">
                       Excellent pace <span className="opacity-40">· 14 to hit daily target of 56</span>
                     </p>
                   </div>
@@ -936,7 +996,7 @@ export default function WaiterDashboard() {
                 <div className="grid grid-cols-3 gap-3">
                   {[
                     { value: "4.8",     label: "Rating",    color: "oklch(0.7 0.15 150)", bg: "oklch(0.7 0.15 150 / 0.08)" },
-                    { value: "3.5m",    label: "Wait",      color: "oklch(0.45 0.12 285)", bg: "oklch(0.45 0.12 285 / 0.08)" },
+                    { value: "3.5m",    label: "Wait",      color: "#3F3D8F", bg: "oklch(0.45 0.12 285 / 0.08)" },
                     { value: "KES 850", label: "PPC",       color: "oklch(0.75 0.15 75)", bg: "oklch(0.75 0.15 75 / 0.08)" },
                   ].map((m) => (
                     <div
@@ -948,7 +1008,7 @@ export default function WaiterDashboard() {
                       }}
                     >
                       <p className="text-sm tabular-nums" style={{ color: m.color }}>{m.value}</p>
-                      <p className="text-[8px] uppercase tracking-widest opacity-40">{m.label}</p>
+                      <p className="text-[8px] uppercase opacity-40">{m.label}</p>
                     </div>
                   ))}
                 </div>
@@ -970,7 +1030,7 @@ export default function WaiterDashboard() {
                 style={{ borderBottom: "1px solid oklch(0.45 0.12 285 / 0.05)" }}
               >
                 <CardTitle
-                  className="text-[13px] uppercase tracking-[0.1em]"
+                  className="text-[13px] uppercase"
                   style={{ color: "#0D031B" }}
                 >
                   Activity Stream
@@ -990,19 +1050,36 @@ export default function WaiterDashboard() {
                           <div
                             className={cn("w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 transition-all duration-500 group-hover:scale-110 shadow-sm", item.bg)}
                           >
-                            <Icon className={cn("h-4.5 w-4.5", item.color)} />
+                            {typeof Icon === 'string' ? (
+                              <div 
+                                className="h-4.5 w-4.5" 
+                                style={{ 
+                                  backgroundColor: item.dot, // Use the dot color which is the hex/oklch string
+                                  maskImage: `url(${Icon})`,
+                                  maskSize: 'contain',
+                                  maskRepeat: 'no-repeat',
+                                  maskPosition: 'center',
+                                  WebkitMaskImage: `url(${Icon})`,
+                                  WebkitMaskSize: 'contain',
+                                  WebkitMaskRepeat: 'no-repeat',
+                                  WebkitMaskPosition: 'center'
+                                }} 
+                              />
+                            ) : (
+                              <Icon className={cn("h-4.5 w-4.5", item.color)} />
+                            )}
                           </div>
  
                           <div className="flex-1 min-w-0">
                             <p
-                              className="text-[13px] truncate tracking-tight transition-colors group-hover:text-oklch(0.45 0.12 285)"
+                              className="text-[13px] truncate transition-colors group-hover:text-[#3F3D8F]"
                               style={{ color: "#3D374C" }}
                             >
                               {item.text}
                             </p>
                             <div className="flex items-center gap-2 mt-1">
                                <div className="w-1 h-1 rounded-full bg-slate-300" />
-                               <p className="text-[10px] uppercase tracking-widest opacity-40" style={{ color: "#736C83" }}>
+                               <p className="text-[10px] uppercase opacity-40" style={{ color: "#736C83" }}>
                                   {item.sub}
                                </p>
                             </div>
@@ -1010,7 +1087,7 @@ export default function WaiterDashboard() {
  
                           <ArrowRight
                             className="h-4 w-4 shrink-0 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
-                            style={{ color: "oklch(0.45 0.12 285)" }}
+                            style={{ color: "#3F3D8F" }}
                           />
                         </div>
                       )

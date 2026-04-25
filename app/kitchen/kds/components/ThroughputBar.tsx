@@ -12,7 +12,7 @@ export function ThroughputBar({ pendingCount, cookingCount, readyCount }: Throug
   return (
     <div className="flex items-center gap-4 px-5 py-3 border-b shrink-0" style={{ background: "rgba(255,255,255,0.75)", backdropFilter: "blur(12px)", borderColor: "oklch(0.45 0.12 285 / 0.1)" }}>
       <div className="flex items-center gap-1.5 shrink-0">
-        <ArrowTrendingUpIcon className="h-3 w-3" style={{ color: "oklch(0.42 0.14 285)" }} />
+        <ArrowTrendingUpIcon className="h-3 w-3" style={{ color: "#3F3D8F" }} />
         <span className="text-[10px] font-bold uppercase " style={{ color: "#736C83" }}>
           Avg 18m
         </span>
@@ -25,7 +25,7 @@ export function ThroughputBar({ pendingCount, cookingCount, readyCount }: Throug
         />
         <div
           className="h-full transition-all duration-500"
-          style={{ width: `${(cookingCount / total) * 100}%`, background: "oklch(0.42 0.14 285)" }}
+          style={{ width: `${(cookingCount / total) * 100}%`, background: "#3F3D8F" }}
         />
         <div
           className="h-full rounded-r-full transition-all duration-500"

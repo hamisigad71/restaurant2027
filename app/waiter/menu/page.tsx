@@ -79,7 +79,7 @@ function MenuCard({
         {/* Live/86'd badge — top-left */}
         <div className="absolute top-2.5 left-2.5">
           <span
-            className="flex items-center gap-1 text-[9px] font-bold uppercase tracking-wider px-2 py-1 rounded-full text-white"
+            className="flex items-center gap-1 text-[9px] font-bold uppercase px-2 py-1 rounded-full text-white"
             style={{
               background: item.available
                 ? "oklch(0.62 0.16 150 / 0.85)"
@@ -99,7 +99,7 @@ function MenuCard({
         {(item.popular || item.vegetarian) && (
           <div className="absolute top-2.5 right-2.5">
             <span
-              className="flex items-center gap-1 text-[9px] font-bold uppercase tracking-wider px-2 py-1 rounded-full text-white"
+              className="flex items-center gap-1 text-[9px] font-bold uppercase px-2 py-1 rounded-full text-white"
               style={{
                 background: item.popular
                   ? "oklch(0.75 0.15 75 / 0.9)"
@@ -118,7 +118,7 @@ function MenuCard({
           <p className="text-white font-bold text-[15px] leading-none tabular-nums drop-shadow">
             KES {item.price.toLocaleString()}
           </p>
-          <p className="text-white/65 text-[9px] font-bold uppercase tracking-wider mt-0.5">
+          <p className="text-white/65 text-[9px] font-bold uppercase mt-0.5">
             {item.category}
           </p>
         </div>
@@ -164,7 +164,7 @@ function MenuCard({
             >
               <DropdownMenuItem
                 className="flex items-center gap-2 text-[11px] font-semibold rounded-xl px-2.5 py-2 cursor-pointer"
-                style={{ color:"oklch(0.42 0.14 285)" }}
+                style={{ color:"#3F3D8F" }}
               >
                 <Package className="h-3.5 w-3.5" />
                 View Ingredients
@@ -183,7 +183,7 @@ function MenuCard({
         {/* Popularity row */}
         <div className="flex items-center justify-between">
           <div
-            className="flex items-center gap-1 text-[9px] font-bold uppercase tracking-wider"
+            className="flex items-center gap-1 text-[9px] font-bold uppercase"
             style={{ color: item.popular ? "oklch(0.55 0.15 75)" : "var(--icon-primary)" }}
           >
             {item.popular
@@ -203,7 +203,7 @@ function MenuCard({
         >
           <button
             onClick={() => onToggleAvailability(item.id)}
-            className="flex items-center justify-center gap-1 text-[9px] font-bold uppercase tracking-wider px-2 py-1.5 rounded-lg transition-colors w-full"
+            className="flex items-center justify-center gap-1 text-[9px] font-bold uppercase px-2 py-1.5 rounded-lg transition-colors w-full"
             style={
               item.available
                 ? { color:"oklch(0.42 0.14 150)", background:"oklch(0.62 0.16 150 / 0.08)" }
@@ -260,15 +260,15 @@ export default function WaiterMenuPage() {
           <div className="flex items-center gap-2 mb-1.5">
             <div
               className="flex items-center justify-center w-9 h-9 rounded-xl p-1.5"
-              style={{ background:"oklch(0.42 0.14 285)", boxShadow:"0 4px 12px oklch(0.45 0.12 285 / 0.35)" }}
+              style={{ background:"#3F3D8F", boxShadow:"0 4px 12px oklch(0.45 0.12 285 / 0.35)" }}
             >
               <img src="/menu-nav.png" className="w-full h-full brightness-0 invert object-contain" alt="Menu" style={{ filter: "brightness(0) invert(1)" }} />
             </div>
             <div>
-              <h1 className="text-[17px] font-bold tracking-tight leading-none" style={{ color:"#0D031B" }}>
+              <h1 className="text-[17px] font-bold leading-none" style={{ color:"#0D031B" }}>
                 Service Menu
               </h1>
-              <p className="text-[10px] font-bold uppercase tracking-[0.18em] mt-0.5" style={{ color:"#9A94AA" }}>
+              <p className="text-[10px] font-bold uppercase mt-0.5" style={{ color:"#9A94AA" }}>
                 Real-time Dish Availability
               </p>
             </div>
@@ -282,10 +282,10 @@ export default function WaiterMenuPage() {
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className="flex items-center h-9 px-4 rounded-xl text-[10px] font-bold uppercase tracking-wider whitespace-nowrap shrink-0 border transition-all duration-200"
+                  className="flex items-center h-9 px-4 rounded-xl text-[10px] font-bold uppercase whitespace-nowrap shrink-0 border transition-all duration-200"
                   style={
                     active
-                      ? { background:"oklch(0.42 0.14 285)", color:"white", borderColor:"transparent", boxShadow:"0 3px 10px oklch(0.45 0.12 285 / 0.3)" }
+                      ? { background:"#3F3D8F", color:"white", borderColor:"transparent", boxShadow:"0 3px 10px oklch(0.45 0.12 285 / 0.3)" }
                       : { background:"rgba(255,255,255,0.8)", color:"#736C83", borderColor:"oklch(0.45 0.12 285 / 0.12)" }
                   }
                 >
@@ -317,7 +317,7 @@ export default function WaiterMenuPage() {
           </div>
 
           {/* Count label */}
-          <p className="text-[10px] font-bold uppercase tracking-[0.16em] -mt-2" style={{ color:"var(--icon-primary)" }}>
+          <p className="text-[10px] font-bold uppercase -mt-2" style={{ color:"var(--icon-primary)" }}>
             {filtered.length} of {menuItems.length} items
           </p>
 

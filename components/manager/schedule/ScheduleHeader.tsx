@@ -13,10 +13,10 @@ export function ScheduleHeader() {
           <Calendar className="h-5 w-5 text-white" />
         </div>
         <div>
-          <h1 className="text-[17px] font-bold tracking-tight leading-none" style={{ color: "#0D031B" }}>
+          <h1 className="text-[17px] font-bold leading-none" style={{ color: "#0D031B" }}>
             Staff Schedule
           </h1>
-          <p className="text-[10px] font-bold uppercase tracking-[0.18em] mt-0.5" style={{ color: "#9A94AA" }}>
+          <p className="text-[10px] font-bold uppercase mt-0.5" style={{ color: "#9A94AA" }}>
             Resource Allocation & Weekly Rostering
           </p>
         </div>
@@ -27,7 +27,7 @@ export function ScheduleHeader() {
           <TooltipTrigger asChild>
             <Button
               variant="outline"
-              className="h-10 px-4 gap-2 rounded-xl font-bold text-[11px] uppercase tracking-wider border transition-all hover:-translate-y-0.5"
+              className="h-10 px-4 gap-2 rounded-xl font-bold text-[11px] uppercase border transition-all hover:-translate-y-0.5"
               style={{ borderColor: "oklch(0.45 0.12 285 / 0.2)", color: "#736C83", background: "rgba(255,255,255,0.8)" }}
             >
               <Zap className="h-3.5 w-3.5" />
@@ -38,7 +38,7 @@ export function ScheduleHeader() {
         </Tooltip>
 
         <Button
-          className="h-10 px-4 gap-2 text-white font-bold rounded-xl border-none text-[11px] uppercase tracking-wider transition-all hover:-translate-y-0.5"
+          className="h-10 px-4 gap-2 text-white font-bold rounded-xl border-none text-[11px] uppercase transition-all hover:-translate-y-0.5"
           style={{ background: "oklch(0.42 0.14 285)", boxShadow: "0 4px 16px oklch(0.45 0.12 285 / 0.35)" }}
         >
           <Plus className="h-3.5 w-3.5" />

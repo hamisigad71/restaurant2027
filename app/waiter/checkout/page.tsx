@@ -113,15 +113,15 @@ export default function CheckoutPage() {
           <div className="flex items-center gap-3 mb-6">
             <div
               className="flex items-center justify-center w-11 h-11 rounded-xl p-2"
-              style={{ background: "oklch(0.45 0.12 285)", boxShadow: "0 4px 12px oklch(0.45 0.12 285 / 0.35)" }}
+              style={{ background: "#3F3D8F", boxShadow: "0 4px 12px oklch(0.45 0.12 285 / 0.35)" }}
             >
               <img src="/checkout-nav.png" className="w-full h-full brightness-0 invert object-contain" alt="Checkout" />
             </div>
             <div>
-              <h1 className="text-[19px] font-bold tracking-tight leading-none" style={{ color: "#0D031B" }}>
+              <h1 className="text-[19px] font-bold leading-none" style={{ color: "#0D031B" }}>
                 Billing & Settlement
               </h1>
-              <p className="text-[10px] font-bold uppercase tracking-[0.18em] mt-1" style={{ color: "#9A94AA" }}>
+              <p className="text-[10px] font-bold uppercase mt-1" style={{ color: "#9A94AA" }}>
                 Manage payments and close tables
               </p>
             </div>
@@ -140,7 +140,7 @@ export default function CheckoutPage() {
           {[
             { label: "Open Tables",    value: activeTablesList.length, icon: ShoppingBag, accent: "oklch(0.75 0.15 75)"   },
             { label: "Ready to Pay",   value: readyCount,              icon: CircleDot,   accent: "oklch(0.62 0.16 150)"  },
-            { label: "Total Pending",  value: `KES ${totalRevenue.toLocaleString()}`, icon: TrendingUp, accent: "oklch(0.45 0.12 285)" },
+            { label: "Total Pending",  value: `KES ${totalRevenue.toLocaleString()}`, icon: TrendingUp, accent: "#3F3D8F" },
           ].map((stat) => {
             const Icon = stat.icon
             return (
@@ -176,7 +176,7 @@ export default function CheckoutPage() {
                 className="overflow-hidden border rounded-3xl shadow-sm"
                 style={{ background: "rgba(255,255,255,0.9)", borderColor: "oklch(0.45 0.12 285 / 0.12)" }}
               >
-                <div className="h-[3px]" style={{ background: "oklch(0.45 0.12 285)" }} />
+                <div className="h-[3px]" style={{ background: "#3F3D8F" }} />
 
                 <CardHeader className="px-5 pt-5 pb-3">
                   <div className="flex items-center gap-3">
@@ -184,7 +184,7 @@ export default function CheckoutPage() {
                       className="flex items-center justify-center w-9 h-9 rounded-xl"
                       style={{ background: "oklch(0.45 0.12 285 / 0.1)" }}
                     >
-                      <Wallet className="h-4 w-4" style={{ color: "oklch(0.45 0.12 285)" }} />
+                      <Wallet className="h-4 w-4" style={{ color: "#3F3D8F" }} />
                     </div>
                     <div>
                       <CardTitle className="text-[15px] font-bold " style={{ color: "#0D031B" }}>
@@ -217,7 +217,7 @@ export default function CheckoutPage() {
                           {active && (
                             <span
                               className="absolute top-2.5 right-2.5 flex items-center justify-center w-4 h-4 rounded-full"
-                              style={{ background: "oklch(0.45 0.12 285)" }}
+                              style={{ background: "#3F3D8F" }}
                             >
                               <Check className="h-2.5 w-2.5 text-white" strokeWidth={2.5} />
                             </span>
@@ -309,7 +309,7 @@ export default function CheckoutPage() {
                             <div
                               className="flex items-center justify-center w-11 h-11 rounded-xl font-bold text-lg shrink-0 text-white transition-all duration-200"
                               style={{
-                                background: selected ? "oklch(0.45 0.12 285)" : "#D0CBE4",
+                                background: selected ? "#3F3D8F" : "#D0CBE4",
                                 boxShadow: selected ? "0 2px 10px oklch(0.45 0.12 285 / 0.3)" : "none",
                               }}
                             >
@@ -331,7 +331,7 @@ export default function CheckoutPage() {
                             </div>
 
                             <div className="text-right shrink-0">
-                              <p className="text-[14px] font-bold tabular-nums" style={{ color: "oklch(0.45 0.12 285)" }}>
+                              <p className="text-[14px] font-bold tabular-nums" style={{ color: "#3F3D8F" }}>
                                 KES {table.amount.toLocaleString()}
                               </p>
                               <span
@@ -347,7 +347,7 @@ export default function CheckoutPage() {
 
                             <ChevronRight
                               className="h-4 w-4 shrink-0 transition-colors"
-                              style={{ color: selected ? "oklch(0.45 0.12 285)" : "#D0CBE4" }}
+                              style={{ color: selected ? "#3F3D8F" : "#D0CBE4" }}
                             />
                           </button>
                         )
@@ -367,7 +367,7 @@ export default function CheckoutPage() {
                 {/* Receipt brand header */}
                 <div
                   className="px-5 py-5 text-center relative overflow-hidden"
-                  style={{ background: "oklch(0.45 0.12 285)" }}
+                  style={{ background: "#3F3D8F" }}
                 >
                   <div className="relative z-10">
                     <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-white/15 mx-auto mb-2.5">
@@ -453,7 +453,7 @@ export default function CheckoutPage() {
                     <span className="text-[13px] font-bold uppercase " style={{ color: "#0D031B" }}>
                       Total
                     </span>
-                    <span className="text-xl font-bold tabular-nums" style={{ color: "oklch(0.45 0.12 285)" }}>
+                    <span className="text-xl font-bold tabular-nums" style={{ color: "#3F3D8F" }}>
                       KES {total.toLocaleString()}
                     </span>
                   </div>
@@ -484,7 +484,7 @@ export default function CheckoutPage() {
                         disabled={!selectedTable || receiptItems.length === 0}
                         className="w-full h-12 font-bold text-[12px] uppercase  text-white rounded-2xl border-none transition-all duration-200 hover:opacity-90 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] disabled:opacity-40 disabled:pointer-events-none relative overflow-hidden group"
                         style={{
-                          background: "oklch(0.45 0.12 285)",
+                          background: "#3F3D8F",
                           boxShadow: "0 6px 24px oklch(0.45 0.12 285 / 0.35)",
                         }}
                       >

@@ -53,16 +53,16 @@ const mockExpenses = [
 ]
 
 const budgetStats = [
-  { label: "Daily Revenue", value: "142,500", icon: ArrowTrendingUpIcon, from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)", delta: "+12%", trend: "up" },
-  { label: "Daily Expenses", value: "89,400", icon: ArrowTrendingDownIcon, from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)", delta: "-4%", trend: "down" },
-  { label: "Net Profit", value: "53,100", icon: CurrencyDollarIcon, from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)", delta: "+8%", trend: "up" },
+  { label: "Daily Revenue", value: "142,500", icon: ArrowTrendingUpIcon, from: "#3F3D8F", to: "oklch(0.38 0.16 275)", delta: "+12%", trend: "up" },
+  { label: "Daily Expenses", value: "89,400", icon: ArrowTrendingDownIcon, from: "#3F3D8F", to: "oklch(0.38 0.16 275)", delta: "-4%", trend: "down" },
+  { label: "Net Profit", value: "53,100", icon: CurrencyDollarIcon, from: "#3F3D8F", to: "oklch(0.38 0.16 275)", delta: "+8%", trend: "up" },
 ]
 
 const budgetCategories = [
-  { label: "Inventory", val: 65, icon: ShoppingCartIcon, from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)", amount: "KES 182,500" },
-  { label: "Labor", val: 45, icon: UserGroupIcon, from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)", amount: "KES 126,450" },
-  { label: "Utilities", val: 15, icon: BoltIcon, from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)", amount: "KES 42,150" },
-  { label: "Misc", val: 10, icon: BanknotesIcon, from: "oklch(0.42 0.14 285)", to: "oklch(0.38 0.16 275)", amount: "KES 28,100" },
+  { label: "Inventory", val: 65, icon: ShoppingCartIcon, from: "#3F3D8F", to: "oklch(0.38 0.16 275)", amount: "KES 182,500" },
+  { label: "Labor", val: 45, icon: UserGroupIcon, from: "#3F3D8F", to: "oklch(0.38 0.16 275)", amount: "KES 126,450" },
+  { label: "Utilities", val: 15, icon: BoltIcon, from: "#3F3D8F", to: "oklch(0.38 0.16 275)", amount: "KES 42,150" },
+  { label: "Misc", val: 10, icon: BanknotesIcon, from: "#3F3D8F", to: "oklch(0.38 0.16 275)", amount: "KES 28,100" },
 ]
 
 export default function ManagerExpensesPage() {
@@ -87,18 +87,18 @@ export default function ManagerExpensesPage() {
               <div 
                 className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center shadow-lg"
                 style={{
-                  background: "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)",
+                  background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.16 275) 100%)",
                 }}
               >
                 <ChartPieIcon className="h-6 w-6 sm:h-7 sm:w-7 text-white" strokeWidth={2.5} />
               </div>
               <div>
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-normal tracking-tight leading-none" style={{ color: "#0D031B" }}>
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-normal leading-none" style={{ color: "#0D031B" }}>
                   Finance Hub
                 </h1>
                 <div className="flex items-center gap-2 mt-1.5">
-                  <div className="h-px w-8 bg-gradient-to-r from-oklch(0.42 0.14 285) to-transparent" />
-                  <p className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider" style={{ color: "#736C83" }}>
+                  <div className="h-px w-8 bg-gradient-to-r from-[#3F3D8F] to-transparent" />
+                  <p className="text-[10px] sm:text-[11px] font-semibold uppercase" style={{ color: "#736C83" }}>
                     Expenditure Tracking & COGS Control
                   </p>
                 </div>
@@ -109,7 +109,7 @@ export default function ManagerExpensesPage() {
           <div className="flex gap-3">
             <Button 
               variant="outline"
-              className="h-11 sm:h-12 px-5 sm:px-6 gap-2 font-normal rounded-[14px] text-xs uppercase tracking-wide transition-all hover:scale-105 active:scale-95 border-2"
+              className="h-11 sm:h-12 px-5 sm:px-6 gap-2 font-normal rounded-[14px] text-xs uppercase transition-all hover:scale-105 active:scale-95 border-2"
               style={{
                 borderColor: "oklch(0.42 0.14 285 / 0.15)",
                 color: "#736C83",
@@ -119,9 +119,9 @@ export default function ManagerExpensesPage() {
               <span className="hidden sm:inline">Export</span>
             </Button>
             <Button 
-              className="h-11 sm:h-12 px-5 sm:px-6 gap-2.5 text-white font-normal rounded-[14px] shadow-xl border-0 text-xs uppercase tracking-wide transition-all hover:-translate-y-0.5 hover:shadow-2xl active:translate-y-0 active:scale-95"
+              className="h-11 sm:h-12 px-5 sm:px-6 gap-2.5 text-white font-normal rounded-[14px] shadow-xl border-0 text-xs uppercase transition-all hover:-translate-y-0.5 hover:shadow-2xl active:translate-y-0 active:scale-95"
               style={{
-                background: "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)",
+                background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.16 275) 100%)",
                 boxShadow: "0 8px 32px oklch(0.42 0.14 285 / 0.35)",
               }}
             >
@@ -155,7 +155,7 @@ export default function ManagerExpensesPage() {
                       <s.icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" strokeWidth={2.5} />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-[10px] sm:text-[11px] font-normal uppercase tracking-wide mb-1.5" style={{ color: "#9A94AA" }}>
+                      <p className="text-[10px] sm:text-[11px] font-normal uppercase mb-1.5" style={{ color: "#9A94AA" }}>
                         {s.label}
                       </p>
                       <p className="text-2xl sm:text-3xl font-normal leading-none tabular-nums" style={{ color: "#0D031B" }}>
@@ -207,10 +207,10 @@ export default function ManagerExpensesPage() {
                     className="w-10 h-10 rounded-xl flex items-center justify-center"
                     style={{ background: "oklch(0.42 0.14 285 / 0.1)" }}
                   >
-                    <DocumentTextIcon className="h-5 w-5" style={{ color: "oklch(0.42 0.14 285)" }} strokeWidth={2.5} />
+                    <DocumentTextIcon className="h-5 w-5" style={{ color: "#3F3D8F" }} strokeWidth={2.5} />
                   </div>
                   <div>
-                    <CardTitle className="text-sm sm:text-base font-normal uppercase tracking-tight" style={{ color: "#0D031B" }}>
+                    <CardTitle className="text-sm sm:text-base font-normal uppercase" style={{ color: "#0D031B" }}>
                       Transaction Ledger
                     </CardTitle>
                     <p className="text-[10px] font-medium mt-0.5" style={{ color: "#9A94AA" }}>
@@ -242,7 +242,7 @@ export default function ManagerExpensesPage() {
                         className="h-10 w-10 rounded-xl border-2 transition-all hover:scale-105 active:scale-95"
                         style={{
                           borderColor: "oklch(0.42 0.14 285 / 0.12)",
-                          color: "oklch(0.42 0.14 285)",
+                          color: "#3F3D8F",
                         }}
                       >
                         <FunnelIcon className="h-4 w-4" strokeWidth={2.5} />
@@ -278,7 +278,7 @@ export default function ManagerExpensesPage() {
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse">
                   <thead style={{ background: "oklch(0.42 0.14 285 / 0.03)" }}>
-                    <tr className="text-[10px] font-normal uppercase tracking-wider" style={{ color: "#9A94AA" }}>
+                    <tr className="text-[10px] font-normal uppercase" style={{ color: "#9A94AA" }}>
                       <th className="px-5 sm:px-6 py-4 whitespace-nowrap">Item / Category</th>
                       <th className="px-5 sm:px-6 py-4 whitespace-nowrap">Amount</th>
                       <th className="px-5 sm:px-6 py-4 whitespace-nowrap">Status</th>
@@ -301,7 +301,7 @@ export default function ManagerExpensesPage() {
                               className="text-[9px] py-0 px-2 h-auto font-normal uppercase border"
                               style={{
                                 background: "oklch(0.42 0.14 285 / 0.08)",
-                                color: "oklch(0.42 0.14 285)",
+                                color: "#3F3D8F",
                                 borderColor: "oklch(0.42 0.14 285 / 0.2)",
                               }}
                             >
@@ -416,9 +416,9 @@ export default function ManagerExpensesPage() {
                     className="w-10 h-10 rounded-xl flex items-center justify-center"
                     style={{ background: "oklch(0.42 0.14 285 / 0.1)" }}
                   >
-                    <CheckBadgeIcon className="h-5 w-5" style={{ color: "oklch(0.42 0.14 285)" }} strokeWidth={2.5} />
+                    <CheckBadgeIcon className="h-5 w-5" style={{ color: "#3F3D8F" }} strokeWidth={2.5} />
                   </div>
-                  <CardTitle className="text-sm font-normal uppercase tracking-tight" style={{ color: "#0D031B" }}>
+                  <CardTitle className="text-sm font-normal uppercase" style={{ color: "#0D031B" }}>
                     Budget Allocation
                   </CardTitle>
                 </div>
@@ -446,7 +446,7 @@ export default function ManagerExpensesPage() {
                             </span>
                           </div>
                         </div>
-                        <span className="text-sm font-medium tabular-nums" style={{ color: "oklch(0.42 0.14 285)" }}>
+                        <span className="text-sm font-medium tabular-nums" style={{ color: "#3F3D8F" }}>
                           {item.val}%
                         </span>
                       </div>
@@ -470,7 +470,7 @@ export default function ManagerExpensesPage() {
             <Card 
               className="border-0 rounded-[24px] shadow-2xl overflow-hidden relative"
               style={{
-                background: "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.35 0.15 280) 100%)",
+                background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.35 0.15 280) 100%)",
                 boxShadow: "0 12px 40px oklch(0.42 0.14 285 / 0.4)",
               }}
             >
@@ -490,7 +490,7 @@ export default function ManagerExpensesPage() {
                     <h4 className="font-medium text-lg uppercase leading-tight text-white">
                       Budget Warning
                     </h4>
-                    <p className="text-[10px] font-medium text-white/70 mt-1 uppercase tracking-wide">
+                    <p className="text-[10px] font-medium text-white/70 mt-1 uppercase">
                       Immediate Action Required
                     </p>
                   </div>
@@ -508,12 +508,12 @@ export default function ManagerExpensesPage() {
 
                 <div className="flex gap-2">
                   <Button 
-                    className="flex-1 h-11 border-2 border-white/30 bg-white/10 hover:bg-white/20 text-white font-medium rounded-xl text-xs uppercase tracking-wide transition-all hover:scale-105 active:scale-95 backdrop-blur-sm"
+                    className="flex-1 h-11 border-2 border-white/30 bg-white/10 hover:bg-white/20 text-white font-medium rounded-xl text-xs uppercase transition-all hover:scale-105 active:scale-95 backdrop-blur-sm"
                   >
                     View Details
                   </Button>
                   <Button 
-                    className="flex-1 h-11 bg-white text-purple-900 font-medium rounded-xl text-xs uppercase tracking-wide transition-all hover:scale-105 active:scale-95 shadow-lg"
+                    className="flex-1 h-11 bg-white text-purple-900 font-medium rounded-xl text-xs uppercase transition-all hover:scale-105 active:scale-95 shadow-lg"
                   >
                     Create Plan
                   </Button>

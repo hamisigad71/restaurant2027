@@ -126,7 +126,7 @@ export default function LoginPage() {
       <div
         className="hidden lg:flex flex-col justify-between p-12 xl:p-16 relative overflow-hidden"
         style={{
-          background: "linear-gradient(145deg, oklch(0.42 0.14 285) 0%, oklch(0.32 0.16 285) 45%, oklch(0.18 0.12 285) 100%)",
+          background: "linear-gradient(145deg, #3F3D8F 0%, oklch(0.32 0.16 285) 45%, oklch(0.18 0.12 285) 100%)",
         }}
       >
         {/* Enhanced Orbs */}
@@ -288,13 +288,26 @@ export default function LoginPage() {
             className="border rounded-[20px] shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl"
             style={{ background:"white", borderColor:"oklch(0.42 0.14 285 / 0.12)" }}
           >
-            <div className="h-[4px]" style={{ background:"linear-gradient(90deg, oklch(0.42 0.14 285) 0%, oklch(0.55 0.18 270) 100%)" }} />
+            <div className="h-[4px]" style={{ background:"linear-gradient(90deg, #3F3D8F 0%, oklch(0.55 0.18 270) 100%)" }} />
             <CardHeader className="px-6 pt-5 pb-3">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
                   <div className="w-8 h-8 rounded-lg flex items-center justify-center" 
-                    style={{ background:"oklch(0.42 0.14 285 / 0.1)" }}>
-                    <Bolt className="h-4 w-4" style={{ color:"oklch(0.42 0.14 285)" }} />
+                    style={{ background:"oklch(0.42 0.14 285 / 0.12)" }}>
+                    <div 
+                      className="h-5 w-5" 
+                      style={{ 
+                        backgroundColor: '#3F3D8F',
+                        maskImage: 'url(/demo.png)',
+                        maskSize: 'contain',
+                        maskRepeat: 'no-repeat',
+                        maskPosition: 'center',
+                        WebkitMaskImage: 'url(/demo.png)',
+                        WebkitMaskSize: 'contain',
+                        WebkitMaskRepeat: 'no-repeat',
+                        WebkitMaskPosition: 'center'
+                      }} 
+                    />
                   </div>
                   <CardTitle className="text-[12px] font-semibold uppercase " style={{ color:"#3D374C" }}>
                     Quick Demo Access
@@ -304,7 +317,7 @@ export default function LoginPage() {
                   className="text-[9px] font-bold px-2.5 py-1 rounded-full border"
                   style={{
                     background:"oklch(0.42 0.14 285 / 0.08)",
-                    color:"oklch(0.42 0.14 285)",
+                    color:"#3F3D8F",
                     borderColor:"oklch(0.42 0.14 285 / 0.25)",
                   }}
                 >
@@ -340,14 +353,14 @@ export default function LoginPage() {
                           {/* Premium Background Accents */}
                           <div 
                             className="absolute inset-0 opacity-0 group-hover:opacity-[0.03] transition-opacity duration-500"
-                            style={{ background: "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)" }}
+                            style={{ background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.16 275) 100%)" }}
                           />
 
                           <div className="relative z-10 flex flex-row items-center gap-3 w-full">
                             <div
                               className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 transition-all duration-500 shadow-md relative"
                               style={{
-                                background: "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)",
+                                background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.16 275) 100%)",
                                 boxShadow: "0 4px 8px oklch(0.42 0.14 285 / 0.25)"
                               }}
                             >
@@ -358,10 +371,10 @@ export default function LoginPage() {
                                 return <DynamicIcon className="h-3.5 w-3.5 text-white transition-transform group-hover:scale-110" />
                               })()}
                             </div>
-                            <p className="text-[12px] font-medium leading-none text-[#0D031B] uppercase tracking-tight">{sub.label}</p>
+                            <p className="text-[12px] font-medium leading-none text-[#0D031B] uppercase">{sub.label}</p>
                           </div>
                           
-                          <p className="relative z-10 text-[9px] font-medium uppercase tracking-wider text-[#9A94AA] truncate w-full">{sub.desc}</p>
+                          <p className="relative z-10 text-[9px] font-medium uppercase text-[#9A94AA] truncate w-full">{sub.desc}</p>
                         </button>
                       ))}
                     </div>
@@ -388,7 +401,7 @@ export default function LoginPage() {
                           {/* Premium Background Accents */}
                           <div 
                             className="absolute inset-0 opacity-0 group-hover:opacity-[0.03] transition-opacity duration-500"
-                            style={{ background: "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)" }}
+                            style={{ background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.16 275) 100%)" }}
                           />
                           
                           <div className="relative z-10 flex flex-row items-center gap-3.5 w-full">
@@ -398,7 +411,7 @@ export default function LoginPage() {
                                 "flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-xl shrink-0 transition-all duration-500 shadow-lg relative",
                               )}
                               style={{ 
-                                background: "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)",
+                                background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.16 275) 100%)",
                                 boxShadow: "0 6px 12px oklch(0.42 0.14 285 / 0.25)"
                               }}
                             >
@@ -409,10 +422,10 @@ export default function LoginPage() {
                               )}
                             </div>
 
-                            <p className="text-[14px] font-medium tracking-tight text-[#0D031B] uppercase leading-none">{opt.label}</p>
+                            <p className="text-[14px] font-medium text-[#0D031B] uppercase leading-none">{opt.label}</p>
                           </div>
 
-                          <p className="relative z-10 text-[10px] font-medium uppercase tracking-wider text-[#9A94AA] truncate w-full">{opt.description}</p>
+                          <p className="relative z-10 text-[10px] font-medium uppercase text-[#9A94AA] truncate w-full">{opt.description}</p>
                         </button>
                       )
                     })}
@@ -489,7 +502,7 @@ export default function LoginPage() {
                 {/* Email */}
                 <div className="space-y-2">
                   <Label htmlFor="email" className="text-[12px] font-bold uppercase  flex items-center gap-2" style={{ color:"#3D374C" }}>
-                    <Mail className="h-3.5 w-3.5" style={{ color:"oklch(0.42 0.14 285)" }} />
+                    <Mail className="h-3.5 w-3.5" style={{ color:"#3F3D8F" }} />
                     Email Address
                   </Label>
                   <div className="relative group">
@@ -514,13 +527,13 @@ export default function LoginPage() {
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
                     <Label htmlFor="password" className="text-[12px] font-bold uppercase  flex items-center gap-2" style={{ color:"#3D374C" }}>
-                      <Lock className="h-3.5 w-3.5" style={{ color:"oklch(0.42 0.14 285)" }} />
+                      <Lock className="h-3.5 w-3.5" style={{ color:"#3F3D8F" }} />
                       Password
                     </Label>
                     <Link
                       href="/forgot-password"
                       className="text-[11px] font-semibold transition-all hover:underline"
-                      style={{ color:"oklch(0.42 0.14 285)" }}
+                      style={{ color:"#3F3D8F" }}
                     >
                       Forgot password?
                     </Link>
@@ -554,7 +567,7 @@ export default function LoginPage() {
                 {/* Portal selector */}
                 <div className="space-y-2.5">
                   <Label className="text-[12px] font-bold uppercase  flex items-center gap-2" style={{ color:"#3D374C" }}>
-                    <Shield className="h-3.5 w-3.5" style={{ color:"oklch(0.42 0.14 285)" }} />
+                    <Shield className="h-3.5 w-3.5" style={{ color:"#3F3D8F" }} />
                     Select Portal
                   </Label>
                   <div className="grid grid-cols-4 gap-2">
@@ -571,8 +584,8 @@ export default function LoginPage() {
                             active
                               ? { 
                                   background:"oklch(0.42 0.14 285 / 0.06)", 
-                                  borderColor:"oklch(0.42 0.14 285)", 
-                                  color:"oklch(0.42 0.14 285)",
+                                  borderColor:"#3F3D8F", 
+                                  color:"#3F3D8F",
                                   boxShadow:"0 8px 24px oklch(0.42 0.14 285 / 0.15)"
                                 }
                               : { 
@@ -586,12 +599,19 @@ export default function LoginPage() {
                             <div className="absolute inset-0 bg-gradient-to-br from-oklch(0.42 0.14 285 / 0.05) to-transparent" />
                           )}
                           {typeof opt.icon === 'string' ? (
-                            <img 
-                              src={opt.icon} 
-                              className={cn("h-4 w-4 relative z-10 transition-transform brightness-0", active && "scale-110")} 
+                            <div 
+                              className={cn("h-4 w-4 relative z-10 transition-transform", active && "scale-110")} 
                               style={{ 
-                                filter: 'invert(37%) sepia(93%) saturate(541%) hue-rotate(221deg) brightness(85%) contrast(89%)',
-                                opacity: active ? 1 : 0.45
+                                backgroundColor: '#3F3D8F',
+                                opacity: active ? 1 : 0.45,
+                                maskImage: `url(${opt.icon})`,
+                                maskSize: 'contain',
+                                maskRepeat: 'no-repeat',
+                                maskPosition: 'center',
+                                WebkitMaskImage: `url(${opt.icon})`,
+                                WebkitMaskSize: 'contain',
+                                WebkitMaskRepeat: 'no-repeat',
+                                WebkitMaskPosition: 'center'
                               }} 
                             />
                           ) : (() => {
@@ -599,7 +619,7 @@ export default function LoginPage() {
                             return (
                               <DynamicIcon 
                                 className={cn("h-4 w-4 relative z-10 transition-transform", active && "scale-110")} 
-                                style={{ color: "oklch(0.42 0.14 285)", opacity: active ? 1 : 0.45 }}
+                                style={{ color: "#3F3D8F", opacity: active ? 1 : 0.45 }}
                               />
                             )
                           })()}
@@ -616,7 +636,7 @@ export default function LoginPage() {
                   disabled={isLoading}
                   className="w-full flex items-center justify-center gap-3 h-12 rounded-2xl font-bold text-[13px] uppercase  text-white transition-all duration-200 hover:-translate-y-1 hover:shadow-2xl active:translate-y-0 active:scale-[0.98] disabled:opacity-60 disabled:pointer-events-none relative overflow-hidden group"
                   style={{
-                    background:"linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)",
+                    background:"linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.16 275) 100%)",
                     boxShadow:"0 8px 32px oklch(0.42 0.14 285 / 0.35)",
                   }}
                 >
@@ -639,7 +659,7 @@ export default function LoginPage() {
 
           <p className="text-center text-[13px]" style={{ color:"#736C83" }}>
             Don't have an account?{" "}
-            <Link href="/signup" className="font-bold transition-all hover:underline" style={{ color:"oklch(0.42 0.14 285)" }}>
+            <Link href="/signup" className="font-bold transition-all hover:underline" style={{ color:"#3F3D8F" }}>
               Create one
             </Link>
           </p>

@@ -168,7 +168,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
                 className="flex items-center justify-center w-9 h-9 rounded-xl"
                 style={{ background: "oklch(0.45 0.12 285 / 0.1)" }}
               >
-                <Receipt className="h-4 w-4" style={{ color: "oklch(0.45 0.12 285)" }} />
+                <Receipt className="h-4 w-4" style={{ color: "#3F3D8F" }} />
               </div>
             </div>
 
@@ -185,7 +185,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
                       <span style={{ color: "#AEA6BF" }}>×{item.quantity}</span>
                     </span>
                   </div>
-                  <span className="text-[12px] font-semibold tabular-nums shrink-0" style={{ color: "oklch(0.45 0.12 285)" }}>
+                  <span className="text-[12px] font-semibold tabular-nums shrink-0" style={{ color: "#3F3D8F" }}>
                     KSh {(item.price * item.quantity).toLocaleString()}
                   </span>
                 </div>
@@ -215,7 +215,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
                 style={{ color: "#0D031B" }}
               >
                 <span>Total Paid</span>
-                <span className="tabular-nums" style={{ color: "oklch(0.45 0.12 285)" }}>
+                <span className="tabular-nums" style={{ color: "#3F3D8F" }}>
                   KSh {grandTotal.toLocaleString()}
                 </span>
               </div>
@@ -263,7 +263,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
               "relative overflow-hidden border-0"
             )}
             style={{
-              background: "oklch(0.45 0.12 285)",
+              background: "#3F3D8F",
               boxShadow: "0 6px 24px oklch(0.45 0.12 285 / 0.35)",
             }}
           >
@@ -318,7 +318,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
             </h1>
             <p
               className="text-[10px] font-bold uppercase  mt-0.5"
-              style={{ color: "oklch(0.45 0.12 285)" }}
+              style={{ color: "#3F3D8F" }}
             >
               Table {tableId}
             </p>
@@ -329,7 +329,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
             className="text-[10px] font-bold px-2.5 py-1 rounded-full border"
             style={{
               background: "oklch(0.45 0.12 285 / 0.1)",
-              color: "oklch(0.45 0.12 285)",
+              color: "#3F3D8F",
               borderColor: "oklch(0.45 0.12 285 / 0.2)",
             }}
           >
@@ -361,7 +361,20 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
                     className="w-14 h-14 rounded-2xl flex items-center justify-center"
                     style={{ background: "oklch(0.45 0.12 285 / 0.08)" }}
                   >
-                    <ShoppingCart className="h-6 w-6" style={{ color: "#AEA6BF" }} />
+                    <div 
+                      className="h-6 w-6" 
+                      style={{ 
+                        backgroundColor: "#AEA6BF",
+                        maskImage: 'url(/shopping-cart.png)',
+                        maskSize: 'contain',
+                        maskRepeat: 'no-repeat',
+                        maskPosition: 'center',
+                        WebkitMaskImage: 'url(/shopping-cart.png)',
+                        WebkitMaskSize: 'contain',
+                        WebkitMaskRepeat: 'no-repeat',
+                        WebkitMaskPosition: 'center'
+                      }} 
+                    />
                   </div>
                   <p className="text-sm font-semibold" style={{ color: "#3D374C" }}>
                     No items found
@@ -410,7 +423,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
 
                       <p
                         className="text-[13px] font-bold tabular-nums shrink-0"
-                        style={{ color: "oklch(0.45 0.12 285)" }}
+                        style={{ color: "#3F3D8F" }}
                       >
                         KSh {(item.price * item.quantity).toLocaleString()}
                       </p>
@@ -445,7 +458,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
                       style={
                         isActive
                           ? {
-                              background: "oklch(0.45 0.12 285)",
+                              background: "#3F3D8F",
                               color: "white",
                               borderColor: "transparent",
                               boxShadow: "0 4px 14px oklch(0.45 0.12 285 / 0.35)",
@@ -548,7 +561,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
                         className="w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-all duration-200"
                         style={
                           active
-                            ? { background: "oklch(0.45 0.12 285)", borderColor: "oklch(0.45 0.12 285)" }
+                            ? { background: "#3F3D8F", borderColor: "#3F3D8F" }
                             : { borderColor: "#D0CBE4" }
                         }
                       >
@@ -607,7 +620,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
                 </p>
                 <p
                   className="text-2xl font-bold tabular-nums leading-tight"
-                  style={{ color: "oklch(0.45 0.12 285)" }}
+                  style={{ color: "#3F3D8F" }}
                 >
                   KSh {grandTotal.toLocaleString()}
                 </p>
@@ -620,7 +633,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
               disabled={orderedItems.length === 0}
               className="w-full flex items-center gap-3 justify-center h-14 rounded-2xl font-bold text-[13px] uppercase  text-white transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden group"
               style={{
-                background: "oklch(0.45 0.12 285)",
+                background: "#3F3D8F",
                 boxShadow: "0 8px 28px oklch(0.45 0.12 285 / 0.4)",
               }}
             >

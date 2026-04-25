@@ -54,7 +54,7 @@ function POSLoader() {
         {/* Animated background orb */}
         <div 
           className="absolute inset-0 -m-20 rounded-full opacity-20 blur-3xl animate-pulse"
-          style={{ background: "oklch(0.42 0.14 285)" }}
+          style={{ background: "#3F3D8F" }}
         />
         
         <div className="relative">
@@ -62,7 +62,7 @@ function POSLoader() {
           <div 
             className="absolute inset-0 rounded-[20px] animate-spin"
             style={{ 
-              background: "conic-gradient(from 0deg, oklch(0.42 0.14 285), transparent, oklch(0.42 0.14 285))",
+              background: "conic-gradient(from 0deg, #3F3D8F, transparent, #3F3D8F)",
               padding: "2px"
             }}
           />
@@ -78,7 +78,7 @@ function POSLoader() {
             <div 
               className="h-7 w-7 animate-pulse"
               style={{
-                backgroundColor: "oklch(0.42 0.14 285)",
+                backgroundColor: "#3F3D8F",
                 WebkitMaskImage: `url('/dining-table.png')`,
                 WebkitMaskRepeat: "no-repeat",
                 WebkitMaskSize: "contain",
@@ -90,7 +90,7 @@ function POSLoader() {
 
         <div className="text-center space-y-1.5 relative">
           <p
-            className="text-[13px] font-bold uppercase tracking-[0.12em]"
+            className="text-[13px] font-bold uppercase"
             style={{ color: "#0D031B" }}
           >
             Loading POS System
@@ -110,7 +110,7 @@ function POSLoader() {
               key={i}
               className="w-2 h-2 rounded-full animate-bounce"
               style={{
-                background: "oklch(0.42 0.14 285)",
+                background: "#3F3D8F",
                 animationDelay: `${i * 0.15}s`,
               }}
             />
@@ -329,7 +329,7 @@ function OrdersContent() {
             <div 
               className="absolute top-0 left-0 right-0 h-[2px]"
               style={{
-                background: "linear-gradient(90deg, oklch(0.42 0.14 285) 0%, oklch(0.55 0.18 270) 50%, oklch(0.42 0.14 285) 100%)"
+                background: "linear-gradient(90deg, #3F3D8F 0%, oklch(0.55 0.18 270) 50%, #3F3D8F 100%)"
               }}
             />
 
@@ -350,7 +350,7 @@ function OrdersContent() {
                 className="flex items-center gap-1.5 text-[11px] font-bold px-3 py-1.5 rounded-xl border shadow-sm"
                 style={{
                   background: "oklch(0.42 0.14 285 / 0.08)",
-                  color: "oklch(0.42 0.14 285)",
+                  color: "#3F3D8F",
                   borderColor: "oklch(0.42 0.14 285 / 0.2)",
                 }}
               >
@@ -382,7 +382,7 @@ function OrdersContent() {
                     className="flex items-center gap-1.5 text-[11px] font-bold px-2.5 py-1 rounded-lg border"
                     style={{
                       background: "oklch(0.42 0.14 285 / 0.06)",
-                      color: "oklch(0.42 0.14 285)",
+                      color: "#3F3D8F",
                       borderColor: "oklch(0.42 0.14 285 / 0.15)",
                     }}
                   >
@@ -394,7 +394,7 @@ function OrdersContent() {
                     className="text-[13px] font-bold px-2.5 py-1 rounded-lg"
                     style={{
                       background: "oklch(0.42 0.14 285 / 0.08)",
-                      color: "oklch(0.42 0.14 285)",
+                      color: "#3F3D8F",
                     }}
                   >
                     KES {total.toLocaleString()}
@@ -474,8 +474,8 @@ function OrdersContent() {
                     className="relative flex items-center justify-center w-11 h-11 rounded-[14px] shrink-0 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3"
                     style={{
                       background: hasItems
-                        ? "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)"
-                        : "oklch(0.42 0.14 285)",
+                        ? "linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.16 275) 100%)"
+                        : "#3F3D8F",
                       boxShadow: hasItems
                         ? "0 4px 16px oklch(0.42 0.14 285 / 0.4), inset 0 1px 0 rgba(255,255,255,0.2)"
                         : "0 3px 12px oklch(0.42 0.14 285 / 0.3)",
@@ -507,7 +507,7 @@ function OrdersContent() {
                   {/* Enhanced label */}
                   <div className="text-left flex flex-col min-w-0 flex-1 gap-0.5">
                     <span
-                      className="text-[14px] font-bold leading-none tracking-tight"
+                      className="text-[14px] font-bold leading-none"
                       style={{ color: "#0D031B" }}
                     >
                       Current Order
@@ -515,7 +515,7 @@ function OrdersContent() {
                     <span
                       className="text-[11px] font-semibold mt-1 flex items-center gap-1.5"
                       style={{ 
-                        color: hasItems ? "oklch(0.42 0.14 285)" : "#736C83" 
+                        color: hasItems ? "#3F3D8F" : "#736C83" 
                       }}
                     >
                       {hasItems ? (
@@ -570,7 +570,7 @@ function OrdersContent() {
                 <div 
                   className="absolute top-0 left-0 right-0 h-[3px]"
                   style={{
-                    background: "linear-gradient(90deg, oklch(0.42 0.14 285) 0%, oklch(0.55 0.18 270) 50%, oklch(0.42 0.14 285) 100%)"
+                    background: "linear-gradient(90deg, #3F3D8F 0%, oklch(0.55 0.18 270) 50%, #3F3D8F 100%)"
                   }}
                 />
 
@@ -585,7 +585,7 @@ function OrdersContent() {
                     >
                       <Receipt
                         className="h-4 w-4"
-                        style={{ color: "oklch(0.42 0.14 285)" }}
+                        style={{ color: "#3F3D8F" }}
                       />
                     </div>
                     <div className="flex flex-col gap-0.5">
@@ -612,7 +612,7 @@ function OrdersContent() {
                         className="text-[10px] font-bold px-2.5 py-1 rounded-lg border"
                         style={{
                           background: "oklch(0.42 0.14 285 / 0.08)",
-                          color: "oklch(0.42 0.14 285)",
+                          color: "#3F3D8F",
                           borderColor: "oklch(0.42 0.14 285 / 0.2)",
                         }}
                       >
@@ -620,7 +620,7 @@ function OrdersContent() {
                       </Badge>
                       <span
                         className="text-[13px] font-bold"
-                        style={{ color: "oklch(0.42 0.14 285)" }}
+                        style={{ color: "#3F3D8F" }}
                       >
                         KES {subtotal.toLocaleString()}
                       </span>

@@ -138,13 +138,13 @@ export function TableGrid({ tables, onSelectTable }: TableGridProps) {
           <div 
             className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg p-2"
             style={{
-              background: "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)",
+              background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.16 275) 100%)",
             }}
           >
             <img src="/service-floor-nav.png" className="w-full h-full brightness-0 invert object-contain" alt="Service Floor" />
           </div>
           <div>
-            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight" style={{ color: "#0D031B" }}>
+            <h1 className="text-2xl sm:text-3xl font-bold" style={{ color: "#0D031B" }}>
               Interactive Floor Plan
             </h1>
             <p className="text-sm font-medium mt-1" style={{ color: "#736C83" }}>
@@ -160,10 +160,10 @@ export function TableGrid({ tables, onSelectTable }: TableGridProps) {
               key={zone}
               onClick={() => setActiveZone(zone)}
               className={cn(
-                "px-5 py-2.5 rounded-xl text-[11px] font-bold uppercase tracking-wider transition-all duration-300",
+                "px-5 py-2.5 rounded-xl text-[11px] font-bold uppercase transition-all duration-300",
                 activeZone === zone 
-                  ? "bg-white text-oklch(0.42 0.14 285) shadow-lg" 
-                  : "text-[#736C83] hover:text-oklch(0.42 0.14 285)"
+                  ? "bg-white text-[#3F3D8F] shadow-lg" 
+                  : "text-[#736C83] hover:text-[#3F3D8F]"
               )}
             >
               Zone {zone.toUpperCase()}
@@ -182,7 +182,7 @@ export function TableGrid({ tables, onSelectTable }: TableGridProps) {
         ].map(item => (
           <div key={item.label} className="flex items-center gap-2">
             <div className={cn("w-2 h-2 rounded-full shadow-sm", item.color)} />
-            <span className="text-xs font-bold text-[#736C83] tracking-wide">{item.label}</span>
+            <span className="text-xs font-bold text-[#736C83]">{item.label}</span>
           </div>
         ))}
       </div>
@@ -254,11 +254,11 @@ export function TableGrid({ tables, onSelectTable }: TableGridProps) {
                 <CardContent className="p-2 sm:p-4 space-y-2">
                   <div className="flex justify-between items-end">
                     <div>
-                      <p className="text-[9px] uppercase font-semibold tracking-wide" style={{ color: "#9A94AA" }}>Zone</p>
+                      <p className="text-[9px] uppercase font-semibold" style={{ color: "#9A94AA" }}>Zone</p>
                       <p className="text-xs font-bold mt-0.5" style={{ color: "#0D031B" }}>{table.zone || "\u2014"}</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-[9px] uppercase font-semibold tracking-wide" style={{ color: "#9A94AA" }}>Status</p>
+                      <p className="text-[9px] uppercase font-semibold" style={{ color: "#9A94AA" }}>Status</p>
                       <div className="flex items-center gap-1 justify-end mt-0.5">
                         <div className={cn("w-1.5 h-1.5 rounded-full bg-gradient-to-br", config.gradient)} />
                         <p className="text-xs font-bold" style={{ color: "#0D031B" }}>{config.label}</p>
@@ -271,10 +271,10 @@ export function TableGrid({ tables, onSelectTable }: TableGridProps) {
                     <div className="pt-2 border-t opacity-0 group-hover:opacity-100 transition-opacity duration-300" 
                       style={{ borderColor: "oklch(0.42 0.14 285 / 0.08)" }}>
                       <div className="flex items-center justify-center gap-1.5">
-                        <span className="text-[9px] font-bold uppercase tracking-wide" style={{ color: "oklch(0.42 0.14 285)" }}>
+                        <span className="text-[9px] font-bold uppercase" style={{ color: "#3F3D8F" }}>
                           Select Table
                         </span>
-                        <ArrowRight className="h-3 w-3" style={{ color: "oklch(0.42 0.14 285)" }} strokeWidth={2.5} />
+                        <ArrowRight className="h-3 w-3" style={{ color: "#3F3D8F" }} strokeWidth={2.5} />
                       </div>
                     </div>
                   )}
@@ -282,7 +282,7 @@ export function TableGrid({ tables, onSelectTable }: TableGridProps) {
 
                 {/* Hover overlay */}
                 {config.selectable && (
-                  <div className="absolute inset-0 bg-gradient-to-br from-oklch(0.42 0.14 285)/0 to-oklch(0.42 0.14 285)/0 group-hover:from-oklch(0.42 0.14 285)/5 group-hover:to-oklch(0.42 0.14 285)/10 transition-all duration-500 pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#3F3D8F]/0 to-[#3F3D8F]/0 group-hover:from-[#3F3D8F]/5 group-hover:to-[#3F3D8F]/10 transition-all duration-500 pointer-events-none" />
                 )}
               </Card>
             );
@@ -332,7 +332,7 @@ export function MenuGrid({
       >
         {/* Gradient accent */}
         <div className="absolute top-0 left-0 right-0 h-[2px]"
-          style={{ background: "linear-gradient(90deg, oklch(0.42 0.14 285) 0%, oklch(0.55 0.18 270) 50%, oklch(0.42 0.14 285) 100%)" }}
+          style={{ background: "linear-gradient(90deg, #3F3D8F 0%, oklch(0.55 0.18 270) 50%, #3F3D8F 100%)" }}
         />
 
         <div className="flex flex-col gap-4">
@@ -345,7 +345,7 @@ export function MenuGrid({
               className="h-10 w-10 rounded-xl border-2 shrink-0 transition-all hover:scale-105 active:scale-95"
               style={{
                 borderColor: "oklch(0.42 0.14 285 / 0.15)",
-                color: "oklch(0.42 0.14 285)",
+                color: "#3F3D8F",
               }}
             >
               <ArrowLeft className="h-4 w-4" strokeWidth={2.5} />
@@ -353,12 +353,12 @@ export function MenuGrid({
 
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 flex-wrap">
-                <h2 className="text-xl sm:text-2xl font-bold tracking-tight" style={{ color: "#0D031B" }}>
+                <h2 className="text-xl sm:text-2xl font-bold" style={{ color: "#0D031B" }}>
                   Grande Menu
                 </h2>
                 {selectedTable && (
                   <Badge className="text-[10px] font-bold px-2.5 py-1 rounded-lg border-0 text-white shadow-md"
-                    style={{ background: "oklch(0.42 0.14 285)" }}>
+                    style={{ background: "#3F3D8F" }}>
                     Table {selectedTable.number.toString().padStart(2, "0")}
                   </Badge>
                 )}
@@ -415,7 +415,7 @@ export function MenuGrid({
                     )}
                     style={{
                       background: activeCategory === cat.id
-                        ? "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)"
+                        ? "linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.16 275) 100%)"
                         : "transparent"
                     }}
                   >
@@ -479,7 +479,7 @@ export function MenuGrid({
                       {/* Live badge — top-left */}
                       <div className="absolute top-2 left-2">
                         <span
-                          className="flex items-center gap-1 text-[8px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full text-white"
+                          className="flex items-center gap-1 text-[8px] font-bold uppercase px-2 py-0.5 rounded-full text-white"
                           style={{
                             background: "oklch(0.62 0.16 150 / 0.85)",
                             backdropFilter: "blur(6px)",
@@ -495,7 +495,7 @@ export function MenuGrid({
                         <p className="text-white font-bold text-[14px] leading-none tabular-nums drop-shadow-sm">
                           KES {item.price.toLocaleString()}
                         </p>
-                        <p className="text-white/70 text-[8px] font-bold uppercase tracking-wider mt-0.5">
+                        <p className="text-white/70 text-[8px] font-bold uppercase mt-0.5">
                           {item.category}
                         </p>
                       </div>
@@ -523,7 +523,7 @@ export function MenuGrid({
                       </div>
 
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-1 text-[8px] font-bold uppercase tracking-wider opacity-60" style={{ color: "oklch(0.42 0.14 285)" }}>
+                        <div className="flex items-center gap-1 text-[8px] font-bold uppercase opacity-60" style={{ color: "#3F3D8F" }}>
                           <TrendingUp className="h-2.5 w-2.5" /> High Demand
                         </div>
                         <span className="text-[8px] opacity-40 font-bold uppercase">50+ orders</span>
@@ -531,7 +531,7 @@ export function MenuGrid({
 
                       <button
                         onClick={() => onAddItem(item)}
-                        className="mt-auto flex items-center justify-center gap-1 text-[9px] font-bold uppercase tracking-wider py-1.5 rounded-lg transition-all active:scale-95"
+                        className="mt-auto flex items-center justify-center gap-1 text-[9px] font-bold uppercase py-1.5 rounded-lg transition-all active:scale-95"
                         style={{ 
                           color:"oklch(0.42 0.14 150)", 
                           background:"oklch(0.62 0.16 150 / 0.08)",
@@ -590,13 +590,13 @@ export function OrderCart({
           
           {/* Gradient accent */}
           <div className="absolute top-0 left-0 right-0 h-[3px]"
-            style={{ background: "linear-gradient(90deg, oklch(0.42 0.14 285) 0%, oklch(0.55 0.18 270) 50%, oklch(0.42 0.14 285) 100%)" }}
+            style={{ background: "linear-gradient(90deg, #3F3D8F 0%, oklch(0.55 0.18 270) 50%, #3F3D8F 100%)" }}
           />
 
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl flex items-center justify-center shadow-md"
-                style={{ background: "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)" }}>
+                style={{ background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.16 275) 100%)" }}>
                 <ShoppingCart className="h-5 w-5 text-white" strokeWidth={2.5} />
               </div>
               <div>
@@ -607,7 +607,7 @@ export function OrderCart({
 
             {table ? (
               <Badge className="text-[11px] font-bold px-3 py-1 rounded-lg border-0 text-white shadow-md"
-                style={{ background: "oklch(0.42 0.14 285)" }}>
+                style={{ background: "#3F3D8F" }}>
                 Table {table.number.toString().padStart(2, "0")}
               </Badge>
             ) : (
@@ -627,11 +627,11 @@ export function OrderCart({
                   className="h-full rounded-full transition-all duration-500"
                   style={{
                     width: `${Math.min((items.length / 10) * 100, 100)}%`,
-                    background: "linear-gradient(90deg, oklch(0.42 0.14 285) 0%, oklch(0.55 0.18 270) 100%)",
+                    background: "linear-gradient(90deg, #3F3D8F 0%, oklch(0.55 0.18 270) 100%)",
                   }}
                 />
               </div>
-              <span className="text-[10px] font-bold shrink-0" style={{ color: "oklch(0.42 0.14 285)" }}>
+              <span className="text-[10px] font-bold shrink-0" style={{ color: "#3F3D8F" }}>
                 {items.length} item{items.length !== 1 ? "s" : ""}
               </span>
             </div>
@@ -673,7 +673,7 @@ export function OrderCart({
                       style={{
                         background: "white",
                         borderColor: "oklch(0.42 0.14 285 / 0.2)",
-                        color: "oklch(0.42 0.14 285)",
+                        color: "#3F3D8F",
                       }}>
                       {index + 1}
                     </div>
@@ -697,7 +697,7 @@ export function OrderCart({
                         onClick={() => onUpdateQuantity(item.menuItem.id, item.quantity - 1)}
                         style={{
                           borderColor: "oklch(0.42 0.14 285 / 0.2)",
-                          color: "oklch(0.42 0.14 285)",
+                          color: "#3F3D8F",
                         }}
                       >
                         <Minus className="h-3 w-3" strokeWidth={2.5} />
@@ -714,7 +714,7 @@ export function OrderCart({
                         onClick={() => onUpdateQuantity(item.menuItem.id, item.quantity + 1)}
                         style={{
                           borderColor: "oklch(0.42 0.14 285 / 0.2)",
-                          color: "oklch(0.42 0.14 285)",
+                          color: "#3F3D8F",
                         }}
                       >
                         <Plus className="h-3 w-3" strokeWidth={2.5} />
@@ -751,7 +751,7 @@ export function OrderCart({
                 <div className="flex justify-between items-end pt-1">
                   <span className="text-sm font-bold" style={{ color: "#0D031B" }}>Total</span>
                   <div className="text-right">
-                    <p className="text-2xl font-bold leading-tight" style={{ color: "oklch(0.42 0.14 285)" }}>
+                    <p className="text-2xl font-bold leading-tight" style={{ color: "#3F3D8F" }}>
                       KES {total.toLocaleString()}
                     </p>
                     <p className="text-[9px] font-medium mt-0.5" style={{ color: "#AEA6BF" }}>Inclusive of VAT</p>
@@ -776,7 +776,7 @@ export function OrderCart({
                   onClick={onPlaceOrder}
                   disabled={!table}
                   style={{
-                    background: "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)",
+                    background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.16 275) 100%)",
                     boxShadow: "0 4px 16px oklch(0.42 0.14 285 / 0.3)",
                   }}
                 >

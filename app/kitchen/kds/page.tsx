@@ -183,7 +183,7 @@ export default function KDSPage() {
                     </span>
                     <span
                       className="text-[10px] font-bold px-2 py-0.5 rounded-full"
-                      style={{ background: "oklch(0.45 0.12 285 / 0.08)", color: "oklch(0.42 0.14 285)" }}
+                      style={{ background: "oklch(0.45 0.12 285 / 0.08)", color: "#3F3D8F" }}
                     >
                       {displayed.length}
                     </span>

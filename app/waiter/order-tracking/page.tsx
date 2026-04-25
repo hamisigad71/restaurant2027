@@ -92,7 +92,7 @@ function OrderCard({ order, onServe }: { order: LiveOrder; onServe:(id:string)=>
         style={{
           background: isReady
             ? "linear-gradient(90deg, oklch(0.65 0.18 150) 0%, oklch(0.70 0.20 160) 100%)"
-            : "linear-gradient(90deg, oklch(0.42 0.14 285) 0%, oklch(0.55 0.18 270) 100%)"
+            : "linear-gradient(90deg, #3F3D8F 0%, oklch(0.55 0.18 270) 100%)"
         }}
       />
 
@@ -118,7 +118,7 @@ function OrderCard({ order, onServe }: { order: LiveOrder; onServe:(id:string)=>
             style={{
               background: isReady
                 ? "linear-gradient(135deg, oklch(0.65 0.18 150) 0%, oklch(0.70 0.20 160) 100%)"
-                : "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)",
+                : "linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.16 275) 100%)",
               boxShadow: isReady
                 ? "0 4px 16px oklch(0.65 0.18 150 / 0.4)"
                 : "0 4px 16px oklch(0.42 0.14 285 / 0.4)",
@@ -169,7 +169,7 @@ function OrderCard({ order, onServe }: { order: LiveOrder; onServe:(id:string)=>
                   }
                 : {
                     background: "oklch(0.42 0.14 285 / 0.08)",
-                    color: "oklch(0.42 0.14 285)",
+                    color: "#3F3D8F",
                     borderColor: "oklch(0.42 0.14 285 / 0.25)",
                   }
             }
@@ -205,7 +205,7 @@ function OrderCard({ order, onServe }: { order: LiveOrder; onServe:(id:string)=>
               ) : (
                 <FireIcon 
                   className="h-4 w-4" 
-                  style={{ color: "oklch(0.42 0.14 285)" }} 
+                  style={{ color: "#3F3D8F" }} 
                   strokeWidth={2.5}
                 />
               )}
@@ -236,7 +236,7 @@ function OrderCard({ order, onServe }: { order: LiveOrder; onServe:(id:string)=>
                 <p className="text-[13px] font-bold truncate leading-tight" style={{ color: "#0D031B" }}>
                   {item.name}
                 </p>
-                <p className="text-[10px] font-semibold uppercase tracking-wide mt-1" style={{ color: "#9A94AA" }}>
+                <p className="text-[10px] font-semibold uppercase mt-1" style={{ color: "#9A94AA" }}>
                   {item.quantity}× {item.category || "item"}
                 </p>
               </div>
@@ -258,7 +258,7 @@ function OrderCard({ order, onServe }: { order: LiveOrder; onServe:(id:string)=>
                 ) : (
                   <FireIcon 
                     className="h-3.5 w-3.5" 
-                    style={{ color: "oklch(0.42 0.14 285)" }} 
+                    style={{ color: "#3F3D8F" }} 
                     strokeWidth={2.5}
                   />
                 )}
@@ -295,7 +295,7 @@ function OrderCard({ order, onServe }: { order: LiveOrder; onServe:(id:string)=>
           >
             <FireIconSolid 
               className="h-4.5 w-4.5 shrink-0" 
-              style={{ color: "oklch(0.42 0.14 285)" }} 
+              style={{ color: "#3F3D8F" }} 
             />
             <span className="text-[11px] font-bold flex-1" style={{ color: "oklch(0.38 0.12 285)" }}>
               Kitchen is preparing
@@ -306,7 +306,7 @@ function OrderCard({ order, onServe }: { order: LiveOrder; onServe:(id:string)=>
                   key={i}
                   className="w-1.5 h-1.5 rounded-full"
                   style={{
-                    background: "oklch(0.42 0.14 285)",
+                    background: "#3F3D8F",
                     animation: `fade-dots 1.4s ease-in-out ${i * 0.2}s infinite`,
                   }}
                 />
@@ -369,7 +369,7 @@ export default function OrderStatusPage() {
           <div 
             className="absolute top-0 left-0 right-0 h-[2px]"
             style={{
-              background: "linear-gradient(90deg, oklch(0.42 0.14 285) 0%, oklch(0.55 0.18 270) 50%, oklch(0.42 0.14 285) 100%)"
+              background: "linear-gradient(90deg, #3F3D8F 0%, oklch(0.55 0.18 270) 50%, #3F3D8F 100%)"
             }}
           />
 
@@ -379,18 +379,18 @@ export default function OrderStatusPage() {
                 <div
                 className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center shadow-lg p-2"
                 style={{
-                  background: "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)",
+                  background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.16 275) 100%)",
                 }}
               >
                 <img src="/order-tracking-nav.png" className="w-full h-full brightness-0 invert object-contain" alt="Order Tracking" style={{ filter: "brightness(0) invert(1)" }} />
               </div>
               <div>
-                <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight leading-none" style={{ color: "#0D031B" }}>
+                <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold leading-none" style={{ color: "#0D031B" }}>
                   Service Tracker
                 </h1>
                 <div className="flex items-center gap-2 mt-1.5">
-                  <div className="h-px w-8 bg-gradient-to-r from-oklch(0.42 0.14 285) to-transparent" />
-                  <p className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider" style={{ color: "#736C83" }}>
+                  <div className="h-px w-8 bg-gradient-to-r from-[#3F3D8F] to-transparent" />
+                  <p className="text-[10px] sm:text-[11px] font-semibold uppercase" style={{ color: "#736C83" }}>
                     Real-time preparation status
                   </p>
                 </div>
@@ -406,8 +406,8 @@ export default function OrderStatusPage() {
                   borderColor: "oklch(0.42 0.14 285 / 0.15)",
                 }}
               >
-                <ArrowTrendingUpIcon className="h-3.5 w-3.5" style={{ color: "oklch(0.42 0.14 285)" }} strokeWidth={2.5} />
-                <span className="text-[11px] font-bold" style={{ color: "oklch(0.42 0.14 285)" }}>
+                <ArrowTrendingUpIcon className="h-3.5 w-3.5" style={{ color: "#3F3D8F" }} strokeWidth={2.5} />
+                <span className="text-[11px] font-bold" style={{ color: "#3F3D8F" }}>
                   {orders.length} Active
                 </span>
               </div>
@@ -437,11 +437,11 @@ export default function OrderStatusPage() {
                 <button
                   key={f}
                   onClick={() => setActiveFilter(f)}
-                  className="flex items-center gap-2 h-9 sm:h-10 px-3 sm:px-4 rounded-xl text-[11px] sm:text-xs font-bold uppercase tracking-wide transition-all duration-300 border-2 whitespace-nowrap hover:scale-105 active:scale-95"
+                  className="flex items-center gap-2 h-9 sm:h-10 px-3 sm:px-4 rounded-xl text-[11px] sm:text-xs font-bold uppercase transition-all duration-300 border-2 whitespace-nowrap hover:scale-105 active:scale-95"
                   style={
                     active
                       ? {
-                          background: "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)",
+                          background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.16 275) 100%)",
                           color: "white",
                           borderColor: "transparent",
                           boxShadow: "0 4px 16px oklch(0.42 0.14 285 / 0.3)",
@@ -461,7 +461,7 @@ export default function OrderStatusPage() {
                           ? "rgba(255,255,255,0.6)" 
                           : f === "ready" 
                             ? "oklch(0.65 0.18 150)" 
-                            : "oklch(0.42 0.14 285)"
+                            : "#3F3D8F"
                       }}
                     />
                   )}
@@ -479,7 +479,7 @@ export default function OrderStatusPage() {
                       style={
                         active
                           ? { background: "rgba(255,255,255,0.25)", color: "white" }
-                          : { background: "oklch(0.42 0.14 285 / 0.1)", color: "oklch(0.42 0.14 285)" }
+                          : { background: "oklch(0.42 0.14 285 / 0.1)", color: "#3F3D8F" }
                       }
                     >
                       {count}

@@ -102,7 +102,7 @@ export function StatsCards() {
             </div>
 
             <div className="space-y-1">
-              <p className="text-xl md:text-2xl font-heading text-foreground leading-none whitespace-nowrap tracking-tight">
+              <p className="text-xl md:text-2xl font-heading text-foreground leading-none whitespace-nowrap">
                 {stat.value}
               </p>
               <p className="text-[10px] font-heading uppercase  text-muted-foreground/80">

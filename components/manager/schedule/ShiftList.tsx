@@ -61,7 +61,7 @@ export function ShiftList({ activeDay, todayShifts, activeCount, upcomingCount }
             <div className="hidden sm:flex items-center gap-1.5">
               {activeCount > 0 && (
                 <span
-                  className="flex items-center gap-1 text-[9px] font-bold uppercase tracking-wider px-2 py-1 rounded-full"
+                  className="flex items-center gap-1 text-[9px] font-bold uppercase px-2 py-1 rounded-full"
                   style={{ background: "oklch(0.45 0.12 285 / 0.1)", color: "oklch(0.38 0.12 285)" }}
                 >
                   <Activity className="h-2.5 w-2.5 animate-pulse" />
@@ -70,7 +70,7 @@ export function ShiftList({ activeDay, todayShifts, activeCount, upcomingCount }
               )}
               {upcomingCount > 0 && (
                 <span
-                  className="flex items-center gap-1 text-[9px] font-bold uppercase tracking-wider px-2 py-1 rounded-full"
+                  className="flex items-center gap-1 text-[9px] font-bold uppercase px-2 py-1 rounded-full"
                   style={{ background: "oklch(0.75 0.15 75 / 0.1)", color: "oklch(0.55 0.15 75)" }}
                 >
                   <Timer className="h-2.5 w-2.5" />
@@ -124,7 +124,7 @@ export function ShiftList({ activeDay, todayShifts, activeCount, upcomingCount }
                       </p>
                       <div className="flex items-center gap-2 mt-1 flex-wrap">
                         <span
-                          className="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border"
+                          className="text-[9px] font-bold uppercase px-2 py-0.5 rounded-full border"
                           style={{ background: role.bg, color: role.text, borderColor: role.border }}
                         >
                           {s.role}
@@ -137,7 +137,7 @@ export function ShiftList({ activeDay, todayShifts, activeCount, upcomingCount }
                     </div>
 
                     <span
-                      className="hidden sm:flex items-center gap-1.5 text-[9px] font-bold uppercase tracking-wider px-2.5 py-1.5 rounded-full shrink-0"
+                      className="hidden sm:flex items-center gap-1.5 text-[9px] font-bold uppercase px-2.5 py-1.5 rounded-full shrink-0"
                       style={{ background: status.bg, color: status.text, borderColor: status.border }}
                     >
                       <StatusIcon className="h-3 w-3" />

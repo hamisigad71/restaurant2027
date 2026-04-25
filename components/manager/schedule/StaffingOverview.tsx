@@ -76,7 +76,7 @@ export function StaffingOverview({ activeDay, completedCount, activeCount, upcom
         style={{ background: "rgba(255,255,255,0.9)", borderColor: "oklch(0.45 0.12 285 / 0.12)" }}
       >
         <CardContent className="px-5 py-4 space-y-4">
-          <p className="text-[11px] font-bold uppercase tracking-[0.18em]" style={{ color: "#9A94AA" }}>
+          <p className="text-[11px] font-bold uppercase" style={{ color: "#9A94AA" }}>
             {activeDay} Breakdown
           </p>
 
@@ -121,7 +121,7 @@ export function StaffingOverview({ activeDay, completedCount, activeCount, upcom
           >
             <CheckCircle2 className="h-6 w-6 text-white" />
           </div>
-          <p className="text-white font-bold text-[15px] tracking-tight leading-none">
+          <p className="text-white font-bold text-[15px] leading-none">
             Quotas Satisfied
           </p>
           <p className="text-[11px] mt-2 leading-relaxed" style={{ color: "rgba(255,255,255,0.65)" }}>
@@ -129,7 +129,7 @@ export function StaffingOverview({ activeDay, completedCount, activeCount, upcom
           </p>
 
           <button
-            className="w-full flex items-center justify-center gap-2 h-10 mt-4 rounded-2xl font-bold text-[11px] uppercase tracking-widest transition-all hover:-translate-y-0.5 hover:shadow-lg"
+            className="w-full flex items-center justify-center gap-2 h-10 mt-4 rounded-2xl font-bold text-[11px] uppercase transition-all hover:-translate-y-0.5 hover:shadow-lg"
             style={{
               background: "rgba(255,255,255,0.15)",
               color: "white",
