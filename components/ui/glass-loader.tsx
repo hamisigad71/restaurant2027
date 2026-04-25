@@ -37,6 +37,9 @@ export function GlassLoader({ className, fullScreen = true, autoHideDuration = 7
     setIsFadingOut(false);
     setIsComplete(false);
 
+    // Signal to other components (e.g. MobileNav) that the loader is active
+    document.body.setAttribute("data-loading", "true");
+
     // If it's a route change (not the first load), we might want a shorter duration,
     // but we will respect the autoHideDuration unless overwritten.
     const activeDuration = isFirstLoad.current ? autoHideDuration : 2000;
@@ -61,6 +64,7 @@ export function GlassLoader({ className, fullScreen = true, autoHideDuration = 7
         
         completeTimer = setTimeout(() => {
           setIsComplete(true); // Then completely remove from DOM
+          document.body.removeAttribute("data-loading");
         }, 600); // 600ms matches the fade-out animation duration
       }, activeDuration);
     }
@@ -69,6 +73,7 @@ export function GlassLoader({ className, fullScreen = true, autoHideDuration = 7
       clearInterval(stepTimer);
       if (hideTimer) clearTimeout(hideTimer);
       if (completeTimer) clearTimeout(completeTimer);
+      document.body.removeAttribute("data-loading");
     };
   }, [pathname, autoHideDuration]);
 
@@ -136,7 +141,7 @@ export function GlassLoader({ className, fullScreen = true, autoHideDuration = 7
           display:        "flex",
           alignItems:     "center",
           justifyContent: "center",
-          background:     "rgba(250, 249, 252, 0.8)", // Frosted light background
+          background:     "rgba(250, 249, 252, 0.97)", // Near-opaque so nothing bleeds through
           backdropFilter: "blur(8px)",
           WebkitBackdropFilter: "blur(8px)",
           overflow:       "hidden",

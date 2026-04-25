@@ -54,12 +54,12 @@ interface NavItem {
 const allNavItems: NavItem[] = [
   // Admin
   { name: "Dashboard", href: "/admin/dashboard", icon: "/dashboard.png", permission: "dashboard", portal: "admin" },
-  { name: "Analytics", href: "/admin/analytics", icon: "/report.png", permission: "analytics", portal: "admin" },
+  { name: "Analytics", href: "/admin/analytics", icon: "/graphic-progression.png", permission: "analytics", portal: "admin" },
   { name: "Inventory", href: "/admin/inventory", icon: "/logistics.png", permission: "inventory", portal: "admin" },
   { name: "Menu", href: "/admin/menu", icon: "/menu-nav.png", permission: "menu", portal: "admin" },
   { name: "Staff", href: "/admin/staff", icon: "/staff.png", permission: "staff", portal: "admin" },
   { name: "Payments", href: "/admin/payments", icon: CreditCardIcon, permission: "payments", portal: "admin" },
-  { name: "Reports", href: "/admin/reports", icon: "/report.png", permission: "reports", portal: "admin" },
+  { name: "Reports", href: "/admin/reports", icon: "/graphic-progression.png", permission: "reports", portal: "admin" },
   { name: "Settings", href: "/admin/settings", icon: "/system-administration.png", permission: "settings", portal: "admin" },
   
   // Manager
@@ -71,7 +71,7 @@ const allNavItems: NavItem[] = [
   { name: "Reservations", href: "/manager/reservations", icon: "/calendar.png", permission: "reservations", portal: "manager" },
   { name: "Expenses", href: "/manager/expenses", icon: "/expences.png", permission: "expenses", portal: "manager" },
   { name: "Shift Planning", href: "/manager/schedule", icon: "/shift.png", permission: "schedule", portal: "manager" },
-  { name: "Reports", href: "/manager/reports", icon: "/report.png", permission: "reports", portal: "manager" },
+  { name: "Reports", href: "/manager/reports", icon: "/graphic-progression.png", permission: "reports", portal: "manager" },
   
   // Waiter
   { name: "Dashboard", href: "/waiter/dashboard", icon: "/dashboard.png", permission: "dashboard", portal: "waiter" },

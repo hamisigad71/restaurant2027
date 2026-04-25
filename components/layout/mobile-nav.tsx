@@ -44,6 +44,18 @@ export function MobileNav() {
   const [isVisible, setIsVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
   const [ripples, setRipples] = useState<{ id: number; x: number; y: number }[]>([])
+  const [isLoaderActive, setIsLoaderActive] = useState(
+    () => typeof document !== "undefined" && document.body.hasAttribute("data-loading")
+  )
+
+  // Watch for GlassLoader's data-loading attribute on body
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setIsLoaderActive(document.body.hasAttribute("data-loading"))
+    })
+    observer.observe(document.body, { attributes: true, attributeFilter: ["data-loading"] })
+    return () => observer.disconnect()
+  }, [])
 
   // Scroll logic: hide on scroll down, show on scroll up
   useEffect(() => {
@@ -87,7 +99,7 @@ export function MobileNav() {
         { label: "Orders", icon: "/food-delivery.png", href: "/manager/orders" },
         { label: "Menu", icon: "/menu-nav.png", href: "/manager/menu" },
         { label: "Staff", icon: "/staff.png", href: "/manager/staff" },
-        { label: "Reports", icon: "/report.png", href: "/manager/reports" },
+        { label: "Reports", icon: "/graphic-progression.png", href: "/manager/reports" },
       ],
       waiter: [
         { label: "Home", icon: "/home.png", href: "/waiter/dashboard" },
@@ -98,7 +110,7 @@ export function MobileNav() {
       ],
       kitchen: [
         { label: "KDS", icon: "/chef-icon.png", href: "/kitchen/kds" },
-        { label: "Stats", icon: "/report.png", href: "/kitchen/kds" },
+        { label: "Stats", icon: "/graphic-progression.png", href: "/kitchen/kds" },
         { label: "System", icon: "/operation.png", href: "/kitchen/kds" },
       ],
       customer: [
@@ -174,7 +186,7 @@ export function MobileNav() {
       <nav 
         className={cn(
           "fixed bottom-6 left-4 right-4 z-40 max-w-md mx-auto md:hidden transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] rounded-[32px] shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)]",
-          (isVisible && !openMobile) ? "translate-y-0 opacity-100" : "translate-y-[calc(100%+40px)] opacity-0 invisible pointer-events-none"
+          (isVisible && !openMobile && !isLoaderActive) ? "translate-y-0 opacity-100" : "translate-y-[calc(100%+40px)] opacity-0 invisible pointer-events-none"
         )}
       >
         {/* Main container with floating design */}

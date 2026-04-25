@@ -418,7 +418,7 @@ export default function LoginPage() {
                               {busy ? (
                                 <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                               ) : (
-                                <img src={opt.icon} className="h-5.5 w-5.5 brightness-0 invert group-hover:scale-110 transition-transform duration-500" alt={opt.label} />
+                                <img src={opt.icon} className="h-4 w-4 brightness-0 invert group-hover:scale-110 transition-transform duration-500" alt={opt.label} />
                               )}
                             </div>
 

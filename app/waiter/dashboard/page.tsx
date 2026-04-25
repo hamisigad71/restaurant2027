@@ -147,7 +147,7 @@ function StatCard({
           >
             {typeof Icon === 'string' ? (
               <div 
-                className="h-8 w-8" 
+                className="h-5 w-5" 
                 style={{ 
                   backgroundColor: accentColor,
                   maskImage: `url(${Icon})`,
@@ -161,7 +161,7 @@ function StatCard({
                 }} 
               />
             ) : (
-              <Icon className="h-8 w-8" style={{ color: accentColor }} />
+              <Icon className="h-5 w-5" style={{ color: accentColor }} />
             )}
           </div>
           {badge && (

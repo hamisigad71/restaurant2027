@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   description: 'Modern restaurant management system for owners, managers, waiters, and kitchen staff',
   generator: 'v0.app',
   icons: {
-    icon: '/favicon.ico',
+    icon: '/icon.svg',
     apple: '/apple-icon.png',
   },
 }
