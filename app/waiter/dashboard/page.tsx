@@ -6,8 +6,6 @@ import { toast } from "sonner"
 import Link from "next/link"
 import {
   BellIcon,
-  ShoppingCartIcon,
-  ClockIcon,
   CheckCircleIcon,
   ExclamationCircleIcon,
   ArrowTrendingUpIcon,
@@ -16,19 +14,19 @@ import {
   ChevronRightIcon,
   BoltIcon as Crown,
   FireIcon,
-  HomeIcon,
   BuildingStorefrontIcon,
-  ChartBarIcon,
   XMarkIcon,
   BoltIcon,
   PlusIcon,
   CameraIcon,
+  ClipboardDocumentListIcon,
+  CalendarDaysIcon,
+  ChartBarIcon,
+  EllipsisHorizontalIcon,
 } from "@heroicons/react/24/outline"
 import { Badge }   from "@/components/ui/badge"
 import { Button }  from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Separator } from "@/components/ui/separator"
-import { Progress } from "@/components/ui/progress"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import {
   Tooltip,
@@ -57,143 +55,161 @@ const tableImages = [
   "https://images.unsplash.com/photo-1522792043064-2db24c3a6479?w=300&h=200&fit=crop",
 ]
 
-const serviceAlerts = [
-  {
-    table: "Table 4",
-    tableNum: "4",
-    items: "Grilled Sea Bass · Filet Mignon",
-    time: "2m ago",
-    urgency: "hot",
-    orderValue: "KES 3,200",
-  },
-  {
-    table: "Table 12",
-    tableNum: "12",
-    items: "2× Cappuccino · Croissant",
-    time: "5m ago",
-    urgency: "warm",
-    orderValue: "KES 850",
-  },
-  {
-    table: "Table 7",
-    tableNum: "7",
-    items: "Lobster Thermidor",
-    time: "Just now",
-    urgency: "hot",
-    orderValue: "KES 5,400",
-  },
-]
-
-const myTables = [
-  { num: 2,  guests: 3, status: "occupied",  order: "ORD-001", elapsed: "15m" },
-  { num: 3,  guests: 4, status: "occupied",  order: "ORD-002", elapsed: "25m" },
-  { num: 7,  guests: 6, status: "occupied",  order: "ORD-003", elapsed: "40m" },
-  { num: 11, guests: 2, status: "occupied",  order: "ORD-004", elapsed: "10m" },
-  { num: 5,  guests: 0, status: "available", order: null,      elapsed: null  },
-  { num: 8,  guests: 0, status: "available", order: null,      elapsed: null  },
-  { num: 1,  guests: 0, status: "reserved",  order: null,      elapsed: null  },
-  { num: 9,  guests: 0, status: "reserved",  order: null,      elapsed: null  },
-]
+const sparklinePoints = "M0,40 C10,38 20,32 30,28 C40,24 50,30 60,26 C70,22 80,18 90,16 C100,14 110,20 120,15 C130,10 140,8 150,5"
 
 const recentActivity = [
-  { icon: CheckCircleIcon,    color: "text-[oklch(0.7_0.15_150)]",  bg: "bg-[oklch(0.7_0.15_150)]/10",  text: "Table 6 payment processed",   sub: "KES 2,100 · 4m ago",  dot: "oklch(0.7 0.15 150)" },
-  { icon: "/shopping-cart.png" as any,    color: "text-[#3F3D8F]", bg: "bg-[#3F3D8F]/10", text: "New order placed — Table 3",   sub: "6 items · 8m ago",    dot: "#3F3D8F" },
-  { icon: ExclamationCircleIcon,     color: "text-[oklch(0.75_0.15_75)]",  bg: "bg-[oklch(0.75_0.15_75)]/10",  text: "Table 9 — guests arrived",     sub: "Reserved · 12m ago",  dot: "oklch(0.75 0.15 75)" },
-  { icon: BuildingStorefrontIcon, color: "text-[oklch(0.45_0.12_285)]", bg: "bg-[oklch(0.45_0.12_285)]/10", text: "Table 2 order updated",        sub: "+2 items · 18m ago",  dot: "#3F3D8F" },
+  { icon: CheckCircleIcon,        color: "text-emerald-400", bg: "bg-emerald-500/10",  text: "Table 6 payment processed",  sub: "KES 2,100 · 4m ago",  dot: "#10b981" },
+  { icon: "/shopping-cart.png" as any, color: "text-violet-400", bg: "bg-violet-500/10", text: "New order placed — Table 3",  sub: "6 items · 8m ago",   dot: "#7C3AED" },
+  { icon: ExclamationCircleIcon,  color: "text-amber-400",   bg: "bg-amber-500/10",    text: "Table 9 — guests arrived",   sub: "Reserved · 12m ago", dot: "#f59e0b" },
+  { icon: BuildingStorefrontIcon, color: "text-violet-400",   bg: "bg-violet-500/10",  text: "Table 2 order updated",      sub: "+2 items · 18m ago", dot: "#7C3AED" },
 ]
 
-const quickActions = [
-  { href: "/waiter/service-floor",   icon: "/service-floor-nav.png", label: "New Order",      primary: true  },
-  { href: "/waiter/service-floor",   icon: "/service-floor-nav.png", label: "Floor Plan",     primary: false },
-  { href: "/waiter/order-tracking",  icon: "/order-tracking-nav.png",       label: "Order Status",   primary: false },
-  { href: "/waiter/checkout",        icon: "/checkout-nav.png", label: "Settlements",    primary: false },
-]
+// ─── Mini Sparkline SVG ───────────────────────────────────────────────────────
+function Sparkline() {
+  return (
+    <svg viewBox="0 0 150 50" className="w-full h-10" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="sparkGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#7C3AED" stopOpacity="0.3" />
+          <stop offset="100%" stopColor="#7C3AED" stopOpacity="0" />
+        </linearGradient>
+      </defs>
+      <path d={`${sparklinePoints} L150,50 L0,50 Z`} fill="url(#sparkGrad)" />
+      <path d={sparklinePoints} fill="none" stroke="#7C3AED" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
 
-// ─── Sub-components ──────────────────────────────────────────────────────────
-
-function StatCard({
-  icon: Icon,
-  value,
-  label,
-  accentColor,
+// ─── Section Header ───────────────────────────────────────────────────────────
+function SectionHeader({
+  icon,
+  iconBg = "bg-violet-500/15",
+  accentColor = "#7C3AED",
+  title,
+  subtitle,
   badge,
+  action,
 }: {
-  icon: React.ComponentType<{ className?: string; color?: string; style?: React.CSSProperties }> | string
-  value: string
-  label: string
-  accentColor: string
-  badge?: string
+  icon: React.ReactNode
+  iconBg?: string
+  accentColor?: string
+  title: string
+  subtitle: string
+  badge?: React.ReactNode
+  action?: React.ReactNode
 }) {
   return (
-    <Card
-      className="relative overflow-hidden border-0 bg-white shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group rounded-[22px]"
-      style={{ 
-        boxShadow: "0 10px 30px -10px rgba(0,0,0,0.08)",
+    <div
+      className="px-6 py-4 flex items-center justify-between"
+      style={{ borderBottom: "1px solid rgba(63, 61, 143, 0.05)" }}
+    >
+      <div className="flex items-center gap-3.5">
+        <div className={cn("w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 shadow-sm", iconBg)}>
+          {icon}
+        </div>
+        <div>
+          <p className="text-[12px] tracking-widest uppercase font-bold text-[#0D031B]">{title}</p>
+          <p className="text-[10px] tracking-wider uppercase text-[#736C83] mt-0.5">{subtitle}</p>
+        </div>
+      </div>
+      <div className="flex items-center gap-2">
+        {badge}
+        {action}
+      </div>
+    </div>
+  )
+}
+
+// ─── Glass Card wrapper ───────────────────────────────────────────────────────
+function GlassCard({
+  children,
+  className,
+  accentColor,
+}: {
+  children: React.ReactNode
+  className?: string
+  accentColor?: string
+}) {
+  return (
+    <div
+      className={cn("overflow-hidden rounded-[20px] relative transition-all duration-300", className)}
+      style={{
+        background: "white",
+        border: "1px solid rgba(63, 61, 143, 0.08)",
+        boxShadow: "0 10px 30px -5px rgba(63, 61, 143, 0.04)",
       }}
     >
-      {/* Subtle background glow */}
-      <div 
-        className="absolute -right-4 -top-4 w-24 h-24 rounded-full opacity-0 group-hover:opacity-10 transition-opacity duration-700 blur-2xl"
-        style={{ background: accentColor }}
-      />
+      {accentColor && (
+        <div
+          className="absolute top-0 left-0 right-0 h-[1.5px]"
+          style={{ background: `linear-gradient(90deg, ${accentColor} 0%, transparent 60%)`, opacity: 0.7 }}
+        />
+      )}
+      {children}
+    </div>
+  )
+}
 
-      <CardContent className="p-6">
-        <div className="flex items-center justify-between mb-6">
-          <div
-            className="flex items-center justify-center w-12 h-12 rounded-[14px] shadow-inner transition-all duration-500 group-hover:scale-110 group-hover:rotate-3"
-            style={{ 
-              background: `linear-gradient(135deg, color-mix(in oklch, ${accentColor} 15%, transparent) 0%, color-mix(in oklch, ${accentColor} 5%, transparent) 100%)`,
-            }}
-          >
-            {typeof Icon === 'string' ? (
-              <div 
-                className="h-5 w-5" 
-                style={{ 
-                  backgroundColor: accentColor,
-                  maskImage: `url(${Icon})`,
-                  maskSize: 'contain',
-                  maskRepeat: 'no-repeat',
-                  maskPosition: 'center',
-                  WebkitMaskImage: `url(${Icon})`,
-                  WebkitMaskSize: 'contain',
-                  WebkitMaskRepeat: 'no-repeat',
-                  WebkitMaskPosition: 'center'
-                }} 
-              />
-            ) : (
-              <Icon className="h-5 w-5" style={{ color: accentColor }} />
-            )}
-          </div>
-          {badge && (
-            <Badge
-              className="text-[9px] uppercase  rounded-full border px-2 py-0.5"
-              style={{
-                background: "oklch(0.75 0.15 75 / 0.12)",
-                color: "oklch(0.75 0.15 75)",
-                borderColor: "oklch(0.75 0.15 75 / 0.3)",
-              }}
-            >
-              <BoltIcon className="h-2.5 w-2.5 mr-1" />
-              {badge}
-            </Badge>
-          )}
+// ─── Stat Cards ───────────────────────────────────────────────────────────────
+
+function RevenueCard() {
+  return (
+    <div
+      className="rounded-[20px] p-5 flex flex-col gap-2.5 relative overflow-hidden"
+      style={{
+        background: "linear-gradient(135deg, #3F3D8F 0%, #302e70 100%)",
+        boxShadow: "0 12px 24px -8px rgba(63, 61, 143, 0.4)",
+      }}
+    >
+      {/* Subtle noise texture */}
+      <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E\")" }} />
+      <div className="flex items-center justify-between">
+        <p className="text-[10px] tracking-widest uppercase text-white/60 font-medium">Today's Revenue</p>
+        <div className="w-7 h-7 rounded-xl bg-white/10 flex items-center justify-center">
+          <ArrowTrendingUpIcon className="h-3.5 w-3.5 text-white/80" />
         </div>
-        <div className="space-y-1">
-          <p
-            className="text-3xl lg:text-[2.2rem] leading-none"
-            style={{ color: "#0D031B" }}
-          >
-            {value}
-          </p>
-          <p
-            className="text-[10px] uppercase opacity-50"
-            style={{ color: "#736C83" }}
-          >
-            {label}
-          </p>
+      </div>
+      <p className="text-[2rem] font-bold text-white leading-none tracking-tight">KSh 245,650</p>
+      <Sparkline />
+      <div className="flex items-center gap-1.5 pt-0.5">
+        <div className="flex items-center gap-1 bg-emerald-400/20 rounded-full px-2 py-0.5">
+          <span className="text-emerald-300 text-[10px] font-bold">▲ 18.5%</span>
         </div>
-      </CardContent>
-    </Card>
+        <span className="text-white/40 text-[10px] tracking-wide">vs yesterday</span>
+      </div>
+    </div>
+  )
+}
+
+function MetricCard({
+  label,
+  value,
+  sub,
+  subDot,
+  icon: Icon,
+}: {
+  label: string
+  value: React.ReactNode
+  sub: React.ReactNode
+  subDot?: string
+  icon: React.ElementType
+}) {
+  return (
+    <div
+      className="rounded-[20px] p-5 flex flex-col gap-3 relative overflow-hidden group hover:shadow-2xl transition-all duration-500 bg-white border border-[#3F3D8F]/10 shadow-sm"
+    >
+      <div className="flex items-start justify-between">
+        <p className="text-[10px] tracking-widest uppercase text-[#736C83] font-bold">{label}</p>
+        <div className="w-10 h-10 rounded-xl bg-[#3F3D8F]/5 border border-[#3F3D8F]/5 flex items-center justify-center transition-transform group-hover:scale-110">
+          <Icon className="h-4.5 w-4.5" style={{ color: "#3F3D8F" }} />
+        </div>
+      </div>
+      <p className="text-3xl font-bold text-[#0D031B] leading-none tracking-tight">{value}</p>
+      <div className="flex items-center gap-1.5 mt-auto">
+        {subDot && <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: subDot }} />}
+        <span className="text-[#9A94AA] text-[10px] tracking-wide font-medium">{sub}</span>
+      </div>
+    </div>
   )
 }
 
@@ -210,21 +226,13 @@ export default function WaiterDashboard() {
     const file = event.target.files?.[0]
     if (file) {
       const reader = new FileReader()
-      reader.onloadend = () => {
-        setAvatarImage(reader.result as string)
-      }
+      reader.onloadend = () => setAvatarImage(reader.result as string)
       reader.readAsDataURL(file)
     }
   }
 
-  const triggerUpload = () => {
-    fileInputRef.current?.click()
-  }
-
-  // Derived data
   const readyOrders = orders.filter(o => o.status === "ready" && !dismissed.includes(o.id))
   const activeCalls = customerCalls.filter(c => !dismissed.includes(c.id))
-  
   const combinedAlerts = [
     ...readyOrders.map(o => ({ ...o, alertType: 'order' as const })),
     ...activeCalls.map(c => ({ ...c, alertType: 'call' as const }))
@@ -236,18 +244,13 @@ export default function WaiterDashboard() {
   useEffect(() => {
     const unsubscribe = OrderService.subscribe((allOrders) => {
       setOrders(prev => {
-        // Check if any new orders have become "ready"
-        const newReady = allOrders.filter(o => 
-          o.status === "ready" && 
-          !prev.some(p => p.id === o.id && p.status === "ready")
+        const newReady = allOrders.filter(o =>
+          o.status === "ready" && !prev.some(p => p.id === o.id && p.status === "ready")
         )
-        
         if (newReady.length > 0) {
-          const audio = new Audio('/mixkit-bike-notification-bell-590.wav')
-          audio.play().catch(() => {})
+          new Audio('/mixkit-bike-notification-bell-590.wav').play().catch(() => {})
           toast.success(`Order for Table ${newReady[0].tableId} is ready!`)
         }
-        
         return allOrders
       })
     })
@@ -255,361 +258,247 @@ export default function WaiterDashboard() {
   }, [])
 
   useEffect(() => {
-    // console.log("Setting up Supabase real-time listener...")
-    // Existing summons listener code remains here...
-    
     const channelName = `summons-realtime-${Date.now()}`
     const channel = supabase
       .channel(channelName)
-      .on(
-        'postgres_changes',
-        {
-          event: 'INSERT',
-          schema: 'public',
-          table: 'summons',
-        },
-        (payload) => {
-          console.log("🔔 SUMMONS PAYLOAD:", payload)
-          
-          const rawName = payload.new?.staff_name || "Staff Member"
-          const staffId = payload.new?.staff_id
-          
-          // Ultra-robust check using regex and type-agnostic ID check
-          const isTableIdentifier = /table/i.test(String(rawName))
-          const isZeroId = String(staffId) === "0"
-          const hasTableId = payload.new?.table_id !== undefined && payload.new?.table_id !== null
-          
-          const isCustomerCall = isZeroId || isTableIdentifier || hasTableId
-          const name = rawName.trim()
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'summons' }, (payload) => {
+        const rawName = payload.new?.staff_name || "Staff Member"
+        const staffId = payload.new?.staff_id
+        const isZeroId = String(staffId) === "0"
+        const isTableIdentifier = /table/i.test(String(rawName))
+        const hasTableId = payload.new?.table_id !== undefined && payload.new?.table_id !== null
+        const isCustomerCall = isZeroId || isTableIdentifier || hasTableId
+        const name = rawName.trim()
 
-          console.log("➡️ IS CUSTOMER CALL?", { isCustomerCall, name, staffId, isTableIdentifier, isZeroId })
+        try {
+          new Audio(isCustomerCall ? "/mixkit-bike-notification-bell-590.wav" : "/universfield-new-notification-022-370046.mp3").play().catch(() => {})
+        } catch {}
 
-          // Play appropriate notification sound
-          try {
-            const soundFile = isCustomerCall 
-              ? "/mixkit-bike-notification-bell-590.wav" 
-              : "/universfield-new-notification-022-370046.mp3"
-            const audio = new Audio(soundFile)
-            audio.play().catch((err) => {
-              console.error("Audio playback was blocked by the browser:", err)
-            })
-          } catch (err) {
-            console.error("Failed to initialize Audio:", err)
-          }
-
-          if (isCustomerCall) {
-            // Add to persistent list
-            setCustomerCalls(prev => [
-              { 
-                id: payload.new.id || `${Date.now()}`, 
-                tableId: name.replace(/table /i, "").trim(),
-                createdAt: new Date().toISOString() 
-              }, 
-              ...prev
-            ])
-
-            toast.warning("Table Assistance", {
-              description: `${name} is requesting a waiter now.`,
-              duration: 10000,
-            })
-          } else {
-            toast.error("STAFF ALERT: Manager Request", {
-              description: `${name}, please report to the manager's office immediately.`,
-              duration: 12000,
-            })
-          }
+        if (isCustomerCall) {
+          setCustomerCalls(prev => [{ id: payload.new.id || `${Date.now()}`, tableId: name.replace(/table /i, "").trim(), createdAt: new Date().toISOString() }, ...prev])
+          toast.warning("Table Assistance", { description: `${name} is requesting a waiter now.`, duration: 10000 })
+        } else {
+          toast.error("STAFF ALERT: Manager Request", { description: `${name}, please report to the manager's office immediately.`, duration: 12000 })
         }
-      )
-      .subscribe((status) => {
-        console.log("Realtime subscription status:", status)
       })
-
-    return () => {
-      console.log("Cleaning up Supabase real-time listener...")
-      supabase.removeChannel(channel)
-    }
+      .subscribe()
+    return () => { supabase.removeChannel(channel) }
   }, [])
+
+  const today = new Date().toLocaleDateString("en-KE", { weekday: "long", day: "numeric", month: "long" })
 
   return (
     <TooltipProvider>
-      <div
-        className="min-h-screen py-5 px-0 space-y-6"
-        style={{ background: "#EBE6F8" }}
-      >
+      <div className="min-h-screen" style={{ background: "#EBE6F8" }}>
 
-        {/* ── Professional Command Header ────────────────────────────────── */}
-        <div className="flex flex-col items-start justify-between gap-4 py-4 px-3">
-          <div className="flex flex-row items-center gap-4 w-full">
-            {/* Premium Avatar with Depth and Upload Capability */}
-            <div className="relative group cursor-pointer shrink-0" onClick={triggerUpload}>
-              <div className="absolute inset-0 bg-[#3F3D8F] blur-3xl opacity-20 group-hover:opacity-30 transition-opacity duration-700" />
-              <div className="relative h-20 w-20 sm:h-32 sm:w-32 rounded-3xl sm:rounded-[42px] p-1 bg-gradient-to-tr from-[#3F3D8F] via-white to-oklch(0.45 0.12 285 / 0.1) shadow-2xl transition-transform duration-500 group-hover:scale-105">
-                <Avatar className="h-full w-full rounded-[20px] sm:rounded-[36px] border-0 overflow-hidden shadow-inner bg-white">
-                  {avatarImage ? (
-                    <img src={avatarImage} alt="User" className="h-full w-full object-cover" />
-                  ) : (
-                    <AvatarFallback 
-                      className="text-sm sm:text-2xl font-medium text-white"
-                      style={{ background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.35 0.15 275) 100%)" }}
-                    >
-                      WA
-                    </AvatarFallback>
-                  )}
-                </Avatar>
-                
-                {/* Edit Overlay */}
-                <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[20px] sm:rounded-[36px] m-1">
-                  <CameraIcon className="h-4 w-4 sm:h-9 sm:w-9 text-white" />
-                </div>
-              </div>
-
-              {/* Hidden File Input */}
-              <input
-                type="file"
-                ref={fileInputRef}
-                onChange={handleImageUpload}
-                accept="image/*"
-                className="hidden"
-              />
-
-            </div>
-
-            <div className="flex flex-col items-start text-left">
-              <div className="flex flex-col gap-1">
-                <h1 className="text-xl sm:text-4xl text-[#0D031B] font-light">
-                  Welcome back, <span className="font-medium" style={{ color: "#3F3D8F" }}>Waiter</span>
-                </h1>
-                <div className="flex items-center gap-2">
-                  <Badge 
-                    variant="outline" 
-                    className="h-5 px-2 rounded-full border-[#10B981]/20 bg-[#10B981]/5 text-[#10B981] text-[8px] uppercase"
-                  >
-                    <span className="relative flex h-1.5 w-1.5 mr-1.5">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#10B981]"></span>
-                    </span>
-                    Shift Active
-                  </Badge>
-                </div>
-              </div>
-              <div className="flex items-center gap-2 mt-1">
-                <p className="text-[10px] uppercase text-[#736C83] opacity-50">
-                  {new Date().toLocaleDateString("en-KE", { weekday: "short", day: "numeric", month: "short" })}
-                </p>
-                <div className="h-1 w-1 rounded-full bg-[#736C83] opacity-20" />
-                <p className="text-[10px] uppercase text-[#736C83] opacity-50">
-                  Alpha Station
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3 sm:gap-4">
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button 
-                  variant="outline" 
-                  size="icon" 
-                  className="h-12 w-12 sm:h-14 sm:w-14 rounded-xl sm:rounded-2xl border-0 bg-white shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 group"
-                >
-                  <ChartBarIcon className="h-4.5 w-4.5 sm:h-5 sm:w-5 text-oklch(0.45 0.12 285 / 0.6) group-hover:text-[#3F3D8F] transition-colors" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>Performance Insights</TooltipContent>
-            </Tooltip>
-
-            <Button
-              asChild
-              className="h-12 sm:h-14 px-5 sm:px-8 rounded-xl sm:rounded-2xl gap-3 sm:gap-4 text-[10px] sm:text-[11px] uppercase text-white border-0 shadow-2xl transition-all duration-500 hover:-translate-y-2 active:translate-y-0 group overflow-hidden relative"
-              style={{
-                background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.35 0.15 275) 100%)",
-              }}
-            >
-              <Link href="/waiter/service-floor">
-                <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="h-7 w-7 rounded-lg bg-white/20 flex items-center justify-center backdrop-blur-md transition-transform group-hover:rotate-12">
-                  <PlusIcon className="h-4 w-4 text-white" />
-                </div>
-                <span>New Order Ticket</span>
-              </Link>
-            </Button>
-          </div>
+        {/* ── Ambient background glow ─────────────────────────────────── */}
+        <div className="fixed inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute top-[-10%] left-[-5%] w-[500px] h-[500px] rounded-full opacity-[0.12]"
+            style={{ background: "radial-gradient(circle, #7C3AED 0%, transparent 70%)", filter: "blur(60px)" }} />
+          <div className="absolute top-[30%] right-[-10%] w-[400px] h-[400px] rounded-full opacity-[0.08]"
+            style={{ background: "radial-gradient(circle, #4338CA 0%, transparent 70%)", filter: "blur(80px)" }} />
+          <div className="absolute bottom-[10%] left-[20%] w-[350px] h-[350px] rounded-full opacity-[0.07]"
+            style={{ background: "radial-gradient(circle, #6C63FF 0%, transparent 70%)", filter: "blur(80px)" }} />
         </div>
 
-        {/* ── Stat Row ─────────────────────────────────────────────────── */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
-          <StatCard
-            icon="/rebell.png"
-            value={combinedAlerts.length.toString()}
-            label="Service Alerts"
-            accentColor="oklch(0.75 0.15 75)"
-            badge={combinedAlerts.length > 0 ? "Action" : undefined}
-          />
-          <StatCard
-            icon="/shopping-cart.png"
-            value={activeTablesCount.toString()}
-            label="Active Tables"
-            accentColor="#3F3D8F"
-          />
-          <StatCard
-            icon={ArrowTrendingUpIcon}
-            value="KES 4,250"
-            label="Today's Sales"
-            accentColor="oklch(0.7 0.15 150)"
-          />
-          <StatCard
-            icon="/time.png"
-            value="3.5m"
-            label="Avg Speed"
-            accentColor="#AEA6BF"
-          />
-        </div>
+        <div className="relative z-10 max-w-screen-xl mx-auto px-4 py-6 space-y-6">
 
-        {/* ── Main Grid ────────────────────────────────────────────────── */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-5">
+          {/* ── Header ──────────────────────────────────────────────────── */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pb-2">
 
-          {/* ── LEFT ───────────────────────────────────────────────────── */}
-          <div className="space-y-5">
-
-            {/* Service Alerts */}
-            <Card
-              className="overflow-hidden border-0 bg-white/80 backdrop-blur-xl shadow-2xl relative"
-              style={{ 
-                boxShadow: "0 10px 40px -10px oklch(0.45 0.12 285 / 0.1)",
-                border: "1px solid oklch(0.45 0.12 285 / 0.08)" 
-              }}
-            >
-              <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-oklch(0.75 0.15 75) to-transparent opacity-40" />
-              
-              <CardHeader
-                className="px-6 py-5"
-                style={{ borderBottom: "1px solid oklch(0.45 0.12 285 / 0.05)" }}
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <div
-                      className="w-11 h-11 rounded-[14px] flex items-center justify-center shadow-inner"
-                      style={{ background: "oklch(0.75 0.15 75 / 0.1)" }}
-                    >
-                      <div 
-                        className="h-5 w-5" 
-                        style={{ 
-                          backgroundColor: "oklch(0.75 0.15 75)",
-                          maskImage: 'url(/rebell.png)',
-                          maskSize: 'contain',
-                          maskRepeat: 'no-repeat',
-                          maskPosition: 'center',
-                          WebkitMaskImage: 'url(/rebell.png)',
-                          WebkitMaskSize: 'contain',
-                          WebkitMaskRepeat: 'no-repeat',
-                          WebkitMaskPosition: 'center'
-                        }} 
-                      />
-                    </div>
-                    <div>
-                      <CardTitle
-                        className="text-[13px] uppercase"
-                        style={{ color: "#0D031B" }}
-                      >
-                        Service Alerts
-                      </CardTitle>
-                      <div className="flex items-center gap-2 mt-1">
-                        <span className="w-1 h-1 rounded-full bg-oklch(0.75 0.15 75)" />
-                        <p
-                          className="text-[10px] uppercase opacity-60"
-                          style={{ color: "#736C83" }}
-                        >
-                          Kitchen ready · Pick up now
-                        </p>
-                      </div>
-                    </div>
+            {/* Left: Avatar + greeting */}
+            <div className="flex items-center gap-4">
+              <div className="relative group cursor-pointer shrink-0" onClick={() => fileInputRef.current?.click()}>
+                <div className="absolute inset-0 rounded-[24px] blur-xl opacity-40 group-hover:opacity-60 transition-opacity duration-500"
+                  style={{ background: "linear-gradient(135deg, #7C3AED, #4338CA)" }} />
+                <div className="relative h-[72px] w-[72px] rounded-2xl p-[2.5px] shadow-2xl"
+                  style={{ background: "linear-gradient(135deg, #7C3AED, #4338CA)" }}>
+                  <div className="h-full w-full rounded-[14px] overflow-hidden bg-white shadow-inner">
+                    {avatarImage
+                      ? <img src={avatarImage} alt="User" className="h-full w-full object-cover" />
+                      : <div className="h-full w-full flex items-center justify-center text-xl font-bold text-white"
+                          style={{ background: "linear-gradient(135deg, #3F3D8F 0%, #4338CA 100%)" }}>WA</div>
+                      }
                   </div>
- 
-                  <Badge
-                    className="flex items-center gap-1.5 text-[10px] uppercase  rounded-full px-3 py-1 border"
-                    style={{
-                      background: "oklch(0.75 0.15 75 / 0.1)",
-                      color: "oklch(0.75 0.15 75)",
-                      borderColor: "oklch(0.75 0.15 75 / 0.25)",
-                    }}
-                  >
-                    <FireIcon className="h-2.5 w-2.5 animate-pulse" />
-                    Live
-                  </Badge>
+                  <div className="absolute inset-[2.5px] flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[14px]">
+                    <CameraIcon className="h-5 w-5 text-white" />
+                  </div>
                 </div>
-              </CardHeader>
+                {/* Online dot */}
+                <div className="absolute bottom-1 right-1 w-3 h-3 rounded-full bg-emerald-400 border-2 border-[#EBE6F8]">
+                  <span className="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-75" />
+                </div>
+                <input type="file" ref={fileInputRef} onChange={handleImageUpload} accept="image/*" className="hidden" />
+              </div>
 
-              <CardContent className="p-0">
-                {combinedAlerts.length === 0 ? (
-                  <div className="flex flex-col items-center justify-center py-20 gap-5">
-                    <div className="relative">
-                      <div className="absolute inset-0 bg-oklch(0.7 0.15 150) blur-2xl opacity-20 animate-pulse" />
-                      <div
-                        className="relative w-20 h-20 rounded-[28px] flex items-center justify-center border-4 border-white shadow-xl"
-                        style={{ background: "linear-gradient(135deg, oklch(0.7 0.15 150 / 0.1) 0%, oklch(0.7 0.15 150 / 0.05) 100%)" }}
-                      >
-                        <CheckCircleIcon className="h-10 w-10" style={{ color: "oklch(0.7 0.15 150)" }} />
-                      </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-[10px] tracking-[0.3em] uppercase text-[#736C83] font-bold mb-1 opacity-70">{today}</p>
+                <h1 className="text-2xl md:text-3xl font-light text-[#0D031B] leading-none">
+                  Welcome back, <span className="font-bold whitespace-nowrap" style={{ color: "#3F3D8F" }}>Waiter</span>
+                </h1>
+                <div className="flex items-center gap-2 mt-1.5">
+                  <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full border"
+                    style={{ background: "rgba(16,185,129,0.08)", borderColor: "rgba(16,185,129,0.2)" }}>
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
+                    </span>
+                    <span className="text-[9px] tracking-widest uppercase text-emerald-500 font-bold">Shift Active</span>
+                  </div>
+                  <div className="h-4 w-[1px] bg-[#3F3D8F]/10 mx-1" />
+                  <span className="text-[9px] tracking-[0.15em] uppercase text-[#3F3D8F]/50 font-bold">Alpha Station</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: Actions */}
+            <div className="flex items-center gap-3 shrink-0">
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="h-10 w-10 md:h-12 md:w-12 rounded-2xl border-[#3F3D8F]/10 bg-white text-[#3F3D8F]/50 hover:text-[#3F3D8F] hover:bg-[#3F3D8F]/05 transition-all shadow-sm"
+                  >
+                    <ChartBarIcon className="h-5 w-5" />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>Performance Insights</TooltipContent>
+              </Tooltip>
+ 
+              <Button
+                asChild
+                className="h-10 md:h-12 px-5 md:px-7 rounded-2xl gap-2.5 text-[10px] tracking-widest uppercase text-white border-0 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl group relative overflow-hidden"
+                style={{
+                  background: "linear-gradient(135deg, #3F3D8F 0%, #302e70 100%)",
+                  boxShadow: "0 8px 24px -6px rgba(63, 61, 143, 0.4)",
+                }}
+              >
+                <Link href="/waiter/service-floor">
+                  <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <PlusIcon className="h-4 w-4" />
+                  <span className="font-bold">New Order</span>
+                </Link>
+              </Button>
+            </div>
+          </div>
+
+          {/* ── Stat Cards Grid ──────────────────────────────────────────── */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+            <RevenueCard />
+            <MetricCard
+              label="Total Orders"
+              value="128"
+              sub={<><span className="text-emerald-400 font-semibold">▲ 12.3%</span> vs yesterday</>}
+              icon={() => (
+                <div className="h-4.5 w-4.5" style={{ 
+                  backgroundColor: "#3F3D8F",
+                  maskImage: "url('/waiter.png')", maskSize: 'contain', maskRepeat: 'no-repeat', maskPosition: 'center',
+                  WebkitMaskImage: "url('/waiter.png')", WebkitMaskSize: 'contain', WebkitMaskRepeat: 'no-repeat', WebkitMaskPosition: 'center'
+                }} />
+              )}
+            />
+            <MetricCard
+              label="Active Tables"
+              value={<>{activeTablesCount || 18} <span className="text-xl text-[#9A94AA] font-bold">/ 32</span></>}
+              sub={`${Math.round(((activeTablesCount || 18) / 32) * 100)}% occupied`}
+              subDot="#10b981"
+              icon={() => (
+                <div className="h-4.5 w-4.5" style={{ 
+                  backgroundColor: "#3F3D8F",
+                  maskImage: "url('/dining-table (1).png')", maskSize: 'contain', maskRepeat: 'no-repeat', maskPosition: 'center',
+                  WebkitMaskImage: "url('/dining-table (1).png')", WebkitMaskSize: 'contain', WebkitMaskRepeat: 'no-repeat', WebkitMaskPosition: 'center'
+                }} />
+              )}
+            />
+            <MetricCard
+              label="New Reservations"
+              value="12"
+              sub="Today"
+              subDot="#10b981"
+              icon={() => (
+                <div className="h-4.5 w-4.5" style={{ 
+                  backgroundColor: "#3F3D8F",
+                  maskImage: "url('/calendar.png')", maskSize: 'contain', maskRepeat: 'no-repeat', maskPosition: 'center',
+                  WebkitMaskImage: "url('/calendar.png')", WebkitMaskSize: 'contain', WebkitMaskRepeat: 'no-repeat', WebkitMaskPosition: 'center'
+                }} />
+              )}
+            />
+          </div>
+
+          {/* ── Main Content Grid ────────────────────────────────────────── */}
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-5">
+
+            {/* ── LEFT column ─────────────────────────────────────────── */}
+            <div className="space-y-5">
+
+              {/* Service Alerts */}
+              <GlassCard accentColor="#f59e0b">
+                <SectionHeader
+                  icon={
+                    <div className="h-4.5 w-4.5" style={{
+                      backgroundColor: "#f59e0b",
+                      maskImage: "url(/rebell.png)", maskSize: "contain", maskRepeat: "no-repeat", maskPosition: "center",
+                      WebkitMaskImage: "url(/rebell.png)", WebkitMaskSize: "contain", WebkitMaskRepeat: "no-repeat", WebkitMaskPosition: "center",
+                    }} />
+                  }
+                  iconBg="bg-amber-500/10"
+                  title="Service Alerts"
+                  subtitle="Kitchen ready · Pickup now"
+                  badge={
+                    <div className="flex items-center gap-1.5 px-3 py-1 rounded-full border border-amber-500/20 bg-amber-500/10">
+                      <FireIcon className="h-2.5 w-2.5 text-amber-400 animate-pulse" />
+                      <span className="text-[9px] tracking-widest uppercase text-amber-400 font-semibold">Live</span>
                     </div>
-                    <div className="text-center space-y-1">
-                      <p className="text-sm uppercase" style={{ color: "#0D031B" }}>All caught up!</p>
-                      <p className="text-[10px] uppercase opacity-40" style={{ color: "#736C83" }}>No pending alerts right now</p>
+                  }
+                />
+
+                {combinedAlerts.length === 0 ? (
+                  <div className="flex flex-col items-center justify-center py-14 gap-3">
+                    <div className="w-14 h-14 rounded-[18px] flex items-center justify-center bg-emerald-500/10 border border-emerald-500/15">
+                      <CheckCircleIcon className="h-7 w-7 text-emerald-400" />
+                    </div>
+                    <div className="text-center">
+                      <p className="text-sm font-bold text-[#0D031B]">All caught up!</p>
+                      <p className="text-[10px] tracking-widest uppercase text-[#9A94AA] mt-1 font-medium">No pending alerts</p>
                     </div>
                   </div>
                 ) : (
-                  <div className="divide-y" style={{ borderColor: "oklch(0.45 0.12 285 / 0.06)" }}>
-                    {combinedAlerts.map((alert) => {
+                  <div>
+                    {combinedAlerts.map((alert, idx) => {
                       const isOrder = alert.alertType === 'order'
-                      
                       return (
                         <div
                           key={alert.id}
-                          className="group flex items-center gap-4 px-5 py-4 transition-colors hover:bg-[#EBE6F8]/50"
+                          className="group flex items-center gap-4 px-5 py-3.5 hover:bg-white/[0.03] transition-colors"
+                          style={{ borderTop: idx > 0 ? "1px solid rgba(255,255,255,0.05)" : undefined }}
                         >
-                          {/* Table number circle */}
+                          {/* Table number badge */}
                           <div
-                            className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl text-white shrink-0 shadow-sm"
+                            className="w-11 h-11 rounded-2xl flex items-center justify-center text-base font-bold text-white shrink-0"
                             style={{
-                              background: isOrder ? "#3F3D8F" : "oklch(0.75 0.15 75)",
-                              boxShadow: `0 4px 12px ${isOrder ? "oklch(0.45 0.12 285 / 0.3)" : "oklch(0.75 0.15 75 / 0.3)"}`,
+                              background: isOrder
+                                ? "linear-gradient(135deg, #7C3AED, #4338CA)"
+                                : "linear-gradient(135deg, #d97706, #b45309)",
+                              boxShadow: `0 4px 12px ${isOrder ? "rgba(124,58,237,0.35)" : "rgba(245,158,11,0.35)"}`,
                             }}
                           >
                             {alert.tableId}
                           </div>
 
                           <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2 mb-0.5">
-                              <p className="text-sm font-bold" style={{ color: "#0D031B" }}>
-                                Table {alert.tableId}
-                              </p>
-                              <span
-                                className="inline-flex items-center gap-1 text-[9px] uppercase font-bold  px-2 py-0.5 rounded-full"
+                            <div className="flex items-center gap-2">
+                              <p className="text-sm font-semibold text-white">Table {alert.tableId}</p>
+                              <span className="px-1.5 py-0.5 rounded-md text-[9px] tracking-wider uppercase font-medium"
                                 style={{
-                                  background: isOrder ? "oklch(0.75 0.15 75 / 0.12)" : "oklch(0.45 0.12 285 / 0.12)",
-                                  color: isOrder ? "oklch(0.75 0.15 75)" : "#3F3D8F",
-                                }}
-                              >
-                                {isOrder ? <FireIcon className="h-2.5 w-2.5" /> : (
-                                  <div 
-                                    className="h-2.5 w-2.5" 
-                                    style={{ 
-                                      backgroundColor: "oklch(0.45 0.12 285)",
-                                      maskImage: 'url(/rebell.png)',
-                                      maskSize: 'contain',
-                                      maskRepeat: 'no-repeat',
-                                      maskPosition: 'center',
-                                      WebkitMaskImage: 'url(/rebell.png)',
-                                      WebkitMaskSize: 'contain',
-                                      WebkitMaskRepeat: 'no-repeat',
-                                      WebkitMaskPosition: 'center'
-                                    }} 
-                                  />
-                                )}
-                                {isOrder ? "Ready" : "Assistance"}
+                                  background: isOrder ? "rgba(124,58,237,0.15)" : "rgba(245,158,11,0.15)",
+                                  color: isOrder ? "#a78bfa" : "#fbbf24",
+                                }}>
+                                {isOrder ? "Ready" : "Assist"}
                               </span>
                             </div>
-                            <p className="text-xs truncate" style={{ color: "#736C83" }}>
-                              {isOrder 
+                            <p className="text-[11px] text-white/40 truncate mt-0.5">
+                              {isOrder
                                 ? `${(alert as any).items.length} items · ${(alert as any).items[0].name}`
                                 : "Customer is requesting assistance"
                               }
@@ -619,25 +508,25 @@ export default function WaiterDashboard() {
                           <div className="flex items-center gap-1.5 shrink-0">
                             <Button
                               size="sm"
-                              className="h-8 px-3 text-[10px] uppercase  text-white hover:opacity-90 shadow-sm transition-all hover:-translate-y-0.5"
-                              style={{ background: isOrder ? "#3F3D8F" : "oklch(0.7 0.15 150)" }}
+                              className="h-8 px-3.5 text-[10px] tracking-wider uppercase text-white font-semibold border-0 rounded-xl shadow-sm transition-all hover:-translate-y-0.5"
+                              style={{
+                                background: isOrder
+                                  ? "linear-gradient(135deg, #7C3AED, #4338CA)"
+                                  : "linear-gradient(135deg, #059669, #047857)",
+                                boxShadow: isOrder ? "0 4px 12px rgba(124,58,237,0.4)" : "0 4px 12px rgba(5,150,105,0.4)",
+                              }}
                               onClick={() => {
-                                if (isOrder) {
-                                  OrderService.updateOrderStatus(alert.id, "served")
-                                } else {
-                                  setDismissed((d) => [...d, alert.id])
-                                }
+                                if (isOrder) OrderService.updateOrderStatus(alert.id, "served")
+                                else setDismissed(d => [...d, alert.id])
                               }}
                             >
                               {isOrder ? "Serve" : "Resolve"}
                             </Button>
-
                             <Button
                               size="icon"
                               variant="ghost"
-                              className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity"
-                              style={{ color: "#AEA6BF" }}
-                              onClick={() => setDismissed((d) => [...d, alert.id])}
+                              className="h-8 w-8 rounded-xl opacity-0 group-hover:opacity-100 transition-all text-white/30 hover:text-white hover:bg-white/10"
+                              onClick={() => setDismissed(d => [...d, alert.id])}
                             >
                               <XMarkIcon className="h-3.5 w-3.5" />
                             </Button>
@@ -647,456 +536,269 @@ export default function WaiterDashboard() {
                     })}
                   </div>
                 )}
-              </CardContent>
-            </Card>
+              </GlassCard>
 
-            {/* My Tables Overview */}
-            <Card
-              className="overflow-hidden border-0 bg-white/80 backdrop-blur-xl shadow-2xl relative"
-              style={{ 
-                boxShadow: "0 10px 40px -10px oklch(0.45 0.12 285 / 0.15)",
-                border: "1px solid oklch(0.45 0.12 285 / 0.08)" 
-              }}
-            >
-              {/* Subtle accent line */}
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#3F3D8F] to-oklch(0.55 0.15 275) opacity-40" />
-              
-              <CardHeader
-                className="px-6 py-5"
-                style={{ borderBottom: "1px solid oklch(0.45 0.12 285 / 0.05)" }}
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <div
-                      className="w-11 h-11 rounded-[14px] flex items-center justify-center shadow-inner"
-                      style={{ 
-                        background: "linear-gradient(135deg, oklch(0.45 0.12 285 / 0.1) 0%, oklch(0.45 0.12 285 / 0.05) 100%)",
-                      }}
+              {/* My Service Floor */}
+              <GlassCard accentColor="#7C3AED">
+                <SectionHeader
+                  icon={<CheckBadgeIcon className="h-4.5 w-4.5 text-violet-400" />}
+                  title="My Service Floor"
+                  subtitle="Active assignments"
+                  action={
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="text-[10px] tracking-widest font-semibold uppercase gap-1 text-violet-400 hover:bg-white/5 h-8 px-3 rounded-xl"
+                      asChild
                     >
-                      <CheckBadgeIcon className="h-5 w-5" style={{ color: "#3F3D8F" }} />
-                    </div>
-                    <div>
-                      <CardTitle
-                        className="text-[13px] font-bold uppercase"
-                        style={{ color: "#0D031B" }}
-                      >
-                        My Service Floor
-                      </CardTitle>
-                      <p
-                        className="text-[10px] font-semibold uppercase mt-1 opacity-60"
-                        style={{ color: "#736C83" }}
-                      >
-                        8 ACTIVE SECTIONS
-                      </p>
-                    </div>
-                  </div>
+                      <Link href="/waiter/service-floor">
+                        Map <ChevronRightIcon className="h-3 w-3" />
+                      </Link>
+                    </Button>
+                  }
+                />
 
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="text-[10px] font-bold uppercase gap-2 hover:bg-black/5 transition-all h-9 px-4 rounded-xl"
-                    style={{ color: "#3F3D8F" }}
-                    asChild
-                  >
-                    <Link href="/waiter/service-floor">
-                      Map View <ChevronRightIcon className="h-3.5 w-3.5" />
-                    </Link>
-                  </Button>
-                </div>
-              </CardHeader>
-
-              <CardContent className="p-5">
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-                  {activeOrders.length === 0 ? (
-                    <div className="col-span-full py-12 text-center flex flex-col items-center gap-3">
-                      <div className="w-12 h-12 rounded-full bg-black/5 flex items-center justify-center">
-                        <CheckBadgeIcon className="h-6 w-6 opacity-20" />
+                <div className="p-4">
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                    {activeOrders.length === 0 ? (
+                      <div className="col-span-full py-12 text-center flex flex-col items-center gap-3">
+                        <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center">
+                          <CheckBadgeIcon className="h-6 w-6 text-white/20" />
+                        </div>
+                        <p className="text-[10px] tracking-widest uppercase text-white/25 font-semibold">No active assignments</p>
                       </div>
-                      <p className="text-[11px] font-bold uppercase opacity-40">No active assignments</p>
-                    </div>
-                  ) : activeOrders.map((t) => {
-                    const tableNum    = parseInt(t.tableId) || 0
-                    const status      = t.status || "pending"
-                    const imgSrc      = tableImages[tableNum % tableImages.length]
-                    
-                    // Status color logic (Professional palette)
-                    const statusColors = {
-                      pending:   { bg: "#3F3D8F", text: "Violet", hex: "#6366f1" },
-                      ready:     { bg: "oklch(0.7 0.15 150)",  text: "Ready",  hex: "#10b981" },
-                      occupied:  { bg: "oklch(0.6 0.16 285)",  text: "Live",   hex: "#8b5cf6" },
-                      served:    { bg: "#3F3D8F", text: "Served", hex: "#6366f1" },
-                      cancelled: { bg: "oklch(0.65 0.18 25)",  text: "Void",   hex: "#ef4444" },
-                    }
-                    const currentStatus = statusColors[status as keyof typeof statusColors] || statusColors.pending
+                    ) : activeOrders.map((t) => {
+                      const tableNum = parseInt(t.tableId) || 0
+                      const status   = t.status || "pending"
+                      const imgSrc   = tableImages[tableNum % tableImages.length]
+                      const statusConfig = {
+                        pending:   { color: "#6366f1", label: "Pending" },
+                        ready:     { color: "#10b981", label: "Ready" },
+                        occupied:  { color: "#8b5cf6", label: "Occupied" },
+                        served:    { color: "#6366f1", label: "Served" },
+                        cancelled: { color: "#ef4444", label: "Cancelled" },
+                      }
+                      const cfg = statusConfig[status as keyof typeof statusConfig] || statusConfig.pending
 
-                    return (
-                      <HoverCard key={t.id} openDelay={200}>
-                        <HoverCardTrigger asChild>
-                          <div
-                            className="group relative flex flex-col rounded-[22px] border-0 bg-white shadow-md transition-all duration-500 cursor-pointer hover:-translate-y-2 hover:shadow-2xl overflow-hidden"
-                            style={{ 
-                              boxShadow: "0 10px 25px -5px rgba(0,0,0,0.05)"
-                            }}
+                      return (
+                        <HoverCard key={t.id} openDelay={200}>
+                          <HoverCardTrigger asChild>
+                            <div
+                              className="group relative flex flex-col rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl"
+                              style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.09)" }}
+                            >
+                              <div className="relative h-24 w-full overflow-hidden">
+                                <img src={imgSrc} alt={`Table ${tableNum}`} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                                <div className="absolute top-2.5 left-2.5 flex items-center gap-1 px-2 py-0.5 rounded-full bg-black/50 backdrop-blur-sm border border-white/10">
+                                  <div className="w-1 h-1 rounded-full" style={{ background: cfg.color }} />
+                                  <span className="text-[8px] tracking-widest uppercase text-white/80">{cfg.label}</span>
+                                </div>
+                              </div>
+                              <div className="px-3 pb-3 pt-6 flex flex-col items-center relative">
+                                <div className="absolute -top-5 w-10 h-10 rounded-xl flex items-center justify-center border-2 border-[#0f0a1e] shadow-xl"
+                                  style={{ background: "linear-gradient(135deg, #7C3AED, #4338CA)" }}>
+                                  <span className="text-base font-bold text-white">{tableNum}</span>
+                                </div>
+                                <p className="text-[9px] tracking-widest uppercase text-white/35 font-medium">{t.items?.length || 0} items</p>
+                              </div>
+                            </div>
+                          </HoverCardTrigger>
+                          <HoverCardContent
+                            className="w-68 p-0 border-0 rounded-[20px] shadow-2xl overflow-hidden"
+                            style={{ background: "#1a0f3a", border: "1px solid rgba(255,255,255,0.12)" }}
+                            sideOffset={12}
                           >
-                            {/* Image Header with sophisticated overlay */}
-                            <div className="relative h-28 w-full overflow-hidden shrink-0">
-                              <img 
-                                src={imgSrc} 
-                                alt={`Table ${tableNum}`}
-                                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" 
-                              />
-                              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-                              
-                              {/* Glowing Status Dot */}
-                              <div className="absolute top-3 left-3 flex items-center gap-2 px-2.5 py-1 rounded-full bg-black/40 backdrop-blur-md border border-white/10">
-                                <div 
-                                  className="w-1.5 h-1.5 rounded-full animate-pulse shadow-[0_0_10px_rgba(255,255,255,1)]" 
-                                  style={{ background: currentStatus.hex }}
-                                />
-                                <span className="text-[9px] text-white uppercase">
-                                  SEC-A
-                                </span>
-                              </div>
-
-                              {/* Capacity Badge */}
-                              <div className="absolute bottom-3 right-3 flex items-center gap-1.5 px-2 py-1 rounded-lg bg-white/10 backdrop-blur-md border border-white/5">
-                                <Crown className="h-3 w-3 text-white/60" />
-                                <span className="text-[10px] text-white">4</span>
-                              </div>
-                            </div>
-                            
-                            {/* Card Body with floating table number */}
-                            <div className="p-4 pt-8 flex flex-col items-center justify-center bg-white relative">
-                              <div 
-                                className="absolute -top-7 w-14 h-14 rounded-2xl bg-white shadow-2xl flex items-center justify-center border-[5px] border-[#EBE6F8] transition-all duration-500 group-hover:scale-110 group-hover:-rotate-3"
-                                style={{ zIndex: 10 }}
-                              >
-                                <span className="text-2xl tabular-nums" style={{ color: "#3F3D8F" }}>
-                                  {tableNum}
-                                </span>
-                              </div>
-
-                              <div className="text-center space-y-1.5">
-                                <p
-                                  className="text-[11px] uppercase"
-                                  style={{ color: currentStatus.bg }}
-                                >
-                                  {status}
-                                </p>
-                                <div className="flex items-center justify-center gap-2">
-                                  <div className="w-1 h-1 rounded-full bg-slate-300" />
-                                  <span className="text-[9px] uppercase text-slate-400">18 min elapsed</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </HoverCardTrigger>
-                        <HoverCardContent
-                          className="w-72 p-0 border-0 bg-white/95 backdrop-blur-2xl rounded-[28px] shadow-2xl overflow-hidden"
-                          sideOffset={15}
-                        >
-                          <div className="p-6 space-y-5">
-                            <div className="flex items-center justify-between">
-                              <div className="flex items-center gap-4">
-                                <div
-                                  className="w-12 h-12 rounded-2xl flex items-center justify-center text-lg font-black text-white shadow-2xl rotate-3"
-                                  style={{ background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.35 0.15 275) 100%)" }}
-                                >
+                            <div className="p-4 space-y-3">
+                              <div className="flex items-center gap-3">
+                                <div className="w-11 h-11 rounded-2xl flex items-center justify-center text-lg font-black text-white shadow-lg"
+                                  style={{ background: "linear-gradient(135deg, #7C3AED, #4338CA)" }}>
                                   {tableNum}
                                 </div>
-                                <div className="space-y-0.5">
-                                  <p className="text-sm uppercase" style={{ color: "#0D031B" }}>Table {tableNum}</p>
-                                  <div className="flex items-center gap-1.5">
-                                    <div className="w-1.5 h-1.5 rounded-full" style={{ background: currentStatus.hex }} />
-                                    <p className="text-[10px] uppercase opacity-40">Section Alpha</p>
+                                <div>
+                                  <p className="text-sm font-semibold text-[#0D031B]">Table {tableNum}</p>
+                                  <div className="flex items-center gap-1.5 mt-0.5">
+                                    <div className="w-1.5 h-1.5 rounded-full" style={{ background: cfg.color }} />
+                                    <p className="text-[9px] tracking-wider uppercase text-[#736C83]">{cfg.label} · Section Alpha</p>
                                   </div>
                                 </div>
                               </div>
-                            </div>
-                            
-                            <div className="grid grid-cols-2 gap-3">
-                              <div className="p-3 rounded-[18px] bg-black/5 space-y-1">
-                                <span className="text-[9px] uppercase opacity-40">Order ID</span>
-                                <p className="text-xs tabular-nums" style={{ color: "#0D031B" }}>#{t.id.slice(-6).toUpperCase()}</p>
+                              <div className="grid grid-cols-2 gap-2.5">
+                                {[
+                                  { label: "Order ID", value: `#${t.id.slice(-6).toUpperCase()}` },
+                                  { label: "Items", value: `${t.items.length} Units` },
+                                ].map(item => (
+                                  <div key={item.label} className="p-2.5 rounded-[14px] space-y-0.5" style={{ background: "rgba(63, 61, 143, 0.05)" }}>
+                                    <p className="text-[8px] tracking-widest uppercase text-[#9A94AA] font-bold">{item.label}</p>
+                                    <p className="text-xs font-semibold text-[#3F3D8F]">{item.value}</p>
+                                  </div>
+                                ))}
                               </div>
-                              <div className="p-3 rounded-[18px] bg-black/5 space-y-1">
-                                <span className="text-[9px] uppercase opacity-40">Active Items</span>
-                                <p className="text-xs" style={{ color: "#0D031B" }}>{t.items.length} Units</p>
-                              </div>
+                              <Button className="w-full h-9 rounded-xl text-[10px] tracking-widest uppercase gap-1.5 text-white border-0"
+                                style={{ background: "linear-gradient(135deg, #7C3AED, #4338CA)" }}>
+                                Manage Table <ArrowRight className="h-3 w-3" />
+                              </Button>
                             </div>
-
-                            <Button 
-                              className="w-full h-11 rounded-xl text-[10px] uppercase gap-2 text-white border-0"
-                              style={{ background: "#3F3D8F" }}
-                            >
-                              Manage Table <ArrowRight className="h-3.5 w-3.5" />
-                            </Button>
-                          </div>
-                        </HoverCardContent>
-                      </HoverCard>
-                    )
-                  })}
+                          </HoverCardContent>
+                        </HoverCard>
+                      )
+                    })}
+                  </div>
                 </div>
-              </CardContent>
-            </Card>
+              </GlassCard>
+            </div>
 
-          </div>
+            {/* ── RIGHT column ────────────────────────────────────────── */}
+            <div className="space-y-4">
 
-          {/* ── RIGHT ──────────────────────────────────────────────────── */}
-          <div className="space-y-5">
-
-            {/* Quick Actions */}
-            <Card
-              className="overflow-hidden border bg-white/75 backdrop-blur-md shadow-sm"
-              style={{ borderColor: "oklch(0.45 0.12 285 / 0.12)" }}
-            >
-              <CardHeader
-                className="px-5 py-4"
-                style={{ borderBottom: "1px solid oklch(0.45 0.12 285 / 0.08)" }}
-              >
-                <CardTitle
-                  className="text-sm uppercase "
-                  style={{ color: "#0D031B" }}
-                >
-                  Quick Actions
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="p-4 space-y-2.5">
-                {/* Primary CTA with rich gradient */}
-                <Button
-                  asChild
-                  className="w-full h-14 rounded-2xl gap-3 text-[11px] uppercase text-white border-0 shadow-xl transition-all duration-300 hover:-translate-y-1 active:translate-y-0 active:scale-95"
-                  style={{
-                    background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.35 0.15 275) 100%)",
-                    boxShadow: "0 8px 25px -5px oklch(0.45 0.12 285 / 0.4)",
-                  }}
-                >
-                  <Link href="/waiter/service-floor" className="flex items-center justify-center">
-                    <img 
-                      src="/service-floor-nav.png" 
-                      className="h-5 w-5 brightness-0 invert object-contain" 
-                      alt="New Order" 
-                    />
-                    <span className="ml-1">Initiate New Order</span>
-                  </Link>
-                </Button>
-
-                {/* Secondary actions grid */}
-                <div className="grid grid-cols-3 gap-2.5">
-                  {[
-                    { href: "/waiter/service-floor", label: "Floor Plan", icon: "/service-floor-nav.png" },
-                    { href: "/waiter/order-tracking", label: "Tracker", icon: "/order-tracking-nav.png" },
-                    { href: "/waiter/checkout", label: "Cashier", icon: "/checkout-nav.png" },
-                  ].map((action) => (
-                    <Button
-                      key={action.href}
-                      asChild
-                      variant="ghost"
-                      className="h-20 flex-col gap-2 text-[9px] uppercase transition-all duration-300 hover:bg-[#EBE6F8] hover:shadow-lg rounded-2xl border"
-                      style={{
-                        borderColor: "oklch(0.45 0.12 285 / 0.1)",
-                        background: "rgba(235, 230, 248, 0.4)",
-                        color: "#3D374C",
-                      }}
-                    >
-                      <Link href={action.href} className="flex flex-col items-center justify-center">
-                        <div className="w-8 h-8 rounded-xl flex items-center justify-center bg-white shadow-sm border border-black/5 group-hover:scale-110 transition-transform">
-                          <img 
-                            src={action.icon} 
-                            className="h-4 w-4 object-contain" 
-                            alt={action.label} 
-                            style={{ filter: "invert(31%) sepia(68%) saturate(1116%) hue-rotate(221deg) brightness(91%) contrast(89%)" }} 
-                          />
-                        </div>
-                        {action.label}
-                      </Link>
-                    </Button>
-                  ))}
+              {/* Quick Actions */}
+              <GlassCard>
+                <div className="px-5 py-4" style={{ borderBottom: "1px solid rgba(63, 61, 143, 0.05)" }}>
+                  <p className="text-[11px] tracking-widest uppercase font-bold text-[#0D031B]">Quick Actions</p>
                 </div>
-              </CardContent>
-            </Card>
-
-            {/* Shift Progress */}
-            <Card
-              className="overflow-hidden border-0 bg-white shadow-xl rounded-[28px] relative"
-              style={{ border: "1px solid oklch(0.45 0.12 285 / 0.08)" }}
-            >
-              <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-[#3F3D8F] to-transparent opacity-40" />
-              
-              <CardHeader className="px-6 py-5" style={{ borderBottom: "1px solid oklch(0.45 0.12 285 / 0.05)" }}>
-                <div className="flex items-center gap-4">
-                  <div
-                    className="w-11 h-11 rounded-[14px] flex items-center justify-center shadow-inner"
-                    style={{ background: "oklch(0.45 0.12 285 / 0.1)" }}
+                <div className="p-4 space-y-2.5">
+                  <Button
+                    asChild
+                    className="w-full h-12 rounded-2xl gap-2.5 text-[10px] tracking-widest uppercase text-white border-0 transition-all duration-300 hover:-translate-y-0.5 group relative overflow-hidden"
+                    style={{ background: "linear-gradient(135deg, #7C3AED 0%, #4338CA 100%)", boxShadow: "0 6px 20px -4px rgba(124,58,237,0.5)" }}
                   >
-                    <div
-                        className="h-5 w-5"
-                        style={{
-                          backgroundColor: "#3F3D8F",
-                          maskImage: "url(/shift.png)",
-                          maskSize: "contain",
-                          maskRepeat: "no-repeat",
-                          maskPosition: "center",
-                          WebkitMaskImage: "url(/shift.png)",
-                          WebkitMaskSize: "contain",
-                          WebkitMaskRepeat: "no-repeat",
-                          WebkitMaskPosition: "center",
-                        }}
+                    <Link href="/waiter/service-floor" className="flex items-center justify-center">
+                      <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <div 
+                        className="h-4 w-4 bg-white" 
+                        style={{ 
+                          maskImage: "url(/service-floor-nav.png)", maskSize: 'contain', maskRepeat: 'no-repeat', maskPosition: 'center',
+                          WebkitMaskImage: "url(/service-floor-nav.png)", WebkitMaskSize: 'contain', WebkitMaskRepeat: 'no-repeat', WebkitMaskPosition: 'center'
+                        }} 
                       />
-                  </div>
-                  <div>
-                    <CardTitle className="text-[13px] uppercase" style={{ color: "#0D031B" }}>
-                      Shift Progress
-                    </CardTitle>
-                    <p className="text-[10px] uppercase mt-1 opacity-60" style={{ color: "#736C83" }}>
-                      14 COVERS TO TARGET
-                    </p>
+                      <span>New Order</span>
+                    </Link>
+                  </Button>
+
+                  <div className="grid grid-cols-3 gap-2">
+                    {[
+                      { href: "/waiter/service-floor",  label: "Floor",   icon: "/service-floor-nav.png" },
+                      { href: "/waiter/order-tracking", label: "Tracker", icon: "/order-tracking-nav.png" },
+                      { href: "/waiter/checkout",       label: "Cashier", icon: "/checkout-nav.png" },
+                    ].map((action) => (
+                      <Button
+                        key={action.href}
+                        asChild
+                        variant="ghost"
+                        className="h-[72px] flex-col gap-1.5 text-[9px] tracking-widest uppercase rounded-2xl border border-white/08 bg-white/04 hover:bg-white/08 text-white/40 hover:text-white/70 transition-all"
+                      >
+                        <Link href={action.href} className="flex flex-col items-center justify-center">
+                          <div className="w-9 h-9 rounded-xl flex items-center justify-center bg-[#3F3D8F]/05 border border-[#3F3D8F]/10 mb-1">
+                            <div 
+                              className="h-4 w-4 bg-[#3F3D8F]" 
+                              style={{ 
+                                maskImage: `url(${action.icon})`, maskSize: 'contain', maskRepeat: 'no-repeat', maskPosition: 'center',
+                                WebkitMaskImage: `url(${action.icon})`, WebkitMaskSize: 'contain', WebkitMaskRepeat: 'no-repeat', WebkitMaskPosition: 'center'
+                              }} 
+                            />
+                          </div>
+                          <span className="text-[#3F3D8F] font-bold">{action.label}</span>
+                        </Link>
+                      </Button>
+                    ))}
                   </div>
                 </div>
-              </CardHeader>
+              </GlassCard>
 
-              <CardContent className="p-6 space-y-6">
-                <div className="flex items-end justify-between px-2">
-                  <div className="space-y-1">
-                    <p className="text-[2.8rem] leading-none" style={{ color: "#0D031B" }}>
-                      75%
-                    </p>
-                    <p className="text-[10px] uppercase opacity-40" style={{ color: "#736C83" }}>
-                      Quota Met
-                    </p>
-                  </div>
-                  <div className="text-right space-y-1">
-                    <p className="text-3xl tabular-nums" style={{ color: "#3F3D8F" }}>
-                      42
-                    </p>
-                    <p className="text-[10px] uppercase opacity-40" style={{ color: "#736C83" }}>
-                      Served Today
-                    </p>
-                  </div>
-                </div>
+              {/* Shift Progress */}
+              <GlassCard accentColor="#7C3AED">
+                <SectionHeader
+                  icon={
+                    <div className="h-4.5 w-4.5" style={{
+                      backgroundColor: "#3F3D8F",
+                      maskImage: "url(/shift.png)", maskSize: "contain", maskRepeat: "no-repeat", maskPosition: "center",
+                      WebkitMaskImage: "url(/shift.png)", WebkitMaskSize: "contain", WebkitMaskRepeat: "no-repeat", WebkitMaskPosition: "center",
+                    }} />
+                  }
+                  title="Shift Progress"
+                  subtitle="14 covers to target"
+                />
 
-                <div className="space-y-3">
-                  <div className="h-3 w-full bg-slate-100 rounded-full overflow-hidden p-0.5 shadow-inner">
-                    <div 
-                      className="h-full rounded-full transition-all duration-1000 shadow-[0_0_10px_oklch(0.45_0.12_285_/_0.3)]"
-                      style={{ 
-                        width: "75%",
-                        background: "linear-gradient(90deg, #3F3D8F 0%, oklch(0.55 0.15 275) 100%)" 
-                      }}
-                    />
-                  </div>
-                  <div className="flex items-center gap-2 px-1">
-                    <div className="w-1.5 h-1.5 rounded-full bg-oklch(0.7 0.15 150) animate-pulse" />
-                    <p className="text-[10px] uppercase text-slate-500">
-                      Excellent pace <span className="opacity-40">· 14 to hit daily target of 56</span>
-                    </p>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-3 gap-3">
-                  {[
-                    { value: "4.8",     label: "Rating",    color: "oklch(0.7 0.15 150)", bg: "oklch(0.7 0.15 150 / 0.08)" },
-                    { value: "3.5m",    label: "Wait",      color: "#3F3D8F", bg: "oklch(0.45 0.12 285 / 0.08)" },
-                    { value: "KES 850", label: "PPC",       color: "oklch(0.75 0.15 75)", bg: "oklch(0.75 0.15 75 / 0.08)" },
-                  ].map((m) => (
-                    <div
-                      key={m.label}
-                      className="rounded-2xl p-4 transition-all hover:scale-105 border flex flex-col items-center justify-center gap-1"
-                      style={{ 
-                        background: m.bg,
-                        borderColor: "oklch(0.45 0.12 285 / 0.05)"
-                      }}
-                    >
-                      <p className="text-sm tabular-nums" style={{ color: m.color }}>{m.value}</p>
-                      <p className="text-[8px] uppercase opacity-40">{m.label}</p>
+                <div className="p-5 space-y-5">
+                  {/* Main numbers */}
+                  <div className="flex items-end justify-between">
+                    <div>
+                      <p className="text-[2.4rem] leading-none font-bold text-[#0D031B] tracking-tight">75<span className="text-xl text-[#9A94AA]">%</span></p>
+                      <p className="text-[9px] tracking-widest uppercase text-[#9A94AA] mt-1 font-bold">Quota Met</p>
                     </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+                    <div className="text-right">
+                      <p className="text-2xl font-bold tabular-nums text-[#3F3D8F]">42</p>
+                      <p className="text-[9px] tracking-widest uppercase text-[#9A94AA] mt-1 font-bold">Served Today</p>
+                    </div>
+                  </div>
 
-            {/* Recent Activity */}
-            <Card
-              className="overflow-hidden border-0 bg-white/70 backdrop-blur-xl shadow-2xl relative"
-              style={{ 
-                boxShadow: "0 10px 40px -10px oklch(0.45 0.12 285 / 0.1)",
-                border: "1px solid oklch(0.45 0.12 285 / 0.08)" 
-              }}
-            >
-              <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-oklch(0.45 0.12 285 / 0.4) to-transparent opacity-20" />
-              
-              <CardHeader
-                className="px-6 py-5"
-                style={{ borderBottom: "1px solid oklch(0.45 0.12 285 / 0.05)" }}
-              >
-                <CardTitle
-                  className="text-[13px] uppercase"
-                  style={{ color: "#0D031B" }}
-                >
-                  Activity Stream
-                </CardTitle>
-              </CardHeader>
-              <ScrollArea className="h-[260px]">
-                <CardContent className="p-0">
-                  <div className="divide-y" style={{ borderColor: "oklch(0.45 0.12 285 / 0.05)" }}>
+                  {/* Progress bar */}
+                  <div className="space-y-2">
+                    <div className="h-2.5 w-full rounded-full overflow-hidden bg-[#3F3D8F]/05 border border-[#3F3D8F]/10">
+                      <div
+                        className="h-full rounded-full relative overflow-hidden"
+                        style={{ width: "75%", background: "linear-gradient(90deg, #7C3AED, #6d28d9)" }}
+                      >
+                        <div className="absolute inset-0 bg-white/20 animate-pulse" style={{ borderRadius: "inherit" }} />
+                      </div>
+                    </div>
+                    <p className="text-[9px] tracking-wide text-[#9A94AA] font-medium">Excellent pace · 14 to target of 56</p>
+                  </div>
+
+                  {/* Micro stats */}
+                  <div className="grid grid-cols-3 gap-2">
+                    {[
+                      { value: "4.8",     label: "Rating",  color: "#34d399", bg: "rgba(52,211,153,0.07)" },
+                      { value: "3.5m",    label: "Wait",    color: "#a78bfa", bg: "rgba(167,139,250,0.07)" },
+                      { value: "KES 850", label: "Avg",     color: "#fb923c", bg: "rgba(251,146,60,0.07)" },
+                    ].map((m) => (
+                      <div
+                        key={m.label}
+                        className="rounded-2xl p-3 flex flex-col items-center gap-1 border border-white/05"
+                        style={{ background: m.bg }}
+                      >
+                        <p className="text-sm tabular-nums font-bold" style={{ color: m.color }}>{m.value}</p>
+                        <p className="text-[8px] tracking-widest uppercase text-[#9A94AA] font-bold">{m.label}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </GlassCard>
+
+              {/* Activity Stream */}
+              <GlassCard>
+                <div className="px-5 py-4" style={{ borderBottom: "1px solid rgba(63, 61, 143, 0.05)" }}>
+                  <p className="text-[11px] tracking-widest uppercase font-bold text-[#0D031B]">Activity Stream</p>
+                </div>
+                <ScrollArea className="h-[240px]">
+                  <div>
                     {recentActivity.map((item, i) => {
                       const Icon = item.icon
                       return (
                         <div
                           key={i}
-                          className="flex items-center gap-4 px-6 py-4 transition-all duration-300 hover:bg-white cursor-pointer group"
+                          className="flex items-center gap-3.5 px-5 py-3 hover:bg-[#3F3D8F]/05 transition-all cursor-pointer group"
+                          style={{ borderTop: i > 0 ? "1px solid rgba(63, 61, 143, 0.05)" : undefined }}
                         >
-                          {/* Icon Container */}
-                          <div
-                            className={cn("w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 transition-all duration-500 group-hover:scale-110 shadow-sm", item.bg)}
-                          >
-                            {typeof Icon === 'string' ? (
-                              <div 
-                                className="h-4.5 w-4.5" 
-                                style={{ 
-                                  backgroundColor: item.dot, // Use the dot color which is the hex/oklch string
-                                  maskImage: `url(${Icon})`,
-                                  maskSize: 'contain',
-                                  maskRepeat: 'no-repeat',
-                                  maskPosition: 'center',
-                                  WebkitMaskImage: `url(${Icon})`,
-                                  WebkitMaskSize: 'contain',
-                                  WebkitMaskRepeat: 'no-repeat',
-                                  WebkitMaskPosition: 'center'
-                                }} 
-                              />
-                            ) : (
-                              <Icon className={cn("h-4.5 w-4.5", item.color)} />
-                            )}
+                          <div className={cn("w-9 h-9 rounded-2xl flex items-center justify-center shrink-0 transition-transform group-hover:scale-105 shadow-sm", item.bg)}>
+                            {typeof Icon === 'string'
+                              ? <div className="h-4 w-4" style={{ backgroundColor: item.dot, maskImage: `url(${Icon})`, maskSize: 'contain', maskRepeat: 'no-repeat', maskPosition: 'center', WebkitMaskImage: `url(${Icon})`, WebkitMaskSize: 'contain', WebkitMaskRepeat: 'no-repeat', WebkitMaskPosition: 'center' }} />
+                              : <Icon className={cn("h-4 w-4", item.color)} />
+                            }
                           </div>
- 
                           <div className="flex-1 min-w-0">
-                            <p
-                              className="text-[13px] truncate transition-colors group-hover:text-[#3F3D8F]"
-                              style={{ color: "#3D374C" }}
-                            >
-                              {item.text}
-                            </p>
-                            <div className="flex items-center gap-2 mt-1">
-                               <div className="w-1 h-1 rounded-full bg-slate-300" />
-                               <p className="text-[10px] uppercase opacity-40" style={{ color: "#736C83" }}>
-                                  {item.sub}
-                               </p>
-                            </div>
+                            <p className="text-[12px] text-[#0D031B] truncate group-hover:text-[#3F3D8F] transition-colors font-bold">{item.text}</p>
+                            <p className="text-[9px] tracking-wide uppercase text-[#9A94AA] mt-0.5 font-bold">{item.sub}</p>
                           </div>
- 
-                          <ArrowRight
-                            className="h-4 w-4 shrink-0 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
-                            style={{ color: "#3F3D8F" }}
-                          />
+                          <ArrowRight className="h-3.5 w-3.5 shrink-0 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 text-[#3F3D8F]" />
                         </div>
                       )
                     })}
                   </div>
-                </CardContent>
-              </ScrollArea>
-            </Card>
+                </ScrollArea>
+              </GlassCard>
 
+            </div>
           </div>
         </div>
       </div>

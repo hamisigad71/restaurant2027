@@ -125,11 +125,11 @@ export function MobileNav() {
       ],
       cleaner: [
         { label: "Tasks", icon: "/office.png", href: "/cleaners" },
-        { label: "Alerts", icon: BellIcon, href: "/cleaners" },
+        { label: "Alerts", icon: "/food-delivery.png", href: "/cleaners" },
       ],
       security: [
         { label: "Watch", icon: "/policeman.png", href: "/security" },
-        { label: "Logs", icon: ClipboardDocumentListIcon, href: "/security" },
+        { label: "Logs", icon: "/report.png", href: "/security" },
       ]
     }
     return configs[role] || configs.customer
@@ -278,8 +278,8 @@ export function MobileNav() {
                       className={cn(
                         "p-2.5 rounded-none transition-all duration-500 relative",
                         isActive 
-                          ? "text-oklch(0.42 0.14 285) scale-100" 
-                          : "text-[#736C83] group-hover:text-oklch(0.42 0.14 285) group-active:scale-90"
+                          ? "text-[#3F3D8F] scale-100" 
+                          : "text-[#736C83] group-hover:text-[#3F3D8F] group-active:scale-90"
                       )}
                       style={isActive ? { animation: "float 3s ease-in-out infinite" } : {}}
                     >
@@ -289,7 +289,7 @@ export function MobileNav() {
                         <div 
                           className="h-5.5 w-5.5 transition-all duration-500 relative z-10" 
                           style={{ 
-                            backgroundColor: isActive ? "oklch(0.42 0.14 285)" : "oklch(0.42 0.14 285 / 0.65)",
+                            backgroundColor: isActive ? "#3F3D8F" : "oklch(0.42 0.14 285 / 0.65)",
                             WebkitMaskImage: `url(${Icon})`,
                             WebkitMaskSize: "contain",
                             WebkitMaskRepeat: "no-repeat",

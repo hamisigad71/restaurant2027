@@ -481,9 +481,13 @@ function OrdersContent() {
                         : "0 3px 12px oklch(0.42 0.14 285 / 0.3)",
                     }}
                   >
-                    <ShoppingCart 
-                      className="h-5 w-5 text-white transition-transform group-hover:scale-110" 
-                      strokeWidth={2.5}
+                    <div 
+                      className="h-5.5 w-5.5 transition-transform group-hover:scale-110" 
+                      style={{ 
+                        backgroundColor: "white",
+                        maskImage: "url('/shopping-cart.png')", maskSize: 'contain', maskRepeat: 'no-repeat', maskPosition: 'center',
+                        WebkitMaskImage: "url('/shopping-cart.png')", WebkitMaskSize: 'contain', WebkitMaskRepeat: 'no-repeat', WebkitMaskPosition: 'center'
+                      }} 
                     />
                     
                     {/* Enhanced badge */}

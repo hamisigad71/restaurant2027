@@ -358,14 +358,14 @@ export default function LoginPage() {
 
                           <div className="relative z-10 flex flex-row items-center gap-3 w-full">
                             <div
-                              className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 transition-all duration-500 shadow-md relative"
+                              className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 transition-all duration-500 relative border"
                               style={{
-                                background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.16 275) 100%)",
-                                boxShadow: "0 4px 8px oklch(0.42 0.14 285 / 0.25)"
+                                background: "rgba(63, 61, 143, 0.09)",
+                                borderColor: "rgba(63, 61, 143, 0.15)",
                               }}
                             >
                               {typeof sub.icon === 'string' ? (
-                                <img src={sub.icon} className="h-4.5 w-4.5 brightness-0 invert group-hover:scale-110 transition-transform duration-500" alt={sub.label} />
+                                <img src={sub.icon} className="h-4.5 w-4.5 group-hover:scale-110 transition-transform duration-500" alt={sub.label} style={{ filter: "invert(31%) sepia(68%) saturate(1116%) hue-rotate(221deg) brightness(91%) contrast(89%)" }} />
                               ) : (() => {
                                 const DynamicIcon = sub.icon as any
                                 return <DynamicIcon className="h-3.5 w-3.5 text-white transition-transform group-hover:scale-110" />
@@ -408,17 +408,17 @@ export default function LoginPage() {
                             {/* Icon with glow */}
                             <div 
                               className={cn(
-                                "flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-xl shrink-0 transition-all duration-500 shadow-lg relative",
+                                "flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-xl shrink-0 transition-all duration-500 relative border",
                               )}
                               style={{ 
-                                background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.16 275) 100%)",
-                                boxShadow: "0 6px 12px oklch(0.42 0.14 285 / 0.25)"
+                                background: "rgba(63, 61, 143, 0.09)",
+                                borderColor: "rgba(63, 61, 143, 0.15)",
                               }}
                             >
                               {busy ? (
-                                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                <div className="w-5 h-5 border-2 border-[#3F3D8F]/30 border-t-[#3F3D8F] rounded-full animate-spin" />
                               ) : (
-                                <img src={opt.icon} className="h-4 w-4 brightness-0 invert group-hover:scale-110 transition-transform duration-500" alt={opt.label} />
+                                <img src={opt.icon} className="h-4 w-4 group-hover:scale-110 transition-transform duration-500" alt={opt.label} style={{ filter: "invert(31%) sepia(68%) saturate(1116%) hue-rotate(221deg) brightness(91%) contrast(89%)" }} />
                               )}
                             </div>
 
