@@ -23,7 +23,7 @@ export function FilterBar({ active, counts, search, onFilter, onSearch }: Filter
   return (
     <div 
       className="px-5 py-3 border-b shrink-0 flex items-center justify-between gap-4" 
-      style={{ background: "rgba(255,255,255,0.6)", backdropFilter: "blur(12px)", borderColor: "oklch(0.45 0.12 285 / 0.1)" }}
+      style={{ background: "rgba(255,255,255,0.6)", backdropFilter: "blur(12px)", borderColor: "rgba(11, 59, 54,  0.1)" }}
     >
       <div className="flex-1 max-w-sm relative">
         <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4" style={{ color: "#736C83" }} />
@@ -36,16 +36,16 @@ export function FilterBar({ active, counts, search, onFilter, onSearch }: Filter
       </div>
 
       <Tabs value={active} onValueChange={onFilter}>
-        <TabsList className="h-auto p-1 gap-1" style={{ background: "rgba(255,255,255,0.7)", border: "1px solid oklch(0.45 0.12 285 / 0.15)", borderRadius: "14px" }}>
+        <TabsList className="h-auto p-1 gap-1" style={{ background: "rgba(255,255,255,0.7)", border: "1px solid rgba(11, 59, 54,  0.15)", borderRadius: "14px" }}>
           {FILTERS.map(f => (
             <TabsTrigger 
               key={f.id} 
               value={f.id} 
               className="flex items-center gap-2 h-9 px-4 text-[11px] font-bold uppercase  rounded-xl transition-all"
-              style={active === f.id ? { background: "#3F3D8F", color: "white", boxShadow: "0 2px 8px oklch(0.45 0.12 285 / 0.25)" } : { color: "#736C83" }}
+              style={active === f.id ? { background: "#0B3B36", color: "white", boxShadow: "0 2px 8px rgba(11, 59, 54,  0.25)" } : { color: "#736C83" }}
             >
               {f.label}
-              <span className="min-w-[20px] h-[20px] rounded-full flex items-center justify-center text-[10px] font-bold px-1.5" style={active === f.id ? { background: "rgba(255,255,255,0.22)" } : { background: "oklch(0.45 0.12 285 / 0.08)" }}>
+              <span className="min-w-[20px] h-[20px] rounded-full flex items-center justify-center text-[10px] font-bold px-1.5" style={active === f.id ? { background: "rgba(255,255,255,0.22)" } : { background: "rgba(11, 59, 54,  0.08)" }}>
                 {counts[f.id]}
               </span>
             </TabsTrigger>

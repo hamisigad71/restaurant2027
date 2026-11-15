@@ -211,7 +211,7 @@ export default function MenuPage() {
               key={item.id}
               className="group relative flex flex-col overflow-hidden rounded-lg border bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
               style={{
-                borderColor: "oklch(0.45 0.12 285 / 0.1)",
+                borderColor: "rgba(11, 59, 54,  0.1)",
                 boxShadow: "0 2px 10px rgba(13,3,27,0.06)",
               }}
             >
@@ -252,7 +252,7 @@ export default function MenuPage() {
                    <span
                       className="flex items-center gap-1 text-[9px] font-bold uppercase px-2 py-1 rounded-full text-white"
                       style={{
-                        background: "oklch(0.45 0.12 285 / 0.7)",
+                        background: "rgba(11, 59, 54,  0.7)",
                         backdropFilter: "blur(6px)",
                       }}
                     >
@@ -275,7 +275,7 @@ export default function MenuPage() {
                   <div
                     className="flex items-center gap-2 px-4 py-2 rounded-xl text-[10px] font-bold uppercase text-white"
                     style={{
-                      background: "oklch(0.45 0.12 285 / 0.9)",
+                      background: "rgba(11, 59, 54,  0.9)",
                       backdropFilter: "blur(8px)",
                       boxShadow: "0 4px 16px rgba(0,0,0,0.2)",
                     }}
@@ -307,7 +307,7 @@ export default function MenuPage() {
                 </div>
 
                 {/* Action Strip */}
-                <div className="flex flex-col gap-2 pt-2 mt-auto border-t" style={{ borderColor: "oklch(0.45 0.12 285 / 0.08)" }}>
+                <div className="flex flex-col gap-2 pt-2 mt-auto border-t" style={{ borderColor: "rgba(11, 59, 54,  0.08)" }}>
                   <button
                     onClick={() => handleToggleAvailability(item.id)}
                     className="flex items-center justify-center gap-1.5 text-[9px] font-bold uppercase px-2 py-1.5 rounded-lg transition-colors w-full"

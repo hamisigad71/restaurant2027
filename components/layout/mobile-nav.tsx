@@ -229,7 +229,7 @@ export function MobileNav() {
             
             {/* Animated Active Indicator - NOW A PERFECT SQUARE */}
             <div 
-              className="absolute h-14 w-14 transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] z-0 flex items-center justify-center top-1/2 -translate-y-1/2"
+              className="absolute h-14 w-14 transition-all duration-300 ease-out z-0 flex items-center justify-center top-1/2 -translate-y-1/2"
               style={{
                 width: `${100 / navItems.length}%`,
                 left: `${(activeIndex === -1 ? 0 : activeIndex) * (100 / navItems.length)}%`,
@@ -260,7 +260,7 @@ export function MobileNav() {
                   {ripples.map(ripple => (
                     <div
                       key={ripple.id}
-                      className="absolute rounded-full bg-oklch(0.42 0.14 285 / 0.2) pointer-events-none"
+                      className="absolute rounded-full bg-rgba(11, 59, 54,  0.2) pointer-events-none"
                       style={{
                         left: ripple.x,
                         top: ripple.y,
@@ -278,8 +278,8 @@ export function MobileNav() {
                       className={cn(
                         "p-2.5 rounded-none transition-all duration-500 relative",
                         isActive 
-                          ? "text-[#3F3D8F] scale-100" 
-                          : "text-[#736C83] group-hover:text-[#3F3D8F] group-active:scale-90"
+                          ? "text-[#0B3B36] scale-100" 
+                          : "text-[#736C83] group-hover:text-[#0B3B36] group-active:scale-90"
                       )}
                       style={isActive ? { animation: "float 3s ease-in-out infinite" } : {}}
                     >
@@ -289,7 +289,7 @@ export function MobileNav() {
                         <div 
                           className="h-5.5 w-5.5 transition-all duration-500 relative z-10" 
                           style={{ 
-                            backgroundColor: isActive ? "#3F3D8F" : "oklch(0.42 0.14 285 / 0.65)",
+                            backgroundColor: isActive ? "#0B3B36" : "rgba(11, 59, 54,  0.65)",
                             WebkitMaskImage: `url(${Icon})`,
                             WebkitMaskSize: "contain",
                             WebkitMaskRepeat: "no-repeat",
@@ -314,11 +314,11 @@ export function MobileNav() {
                     className={cn(
                       "text-[9px] font-bold uppercase transition-all duration-500 relative",
                       isActive 
-                        ? "text-oklch(0.42 0.14 285) opacity-100 translate-y-0" 
-                        : "text-oklch(0.42 0.14 285 / 0.65) opacity-65 translate-y-0.5 group-hover:opacity-100 group-hover:translate-y-0"
+                        ? "text-#0B3B36 opacity-100 translate-y-0" 
+                        : "text-rgba(11, 59, 54,  0.65) opacity-65 translate-y-0.5 group-hover:opacity-100 group-hover:translate-y-0"
                     )}
                     style={isActive ? { 
-                      textShadow: "0 0 8px oklch(0.42 0.14 285 / 0.3)"
+                      textShadow: "0 0 8px rgba(11, 59, 54,  0.3)"
                     } : {}}
                   >
                     {item.label}
@@ -329,19 +329,19 @@ export function MobileNav() {
                     <div className={cn(
                       "w-1 h-1 rounded-full transition-all duration-500",
                       isActive 
-                        ? "opacity-100 scale-100 bg-oklch(0.42 0.14 285)" 
+                        ? "opacity-100 scale-100 bg-#0B3B36" 
                         : "opacity-0 scale-0 bg-transparent"
                     )}>
                       {isActive && (
                         <>
                           {/* Pulsing outer ring */}
                           <div 
-                            className="absolute inset-0 rounded-full bg-oklch(0.42 0.14 285)"
+                            className="absolute inset-0 rounded-full bg-#0B3B36"
                             style={{ animation: "pulse-glow 2s ease-in-out infinite" }}
                           />
                           {/* Static glow */}
                           <div 
-                            className="absolute inset-0 rounded-full blur-sm bg-oklch(0.42 0.14 285 / 0.6)"
+                            className="absolute inset-0 rounded-full blur-sm bg-rgba(11, 59, 54,  0.6)"
                           />
                         </>
                       )}

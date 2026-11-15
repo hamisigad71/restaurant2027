@@ -54,7 +54,7 @@ function POSLoader() {
         {/* Animated background orb */}
         <div 
           className="absolute inset-0 -m-20 rounded-full opacity-20 blur-3xl animate-pulse"
-          style={{ background: "#3F3D8F" }}
+          style={{ background: "#0B3B36" }}
         />
         
         <div className="relative">
@@ -62,7 +62,7 @@ function POSLoader() {
           <div 
             className="absolute inset-0 rounded-[20px] animate-spin"
             style={{ 
-              background: "conic-gradient(from 0deg, #3F3D8F, transparent, #3F3D8F)",
+              background: "conic-gradient(from 0deg, #0B3B36, transparent, #0B3B36)",
               padding: "2px"
             }}
           />
@@ -72,13 +72,13 @@ function POSLoader() {
             className="relative w-16 h-16 rounded-[18px] flex items-center justify-center"
             style={{ 
               background: "white",
-              boxShadow: "0 8px 32px oklch(0.42 0.14 285 / 0.2)"
+              boxShadow: "0 8px 32px rgba(11, 59, 54,  0.2)"
             }}
           >
             <div 
               className="h-7 w-7 animate-pulse"
               style={{
-                backgroundColor: "#3F3D8F",
+                backgroundColor: "#0B3B36",
                 WebkitMaskImage: `url('/dining-table.png')`,
                 WebkitMaskRepeat: "no-repeat",
                 WebkitMaskSize: "contain",
@@ -108,9 +108,9 @@ function POSLoader() {
           {[0, 1, 2].map((i) => (
             <div
               key={i}
-              className="w-2 h-2 rounded-full animate-bounce"
+              className="w-2 h-2 rounded-full animate-pulse"
               style={{
-                background: "#3F3D8F",
+                background: "#0B3B36",
                 animationDelay: `${i * 0.15}s`,
               }}
             />
@@ -321,7 +321,7 @@ function OrdersContent() {
             className="flex items-center justify-between px-4 sm:px-6 py-3.5 border-b shrink-0 backdrop-blur-xl sticky top-[-16px] md:top-[-24px] lg:top-[-32px] z-30"
             style={{
               background: "rgba(255,255,255,0.92)",
-              borderColor: "oklch(0.42 0.14 285 / 0.08)",
+              borderColor: "rgba(11, 59, 54,  0.08)",
               boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
             }}
           >
@@ -329,7 +329,7 @@ function OrdersContent() {
             <div 
               className="absolute top-0 left-0 right-0 h-[2px]"
               style={{
-                background: "linear-gradient(90deg, #3F3D8F 0%, oklch(0.55 0.18 270) 50%, #3F3D8F 100%)"
+                background: "linear-gradient(90deg, #0B3B36 0%, #13584F 50%, #0B3B36 100%)"
               }}
             />
 
@@ -349,9 +349,9 @@ function OrdersContent() {
               <Badge
                 className="flex items-center gap-1.5 text-[11px] font-bold px-3 py-1.5 rounded-xl border shadow-sm"
                 style={{
-                  background: "oklch(0.42 0.14 285 / 0.08)",
-                  color: "#3F3D8F",
-                  borderColor: "oklch(0.42 0.14 285 / 0.2)",
+                  background: "rgba(11, 59, 54,  0.08)",
+                  color: "#0B3B36",
+                  borderColor: "rgba(11, 59, 54,  0.2)",
                 }}
               >
                 <div 
@@ -374,16 +374,16 @@ function OrdersContent() {
                 <Separator 
                   orientation="vertical" 
                   className="h-5" 
-                  style={{ background: "oklch(0.42 0.14 285 / 0.12)" }}
+                  style={{ background: "rgba(11, 59, 54,  0.12)" }}
                 />
                 
                 <div className="flex items-center gap-2">
                   <div
                     className="flex items-center gap-1.5 text-[11px] font-bold px-2.5 py-1 rounded-lg border"
                     style={{
-                      background: "oklch(0.42 0.14 285 / 0.06)",
-                      color: "#3F3D8F",
-                      borderColor: "oklch(0.42 0.14 285 / 0.15)",
+                      background: "rgba(11, 59, 54,  0.06)",
+                      color: "#0B3B36",
+                      borderColor: "rgba(11, 59, 54,  0.15)",
                     }}
                   >
                     <Sparkles className="h-3 w-3" />
@@ -393,8 +393,8 @@ function OrdersContent() {
                   <div
                     className="text-[13px] font-bold px-2.5 py-1 rounded-lg"
                     style={{
-                      background: "oklch(0.42 0.14 285 / 0.08)",
-                      color: "#3F3D8F",
+                      background: "rgba(11, 59, 54,  0.08)",
+                      color: "#0B3B36",
                     }}
                   >
                     KES {total.toLocaleString()}
@@ -443,10 +443,10 @@ function OrdersContent() {
                 )}
                 style={{
                   borderColor: hasItems
-                    ? "oklch(0.42 0.14 285 / 0.25)"
-                    : "oklch(0.42 0.14 285 / 0.12)",
+                    ? "rgba(11, 59, 54,  0.25)"
+                    : "rgba(11, 59, 54,  0.12)",
                   boxShadow: hasItems
-                    ? "0 12px 40px oklch(0.42 0.14 285 / 0.25), 0 4px 12px rgba(0,0,0,0.08)"
+                    ? "0 12px 40px rgba(11, 59, 54,  0.25), 0 4px 12px rgba(0,0,0,0.08)"
                     : "0 8px 24px rgba(0,0,0,0.1)",
                 }}
               >
@@ -454,7 +454,7 @@ function OrdersContent() {
                 <div 
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                   style={{
-                    background: "radial-gradient(circle at 50% 50%, oklch(0.42 0.14 285 / 0.03) 0%, transparent 70%)"
+                    background: "radial-gradient(circle at 50% 50%, rgba(11, 59, 54,  0.03) 0%, transparent 70%)"
                   }}
                 />
 
@@ -462,7 +462,7 @@ function OrdersContent() {
                 <div 
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
                   style={{
-                    background: "linear-gradient(110deg, transparent 25%, oklch(0.42 0.14 285 / 0.08) 50%, transparent 75%)",
+                    background: "linear-gradient(110deg, transparent 25%, rgba(11, 59, 54,  0.08) 50%, transparent 75%)",
                     backgroundSize: "200% 100%",
                     animation: "shine 2s ease-in-out infinite"
                   }}
@@ -474,11 +474,11 @@ function OrdersContent() {
                     className="relative flex items-center justify-center w-11 h-11 rounded-[14px] shrink-0 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3"
                     style={{
                       background: hasItems
-                        ? "linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.16 275) 100%)"
-                        : "#3F3D8F",
+                        ? "linear-gradient(135deg, #0B3B36 0%, #062421 100%)"
+                        : "#0B3B36",
                       boxShadow: hasItems
-                        ? "0 4px 16px oklch(0.42 0.14 285 / 0.4), inset 0 1px 0 rgba(255,255,255,0.2)"
-                        : "0 3px 12px oklch(0.42 0.14 285 / 0.3)",
+                        ? "0 4px 16px rgba(11, 59, 54,  0.4), inset 0 1px 0 rgba(255,255,255,0.2)"
+                        : "0 3px 12px rgba(11, 59, 54,  0.3)",
                     }}
                   >
                     <div 
@@ -493,7 +493,7 @@ function OrdersContent() {
                     {/* Enhanced badge */}
                     {cartCount > 0 && (
                       <span
-                        className="absolute -top-2 -right-2 flex items-center justify-center rounded-full text-[10px] font-bold text-white leading-none animate-bounce"
+                        className="absolute -top-2 -right-2 flex items-center justify-center rounded-full text-[10px] font-bold text-white leading-none transition-transform duration-200 ease-out active:scale-95"
                         style={{
                           minWidth: "20px",
                           height: "20px",
@@ -519,7 +519,7 @@ function OrdersContent() {
                     <span
                       className="text-[11px] font-semibold mt-1 flex items-center gap-1.5"
                       style={{ 
-                        color: hasItems ? "#3F3D8F" : "#736C83" 
+                        color: hasItems ? "#0B3B36" : "#736C83" 
                       }}
                     >
                       {hasItems ? (
@@ -558,7 +558,7 @@ function OrdersContent() {
                 width: "min(calc(100vw - 2rem), 420px)",
                 borderRadius: "1.5rem",
                 boxShadow:
-                  "0 32px 64px oklch(0.42 0.14 285 / 0.2), 0 8px 24px rgba(0,0,0,0.12)",
+                  "0 32px 64px rgba(11, 59, 54,  0.2), 0 8px 24px rgba(0,0,0,0.12)",
                 background: "white",
               }}
             >
@@ -566,15 +566,15 @@ function OrdersContent() {
               <div
                 className="relative px-5 py-4 border-b overflow-hidden"
                 style={{
-                  background: "linear-gradient(135deg, oklch(0.42 0.14 285 / 0.04) 0%, oklch(0.42 0.14 285 / 0.02) 100%)",
-                  borderColor: "oklch(0.42 0.14 285 / 0.08)",
+                  background: "linear-gradient(135deg, rgba(11, 59, 54,  0.04) 0%, rgba(11, 59, 54,  0.02) 100%)",
+                  borderColor: "rgba(11, 59, 54,  0.08)",
                 }}
               >
                 {/* Decorative gradient line */}
                 <div 
                   className="absolute top-0 left-0 right-0 h-[3px]"
                   style={{
-                    background: "linear-gradient(90deg, #3F3D8F 0%, oklch(0.55 0.18 270) 50%, #3F3D8F 100%)"
+                    background: "linear-gradient(90deg, #0B3B36 0%, #13584F 50%, #0B3B36 100%)"
                   }}
                 />
 
@@ -583,13 +583,13 @@ function OrdersContent() {
                     <div
                       className="w-8 h-8 rounded-lg flex items-center justify-center"
                       style={{ 
-                        background: "oklch(0.42 0.14 285 / 0.1)",
-                        border: "1px solid oklch(0.42 0.14 285 / 0.2)"
+                        background: "rgba(11, 59, 54,  0.1)",
+                        border: "1px solid rgba(11, 59, 54,  0.2)"
                       }}
                     >
                       <Receipt
                         className="h-4 w-4"
-                        style={{ color: "#3F3D8F" }}
+                        style={{ color: "#0B3B36" }}
                       />
                     </div>
                     <div className="flex flex-col gap-0.5">
@@ -615,16 +615,16 @@ function OrdersContent() {
                       <Badge
                         className="text-[10px] font-bold px-2.5 py-1 rounded-lg border"
                         style={{
-                          background: "oklch(0.42 0.14 285 / 0.08)",
-                          color: "#3F3D8F",
-                          borderColor: "oklch(0.42 0.14 285 / 0.2)",
+                          background: "rgba(11, 59, 54,  0.08)",
+                          color: "#0B3B36",
+                          borderColor: "rgba(11, 59, 54,  0.2)",
                         }}
                       >
                         {cartCount} item{cartCount > 1 ? "s" : ""}
                       </Badge>
                       <span
                         className="text-[13px] font-bold"
-                        style={{ color: "#3F3D8F" }}
+                        style={{ color: "#0B3B36" }}
                       >
                         KES {subtotal.toLocaleString()}
                       </span>

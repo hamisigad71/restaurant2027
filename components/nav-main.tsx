@@ -45,23 +45,23 @@ export function NavMain({
               {hasSubItems ? (
                 <>
                   {item.icon && (typeof item.icon === 'string' ? (
-                    <div className="size-4 shrink-0 transition-all duration-200" style={{ backgroundColor: "oklch(0.42 0.14 285)", WebkitMaskImage: `url(${item.icon})`, WebkitMaskSize: "contain", WebkitMaskRepeat: "no-repeat", WebkitMaskPosition: "center", opacity: item.isActive ? 1 : 0.7 }} />
+                    <div className="size-4 shrink-0 transition-all duration-200" style={{ backgroundColor: item.isActive ? "#7AE72A" : "currentColor", WebkitMaskImage: `url(${item.icon})`, WebkitMaskSize: "contain", WebkitMaskRepeat: "no-repeat", WebkitMaskPosition: "center", opacity: item.isActive ? 1 : 0.7 }} />
                   ) : (
                     <item.icon className="size-4" />
                   ))}
                   <span>{item.title}</span>
-                  {item.badge && <SidebarMenuBadge className="ml-auto">{item.badge}</SidebarMenuBadge>}
+                  {item.badge && <SidebarMenuBadge className="ml-auto bg-[#7AE72A]/20 text-[#7AE72A] border-0">{item.badge}</SidebarMenuBadge>}
                   <ChevronRightIcon className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90 h-4 w-4" />
                 </>
               ) : (
                 <Link href={item.url}>
                   {item.icon && (typeof item.icon === 'string' ? (
-                    <div className="size-4 shrink-0 transition-all duration-200" style={{ backgroundColor: "oklch(0.42 0.14 285)", WebkitMaskImage: `url(${item.icon})`, WebkitMaskSize: "contain", WebkitMaskRepeat: "no-repeat", WebkitMaskPosition: "center", opacity: item.isActive ? 1 : 0.7 }} />
+                    <div className="size-4 shrink-0 transition-all duration-200" style={{ backgroundColor: item.isActive ? "#7AE72A" : "currentColor", WebkitMaskImage: `url(${item.icon})`, WebkitMaskSize: "contain", WebkitMaskRepeat: "no-repeat", WebkitMaskPosition: "center", opacity: item.isActive ? 1 : 0.7 }} />
                   ) : (
                     <item.icon className="size-4" />
                   ))}
                   <span>{item.title}</span>
-                  {item.badge && <SidebarMenuBadge className="ml-auto">{item.badge}</SidebarMenuBadge>}
+                  {item.badge && <SidebarMenuBadge className="ml-auto bg-[#7AE72A]/20 text-[#7AE72A] border-0">{item.badge}</SidebarMenuBadge>}
                 </Link>
               )}
             </SidebarMenuButton>

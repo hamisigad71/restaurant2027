@@ -150,7 +150,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
             style={{
               background: "rgba(253,252,255,0.92)",
               backdropFilter: "blur(20px)",
-              border: "1px solid oklch(0.45 0.12 285 / 0.12)",
+              border: "1px solid rgba(11, 59, 54,  0.12)",
               boxShadow: "0 16px 48px rgba(13,3,27,0.08)",
             }}
           >
@@ -166,9 +166,9 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
               </div>
               <div
                 className="flex items-center justify-center w-9 h-9 rounded-xl"
-                style={{ background: "oklch(0.45 0.12 285 / 0.1)" }}
+                style={{ background: "rgba(11, 59, 54,  0.1)" }}
               >
-                <Receipt className="h-4 w-4" style={{ color: "#3F3D8F" }} />
+                <Receipt className="h-4 w-4" style={{ color: "#0B3B36" }} />
               </div>
             </div>
 
@@ -185,7 +185,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
                       <span style={{ color: "#AEA6BF" }}>×{item.quantity}</span>
                     </span>
                   </div>
-                  <span className="text-[12px] font-semibold tabular-nums shrink-0" style={{ color: "#3F3D8F" }}>
+                  <span className="text-[12px] font-semibold tabular-nums shrink-0" style={{ color: "#0B3B36" }}>
                     KSh {(item.price * item.quantity).toLocaleString()}
                   </span>
                 </div>
@@ -215,7 +215,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
                 style={{ color: "#0D031B" }}
               >
                 <span>Total Paid</span>
-                <span className="tabular-nums" style={{ color: "#3F3D8F" }}>
+                <span className="tabular-nums" style={{ color: "#0B3B36" }}>
                   KSh {grandTotal.toLocaleString()}
                 </span>
               </div>
@@ -248,7 +248,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
             </p>
           )}
 
-          <div className="flex items-center gap-2 mb-8" style={{ color: "oklch(0.45 0.12 285 / 0.45)" }}>
+          <div className="flex items-center gap-2 mb-8" style={{ color: "rgba(11, 59, 54,  0.45)" }}>
             <UtensilsCrossed className="h-4 w-4" />
             <span className="text-[10px] font-medium uppercase ">
               Resto · Experience Excellence
@@ -263,8 +263,8 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
               "relative overflow-hidden border-0"
             )}
             style={{
-              background: "#3F3D8F",
-              boxShadow: "0 6px 24px oklch(0.45 0.12 285 / 0.35)",
+              background: "#0B3B36",
+              boxShadow: "0 6px 24px rgba(11, 59, 54,  0.35)",
             }}
           >
             {/* Shine effect */}
@@ -288,8 +288,8 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
           style={{
             background: "rgba(253,252,255,0.92)",
             backdropFilter: "blur(20px)",
-            borderColor: "oklch(0.45 0.12 285 / 0.1)",
-            boxShadow: "0 1px 12px oklch(0.45 0.12 285 / 0.06)",
+            borderColor: "rgba(11, 59, 54,  0.1)",
+            boxShadow: "0 1px 12px rgba(11, 59, 54,  0.06)",
           }}
         >
           <Tooltip>
@@ -299,7 +299,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
                 className="flex items-center justify-center w-9 h-9 rounded-xl border transition-all hover:scale-105 active:scale-95"
                 style={{
                   background: "#EBE6F8",
-                  borderColor: "oklch(0.45 0.12 285 / 0.15)",
+                  borderColor: "rgba(11, 59, 54,  0.15)",
                   color: "#3D374C",
                 }}
               >
@@ -318,7 +318,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
             </h1>
             <p
               className="text-[10px] font-bold uppercase  mt-0.5"
-              style={{ color: "#3F3D8F" }}
+              style={{ color: "#0B3B36" }}
             >
               Table {tableId}
             </p>
@@ -328,9 +328,9 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
           <Badge
             className="text-[10px] font-bold px-2.5 py-1 rounded-full border"
             style={{
-              background: "oklch(0.45 0.12 285 / 0.1)",
-              color: "#3F3D8F",
-              borderColor: "oklch(0.45 0.12 285 / 0.2)",
+              background: "rgba(11, 59, 54,  0.1)",
+              color: "#0B3B36",
+              borderColor: "rgba(11, 59, 54,  0.2)",
             }}
           >
             {orderedItems.reduce((s, i) => s + i.quantity, 0)} items
@@ -355,11 +355,11 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
               {orderedItems.length === 0 ? (
                 <div
                   className="flex flex-col items-center justify-center py-16 gap-3 rounded-3xl border border-dashed"
-                  style={{ borderColor: "oklch(0.45 0.12 285 / 0.2)" }}
+                  style={{ borderColor: "rgba(11, 59, 54,  0.2)" }}
                 >
                   <div
                     className="w-14 h-14 rounded-2xl flex items-center justify-center"
-                    style={{ background: "oklch(0.45 0.12 285 / 0.08)" }}
+                    style={{ background: "rgba(11, 59, 54,  0.08)" }}
                   >
                     <div 
                       className="h-6 w-6" 
@@ -388,7 +388,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
                   className="rounded-3xl overflow-hidden border divide-y"
                   style={{
                     background: "rgba(255,255,255,0.9)",
-                    borderColor: "oklch(0.45 0.12 285 / 0.1)",
+                    borderColor: "rgba(11, 59, 54,  0.1)",
                     
                   }}
                 >
@@ -423,7 +423,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
 
                       <p
                         className="text-[13px] font-bold tabular-nums shrink-0"
-                        style={{ color: "#3F3D8F" }}
+                        style={{ color: "#0B3B36" }}
                       >
                         KSh {(item.price * item.quantity).toLocaleString()}
                       </p>
@@ -458,16 +458,16 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
                       style={
                         isActive
                           ? {
-                              background: "#3F3D8F",
+                              background: "#0B3B36",
                               color: "white",
                               borderColor: "transparent",
-                              boxShadow: "0 4px 14px oklch(0.45 0.12 285 / 0.35)",
+                              boxShadow: "0 4px 14px rgba(11, 59, 54,  0.35)",
                               transform: "scale(1.04)",
                             }
                           : {
                               background: "rgba(255,255,255,0.85)",
                               color: "#3D374C",
-                              borderColor: "oklch(0.45 0.12 285 / 0.14)",
+                              borderColor: "rgba(11, 59, 54,  0.14)",
                             }
                       }
                     >
@@ -493,7 +493,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
                     className="pl-14 h-12 rounded-2xl border text-sm font-semibold"
                     style={{
                       background: "rgba(255,255,255,0.9)",
-                      borderColor: "oklch(0.45 0.12 285 / 0.2)",
+                      borderColor: "rgba(11, 59, 54,  0.2)",
                       color: "#0D031B",
                     }}
                   />
@@ -522,13 +522,13 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
                       style={
                         active
                           ? {
-                              background: "oklch(0.45 0.12 285 / 0.05)",
-                              borderColor: "oklch(0.45 0.12 285 / 0.4)",
-                              boxShadow: "0 2px 10px oklch(0.45 0.12 285 / 0.1)",
+                              background: "rgba(11, 59, 54,  0.05)",
+                              borderColor: "rgba(11, 59, 54,  0.4)",
+                              boxShadow: "0 2px 10px rgba(11, 59, 54,  0.1)",
                             }
                           : {
                               background: "rgba(255,255,255,0.88)",
-                              borderColor: "oklch(0.45 0.12 285 / 0.12)",
+                              borderColor: "rgba(11, 59, 54,  0.12)",
                             }
                       }
                     >
@@ -561,7 +561,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
                         className="w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-all duration-200"
                         style={
                           active
-                            ? { background: "#3F3D8F", borderColor: "#3F3D8F" }
+                            ? { background: "#0B3B36", borderColor: "#0B3B36" }
                             : { borderColor: "#D0CBE4" }
                         }
                       >
@@ -586,7 +586,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
           style={{
             background: "rgba(253,252,255,0.96)",
             backdropFilter: "blur(20px)",
-            borderColor: "oklch(0.45 0.12 285 / 0.1)",
+            borderColor: "rgba(11, 59, 54,  0.1)",
             boxShadow: "0 -4px 24px rgba(13,3,27,0.05)",
           }}
         >
@@ -596,8 +596,8 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
             <div
               className="flex items-center justify-between px-4 py-3.5 rounded-2xl border"
               style={{
-                background: "oklch(0.45 0.12 285 / 0.05)",
-                borderColor: "oklch(0.45 0.12 285 / 0.1)",
+                background: "rgba(11, 59, 54,  0.05)",
+                borderColor: "rgba(11, 59, 54,  0.1)",
               }}
             >
               <div className="space-y-1">
@@ -620,7 +620,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
                 </p>
                 <p
                   className="text-2xl font-bold tabular-nums leading-tight"
-                  style={{ color: "#3F3D8F" }}
+                  style={{ color: "#0B3B36" }}
                 >
                   KSh {grandTotal.toLocaleString()}
                 </p>
@@ -633,8 +633,8 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
               disabled={orderedItems.length === 0}
               className="w-full flex items-center gap-3 justify-center h-14 rounded-2xl font-bold text-[13px] uppercase  text-white transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden group"
               style={{
-                background: "#3F3D8F",
-                boxShadow: "0 8px 28px oklch(0.45 0.12 285 / 0.4)",
+                background: "#0B3B36",
+                boxShadow: "0 8px 28px rgba(11, 59, 54,  0.4)",
               }}
             >
               {/* Shimmer on hover */}

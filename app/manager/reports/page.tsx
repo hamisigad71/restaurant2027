@@ -108,7 +108,7 @@ export default function ManagerReportsPage() {
                   <p className="text-2xl font-heading">KSh 3,840</p>
                 </div>
                 <div className="text-success flex items-center gap-1 text-xs bg-success/10 px-2 py-1 rounded-full">
-                  <TrendingUp className="h-3 w-3" />
+                  <ArrowTrendingUpIcon className="h-3 w-3" />
                   +4%
                 </div>
               </div>
@@ -118,7 +118,7 @@ export default function ManagerReportsPage() {
                   <p className="text-2xl font-heading">1.5h</p>
                 </div>
                 <div className="text-success flex items-center gap-1 text-xs bg-success/10 px-2 py-1 rounded-full">
-                  <TrendingUp className="h-3 w-3" />
+                  <ArrowTrendingUpIcon className="h-3 w-3" />
                   -8m
                 </div>
               </div>

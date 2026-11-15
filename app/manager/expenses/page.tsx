@@ -53,16 +53,16 @@ const mockExpenses = [
 ]
 
 const budgetStats = [
-  { label: "Daily Revenue", value: "142,500", icon: ArrowTrendingUpIcon, from: "#3F3D8F", to: "oklch(0.38 0.16 275)", delta: "+12%", trend: "up" },
-  { label: "Daily Expenses", value: "89,400", icon: ArrowTrendingDownIcon, from: "#3F3D8F", to: "oklch(0.38 0.16 275)", delta: "-4%", trend: "down" },
-  { label: "Net Profit", value: "53,100", icon: CurrencyDollarIcon, from: "#3F3D8F", to: "oklch(0.38 0.16 275)", delta: "+8%", trend: "up" },
+  { label: "Daily Revenue", value: "142,500", icon: ArrowTrendingUpIcon, from: "#0B3B36", to: "#062421", delta: "+12%", trend: "up" },
+  { label: "Daily Expenses", value: "89,400", icon: ArrowTrendingDownIcon, from: "#0B3B36", to: "#062421", delta: "-4%", trend: "down" },
+  { label: "Net Profit", value: "53,100", icon: CurrencyDollarIcon, from: "#0B3B36", to: "#062421", delta: "+8%", trend: "up" },
 ]
 
 const budgetCategories = [
-  { label: "Inventory", val: 65, icon: ShoppingCartIcon, from: "#3F3D8F", to: "oklch(0.38 0.16 275)", amount: "KES 182,500" },
-  { label: "Labor", val: 45, icon: UserGroupIcon, from: "#3F3D8F", to: "oklch(0.38 0.16 275)", amount: "KES 126,450" },
-  { label: "Utilities", val: 15, icon: BoltIcon, from: "#3F3D8F", to: "oklch(0.38 0.16 275)", amount: "KES 42,150" },
-  { label: "Misc", val: 10, icon: BanknotesIcon, from: "#3F3D8F", to: "oklch(0.38 0.16 275)", amount: "KES 28,100" },
+  { label: "Inventory", val: 65, icon: ShoppingCartIcon, from: "#0B3B36", to: "#062421", amount: "KES 182,500" },
+  { label: "Labor", val: 45, icon: UserGroupIcon, from: "#0B3B36", to: "#062421", amount: "KES 126,450" },
+  { label: "Utilities", val: 15, icon: BoltIcon, from: "#0B3B36", to: "#062421", amount: "KES 42,150" },
+  { label: "Misc", val: 10, icon: BanknotesIcon, from: "#0B3B36", to: "#062421", amount: "KES 28,100" },
 ]
 
 export default function ManagerExpensesPage() {
@@ -87,7 +87,7 @@ export default function ManagerExpensesPage() {
               <div 
                 className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center shadow-lg"
                 style={{
-                  background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.16 275) 100%)",
+                  background: "linear-gradient(135deg, #0B3B36 0%, #062421 100%)",
                 }}
               >
                 <ChartPieIcon className="h-6 w-6 sm:h-7 sm:w-7 text-white" strokeWidth={2.5} />
@@ -97,7 +97,7 @@ export default function ManagerExpensesPage() {
                   Finance Hub
                 </h1>
                 <div className="flex items-center gap-2 mt-1.5">
-                  <div className="h-px w-8 bg-gradient-to-r from-[#3F3D8F] to-transparent" />
+                  <div className="h-px w-8 bg-gradient-to-r from-[#0B3B36] to-transparent" />
                   <p className="text-[10px] sm:text-[11px] font-semibold uppercase" style={{ color: "#736C83" }}>
                     Expenditure Tracking & COGS Control
                   </p>
@@ -111,7 +111,7 @@ export default function ManagerExpensesPage() {
               variant="outline"
               className="h-11 sm:h-12 px-5 sm:px-6 gap-2 font-normal rounded-[14px] text-xs uppercase transition-all hover:scale-105 active:scale-95 border-2"
               style={{
-                borderColor: "oklch(0.42 0.14 285 / 0.15)",
+                borderColor: "rgba(11, 59, 54,  0.15)",
                 color: "#736C83",
               }}
             >
@@ -121,8 +121,8 @@ export default function ManagerExpensesPage() {
             <Button 
               className="h-11 sm:h-12 px-5 sm:px-6 gap-2.5 text-white font-normal rounded-[14px] shadow-xl border-0 text-xs uppercase transition-all hover:-translate-y-0.5 hover:shadow-2xl active:translate-y-0 active:scale-95"
               style={{
-                background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.16 275) 100%)",
-                boxShadow: "0 8px 32px oklch(0.42 0.14 285 / 0.35)",
+                background: "linear-gradient(135deg, #0B3B36 0%, #062421 100%)",
+                boxShadow: "0 8px 32px rgba(11, 59, 54,  0.35)",
               }}
             >
               <PlusIcon className="h-4 w-4" strokeWidth={2.5} />
@@ -183,7 +183,7 @@ export default function ManagerExpensesPage() {
                 </div>
 
                 {/* Bottom accent line */}
-                <div className="mt-4 pt-4 border-t relative z-10" style={{ borderColor: "oklch(0.42 0.14 285 / 0.08)" }}>
+                <div className="mt-4 pt-4 border-t relative z-10" style={{ borderColor: "rgba(11, 59, 54,  0.08)" }}>
                   <p className="text-[10px] font-medium flex items-center gap-1.5" style={{ color: "#9A94AA" }}>
                     <ChartBarIcon className="h-3 w-3" />
                     vs. last period
@@ -200,14 +200,14 @@ export default function ManagerExpensesPage() {
             style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.08)" }}>
             
             {/* Enhanced Header */}
-            <CardHeader className="px-5 sm:px-6 py-5 border-b" style={{ borderColor: "oklch(0.42 0.14 285 / 0.08)" }}>
+            <CardHeader className="px-5 sm:px-6 py-5 border-b" style={{ borderColor: "rgba(11, 59, 54,  0.08)" }}>
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
                   <div 
                     className="w-10 h-10 rounded-xl flex items-center justify-center"
-                    style={{ background: "oklch(0.42 0.14 285 / 0.1)" }}
+                    style={{ background: "rgba(11, 59, 54,  0.1)" }}
                   >
-                    <DocumentTextIcon className="h-5 w-5" style={{ color: "#3F3D8F" }} strokeWidth={2.5} />
+                    <DocumentTextIcon className="h-5 w-5" style={{ color: "#0B3B36" }} strokeWidth={2.5} />
                   </div>
                   <div>
                     <CardTitle className="text-sm sm:text-base font-normal uppercase" style={{ color: "#0D031B" }}>
@@ -221,14 +221,14 @@ export default function ManagerExpensesPage() {
 
                 <div className="flex gap-2">
                   <div className="relative flex-1 sm:flex-none sm:w-64">
-                    <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4" style={{ color: "oklch(0.42 0.14 285 / 0.4)" }} />
+                    <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4" style={{ color: "rgba(11, 59, 54,  0.4)" }} />
                     <Input
                       placeholder="Search transactions..."
                       value={searchQuery}
                       onChange={e => setSearchQuery(e.target.value)}
                       className="pl-10 h-10 bg-white border-2 rounded-xl text-sm"
                       style={{
-                        borderColor: "oklch(0.42 0.14 285 / 0.12)",
+                        borderColor: "rgba(11, 59, 54,  0.12)",
                         color: "#0D031B",
                       }}
                     />
@@ -241,8 +241,8 @@ export default function ManagerExpensesPage() {
                         size="icon" 
                         className="h-10 w-10 rounded-xl border-2 transition-all hover:scale-105 active:scale-95"
                         style={{
-                          borderColor: "oklch(0.42 0.14 285 / 0.12)",
-                          color: "#3F3D8F",
+                          borderColor: "rgba(11, 59, 54,  0.12)",
+                          color: "#0B3B36",
                         }}
                       >
                         <FunnelIcon className="h-4 w-4" strokeWidth={2.5} />
@@ -251,19 +251,19 @@ export default function ManagerExpensesPage() {
                     <DropdownMenuContent align="end" className="bg-white/98 backdrop-blur-xl border-0 rounded-2xl shadow-2xl w-48">
                       <DropdownMenuItem 
                         onClick={() => setFilterStatus("all")}
-                        className="text-xs font-semibold rounded-xl m-1 focus:bg-oklch(0.42 0.14 285 / 0.08)"
+                        className="text-xs font-semibold rounded-xl m-1 focus:bg-rgba(11, 59, 54,  0.08)"
                       >
                         All Status
                       </DropdownMenuItem>
                       <DropdownMenuItem 
                         onClick={() => setFilterStatus("paid")}
-                        className="text-xs font-semibold rounded-xl m-1 focus:bg-oklch(0.42 0.14 285 / 0.08)"
+                        className="text-xs font-semibold rounded-xl m-1 focus:bg-rgba(11, 59, 54,  0.08)"
                       >
                         Paid Only
                       </DropdownMenuItem>
                       <DropdownMenuItem 
                         onClick={() => setFilterStatus("pending")}
-                        className="text-xs font-semibold rounded-xl m-1 focus:bg-oklch(0.42 0.14 285 / 0.08)"
+                        className="text-xs font-semibold rounded-xl m-1 focus:bg-rgba(11, 59, 54,  0.08)"
                       >
                         Pending Only
                       </DropdownMenuItem>
@@ -277,7 +277,7 @@ export default function ManagerExpensesPage() {
             <CardContent className="p-0">
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse">
-                  <thead style={{ background: "oklch(0.42 0.14 285 / 0.03)" }}>
+                  <thead style={{ background: "rgba(11, 59, 54,  0.03)" }}>
                     <tr className="text-[10px] font-normal uppercase" style={{ color: "#9A94AA" }}>
                       <th className="px-5 sm:px-6 py-4 whitespace-nowrap">Item / Category</th>
                       <th className="px-5 sm:px-6 py-4 whitespace-nowrap">Amount</th>
@@ -286,11 +286,11 @@ export default function ManagerExpensesPage() {
                       <th className="px-5 sm:px-6 py-4 text-right whitespace-nowrap">Actions</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y" style={{ borderColor: "oklch(0.42 0.14 285 / 0.05)" }}>
+                  <tbody className="divide-y" style={{ borderColor: "rgba(11, 59, 54,  0.05)" }}>
                     {filteredExpenses.map((exp) => (
                       <tr 
                         key={exp.id} 
-                        className="group transition-all hover:bg-oklch(0.42 0.14 285 / 0.02)"
+                        className="group transition-all hover:bg-rgba(11, 59, 54,  0.02)"
                       >
                         <td className="px-5 sm:px-6 py-4">
                           <div className="font-normal text-sm uppercase leading-tight" style={{ color: "#0D031B" }}>
@@ -300,9 +300,9 @@ export default function ManagerExpensesPage() {
                             <Badge 
                               className="text-[9px] py-0 px-2 h-auto font-normal uppercase border"
                               style={{
-                                background: "oklch(0.42 0.14 285 / 0.08)",
-                                color: "#3F3D8F",
-                                borderColor: "oklch(0.42 0.14 285 / 0.2)",
+                                background: "rgba(11, 59, 54,  0.08)",
+                                color: "#0B3B36",
+                                borderColor: "rgba(11, 59, 54,  0.2)",
                               }}
                             >
                               {exp.category}
@@ -350,25 +350,25 @@ export default function ManagerExpensesPage() {
                               <Button 
                                 variant="ghost" 
                                 size="icon" 
-                                className="h-9 w-9 rounded-xl transition-all hover:bg-oklch(0.42 0.14 285 / 0.08) active:scale-90"
+                                className="h-9 w-9 rounded-xl transition-all hover:bg-rgba(11, 59, 54,  0.08) active:scale-90"
                               >
-                                <MoreVertical className="h-4 w-4" style={{ color: "#9A94AA" }} />
+                                <EllipsisHorizontalIcon className="h-4 w-4" style={{ color: "#9A94AA" }} />
                               </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end" className="bg-white/98 backdrop-blur-xl border-0 rounded-2xl shadow-2xl w-48">
-                              <DropdownMenuItem className="text-xs font-semibold rounded-xl m-1 focus:bg-oklch(0.42 0.14 285 / 0.08)">
-                                <Eye className="h-3.5 w-3.5 mr-2" />
+                              <DropdownMenuItem className="text-xs font-semibold rounded-xl m-1 focus:bg-rgba(11, 59, 54,  0.08)">
+                                <EyeIcon className="h-3.5 w-3.5 mr-2" />
                                 View Details
                               </DropdownMenuItem>
-                              <DropdownMenuItem className="text-xs font-semibold rounded-xl m-1 focus:bg-oklch(0.42 0.14 285 / 0.08)">
-                                <Edit className="h-3.5 w-3.5 mr-2" />
+                              <DropdownMenuItem className="text-xs font-semibold rounded-xl m-1 focus:bg-rgba(11, 59, 54,  0.08)">
+                                <PencilIcon className="h-3.5 w-3.5 mr-2" />
                                 Edit Transaction
                               </DropdownMenuItem>
-                              <DropdownMenuItem className="text-xs font-semibold rounded-xl m-1 focus:bg-oklch(0.42 0.14 285 / 0.08)">
-                                <Download className="h-3.5 w-3.5 mr-2" />
+                              <DropdownMenuItem className="text-xs font-semibold rounded-xl m-1 focus:bg-rgba(11, 59, 54,  0.08)">
+                                <CloudArrowDownIcon className="h-3.5 w-3.5 mr-2" />
                                 Download Receipt
                               </DropdownMenuItem>
-                              <DropdownMenuSeparator className="my-1" style={{ background: "oklch(0.42 0.14 285 / 0.08)" }} />
+                              <DropdownMenuSeparator className="my-1" style={{ background: "rgba(11, 59, 54,  0.08)" }} />
                               <DropdownMenuItem className="text-xs font-semibold rounded-xl m-1 focus:bg-rose-50 text-rose-600">
                                 <TrashIcon className="h-3.5 w-3.5 mr-2" />
                                 Delete
@@ -387,9 +387,9 @@ export default function ManagerExpensesPage() {
                 <div className="flex flex-col items-center justify-center py-16 px-4">
                   <div 
                     className="w-16 h-16 rounded-2xl flex items-center justify-center mb-4"
-                    style={{ background: "oklch(0.42 0.14 285 / 0.08)" }}
+                    style={{ background: "rgba(11, 59, 54,  0.08)" }}
                   >
-                    <FileText className="h-8 w-8" style={{ color: "oklch(0.42 0.14 285 / 0.4)" }} />
+                    <DocumentTextIcon className="h-8 w-8" style={{ color: "rgba(11, 59, 54,  0.4)" }} />
                   </div>
                   <p className="text-sm font-normal uppercase" style={{ color: "#9A94AA" }}>
                     No transactions found
@@ -410,13 +410,13 @@ export default function ManagerExpensesPage() {
               className="border-0 bg-white rounded-[24px] shadow-xl overflow-hidden"
               style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.08)" }}
             >
-              <CardHeader className="px-6 py-5 border-b" style={{ borderColor: "oklch(0.42 0.14 285 / 0.08)" }}>
+              <CardHeader className="px-6 py-5 border-b" style={{ borderColor: "rgba(11, 59, 54,  0.08)" }}>
                 <div className="flex items-center gap-3">
                   <div 
                     className="w-10 h-10 rounded-xl flex items-center justify-center"
-                    style={{ background: "oklch(0.42 0.14 285 / 0.1)" }}
+                    style={{ background: "rgba(11, 59, 54,  0.1)" }}
                   >
-                    <CheckBadgeIcon className="h-5 w-5" style={{ color: "#3F3D8F" }} strokeWidth={2.5} />
+                    <CheckBadgeIcon className="h-5 w-5" style={{ color: "#0B3B36" }} strokeWidth={2.5} />
                   </div>
                   <CardTitle className="text-sm font-normal uppercase" style={{ color: "#0D031B" }}>
                     Budget Allocation
@@ -446,12 +446,12 @@ export default function ManagerExpensesPage() {
                             </span>
                           </div>
                         </div>
-                        <span className="text-sm font-medium tabular-nums" style={{ color: "#3F3D8F" }}>
+                        <span className="text-sm font-medium tabular-nums" style={{ color: "#0B3B36" }}>
                           {item.val}%
                         </span>
                       </div>
                       
-                      <div className="h-2.5 rounded-full overflow-hidden" style={{ background: "oklch(0.42 0.14 285 / 0.08)" }}>
+                      <div className="h-2.5 rounded-full overflow-hidden" style={{ background: "rgba(11, 59, 54,  0.08)" }}>
                         <div 
                           className="h-full rounded-full transition-all duration-1000"
                           style={{ 
@@ -470,8 +470,8 @@ export default function ManagerExpensesPage() {
             <Card 
               className="border-0 rounded-[24px] shadow-2xl overflow-hidden relative"
               style={{
-                background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.35 0.15 280) 100%)",
-                boxShadow: "0 12px 40px oklch(0.42 0.14 285 / 0.4)",
+                background: "linear-gradient(135deg, #0B3B36 0%, #062421 100%)",
+                boxShadow: "0 12px 40px rgba(11, 59, 54,  0.4)",
               }}
             >
               {/* Decorative orbs */}

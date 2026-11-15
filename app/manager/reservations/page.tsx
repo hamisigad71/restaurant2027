@@ -49,10 +49,10 @@ const mockReservations = [
 ]
 
 const stats = [
-  { label: "Today's Bookings", value: "18", icon: CalendarIcon, from: "#3F3D8F", to: "oklch(0.38 0.16 275)", change: "+12%" },
-  { label: "Total Guests", value: "54", icon: UserGroupIcon, from: "#3F3D8F", to: "oklch(0.38 0.16 275)", change: "+8%" },
-  { label: "Pending Requests", value: "4", icon: ClockIcon, from: "#3F3D8F", to: "oklch(0.38 0.16 275)", change: "+2" },
-  { label: "VIP Arrivals", value: "2", icon: StarIcon, from: "#3F3D8F", to: "oklch(0.38 0.16 275)", change: "Today" },
+  { label: "Today's Bookings", value: "18", icon: CalendarIcon, from: "#0B3B36", to: "#062421", change: "+12%" },
+  { label: "Total Guests", value: "54", icon: UserGroupIcon, from: "#0B3B36", to: "#062421", change: "+8%" },
+  { label: "Pending Requests", value: "4", icon: ClockIcon, from: "#0B3B36", to: "#062421", change: "+2" },
+  { label: "VIP Arrivals", value: "2", icon: StarIcon, from: "#0B3B36", to: "#062421", change: "Today" },
 ]
 
 export default function ManagerReservationsPage() {
@@ -77,7 +77,7 @@ export default function ManagerReservationsPage() {
               <div 
                 className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center shadow-lg"
                 style={{
-                  background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.16 275) 100%)",
+                  background: "linear-gradient(135deg, #0B3B36 0%, #062421 100%)",
                 }}
               >
                 <CalendarIcon className="h-6 w-6 sm:h-7 sm:w-7 text-white" strokeWidth={2.5} />
@@ -87,7 +87,7 @@ export default function ManagerReservationsPage() {
                   Reservations
                 </h1>
                 <div className="flex items-center gap-2 mt-1.5">
-                  <div className="h-px w-8 bg-gradient-to-r from-[#3F3D8F] to-transparent" />
+                  <div className="h-px w-8 bg-gradient-to-r from-[#0B3B36] to-transparent" />
                   <p className="text-[10px] sm:text-[11px] font-semibold uppercase" style={{ color: "#736C83" }}>
                     Guest Booking & Table Management
                   </p>
@@ -99,8 +99,8 @@ export default function ManagerReservationsPage() {
           <Button 
             className="h-11 sm:h-12 px-5 sm:px-8 gap-2.5 text-white font-medium rounded-[14px] shadow-xl border-0 text-xs uppercase transition-all hover:-translate-y-0.5 hover:shadow-2xl active:translate-y-0 active:scale-95"
             style={{
-              background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.16 275) 100%)",
-              boxShadow: "0 8px 32px oklch(0.42 0.14 285 / 0.35)",
+              background: "linear-gradient(135deg, #0B3B36 0%, #062421 100%)",
+              boxShadow: "0 8px 32px rgba(11, 59, 54,  0.35)",
             }}
           >
             <PlusIcon className="h-4 w-4" strokeWidth={2.5} />
@@ -144,16 +144,16 @@ export default function ManagerReservationsPage() {
                   <Badge 
                     className="text-[9px] font-medium px-2 py-0.5 rounded-lg border"
                     style={{
-                      background: "oklch(0.42 0.14 285 / 0.08)",
-                      color: "#3F3D8F",
-                      borderColor: "oklch(0.42 0.14 285 / 0.2)",
+                      background: "rgba(11, 59, 54,  0.08)",
+                      color: "#0B3B36",
+                      borderColor: "rgba(11, 59, 54,  0.2)",
                     }}
                   >
                     {s.change}
                   </Badge>
                 </div>
 
-                <div className="mt-3 pt-3 border-t relative z-10" style={{ borderColor: "oklch(0.42 0.14 285 / 0.08)" }}>
+                <div className="mt-3 pt-3 border-t relative z-10" style={{ borderColor: "rgba(11, 59, 54,  0.08)" }}>
                   <p className="text-[10px] font-medium flex items-center gap-1.5" style={{ color: "#9A94AA" }}>
                     <ChartBarIcon className="h-3 w-3" />
                     vs. yesterday
@@ -172,14 +172,14 @@ export default function ManagerReservationsPage() {
               {/* Search */}
               <div className="relative flex-1 group">
                 <MagnifyingGlassIcon className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 transition-colors" 
-                  style={{ color: "oklch(0.42 0.14 285 / 0.4)" }} strokeWidth={2.5} />
+                  style={{ color: "rgba(11, 59, 54,  0.4)" }} strokeWidth={2.5} />
                 <Input 
                   placeholder="Search by guest name or ID..." 
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="pl-11 pr-4 h-11 sm:h-12 bg-white border-2 rounded-xl text-sm transition-all duration-200"
                   style={{
-                    borderColor: "oklch(0.42 0.14 285 / 0.12)",
+                    borderColor: "rgba(11, 59, 54,  0.12)",
                     color: "#0D031B",
                   }}
                 />
@@ -192,7 +192,7 @@ export default function ManagerReservationsPage() {
                     variant="outline"
                     className="h-11 sm:h-12 px-5 sm:px-6 gap-2 font-medium rounded-xl text-xs uppercase transition-all hover:scale-105 active:scale-95 border-2"
                     style={{
-                      borderColor: "oklch(0.42 0.14 285 / 0.15)",
+                      borderColor: "rgba(11, 59, 54,  0.15)",
                       color: "#736C83",
                     }}
                   >
@@ -203,19 +203,19 @@ export default function ManagerReservationsPage() {
                 <DropdownMenuContent align="end" className="bg-white/98 backdrop-blur-xl border-0 rounded-2xl shadow-2xl w-48">
                   <DropdownMenuItem 
                     onClick={() => setFilterStatus("all")}
-                    className="text-xs font-semibold rounded-xl m-1 focus:bg-oklch(0.42 0.14 285 / 0.08)"
+                    className="text-xs font-semibold rounded-xl m-1 focus:bg-rgba(11, 59, 54,  0.08)"
                   >
                     All Reservations
                   </DropdownMenuItem>
                   <DropdownMenuItem 
                     onClick={() => setFilterStatus("confirmed")}
-                    className="text-xs font-semibold rounded-xl m-1 focus:bg-oklch(0.42 0.14 285 / 0.08)"
+                    className="text-xs font-semibold rounded-xl m-1 focus:bg-rgba(11, 59, 54,  0.08)"
                   >
                     Confirmed Only
                   </DropdownMenuItem>
                   <DropdownMenuItem 
                     onClick={() => setFilterStatus("pending")}
-                    className="text-xs font-semibold rounded-xl m-1 focus:bg-oklch(0.42 0.14 285 / 0.08)"
+                    className="text-xs font-semibold rounded-xl m-1 focus:bg-rgba(11, 59, 54,  0.08)"
                   >
                     Pending Only
                   </DropdownMenuItem>
@@ -230,13 +230,13 @@ export default function ManagerReservationsPage() {
           className="border-0 bg-white rounded-[24px] shadow-xl overflow-hidden"
           style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.08)" }}
         >
-          <CardHeader className="px-5 sm:px-6 py-5 border-b" style={{ borderColor: "oklch(0.42 0.14 285 / 0.08)" }}>
+          <CardHeader className="px-5 sm:px-6 py-5 border-b" style={{ borderColor: "rgba(11, 59, 54,  0.08)" }}>
             <div className="flex items-center gap-3">
               <div 
                 className="w-10 h-10 rounded-xl flex items-center justify-center"
-                style={{ background: "oklch(0.42 0.14 285 / 0.1)" }}
+                style={{ background: "rgba(11, 59, 54,  0.1)" }}
               >
-                <UserGroupIcon className="h-5 w-5" style={{ color: "#3F3D8F" }} strokeWidth={2.5} />
+                <UserGroupIcon className="h-5 w-5" style={{ color: "#0B3B36" }} strokeWidth={2.5} />
               </div>
               <div>
                 <CardTitle className="text-sm sm:text-base font-normal uppercase" style={{ color: "#0D031B" }}>
@@ -253,7 +253,7 @@ export default function ManagerReservationsPage() {
             {/* Desktop Table View */}
             <div className="hidden lg:block overflow-x-auto">
               <table className="w-full text-left border-collapse">
-                <thead style={{ background: "oklch(0.42 0.14 285 / 0.03)" }}>
+                <thead style={{ background: "rgba(11, 59, 54,  0.03)" }}>
                   <tr className="text-[10px] font-medium uppercase" style={{ color: "#9A94AA" }}>
                     <th className="px-6 py-4">Guest Details</th>
                     <th className="px-6 py-4">Party Size</th>
@@ -263,9 +263,9 @@ export default function ManagerReservationsPage() {
                     <th className="px-6 py-4 text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y" style={{ borderColor: "oklch(0.42 0.14 285 / 0.05)" }}>
+                <tbody className="divide-y" style={{ borderColor: "rgba(11, 59, 54,  0.05)" }}>
                   {filteredReservations.map((res) => (
-                    <tr key={res.id} className="group transition-all hover:bg-oklch(0.42 0.14 285 / 0.02)">
+                    <tr key={res.id} className="group transition-all hover:bg-rgba(11, 59, 54,  0.02)">
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-2">
                           <div className="font-medium text-sm uppercase leading-tight" style={{ color: "#0D031B" }}>
@@ -279,13 +279,13 @@ export default function ManagerReservationsPage() {
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-1.5 text-xs font-medium" style={{ color: "#0D031B" }}>
-                          <UserGroupIcon className="h-3.5 w-3.5" style={{ color: "#3F3D8F" }} strokeWidth={2.5} />
+                          <UserGroupIcon className="h-3.5 w-3.5" style={{ color: "#0B3B36" }} strokeWidth={2.5} />
                           {res.partySize} guests
                         </div>
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-1.5 text-xs font-medium" style={{ color: "#0D031B" }}>
-                          <ClockIcon className="h-3.5 w-3.5" style={{ color: "#3F3D8F" }} strokeWidth={2.5} />
+                          <ClockIcon className="h-3.5 w-3.5" style={{ color: "#0B3B36" }} strokeWidth={2.5} />
                           {res.time}
                         </div>
                         <div className="text-[10px] font-medium mt-1" style={{ color: "#9A94AA" }}>{res.date}</div>
@@ -295,9 +295,9 @@ export default function ManagerReservationsPage() {
                           <Badge 
                             className="flex items-center gap-1.5 text-[10px] font-medium uppercase px-2.5 py-1 rounded-lg border w-fit"
                             style={{
-                              background: "oklch(0.42 0.14 285 / 0.08)",
-                              color: "#3F3D8F",
-                              borderColor: "oklch(0.42 0.14 285 / 0.2)",
+                              background: "rgba(11, 59, 54,  0.08)",
+                              color: "#0B3B36",
+                              borderColor: "rgba(11, 59, 54,  0.2)",
                             }}
                           >
                             <TableCellsIcon className="h-3 w-3" strokeWidth={2.5} />
@@ -333,29 +333,29 @@ export default function ManagerReservationsPage() {
                             <Button 
                               variant="ghost" 
                               size="icon" 
-                              className="h-9 w-9 rounded-xl transition-all hover:bg-oklch(0.42 0.14 285 / 0.08) active:scale-90"
+                              className="h-9 w-9 rounded-xl transition-all hover:bg-rgba(11, 59, 54,  0.08) active:scale-90"
                             >
                               <EllipsisHorizontalIcon className="h-4 w-4" style={{ color: "#9A94AA" }} />
                             </Button>
                           </DropdownMenuTrigger>
                           <DropdownMenuContent align="end" className="bg-white/98 backdrop-blur-xl border-0 rounded-2xl shadow-2xl w-48">
-                            <DropdownMenuItem className="text-xs font-semibold rounded-xl m-1 focus:bg-oklch(0.42 0.14 285 / 0.08)">
+                            <DropdownMenuItem className="text-xs font-semibold rounded-xl m-1 focus:bg-rgba(11, 59, 54,  0.08)">
                               <EyeIcon className="h-3.5 w-3.5 mr-2" />
                               View Details
                             </DropdownMenuItem>
-                            <DropdownMenuItem className="text-xs font-semibold rounded-xl m-1 focus:bg-oklch(0.42 0.14 285 / 0.08)">
+                            <DropdownMenuItem className="text-xs font-semibold rounded-xl m-1 focus:bg-rgba(11, 59, 54,  0.08)">
                               <CheckCircleIcon className="h-3.5 w-3.5 mr-2" />
                               Confirm Arrival
                             </DropdownMenuItem>
-                            <DropdownMenuItem className="text-xs font-semibold rounded-xl m-1 focus:bg-oklch(0.42 0.14 285 / 0.08)">
+                            <DropdownMenuItem className="text-xs font-semibold rounded-xl m-1 focus:bg-rgba(11, 59, 54,  0.08)">
                               <TableCellsIcon className="h-3.5 w-3.5 mr-2" />
                               Assign Table
                             </DropdownMenuItem>
-                            <DropdownMenuItem className="text-xs font-semibold rounded-xl m-1 focus:bg-oklch(0.42 0.14 285 / 0.08)">
+                            <DropdownMenuItem className="text-xs font-semibold rounded-xl m-1 focus:bg-rgba(11, 59, 54,  0.08)">
                               <PencilIcon className="h-3.5 w-3.5 mr-2" />
                               Edit Booking
                             </DropdownMenuItem>
-                            <DropdownMenuSeparator className="my-1" style={{ background: "oklch(0.42 0.14 285 / 0.08)" }} />
+                            <DropdownMenuSeparator className="my-1" style={{ background: "rgba(11, 59, 54,  0.08)" }} />
                             <DropdownMenuItem className="text-xs font-semibold rounded-xl m-1 focus:bg-rose-50 text-rose-600">
                               <XMarkIcon className="h-3.5 w-3.5 mr-2" />
                               Cancel Booking
@@ -399,16 +399,16 @@ export default function ManagerReservationsPage() {
                       </Badge>
                     </div>
 
-                    <Separator style={{ background: "oklch(0.42 0.14 285 / 0.08)" }} />
+                    <Separator style={{ background: "rgba(11, 59, 54,  0.08)" }} />
 
                     {/* Details Grid */}
                     <div className="grid grid-cols-2 gap-3">
                       <div className="flex items-center gap-1.5">
-                        <UserGroupIcon className="h-3.5 w-3.5" style={{ color: "#3F3D8F" }} />
+                        <UserGroupIcon className="h-3.5 w-3.5" style={{ color: "#0B3B36" }} />
                         <span className="text-xs font-medium" style={{ color: "#0D031B" }}>{res.partySize} guests</span>
                       </div>
                       <div className="flex items-center gap-1.5">
-                        <ClockIcon className="h-3.5 w-3.5" style={{ color: "#3F3D8F" }} />
+                        <ClockIcon className="h-3.5 w-3.5" style={{ color: "#0B3B36" }} />
                         <span className="text-xs font-medium" style={{ color: "#0D031B" }}>{res.time}</span>
                       </div>
                     </div>
@@ -417,9 +417,9 @@ export default function ManagerReservationsPage() {
                       <Badge 
                         className="flex items-center gap-1.5 text-[10px] font-medium uppercase px-2.5 py-1 rounded-lg border w-fit"
                         style={{
-                          background: "oklch(0.42 0.14 285 / 0.08)",
-                          color: "#3F3D8F",
-                          borderColor: "oklch(0.42 0.14 285 / 0.2)",
+                          background: "rgba(11, 59, 54,  0.08)",
+                          color: "#0B3B36",
+                          borderColor: "rgba(11, 59, 54,  0.2)",
                         }}
                       >
                         <TableCellsIcon className="h-3 w-3" />
@@ -437,7 +437,7 @@ export default function ManagerReservationsPage() {
                       <Button 
                         className="flex-1 h-9 text-xs font-medium uppercase rounded-xl"
                         style={{
-                          background: "#3F3D8F",
+                          background: "#0B3B36",
                           color: "white",
                         }}
                       >
@@ -447,7 +447,7 @@ export default function ManagerReservationsPage() {
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                           <Button variant="outline" size="icon" className="h-9 w-9 rounded-xl border-2"
-                            style={{ borderColor: "oklch(0.42 0.14 285 / 0.15)" }}>
+                            style={{ borderColor: "rgba(11, 59, 54,  0.15)" }}>
                             <EllipsisHorizontalIcon className="h-4 w-4" style={{ color: "#9A94AA" }} />
                           </Button>
                         </DropdownMenuTrigger>
@@ -513,8 +513,8 @@ export default function ManagerReservationsPage() {
           <Card 
             className="border-0 rounded-[24px] shadow-xl overflow-hidden relative"
             style={{
-              background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.35 0.15 280) 100%)",
-              boxShadow: "0 12px 40px oklch(0.42 0.14 285 / 0.4)",
+              background: "linear-gradient(135deg, #0B3B36 0%, #062421 100%)",
+              boxShadow: "0 12px 40px rgba(11, 59, 54,  0.4)",
             }}
           >
             {/* Decorative orbs */}

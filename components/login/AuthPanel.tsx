@@ -76,15 +76,15 @@ export function AuthPanel({
         {/* Quick Demo Access */}
         <Card
           className="border rounded-[20px] shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl"
-          style={{ background: "white", borderColor: "oklch(0.42 0.14 285 / 0.12)" }}
+          style={{ background: "white", borderColor: "rgba(11, 59, 54,  0.12)" }}
         >
-          <div className="h-[4px]" style={{ background: "linear-gradient(90deg, oklch(0.42 0.14 285) 0%, oklch(0.55 0.18 270) 100%)" }} />
+          <div className="h-[4px]" style={{ background: "linear-gradient(90deg, #0B3B36 0%, #13584F 100%)" }} />
           <CardHeader className="px-6 pt-5 pb-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2.5">
                 <div className="w-8 h-8 rounded-lg flex items-center justify-center"
-                  style={{ background: "oklch(0.42 0.14 285 / 0.1)" }}>
-                  <Zap className="h-4 w-4" style={{ color: "oklch(0.42 0.14 285)" }} />
+                  style={{ background: "rgba(11, 59, 54,  0.1)" }}>
+                  <Zap className="h-4 w-4" style={{ color: "#0B3B36" }} />
                 </div>
                 <CardTitle className="text-[12px] font-semibold uppercase" style={{ color: "#3D374C" }}>
                   Quick Demo Access
@@ -93,9 +93,9 @@ export function AuthPanel({
               <Badge
                 className="text-[9px] font-bold px-2.5 py-1 rounded-full border"
                 style={{
-                  background: "oklch(0.42 0.14 285 / 0.08)",
-                  color: "oklch(0.42 0.14 285)",
-                  borderColor: "oklch(0.42 0.14 285 / 0.25)",
+                  background: "rgba(11, 59, 54,  0.08)",
+                  color: "#0B3B36",
+                  borderColor: "rgba(11, 59, 54,  0.25)",
                 }}
               >
                 One-click
@@ -113,7 +113,7 @@ export function AuthPanel({
                     </p>
                     <button
                       onClick={() => setShowStaffPicker(false)}
-                      className="flex items-center justify-center w-7 h-7 rounded-lg transition-all hover:bg-[#F0ECF9] active:scale-95"
+                      className="flex items-center justify-center w-7 h-7 rounded-lg transition-all hover:bg-[#E6F0EC] active:scale-95"
                       style={{ color: "#9A94AA" }}
                     >
                       <X className="h-4 w-4" />
@@ -125,14 +125,14 @@ export function AuthPanel({
                         key={sub.id}
                         onClick={() => { setShowStaffPicker(false); handleQuickLogin(sub.id as UserRole) }}
                         className="group flex items-center gap-2.5 p-3.5 rounded-xl border transition-all duration-200 text-left hover:shadow-md active:scale-[0.98]"
-                        style={{ background: "white", borderColor: "oklch(0.42 0.14 285 / 0.14)" }}
+                        style={{ background: "white", borderColor: "rgba(11, 59, 54,  0.14)" }}
                       >
                         <div
                           className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 transition-all duration-200"
-                          style={{ background: "oklch(0.42 0.14 285 / 0.08)", color: "oklch(0.42 0.14 285)" }}
+                          style={{ background: "rgba(11, 59, 54,  0.08)", color: "#0B3B36" }}
                         >
                           {typeof sub.icon === 'string' ? (
-                            <img src={sub.icon} className="h-5 w-5 brightness-0" style={{ filter: 'invert(37%) sepia(93%) saturate(541%) hue-rotate(221deg) brightness(85%) contrast(89%)' }} />
+                            <img src={sub.icon} className="h-5 w-5 brightness-0" style={{ filter: 'invert(17%) sepia(50%) saturate(1475%) hue-rotate(125deg) brightness(94%) contrast(96%)' }} />
                           ) : (
                             <sub.icon className="h-4 w-4 transition-transform group-hover:scale-110" />
                           )}
@@ -163,8 +163,8 @@ export function AuthPanel({
                         )}
                         style={
                           busy
-                            ? { borderColor: "oklch(0.42 0.14 285 / 0.4)", background: "oklch(0.42 0.14 285 / 0.06)" }
-                            : { borderColor: "oklch(0.42 0.14 285 / 0.14)", background: "white" }
+                            ? { borderColor: "rgba(11, 59, 54,  0.4)", background: "rgba(11, 59, 54,  0.06)" }
+                            : { borderColor: "rgba(11, 59, 54,  0.14)", background: "white" }
                         }
                       >
                         {!busy && <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-[oklch(0.42_0.14_285_/_0.03)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />}
@@ -172,14 +172,14 @@ export function AuthPanel({
                           className="flex items-center justify-center w-10 h-10 rounded-lg shrink-0 transition-all duration-200 relative z-10"
                           style={
                             busy
-                              ? { background: "oklch(0.42 0.14 285)", color: "white" }
-                              : { background: "oklch(0.42 0.14 285 / 0.08)", color: "oklch(0.42 0.14 285)" }
+                              ? { background: "#0B3B36", color: "white" }
+                              : { background: "rgba(11, 59, 54,  0.08)", color: "#0B3B36" }
                           }
                         >
                           {busy
                             ? <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                             : typeof opt.icon === 'string' ? (
-                              <img src={opt.icon} className={cn("h-5 w-5 brightness-0", busy && "invert")} style={!busy ? { filter: 'invert(37%) sepia(93%) saturate(541%) hue-rotate(221deg) brightness(85%) contrast(89%)' } : undefined} />
+                              <img src={opt.icon} className={cn("h-5 w-5 brightness-0", busy && "invert")} style={!busy ? { filter: 'invert(17%) sepia(50%) saturate(1475%) hue-rotate(125deg) brightness(94%) contrast(96%)' } : undefined} />
                             ) : (
                               <opt.icon className="h-4.5 w-4.5 transition-transform group-hover:scale-110" />
                             )
@@ -201,24 +201,24 @@ export function AuthPanel({
         {/* Social login or email form... keeping it slightly simplified for readability */}
         <div className="space-y-4">
            <div className="flex items-center gap-4">
-              <Separator className="flex-1" style={{ background:"oklch(0.42 0.14 285 / 0.12)" }} />
+              <Separator className="flex-1" style={{ background:"rgba(11, 59, 54,  0.12)" }} />
               <span className="text-[10px] font-bold uppercase whitespace-nowrap px-1" style={{ color:"var(--icon-primary)" }}>
                 or continue with
               </span>
-              <Separator className="flex-1" style={{ background:"oklch(0.42 0.14 285 / 0.12)" }} />
+              <Separator className="flex-1" style={{ background:"rgba(11, 59, 54,  0.12)" }} />
             </div>
             {/* Social Buttons would go here */}
         </div>
 
         <Card
           className="border rounded-[20px] shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl"
-          style={{ background: "white", borderColor: "oklch(0.42 0.14 285 / 0.12)" }}
+          style={{ background: "white", borderColor: "rgba(11, 59, 54,  0.12)" }}
         >
           <CardContent className="p-6">
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="space-y-2">
                 <Label htmlFor="email" className="text-[12px] font-bold uppercase flex items-center gap-2" style={{ color: "#3D374C" }}>
-                  <Mail className="h-3.5 w-3.5" style={{ color: "oklch(0.42 0.14 285)" }} />
+                  <Mail className="h-3.5 w-3.5" style={{ color: "#0B3B36" }} />
                   Email Address
                 </Label>
                 <Input
@@ -229,17 +229,17 @@ export function AuthPanel({
                   onChange={e => setEmail(e.target.value)}
                   required
                   className="h-12 rounded-xl text-[14px] border-2 transition-all duration-200 pl-4 pr-4 focus:shadow-md"
-                  style={{ background: "#FAFAFE", borderColor: "oklch(0.42 0.14 285 / 0.14)", color: "#0D031B" }}
+                  style={{ background: "#F4FAF7", borderColor: "rgba(11, 59, 54,  0.14)", color: "#0D031B" }}
                 />
               </div>
 
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <Label htmlFor="password" className="text-[12px] font-bold uppercase flex items-center gap-2" style={{ color: "#3D374C" }}>
-                    <Lock className="h-3.5 w-3.5" style={{ color: "oklch(0.42 0.14 285)" }} />
+                    <Lock className="h-3.5 w-3.5" style={{ color: "#0B3B36" }} />
                     Password
                   </Label>
-                  <Link href="/forgot-password" title="Forgot password?" className="text-[11px] font-semibold transition-all hover:underline" style={{ color: "oklch(0.42 0.14 285)" }}>
+                  <Link href="/forgot-password" title="Forgot password?" className="text-[11px] font-semibold transition-all hover:underline" style={{ color: "#0B3B36" }}>
                     Forgot password?
                   </Link>
                 </div>
@@ -252,7 +252,7 @@ export function AuthPanel({
                     onChange={e => setPassword(e.target.value)}
                     required
                     className="h-12 rounded-xl text-[14px] border-2 transition-all duration-200 pl-4 pr-12 focus:shadow-md"
-                    style={{ background: "#FAFAFE", borderColor: "oklch(0.42 0.14 285 / 0.14)", color: "#0D031B" }}
+                    style={{ background: "#F4FAF7", borderColor: "rgba(11, 59, 54,  0.14)", color: "#0D031B" }}
                   />
                   <button
                     type="button"
@@ -267,7 +267,7 @@ export function AuthPanel({
 
               <div className="space-y-2.5">
                 <Label className="text-[12px] font-bold uppercase flex items-center gap-2" style={{ color: "#3D374C" }}>
-                  <Shield className="h-3.5 w-3.5" style={{ color: "oklch(0.42 0.14 285)" }} />
+                  <Shield className="h-3.5 w-3.5" style={{ color: "#0B3B36" }} />
                   Select Portal
                 </Label>
                 <div className="grid grid-cols-4 gap-2">
@@ -282,13 +282,13 @@ export function AuthPanel({
                         className="relative flex flex-col items-center gap-2 py-3.5 px-1 rounded-xl border-2 text-[10px] font-bold transition-all duration-200 overflow-hidden active:scale-95"
                         style={
                           active
-                            ? { background: "oklch(0.42 0.14 285 / 0.06)", borderColor: "oklch(0.42 0.14 285)", color: "oklch(0.42 0.14 285)", boxShadow: "0 8px 24px oklch(0.42 0.14 285 / 0.15)" }
-                            : { background: "#FAFAFE", borderColor: "oklch(0.42 0.14 285 / 0.14)", color: "#736C83" }
+                            ? { background: "rgba(11, 59, 54,  0.06)", borderColor: "#0B3B36", color: "#0B3B36", boxShadow: "0 8px 24px rgba(11, 59, 54,  0.15)" }
+                            : { background: "#F4FAF7", borderColor: "rgba(11, 59, 54,  0.14)", color: "#736C83" }
                         }
                       >
-                        {active && <div className="absolute inset-0 bg-gradient-to-br from-oklch(0.42 0.14 285 / 0.05) to-transparent" />}
+                        {active && <div className="absolute inset-0 bg-gradient-to-br from-rgba(11, 59, 54,  0.05) to-transparent" />}
                         {typeof opt.icon === 'string' ? (
-                          <img src={opt.icon} className={cn("h-4 w-4 relative z-10 transition-transform", active && "scale-110 brightness-0")} style={active ? { filter: 'invert(37%) sepia(93%) saturate(541%) hue-rotate(221deg) brightness(85%) contrast(89%)' } : { opacity: 0.7 }} />
+                          <img src={opt.icon} className={cn("h-4 w-4 relative z-10 transition-transform", active && "scale-110 brightness-0")} style={active ? { filter: 'invert(17%) sepia(50%) saturate(1475%) hue-rotate(125deg) brightness(94%) contrast(96%)' } : { opacity: 0.7 }} />
                         ) : (
                           <Icon className={cn("h-4 w-4 relative z-10 transition-transform", active && "scale-110")} />
                         )}
@@ -304,8 +304,8 @@ export function AuthPanel({
                 disabled={isLoading}
                 className="w-full flex items-center justify-center gap-3 h-12 rounded-2xl font-bold text-[13px] uppercase text-white transition-all duration-200 hover:-translate-y-1 hover:shadow-2xl active:translate-y-0 active:scale-[0.98] disabled:opacity-60 disabled:pointer-events-none relative overflow-hidden group"
                 style={{
-                  background: "linear-gradient(135deg, oklch(0.42 0.14 285) 0%, oklch(0.38 0.16 275) 100%)",
-                  boxShadow: "0 8px 32px oklch(0.42 0.14 285 / 0.35)",
+                  background: "linear-gradient(135deg, #0B3B36 0%, #062421 100%)",
+                  boxShadow: "0 8px 32px rgba(11, 59, 54,  0.35)",
                 }}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000" />
@@ -327,7 +327,7 @@ export function AuthPanel({
 
         <p className="text-center text-[13px]" style={{ color: "#736C83" }}>
           Don't have an account?{" "}
-          <Link href="/signup" title="Create one" className="font-bold transition-all hover:underline" style={{ color: "oklch(0.42 0.14 285)" }}>
+          <Link href="/signup" title="Create one" className="font-bold transition-all hover:underline" style={{ color: "#0B3B36" }}>
             Create one
           </Link>
         </p>

@@ -61,7 +61,7 @@ export function StatsCards() {
   return (
     <div className="grid gap-4 grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
       {stats.map((stat) => (
-        <Card key={stat.title} className="group relative overflow-hidden bg-card border-border/50 shadow-sm transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-1">
+        <Card key={stat.title} className="group relative overflow-hidden bg-card border-border/50 shadow-sm transition-all duration-200 ease-out hover:shadow-md hover:-translate-y-0.5 active:scale-[0.99] cursor-default">
           {/* Animated Background Gradient */}
           <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           
@@ -72,7 +72,7 @@ export function StatsCards() {
                   <div 
                     className="h-5 w-5" 
                     style={{ 
-                      backgroundColor: "oklch(0.42 0.14 285)",
+                      backgroundColor: "#0B3B36",
                       WebkitMaskImage: `url(${stat.icon})`,
                       WebkitMaskSize: "contain",
                       WebkitMaskRepeat: "no-repeat",

@@ -310,7 +310,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
   const CartSheet = () => (
     <SheetContent
       className="w-full sm:max-w-[420px] p-0 flex flex-col border-l"
-      style={{ background:"#FDFCFF", borderColor:"oklch(0.45 0.12 285 / 0.12)" }}
+      style={{ background:"#FDFCFF", borderColor:"rgba(11, 59, 54,  0.12)" }}
     >
       <SheetHeader
         className="px-6 pt-6 pb-4 shrink-0"
@@ -318,12 +318,12 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
         <div className="flex items-center gap-3">
           <div
             className="flex items-center justify-center w-9 h-9 rounded-xl"
-            style={{ background:"oklch(0.45 0.12 285 / 0.1)" }}
+            style={{ background:"rgba(11, 59, 54,  0.1)" }}
           >
             <div 
               className="h-4 w-4" 
               style={{ 
-                backgroundColor: "#3F3D8F",
+                backgroundColor: "#0B3B36",
                 maskImage: 'url(/shopping-cart.png)',
                 maskSize: 'contain',
                 maskRepeat: 'no-repeat',
@@ -339,7 +339,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
             <SheetTitle className="text-[15px] font-bold " style={{ color:"#0D031B" }}>
               Your Order
             </SheetTitle>
-            <SheetDescription className="text-[10px] uppercase  font-semibold mt-0.5" style={{ color:"#3F3D8F" }}>
+            <SheetDescription className="text-[10px] uppercase  font-semibold mt-0.5" style={{ color:"#0B3B36" }}>
               Table {tableId}
             </SheetDescription>
           </div>
@@ -369,11 +369,11 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
           </div>
         ) : cart.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 text-center gap-4">
-            <div className="w-16 h-16 rounded-2xl flex items-center justify-center" style={{ background:"oklch(0.45 0.12 285 / 0.08)" }}>
+            <div className="w-16 h-16 rounded-2xl flex items-center justify-center" style={{ background:"rgba(11, 59, 54,  0.08)" }}>
               <div 
                 className="h-8 w-8" 
                 style={{ 
-                  backgroundColor: "oklch(0.45 0.12 285 / 0.4)",
+                  backgroundColor: "rgba(11, 59, 54,  0.4)",
                   maskImage: 'url(/shopping-cart.png)',
                   maskSize: 'contain',
                   maskRepeat: 'no-repeat',
@@ -405,18 +405,18 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
 
                 <div className="flex-1 min-w-0">
                   <p className="text-[13px] font-semibold truncate" style={{ color:"#0D031B" }}>{item.name}</p>
-                  <p className="text-[11px] font-medium mt-0.5" style={{ color:"#3F3D8F" }}>
+                  <p className="text-[11px] font-medium mt-0.5" style={{ color:"#0B3B36" }}>
                     KSh {(item.price * item.quantity).toLocaleString()}
                   </p>
                 </div>
 
                 <div
                   className="flex items-center gap-1.5 rounded-full p-1"
-                  style={{ background:"oklch(0.45 0.12 285 / 0.06)" }}
+                  style={{ background:"rgba(11, 59, 54,  0.06)" }}
                 >
                   <button
                     className="flex items-center justify-center w-7 h-7 rounded-full transition-colors hover:bg-white"
-                    style={{ color:"#3F3D8F" }}
+                    style={{ color:"#0B3B36" }}
                     onClick={() => updateQuantity(item.id, -1)}
                   >
                     <Minus className="h-3 w-3" />
@@ -424,7 +424,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                   <span className="w-5 text-center text-xs font-bold" style={{ color:"#0D031B" }}>{item.quantity}</span>
                   <button
                     className="flex items-center justify-center w-7 h-7 rounded-full text-white transition-colors"
-                    style={{ background:"#3F3D8F" }}
+                    style={{ background:"#0B3B36" }}
                     onClick={() => updateQuantity(item.id, 1)}
                   >
                     <Plus className="h-3 w-3" />
@@ -447,15 +447,15 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
       {cart.length > 0 && !orderConfirmed && (
         <SheetFooter
           className="flex-col gap-4 px-6 py-5 border-t shrink-0"
-          style={{ borderColor:"oklch(0.45 0.12 285 / 0.1)" }}
+          style={{ borderColor:"rgba(11, 59, 54,  0.1)" }}
         >
           {/* Total row */}
           <div
             className="flex justify-between items-center px-4 py-3 rounded-2xl"
-            style={{ background:"oklch(0.45 0.12 285 / 0.06)" }}
+            style={{ background:"rgba(11, 59, 54,  0.06)" }}
           >
             <span className="text-sm font-semibold" style={{ color:"#3D374C" }}>Total</span>
-            <span className="text-lg font-bold tabular-nums" style={{ color:"#3F3D8F" }}>
+            <span className="text-lg font-bold tabular-nums" style={{ color:"#0B3B36" }}>
               KSh {cartTotal.toLocaleString()}
             </span>
           </div>
@@ -463,8 +463,8 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
           <Button
             className="w-full h-13 text-[13px] font-bold uppercase  text-white rounded-2xl transition-all hover:opacity-90 hover:-translate-y-0.5 active:translate-y-0 border-none h-12"
             style={{
-              background:"#3F3D8F",
-              boxShadow:"0 6px 24px oklch(0.45 0.12 285 / 0.35)",
+              background:"#0B3B36",
+              boxShadow:"0 6px 24px rgba(11, 59, 54,  0.35)",
             }}
             onClick={handlePlaceOrder}
           >
@@ -501,7 +501,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
           <div 
             className="fixed inset-0 z-[100] flex flex-col items-center justify-center p-6 text-center overflow-hidden animate-in fade-in duration-1000"
             style={{ 
-              background: `#3F3D8F url(${HERO_IMAGE})`,
+              background: `#0B3B36 url(${HERO_IMAGE})`,
               backgroundSize: "cover",
               backgroundPosition: "center"
             }}
@@ -510,7 +510,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
             <div 
                className="absolute inset-0 backdrop-blur-xl transition-all duration-1000"
                style={{ 
-                 background: "linear-gradient(135deg, oklch(0.6 0.15 285 / 0.4), oklch(0.45 0.12 285 / 0.8))" 
+                 background: "linear-gradient(135deg, oklch(0.6 0.15 285 / 0.4), rgba(11, 59, 54,  0.8))" 
                }} 
             />
             
@@ -519,8 +519,8 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                 <div 
                   className="flex items-center justify-center w-28 h-28 rounded-[3rem] animate-pulse"
                   style={{ 
-                    background:"#3F3D8F", 
-                    boxShadow:"0 20px 60px oklch(0.45 0.12 285 / 0.7)",
+                    background:"#0B3B36", 
+                    boxShadow:"0 20px 60px rgba(11, 59, 54,  0.7)",
                     border: "1px solid rgba(255,255,255,0.3)"
                   }}
                 >
@@ -585,7 +585,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                 <div className="flex items-center gap-3 mb-1.5">
                   <div
                     className="flex items-center justify-center w-9 h-9 rounded-xl"
-                    style={{ background:"#3F3D8F", boxShadow:"0 4px 16px oklch(0.45 0.12 285 / 0.5)" }}
+                    style={{ background:"#0B3B36", boxShadow:"0 4px 16px rgba(11, 59, 54,  0.5)" }}
                   >
                     <UtensilsCrossed className="h-4.5 w-4.5 text-white" />
                   </div>
@@ -714,7 +714,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
               style={{
                 background:"rgba(255,255,255,0.85)",
                 backdropFilter:"blur(12px)",
-                borderColor:"oklch(0.45 0.12 285 / 0.15)",
+                borderColor:"rgba(11, 59, 54,  0.15)",
                 color:"#0D031B",
               }}
             />
@@ -744,7 +744,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                   )}
                   style={
                     active
-                      ? { background:"#3F3D8F", boxShadow:"0 4px 16px oklch(0.45 0.12 285 / 0.35)", color:"white" }
+                      ? { background:"#0B3B36", boxShadow:"0 4px 16px rgba(11, 59, 54,  0.35)", color:"white" }
                       : { background:"rgba(255,255,255,0.8)", color:"#3D374C" }
                   }
                 >
@@ -763,7 +763,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
             </p>
             {searchQuery && (
               <p className="text-[11px]" style={{ color:"#9A94AA" }}>
-                Showing results for "<span style={{ color:"#3F3D8F" }}>{searchQuery}</span>"
+                Showing results for "<span style={{ color:"#0B3B36" }}>{searchQuery}</span>"
               </p>
             )}
           </div>
@@ -801,7 +801,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                       {item.popular && (
                         <span
                           className="flex items-center gap-1 text-[9px] font-bold uppercase  px-2 py-1 rounded-full"
-                          style={{ background:"oklch(0.45 0.12 285 / 0.85)", color:"white", backdropFilter:"blur(8px)" }}
+                          style={{ background:"rgba(11, 59, 54,  0.85)", color:"white", backdropFilter:"blur(8px)" }}
                         >
                           <Crown className="h-2.5 w-2.5" />
                           Chef's Pick
@@ -823,7 +823,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                       <span
                         className="flex items-center gap-1 text-[9px] font-bold uppercase px-2 py-1 rounded-full text-white"
                         style={{
-                          background: "oklch(0.45 0.12 285 / 0.7)",
+                          background: "rgba(11, 59, 54,  0.7)",
                           backdropFilter: "blur(6px)",
                         }}
                       >
@@ -859,12 +859,12 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                               style={{ 
                                 background:"rgba(255,255,255,0.92)", 
                                 backdropFilter:"blur(12px)",
-                                borderColor:"oklch(0.45 0.12 285 / 0.15)"
+                                borderColor:"rgba(11, 59, 54,  0.15)"
                               }}
                             >
                               <button
                                 className="flex items-center justify-center w-8 h-8 rounded-full transition-colors hover:bg-[#EBE6F8]"
-                                style={{ color:"#3F3D8F" }}
+                                style={{ color:"#0B3B36" }}
                                 onClick={() => updateQuantity(item.id, -1)}
                               >
                                 <Minus className="h-3.5 w-3.5" />
@@ -872,7 +872,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                               <span className="text-[13px] font-bold w-6 text-center" style={{ color:"#0D031B" }}>{qty}</span>
                               <button
                                 className="flex items-center justify-center w-8 h-8 rounded-full text-white"
-                                style={{ background:"#3F3D8F" }}
+                                style={{ background:"#0B3B36" }}
                                 onClick={() => updateQuantity(item.id, 1)}
                               >
                                 <Plus className="h-3.5 w-3.5" />
@@ -896,14 +896,14 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                     </p>
 
                     {/* Action Strip */}
-                    <div className="flex flex-col gap-2 pt-2 mt-auto border-t" style={{ borderColor: "oklch(0.45 0.12 285 / 0.08)" }}>
+                    <div className="flex flex-col gap-2 pt-2 mt-auto border-t" style={{ borderColor: "rgba(11, 59, 54,  0.08)" }}>
                       {!inCart ? (
                         <button
                           onClick={(e) => { e.stopPropagation(); addToCart(item); }}
                           className="flex items-center justify-center gap-1.5 text-[9px] font-bold uppercase px-2 py-2 rounded-lg transition-all text-white active:scale-95"
                           style={{
-                            background: "#3F3D8F",
-                            boxShadow: "0 4px 12px oklch(0.45 0.12 285 / 0.25)"
+                            background: "#0B3B36",
+                            boxShadow: "0 4px 12px rgba(11, 59, 54,  0.25)"
                           }}
                         >
                           <Plus className="h-3 w-3" />
@@ -932,8 +932,8 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
             {/* Empty state */}
             {filteredItems.length === 0 && (
               <div className="col-span-full flex flex-col items-center justify-center py-20 gap-4">
-                <div className="w-16 h-16 rounded-2xl flex items-center justify-center" style={{ background:"oklch(0.45 0.12 285 / 0.08)" }}>
-                  <ChefHat className="h-8 w-8" style={{ color:"oklch(0.45 0.12 285 / 0.4)" }} />
+                <div className="w-16 h-16 rounded-2xl flex items-center justify-center" style={{ background:"rgba(11, 59, 54,  0.08)" }}>
+                  <ChefHat className="h-8 w-8" style={{ color:"rgba(11, 59, 54,  0.4)" }} />
                 </div>
                 <div className="text-center">
                   <p className="font-semibold text-sm" style={{ color:"#3D374C" }}>No dishes found</p>
@@ -948,7 +948,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
         <Dialog open={!!selectedItem} onOpenChange={() => { setSelectedItem(null); setItemNotes("") }}>
           <DialogContent
             className="max-w-sm p-0 overflow-hidden border rounded-3xl"
-            style={{ background:"#FDFCFF", borderColor:"oklch(0.45 0.12 285 / 0.12)" }}
+            style={{ background:"#FDFCFF", borderColor:"rgba(11, 59, 54,  0.12)" }}
           >
             {selectedItem && (
               <>
@@ -966,7 +966,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                     {selectedItem.popular && (
                       <span
                         className="flex items-center gap-1 text-[9px] font-bold uppercase  px-2.5 py-1 rounded-full"
-                        style={{ background:"oklch(0.45 0.12 285 / 0.85)", color:"white" }}
+                        style={{ background:"rgba(11, 59, 54,  0.85)", color:"white" }}
                       >
                         <Crown className="h-2.5 w-2.5" />
                         Chef's Pick
@@ -998,7 +998,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                   <div className="flex items-center gap-2 mb-4">
                     <span
                       className="flex items-center gap-1.5 text-[10px] font-semibold uppercase  px-3 py-1.5 rounded-lg"
-                      style={{ background:"oklch(0.45 0.12 285 / 0.08)", color:"#3F3D8F" }}
+                      style={{ background:"rgba(11, 59, 54,  0.08)", color:"#0B3B36" }}
                     >
                       <Clock className="h-3 w-3" />
                       {selectedItem.prepTime}
@@ -1012,7 +1012,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                     </span>
                     <span
                       className="ml-auto text-[15px] font-bold"
-                      style={{ color:"#3F3D8F" }}
+                      style={{ color:"#0B3B36" }}
                     >
                       KSh {selectedItem.price.toLocaleString()}
                     </span>
@@ -1033,7 +1033,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                       className="resize-none h-20 rounded-xl text-sm border"
                       style={{
                         background:"#F5F2FB",
-                        borderColor:"oklch(0.45 0.12 285 / 0.15)",
+                        borderColor:"rgba(11, 59, 54,  0.15)",
                         color:"#0D031B",
                       }}
                     />
@@ -1043,8 +1043,8 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                     <Button
                       className="w-full h-12 text-[13px] font-bold uppercase  text-white rounded-2xl border-none transition-all hover:opacity-90"
                       style={{
-                        background:"#3F3D8F",
-                        boxShadow:"0 6px 24px oklch(0.45 0.12 285 / 0.35)",
+                        background:"#0B3B36",
+                        boxShadow:"0 6px 24px rgba(11, 59, 54,  0.35)",
                       }}
                       onClick={() => { addToCart(selectedItem, itemNotes); setSelectedItem(null); setItemNotes("") }}
                     >
@@ -1070,12 +1070,12 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
               style={{
                 background: showBillBanner 
                   ? "linear-gradient(135deg, oklch(0.62 0.16 150) 0%, oklch(0.55 0.14 150) 100%)"
-                  : "#3F3D8F",
+                  : "#0B3B36",
                 backdropFilter: "blur(20px)",
                 borderColor: showBillBanner ? "oklch(0.62 0.16 150 / 0.4)" : "rgba(255,255,255,0.12)",
                 boxShadow: showBillBanner 
                   ? "0 12px 32px oklch(0.62 0.16 150 / 0.35)"
-                  : "0 12px 32px oklch(0.45 0.12 285 / 0.4)",
+                  : "0 12px 32px rgba(11, 59, 54,  0.4)",
                 animation: showBillBanner ? "pulse-ready 2s infinite" : "none",
               }}
             >
@@ -1127,13 +1127,13 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                   style={{
                     background: "rgba(255,255,255,0.95)",
                     backdropFilter: "blur(16px)",
-                    borderColor: "oklch(0.45 0.12 285 / 0.25)",
+                    borderColor: "rgba(11, 59, 54,  0.25)",
                     boxShadow: "0 8px 24px rgba(13,3,27,0.12)",
-                    color: "#3F3D8F",
+                    color: "#0B3B36",
                   }}
                   onClick={handleCallWaiter}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-tr from-oklch(0.45 0.12 285 / 0.05) to-transparent opacity-0 group-hover/waiter:opacity-100 transition-opacity" />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-rgba(11, 59, 54,  0.05) to-transparent opacity-0 group-hover/waiter:opacity-100 transition-opacity" />
                   <UtensilsCrossed className="h-5.5 w-5.5 relative z-10 transition-transform group-hover/waiter:-rotate-12" />
                 </button>
               </TooltipTrigger>
@@ -1147,9 +1147,9 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                   <button
                     className="flex-1 flex items-center justify-center gap-2.5 h-[58px] rounded-[24px] text-[13px] font-bold uppercase  text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl active:translate-y-0 relative overflow-hidden group"
                     style={{
-                      background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.12 285) 100%)",
-                      boxShadow: "0 10px 30px oklch(0.45 0.12 285 / 0.4)",
-                      border: "1px solid oklch(0.45 0.12 285 / 0.15)",
+                      background: "linear-gradient(135deg, #0B3B36 0%, #0B3B36 100%)",
+                      boxShadow: "0 10px 30px rgba(11, 59, 54,  0.4)",
+                      border: "1px solid rgba(11, 59, 54,  0.15)",
                     }}
                   >
                     {/* Gloss Reflection */}

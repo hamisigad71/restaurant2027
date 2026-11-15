@@ -14,13 +14,13 @@ export const shifts = [
 ]
 
 export const ROLE_CONFIG = {
-  Waiter:  { bg:"oklch(0.45 0.12 285 / 0.1)", text:"oklch(0.38 0.12 285)", border:"oklch(0.45 0.12 285 / 0.25)", avatar:"oklch(0.45 0.12 285)" },
+  Waiter:  { bg:"rgba(11, 59, 54,  0.1)", text:"#0B3B36", border:"rgba(11, 59, 54,  0.25)", avatar:"#0B3B36" },
   Kitchen: { bg:"oklch(0.75 0.15 75 / 0.1)",  text:"oklch(0.55 0.15 75)",  border:"oklch(0.75 0.15 75 / 0.25)",  avatar:"oklch(0.75 0.15 75)"  },
   Manager: { bg:"oklch(0.62 0.16 150 / 0.1)", text:"oklch(0.42 0.14 150)", border:"oklch(0.62 0.16 150 / 0.25)", avatar:"oklch(0.62 0.16 150)" },
 }
 
 export const STATUS_CONFIG = {
   completed: { label:"Completed", bg:"oklch(0.62 0.16 150 / 0.1)", text:"oklch(0.42 0.14 150)", border:"oklch(0.62 0.16 150 / 0.25)", icon:CheckCircle2 },
-  active:    { label:"Active",    bg:"oklch(0.45 0.12 285 / 0.1)", text:"oklch(0.38 0.12 285)", border:"oklch(0.45 0.12 285 / 0.25)", icon:Activity     },
+  active:    { label:"Active",    bg:"rgba(11, 59, 54,  0.1)", text:"#0B3B36", border:"rgba(11, 59, 54,  0.25)", icon:Activity     },
   upcoming:  { label:"Upcoming",  bg:"oklch(0.75 0.15 75 / 0.1)",  text:"oklch(0.55 0.15 75)",  border:"oklch(0.75 0.15 75 / 0.25)",  icon:Timer        },
 }

@@ -92,7 +92,7 @@ function OrderCard({ order, onServe }: { order: LiveOrder; onServe:(id:string)=>
         style={{
           background: isReady
             ? "linear-gradient(90deg, oklch(0.65 0.18 150) 0%, oklch(0.70 0.20 160) 100%)"
-            : "linear-gradient(90deg, #3F3D8F 0%, oklch(0.55 0.18 270) 100%)"
+            : "linear-gradient(90deg, #0B3B36 0%, #13584F 100%)"
         }}
       />
 
@@ -118,10 +118,10 @@ function OrderCard({ order, onServe }: { order: LiveOrder; onServe:(id:string)=>
             style={{
               background: isReady
                 ? "linear-gradient(135deg, oklch(0.65 0.18 150) 0%, oklch(0.70 0.20 160) 100%)"
-                : "linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.16 275) 100%)",
+                : "linear-gradient(135deg, #0B3B36 0%, #062421 100%)",
               boxShadow: isReady
                 ? "0 4px 16px oklch(0.65 0.18 150 / 0.4)"
-                : "0 4px 16px oklch(0.42 0.14 285 / 0.4)",
+                : "0 4px 16px rgba(11, 59, 54,  0.4)",
             }}
           >
             <UserGroupIcon className="h-3.5 w-3.5" strokeWidth={2.5} />
@@ -168,9 +168,9 @@ function OrderCard({ order, onServe }: { order: LiveOrder; onServe:(id:string)=>
                     borderColor: "oklch(0.65 0.18 150 / 0.25)",
                   }
                 : {
-                    background: "oklch(0.42 0.14 285 / 0.08)",
-                    color: "#3F3D8F",
-                    borderColor: "oklch(0.42 0.14 285 / 0.25)",
+                    background: "rgba(11, 59, 54,  0.08)",
+                    color: "#0B3B36",
+                    borderColor: "rgba(11, 59, 54,  0.25)",
                   }
             }
           >
@@ -193,7 +193,7 @@ function OrderCard({ order, onServe }: { order: LiveOrder; onServe:(id:string)=>
               style={{
                 background: isReady
                   ? "oklch(0.65 0.18 150 / 0.1)"
-                  : "oklch(0.42 0.14 285 / 0.1)",
+                  : "rgba(11, 59, 54,  0.1)",
               }}
             >
               {isReady ? (
@@ -205,7 +205,7 @@ function OrderCard({ order, onServe }: { order: LiveOrder; onServe:(id:string)=>
               ) : (
                 <FireIcon 
                   className="h-4 w-4" 
-                  style={{ color: "#3F3D8F" }} 
+                  style={{ color: "#0B3B36" }} 
                   strokeWidth={2.5}
                 />
               )}
@@ -213,7 +213,7 @@ function OrderCard({ order, onServe }: { order: LiveOrder; onServe:(id:string)=>
           </div>
         </div>
 
-        <Separator style={{ background: "oklch(0.42 0.14 285 / 0.08)" }} />
+        <Separator style={{ background: "rgba(11, 59, 54,  0.08)" }} />
 
         {/* Item List - Enhanced */}
         <div className="space-y-2.5">
@@ -221,7 +221,7 @@ function OrderCard({ order, onServe }: { order: LiveOrder; onServe:(id:string)=>
             <div key={i} className="flex items-center gap-3 group/item">
               <div
                 className="relative w-12 h-12 rounded-xl overflow-hidden shrink-0 border-2 transition-all group-hover/item:scale-105"
-                style={{ borderColor: "oklch(0.42 0.14 285 / 0.08)" }}
+                style={{ borderColor: "rgba(11, 59, 54,  0.08)" }}
               >
                 <img
                   src={item.image || getDishImage(item.name)}
@@ -246,7 +246,7 @@ function OrderCard({ order, onServe }: { order: LiveOrder; onServe:(id:string)=>
                 style={{
                   background: isReady
                     ? "oklch(0.65 0.18 150 / 0.15)"
-                    : "oklch(0.42 0.14 285 / 0.1)",
+                    : "rgba(11, 59, 54,  0.1)",
                 }}
               >
                 {isReady ? (
@@ -258,7 +258,7 @@ function OrderCard({ order, onServe }: { order: LiveOrder; onServe:(id:string)=>
                 ) : (
                   <FireIcon 
                     className="h-3.5 w-3.5" 
-                    style={{ color: "#3F3D8F" }} 
+                    style={{ color: "#0B3B36" }} 
                     strokeWidth={2.5}
                   />
                 )}
@@ -289,15 +289,15 @@ function OrderCard({ order, onServe }: { order: LiveOrder; onServe:(id:string)=>
           <div
             className="flex items-center gap-2.5 px-4 py-3 rounded-[16px] border-2"
             style={{
-              background: "oklch(0.42 0.14 285 / 0.04)",
-              borderColor: "oklch(0.42 0.14 285 / 0.12)",
+              background: "rgba(11, 59, 54,  0.04)",
+              borderColor: "rgba(11, 59, 54,  0.12)",
             }}
           >
             <FireIconSolid 
               className="h-4.5 w-4.5 shrink-0" 
-              style={{ color: "#3F3D8F" }} 
+              style={{ color: "#0B3B36" }} 
             />
-            <span className="text-[11px] font-bold flex-1" style={{ color: "oklch(0.38 0.12 285)" }}>
+            <span className="text-[11px] font-bold flex-1" style={{ color: "#0B3B36" }}>
               Kitchen is preparing
             </span>
             <span className="flex gap-1 ml-auto">
@@ -306,7 +306,7 @@ function OrderCard({ order, onServe }: { order: LiveOrder; onServe:(id:string)=>
                   key={i}
                   className="w-1.5 h-1.5 rounded-full"
                   style={{
-                    background: "#3F3D8F",
+                    background: "#0B3B36",
                     animation: `fade-dots 1.4s ease-in-out ${i * 0.2}s infinite`,
                   }}
                 />
@@ -361,7 +361,7 @@ export default function OrderStatusPage() {
           className="px-4 sm:px-6 py-4 sm:py-5 border-b backdrop-blur-xl sticky top-0 z-10"
           style={{
             background: "rgba(255,255,255,0.92)",
-            borderColor: "oklch(0.42 0.14 285 / 0.08)",
+            borderColor: "rgba(11, 59, 54,  0.08)",
             boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
           }}
         >
@@ -369,7 +369,7 @@ export default function OrderStatusPage() {
           <div 
             className="absolute top-0 left-0 right-0 h-[2px]"
             style={{
-              background: "linear-gradient(90deg, #3F3D8F 0%, oklch(0.55 0.18 270) 50%, #3F3D8F 100%)"
+              background: "linear-gradient(90deg, #0B3B36 0%, #13584F 50%, #0B3B36 100%)"
             }}
           />
 
@@ -379,7 +379,7 @@ export default function OrderStatusPage() {
                 <div
                 className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center shadow-lg p-2"
                 style={{
-                  background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.16 275) 100%)",
+                  background: "linear-gradient(135deg, #0B3B36 0%, #062421 100%)",
                 }}
               >
                 <img src="/order-tracking-nav.png" className="w-full h-full brightness-0 invert object-contain" alt="Order Tracking" style={{ filter: "brightness(0) invert(1)" }} />
@@ -389,7 +389,7 @@ export default function OrderStatusPage() {
                   Service Tracker
                 </h1>
                 <div className="flex items-center gap-2 mt-1.5">
-                  <div className="h-px w-8 bg-gradient-to-r from-[#3F3D8F] to-transparent" />
+                  <div className="h-px w-8 bg-gradient-to-r from-[#0B3B36] to-transparent" />
                   <p className="text-[10px] sm:text-[11px] font-semibold uppercase" style={{ color: "#736C83" }}>
                     Real-time preparation status
                   </p>
@@ -402,12 +402,12 @@ export default function OrderStatusPage() {
               <div 
                 className="flex items-center gap-2 px-3 py-2 rounded-xl border whitespace-nowrap"
                 style={{
-                  background: "oklch(0.42 0.14 285 / 0.06)",
-                  borderColor: "oklch(0.42 0.14 285 / 0.15)",
+                  background: "rgba(11, 59, 54,  0.06)",
+                  borderColor: "rgba(11, 59, 54,  0.15)",
                 }}
               >
-                <ArrowTrendingUpIcon className="h-3.5 w-3.5" style={{ color: "#3F3D8F" }} strokeWidth={2.5} />
-                <span className="text-[11px] font-bold" style={{ color: "#3F3D8F" }}>
+                <ArrowTrendingUpIcon className="h-3.5 w-3.5" style={{ color: "#0B3B36" }} strokeWidth={2.5} />
+                <span className="text-[11px] font-bold" style={{ color: "#0B3B36" }}>
                   {orders.length} Active
                 </span>
               </div>
@@ -441,15 +441,15 @@ export default function OrderStatusPage() {
                   style={
                     active
                       ? {
-                          background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.16 275) 100%)",
+                          background: "linear-gradient(135deg, #0B3B36 0%, #062421 100%)",
                           color: "white",
                           borderColor: "transparent",
-                          boxShadow: "0 4px 16px oklch(0.42 0.14 285 / 0.3)",
+                          boxShadow: "0 4px 16px rgba(11, 59, 54,  0.3)",
                         }
                       : {
                           background: "white",
                           color: "#736C83",
-                          borderColor: "oklch(0.42 0.14 285 / 0.12)",
+                          borderColor: "rgba(11, 59, 54,  0.12)",
                         }
                   }
                 >
@@ -461,7 +461,7 @@ export default function OrderStatusPage() {
                           ? "rgba(255,255,255,0.6)" 
                           : f === "ready" 
                             ? "oklch(0.65 0.18 150)" 
-                            : "#3F3D8F"
+                            : "#0B3B36"
                       }}
                     />
                   )}
@@ -479,7 +479,7 @@ export default function OrderStatusPage() {
                       style={
                         active
                           ? { background: "rgba(255,255,255,0.25)", color: "white" }
-                          : { background: "oklch(0.42 0.14 285 / 0.1)", color: "#3F3D8F" }
+                          : { background: "rgba(11, 59, 54,  0.1)", color: "#0B3B36" }
                       }
                     >
                       {count}
@@ -499,7 +499,7 @@ export default function OrderStatusPage() {
                 className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl flex items-center justify-center border-2 shadow-lg"
                 style={{
                   background: "white",
-                  borderColor: "oklch(0.42 0.14 285 / 0.15)",
+                  borderColor: "rgba(11, 59, 54,  0.15)",
                 }}
               >
                 <CheckCircleIcon className="h-8 w-8 sm:h-10 sm:w-10" style={{ color: "var(--icon-primary)" }} strokeWidth={2.5} />

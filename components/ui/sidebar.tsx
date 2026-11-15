@@ -44,8 +44,19 @@ type SidebarContextProps = {
 
 export const SidebarContext = React.createContext<SidebarContextProps | null>(null)
 
-function useSidebar() {
+function useSidebar(): SidebarContextProps {
   const context = React.useContext(SidebarContext)
+  if (!context) {
+    return {
+      state: 'expanded',
+      open: true,
+      setOpen: () => {},
+      openMobile: false,
+      setOpenMobile: () => {},
+      isMobile: false,
+      toggleSidebar: () => {},
+    }
+  }
   return context
 }
 

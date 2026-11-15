@@ -31,19 +31,19 @@ export function SalesChart() {
             <AreaChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
               <defs>
                 <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="oklch(var(--primary))" stopOpacity={0.2} />
-                  <stop offset="95%" stopColor="oklch(var(--primary))" stopOpacity={0} />
+                  <stop offset="5%" stopColor="#7AE72A" stopOpacity={0.4} />
+                  <stop offset="95%" stopColor="#0B3B36" stopOpacity={0.0} />
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="oklch(var(--border))" vertical={false} opacity={0.5} />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} opacity={0.6} />
               <XAxis
                 dataKey="date"
-                tick={{ fill: 'oklch(var(--muted-foreground))', fontSize: 10, fontFamily: 'var(--font-sans)' }}
-                axisLine={{ stroke: 'oklch(var(--border))' }}
+                tick={{ fill: 'var(--muted-foreground)', fontSize: 10, fontFamily: 'var(--font-sans)' }}
+                axisLine={{ stroke: 'var(--border)' }}
                 tickLine={false}
               />
               <YAxis
-                tick={{ fill: 'oklch(var(--muted-foreground))', fontSize: 10, fontFamily: 'var(--font-sans)' }}
+                tick={{ fill: 'var(--muted-foreground)', fontSize: 10, fontFamily: 'var(--font-sans)' }}
                 axisLine={false}
                 tickLine={false}
                 tickFormatter={(value) => `${value}K`}

@@ -113,7 +113,7 @@ export default function CheckoutPage() {
           <div className="flex items-center gap-3 mb-6">
             <div
               className="flex items-center justify-center w-11 h-11 rounded-xl p-2"
-              style={{ background: "#3F3D8F", boxShadow: "0 4px 12px oklch(0.45 0.12 285 / 0.35)" }}
+              style={{ background: "#0B3B36", boxShadow: "0 4px 12px rgba(11, 59, 54,  0.35)" }}
             >
               <img src="/checkout-nav.png" className="w-full h-full brightness-0 invert object-contain" alt="Checkout" />
             </div>
@@ -134,13 +134,13 @@ export default function CheckoutPage() {
           style={{
             background: "rgba(255,255,255,0.75)",
             backdropFilter: "blur(12px)",
-            borderColor: "oklch(0.45 0.12 285 / 0.1)",
+            borderColor: "rgba(11, 59, 54,  0.1)",
           }}
         >
           {[
             { label: "Open Tables",    value: activeTablesList.length, icon: ShoppingBag, accent: "oklch(0.75 0.15 75)"   },
             { label: "Ready to Pay",   value: readyCount,              icon: CircleDot,   accent: "oklch(0.62 0.16 150)"  },
-            { label: "Total Pending",  value: `KES ${totalRevenue.toLocaleString()}`, icon: TrendingUp, accent: "#3F3D8F" },
+            { label: "Total Pending",  value: `KES ${totalRevenue.toLocaleString()}`, icon: TrendingUp, accent: "#0B3B36" },
           ].map((stat) => {
             const Icon = stat.icon
             return (
@@ -174,17 +174,17 @@ export default function CheckoutPage() {
               {/* Payment method selector */}
               <Card
                 className="overflow-hidden border rounded-3xl shadow-sm"
-                style={{ background: "rgba(255,255,255,0.9)", borderColor: "oklch(0.45 0.12 285 / 0.12)" }}
+                style={{ background: "rgba(255,255,255,0.9)", borderColor: "rgba(11, 59, 54,  0.12)" }}
               >
-                <div className="h-[3px]" style={{ background: "#3F3D8F" }} />
+                <div className="h-[3px]" style={{ background: "#0B3B36" }} />
 
                 <CardHeader className="px-5 pt-5 pb-3">
                   <div className="flex items-center gap-3">
                     <div
                       className="flex items-center justify-center w-9 h-9 rounded-xl"
-                      style={{ background: "oklch(0.45 0.12 285 / 0.1)" }}
+                      style={{ background: "rgba(11, 59, 54,  0.1)" }}
                     >
-                      <Wallet className="h-4 w-4" style={{ color: "#3F3D8F" }} />
+                      <Wallet className="h-4 w-4" style={{ color: "#0B3B36" }} />
                     </div>
                     <div>
                       <CardTitle className="text-[15px] font-bold " style={{ color: "#0D031B" }}>
@@ -209,15 +209,15 @@ export default function CheckoutPage() {
                           className="relative flex flex-col items-center gap-2.5 py-5 px-3 rounded-2xl border transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[oklch(0.45_0.12_285)]"
                           style={
                             active
-                              ? { background: "oklch(0.45 0.12 285 / 0.06)", borderColor: "oklch(0.45 0.12 285 / 0.4)", boxShadow: "0 2px 12px oklch(0.45 0.12 285 / 0.15)" }
-                              : { background: "#F5F2FB", borderColor: "oklch(0.45 0.12 285 / 0.1)" }
+                              ? { background: "rgba(11, 59, 54,  0.06)", borderColor: "rgba(11, 59, 54,  0.4)", boxShadow: "0 2px 12px rgba(11, 59, 54,  0.15)" }
+                              : { background: "#F5F2FB", borderColor: "rgba(11, 59, 54,  0.1)" }
                           }
                         >
                           {/* Active checkmark */}
                           {active && (
                             <span
                               className="absolute top-2.5 right-2.5 flex items-center justify-center w-4 h-4 rounded-full"
-                              style={{ background: "#3F3D8F" }}
+                              style={{ background: "#0B3B36" }}
                             >
                               <Check className="h-2.5 w-2.5 text-white" strokeWidth={2.5} />
                             </span>
@@ -240,7 +240,7 @@ export default function CheckoutPage() {
               {/* Active tables list */}
               <Card
                 className="overflow-hidden border rounded-3xl shadow-sm"
-                style={{ background: "rgba(255,255,255,0.9)", borderColor: "oklch(0.45 0.12 285 / 0.12)" }}
+                style={{ background: "rgba(255,255,255,0.9)", borderColor: "rgba(11, 59, 54,  0.12)" }}
               >
                 <div className="h-[3px]" style={{ background: "oklch(0.75 0.15 75)" }} />
 
@@ -301,16 +301,16 @@ export default function CheckoutPage() {
                             className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl border transition-all duration-200 text-left hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[oklch(0.45_0.12_285)]"
                             style={
                               selected
-                                ? { background: "oklch(0.45 0.12 285 / 0.06)", borderColor: "oklch(0.45 0.12 285 / 0.35)", boxShadow: "0 2px 10px oklch(0.45 0.12 285 / 0.1)" }
-                                : { background: "#FAFAF9", borderColor: "oklch(0.45 0.12 285 / 0.1)" }
+                                ? { background: "rgba(11, 59, 54,  0.06)", borderColor: "rgba(11, 59, 54,  0.35)", boxShadow: "0 2px 10px rgba(11, 59, 54,  0.1)" }
+                                : { background: "#FAFAF9", borderColor: "rgba(11, 59, 54,  0.1)" }
                             }
                           >
                             {/* Table avatar */}
                             <div
                               className="flex items-center justify-center w-11 h-11 rounded-xl font-bold text-lg shrink-0 text-white transition-all duration-200"
                               style={{
-                                background: selected ? "#3F3D8F" : "#D0CBE4",
-                                boxShadow: selected ? "0 2px 10px oklch(0.45 0.12 285 / 0.3)" : "none",
+                                background: selected ? "#0B3B36" : "#D0CBE4",
+                                boxShadow: selected ? "0 2px 10px rgba(11, 59, 54,  0.3)" : "none",
                               }}
                             >
                               {table.id.replace("T","")}
@@ -331,7 +331,7 @@ export default function CheckoutPage() {
                             </div>
 
                             <div className="text-right shrink-0">
-                              <p className="text-[14px] font-bold tabular-nums" style={{ color: "#3F3D8F" }}>
+                              <p className="text-[14px] font-bold tabular-nums" style={{ color: "#0B3B36" }}>
                                 KES {table.amount.toLocaleString()}
                               </p>
                               <span
@@ -347,7 +347,7 @@ export default function CheckoutPage() {
 
                             <ChevronRight
                               className="h-4 w-4 shrink-0 transition-colors"
-                              style={{ color: selected ? "#3F3D8F" : "#D0CBE4" }}
+                              style={{ color: selected ? "#0B3B36" : "#D0CBE4" }}
                             />
                           </button>
                         )
@@ -362,12 +362,12 @@ export default function CheckoutPage() {
             <div className="sticky top-6">
               <Card
                 className="overflow-hidden border rounded-3xl shadow-sm"
-                style={{ background: "rgba(255,255,255,0.92)", borderColor: "oklch(0.45 0.12 285 / 0.12)" }}
+                style={{ background: "rgba(255,255,255,0.92)", borderColor: "rgba(11, 59, 54,  0.12)" }}
               >
                 {/* Receipt brand header */}
                 <div
                   className="px-5 py-5 text-center relative overflow-hidden"
-                  style={{ background: "#3F3D8F" }}
+                  style={{ background: "#0B3B36" }}
                 >
                   <div className="relative z-10">
                     <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-white/15 mx-auto mb-2.5">
@@ -383,7 +383,7 @@ export default function CheckoutPage() {
                 {/* Meta row */}
                 <div
                   className="px-5 py-2.5 flex items-center justify-between border-b"
-                  style={{ background: "#FAFAF9", borderColor: "oklch(0.45 0.12 285 / 0.08)" }}
+                  style={{ background: "#FAFAF9", borderColor: "rgba(11, 59, 54,  0.08)" }}
                 >
                   <span className="text-[10px] font-bold uppercase " style={{ color: "#9A94AA" }}>
                     {selectedTable ? formatLabel(selectedTable) : "No table selected"}
@@ -453,7 +453,7 @@ export default function CheckoutPage() {
                     <span className="text-[13px] font-bold uppercase " style={{ color: "#0D031B" }}>
                       Total
                     </span>
-                    <span className="text-xl font-bold tabular-nums" style={{ color: "#3F3D8F" }}>
+                    <span className="text-xl font-bold tabular-nums" style={{ color: "#0B3B36" }}>
                       KES {total.toLocaleString()}
                     </span>
                   </div>
@@ -465,7 +465,7 @@ export default function CheckoutPage() {
                     return (
                       <div
                         className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl"
-                        style={{ background: "oklch(0.45 0.12 285 / 0.05)", border: "1px solid oklch(0.45 0.12 285 / 0.1)" }}
+                        style={{ background: "rgba(11, 59, 54,  0.05)", border: "1px solid rgba(11, 59, 54,  0.1)" }}
                       >
                         <div className={cn("flex items-center justify-center w-7 h-7 rounded-lg shrink-0", m.bg)}>
                           <Icon className={cn("h-3.5 w-3.5", m.text)} />
@@ -484,8 +484,8 @@ export default function CheckoutPage() {
                         disabled={!selectedTable || receiptItems.length === 0}
                         className="w-full h-12 font-bold text-[12px] uppercase  text-white rounded-2xl border-none transition-all duration-200 hover:opacity-90 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] disabled:opacity-40 disabled:pointer-events-none relative overflow-hidden group"
                         style={{
-                          background: "#3F3D8F",
-                          boxShadow: "0 6px 24px oklch(0.45 0.12 285 / 0.35)",
+                          background: "#0B3B36",
+                          boxShadow: "0 6px 24px rgba(11, 59, 54,  0.35)",
                         }}
                       >
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />

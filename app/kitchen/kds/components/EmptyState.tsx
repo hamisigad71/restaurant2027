@@ -11,7 +11,7 @@ export function EmptyState({ filter, search }: EmptyStateProps) {
     <div className="flex flex-col items-center justify-center py-24 gap-4">
       <div 
         className="w-20 h-20 rounded-[2.5rem] flex items-center justify-center border"
-        style={{ background: "rgba(255,255,255,0.8)", borderColor: "oklch(0.45 0.12 285 / 0.15)", boxShadow: "0 8px 32px rgba(13,3,27,0.06)" }}
+        style={{ background: "rgba(255,255,255,0.8)", borderColor: "rgba(11, 59, 54,  0.15)", boxShadow: "0 8px 32px rgba(13,3,27,0.06)" }}
       >
         <div
           className="h-8 w-8"

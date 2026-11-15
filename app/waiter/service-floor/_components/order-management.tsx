@@ -138,7 +138,7 @@ export function TableGrid({ tables, onSelectTable }: TableGridProps) {
           <div 
             className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg p-2"
             style={{
-              background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.16 275) 100%)",
+              background: "linear-gradient(135deg, #0B3B36 0%, #062421 100%)",
             }}
           >
             <img src="/service-floor-nav.png" className="w-full h-full brightness-0 invert object-contain" alt="Service Floor" />
@@ -154,7 +154,7 @@ export function TableGrid({ tables, onSelectTable }: TableGridProps) {
         </div>
 
         {/* Zone Filter */}
-        <div className="flex bg-white/50 backdrop-blur-sm p-1.5 rounded-2xl w-fit border border-oklch(0.42 0.14 285 / 0.08) shrink-0">
+        <div className="flex bg-white/50 backdrop-blur-sm p-1.5 rounded-2xl w-fit border border-rgba(11, 59, 54,  0.08) shrink-0">
           {zones.map(zone => (
             <button
               key={zone}
@@ -162,8 +162,8 @@ export function TableGrid({ tables, onSelectTable }: TableGridProps) {
               className={cn(
                 "px-5 py-2.5 rounded-xl text-[11px] font-bold uppercase transition-all duration-300",
                 activeZone === zone 
-                  ? "bg-white text-[#3F3D8F] shadow-lg" 
-                  : "text-[#736C83] hover:text-[#3F3D8F]"
+                  ? "bg-white text-[#0B3B36] shadow-lg" 
+                  : "text-[#736C83] hover:text-[#0B3B36]"
               )}
             >
               Zone {zone.toUpperCase()}
@@ -192,7 +192,7 @@ export function TableGrid({ tables, onSelectTable }: TableGridProps) {
         {filteredTables.length === 0 ? (
           <div className="col-span-full flex flex-col items-center justify-center py-16 sm:py-24 gap-4">
             <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl flex items-center justify-center" 
-              style={{ background: "oklch(0.42 0.14 285 / 0.08)" }}>
+              style={{ background: "rgba(11, 59, 54,  0.08)" }}>
               <UtensilsCrossed className="h-8 w-8 sm:h-10 sm:w-10" style={{ color: "#AEA6BF" }} strokeWidth={2.5} />
             </div>
             <p className="text-sm font-bold uppercase" style={{ color: "#9A94AA" }}>No tables found in this zone</p>
@@ -269,12 +269,12 @@ export function TableGrid({ tables, onSelectTable }: TableGridProps) {
                   {/* Action hint */}
                   {config.selectable && (
                     <div className="pt-2 border-t opacity-0 group-hover:opacity-100 transition-opacity duration-300" 
-                      style={{ borderColor: "oklch(0.42 0.14 285 / 0.08)" }}>
+                      style={{ borderColor: "rgba(11, 59, 54,  0.08)" }}>
                       <div className="flex items-center justify-center gap-1.5">
-                        <span className="text-[9px] font-bold uppercase" style={{ color: "#3F3D8F" }}>
+                        <span className="text-[9px] font-bold uppercase" style={{ color: "#0B3B36" }}>
                           Select Table
                         </span>
-                        <ArrowRight className="h-3 w-3" style={{ color: "#3F3D8F" }} strokeWidth={2.5} />
+                        <ArrowRight className="h-3 w-3" style={{ color: "#0B3B36" }} strokeWidth={2.5} />
                       </div>
                     </div>
                   )}
@@ -282,7 +282,7 @@ export function TableGrid({ tables, onSelectTable }: TableGridProps) {
 
                 {/* Hover overlay */}
                 {config.selectable && (
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#3F3D8F]/0 to-[#3F3D8F]/0 group-hover:from-[#3F3D8F]/5 group-hover:to-[#3F3D8F]/10 transition-all duration-500 pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#0B3B36]/0 to-[#0B3B36]/0 group-hover:from-[#0B3B36]/5 group-hover:to-[#0B3B36]/10 transition-all duration-500 pointer-events-none" />
                 )}
               </Card>
             );
@@ -327,12 +327,12 @@ export function MenuGrid({
         className="px-3 sm:px-6 py-4 sm:py-5 border-b backdrop-blur-xl sticky top-[40px] md:top-[44px] lg:top-[54px] z-20"
         style={{
           background: "rgba(255,255,255,0.92)",
-          borderColor: "oklch(0.42 0.14 285 / 0.08)",
+          borderColor: "rgba(11, 59, 54,  0.08)",
         }}
       >
         {/* Gradient accent */}
         <div className="absolute top-0 left-0 right-0 h-[2px]"
-          style={{ background: "linear-gradient(90deg, #3F3D8F 0%, oklch(0.55 0.18 270) 50%, #3F3D8F 100%)" }}
+          style={{ background: "linear-gradient(90deg, #0B3B36 0%, #13584F 50%, #0B3B36 100%)" }}
         />
 
         <div className="flex flex-col gap-4">
@@ -344,8 +344,8 @@ export function MenuGrid({
               onClick={onBack}
               className="h-10 w-10 rounded-xl border-2 shrink-0 transition-all hover:scale-105 active:scale-95"
               style={{
-                borderColor: "oklch(0.42 0.14 285 / 0.15)",
-                color: "#3F3D8F",
+                borderColor: "rgba(11, 59, 54,  0.15)",
+                color: "#0B3B36",
               }}
             >
               <ArrowLeft className="h-4 w-4" strokeWidth={2.5} />
@@ -358,7 +358,7 @@ export function MenuGrid({
                 </h2>
                 {selectedTable && (
                   <Badge className="text-[10px] font-bold px-2.5 py-1 rounded-lg border-0 text-white shadow-md"
-                    style={{ background: "#3F3D8F" }}>
+                    style={{ background: "#0B3B36" }}>
                     Table {selectedTable.number.toString().padStart(2, "0")}
                   </Badge>
                 )}
@@ -377,7 +377,7 @@ export function MenuGrid({
                 onChange={(e) => setSearch(e.target.value)}
                 className="pl-10 h-10 border-2 rounded-xl text-sm"
                 style={{
-                  borderColor: "oklch(0.42 0.14 285 / 0.12)",
+                  borderColor: "rgba(11, 59, 54,  0.12)",
                   color: "#0D031B",
                 }}
               />
@@ -393,7 +393,7 @@ export function MenuGrid({
               onChange={(e) => setSearch(e.target.value)}
               className="pl-10 h-10 border-2 rounded-xl text-sm"
               style={{
-                borderColor: "oklch(0.42 0.14 285 / 0.12)",
+                borderColor: "rgba(11, 59, 54,  0.12)",
                 color: "#0D031B",
               }}
             />
@@ -403,7 +403,7 @@ export function MenuGrid({
           <ScrollArea className="w-full">
             <Tabs value={activeCategory} onValueChange={onCategoryChange}>
               <TabsList className="bg-white border-2 p-1 h-auto gap-1 rounded-xl inline-flex w-full sm:w-auto"
-                style={{ borderColor: "oklch(0.42 0.14 285 / 0.12)" }}>
+                style={{ borderColor: "rgba(11, 59, 54,  0.12)" }}>
                 {categories.map((cat) => (
                   <TabsTrigger
                     key={cat.id}
@@ -415,7 +415,7 @@ export function MenuGrid({
                     )}
                     style={{
                       background: activeCategory === cat.id
-                        ? "linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.16 275) 100%)"
+                        ? "linear-gradient(135deg, #0B3B36 0%, #062421 100%)"
                         : "transparent"
                     }}
                   >
@@ -433,7 +433,7 @@ export function MenuGrid({
           {filtered.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-16 sm:py-24 gap-4">
               <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl flex items-center justify-center"
-                style={{ background: "oklch(0.42 0.14 285 / 0.08)" }}>
+                style={{ background: "rgba(11, 59, 54,  0.08)" }}>
                 <div 
                   className="h-8 w-8 sm:h-10 sm:w-10" 
                   style={{ 
@@ -461,7 +461,7 @@ export function MenuGrid({
                     key={item.id}
                     className="group relative flex flex-col overflow-hidden rounded-xl border bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
                     style={{
-                      borderColor: "oklch(0.45 0.12 285 / 0.1)",
+                      borderColor: "rgba(11, 59, 54,  0.1)",
                       boxShadow: "0 2px 10px rgba(13,3,27,0.06)",
                     }}
                   >
@@ -523,7 +523,7 @@ export function MenuGrid({
                       </div>
 
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-1 text-[8px] font-bold uppercase opacity-60" style={{ color: "#3F3D8F" }}>
+                        <div className="flex items-center gap-1 text-[8px] font-bold uppercase opacity-60" style={{ color: "#0B3B36" }}>
                           <TrendingUp className="h-2.5 w-2.5" /> High Demand
                         </div>
                         <span className="text-[8px] opacity-40 font-bold uppercase">50+ orders</span>
@@ -584,19 +584,19 @@ export function OrderCart({
       <CardHeader className="shrink-0 p-0">
         <div className="px-5 pt-5 pb-4 border-b"
           style={{
-            background: "linear-gradient(135deg, oklch(0.42 0.14 285 / 0.04) 0%, oklch(0.42 0.14 285 / 0.02) 100%)",
-            borderColor: "oklch(0.42 0.14 285 / 0.08)",
+            background: "linear-gradient(135deg, rgba(11, 59, 54,  0.04) 0%, rgba(11, 59, 54,  0.02) 100%)",
+            borderColor: "rgba(11, 59, 54,  0.08)",
           }}>
           
           {/* Gradient accent */}
           <div className="absolute top-0 left-0 right-0 h-[3px]"
-            style={{ background: "linear-gradient(90deg, #3F3D8F 0%, oklch(0.55 0.18 270) 50%, #3F3D8F 100%)" }}
+            style={{ background: "linear-gradient(90deg, #0B3B36 0%, #13584F 50%, #0B3B36 100%)" }}
           />
 
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl flex items-center justify-center shadow-md"
-                style={{ background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.16 275) 100%)" }}>
+                style={{ background: "linear-gradient(135deg, #0B3B36 0%, #062421 100%)" }}>
                 <ShoppingCart className="h-5 w-5 text-white" strokeWidth={2.5} />
               </div>
               <div>
@@ -607,7 +607,7 @@ export function OrderCart({
 
             {table ? (
               <Badge className="text-[11px] font-bold px-3 py-1 rounded-lg border-0 text-white shadow-md"
-                style={{ background: "#3F3D8F" }}>
+                style={{ background: "#0B3B36" }}>
                 Table {table.number.toString().padStart(2, "0")}
               </Badge>
             ) : (
@@ -622,16 +622,16 @@ export function OrderCart({
           {items.length > 0 && (
             <div className="mt-4 flex items-center gap-2.5">
               <div className="h-2 flex-1 rounded-full overflow-hidden"
-                style={{ background: "oklch(0.42 0.14 285 / 0.1)" }}>
+                style={{ background: "rgba(11, 59, 54,  0.1)" }}>
                 <div
                   className="h-full rounded-full transition-all duration-500"
                   style={{
                     width: `${Math.min((items.length / 10) * 100, 100)}%`,
-                    background: "linear-gradient(90deg, #3F3D8F 0%, oklch(0.55 0.18 270) 100%)",
+                    background: "linear-gradient(90deg, #0B3B36 0%, #13584F 100%)",
                   }}
                 />
               </div>
-              <span className="text-[10px] font-bold shrink-0" style={{ color: "#3F3D8F" }}>
+              <span className="text-[10px] font-bold shrink-0" style={{ color: "#0B3B36" }}>
                 {items.length} item{items.length !== 1 ? "s" : ""}
               </span>
             </div>
@@ -644,7 +644,7 @@ export function OrderCart({
         {items.length === 0 ? (
           <div className="flex-1 flex flex-col items-center justify-center p-6 gap-4">
             <div className="w-16 h-16 rounded-2xl flex items-center justify-center"
-              style={{ background: "oklch(0.42 0.14 285 / 0.08)" }}>
+              style={{ background: "rgba(11, 59, 54,  0.08)" }}>
               <ShoppingCart className="h-8 w-8" style={{ color: "#AEA6BF" }} strokeWidth={2.5} />
             </div>
             <div className="text-center">
@@ -664,16 +664,16 @@ export function OrderCart({
                     key={item.menuItem.id}
                     className="flex items-center gap-3 px-3 py-3 rounded-xl border-2 transition-all hover:shadow-md"
                     style={{
-                      background: "oklch(0.42 0.14 285 / 0.02)",
-                      borderColor: "oklch(0.42 0.14 285 / 0.08)",
+                      background: "rgba(11, 59, 54,  0.02)",
+                      borderColor: "rgba(11, 59, 54,  0.08)",
                     }}
                   >
                     {/* Index */}
                     <div className="w-6 h-6 rounded-lg shrink-0 flex items-center justify-center text-[11px] font-bold border"
                       style={{
                         background: "white",
-                        borderColor: "oklch(0.42 0.14 285 / 0.2)",
-                        color: "#3F3D8F",
+                        borderColor: "rgba(11, 59, 54,  0.2)",
+                        color: "#0B3B36",
                       }}>
                       {index + 1}
                     </div>
@@ -696,8 +696,8 @@ export function OrderCart({
                         className="h-7 w-7 rounded-lg border-2 transition-all hover:scale-110 active:scale-95"
                         onClick={() => onUpdateQuantity(item.menuItem.id, item.quantity - 1)}
                         style={{
-                          borderColor: "oklch(0.42 0.14 285 / 0.2)",
-                          color: "#3F3D8F",
+                          borderColor: "rgba(11, 59, 54,  0.2)",
+                          color: "#0B3B36",
                         }}
                       >
                         <Minus className="h-3 w-3" strokeWidth={2.5} />
@@ -713,8 +713,8 @@ export function OrderCart({
                         className="h-7 w-7 rounded-lg border-2 transition-all hover:scale-110 active:scale-95"
                         onClick={() => onUpdateQuantity(item.menuItem.id, item.quantity + 1)}
                         style={{
-                          borderColor: "oklch(0.42 0.14 285 / 0.2)",
-                          color: "#3F3D8F",
+                          borderColor: "rgba(11, 59, 54,  0.2)",
+                          color: "#0B3B36",
                         }}
                       >
                         <Plus className="h-3 w-3" strokeWidth={2.5} />
@@ -735,7 +735,7 @@ export function OrderCart({
             </ScrollArea>
 
             {/* Enhanced Summary */}
-            <div className="shrink-0 border-t" style={{ borderColor: "oklch(0.42 0.14 285 / 0.08)" }}>
+            <div className="shrink-0 border-t" style={{ borderColor: "rgba(11, 59, 54,  0.08)" }}>
               <div className="px-5 pt-4 pb-3 space-y-2">
                 <div className="flex justify-between items-center">
                   <span className="text-xs font-semibold" style={{ color: "#736C83" }}>Subtotal</span>
@@ -746,12 +746,12 @@ export function OrderCart({
                   <span className="text-xs font-bold" style={{ color: "#0D031B" }}>KES {tax.toLocaleString()}</span>
                 </div>
                 
-                <Separator style={{ background: "oklch(0.42 0.14 285 / 0.08)" }} />
+                <Separator style={{ background: "rgba(11, 59, 54,  0.08)" }} />
                 
                 <div className="flex justify-between items-end pt-1">
                   <span className="text-sm font-bold" style={{ color: "#0D031B" }}>Total</span>
                   <div className="text-right">
-                    <p className="text-2xl font-bold leading-tight" style={{ color: "#3F3D8F" }}>
+                    <p className="text-2xl font-bold leading-tight" style={{ color: "#0B3B36" }}>
                       KES {total.toLocaleString()}
                     </p>
                     <p className="text-[9px] font-medium mt-0.5" style={{ color: "#AEA6BF" }}>Inclusive of VAT</p>
@@ -765,7 +765,7 @@ export function OrderCart({
                   className="flex-1 h-10 text-xs font-bold uppercase rounded-xl border-2 transition-all hover:scale-105 active:scale-95"
                   onClick={onClearCart}
                   style={{
-                    borderColor: "oklch(0.42 0.14 285 / 0.15)",
+                    borderColor: "rgba(11, 59, 54,  0.15)",
                     color: "#736C83",
                   }}
                 >
@@ -776,8 +776,8 @@ export function OrderCart({
                   onClick={onPlaceOrder}
                   disabled={!table}
                   style={{
-                    background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.16 275) 100%)",
-                    boxShadow: "0 4px 16px oklch(0.42 0.14 285 / 0.3)",
+                    background: "linear-gradient(135deg, #0B3B36 0%, #062421 100%)",
+                    boxShadow: "0 4px 16px rgba(11, 59, 54,  0.3)",
                   }}
                 >
                   <Check className="h-4 w-4" strokeWidth={2.5} />

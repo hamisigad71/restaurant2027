@@ -33,7 +33,7 @@ export default function IconDemo() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Outline Style - Default */}
           <div className="p-6 bg-white rounded-2xl shadow-sm border border-slate-200">
-            <h3 className="text-lg font-semibold mb-4 text-indigo-600">24x24 Outline</h3>
+            <h3 className="text-lg font-semibold mb-4 text-slate-900">24x24 Outline</h3>
             <div className="flex gap-4">
               <FireIcon className="h-10 w-10 text-orange-500" />
               <QueueListIcon className="h-10 w-10 text-slate-700" />
@@ -45,21 +45,21 @@ export default function IconDemo() {
 
           {/* Solid Style - Impact */}
           <div className="p-6 bg-white rounded-2xl shadow-sm border border-slate-200">
-            <h3 className="text-lg font-semibold mb-4 text-indigo-600">24x24 Solid</h3>
+            <h3 className="text-lg font-semibold mb-4 text-slate-900">24x24 Solid</h3>
             <div className="flex gap-4">
               <CheckCircleIconSolid className="h-10 w-10 text-emerald-500" />
               <ExclamationCircleIconSolid className="h-10 w-10 text-rose-500" />
               <FireIconSolid className="h-10 w-10 text-orange-500" />
-              <BoltIcon className="h-10 w-10 text-indigo-500" />
+              <BoltIcon className="h-10 w-10 text-amber-500" />
             </div>
             <p className="mt-4 text-sm text-slate-500">Great for badges, active states, and focus areas.</p>
           </div>
 
           {/* Mini/Micro - Dense UI */}
           <div className="p-6 bg-white rounded-2xl shadow-sm border border-slate-200">
-            <h3 className="text-lg font-semibold mb-4 text-indigo-600">20x20 Mini</h3>
+            <h3 className="text-lg font-semibold mb-4 text-slate-900">20x20 Mini</h3>
             <div className="flex items-center gap-4">
-              <button className="flex items-center gap-1.5 px-3 py-1.5 bg-indigo-600 text-white rounded-lg text-sm font-medium">
+              <button className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-sm font-medium transition-colors">
                 View Details
                 <ArrowUpRightIconMini className="h-4 w-4" />
               </button>

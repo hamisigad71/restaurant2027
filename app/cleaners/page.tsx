@@ -42,8 +42,8 @@ const INITIAL_TABLES: DirtyTable[] = [
 
 const URGENCY_CONFIG = {
   high:   { label:"Urgent",  accent:"oklch(0.65 0.18 25)", bg:"oklch(0.65 0.18 25 / 0.08)", border:"oklch(0.65 0.18 25 / 0.3)", icon:BoltIcon,          barBg:"oklch(0.65 0.18 25)", ctaBg:"oklch(0.65 0.18 25)" },
-  medium: { label:"Due",     accent:"oklch(0.75 0.15 75)", bg:"oklch(0.75 0.15 75 / 0.06)", border:"oklch(0.75 0.15 75 / 0.2)", icon:ClockIcon,        barBg:"oklch(0.75 0.15 75)", ctaBg:"#3F3D8F" },
-  low:    { label:"Routine", accent:"#3F3D8F", bg:"oklch(0.45 0.12 285 / 0.05)", border:"oklch(0.45 0.12 285 / 0.15)", icon:SparklesIcon, barBg:"#3F3D8F", ctaBg:"#3F3D8F" },
+  medium: { label:"Due",     accent:"oklch(0.75 0.15 75)", bg:"oklch(0.75 0.15 75 / 0.06)", border:"oklch(0.75 0.15 75 / 0.2)", icon:ClockIcon,        barBg:"oklch(0.75 0.15 75)", ctaBg:"#0B3B36" },
+  low:    { label:"Routine", accent:"#0B3B36", bg:"rgba(11, 59, 54,  0.05)", border:"rgba(11, 59, 54,  0.15)", icon:SparklesIcon, barBg:"#0B3B36", ctaBg:"#0B3B36" },
 }
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
@@ -80,13 +80,13 @@ export default function CleanersPage() {
           style={{
             background: "rgba(253,252,255,0.92)",
             backdropFilter: "blur(20px)",
-            borderColor: "oklch(0.45 0.12 285 / 0.1)",
-            boxShadow: "0 1px 12px oklch(0.45 0.12 285 / 0.06)",
+            borderColor: "rgba(11, 59, 54,  0.1)",
+            boxShadow: "0 1px 12px rgba(11, 59, 54,  0.06)",
           }}
         >
           <div
             className="flex items-center justify-center w-10 h-10 rounded-xl shrink-0"
-            style={{ background:"#3F3D8F", boxShadow:"0 4px 14px oklch(0.45 0.12 285 / 0.35)" }}
+            style={{ background:"#0B3B36", boxShadow:"0 4px 14px rgba(11, 59, 54,  0.35)" }}
           >
             <SparklesIcon className="h-5 w-5 text-white" strokeWidth={2} />
           </div>
@@ -118,9 +118,9 @@ export default function CleanersPage() {
             <Badge
               className="text-[10px] font-bold px-2.5 py-1 rounded-full border"
               style={{
-                background:"oklch(0.45 0.12 285 / 0.1)",
-                color:"#3F3D8F",
-                borderColor:"oklch(0.45 0.12 285 / 0.2)",
+                background:"rgba(11, 59, 54,  0.1)",
+                color:"#0B3B36",
+                borderColor:"rgba(11, 59, 54,  0.2)",
               }}
             >
               {tables.length} total
@@ -133,17 +133,17 @@ export default function CleanersPage() {
           {/* ── Shift progress card ───────────────────────────────── */}
           <Card
             className="border rounded-3xl overflow-hidden shadow-sm"
-            style={{ background:"rgba(255,255,255,0.9)", borderColor:"oklch(0.45 0.12 285 / 0.12)" }}
+            style={{ background:"rgba(255,255,255,0.9)", borderColor:"rgba(11, 59, 54,  0.12)" }}
           >
-            <div className="h-[3px]" style={{ background:"#3F3D8F" }} />
+            <div className="h-[3px]" style={{ background:"#0B3B36" }} />
             <CardContent className="px-5 py-4">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2.5">
                   <div
                     className="flex items-center justify-center w-8 h-8 rounded-lg"
-                    style={{ background:"oklch(0.45 0.12 285 / 0.1)" }}
+                    style={{ background:"rgba(11, 59, 54,  0.1)" }}
                   >
-                    <ClipboardDocumentListIcon className="h-3.5 w-3.5" style={{ color:"#3F3D8F" }} />
+                    <ClipboardDocumentListIcon className="h-3.5 w-3.5" style={{ color:"#0B3B36" }} />
                   </div>
                   <div>
                     <p className="text-[13px] font-bold" style={{ color:"#0D031B" }}>Shift Progress</p>
@@ -152,7 +152,7 @@ export default function CleanersPage() {
                     </p>
                   </div>
                 </div>
-                <p className="text-2xl font-bold tabular-nums" style={{ color:"#3F3D8F" }}>
+                <p className="text-2xl font-bold tabular-nums" style={{ color:"#0B3B36" }}>
                   {cleanPct}%
                 </p>
               </div>
@@ -167,7 +167,7 @@ export default function CleanersPage() {
                   <div
                     key={s.label}
                     className="flex flex-col items-center py-3 rounded-xl border"
-                    style={{ background:"#F5F2FB", borderColor:"oklch(0.45 0.12 285 / 0.1)" }}
+                    style={{ background:"#F5F2FB", borderColor:"rgba(11, 59, 54,  0.1)" }}
                   >
                     <s.icon className="h-4 w-4 mb-1.5" style={{ color:s.color }} />
                     <p className="text-xl font-bold tabular-nums" style={{ color:"#0D031B" }}>{s.value}</p>
@@ -183,9 +183,9 @@ export default function CleanersPage() {
             <div className="flex flex-col items-center justify-center py-20 gap-4">
               <div
                 className="w-20 h-20 rounded-3xl flex items-center justify-center border"
-                style={{ background:"rgba(255,255,255,0.9)", borderColor:"oklch(0.45 0.12 285 / 0.15)" }}
+                style={{ background:"rgba(255,255,255,0.9)", borderColor:"rgba(11, 59, 54,  0.15)" }}
               >
-                <SunIcon className="h-10 w-10" style={{ color:"#3F3D8F" }} />
+                <SunIcon className="h-10 w-10" style={{ color:"#0B3B36" }} />
               </div>
               <div className="text-center">
                 <p className="text-lg font-bold" style={{ color:"#0D031B" }}>All areas spotless!</p>

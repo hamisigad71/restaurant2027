@@ -8,7 +8,7 @@ export function ScheduleHeader() {
       <div className="flex items-center gap-3">
         <div
           className="flex items-center justify-center w-10 h-10 rounded-xl shrink-0"
-          style={{ background: "oklch(0.42 0.14 285)", boxShadow: "0 4px 14px oklch(0.45 0.12 285 / 0.35)" }}
+          style={{ background: "#0B3B36", boxShadow: "0 4px 14px rgba(11, 59, 54,  0.35)" }}
         >
           <Calendar className="h-5 w-5 text-white" />
         </div>
@@ -28,7 +28,7 @@ export function ScheduleHeader() {
             <Button
               variant="outline"
               className="h-10 px-4 gap-2 rounded-xl font-bold text-[11px] uppercase border transition-all hover:-translate-y-0.5"
-              style={{ borderColor: "oklch(0.45 0.12 285 / 0.2)", color: "#736C83", background: "rgba(255,255,255,0.8)" }}
+              style={{ borderColor: "rgba(11, 59, 54,  0.2)", color: "#736C83", background: "rgba(255,255,255,0.8)" }}
             >
               <Zap className="h-3.5 w-3.5" />
               <span className="hidden sm:inline">Auto-Generate</span>
@@ -39,7 +39,7 @@ export function ScheduleHeader() {
 
         <Button
           className="h-10 px-4 gap-2 text-white font-bold rounded-xl border-none text-[11px] uppercase transition-all hover:-translate-y-0.5"
-          style={{ background: "oklch(0.42 0.14 285)", boxShadow: "0 4px 16px oklch(0.45 0.12 285 / 0.35)" }}
+          style={{ background: "#0B3B36", boxShadow: "0 4px 16px rgba(11, 59, 54,  0.35)" }}
         >
           <Plus className="h-3.5 w-3.5" />
           Add Shift

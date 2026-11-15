@@ -31,9 +31,6 @@ export default function RootLayout({
   return (
     <html lang="en" className={quicksand.variable} suppressHydrationWarning>
       <body className="font-sans antialiased" suppressHydrationWarning>
-        {/* Forces the 7-second auto-hiding loader on initial app load */}
-        <GlassLoader autoHideDuration={7000} />
-        
         <AuthProvider>
           {children}
           <MobileNav />

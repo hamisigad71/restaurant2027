@@ -53,12 +53,12 @@ const INITIAL_ALERTS = [
 ]
 
 const ZONE_COLORS: Record<string,string> = {
-  Entry:    "#3F3D8F",
+  Entry:    "#0B3B36",
   Dining:   "oklch(0.62 0.16 150)",
   Bar:      "oklch(0.75 0.15 75)",
   Kitchen:  "oklch(0.65 0.18 25)",
   Outdoor:  "oklch(0.62 0.16 150)",
-  VIP:      "#3F3D8F",
+  VIP:      "#0B3B36",
   Staff:    "#9A94AA",
   Facility: "#9A94AA",
 }
@@ -94,13 +94,13 @@ export default function SecurityPage() {
           style={{
             background: "rgba(253,252,255,0.92)",
             backdropFilter: "blur(20px)",
-            borderColor: "oklch(0.45 0.12 285 / 0.1)",
-            boxShadow: "0 1px 12px oklch(0.45 0.12 285 / 0.06)",
+            borderColor: "rgba(11, 59, 54,  0.1)",
+            boxShadow: "0 1px 12px rgba(11, 59, 54,  0.06)",
           }}
         >
           <div
             className="flex items-center justify-center w-10 h-10 rounded-xl shrink-0"
-            style={{ background:"#3F3D8F", boxShadow:"0 4px 14px oklch(0.45 0.12 285 / 0.35)" }}
+            style={{ background:"#0B3B36", boxShadow:"0 4px 14px rgba(11, 59, 54,  0.35)" }}
           >
             <ShieldCheck className="h-5 w-5 text-white" strokeWidth={2} />
           </div>
@@ -135,7 +135,7 @@ export default function SecurityPage() {
             <TooltipTrigger asChild>
               <button
                 className="relative flex items-center justify-center w-9 h-9 rounded-xl border transition-all hover:bg-[#EBE6F8]"
-                style={{ borderColor:"oklch(0.45 0.12 285 / 0.15)", color:"#736C83" }}
+                style={{ borderColor:"rgba(11, 59, 54,  0.15)", color:"#736C83" }}
               >
                 <Bell className="h-4 w-4" />
                 {alerts.length > 0 && (
@@ -157,7 +157,7 @@ export default function SecurityPage() {
           {/* ── KPI row ──────────────────────────────────────────── */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
-              { label:"Total Guests", val:totalGuests,          suffix:"",       icon:Users,      accent:"#3F3D8F", sub:"Of 160 capacity"        },
+              { label:"Total Guests", val:totalGuests,          suffix:"",       icon:Users,      accent:"#0B3B36", sub:"Of 160 capacity"        },
               { label:"Capacity",     val:`${capacity}%`,        suffix:"",       icon:Crosshair,  accent:"oklch(0.65 0.18 25)",  sub:"18 seats remaining"     },
               { label:"Live Cameras", val:`${onlineCams}/12`,    suffix:"",       icon:Camera,     accent:"oklch(0.62 0.16 150)", sub:`${offlineCams} offline` },
               { label:"Incidents",    val:"0",                   suffix:"today",  icon:Activity,   accent:"oklch(0.62 0.16 150)", sub:"All clear"              },
@@ -165,7 +165,7 @@ export default function SecurityPage() {
               <Card
                 key={k.label}
                 className="border rounded-2xl overflow-hidden shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
-                style={{ background:"rgba(255,255,255,0.9)", borderColor:"oklch(0.45 0.12 285 / 0.1)" }}
+                style={{ background:"rgba(255,255,255,0.9)", borderColor:"rgba(11, 59, 54,  0.1)" }}
               >
                 <CardContent className="p-4">
                   <div className="flex items-start justify-between mb-3">
@@ -204,18 +204,18 @@ export default function SecurityPage() {
               {/* Live feed */}
               <Card
                 className="border rounded-3xl overflow-hidden shadow-sm"
-                style={{ background:"rgba(255,255,255,0.9)", borderColor:"oklch(0.45 0.12 285 / 0.1)" }}
+                style={{ background:"rgba(255,255,255,0.9)", borderColor:"rgba(11, 59, 54,  0.1)" }}
               >
                 <CardHeader
                   className="px-5 py-4 border-b flex flex-row items-center justify-between"
-                  style={{ borderColor:"oklch(0.45 0.12 285 / 0.08)" }}
+                  style={{ borderColor:"rgba(11, 59, 54,  0.08)" }}
                 >
                   <div className="flex items-center gap-2.5">
                     <div
                       className="flex items-center justify-center w-8 h-8 rounded-lg"
-                      style={{ background:"oklch(0.45 0.12 285 / 0.1)" }}
+                      style={{ background:"rgba(11, 59, 54,  0.1)" }}
                     >
-                      <Eye className="h-3.5 w-3.5" style={{ color:"#3F3D8F" }} />
+                      <Eye className="h-3.5 w-3.5" style={{ color:"#0B3B36" }} />
                     </div>
                     <div>
                       <CardTitle className="text-[13px] font-bold" style={{ color:"#0D031B" }}>Live Monitor</CardTitle>
@@ -268,16 +268,16 @@ export default function SecurityPage() {
               {/* Camera grid */}
               <Card
                 className="border rounded-3xl overflow-hidden shadow-sm"
-                style={{ background:"rgba(255,255,255,0.9)", borderColor:"oklch(0.45 0.12 285 / 0.1)" }}
+                style={{ background:"rgba(255,255,255,0.9)", borderColor:"rgba(11, 59, 54,  0.1)" }}
               >
                 <CardHeader
                   className="px-5 py-4 border-b"
-                  style={{ borderColor:"oklch(0.45 0.12 285 / 0.08)" }}
+                  style={{ borderColor:"rgba(11, 59, 54,  0.08)" }}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2.5">
-                      <div className="flex items-center justify-center w-8 h-8 rounded-lg" style={{ background:"oklch(0.45 0.12 285 / 0.1)" }}>
-                        <Camera className="h-3.5 w-3.5" style={{ color:"#3F3D8F" }} />
+                      <div className="flex items-center justify-center w-8 h-8 rounded-lg" style={{ background:"rgba(11, 59, 54,  0.1)" }}>
+                        <Camera className="h-3.5 w-3.5" style={{ color:"#0B3B36" }} />
                       </div>
                       <CardTitle className="text-[13px] font-bold" style={{ color:"#0D031B" }}>Camera Matrix</CardTitle>
                     </div>
@@ -309,8 +309,8 @@ export default function SecurityPage() {
                           className="relative flex flex-col items-start p-3 rounded-xl border text-left transition-all duration-200 hover:shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
                           style={
                             isActive
-                              ? { background:"oklch(0.45 0.12 285 / 0.08)", borderColor:"oklch(0.45 0.12 285 / 0.4)", boxShadow:"0 2px 10px oklch(0.45 0.12 285 / 0.12)" }
-                              : { background:"#F5F2FB", borderColor:"oklch(0.45 0.12 285 / 0.1)" }
+                              ? { background:"rgba(11, 59, 54,  0.08)", borderColor:"rgba(11, 59, 54,  0.4)", boxShadow:"0 2px 10px rgba(11, 59, 54,  0.12)" }
+                              : { background:"#F5F2FB", borderColor:"rgba(11, 59, 54,  0.1)" }
                           }
                         >
                           {/* Status dot */}
@@ -318,7 +318,7 @@ export default function SecurityPage() {
                             className={cn("w-1.5 h-1.5 rounded-full mb-2", isOnline ? "animate-pulse" : "")}
                             style={{ background: isOnline ? "oklch(0.62 0.16 150)" : "oklch(0.65 0.18 25)" }}
                           />
-                          <p className="text-[10px] font-bold leading-tight" style={{ color: isActive ? "#3F3D8F" : "#0D031B" }}>
+                          <p className="text-[10px] font-bold leading-tight" style={{ color: isActive ? "#0B3B36" : "#0D031B" }}>
                             {cam.id}
                           </p>
                           <p className="text-[9px] truncate w-full mt-0.5" style={{ color:"#9A94AA" }}>
@@ -342,13 +342,13 @@ export default function SecurityPage() {
             <div>
               <Card
                 className="border rounded-3xl overflow-hidden shadow-sm sticky top-24"
-                style={{ background:"rgba(255,255,255,0.9)", borderColor:"oklch(0.45 0.12 285 / 0.1)" }}
+                style={{ background:"rgba(255,255,255,0.9)", borderColor:"rgba(11, 59, 54,  0.1)" }}
               >
                 <div className="h-[3px]" style={{ background:"oklch(0.65 0.18 25)" }} />
 
                 <CardHeader
                   className="px-5 py-4 border-b"
-                  style={{ borderColor:"oklch(0.45 0.12 285 / 0.08)" }}
+                  style={{ borderColor:"rgba(11, 59, 54,  0.08)" }}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2.5">
@@ -393,14 +393,14 @@ export default function SecurityPage() {
                           key={a.id}
                           className="group relative flex items-start gap-3 p-3.5 rounded-2xl border transition-colors"
                           style={{
-                            background: a.severity === "warning" ? "oklch(0.65 0.18 25 / 0.05)" : "oklch(0.45 0.12 285 / 0.04)",
-                            borderColor: a.severity === "warning" ? "oklch(0.65 0.18 25 / 0.2)" : "oklch(0.45 0.12 285 / 0.12)",
+                            background: a.severity === "warning" ? "oklch(0.65 0.18 25 / 0.05)" : "rgba(11, 59, 54,  0.04)",
+                            borderColor: a.severity === "warning" ? "oklch(0.65 0.18 25 / 0.2)" : "rgba(11, 59, 54,  0.12)",
                           }}
                         >
                           {/* Severity dot */}
                           <span
                             className="w-2 h-2 rounded-full shrink-0 mt-1.5"
-                            style={{ background: a.severity === "warning" ? "oklch(0.65 0.18 25)" : "#3F3D8F" }}
+                            style={{ background: a.severity === "warning" ? "oklch(0.65 0.18 25)" : "#0B3B36" }}
                           />
                           <div className="flex-1 min-w-0">
                             <p className="text-[12px] font-bold leading-tight" style={{ color:"#0D031B" }}>{a.title}</p>

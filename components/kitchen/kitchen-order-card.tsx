@@ -64,7 +64,7 @@ export function KitchenOrderCard({ order, onUpdateStatus }: KitchenOrderCardProp
   return (
     <Card
       className={cn(
-        "relative overflow-hidden border border-border/50 transition-all bg-card shadow-sm hover:shadow-md",
+        "relative overflow-hidden border border-border/50 transition-all duration-200 ease-out bg-card shadow-sm hover:shadow-md hover:-translate-y-0.5",
         isUrgent && order.status !== "ready" && "ring-2 ring-destructive ring-offset-2 ring-offset-background"
       )}
     >

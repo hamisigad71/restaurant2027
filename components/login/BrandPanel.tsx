@@ -12,7 +12,7 @@ export function BrandPanel() {
     <div
       className="hidden lg:flex flex-col justify-between p-12 xl:p-16 relative overflow-hidden"
       style={{
-        background: "linear-gradient(145deg, oklch(0.42 0.14 285) 0%, oklch(0.32 0.16 285) 45%, oklch(0.18 0.12 285) 100%)",
+        background: "linear-gradient(145deg, #0B3B36 0%, #041816 45%, #03100E 100%)",
       }}
     >
       {/* Enhanced Orbs */}

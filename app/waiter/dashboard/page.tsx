@@ -157,7 +157,7 @@ function RevenueCard() {
     <div
       className="rounded-[20px] p-5 flex flex-col gap-2.5 relative overflow-hidden"
       style={{
-        background: "linear-gradient(135deg, #3F3D8F 0%, #302e70 100%)",
+        background: "linear-gradient(135deg, #0B3B36 0%, #302e70 100%)",
         boxShadow: "0 12px 24px -8px rgba(63, 61, 143, 0.4)",
       }}
     >
@@ -196,12 +196,12 @@ function MetricCard({
 }) {
   return (
     <div
-      className="rounded-[20px] p-5 flex flex-col gap-3 relative overflow-hidden group hover:shadow-2xl transition-all duration-500 bg-white border border-[#3F3D8F]/10 shadow-sm"
+      className="rounded-[20px] p-5 flex flex-col gap-3 relative overflow-hidden group hover:shadow-2xl transition-all duration-500 bg-white border border-[#0B3B36]/10 shadow-sm"
     >
       <div className="flex items-start justify-between">
         <p className="text-[10px] tracking-widest uppercase text-[#736C83] font-bold">{label}</p>
-        <div className="w-10 h-10 rounded-xl bg-[#3F3D8F]/5 border border-[#3F3D8F]/5 flex items-center justify-center transition-transform group-hover:scale-110">
-          <Icon className="h-4.5 w-4.5" style={{ color: "#3F3D8F" }} />
+        <div className="w-10 h-10 rounded-xl bg-[#0B3B36]/5 border border-[#0B3B36]/5 flex items-center justify-center transition-transform group-hover:scale-110">
+          <Icon className="h-4.5 w-4.5" style={{ color: "#0B3B36" }} />
         </div>
       </div>
       <p className="text-3xl font-bold text-[#0D031B] leading-none tracking-tight">{value}</p>
@@ -317,7 +317,7 @@ export default function WaiterDashboard() {
                     {avatarImage
                       ? <img src={avatarImage} alt="User" className="h-full w-full object-cover" />
                       : <div className="h-full w-full flex items-center justify-center text-xl font-bold text-white"
-                          style={{ background: "linear-gradient(135deg, #3F3D8F 0%, #4338CA 100%)" }}>WA</div>
+                          style={{ background: "linear-gradient(135deg, #0B3B36 0%, #4338CA 100%)" }}>WA</div>
                       }
                   </div>
                   <div className="absolute inset-[2.5px] flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[14px]">
@@ -334,7 +334,7 @@ export default function WaiterDashboard() {
               <div className="flex-1 min-w-0">
                 <p className="text-[10px] tracking-[0.3em] uppercase text-[#736C83] font-bold mb-1 opacity-70">{today}</p>
                 <h1 className="text-2xl md:text-3xl font-light text-[#0D031B] leading-none">
-                  Welcome back, <span className="font-bold whitespace-nowrap" style={{ color: "#3F3D8F" }}>Waiter</span>
+                  Welcome back, <span className="font-bold whitespace-nowrap" style={{ color: "#0B3B36" }}>Waiter</span>
                 </h1>
                 <div className="flex items-center gap-2 mt-1.5">
                   <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full border"
@@ -345,8 +345,8 @@ export default function WaiterDashboard() {
                     </span>
                     <span className="text-[9px] tracking-widest uppercase text-emerald-500 font-bold">Shift Active</span>
                   </div>
-                  <div className="h-4 w-[1px] bg-[#3F3D8F]/10 mx-1" />
-                  <span className="text-[9px] tracking-[0.15em] uppercase text-[#3F3D8F]/50 font-bold">Alpha Station</span>
+                  <div className="h-4 w-[1px] bg-[#0B3B36]/10 mx-1" />
+                  <span className="text-[9px] tracking-[0.15em] uppercase text-[#0B3B36]/50 font-bold">Alpha Station</span>
                 </div>
               </div>
             </div>
@@ -358,7 +358,7 @@ export default function WaiterDashboard() {
                   <Button
                     variant="outline"
                     size="icon"
-                    className="h-10 w-10 md:h-12 md:w-12 rounded-2xl border-[#3F3D8F]/10 bg-white text-[#3F3D8F]/50 hover:text-[#3F3D8F] hover:bg-[#3F3D8F]/05 transition-all shadow-sm"
+                    className="h-10 w-10 md:h-12 md:w-12 rounded-2xl border-[#0B3B36]/10 bg-white text-[#0B3B36]/50 hover:text-[#0B3B36] hover:bg-[#0B3B36]/05 transition-all shadow-sm"
                   >
                     <ChartBarIcon className="h-5 w-5" />
                   </Button>
@@ -370,7 +370,7 @@ export default function WaiterDashboard() {
                 asChild
                 className="h-10 md:h-12 px-5 md:px-7 rounded-2xl gap-2.5 text-[10px] tracking-widest uppercase text-white border-0 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl group relative overflow-hidden"
                 style={{
-                  background: "linear-gradient(135deg, #3F3D8F 0%, #302e70 100%)",
+                  background: "linear-gradient(135deg, #0B3B36 0%, #302e70 100%)",
                   boxShadow: "0 8px 24px -6px rgba(63, 61, 143, 0.4)",
                 }}
               >
@@ -392,7 +392,7 @@ export default function WaiterDashboard() {
               sub={<><span className="text-emerald-400 font-semibold">▲ 12.3%</span> vs yesterday</>}
               icon={() => (
                 <div className="h-4.5 w-4.5" style={{ 
-                  backgroundColor: "#3F3D8F",
+                  backgroundColor: "#0B3B36",
                   maskImage: "url('/waiter.png')", maskSize: 'contain', maskRepeat: 'no-repeat', maskPosition: 'center',
                   WebkitMaskImage: "url('/waiter.png')", WebkitMaskSize: 'contain', WebkitMaskRepeat: 'no-repeat', WebkitMaskPosition: 'center'
                 }} />
@@ -405,7 +405,7 @@ export default function WaiterDashboard() {
               subDot="#10b981"
               icon={() => (
                 <div className="h-4.5 w-4.5" style={{ 
-                  backgroundColor: "#3F3D8F",
+                  backgroundColor: "#0B3B36",
                   maskImage: "url('/dining-table (1).png')", maskSize: 'contain', maskRepeat: 'no-repeat', maskPosition: 'center',
                   WebkitMaskImage: "url('/dining-table (1).png')", WebkitMaskSize: 'contain', WebkitMaskRepeat: 'no-repeat', WebkitMaskPosition: 'center'
                 }} />
@@ -418,7 +418,7 @@ export default function WaiterDashboard() {
               subDot="#10b981"
               icon={() => (
                 <div className="h-4.5 w-4.5" style={{ 
-                  backgroundColor: "#3F3D8F",
+                  backgroundColor: "#0B3B36",
                   maskImage: "url('/calendar.png')", maskSize: 'contain', maskRepeat: 'no-repeat', maskPosition: 'center',
                   WebkitMaskImage: "url('/calendar.png')", WebkitMaskSize: 'contain', WebkitMaskRepeat: 'no-repeat', WebkitMaskPosition: 'center'
                 }} />
@@ -630,7 +630,7 @@ export default function WaiterDashboard() {
                                 ].map(item => (
                                   <div key={item.label} className="p-2.5 rounded-[14px] space-y-0.5" style={{ background: "rgba(63, 61, 143, 0.05)" }}>
                                     <p className="text-[8px] tracking-widest uppercase text-[#9A94AA] font-bold">{item.label}</p>
-                                    <p className="text-xs font-semibold text-[#3F3D8F]">{item.value}</p>
+                                    <p className="text-xs font-semibold text-[#0B3B36]">{item.value}</p>
                                   </div>
                                 ))}
                               </div>
@@ -688,16 +688,16 @@ export default function WaiterDashboard() {
                         className="h-[72px] flex-col gap-1.5 text-[9px] tracking-widest uppercase rounded-2xl border border-white/08 bg-white/04 hover:bg-white/08 text-white/40 hover:text-white/70 transition-all"
                       >
                         <Link href={action.href} className="flex flex-col items-center justify-center">
-                          <div className="w-9 h-9 rounded-xl flex items-center justify-center bg-[#3F3D8F]/05 border border-[#3F3D8F]/10 mb-1">
+                          <div className="w-9 h-9 rounded-xl flex items-center justify-center bg-[#0B3B36]/05 border border-[#0B3B36]/10 mb-1">
                             <div 
-                              className="h-4 w-4 bg-[#3F3D8F]" 
+                              className="h-4 w-4 bg-[#0B3B36]" 
                               style={{ 
                                 maskImage: `url(${action.icon})`, maskSize: 'contain', maskRepeat: 'no-repeat', maskPosition: 'center',
                                 WebkitMaskImage: `url(${action.icon})`, WebkitMaskSize: 'contain', WebkitMaskRepeat: 'no-repeat', WebkitMaskPosition: 'center'
                               }} 
                             />
                           </div>
-                          <span className="text-[#3F3D8F] font-bold">{action.label}</span>
+                          <span className="text-[#0B3B36] font-bold">{action.label}</span>
                         </Link>
                       </Button>
                     ))}
@@ -710,7 +710,7 @@ export default function WaiterDashboard() {
                 <SectionHeader
                   icon={
                     <div className="h-4.5 w-4.5" style={{
-                      backgroundColor: "#3F3D8F",
+                      backgroundColor: "#0B3B36",
                       maskImage: "url(/shift.png)", maskSize: "contain", maskRepeat: "no-repeat", maskPosition: "center",
                       WebkitMaskImage: "url(/shift.png)", WebkitMaskSize: "contain", WebkitMaskRepeat: "no-repeat", WebkitMaskPosition: "center",
                     }} />
@@ -727,14 +727,14 @@ export default function WaiterDashboard() {
                       <p className="text-[9px] tracking-widest uppercase text-[#9A94AA] mt-1 font-bold">Quota Met</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-2xl font-bold tabular-nums text-[#3F3D8F]">42</p>
+                      <p className="text-2xl font-bold tabular-nums text-[#0B3B36]">42</p>
                       <p className="text-[9px] tracking-widest uppercase text-[#9A94AA] mt-1 font-bold">Served Today</p>
                     </div>
                   </div>
 
                   {/* Progress bar */}
                   <div className="space-y-2">
-                    <div className="h-2.5 w-full rounded-full overflow-hidden bg-[#3F3D8F]/05 border border-[#3F3D8F]/10">
+                    <div className="h-2.5 w-full rounded-full overflow-hidden bg-[#0B3B36]/05 border border-[#0B3B36]/10">
                       <div
                         className="h-full rounded-full relative overflow-hidden"
                         style={{ width: "75%", background: "linear-gradient(90deg, #7C3AED, #6d28d9)" }}
@@ -777,7 +777,7 @@ export default function WaiterDashboard() {
                       return (
                         <div
                           key={i}
-                          className="flex items-center gap-3.5 px-5 py-3 hover:bg-[#3F3D8F]/05 transition-all cursor-pointer group"
+                          className="flex items-center gap-3.5 px-5 py-3 hover:bg-[#0B3B36]/05 transition-all cursor-pointer group"
                           style={{ borderTop: i > 0 ? "1px solid rgba(63, 61, 143, 0.05)" : undefined }}
                         >
                           <div className={cn("w-9 h-9 rounded-2xl flex items-center justify-center shrink-0 transition-transform group-hover:scale-105 shadow-sm", item.bg)}>
@@ -787,10 +787,10 @@ export default function WaiterDashboard() {
                             }
                           </div>
                           <div className="flex-1 min-w-0">
-                            <p className="text-[12px] text-[#0D031B] truncate group-hover:text-[#3F3D8F] transition-colors font-bold">{item.text}</p>
+                            <p className="text-[12px] text-[#0D031B] truncate group-hover:text-[#0B3B36] transition-colors font-bold">{item.text}</p>
                             <p className="text-[9px] tracking-wide uppercase text-[#9A94AA] mt-0.5 font-bold">{item.sub}</p>
                           </div>
-                          <ArrowRight className="h-3.5 w-3.5 shrink-0 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 text-[#3F3D8F]" />
+                          <ArrowRight className="h-3.5 w-3.5 shrink-0 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 text-[#0B3B36]" />
                         </div>
                       )
                     })}

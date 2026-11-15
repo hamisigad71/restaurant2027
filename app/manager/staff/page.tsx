@@ -169,10 +169,10 @@ const roleConfig: Record<string, { bg: string; text: string; icon: any }> = {
 }
 
 const stats = [
-  { label: "Active Duty",  value: "48",  sub: "85% capacity",  icon: "/employee.png",   from: "#3F3D8F", to: "oklch(0.38 0.16 275)" },
-  { label: "Avg. Rating",  value: "4.8", sub: "Top performers", icon: "/rating.png",       from: "#3F3D8F", to: "oklch(0.38 0.16 275)" },
-  { label: "Attendance",   value: "96%", sub: "Weekly avg",     icon: HeartIcon,      from: "#3F3D8F", to: "oklch(0.38 0.16 275)" },
-  { label: "Open Shifts",  value: "3",   sub: "Needs action",   icon: ArrowTrendingUpIcon, from: "#3F3D8F", to: "oklch(0.38 0.16 275)" },
+  { label: "Active Duty",  value: "48",  sub: "85% capacity",  icon: "/employee.png",   from: "#0B3B36", to: "#062421" },
+  { label: "Avg. Rating",  value: "4.8", sub: "Top performers", icon: "/rating.png",       from: "#0B3B36", to: "#062421" },
+  { label: "Attendance",   value: "96%", sub: "Weekly avg",     icon: HeartIcon,      from: "#0B3B36", to: "#062421" },
+  { label: "Open Shifts",  value: "3",   sub: "Needs action",   icon: ArrowTrendingUpIcon, from: "#0B3B36", to: "#062421" },
 ]
 
 export default function ManagerStaffPage() {
@@ -263,7 +263,7 @@ export default function ManagerStaffPage() {
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-pulse" />
             
             <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center shrink-0 border border-white/30">
-              <BellAlertIcon className="h-5 w-5 sm:h-6 sm:w-6 text-white animate-bounce" strokeWidth={2.5} />
+              <BellAlertIcon className="h-5 w-5 sm:h-6 sm:w-6 text-white animate-pulse" strokeWidth={2.5} />
             </div>
             
             <div className="flex-1 min-w-0 relative">
@@ -291,7 +291,7 @@ export default function ManagerStaffPage() {
               <div 
                 className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center shadow-lg"
                 style={{
-                  background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.16 275) 100%)",
+                  background: "linear-gradient(135deg, #0B3B36 0%, #062421 100%)",
                 }}
               >
                 <img src="/service (1).png" className="h-7 w-7 text-white brightness-0 invert" alt="Service" />
@@ -301,7 +301,7 @@ export default function ManagerStaffPage() {
                   Personnel Hub
                 </h1>
                 <div className="flex items-center gap-2 mt-1.5">
-                  <div className="h-px w-8 bg-gradient-to-r from-[#3F3D8F] to-transparent" />
+                  <div className="h-px w-8 bg-gradient-to-r from-[#0B3B36] to-transparent" />
                   <p className="text-[10px] sm:text-[11px] font-medium uppercase" style={{ color: "#736C83" }}>
                     Operational Control & Performance
                   </p>
@@ -313,8 +313,8 @@ export default function ManagerStaffPage() {
           <Button 
             className="h-12 px-6 sm:px-8 gap-2.5 text-white font-medium rounded-[16px] shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:shadow-2xl active:translate-y-0 active:scale-95 border-0 text-[11px] sm:text-xs uppercase"
             style={{
-              background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.16 275) 100%)",
-              boxShadow: "0 8px 32px oklch(0.42 0.14 285 / 0.35)",
+              background: "linear-gradient(135deg, #0B3B36 0%, #062421 100%)",
+              boxShadow: "0 8px 32px rgba(11, 59, 54,  0.35)",
             }}
           >
             <UserPlusIcon className="h-4 w-4 sm:h-4.5 sm:w-4.5" strokeWidth={2.5} />
@@ -388,14 +388,14 @@ export default function ManagerStaffPage() {
             <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
               {/* Search */}
               <div className="relative flex-1 group">
-                <MagnifyingGlassIcon className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 transition-colors" style={{ color: "oklch(0.42 0.14 285 / 0.4)" }} />
+                <MagnifyingGlassIcon className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 transition-colors" style={{ color: "rgba(11, 59, 54,  0.4)" }} />
                 <Input
                   placeholder="Search by name or role..."
                   value={searchQuery}
                   onChange={e => setSearchQuery(e.target.value)}
                   className="pl-11 pr-4 h-11 sm:h-12 bg-white border-2 rounded-xl sm:rounded-2xl text-sm transition-all duration-200 focus-visible:ring-0"
                   style={{
-                    borderColor: "oklch(0.42 0.14 285 / 0.12)",
+                    borderColor: "rgba(11, 59, 54,  0.12)",
                     color: "#0D031B",
                   }}
                 />
@@ -406,7 +406,7 @@ export default function ManagerStaffPage() {
                 <Select value={roleFilter} onValueChange={setRoleFilter}>
                   <SelectTrigger className="h-11 sm:h-12 w-full sm:w-40 bg-white border-2 rounded-xl sm:rounded-2xl text-xs font-medium uppercase transition-all"
                     style={{
-                      borderColor: "oklch(0.42 0.14 285 / 0.12)",
+                      borderColor: "rgba(11, 59, 54,  0.12)",
                       color: "#736C83",
                     }}>
                     <SelectValue placeholder="Role" />
@@ -416,7 +416,7 @@ export default function ManagerStaffPage() {
                       <SelectItem 
                         key={r} 
                         value={r} 
-                        className="text-xs uppercase font-medium focus:bg-oklch(0.42 0.14 285 / 0.08) rounded-xl m-1"
+                        className="text-xs uppercase font-medium focus:bg-rgba(11, 59, 54,  0.08) rounded-xl m-1"
                       >
                         {r === "all" ? "All Roles" : r}
                       </SelectItem>
@@ -429,8 +429,8 @@ export default function ManagerStaffPage() {
                   size="icon" 
                   className="h-11 sm:h-12 w-11 sm:w-12 rounded-xl sm:rounded-2xl bg-white border-2 transition-all hover:scale-105 active:scale-95"
                   style={{
-                    borderColor: "oklch(0.42 0.14 285 / 0.12)",
-                    color: "#3F3D8F",
+                    borderColor: "rgba(11, 59, 54,  0.12)",
+                    color: "#0B3B36",
                   }}
                 >
                   <FunnelIcon className="h-4 w-4" strokeWidth={2.5} />
@@ -526,25 +526,25 @@ export default function ManagerStaffPage() {
 
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
-                        <button className="shrink-0 h-8 w-8 flex items-center justify-center rounded-xl transition-all hover:bg-oklch(0.42 0.14 285 / 0.08) active:scale-90"
+                        <button className="shrink-0 h-8 w-8 flex items-center justify-center rounded-xl transition-all hover:bg-rgba(11, 59, 54,  0.08) active:scale-90"
                           style={{ color: "#9A94AA" }}>
                           <EllipsisHorizontalIcon className="h-4 w-4" />
                         </button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end" className="bg-white/98 backdrop-blur-xl border-0 rounded-2xl shadow-2xl w-48">
-                        <DropdownMenuItem className="text-xs font-medium rounded-xl m-1 focus:bg-oklch(0.42 0.14 285 / 0.08)" style={{ color: "#3F3D8F" }}>
+                        <DropdownMenuItem className="text-xs font-medium rounded-xl m-1 focus:bg-rgba(11, 59, 54,  0.08)" style={{ color: "#0B3B36" }}>
                           <UserCircleIcon className="h-3.5 w-3.5 mr-2" />
                           Full Profile
                         </DropdownMenuItem>
-                        <DropdownMenuItem className="text-xs font-medium rounded-xl m-1 focus:bg-oklch(0.42 0.14 285 / 0.08)">
+                        <DropdownMenuItem className="text-xs font-medium rounded-xl m-1 focus:bg-rgba(11, 59, 54,  0.08)">
                           <ClockIcon className="h-3.5 w-3.5 mr-2" />
                           Duty Log
                         </DropdownMenuItem>
-                        <DropdownMenuItem className="text-xs font-medium rounded-xl m-1 focus:bg-oklch(0.42 0.14 285 / 0.08)">
+                        <DropdownMenuItem className="text-xs font-medium rounded-xl m-1 focus:bg-rgba(11, 59, 54,  0.08)">
                           <ChatBubbleLeftRightIcon className="h-3.5 w-3.5 mr-2" />
                           Send Ping
                         </DropdownMenuItem>
-                        <DropdownMenuSeparator className="bg-oklch(0.42 0.14 285 / 0.05)" />
+                        <DropdownMenuSeparator className="bg-rgba(11, 59, 54,  0.05)" />
                         <DropdownMenuItem className="text-xs font-medium rounded-xl m-1 focus:bg-rose-50" style={{ color: "oklch(0.55 0.20 25)" }}>
                           Remove Staff
                         </DropdownMenuItem>
@@ -571,9 +571,9 @@ export default function ManagerStaffPage() {
 
                     <div 
                       className="rounded-xl px-3 py-2.5 flex items-center gap-2 transition-all hover:scale-105"
-                      style={{ background: "oklch(0.42 0.14 285 / 0.06)" }}
+                      style={{ background: "rgba(11, 59, 54,  0.06)" }}
                     >
-                      <ClockIcon className="h-3.5 w-3.5 shrink-0" style={{ color: "#3F3D8F" }} />
+                      <ClockIcon className="h-3.5 w-3.5 shrink-0" style={{ color: "#0B3B36" }} />
                       <div className="min-w-0">
                         <p className="text-[10px] font-medium leading-tight line-clamp-1" style={{ color: "#0D031B" }}>
                           {staff.shift}
@@ -599,9 +599,9 @@ export default function ManagerStaffPage() {
                             key={t} 
                             className="px-2 py-0.5 rounded-lg text-[10px] font-medium border"
                             style={{
-                              background: "oklch(0.42 0.14 285 / 0.08)",
-                              color: "#3F3D8F",
-                              borderColor: "oklch(0.42 0.14 285 / 0.2)",
+                              background: "rgba(11, 59, 54,  0.08)",
+                              color: "#0B3B36",
+                              borderColor: "rgba(11, 59, 54,  0.2)",
                             }}
                           >
                             {t}
@@ -620,23 +620,23 @@ export default function ManagerStaffPage() {
                   <div className="space-y-2">
                     <div className="flex justify-between items-center text-[9px] font-medium uppercase">
                       <span style={{ color: "#9A94AA" }}>Performance</span>
-                      <span className="tabular-nums" style={{ color: "#3F3D8F" }}>
+                      <span className="tabular-nums" style={{ color: "#0B3B36" }}>
                         {Math.round(staff.rating * 20)}%
                       </span>
                     </div>
-                    <div className="h-2 rounded-full overflow-hidden" style={{ background: "oklch(0.42 0.14 285 / 0.08)" }}>
+                    <div className="h-2 rounded-full overflow-hidden" style={{ background: "rgba(11, 59, 54,  0.08)" }}>
                       <div 
                         className="h-full rounded-full transition-all duration-1000"
                         style={{ 
                           width: `${staff.rating * 20}%`,
-                          background: "linear-gradient(90deg, #3F3D8F 0%, oklch(0.55 0.18 270) 100%)",
+                          background: "linear-gradient(90deg, #0B3B36 0%, #13584F 100%)",
                         }}
                       />
                     </div>
                   </div>
 
                   {/* Award Stars Section */}
-                  <div className="pt-3 border-t space-y-2" style={{ borderColor: "oklch(0.42 0.14 285 / 0.08)" }}>
+                  <div className="pt-3 border-t space-y-2" style={{ borderColor: "rgba(11, 59, 54,  0.08)" }}>
                     <div className="flex items-center justify-between">
                       <span className="text-[10px] font-medium uppercase" style={{ color: "#9A94AA" }}>
                         Performance Award
@@ -684,7 +684,7 @@ export default function ManagerStaffPage() {
                     <Button
                       variant="ghost"
                       className="h-9 rounded-xl text-[10px] font-bold uppercase gap-1.5 transition-all hover:scale-105 active:scale-95"
-                      style={{ color: "#3F3D8F" }}
+                      style={{ color: "#0B3B36" }}
                     >
                       <PhoneIcon className="h-3.5 w-3.5" />
                       Call
@@ -692,7 +692,7 @@ export default function ManagerStaffPage() {
                     <Button
                       variant="ghost"
                       className="h-9 rounded-xl text-[10px] font-bold uppercase gap-1.5 transition-all hover:scale-105 active:scale-95"
-                      style={{ color: "#3F3D8F" }}
+                      style={{ color: "#0B3B36" }}
                     >
                       <EnvelopeIcon className="h-3.5 w-3.5" />
                       Email
@@ -712,8 +712,8 @@ export default function ManagerStaffPage() {
                     style={
                       !summoned[staff.id]
                         ? {
-                            background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.16 275) 100%)",
-                            boxShadow: "0 4px 16px oklch(0.42 0.14 285 / 0.3)",
+                            background: "linear-gradient(135deg, #0B3B36 0%, #062421 100%)",
+                            boxShadow: "0 4px 16px rgba(11, 59, 54,  0.3)",
                           }
                         : undefined
                     }
@@ -768,7 +768,7 @@ export default function ManagerStaffPage() {
                 variant="outline" 
                 className="h-11 sm:h-12 px-6 sm:px-8 border-2 font-bold rounded-[14px] text-xs uppercase transition-all hover:scale-105 active:scale-95"
                 style={{
-                  borderColor: "oklch(0.42 0.14 285 / 0.15)",
+                  borderColor: "rgba(11, 59, 54,  0.15)",
                   color: "#736C83",
                 }}
               >
@@ -778,8 +778,8 @@ export default function ManagerStaffPage() {
                 onClick={() => setIsAuditOpen(true)}
                 className="h-11 sm:h-12 px-6 sm:px-8 text-white font-bold rounded-[14px] shadow-xl border-0 text-xs uppercase transition-all hover:-translate-y-0.5 hover:shadow-2xl active:translate-y-0 active:scale-95"
                 style={{
-                  background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.16 275) 100%)",
-                  boxShadow: "0 8px 32px oklch(0.42 0.14 285 / 0.35)",
+                  background: "linear-gradient(135deg, #0B3B36 0%, #062421 100%)",
+                  boxShadow: "0 8px 32px rgba(11, 59, 54,  0.35)",
                 }}
               >
                 <ArrowTrendingUpIcon className="h-4 w-4 mr-2" strokeWidth={2.5} />
@@ -801,7 +801,7 @@ export default function ManagerStaffPage() {
             <div 
               className="h-1.5 w-full"
               style={{
-                background: "linear-gradient(90deg, #3F3D8F 0%, oklch(0.55 0.18 270) 50%, #3F3D8F 100%)"
+                background: "linear-gradient(90deg, #0B3B36 0%, #13584F 50%, #0B3B36 100%)"
               }}
             />
 
@@ -810,7 +810,7 @@ export default function ManagerStaffPage() {
                 <div 
                   className="w-14 h-14 rounded-[18px] flex items-center justify-center shadow-lg"
                   style={{
-                    background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.16 275) 100%)",
+                    background: "linear-gradient(135deg, #0B3B36 0%, #062421 100%)",
                   }}
                 >
                   <SparklesIcon className="h-7 w-7 text-white" strokeWidth={2.5} />
@@ -845,11 +845,11 @@ export default function ManagerStaffPage() {
                   <div 
                     className="p-5 rounded-[20px] border-2 transition-all hover:scale-105"
                     style={{
-                      background: "oklch(0.42 0.14 285 / 0.08)",
-                      borderColor: "oklch(0.42 0.14 285 / 0.2)",
+                      background: "rgba(11, 59, 54,  0.08)",
+                      borderColor: "rgba(11, 59, 54,  0.2)",
                     }}
                   >
-                    <p className="text-3xl font-normal leading-none tabular-nums" style={{ color: "#3F3D8F" }}>
+                    <p className="text-3xl font-normal leading-none tabular-nums" style={{ color: "#0B3B36" }}>
                       {auditMetrics.totalShifts}
                     </p>
                     <p className="text-[10px] font-normal uppercase mt-2" style={{ color: "#9A94AA" }}>
@@ -867,7 +867,7 @@ export default function ManagerStaffPage() {
                 >
                   {/* Decorative orbs */}
                   <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full opacity-20 blur-3xl bg-gradient-to-br from-amber-400 to-amber-600" />
-                  <div className="absolute -bottom-8 -left-8 w-32 h-32 rounded-full opacity-10 blur-3xl" style={{ background: "#3F3D8F" }} />
+                  <div className="absolute -bottom-8 -left-8 w-32 h-32 rounded-full opacity-10 blur-3xl" style={{ background: "#0B3B36" }} />
                   
                   <div className="relative z-10">
                     <div className="flex items-center gap-2 mb-3">
@@ -923,7 +923,7 @@ export default function ManagerStaffPage() {
                         className="flex items-center gap-3 p-4 rounded-[16px] border-2 transition-all hover:scale-[1.02] hover:shadow-md group"
                         style={{
                           background: "white",
-                          borderColor: "oklch(0.42 0.14 285 / 0.08)",
+                          borderColor: "rgba(11, 59, 54,  0.08)",
                         }}
                       >
                         <div className="w-11 h-11 rounded-xl overflow-hidden shrink-0 ring-2 ring-white shadow-sm">
@@ -968,7 +968,7 @@ export default function ManagerStaffPage() {
               className="p-6 border-t space-y-4 shrink-0"
               style={{
                 background: "white",
-                borderColor: "oklch(0.42 0.14 285 / 0.08)",
+                borderColor: "rgba(11, 59, 54,  0.08)",
               }}
             >
               <div 
@@ -991,8 +991,8 @@ export default function ManagerStaffPage() {
                 }}
                 className="w-full h-13 text-white font-normal text-xs uppercase rounded-[16px] shadow-2xl border-0 transition-all hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
                 style={{
-                  background: "linear-gradient(135deg, #3F3D8F 0%, oklch(0.38 0.16 275) 100%)",
-                  boxShadow: "0 8px 32px oklch(0.42 0.14 285 / 0.4)",
+                  background: "linear-gradient(135deg, #0B3B36 0%, #062421 100%)",
+                  boxShadow: "0 8px 32px rgba(11, 59, 54,  0.4)",
                 }}
               >
                 <CheckCircleIcon className="h-4 w-4 mr-2" strokeWidth={2.5} />

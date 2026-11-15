@@ -66,10 +66,10 @@ const roleAccent: Record<
   { bg: string; text: string; dot: string; avatarBg: string }
 > = {
   admin: {
-    bg: "oklch(0.45 0.12 285 / 0.08)",
-    text: "oklch(0.38 0.12 285)",
-    dot: "oklch(0.42 0.14 285)",
-    avatarBg: "oklch(0.45 0.12 285 / 0.1)",
+    bg: "rgba(11, 59, 54,  0.08)",
+    text: "#0B3B36",
+    dot: "#0B3B36",
+    avatarBg: "rgba(11, 59, 54,  0.1)",
   },
   manager: {
     bg: "oklch(0.65 0.12 230 / 0.08)",
@@ -200,8 +200,8 @@ const notifications = [
   {
     id: "2",
     icon: ShoppingCartIcon,
-    iconColor: "oklch(0.42 0.14 285)",
-    iconBg: "oklch(0.45 0.12 285 / 0.08)",
+    iconColor: "#0B3B36",
+    iconBg: "rgba(11, 59, 54,  0.08)",
     title: "New Order",
     body: "Table 3 placed a new order",
     time: "5m ago",
@@ -260,35 +260,22 @@ export function Header({
   return (
     <TooltipProvider delayDuration={300}>
       <header
-        className="sticky top-0 z-30 flex items-center h-14 px-4 lg:px-6 border-b"
-        style={{
-          background: "rgba(250,250,249,0.94)",
-          backdropFilter: "blur(20px)",
-          WebkitBackdropFilter: "blur(20px)",
-          borderColor: "#E2DCF0",
-          boxShadow: "0 1px 0 #E2DCF0",
-        }}
+        className="sticky top-0 z-30 flex items-center h-14 px-4 lg:px-6 border-b bg-card/90 backdrop-blur-md border-border/60 shadow-xs"
       >
         {/* ── Left: spacer + page title ───────────────────────── */}
         <div className="flex items-center gap-3 min-w-0 flex-1">
           {/* Sidebar Toggle */}
-          <SidebarTrigger className="-ml-1 h-9 w-9 rounded-xl hover:bg-[#EBE6F8] text-[#736C83]" />
+          <SidebarTrigger className="-ml-1 h-9 w-9 rounded-xl hover:bg-muted text-muted-foreground transition-colors" />
 
           {/* Thin vertical rule */}
-          <div className="hidden lg:block h-5 w-px bg-[#D8D2E8] shrink-0" />
+          <div className="hidden lg:block h-5 w-px bg-border shrink-0" />
 
           <div className="min-w-0">
-            <h1
-              className="text-[15px]  leading-none truncate"
-              style={{ color: "#0D031B" }}
-            >
+            <h1 className="text-[15px] font-semibold text-foreground leading-none truncate">
               {currentPage.title}
             </h1>
             {currentPage.subtitle && (
-              <p
-                className="text-[10px]  uppercase font-medium mt-0.5 hidden sm:block truncate"
-                style={{ color: "#9A94AA" }}
-              >
+              <p className="text-[10px] uppercase font-medium mt-1 hidden sm:block truncate text-muted-foreground">
                 {currentPage.subtitle}
               </p>
             )}
@@ -296,24 +283,20 @@ export function Header({
         </div>
 
         {/* ── Right: actions ──────────────────────────────────── */}
-        <div className="flex items-center gap-1 shrink-0">
+        <div className="flex items-center gap-1.5 shrink-0">
           {/* Search — desktop */}
           <div className="hidden md:flex items-center relative mr-1">
-            <MagnifyingGlassIcon
-              className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 pointer-events-none"
-              style={{ color: "#B8B2C8" }}
-            />
+            <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 pointer-events-none text-muted-foreground" />
             <Input
               type="search"
               placeholder="Search…"
               className={cn(
                 "h-8 pl-8 pr-3 text-[13px] rounded-lg border",
-                "bg-[#F4F1FA] border-transparent placeholder:text-[#B8B2C8]",
-                "focus:bg-white focus:border-[oklch(0.45_0.12_285)/0.35]",
-                "focus:ring-1 focus:ring-[oklch(0.45_0.12_285)/0.2]",
-                "transition-all duration-200 w-44 focus:w-56",
+                "bg-muted/50 border-border/50 placeholder:text-muted-foreground/70",
+                "focus:bg-card focus:border-primary/50",
+                "focus:ring-1 focus:ring-primary/20",
+                "transition-all duration-200 w-44 focus:w-56 text-foreground",
               )}
-              style={{ color: "#0D031B" }}
             />
           </div>
 
@@ -379,19 +362,17 @@ export function Header({
                 variant="ghost"
                 size="icon"
                 aria-label="Notifications"
-                className="relative h-8 w-8 rounded-lg hover:bg-[#EBE6F8] transition-colors"
-                style={{ color: "#736C83" }}
+                className="relative h-8 w-8 rounded-lg hover:bg-muted text-muted-foreground transition-colors"
               >
                 <BellIcon className="h-4 w-4" />
                 {unreadCount > 0 && (
                   <span
-                    className="absolute -top-0.5 -right-0.5 flex items-center justify-center rounded-full text-[9px] text-white"
+                    className="absolute -top-0.5 -right-0.5 flex items-center justify-center rounded-full text-[9px] font-bold text-foreground bg-accent leading-none"
                     style={{
                       minWidth: "16px",
                       height: "16px",
                       padding: "0 3px",
-                      background: "oklch(0.55 0.18 25)",
-                      boxShadow: "0 1px 4px oklch(0.55 0.18 25 / 0.45)",
+                      boxShadow: "0 2px 6px rgba(122, 231, 42, 0.4)",
                     }}
                   >
                     {unreadCount}
@@ -402,39 +383,26 @@ export function Header({
 
             <SheetContent
               side="right"
-              className="w-[300px] sm:w-[360px] p-0"
-              style={{ borderColor: "#E2DCF0", background: "#FAFAF9" }}
+              className="w-[300px] sm:w-[360px] p-0 border-border bg-card"
             >
               <SheetHeader
-                className="px-5 py-4"
-                style={{ borderBottom: "1px solid #EEEBF5" }}
+                className="px-5 py-4 border-b border-border/60"
               >
                 <div className="flex items-center justify-between">
                   <SheetTitle
-                    className="flex items-center gap-2 text-[13px]"
-                    style={{ color: "#0D031B" }}
+                    className="flex items-center gap-2 text-[13px] text-foreground font-semibold"
                   >
-                    <BellIcon
-                      className="h-3.5 w-3.5"
-                      style={{ color: "oklch(0.42 0.14 285)" }}
-                    />
+                    <BellIcon className="h-3.5 w-3.5 text-primary" />
                     Notifications
                     {unreadCount > 0 && (
-                      <span
-                        className="text-[9px] px-1.5 py-0.5 rounded-full"
-                        style={{
-                          background: "oklch(0.45 0.12 285 / 0.1)",
-                          color: "oklch(0.42 0.14 285)",
-                        }}
-                      >
+                      <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-accent/20 text-foreground font-bold">
                         {unreadCount} new
                       </span>
                     )}
                   </SheetTitle>
                   {unreadCount > 0 && (
                     <button
-                      className="text-[10px] font-medium uppercase  hover:opacity-60 transition-opacity"
-                      style={{ color: "oklch(0.42 0.14 285)" }}
+                      className="text-[10px] font-medium uppercase text-primary hover:opacity-75 transition-opacity"
                       onClick={() =>
                         setDismissedNotifs(notifications.map((n) => n.id))
                       }
@@ -479,7 +447,7 @@ export function Header({
                           {notif.unread && (
                             <span
                               className="absolute left-1.5 top-[22px] w-1.5 h-1.5 rounded-full"
-                              style={{ background: "oklch(0.42 0.14 285)" }}
+                              style={{ background: "#0B3B36" }}
                             />
                           )}
 
@@ -637,11 +605,11 @@ export function Header({
               >
                 <span
                   className="flex items-center justify-center w-6 h-6 rounded-md"
-                  style={{ background: "oklch(0.45 0.12 285 / 0.08)" }}
+                  style={{ background: "rgba(11, 59, 54,  0.08)" }}
                 >
                   <UserIcon
                     className="h-3.5 w-3.5"
-                    style={{ color: "oklch(0.42 0.14 285)" }}
+                    style={{ color: "#0B3B36" }}
                   />
                 </span>
                 Profile
@@ -654,11 +622,11 @@ export function Header({
               >
                 <span
                   className="flex items-center justify-center w-6 h-6 rounded-md"
-                  style={{ background: "oklch(0.45 0.12 285 / 0.08)" }}
+                  style={{ background: "rgba(11, 59, 54,  0.08)" }}
                 >
                   <Cog6ToothIcon
                     className="h-3.5 w-3.5"
-                    style={{ color: "oklch(0.42 0.14 285)" }}
+                    style={{ color: "#0B3B36" }}
                   />
                 </span>
                 Settings

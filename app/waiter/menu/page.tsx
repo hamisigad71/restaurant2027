@@ -61,7 +61,7 @@ function MenuCard({
     <div
       className="group relative flex flex-col overflow-hidden rounded-lg border bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
       style={{
-        borderColor: "oklch(0.45 0.12 285 / 0.1)",
+        borderColor: "rgba(11, 59, 54,  0.1)",
         boxShadow: "0 2px 10px rgba(13,3,27,0.06)",
       }}
     >
@@ -158,13 +158,13 @@ function MenuCard({
               className="w-44 rounded-2xl border p-1.5"
               style={{
                 background:"#FDFCFF",
-                borderColor:"oklch(0.45 0.12 285 / 0.15)",
+                borderColor:"rgba(11, 59, 54,  0.15)",
                 boxShadow:"0 8px 28px rgba(13,3,27,0.12)",
               }}
             >
               <DropdownMenuItem
                 className="flex items-center gap-2 text-[11px] font-semibold rounded-xl px-2.5 py-2 cursor-pointer"
-                style={{ color:"#3F3D8F" }}
+                style={{ color:"#0B3B36" }}
               >
                 <Package className="h-3.5 w-3.5" />
                 View Ingredients
@@ -199,7 +199,7 @@ function MenuCard({
         {/* Action row */}
         <div
           className="flex flex-col gap-2 pt-2 mt-auto border-t"
-          style={{ borderColor:"oklch(0.45 0.12 285 / 0.08)" }}
+          style={{ borderColor:"rgba(11, 59, 54,  0.08)" }}
         >
           <button
             onClick={() => onToggleAvailability(item.id)}
@@ -260,7 +260,7 @@ export default function WaiterMenuPage() {
           <div className="flex items-center gap-2 mb-1.5">
             <div
               className="flex items-center justify-center w-9 h-9 rounded-xl p-1.5"
-              style={{ background:"#3F3D8F", boxShadow:"0 4px 12px oklch(0.45 0.12 285 / 0.35)" }}
+              style={{ background:"#0B3B36", boxShadow:"0 4px 12px rgba(11, 59, 54,  0.35)" }}
             >
               <img src="/menu-nav.png" className="w-full h-full brightness-0 invert object-contain" alt="Menu" style={{ filter: "brightness(0) invert(1)" }} />
             </div>
@@ -285,8 +285,8 @@ export default function WaiterMenuPage() {
                   className="flex items-center h-9 px-4 rounded-xl text-[10px] font-bold uppercase whitespace-nowrap shrink-0 border transition-all duration-200"
                   style={
                     active
-                      ? { background:"#3F3D8F", color:"white", borderColor:"transparent", boxShadow:"0 3px 10px oklch(0.45 0.12 285 / 0.3)" }
-                      : { background:"rgba(255,255,255,0.8)", color:"#736C83", borderColor:"oklch(0.45 0.12 285 / 0.12)" }
+                      ? { background:"#0B3B36", color:"white", borderColor:"transparent", boxShadow:"0 3px 10px rgba(11, 59, 54,  0.3)" }
+                      : { background:"rgba(255,255,255,0.8)", color:"#736C83", borderColor:"rgba(11, 59, 54,  0.12)" }
                   }
                 >
                   {cat}
@@ -309,7 +309,7 @@ export default function WaiterMenuPage() {
                 className="h-10 pl-10 rounded-xl border text-sm"
                 style={{
                   background:"rgba(255,255,255,0.85)",
-                  borderColor:"oklch(0.45 0.12 285 / 0.15)",
+                  borderColor:"rgba(11, 59, 54,  0.15)",
                   color:"#0D031B",
                 }}
               />
@@ -326,7 +326,7 @@ export default function WaiterMenuPage() {
             <div className="flex flex-col items-center justify-center py-20 gap-4">
               <div
                 className="w-16 h-16 rounded-2xl flex items-center justify-center border"
-                style={{ background:"rgba(255,255,255,0.8)", borderColor:"oklch(0.45 0.12 285 / 0.15)" }}
+                style={{ background:"rgba(255,255,255,0.8)", borderColor:"rgba(11, 59, 54,  0.15)" }}
               >
                 <Package className="h-7 w-7" style={{ color:"var(--icon-primary)" }} />
               </div>
