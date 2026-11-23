@@ -29,8 +29,8 @@ export function EmptyState({ filter, search }: EmptyStateProps) {
         />
       </div>
       <div className="text-center">
-        <p className="font-bold text-xl" style={{ color: "#0D031B" }}>All caught up!</p>
-        <p className="text-sm mt-1.5 font-medium" style={{ color: "#736C83" }}>
+        <p className="font-bold text-xl" style={{ color: "#082420" }}>All caught up!</p>
+        <p className="text-sm mt-1.5 font-medium" style={{ color: "#4B6E67" }}>
           {search ? `No results for "${search}"` : `No ${filter === "all" ? "active" : filter} orders right now.`}
         </p>
       </div>

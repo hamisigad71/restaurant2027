@@ -47,7 +47,7 @@ function POSLoader() {
     <div
       className="flex items-center justify-center min-h-screen"
       style={{ 
-        background: "linear-gradient(135deg, #F8F6FC 0%, #F0EBF8 50%, #E8E3F5 100%)" 
+        background: "linear-gradient(135deg, #F4FAF7 0%, #F4FAF7 50%, #E1EFE9 100%)" 
       }}
     >
       <div className="flex flex-col items-center gap-4 relative">
@@ -91,13 +91,13 @@ function POSLoader() {
         <div className="text-center space-y-1.5 relative">
           <p
             className="text-[13px] font-bold uppercase"
-            style={{ color: "#0D031B" }}
+            style={{ color: "#082420" }}
           >
             Loading POS System
           </p>
           <p
             className="text-[11px] font-medium"
-            style={{ color: "#736C83" }}
+            style={{ color: "#4B6E67" }}
           >
             Please wait a moment...
           </p>
@@ -338,13 +338,13 @@ function OrdersContent() {
               <button
                 onClick={() => setSelectedTable(null)}
                 className="flex items-center gap-2 font-semibold transition-all hover:opacity-70 active:scale-95 group"
-                style={{ color: "#736C83" }}
+                style={{ color: "#4B6E67" }}
               >
                 <ArrowLeft className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-0.5" />
                 Tables
               </button>
               
-              <ChevronRight className="h-3.5 w-3.5" style={{ color: "#C4BAD8" }} />
+              <ChevronRight className="h-3.5 w-3.5" style={{ color: "#A2C5BC" }} />
               
               <Badge
                 className="flex items-center gap-1.5 text-[11px] font-bold px-3 py-1.5 rounded-xl border shadow-sm"
@@ -512,14 +512,14 @@ function OrdersContent() {
                   <div className="text-left flex flex-col min-w-0 flex-1 gap-0.5">
                     <span
                       className="text-[14px] font-bold leading-none"
-                      style={{ color: "#0D031B" }}
+                      style={{ color: "#082420" }}
                     >
                       Current Order
                     </span>
                     <span
                       className="text-[11px] font-semibold mt-1 flex items-center gap-1.5"
                       style={{ 
-                        color: hasItems ? "#0B3B36" : "#736C83" 
+                        color: hasItems ? "#0B3B36" : "#4B6E67" 
                       }}
                     >
                       {hasItems ? (
@@ -595,14 +595,14 @@ function OrdersContent() {
                     <div className="flex flex-col gap-0.5">
                       <span
                         className="text-[14px] font-bold leading-none"
-                        style={{ color: "#0D031B" }}
+                        style={{ color: "#082420" }}
                       >
                         Order Details
                       </span>
                       {selectedTable && (
                         <span
                           className="text-[10px] font-medium"
-                          style={{ color: "#736C83" }}
+                          style={{ color: "#4B6E67" }}
                         >
                           Table {selectedTable.number.toString().padStart(2, "0")}
                         </span>

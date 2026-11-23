@@ -233,10 +233,10 @@ function OrderCard({ order, onServe }: { order: LiveOrder; onServe:(id:string)=>
               </div>
               
               <div className="flex-1 min-w-0">
-                <p className="text-[13px] font-bold truncate leading-tight" style={{ color: "#0D031B" }}>
+                <p className="text-[13px] font-bold truncate leading-tight" style={{ color: "#082420" }}>
                   {item.name}
                 </p>
-                <p className="text-[10px] font-semibold uppercase mt-1" style={{ color: "#9A94AA" }}>
+                <p className="text-[10px] font-semibold uppercase mt-1" style={{ color: "#628C84" }}>
                   {item.quantity}× {item.category || "item"}
                 </p>
               </div>
@@ -353,7 +353,7 @@ export default function OrderStatusPage() {
 
       <div 
         className="flex flex-col min-h-screen" 
-        style={{ background: "linear-gradient(135deg, #F8F6FC 0%, #F0EBF8 50%, #E8E3F5 100%)" }}
+        style={{ background: "linear-gradient(135deg, #F4FAF7 0%, #F4FAF7 50%, #E1EFE9 100%)" }}
       >
 
         {/* ── Enhanced Header ──────────────────────────────────────────── */}
@@ -385,12 +385,12 @@ export default function OrderStatusPage() {
                 <img src="/order-tracking-nav.png" className="w-full h-full brightness-0 invert object-contain" alt="Order Tracking" style={{ filter: "brightness(0) invert(1)" }} />
               </div>
               <div>
-                <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold leading-none" style={{ color: "#0D031B" }}>
+                <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold leading-none" style={{ color: "#082420" }}>
                   Service Tracker
                 </h1>
                 <div className="flex items-center gap-2 mt-1.5">
                   <div className="h-px w-8 bg-gradient-to-r from-[#0B3B36] to-transparent" />
-                  <p className="text-[10px] sm:text-[11px] font-semibold uppercase" style={{ color: "#736C83" }}>
+                  <p className="text-[10px] sm:text-[11px] font-semibold uppercase" style={{ color: "#4B6E67" }}>
                     Real-time preparation status
                   </p>
                 </div>
@@ -448,7 +448,7 @@ export default function OrderStatusPage() {
                         }
                       : {
                           background: "white",
-                          color: "#736C83",
+                          color: "#4B6E67",
                           borderColor: "rgba(11, 59, 54,  0.12)",
                         }
                   }
@@ -505,10 +505,10 @@ export default function OrderStatusPage() {
                 <CheckCircleIcon className="h-8 w-8 sm:h-10 sm:w-10" style={{ color: "var(--icon-primary)" }} strokeWidth={2.5} />
               </div>
               <div className="text-center">
-                <p className="font-bold text-lg sm:text-xl" style={{ color: "#0D031B" }}>
+                <p className="font-bold text-lg sm:text-xl" style={{ color: "#082420" }}>
                   All Caught Up!
                 </p>
-                <p className="text-sm sm:text-base mt-2" style={{ color: "#736C83" }}>
+                <p className="text-sm sm:text-base mt-2" style={{ color: "#4B6E67" }}>
                   No active orders right now.
                 </p>
               </div>

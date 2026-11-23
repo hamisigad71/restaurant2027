@@ -75,14 +75,14 @@ export default function IconDemo() {
 
       <section className="p-8 bg-slate-900 rounded-3xl text-white">
         <h2 className="text-xl font-bold mb-4">How to Use Heroicons</h2>
-        <pre className="bg-black/20 p-4 rounded-xl text-sm overflow-x-auto text-indigo-200 border border-white/10">
+        <pre className="bg-black/20 p-4 rounded-xl text-sm overflow-x-auto text-[#A2C5BC] border border-white/10">
           {`// Import from either outline or solid sets
 import { BeakerIcon } from "@heroicons/react/24/outline"
 import { BeakerIcon as BeakerIconSolid } from "@heroicons/react/24/solid"
 import { BeakerIcon as BeakerIconMini } from "@heroicons/react/20/solid"
 
 // Use with Tailwind classes
-<BeakerIcon className="h-6 w-6 text-indigo-500" />`}
+<BeakerIcon className="h-6 w-6 text-[#0B3B36]" />`}
         </pre>
       </section>
     </div>

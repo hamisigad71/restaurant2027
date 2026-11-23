@@ -26,12 +26,12 @@ export function FilterBar({ active, counts, search, onFilter, onSearch }: Filter
       style={{ background: "rgba(255,255,255,0.6)", backdropFilter: "blur(12px)", borderColor: "rgba(11, 59, 54,  0.1)" }}
     >
       <div className="flex-1 max-w-sm relative">
-        <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4" style={{ color: "#736C83" }} />
+        <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4" style={{ color: "#4B6E67" }} />
         <input 
           value={search}
           onChange={(e) => onSearch(e.target.value)}
           placeholder="Search table, waiter, or dish..."
-          className="w-full h-10 pl-10 pr-4 rounded-xl text-[12px] font-medium  placeholder:text-[var(--icon-primary)] transition-all bg-white/50 focus:bg-white focus:outline-none focus:ring-1 focus:ring-[oklch(0.45_0.12_285_/_0.2)] border border-transparent focus:border-[oklch(0.45_0.12_285_/_0.15)]"
+          className="w-full h-10 pl-10 pr-4 rounded-xl text-[12px] font-medium  placeholder:text-[var(--icon-primary)] transition-all bg-white/50 focus:bg-white focus:outline-none focus:ring-1 focus:ring-[rgba(11, 59, 54, 0.2)] border border-transparent focus:border-[rgba(11, 59, 54, 0.15)]"
         />
       </div>
 
@@ -42,7 +42,7 @@ export function FilterBar({ active, counts, search, onFilter, onSearch }: Filter
               key={f.id} 
               value={f.id} 
               className="flex items-center gap-2 h-9 px-4 text-[11px] font-bold uppercase  rounded-xl transition-all"
-              style={active === f.id ? { background: "#0B3B36", color: "white", boxShadow: "0 2px 8px rgba(11, 59, 54,  0.25)" } : { color: "#736C83" }}
+              style={active === f.id ? { background: "#0B3B36", color: "white", boxShadow: "0 2px 8px rgba(11, 59, 54,  0.25)" } : { color: "#4B6E67" }}
             >
               {f.label}
               <span className="min-w-[20px] h-[20px] rounded-full flex items-center justify-center text-[10px] font-bold px-1.5" style={active === f.id ? { background: "rgba(255,255,255,0.22)" } : { background: "rgba(11, 59, 54,  0.08)" }}>

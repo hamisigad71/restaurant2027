@@ -279,7 +279,7 @@ export function MobileNav() {
                         "p-2.5 rounded-none transition-all duration-500 relative",
                         isActive 
                           ? "text-[#0B3B36] scale-100" 
-                          : "text-[#736C83] group-hover:text-[#0B3B36] group-active:scale-90"
+                          : "text-[#4B6E67] group-hover:text-[#0B3B36] group-active:scale-90"
                       )}
                       style={isActive ? { animation: "float 3s ease-in-out infinite" } : {}}
                     >
@@ -301,7 +301,7 @@ export function MobileNav() {
                         <Icon 
                           className={cn(
                             "h-5.5 w-5.5 transition-all duration-500 relative z-10",
-                            isActive && "drop-shadow-[0_2px_8px_oklch(0.42_0.14_285_/_0.4)]"
+                            isActive && "drop-shadow-[0_2px_8px_rgba(11, 59, 54, 0.4)]"
                           )} 
                           strokeWidth={isActive ? 2.5 : 2} 
                         />

@@ -144,10 +144,10 @@ export function TableGrid({ tables, onSelectTable }: TableGridProps) {
             <img src="/service-floor-nav.png" className="w-full h-full brightness-0 invert object-contain" alt="Service Floor" />
           </div>
           <div>
-            <h1 className="text-2xl sm:text-3xl font-bold" style={{ color: "#0D031B" }}>
+            <h1 className="text-2xl sm:text-3xl font-bold" style={{ color: "#082420" }}>
               Interactive Floor Plan
             </h1>
-            <p className="text-sm font-medium mt-1" style={{ color: "#736C83" }}>
+            <p className="text-sm font-medium mt-1" style={{ color: "#4B6E67" }}>
               {availableCount} available • {occupiedCount} occupied
             </p>
           </div>
@@ -163,7 +163,7 @@ export function TableGrid({ tables, onSelectTable }: TableGridProps) {
                 "px-5 py-2.5 rounded-xl text-[11px] font-bold uppercase transition-all duration-300",
                 activeZone === zone 
                   ? "bg-white text-[#0B3B36] shadow-lg" 
-                  : "text-[#736C83] hover:text-[#0B3B36]"
+                  : "text-[#4B6E67] hover:text-[#0B3B36]"
               )}
             >
               Zone {zone.toUpperCase()}
@@ -176,13 +176,13 @@ export function TableGrid({ tables, onSelectTable }: TableGridProps) {
       <div className="flex items-center gap-6 flex-wrap mb-8">
         {[
           { label: "Available", color: "bg-emerald-500" },
-          { label: "Occupied", color: "bg-purple-500" },
+          { label: "Occupied", color: "bg-[#0B3B36]" },
           { label: "Reserved", color: "bg-amber-500" },
           { label: "Cleaning", color: "bg-blue-500" },
         ].map(item => (
           <div key={item.label} className="flex items-center gap-2">
             <div className={cn("w-2 h-2 rounded-full shadow-sm", item.color)} />
-            <span className="text-xs font-bold text-[#736C83]">{item.label}</span>
+            <span className="text-xs font-bold text-[#4B6E67]">{item.label}</span>
           </div>
         ))}
       </div>
@@ -193,9 +193,9 @@ export function TableGrid({ tables, onSelectTable }: TableGridProps) {
           <div className="col-span-full flex flex-col items-center justify-center py-16 sm:py-24 gap-4">
             <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl flex items-center justify-center" 
               style={{ background: "rgba(11, 59, 54,  0.08)" }}>
-              <UtensilsCrossed className="h-8 w-8 sm:h-10 sm:w-10" style={{ color: "#AEA6BF" }} strokeWidth={2.5} />
+              <UtensilsCrossed className="h-8 w-8 sm:h-10 sm:w-10" style={{ color: "#A2C5BC" }} strokeWidth={2.5} />
             </div>
-            <p className="text-sm font-bold uppercase" style={{ color: "#9A94AA" }}>No tables found in this zone</p>
+            <p className="text-sm font-bold uppercase" style={{ color: "#628C84" }}>No tables found in this zone</p>
           </div>
         ) : (
           filteredTables.map((table, index) => {
@@ -254,14 +254,14 @@ export function TableGrid({ tables, onSelectTable }: TableGridProps) {
                 <CardContent className="p-2 sm:p-4 space-y-2">
                   <div className="flex justify-between items-end">
                     <div>
-                      <p className="text-[9px] uppercase font-semibold" style={{ color: "#9A94AA" }}>Zone</p>
-                      <p className="text-xs font-bold mt-0.5" style={{ color: "#0D031B" }}>{table.zone || "\u2014"}</p>
+                      <p className="text-[9px] uppercase font-semibold" style={{ color: "#628C84" }}>Zone</p>
+                      <p className="text-xs font-bold mt-0.5" style={{ color: "#082420" }}>{table.zone || "\u2014"}</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-[9px] uppercase font-semibold" style={{ color: "#9A94AA" }}>Status</p>
+                      <p className="text-[9px] uppercase font-semibold" style={{ color: "#628C84" }}>Status</p>
                       <div className="flex items-center gap-1 justify-end mt-0.5">
                         <div className={cn("w-1.5 h-1.5 rounded-full bg-gradient-to-br", config.gradient)} />
-                        <p className="text-xs font-bold" style={{ color: "#0D031B" }}>{config.label}</p>
+                        <p className="text-xs font-bold" style={{ color: "#082420" }}>{config.label}</p>
                       </div>
                     </div>
                   </div>
@@ -353,7 +353,7 @@ export function MenuGrid({
 
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 flex-wrap">
-                <h2 className="text-xl sm:text-2xl font-bold" style={{ color: "#0D031B" }}>
+                <h2 className="text-xl sm:text-2xl font-bold" style={{ color: "#082420" }}>
                   Grande Menu
                 </h2>
                 {selectedTable && (
@@ -363,14 +363,14 @@ export function MenuGrid({
                   </Badge>
                 )}
               </div>
-              <p className="text-[11px] font-semibold mt-1" style={{ color: "#736C83" }}>
+              <p className="text-[11px] font-semibold mt-1" style={{ color: "#4B6E67" }}>
                 {filtered.length} item{filtered.length !== 1 ? "s" : ""} available
               </p>
             </div>
 
             {/* Search - desktop */}
             <div className="relative w-64 shrink-0 hidden sm:block">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4" style={{ color: "#AEA6BF" }} strokeWidth={2.5} />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4" style={{ color: "#A2C5BC" }} strokeWidth={2.5} />
               <Input
                 placeholder="Search menu…"
                 value={search}
@@ -378,7 +378,7 @@ export function MenuGrid({
                 className="pl-10 h-10 border-2 rounded-xl text-sm"
                 style={{
                   borderColor: "rgba(11, 59, 54,  0.12)",
-                  color: "#0D031B",
+                  color: "#082420",
                 }}
               />
             </div>
@@ -386,7 +386,7 @@ export function MenuGrid({
 
           {/* Search - mobile */}
           <div className="relative sm:hidden">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4" style={{ color: "#AEA6BF" }} strokeWidth={2.5} />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4" style={{ color: "#A2C5BC" }} strokeWidth={2.5} />
             <Input
               placeholder="Search menu…"
               value={search}
@@ -394,7 +394,7 @@ export function MenuGrid({
               className="pl-10 h-10 border-2 rounded-xl text-sm"
               style={{
                 borderColor: "rgba(11, 59, 54,  0.12)",
-                color: "#0D031B",
+                color: "#082420",
               }}
             />
           </div>
@@ -411,7 +411,7 @@ export function MenuGrid({
                     className={cn(
                       "px-3 py-2 text-[10px] font-bold uppercase rounded-lg transition-all duration-300 whitespace-nowrap",
                       "data-[state=active]:text-white data-[state=active]:shadow-md",
-                      "text-[#736C83]"
+                      "text-[#4B6E67]"
                     )}
                     style={{
                       background: activeCategory === cat.id
@@ -437,7 +437,7 @@ export function MenuGrid({
                 <div 
                   className="h-8 w-8 sm:h-10 sm:w-10" 
                   style={{ 
-                    backgroundColor: "#AEA6BF",
+                    backgroundColor: "#A2C5BC",
                     WebkitMaskImage: `url('/dining-table.png')`,
                     WebkitMaskRepeat: "no-repeat",
                     WebkitMaskSize: "contain",
@@ -446,8 +446,8 @@ export function MenuGrid({
                 />
               </div>
               <div className="text-center">
-                <p className="text-sm font-bold" style={{ color: "#0D031B" }}>No items found</p>
-                <p className="text-xs mt-1" style={{ color: "#9A94AA" }}>Try a different category or search term</p>
+                <p className="text-sm font-bold" style={{ color: "#082420" }}>No items found</p>
+                <p className="text-xs mt-1" style={{ color: "#628C84" }}>Try a different category or search term</p>
               </div>
             </div>
           ) : (
@@ -515,7 +515,7 @@ export function MenuGrid({
                       <div className="flex items-start justify-between gap-1">
                         <h3
                           className="text-[12px] font-bold leading-tight line-clamp-2 flex-1"
-                          style={{ color: "#0D031B" }}
+                          style={{ color: "#082420" }}
                         >
                           {item.name}
                         </h3>
@@ -600,8 +600,8 @@ export function OrderCart({
                 <ShoppingCart className="h-5 w-5 text-white" strokeWidth={2.5} />
               </div>
               <div>
-                <p className="text-sm font-bold leading-tight" style={{ color: "#0D031B" }}>Guest Order</p>
-                <p className="text-[10px] font-medium mt-0.5" style={{ color: "#736C83" }}>Selection overview</p>
+                <p className="text-sm font-bold leading-tight" style={{ color: "#082420" }}>Guest Order</p>
+                <p className="text-[10px] font-medium mt-0.5" style={{ color: "#4B6E67" }}>Selection overview</p>
               </div>
             </div>
 
@@ -612,7 +612,7 @@ export function OrderCart({
               </Badge>
             ) : (
               <Badge variant="outline" className="text-[11px] px-3 py-1 rounded-lg border-2"
-                style={{ borderColor: "#AEA6BF", color: "#736C83" }}>
+                style={{ borderColor: "#A2C5BC", color: "#4B6E67" }}>
                 No Table
               </Badge>
             )}
@@ -645,11 +645,11 @@ export function OrderCart({
           <div className="flex-1 flex flex-col items-center justify-center p-6 gap-4">
             <div className="w-16 h-16 rounded-2xl flex items-center justify-center"
               style={{ background: "rgba(11, 59, 54,  0.08)" }}>
-              <ShoppingCart className="h-8 w-8" style={{ color: "#AEA6BF" }} strokeWidth={2.5} />
+              <ShoppingCart className="h-8 w-8" style={{ color: "#A2C5BC" }} strokeWidth={2.5} />
             </div>
             <div className="text-center">
-              <p className="text-sm font-bold" style={{ color: "#0D031B" }}>Cart is empty</p>
-              <p className="text-xs mt-1 leading-relaxed" style={{ color: "#9A94AA" }}>
+              <p className="text-sm font-bold" style={{ color: "#082420" }}>Cart is empty</p>
+              <p className="text-xs mt-1 leading-relaxed" style={{ color: "#628C84" }}>
                 {table ? "Browse the menu and add items" : "Select a table to get started"}
               </p>
             </div>
@@ -680,10 +680,10 @@ export function OrderCart({
 
                     {/* Info */}
                     <div className="flex-1 min-w-0">
-                      <p className="text-[13px] font-bold truncate leading-tight" style={{ color: "#0D031B" }}>
+                      <p className="text-[13px] font-bold truncate leading-tight" style={{ color: "#082420" }}>
                         {item.menuItem.name}
                       </p>
-                      <p className="text-[11px] font-semibold mt-1" style={{ color: "#736C83" }}>
+                      <p className="text-[11px] font-semibold mt-1" style={{ color: "#4B6E67" }}>
                         KES {item.menuItem.price.toLocaleString()}
                       </p>
                     </div>
@@ -703,7 +703,7 @@ export function OrderCart({
                         <Minus className="h-3 w-3" strokeWidth={2.5} />
                       </Button>
                       
-                      <span className="w-6 text-center text-sm font-bold" style={{ color: "#0D031B" }}>
+                      <span className="w-6 text-center text-sm font-bold" style={{ color: "#082420" }}>
                         {item.quantity}
                       </span>
                       
@@ -738,23 +738,23 @@ export function OrderCart({
             <div className="shrink-0 border-t" style={{ borderColor: "rgba(11, 59, 54,  0.08)" }}>
               <div className="px-5 pt-4 pb-3 space-y-2">
                 <div className="flex justify-between items-center">
-                  <span className="text-xs font-semibold" style={{ color: "#736C83" }}>Subtotal</span>
-                  <span className="text-xs font-bold" style={{ color: "#0D031B" }}>KES {subtotal.toLocaleString()}</span>
+                  <span className="text-xs font-semibold" style={{ color: "#4B6E67" }}>Subtotal</span>
+                  <span className="text-xs font-bold" style={{ color: "#082420" }}>KES {subtotal.toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-xs font-semibold" style={{ color: "#736C83" }}>VAT (16%)</span>
-                  <span className="text-xs font-bold" style={{ color: "#0D031B" }}>KES {tax.toLocaleString()}</span>
+                  <span className="text-xs font-semibold" style={{ color: "#4B6E67" }}>VAT (16%)</span>
+                  <span className="text-xs font-bold" style={{ color: "#082420" }}>KES {tax.toLocaleString()}</span>
                 </div>
                 
                 <Separator style={{ background: "rgba(11, 59, 54,  0.08)" }} />
                 
                 <div className="flex justify-between items-end pt-1">
-                  <span className="text-sm font-bold" style={{ color: "#0D031B" }}>Total</span>
+                  <span className="text-sm font-bold" style={{ color: "#082420" }}>Total</span>
                   <div className="text-right">
                     <p className="text-2xl font-bold leading-tight" style={{ color: "#0B3B36" }}>
                       KES {total.toLocaleString()}
                     </p>
-                    <p className="text-[9px] font-medium mt-0.5" style={{ color: "#AEA6BF" }}>Inclusive of VAT</p>
+                    <p className="text-[9px] font-medium mt-0.5" style={{ color: "#A2C5BC" }}>Inclusive of VAT</p>
                   </div>
                 </div>
               </div>
@@ -766,7 +766,7 @@ export function OrderCart({
                   onClick={onClearCart}
                   style={{
                     borderColor: "rgba(11, 59, 54,  0.15)",
-                    color: "#736C83",
+                    color: "#4B6E67",
                   }}
                 >
                   Clear

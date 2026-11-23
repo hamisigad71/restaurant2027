@@ -49,7 +49,7 @@ const roleConfig: Record<UserRole, { label: string; color: string; icon: typeof 
   manager: { label: "Manager", color: "bg-chart-2/10 text-chart-2 border-chart-2/30", icon: UserCheck },
   waiter: { label: "Waiter", color: "bg-chart-4/10 text-chart-4 border-chart-4/30", icon: Users },
   kitchen: { label: "Kitchen", color: "bg-chart-1/10 text-chart-1 border-chart-1/30", icon: ChefHat },
-  customer: { label: "Customer", color: "bg-purple-500/10 text-purple-400 border-purple-500/30", icon: Users },
+  customer: { label: "Customer", color: "bg-[#0B3B36]/10 text-[#0B3B36] border-[#0B3B36]/30", icon: Users },
   cleaner: { label: "Cleaner", color: "bg-slate-500/10 text-slate-400 border-slate-500/30", icon: Users },
   security: { label: "Security", color: "bg-orange-500/10 text-orange-400 border-orange-500/30", icon: Shield },
 }

@@ -107,7 +107,7 @@ export default function CheckoutPage() {
 
   return (
     <TooltipProvider>
-      <div className="flex flex-col min-h-screen" style={{ background: "#F0EBF8" }}>
+      <div className="flex flex-col min-h-screen" style={{ background: "#F4FAF7" }}>
         {/* ── Page Header ────────────────────────────────────────── */}
         <div className="max-w-5xl mx-auto w-full px-4 lg:px-6 pt-6">
           <div className="flex items-center gap-3 mb-6">
@@ -118,10 +118,10 @@ export default function CheckoutPage() {
               <img src="/checkout-nav.png" className="w-full h-full brightness-0 invert object-contain" alt="Checkout" />
             </div>
             <div>
-              <h1 className="text-[19px] font-bold leading-none" style={{ color: "#0D031B" }}>
+              <h1 className="text-[19px] font-bold leading-none" style={{ color: "#082420" }}>
                 Billing & Settlement
               </h1>
-              <p className="text-[10px] font-bold uppercase mt-1" style={{ color: "#9A94AA" }}>
+              <p className="text-[10px] font-bold uppercase mt-1" style={{ color: "#628C84" }}>
                 Manage payments and close tables
               </p>
             </div>
@@ -152,10 +152,10 @@ export default function CheckoutPage() {
                   <Icon className="h-3.5 w-3.5" style={{ color: stat.accent }} />
                 </div>
                 <div>
-                  <p className="text-[14px] font-bold leading-none tabular-nums" style={{ color: "#0D031B" }}>
+                  <p className="text-[14px] font-bold leading-none tabular-nums" style={{ color: "#082420" }}>
                     {stat.value}
                   </p>
-                  <p className="text-[9px] font-bold uppercase  mt-0.5" style={{ color: "#9A94AA" }}>
+                  <p className="text-[9px] font-bold uppercase  mt-0.5" style={{ color: "#628C84" }}>
                     {stat.label}
                   </p>
                 </div>
@@ -187,10 +187,10 @@ export default function CheckoutPage() {
                       <Wallet className="h-4 w-4" style={{ color: "#0B3B36" }} />
                     </div>
                     <div>
-                      <CardTitle className="text-[15px] font-bold " style={{ color: "#0D031B" }}>
+                      <CardTitle className="text-[15px] font-bold " style={{ color: "#082420" }}>
                         Payment Method
                       </CardTitle>
-                      <p className="text-[10px] font-medium uppercase  mt-0.5" style={{ color: "#9A94AA" }}>
+                      <p className="text-[10px] font-medium uppercase  mt-0.5" style={{ color: "#628C84" }}>
                         Select how to settle
                       </p>
                     </div>
@@ -206,7 +206,7 @@ export default function CheckoutPage() {
                         <button
                           key={m.id}
                           onClick={() => setSelectedMethod(m.id)}
-                          className="relative flex flex-col items-center gap-2.5 py-5 px-3 rounded-2xl border transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[oklch(0.45_0.12_285)]"
+                          className="relative flex flex-col items-center gap-2.5 py-5 px-3 rounded-2xl border transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0B3B36]"
                           style={
                             active
                               ? { background: "rgba(11, 59, 54,  0.06)", borderColor: "rgba(11, 59, 54,  0.4)", boxShadow: "0 2px 12px rgba(11, 59, 54,  0.15)" }
@@ -227,8 +227,8 @@ export default function CheckoutPage() {
                             <Icon className={cn("h-5 w-5", m.text)} />
                           </div>
                           <div className="text-center">
-                            <p className="text-[12px] font-bold" style={{ color: "#0D031B" }}>{m.label}</p>
-                            <p className="text-[9px] mt-0.5 leading-tight" style={{ color: "#9A94AA" }}>{m.desc}</p>
+                            <p className="text-[12px] font-bold" style={{ color: "#082420" }}>{m.label}</p>
+                            <p className="text-[9px] mt-0.5 leading-tight" style={{ color: "#628C84" }}>{m.desc}</p>
                           </div>
                         </button>
                       )
@@ -254,10 +254,10 @@ export default function CheckoutPage() {
                         <ShoppingBag className="h-4 w-4" style={{ color: "oklch(0.55 0.15 75)" }} />
                       </div>
                       <div>
-                        <CardTitle className="text-[15px] font-bold " style={{ color: "#0D031B" }}>
+                        <CardTitle className="text-[15px] font-bold " style={{ color: "#082420" }}>
                           Active Billing
                         </CardTitle>
-                        <p className="text-[10px] font-medium uppercase  mt-0.5" style={{ color: "#9A94AA" }}>
+                        <p className="text-[10px] font-medium uppercase  mt-0.5" style={{ color: "#628C84" }}>
                           {activeTablesList.length} table{activeTablesList.length !== 1 ? "s" : ""} pending settlement
                         </p>
                       </div>
@@ -286,8 +286,8 @@ export default function CheckoutPage() {
                         <Check className="h-6 w-6" style={{ color: "oklch(0.42 0.14 150)" }} />
                       </div>
                       <div className="text-center">
-                        <p className="text-sm font-semibold" style={{ color: "#3D374C" }}>All settled!</p>
-                        <p className="text-xs mt-0.5" style={{ color: "#9A94AA" }}>No pending tables right now.</p>
+                        <p className="text-sm font-semibold" style={{ color: "#133D38" }}>All settled!</p>
+                        <p className="text-xs mt-0.5" style={{ color: "#628C84" }}>No pending tables right now.</p>
                       </div>
                     </div>
                   ) : (
@@ -298,18 +298,18 @@ export default function CheckoutPage() {
                           <button
                             key={table.id}
                             onClick={() => setSelectedTable(table.id)}
-                            className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl border transition-all duration-200 text-left hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[oklch(0.45_0.12_285)]"
+                            className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl border transition-all duration-200 text-left hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0B3B36]"
                             style={
                               selected
                                 ? { background: "rgba(11, 59, 54,  0.06)", borderColor: "rgba(11, 59, 54,  0.35)", boxShadow: "0 2px 10px rgba(11, 59, 54,  0.1)" }
-                                : { background: "#FAFAF9", borderColor: "rgba(11, 59, 54,  0.1)" }
+                                : { background: "#FFFFFF", borderColor: "rgba(11, 59, 54,  0.1)" }
                             }
                           >
                             {/* Table avatar */}
                             <div
                               className="flex items-center justify-center w-11 h-11 rounded-xl font-bold text-lg shrink-0 text-white transition-all duration-200"
                               style={{
-                                background: selected ? "#0B3B36" : "#D0CBE4",
+                                background: selected ? "#0B3B36" : "#C8DDD5",
                                 boxShadow: selected ? "0 2px 10px rgba(11, 59, 54,  0.3)" : "none",
                               }}
                             >
@@ -317,14 +317,14 @@ export default function CheckoutPage() {
                             </div>
 
                             <div className="flex-1 min-w-0">
-                              <p className="text-[13px] font-bold" style={{ color: "#0D031B" }}>{table.label}</p>
+                              <p className="text-[13px] font-bold" style={{ color: "#082420" }}>{table.label}</p>
                               <div className="flex items-center gap-2 mt-0.5">
-                                <span className="flex items-center gap-1 text-[10px]" style={{ color: "#9A94AA" }}>
+                                <span className="flex items-center gap-1 text-[10px]" style={{ color: "#628C84" }}>
                                   <Users className="h-3 w-3" />
                                   {table.guests} guests
                                 </span>
-                                <span style={{ color: "#D0CBE4" }}>·</span>
-                                <span className="text-[10px]" style={{ color: "#9A94AA" }}>
+                                <span style={{ color: "#C8DDD5" }}>·</span>
+                                <span className="text-[10px]" style={{ color: "#628C84" }}>
                                   {table.items} item{table.items !== 1 ? "s" : ""}
                                 </span>
                               </div>
@@ -347,7 +347,7 @@ export default function CheckoutPage() {
 
                             <ChevronRight
                               className="h-4 w-4 shrink-0 transition-colors"
-                              style={{ color: selected ? "#0B3B36" : "#D0CBE4" }}
+                              style={{ color: selected ? "#0B3B36" : "#C8DDD5" }}
                             />
                           </button>
                         )
@@ -383,12 +383,12 @@ export default function CheckoutPage() {
                 {/* Meta row */}
                 <div
                   className="px-5 py-2.5 flex items-center justify-between border-b"
-                  style={{ background: "#FAFAF9", borderColor: "rgba(11, 59, 54,  0.08)" }}
+                  style={{ background: "#FFFFFF", borderColor: "rgba(11, 59, 54,  0.08)" }}
                 >
-                  <span className="text-[10px] font-bold uppercase " style={{ color: "#9A94AA" }}>
+                  <span className="text-[10px] font-bold uppercase " style={{ color: "#628C84" }}>
                     {selectedTable ? formatLabel(selectedTable) : "No table selected"}
                   </span>
-                  <span className="text-[10px] font-bold uppercase " style={{ color: "#9A94AA" }}>
+                  <span className="text-[10px] font-bold uppercase " style={{ color: "#628C84" }}>
                     {new Date().toLocaleDateString("en-KE", { day: "numeric", month: "short", year: "numeric" })}
                   </span>
                 </div>
@@ -398,7 +398,7 @@ export default function CheckoutPage() {
                   {/* Line items */}
                   {receiptItems.length === 0 ? (
                     <div className="py-6 text-center">
-                      <p className="text-[11px]" style={{ color: "#AEA6BF" }}>
+                      <p className="text-[11px]" style={{ color: "#A2C5BC" }}>
                         Select a table to preview receipt
                       </p>
                     </div>
@@ -408,14 +408,14 @@ export default function CheckoutPage() {
                         {receiptItems.map((item, i) => (
                           <div key={i} className="flex items-start justify-between gap-2">
                             <div className="flex-1 min-w-0">
-                              <span className="text-[12px] block truncate" style={{ color: "#3D374C" }}>
+                              <span className="text-[12px] block truncate" style={{ color: "#133D38" }}>
                                 {item.name}
                               </span>
-                              <span className="text-[10px]" style={{ color: "#AEA6BF" }}>
+                              <span className="text-[10px]" style={{ color: "#A2C5BC" }}>
                                 ×{item.qty} · KES {item.unit.toLocaleString()}
                               </span>
                             </div>
-                            <span className="text-[12px] font-semibold tabular-nums shrink-0" style={{ color: "#0D031B" }}>
+                            <span className="text-[12px] font-semibold tabular-nums shrink-0" style={{ color: "#082420" }}>
                               KES {item.amount.toLocaleString()}
                             </span>
                           </div>
@@ -427,16 +427,16 @@ export default function CheckoutPage() {
                   {/* Dashed separator */}
                   <div
                     className="h-px"
-                    style={{ backgroundImage: "repeating-linear-gradient(90deg,#D0CBE4 0,#D0CBE4 6px,transparent 6px,transparent 10px)" }}
+                    style={{ backgroundImage: "repeating-linear-gradient(90deg,#C8DDD5 0,#C8DDD5 6px,transparent 6px,transparent 10px)" }}
                   />
 
                   {/* Subtotals */}
                   <div className="space-y-2">
-                    <div className="flex justify-between text-[12px]" style={{ color: "#736C83" }}>
+                    <div className="flex justify-between text-[12px]" style={{ color: "#4B6E67" }}>
                       <span>Subtotal</span>
                       <span className="tabular-nums">KES {subtotal.toLocaleString()}</span>
                     </div>
-                    <div className="flex justify-between text-[12px]" style={{ color: "#736C83" }}>
+                    <div className="flex justify-between text-[12px]" style={{ color: "#4B6E67" }}>
                       <span>Service (10%)</span>
                       <span className="tabular-nums">KES {service.toLocaleString()}</span>
                     </div>
@@ -445,12 +445,12 @@ export default function CheckoutPage() {
                   {/* Dashed separator */}
                   <div
                     className="h-px"
-                    style={{ backgroundImage: "repeating-linear-gradient(90deg,#D0CBE4 0,#D0CBE4 6px,transparent 6px,transparent 10px)" }}
+                    style={{ backgroundImage: "repeating-linear-gradient(90deg,#C8DDD5 0,#C8DDD5 6px,transparent 6px,transparent 10px)" }}
                   />
 
                   {/* Grand total */}
                   <div className="flex items-baseline justify-between">
-                    <span className="text-[13px] font-bold uppercase " style={{ color: "#0D031B" }}>
+                    <span className="text-[13px] font-bold uppercase " style={{ color: "#082420" }}>
                       Total
                     </span>
                     <span className="text-xl font-bold tabular-nums" style={{ color: "#0B3B36" }}>
@@ -470,8 +470,8 @@ export default function CheckoutPage() {
                         <div className={cn("flex items-center justify-center w-7 h-7 rounded-lg shrink-0", m.bg)}>
                           <Icon className={cn("h-3.5 w-3.5", m.text)} />
                         </div>
-                        <span className="text-[11px] font-semibold" style={{ color: "#3D374C" }}>{m.label}</span>
-                        <span className="text-[10px] ml-auto truncate" style={{ color: "#9A94AA" }}>{m.desc}</span>
+                        <span className="text-[11px] font-semibold" style={{ color: "#133D38" }}>{m.label}</span>
+                        <span className="text-[10px] ml-auto truncate" style={{ color: "#628C84" }}>{m.desc}</span>
                       </div>
                     )
                   })()}

@@ -13,10 +13,10 @@ export function ScheduleHeader() {
           <Calendar className="h-5 w-5 text-white" />
         </div>
         <div>
-          <h1 className="text-[17px] font-bold leading-none" style={{ color: "#0D031B" }}>
+          <h1 className="text-[17px] font-bold leading-none" style={{ color: "#082420" }}>
             Staff Schedule
           </h1>
-          <p className="text-[10px] font-bold uppercase mt-0.5" style={{ color: "#9A94AA" }}>
+          <p className="text-[10px] font-bold uppercase mt-0.5" style={{ color: "#628C84" }}>
             Resource Allocation & Weekly Rostering
           </p>
         </div>
@@ -28,7 +28,7 @@ export function ScheduleHeader() {
             <Button
               variant="outline"
               className="h-10 px-4 gap-2 rounded-xl font-bold text-[11px] uppercase border transition-all hover:-translate-y-0.5"
-              style={{ borderColor: "rgba(11, 59, 54,  0.2)", color: "#736C83", background: "rgba(255,255,255,0.8)" }}
+              style={{ borderColor: "rgba(11, 59, 54,  0.2)", color: "#4B6E67", background: "rgba(255,255,255,0.8)" }}
             >
               <Zap className="h-3.5 w-3.5" />
               <span className="hidden sm:inline">Auto-Generate</span>

@@ -14,11 +14,14 @@ const quicksand = Quicksand({
 })
 
 export const metadata: Metadata = {
-  title: 'Smart Restaurant OS',
-  description: 'Modern restaurant management system for owners, managers, waiters, and kitchen staff',
-  generator: 'v0.app',
+  title: 'TableTap · Smart Restaurant OS',
+  description: 'TableTap: Scan · Pay · Done. Modern restaurant management system for owners, managers, waiters, and kitchen staff',
   icons: {
-    icon: '/icon.svg',
+    icon: [
+      { url: '/favicon-icon.png', type: 'image/png' },
+      { url: '/favicon.ico', sizes: 'any' },
+    ],
+    shortcut: '/favicon-icon.png',
     apple: '/apple-icon.png',
   },
 }

@@ -77,7 +77,7 @@ export default function ManagerExpensesPage() {
   })
 
   return (
-    <div className="min-h-screen" style={{ background: "linear-gradient(135deg, #F8F6FC 0%, #F0EBF8 50%, #E8E3F5 100%)" }}>
+    <div className="min-h-screen" style={{ background: "linear-gradient(135deg, #F4FAF7 0%, #F4FAF7 50%, #E1EFE9 100%)" }}>
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-24 space-y-6 sm:space-y-8">
         
         {/* ── Enhanced Header ────────────────────────────────────────────── */}
@@ -93,12 +93,12 @@ export default function ManagerExpensesPage() {
                 <ChartPieIcon className="h-6 w-6 sm:h-7 sm:w-7 text-white" strokeWidth={2.5} />
               </div>
               <div>
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-normal leading-none" style={{ color: "#0D031B" }}>
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-normal leading-none" style={{ color: "#082420" }}>
                   Finance Hub
                 </h1>
                 <div className="flex items-center gap-2 mt-1.5">
                   <div className="h-px w-8 bg-gradient-to-r from-[#0B3B36] to-transparent" />
-                  <p className="text-[10px] sm:text-[11px] font-semibold uppercase" style={{ color: "#736C83" }}>
+                  <p className="text-[10px] sm:text-[11px] font-semibold uppercase" style={{ color: "#4B6E67" }}>
                     Expenditure Tracking & COGS Control
                   </p>
                 </div>
@@ -112,7 +112,7 @@ export default function ManagerExpensesPage() {
               className="h-11 sm:h-12 px-5 sm:px-6 gap-2 font-normal rounded-[14px] text-xs uppercase transition-all hover:scale-105 active:scale-95 border-2"
               style={{
                 borderColor: "rgba(11, 59, 54,  0.15)",
-                color: "#736C83",
+                color: "#4B6E67",
               }}
             >
               <CloudArrowDownIcon className="h-4 w-4" strokeWidth={2.5} />
@@ -155,11 +155,11 @@ export default function ManagerExpensesPage() {
                       <s.icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" strokeWidth={2.5} />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-[10px] sm:text-[11px] font-normal uppercase mb-1.5" style={{ color: "#9A94AA" }}>
+                      <p className="text-[10px] sm:text-[11px] font-normal uppercase mb-1.5" style={{ color: "#628C84" }}>
                         {s.label}
                       </p>
-                      <p className="text-2xl sm:text-3xl font-normal leading-none tabular-nums" style={{ color: "#0D031B" }}>
-                        <span className="text-lg sm:text-xl" style={{ color: "#736C83" }}>KES </span>
+                      <p className="text-2xl sm:text-3xl font-normal leading-none tabular-nums" style={{ color: "#082420" }}>
+                        <span className="text-lg sm:text-xl" style={{ color: "#4B6E67" }}>KES </span>
                         {s.value}
                       </p>
                     </div>
@@ -184,7 +184,7 @@ export default function ManagerExpensesPage() {
 
                 {/* Bottom accent line */}
                 <div className="mt-4 pt-4 border-t relative z-10" style={{ borderColor: "rgba(11, 59, 54,  0.08)" }}>
-                  <p className="text-[10px] font-medium flex items-center gap-1.5" style={{ color: "#9A94AA" }}>
+                  <p className="text-[10px] font-medium flex items-center gap-1.5" style={{ color: "#628C84" }}>
                     <ChartBarIcon className="h-3 w-3" />
                     vs. last period
                   </p>
@@ -210,10 +210,10 @@ export default function ManagerExpensesPage() {
                     <DocumentTextIcon className="h-5 w-5" style={{ color: "#0B3B36" }} strokeWidth={2.5} />
                   </div>
                   <div>
-                    <CardTitle className="text-sm sm:text-base font-normal uppercase" style={{ color: "#0D031B" }}>
+                    <CardTitle className="text-sm sm:text-base font-normal uppercase" style={{ color: "#082420" }}>
                       Transaction Ledger
                     </CardTitle>
-                    <p className="text-[10px] font-medium mt-0.5" style={{ color: "#9A94AA" }}>
+                    <p className="text-[10px] font-medium mt-0.5" style={{ color: "#628C84" }}>
                       {filteredExpenses.length} transaction{filteredExpenses.length !== 1 ? 's' : ''} found
                     </p>
                   </div>
@@ -229,7 +229,7 @@ export default function ManagerExpensesPage() {
                       className="pl-10 h-10 bg-white border-2 rounded-xl text-sm"
                       style={{
                         borderColor: "rgba(11, 59, 54,  0.12)",
-                        color: "#0D031B",
+                        color: "#082420",
                       }}
                     />
                   </div>
@@ -278,7 +278,7 @@ export default function ManagerExpensesPage() {
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse">
                   <thead style={{ background: "rgba(11, 59, 54,  0.03)" }}>
-                    <tr className="text-[10px] font-normal uppercase" style={{ color: "#9A94AA" }}>
+                    <tr className="text-[10px] font-normal uppercase" style={{ color: "#628C84" }}>
                       <th className="px-5 sm:px-6 py-4 whitespace-nowrap">Item / Category</th>
                       <th className="px-5 sm:px-6 py-4 whitespace-nowrap">Amount</th>
                       <th className="px-5 sm:px-6 py-4 whitespace-nowrap">Status</th>
@@ -293,7 +293,7 @@ export default function ManagerExpensesPage() {
                         className="group transition-all hover:bg-rgba(11, 59, 54,  0.02)"
                       >
                         <td className="px-5 sm:px-6 py-4">
-                          <div className="font-normal text-sm uppercase leading-tight" style={{ color: "#0D031B" }}>
+                          <div className="font-normal text-sm uppercase leading-tight" style={{ color: "#082420" }}>
                             {exp.item}
                           </div>
                           <div className="flex items-center gap-2 mt-1.5">
@@ -307,16 +307,16 @@ export default function ManagerExpensesPage() {
                             >
                               {exp.category}
                             </Badge>
-                            <span className="text-[9px] font-medium" style={{ color: "#C4BAD8" }}>
+                            <span className="text-[9px] font-medium" style={{ color: "#A2C5BC" }}>
                               {exp.id}
                             </span>
                           </div>
                         </td>
                         <td className="px-5 sm:px-6 py-4">
-                          <div className="font-normal text-sm tabular-nums" style={{ color: "#0D031B" }}>
+                          <div className="font-normal text-sm tabular-nums" style={{ color: "#082420" }}>
                             KES {exp.amount.toLocaleString()}
                           </div>
-                          <div className="flex items-center gap-1.5 text-[10px] font-medium mt-1" style={{ color: "#9A94AA" }}>
+                          <div className="flex items-center gap-1.5 text-[10px] font-medium mt-1" style={{ color: "#628C84" }}>
                             <CalendarIcon className="h-3 w-3" />
                             {exp.date}
                           </div>
@@ -339,7 +339,7 @@ export default function ManagerExpensesPage() {
                           </Badge>
                         </td>
                         <td className="px-5 sm:px-6 py-4">
-                          <div className="flex items-center gap-1.5 text-[10px] font-semibold uppercase" style={{ color: "#9A94AA" }}>
+                          <div className="flex items-center gap-1.5 text-[10px] font-semibold uppercase" style={{ color: "#628C84" }}>
                             <CreditCardIcon className="h-3 w-3" />
                             {exp.method}
                           </div>
@@ -352,7 +352,7 @@ export default function ManagerExpensesPage() {
                                 size="icon" 
                                 className="h-9 w-9 rounded-xl transition-all hover:bg-rgba(11, 59, 54,  0.08) active:scale-90"
                               >
-                                <EllipsisHorizontalIcon className="h-4 w-4" style={{ color: "#9A94AA" }} />
+                                <EllipsisHorizontalIcon className="h-4 w-4" style={{ color: "#628C84" }} />
                               </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end" className="bg-white/98 backdrop-blur-xl border-0 rounded-2xl shadow-2xl w-48">
@@ -391,10 +391,10 @@ export default function ManagerExpensesPage() {
                   >
                     <DocumentTextIcon className="h-8 w-8" style={{ color: "rgba(11, 59, 54,  0.4)" }} />
                   </div>
-                  <p className="text-sm font-normal uppercase" style={{ color: "#9A94AA" }}>
+                  <p className="text-sm font-normal uppercase" style={{ color: "#628C84" }}>
                     No transactions found
                   </p>
-                  <p className="text-xs font-medium mt-1" style={{ color: "#C4BAD8" }}>
+                  <p className="text-xs font-medium mt-1" style={{ color: "#A2C5BC" }}>
                     Try adjusting your search or filters
                   </p>
                 </div>
@@ -418,7 +418,7 @@ export default function ManagerExpensesPage() {
                   >
                     <CheckBadgeIcon className="h-5 w-5" style={{ color: "#0B3B36" }} strokeWidth={2.5} />
                   </div>
-                  <CardTitle className="text-sm font-normal uppercase" style={{ color: "#0D031B" }}>
+                  <CardTitle className="text-sm font-normal uppercase" style={{ color: "#082420" }}>
                     Budget Allocation
                   </CardTitle>
                 </div>
@@ -438,10 +438,10 @@ export default function ManagerExpensesPage() {
                             <Icon className="h-5 w-5 text-white" strokeWidth={2.5} />
                           </div>
                           <div>
-                            <span className="text-xs font-normal uppercase block leading-none" style={{ color: "#0D031B" }}>
+                            <span className="text-xs font-normal uppercase block leading-none" style={{ color: "#082420" }}>
                               {item.label}
                             </span>
-                            <span className="text-[10px] font-medium block mt-1" style={{ color: "#9A94AA" }}>
+                            <span className="text-[10px] font-medium block mt-1" style={{ color: "#628C84" }}>
                               {item.amount}
                             </span>
                           </div>
@@ -513,7 +513,7 @@ export default function ManagerExpensesPage() {
                     View Details
                   </Button>
                   <Button 
-                    className="flex-1 h-11 bg-white text-purple-900 font-medium rounded-xl text-xs uppercase transition-all hover:scale-105 active:scale-95 shadow-lg"
+                    className="flex-1 h-11 bg-white text-[#0B3B36] font-medium rounded-xl text-xs uppercase transition-all hover:scale-105 active:scale-95 shadow-lg"
                   >
                     Create Plan
                   </Button>

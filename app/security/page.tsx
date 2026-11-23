@@ -59,8 +59,8 @@ const ZONE_COLORS: Record<string,string> = {
   Kitchen:  "oklch(0.65 0.18 25)",
   Outdoor:  "oklch(0.62 0.16 150)",
   VIP:      "#0B3B36",
-  Staff:    "#9A94AA",
-  Facility: "#9A94AA",
+  Staff:    "#628C84",
+  Facility: "#628C84",
 }
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
@@ -86,7 +86,7 @@ export default function SecurityPage() {
 
   return (
     <TooltipProvider>
-      <div className="min-h-screen flex flex-col" style={{ background:"#F0EBF8" }}>
+      <div className="min-h-screen flex flex-col" style={{ background:"#F4FAF7" }}>
 
         {/* ── Header ─────────────────────────────────────────────── */}
         <header
@@ -106,10 +106,10 @@ export default function SecurityPage() {
           </div>
 
           <div className="min-w-0 flex-1">
-            <h1 className="text-[15px] font-bold  leading-none" style={{ color:"#0D031B" }}>
+            <h1 className="text-[15px] font-bold  leading-none" style={{ color:"#082420" }}>
               SecOps Center
             </h1>
-            <p className="text-[10px] font-bold uppercase  mt-0.5" style={{ color:"#9A94AA" }}>
+            <p className="text-[10px] font-bold uppercase  mt-0.5" style={{ color:"#628C84" }}>
               Resto HQ · {liveTime}
             </p>
           </div>
@@ -134,8 +134,8 @@ export default function SecurityPage() {
           <Tooltip>
             <TooltipTrigger asChild>
               <button
-                className="relative flex items-center justify-center w-9 h-9 rounded-xl border transition-all hover:bg-[#EBE6F8]"
-                style={{ borderColor:"rgba(11, 59, 54,  0.15)", color:"#736C83" }}
+                className="relative flex items-center justify-center w-9 h-9 rounded-xl border transition-all hover:bg-[#F4FAF7]"
+                style={{ borderColor:"rgba(11, 59, 54,  0.15)", color:"#4B6E67" }}
               >
                 <Bell className="h-4 w-4" />
                 {alerts.length > 0 && (
@@ -184,8 +184,8 @@ export default function SecurityPage() {
                       </span>
                     )}
                   </div>
-                  <p className="text-2xl font-bold leading-none tabular-nums" style={{ color:"#0D031B" }}>{k.val}</p>
-                  <p className="text-[10px] font-bold uppercase  mt-1" style={{ color:"#9A94AA" }}>{k.label}</p>
+                  <p className="text-2xl font-bold leading-none tabular-nums" style={{ color:"#082420" }}>{k.val}</p>
+                  <p className="text-[10px] font-bold uppercase  mt-1" style={{ color:"#628C84" }}>{k.label}</p>
                   {k.label === "Capacity" && (
                     <Progress value={capacity} className="h-1.5 mt-2 rounded-full" style={{ background:"rgba(0,0,0,0.06)" }} />
                   )}
@@ -218,8 +218,8 @@ export default function SecurityPage() {
                       <Eye className="h-3.5 w-3.5" style={{ color:"#0B3B36" }} />
                     </div>
                     <div>
-                      <CardTitle className="text-[13px] font-bold" style={{ color:"#0D031B" }}>Live Monitor</CardTitle>
-                      <p className="text-[10px] uppercase  font-medium mt-0.5" style={{ color:"#9A94AA" }}>
+                      <CardTitle className="text-[13px] font-bold" style={{ color:"#082420" }}>Live Monitor</CardTitle>
+                      <p className="text-[10px] uppercase  font-medium mt-0.5" style={{ color:"#628C84" }}>
                         {CAMERAS.find(c => c.id === activeCamera)?.label}
                       </p>
                     </div>
@@ -240,7 +240,7 @@ export default function SecurityPage() {
                   {/* Video placeholder */}
                   <div
                     className="relative w-full aspect-video rounded-2xl overflow-hidden border flex flex-col items-center justify-center"
-                    style={{ background:"#0D031B", borderColor:"rgba(255,255,255,0.08)" }}
+                    style={{ background:"#082420", borderColor:"rgba(255,255,255,0.08)" }}
                   >
                     <div
                       className="absolute inset-0 opacity-[0.04]"
@@ -279,7 +279,7 @@ export default function SecurityPage() {
                       <div className="flex items-center justify-center w-8 h-8 rounded-lg" style={{ background:"rgba(11, 59, 54,  0.1)" }}>
                         <Camera className="h-3.5 w-3.5" style={{ color:"#0B3B36" }} />
                       </div>
-                      <CardTitle className="text-[13px] font-bold" style={{ color:"#0D031B" }}>Camera Matrix</CardTitle>
+                      <CardTitle className="text-[13px] font-bold" style={{ color:"#082420" }}>Camera Matrix</CardTitle>
                     </div>
                     <div className="flex items-center gap-3 text-[10px] font-bold uppercase ">
                       <span className="flex items-center gap-1" style={{ color:"oklch(0.42 0.14 150)" }}>
@@ -300,7 +300,7 @@ export default function SecurityPage() {
                     {CAMERAS.map(cam => {
                       const isActive  = activeCamera === cam.id
                       const isOnline  = cam.status === "online"
-                      const zoneColor = ZONE_COLORS[cam.zone] ?? "#9A94AA"
+                      const zoneColor = ZONE_COLORS[cam.zone] ?? "#628C84"
                       return (
                         <button
                           key={cam.id}
@@ -318,10 +318,10 @@ export default function SecurityPage() {
                             className={cn("w-1.5 h-1.5 rounded-full mb-2", isOnline ? "animate-pulse" : "")}
                             style={{ background: isOnline ? "oklch(0.62 0.16 150)" : "oklch(0.65 0.18 25)" }}
                           />
-                          <p className="text-[10px] font-bold leading-tight" style={{ color: isActive ? "#0B3B36" : "#0D031B" }}>
+                          <p className="text-[10px] font-bold leading-tight" style={{ color: isActive ? "#0B3B36" : "#082420" }}>
                             {cam.id}
                           </p>
-                          <p className="text-[9px] truncate w-full mt-0.5" style={{ color:"#9A94AA" }}>
+                          <p className="text-[9px] truncate w-full mt-0.5" style={{ color:"#628C84" }}>
                             {cam.label}
                           </p>
                           <span
@@ -355,7 +355,7 @@ export default function SecurityPage() {
                       <div className="flex items-center justify-center w-8 h-8 rounded-lg" style={{ background:"oklch(0.65 0.18 25 / 0.1)" }}>
                         <AlertCircle className="h-3.5 w-3.5" style={{ color:"oklch(0.55 0.18 25)" }} />
                       </div>
-                      <CardTitle className="text-[13px] font-bold" style={{ color:"#0D031B" }}>Recent Alerts</CardTitle>
+                      <CardTitle className="text-[13px] font-bold" style={{ color:"#082420" }}>Recent Alerts</CardTitle>
                     </div>
                     {alerts.length > 0 && (
                       <Badge
@@ -382,8 +382,8 @@ export default function SecurityPage() {
                         <ShieldCheck className="h-6 w-6" style={{ color:"oklch(0.42 0.14 150)" }} />
                       </div>
                       <div className="text-center">
-                        <p className="text-sm font-bold" style={{ color:"#0D031B" }}>All clear</p>
-                        <p className="text-xs mt-0.5" style={{ color:"#9A94AA" }}>No active alerts</p>
+                        <p className="text-sm font-bold" style={{ color:"#082420" }}>All clear</p>
+                        <p className="text-xs mt-0.5" style={{ color:"#628C84" }}>No active alerts</p>
                       </div>
                     </div>
                   ) : (
@@ -403,8 +403,8 @@ export default function SecurityPage() {
                             style={{ background: a.severity === "warning" ? "oklch(0.65 0.18 25)" : "#0B3B36" }}
                           />
                           <div className="flex-1 min-w-0">
-                            <p className="text-[12px] font-bold leading-tight" style={{ color:"#0D031B" }}>{a.title}</p>
-                            <p className="text-[11px] mt-1 leading-relaxed" style={{ color:"#736C83" }}>{a.desc}</p>
+                            <p className="text-[12px] font-bold leading-tight" style={{ color:"#082420" }}>{a.title}</p>
+                            <p className="text-[11px] mt-1 leading-relaxed" style={{ color:"#4B6E67" }}>{a.desc}</p>
                             <p className="text-[10px] mt-1.5 flex items-center gap-1" style={{ color:"var(--icon-primary)" }}>
                               <Clock className="h-3 w-3" />
                               {a.time}
@@ -412,7 +412,7 @@ export default function SecurityPage() {
                           </div>
                           <button
                             onClick={() => dismissAlert(a.id)}
-                            className="opacity-0 group-hover:opacity-100 flex items-center justify-center w-6 h-6 rounded-lg shrink-0 transition-all hover:bg-[#EBE6F8] mt-0.5"
+                            className="opacity-0 group-hover:opacity-100 flex items-center justify-center w-6 h-6 rounded-lg shrink-0 transition-all hover:bg-[#F4FAF7] mt-0.5"
                             style={{ color:"var(--icon-primary)" }}
                             aria-label="Dismiss"
                           >
@@ -424,7 +424,7 @@ export default function SecurityPage() {
                       {/* Clear all */}
                       <button
                         onClick={() => setAlerts([])}
-                        className="w-full text-[10px] font-bold uppercase  py-2 rounded-xl transition-colors hover:bg-[#EBE6F8]"
+                        className="w-full text-[10px] font-bold uppercase  py-2 rounded-xl transition-colors hover:bg-[#F4FAF7]"
                         style={{ color:"var(--icon-primary)" }}
                       >
                         Dismiss all

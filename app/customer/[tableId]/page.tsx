@@ -336,7 +336,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
             />
           </div>
           <div>
-            <SheetTitle className="text-[15px] font-bold " style={{ color:"#0D031B" }}>
+            <SheetTitle className="text-[15px] font-bold " style={{ color:"#082420" }}>
               Your Order
             </SheetTitle>
             <SheetDescription className="text-[10px] uppercase  font-semibold mt-0.5" style={{ color:"#0B3B36" }}>
@@ -361,8 +361,8 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
               </div>
             </div>
             <div>
-              <h3 className="font-bold text-lg " style={{ color:"#0D031B" }}>Order Confirmed!</h3>
-              <p className="text-xs mt-1 leading-relaxed" style={{ color:"#736C83" }}>
+              <h3 className="font-bold text-lg " style={{ color:"#082420" }}>Order Confirmed!</h3>
+              <p className="text-xs mt-1 leading-relaxed" style={{ color:"#4B6E67" }}>
                 Your selection is on its way to the kitchen.
               </p>
             </div>
@@ -386,8 +386,8 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
               />
             </div>
             <div>
-              <p className="font-semibold text-sm" style={{ color:"#3D374C" }}>Nothing here yet</p>
-              <p className="text-xs mt-0.5" style={{ color:"#736C83" }}>Browse the menu and add items</p>
+              <p className="font-semibold text-sm" style={{ color:"#133D38" }}>Nothing here yet</p>
+              <p className="text-xs mt-0.5" style={{ color:"#4B6E67" }}>Browse the menu and add items</p>
             </div>
           </div>
         ) : (
@@ -404,7 +404,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                 </div>
 
                 <div className="flex-1 min-w-0">
-                  <p className="text-[13px] font-semibold truncate" style={{ color:"#0D031B" }}>{item.name}</p>
+                  <p className="text-[13px] font-semibold truncate" style={{ color:"#082420" }}>{item.name}</p>
                   <p className="text-[11px] font-medium mt-0.5" style={{ color:"#0B3B36" }}>
                     KSh {(item.price * item.quantity).toLocaleString()}
                   </p>
@@ -421,7 +421,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                   >
                     <Minus className="h-3 w-3" />
                   </button>
-                  <span className="w-5 text-center text-xs font-bold" style={{ color:"#0D031B" }}>{item.quantity}</span>
+                  <span className="w-5 text-center text-xs font-bold" style={{ color:"#082420" }}>{item.quantity}</span>
                   <button
                     className="flex items-center justify-center w-7 h-7 rounded-full text-white transition-colors"
                     style={{ background:"#0B3B36" }}
@@ -433,7 +433,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
 
                 <button
                   className="flex items-center justify-center w-7 h-7 rounded-full transition-colors hover:bg-red-50"
-                  style={{ color:"#AEA6BF" }}
+                  style={{ color:"#A2C5BC" }}
                   onClick={() => removeFromCart(item.id)}
                 >
                   <X className="h-3.5 w-3.5" />
@@ -454,7 +454,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
             className="flex justify-between items-center px-4 py-3 rounded-2xl"
             style={{ background:"rgba(11, 59, 54,  0.06)" }}
           >
-            <span className="text-sm font-semibold" style={{ color:"#3D374C" }}>Total</span>
+            <span className="text-sm font-semibold" style={{ color:"#133D38" }}>Total</span>
             <span className="text-lg font-bold tabular-nums" style={{ color:"#0B3B36" }}>
               KSh {cartTotal.toLocaleString()}
             </span>
@@ -510,7 +510,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
             <div 
                className="absolute inset-0 backdrop-blur-xl transition-all duration-1000"
                style={{ 
-                 background: "linear-gradient(135deg, oklch(0.6 0.15 285 / 0.4), rgba(11, 59, 54,  0.8))" 
+                 background: "linear-gradient(135deg, #0B3B36, rgba(11, 59, 54,  0.8))" 
                }} 
             />
             
@@ -550,7 +550,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                   }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <span className="relative flex items-center gap-4 text-[15px] font-black uppercase text-[#0D031B]">
+                  <span className="relative flex items-center gap-4 text-[15px] font-black uppercase text-[#082420]">
                     Enjoy Experience
                     <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center transition-transform group-hover:translate-x-1">
                       <ChevronRight className="h-4 w-4 text-primary" />
@@ -575,8 +575,8 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
             className="w-full h-full object-cover scale-105 animate-in fade-in zoom-in duration-1000"
           />
           {/* Gradient overlays */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0D031B]/90 via-[#0D031B]/30 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0D031B]/30 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#082420]/90 via-[#082420]/30 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#082420]/30 to-transparent" />
 
           {/* Brand */}
           <div className="absolute bottom-0 left-0 right-0 p-6 pb-8">
@@ -704,7 +704,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
           <div className="relative">
             <Search
               className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 pointer-events-none"
-              style={{ color:"#AEA6BF" }}
+              style={{ color:"#A2C5BC" }}
             />
             <Input
               placeholder="Search the menu…"
@@ -715,13 +715,13 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                 background:"rgba(255,255,255,0.85)",
                 backdropFilter:"blur(12px)",
                 borderColor:"rgba(11, 59, 54,  0.15)",
-                color:"#0D031B",
+                color:"#082420",
               }}
             />
             {searchQuery && (
               <button
                 className="absolute right-3.5 top-1/2 -translate-y-1/2 flex items-center justify-center w-6 h-6 rounded-full"
-                style={{ background:"#EBE6F8", color:"#736C83" }}
+                style={{ background:"#F4FAF7", color:"#4B6E67" }}
                 onClick={() => setSearchQuery("")}
               >
                 <X className="h-3.5 w-3.5" />
@@ -745,7 +745,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                   style={
                     active
                       ? { background:"#0B3B36", boxShadow:"0 4px 16px rgba(11, 59, 54,  0.35)", color:"white" }
-                      : { background:"rgba(255,255,255,0.8)", color:"#3D374C" }
+                      : { background:"rgba(255,255,255,0.8)", color:"#133D38" }
                   }
                 >
                   <span style={{ fontSize:15 }}>{display.emoji}</span>
@@ -757,12 +757,12 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
 
           {/* ── Results count ─────────────────────────────────────────── */}
           <div className="flex items-center justify-between px-1">
-            <p className="text-[11px] font-medium uppercase " style={{ color:"#9A94AA" }}>
+            <p className="text-[11px] font-medium uppercase " style={{ color:"#628C84" }}>
               {filteredItems.length} {filteredItems.length === 1 ? "dish" : "dishes"}
               {activeCategory !== "All" && ` · ${CATEGORY_DISPLAY[activeCategory]?.label || activeCategory}`}
             </p>
             {searchQuery && (
-              <p className="text-[11px]" style={{ color:"#9A94AA" }}>
+              <p className="text-[11px]" style={{ color:"#628C84" }}>
                 Showing results for "<span style={{ color:"#0B3B36" }}>{searchQuery}</span>"
               </p>
             )}
@@ -863,13 +863,13 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                               }}
                             >
                               <button
-                                className="flex items-center justify-center w-8 h-8 rounded-full transition-colors hover:bg-[#EBE6F8]"
+                                className="flex items-center justify-center w-8 h-8 rounded-full transition-colors hover:bg-[#F4FAF7]"
                                 style={{ color:"#0B3B36" }}
                                 onClick={() => updateQuantity(item.id, -1)}
                               >
                                 <Minus className="h-3.5 w-3.5" />
                               </button>
-                              <span className="text-[13px] font-bold w-6 text-center" style={{ color:"#0D031B" }}>{qty}</span>
+                              <span className="text-[13px] font-bold w-6 text-center" style={{ color:"#082420" }}>{qty}</span>
                               <button
                                 className="flex items-center justify-center w-8 h-8 rounded-full text-white"
                                 style={{ background:"#0B3B36" }}
@@ -885,7 +885,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                   {/* Body */}
                   <div className="flex flex-col flex-1 px-3 pt-3 pb-3 gap-2">
                     <div className="flex items-start justify-between gap-1.5">
-                      <h3 className="text-[12px] font-bold leading-tight line-clamp-2 text-[#0D031B]">
+                      <h3 className="text-[12px] font-bold leading-tight line-clamp-2 text-[#082420]">
                         {item.name}
                       </h3>
                     </div>
@@ -936,8 +936,8 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                   <ChefHat className="h-8 w-8" style={{ color:"rgba(11, 59, 54,  0.4)" }} />
                 </div>
                 <div className="text-center">
-                  <p className="font-semibold text-sm" style={{ color:"#3D374C" }}>No dishes found</p>
-                  <p className="text-xs mt-0.5" style={{ color:"#736C83" }}>Try a different search or category</p>
+                  <p className="font-semibold text-sm" style={{ color:"#133D38" }}>No dishes found</p>
+                  <p className="text-xs mt-0.5" style={{ color:"#4B6E67" }}>Try a different search or category</p>
                 </div>
               </div>
             )}
@@ -986,10 +986,10 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
 
                 <div className="px-5 pb-5 -mt-2">
                   <DialogHeader className="mb-4">
-                    <DialogTitle className="text-xl font-bold " style={{ color:"#0D031B" }}>
+                    <DialogTitle className="text-xl font-bold " style={{ color:"#082420" }}>
                       {selectedItem.name}
                     </DialogTitle>
-                    <DialogDescription className="text-xs leading-relaxed mt-1" style={{ color:"#736C83" }}>
+                    <DialogDescription className="text-xs leading-relaxed mt-1" style={{ color:"#4B6E67" }}>
                       {selectedItem.description}
                     </DialogDescription>
                   </DialogHeader>
@@ -1022,7 +1022,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                   <div className="space-y-2 mb-5">
                     <label
                       className="text-[10px] font-bold uppercase "
-                      style={{ color:"#AEA6BF" }}
+                      style={{ color:"#A2C5BC" }}
                     >
                       Special Instructions
                     </label>
@@ -1034,7 +1034,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                       style={{
                         background:"#F5F2FB",
                         borderColor:"rgba(11, 59, 54,  0.15)",
-                        color:"#0D031B",
+                        color:"#082420",
                       }}
                     />
                   </div>

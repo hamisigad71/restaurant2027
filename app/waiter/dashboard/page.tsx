@@ -59,9 +59,9 @@ const sparklinePoints = "M0,40 C10,38 20,32 30,28 C40,24 50,30 60,26 C70,22 80,1
 
 const recentActivity = [
   { icon: CheckCircleIcon,        color: "text-emerald-400", bg: "bg-emerald-500/10",  text: "Table 6 payment processed",  sub: "KES 2,100 · 4m ago",  dot: "#10b981" },
-  { icon: "/shopping-cart.png" as any, color: "text-violet-400", bg: "bg-violet-500/10", text: "New order placed — Table 3",  sub: "6 items · 8m ago",   dot: "#7C3AED" },
+  { icon: "/shopping-cart.png" as any, color: "text-[#0B3B36]", bg: "bg-[#0B3B36]/10", text: "New order placed — Table 3",  sub: "6 items · 8m ago",   dot: "#7C3AED" },
   { icon: ExclamationCircleIcon,  color: "text-amber-400",   bg: "bg-amber-500/10",    text: "Table 9 — guests arrived",   sub: "Reserved · 12m ago", dot: "#f59e0b" },
-  { icon: BuildingStorefrontIcon, color: "text-violet-400",   bg: "bg-violet-500/10",  text: "Table 2 order updated",      sub: "+2 items · 18m ago", dot: "#7C3AED" },
+  { icon: BuildingStorefrontIcon, color: "text-[#0B3B36]",   bg: "bg-[#0B3B36]/10",  text: "Table 2 order updated",      sub: "+2 items · 18m ago", dot: "#7C3AED" },
 ]
 
 // ─── Mini Sparkline SVG ───────────────────────────────────────────────────────
@@ -83,7 +83,7 @@ function Sparkline() {
 // ─── Section Header ───────────────────────────────────────────────────────────
 function SectionHeader({
   icon,
-  iconBg = "bg-violet-500/15",
+  iconBg = "bg-[#0B3B36]/15",
   accentColor = "#7C3AED",
   title,
   subtitle,
@@ -108,8 +108,8 @@ function SectionHeader({
           {icon}
         </div>
         <div>
-          <p className="text-[12px] tracking-widest uppercase font-bold text-[#0D031B]">{title}</p>
-          <p className="text-[10px] tracking-wider uppercase text-[#736C83] mt-0.5">{subtitle}</p>
+          <p className="text-[12px] tracking-widest uppercase font-bold text-[#082420]">{title}</p>
+          <p className="text-[10px] tracking-wider uppercase text-[#4B6E67] mt-0.5">{subtitle}</p>
         </div>
       </div>
       <div className="flex items-center gap-2">
@@ -199,15 +199,15 @@ function MetricCard({
       className="rounded-[20px] p-5 flex flex-col gap-3 relative overflow-hidden group hover:shadow-2xl transition-all duration-500 bg-white border border-[#0B3B36]/10 shadow-sm"
     >
       <div className="flex items-start justify-between">
-        <p className="text-[10px] tracking-widest uppercase text-[#736C83] font-bold">{label}</p>
+        <p className="text-[10px] tracking-widest uppercase text-[#4B6E67] font-bold">{label}</p>
         <div className="w-10 h-10 rounded-xl bg-[#0B3B36]/5 border border-[#0B3B36]/5 flex items-center justify-center transition-transform group-hover:scale-110">
           <Icon className="h-4.5 w-4.5" style={{ color: "#0B3B36" }} />
         </div>
       </div>
-      <p className="text-3xl font-bold text-[#0D031B] leading-none tracking-tight">{value}</p>
+      <p className="text-3xl font-bold text-[#082420] leading-none tracking-tight">{value}</p>
       <div className="flex items-center gap-1.5 mt-auto">
         {subDot && <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: subDot }} />}
-        <span className="text-[#9A94AA] text-[10px] tracking-wide font-medium">{sub}</span>
+        <span className="text-[#628C84] text-[10px] tracking-wide font-medium">{sub}</span>
       </div>
     </div>
   )
@@ -289,7 +289,7 @@ export default function WaiterDashboard() {
 
   return (
     <TooltipProvider>
-      <div className="min-h-screen" style={{ background: "#EBE6F8" }}>
+      <div className="min-h-screen" style={{ background: "#F4FAF7" }}>
 
         {/* ── Ambient background glow ─────────────────────────────────── */}
         <div className="fixed inset-0 pointer-events-none overflow-hidden">
@@ -325,15 +325,15 @@ export default function WaiterDashboard() {
                   </div>
                 </div>
                 {/* Online dot */}
-                <div className="absolute bottom-1 right-1 w-3 h-3 rounded-full bg-emerald-400 border-2 border-[#EBE6F8]">
+                <div className="absolute bottom-1 right-1 w-3 h-3 rounded-full bg-emerald-400 border-2 border-[#F4FAF7]">
                   <span className="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-75" />
                 </div>
                 <input type="file" ref={fileInputRef} onChange={handleImageUpload} accept="image/*" className="hidden" />
               </div>
 
               <div className="flex-1 min-w-0">
-                <p className="text-[10px] tracking-[0.3em] uppercase text-[#736C83] font-bold mb-1 opacity-70">{today}</p>
-                <h1 className="text-2xl md:text-3xl font-light text-[#0D031B] leading-none">
+                <p className="text-[10px] tracking-[0.3em] uppercase text-[#4B6E67] font-bold mb-1 opacity-70">{today}</p>
+                <h1 className="text-2xl md:text-3xl font-light text-[#082420] leading-none">
                   Welcome back, <span className="font-bold whitespace-nowrap" style={{ color: "#0B3B36" }}>Waiter</span>
                 </h1>
                 <div className="flex items-center gap-2 mt-1.5">
@@ -400,7 +400,7 @@ export default function WaiterDashboard() {
             />
             <MetricCard
               label="Active Tables"
-              value={<>{activeTablesCount || 18} <span className="text-xl text-[#9A94AA] font-bold">/ 32</span></>}
+              value={<>{activeTablesCount || 18} <span className="text-xl text-[#628C84] font-bold">/ 32</span></>}
               sub={`${Math.round(((activeTablesCount || 18) / 32) * 100)}% occupied`}
               subDot="#10b981"
               icon={() => (
@@ -459,8 +459,8 @@ export default function WaiterDashboard() {
                       <CheckCircleIcon className="h-7 w-7 text-emerald-400" />
                     </div>
                     <div className="text-center">
-                      <p className="text-sm font-bold text-[#0D031B]">All caught up!</p>
-                      <p className="text-[10px] tracking-widest uppercase text-[#9A94AA] mt-1 font-medium">No pending alerts</p>
+                      <p className="text-sm font-bold text-[#082420]">All caught up!</p>
+                      <p className="text-[10px] tracking-widest uppercase text-[#628C84] mt-1 font-medium">No pending alerts</p>
                     </div>
                   </div>
                 ) : (
@@ -541,14 +541,14 @@ export default function WaiterDashboard() {
               {/* My Service Floor */}
               <GlassCard accentColor="#7C3AED">
                 <SectionHeader
-                  icon={<CheckBadgeIcon className="h-4.5 w-4.5 text-violet-400" />}
+                  icon={<CheckBadgeIcon className="h-4.5 w-4.5 text-[#0B3B36]" />}
                   title="My Service Floor"
                   subtitle="Active assignments"
                   action={
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="text-[10px] tracking-widest font-semibold uppercase gap-1 text-violet-400 hover:bg-white/5 h-8 px-3 rounded-xl"
+                      className="text-[10px] tracking-widest font-semibold uppercase gap-1 text-[#0B3B36] hover:bg-white/5 h-8 px-3 rounded-xl"
                       asChild
                     >
                       <Link href="/waiter/service-floor">
@@ -616,10 +616,10 @@ export default function WaiterDashboard() {
                                   {tableNum}
                                 </div>
                                 <div>
-                                  <p className="text-sm font-semibold text-[#0D031B]">Table {tableNum}</p>
+                                  <p className="text-sm font-semibold text-[#082420]">Table {tableNum}</p>
                                   <div className="flex items-center gap-1.5 mt-0.5">
                                     <div className="w-1.5 h-1.5 rounded-full" style={{ background: cfg.color }} />
-                                    <p className="text-[9px] tracking-wider uppercase text-[#736C83]">{cfg.label} · Section Alpha</p>
+                                    <p className="text-[9px] tracking-wider uppercase text-[#4B6E67]">{cfg.label} · Section Alpha</p>
                                   </div>
                                 </div>
                               </div>
@@ -629,7 +629,7 @@ export default function WaiterDashboard() {
                                   { label: "Items", value: `${t.items.length} Units` },
                                 ].map(item => (
                                   <div key={item.label} className="p-2.5 rounded-[14px] space-y-0.5" style={{ background: "rgba(63, 61, 143, 0.05)" }}>
-                                    <p className="text-[8px] tracking-widest uppercase text-[#9A94AA] font-bold">{item.label}</p>
+                                    <p className="text-[8px] tracking-widest uppercase text-[#628C84] font-bold">{item.label}</p>
                                     <p className="text-xs font-semibold text-[#0B3B36]">{item.value}</p>
                                   </div>
                                 ))}
@@ -654,7 +654,7 @@ export default function WaiterDashboard() {
               {/* Quick Actions */}
               <GlassCard>
                 <div className="px-5 py-4" style={{ borderBottom: "1px solid rgba(63, 61, 143, 0.05)" }}>
-                  <p className="text-[11px] tracking-widest uppercase font-bold text-[#0D031B]">Quick Actions</p>
+                  <p className="text-[11px] tracking-widest uppercase font-bold text-[#082420]">Quick Actions</p>
                 </div>
                 <div className="p-4 space-y-2.5">
                   <Button
@@ -723,12 +723,12 @@ export default function WaiterDashboard() {
                   {/* Main numbers */}
                   <div className="flex items-end justify-between">
                     <div>
-                      <p className="text-[2.4rem] leading-none font-bold text-[#0D031B] tracking-tight">75<span className="text-xl text-[#9A94AA]">%</span></p>
-                      <p className="text-[9px] tracking-widest uppercase text-[#9A94AA] mt-1 font-bold">Quota Met</p>
+                      <p className="text-[2.4rem] leading-none font-bold text-[#082420] tracking-tight">75<span className="text-xl text-[#628C84]">%</span></p>
+                      <p className="text-[9px] tracking-widest uppercase text-[#628C84] mt-1 font-bold">Quota Met</p>
                     </div>
                     <div className="text-right">
                       <p className="text-2xl font-bold tabular-nums text-[#0B3B36]">42</p>
-                      <p className="text-[9px] tracking-widest uppercase text-[#9A94AA] mt-1 font-bold">Served Today</p>
+                      <p className="text-[9px] tracking-widest uppercase text-[#628C84] mt-1 font-bold">Served Today</p>
                     </div>
                   </div>
 
@@ -742,7 +742,7 @@ export default function WaiterDashboard() {
                         <div className="absolute inset-0 bg-white/20 animate-pulse" style={{ borderRadius: "inherit" }} />
                       </div>
                     </div>
-                    <p className="text-[9px] tracking-wide text-[#9A94AA] font-medium">Excellent pace · 14 to target of 56</p>
+                    <p className="text-[9px] tracking-wide text-[#628C84] font-medium">Excellent pace · 14 to target of 56</p>
                   </div>
 
                   {/* Micro stats */}
@@ -758,7 +758,7 @@ export default function WaiterDashboard() {
                         style={{ background: m.bg }}
                       >
                         <p className="text-sm tabular-nums font-bold" style={{ color: m.color }}>{m.value}</p>
-                        <p className="text-[8px] tracking-widest uppercase text-[#9A94AA] font-bold">{m.label}</p>
+                        <p className="text-[8px] tracking-widest uppercase text-[#628C84] font-bold">{m.label}</p>
                       </div>
                     ))}
                   </div>
@@ -768,7 +768,7 @@ export default function WaiterDashboard() {
               {/* Activity Stream */}
               <GlassCard>
                 <div className="px-5 py-4" style={{ borderBottom: "1px solid rgba(63, 61, 143, 0.05)" }}>
-                  <p className="text-[11px] tracking-widest uppercase font-bold text-[#0D031B]">Activity Stream</p>
+                  <p className="text-[11px] tracking-widest uppercase font-bold text-[#082420]">Activity Stream</p>
                 </div>
                 <ScrollArea className="h-[240px]">
                   <div>
@@ -787,8 +787,8 @@ export default function WaiterDashboard() {
                             }
                           </div>
                           <div className="flex-1 min-w-0">
-                            <p className="text-[12px] text-[#0D031B] truncate group-hover:text-[#0B3B36] transition-colors font-bold">{item.text}</p>
-                            <p className="text-[9px] tracking-wide uppercase text-[#9A94AA] mt-0.5 font-bold">{item.sub}</p>
+                            <p className="text-[12px] text-[#082420] truncate group-hover:text-[#0B3B36] transition-colors font-bold">{item.text}</p>
+                            <p className="text-[9px] tracking-wide uppercase text-[#628C84] mt-0.5 font-bold">{item.sub}</p>
                           </div>
                           <ArrowRight className="h-3.5 w-3.5 shrink-0 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 text-[#0B3B36]" />
                         </div>

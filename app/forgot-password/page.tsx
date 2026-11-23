@@ -3,7 +3,6 @@
 import Link from "next/link"
 import { useState } from "react"
 import { 
-  BoltIcon as UtensilsCrossed, 
   ArrowLeftIcon as ArrowLeft, 
   EnvelopeIcon as Mail 
 } from "@heroicons/react/24/outline"
@@ -11,6 +10,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Field, FieldLabel } from "@/components/ui/field"
+import { TableTapLogo } from "@/components/brand/tabletap-logo"
 
 export default function ForgotPasswordPage() {
   const [isLoading, setIsLoading] = useState(false)
@@ -29,14 +29,8 @@ export default function ForgotPasswordPage() {
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
       <div className="w-full max-w-md">
         {/* Logo */}
-        <div className="flex items-center justify-center gap-3 mb-8">
-          <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-primary">
-            <UtensilsCrossed className="h-6 w-6 text-primary-foreground" />
-          </div>
-          <div>
-            <h1 className="text-xl text-foreground">Smart Restaurant</h1>
-            <p className="text-sm text-muted-foreground">Management System</p>
-          </div>
+        <div className="flex items-center justify-center mb-8">
+          <TableTapLogo variant="light" size="md" />
         </div>
 
         <Card className="border-border bg-card">

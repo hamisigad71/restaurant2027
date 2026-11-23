@@ -138,12 +138,12 @@ export function AppSidebar({
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild className="hover:bg-primary/5">
               <a href="#">
-                <div className="flex aspect-square size-20 items-center justify-center rounded-xl text-primary-foreground shadow-lg shadow-primary/20 p-1.5 shrink-0">
-                  <img src="/logo-icon.png" alt="Resto" className="size-full object-contain" />
+                <div className="flex aspect-square size-12 items-center justify-center rounded-xl overflow-hidden p-1 shrink-0">
+                  <img src="/logo-icon.png" alt="TableTap" className="size-full object-contain" />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate   uppercase">Resto</span>
-                  <span className="truncate text-[10px] text-muted-foreground uppercase ">Grande Cuisine</span>
+                  <span className="truncate font-bold tracking-tight text-white">TableTap</span>
+                  <span className="truncate text-[10px] text-[#7AE72A] uppercase font-semibold">Scan · Pay · Done</span>
                 </div>
               </a>
             </SidebarMenuButton>

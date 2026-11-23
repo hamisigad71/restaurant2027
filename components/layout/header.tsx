@@ -307,8 +307,8 @@ export function Header({
                 variant="ghost"
                 size="icon"
                 aria-label="Search"
-                className="md:hidden h-8 w-8 rounded-lg hover:bg-[#EBE6F8] transition-colors"
-                style={{ color: "#736C83" }}
+                className="md:hidden h-8 w-8 rounded-lg hover:bg-[#F4FAF7] transition-colors"
+                style={{ color: "#4B6E67" }}
                 onClick={() => setSearchOpen((v) => !v)}
               >
                 <MagnifyingGlassIcon className="h-4 w-4" />
@@ -325,26 +325,26 @@ export function Header({
               className="absolute top-14 left-0 right-0 z-40 md:hidden flex items-center gap-2 px-4 py-2.5 border-b"
               style={{
                 background: "rgba(250,250,249,0.98)",
-                borderColor: "#E2DCF0",
+                borderColor: "#D8E7E1",
               }}
             >
               <div className="relative flex-1">
                 <MagnifyingGlassIcon
                   className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 pointer-events-none"
-                  style={{ color: "#B8B2C8" }}
+                  style={{ color: "#8FAEA7" }}
                 />
                 <Input
                   autoFocus
                   type="search"
                   placeholder="Search tables, orders, staff…"
-                  className="w-full h-8 pl-8 pr-8 text-[13px] rounded-lg border bg-[#F4F1FA] border-transparent focus:bg-white focus:border-[oklch(0.45_0.12_285)/0.3]"
-                  style={{ color: "#0D031B" }}
+                  className="w-full h-8 pl-8 pr-8 text-[13px] rounded-lg border bg-[#EBF6F1] border-transparent focus:bg-white focus:border-[#0B3B36/0.3]"
+                  style={{ color: "#082420" }}
                 />
               </div>
               <button
                 onClick={() => setSearchOpen(false)}
-                className="flex items-center justify-center h-7 w-7 rounded-md hover:bg-[#EBE6F8] shrink-0"
-                style={{ color: "#736C83" }}
+                className="flex items-center justify-center h-7 w-7 rounded-md hover:bg-[#F4FAF7] shrink-0"
+                style={{ color: "#4B6E67" }}
                 aria-label="Close search"
               >
                 <XMarkIcon className="h-3.5 w-3.5" />
@@ -353,7 +353,7 @@ export function Header({
           )}
 
           {/* Thin divider */}
-          <div className="h-5 w-px bg-[#E2DCF0] mx-1 hidden sm:block" />
+          <div className="h-5 w-px bg-[#D8E7E1] mx-1 hidden sm:block" />
 
           {/* ── Notifications ─────────────────────────────────── */}
           <Sheet>
@@ -427,22 +427,22 @@ export function Header({
                     </div>
                     <p
                       className="text-[13px]"
-                      style={{ color: "#3D374C" }}
+                      style={{ color: "#133D38" }}
                     >
                       You're all caught up
                     </p>
-                    <p className="text-xs" style={{ color: "#9A94AA" }}>
+                    <p className="text-xs" style={{ color: "#628C84" }}>
                       No new notifications
                     </p>
                   </div>
                 ) : (
-                  <div style={{ borderColor: "#EEEBF5" }} className="divide-y">
+                  <div style={{ borderColor: "#E4EFEA" }} className="divide-y">
                     {visibleNotifs.map((notif) => {
                       const Icon = notif.icon;
                       return (
                         <div
                           key={notif.id}
-                          className="group relative flex items-start gap-3 px-5 py-4 transition-colors hover:bg-[#F4F1FA]"
+                          className="group relative flex items-start gap-3 px-5 py-4 transition-colors hover:bg-[#EBF6F1]"
                         >
                           {notif.unread && (
                             <span
@@ -464,19 +464,19 @@ export function Header({
                           <div className="flex-1 min-w-0">
                             <p
                               className="text-[13px] leading-tight"
-                              style={{ color: "#0D031B" }}
+                              style={{ color: "#082420" }}
                             >
                               {notif.title}
                             </p>
                             <p
                               className="text-xs mt-0.5"
-                              style={{ color: "#736C83" }}
+                              style={{ color: "#4B6E67" }}
                             >
                               {notif.body}
                             </p>
                             <p
                               className="text-[10px] mt-1 font-medium"
-                              style={{ color: "#B8B2C8" }}
+                              style={{ color: "#8FAEA7" }}
                             >
                               {notif.time}
                             </p>
@@ -484,8 +484,8 @@ export function Header({
 
                           <button
                             aria-label="Dismiss"
-                            className="opacity-0 group-hover:opacity-100 flex items-center justify-center w-5 h-5 rounded-md shrink-0 mt-0.5 transition-all hover:bg-[#E2DCF0]"
-                            style={{ color: "#9A94AA" }}
+                            className="opacity-0 group-hover:opacity-100 flex items-center justify-center w-5 h-5 rounded-md shrink-0 mt-0.5 transition-all hover:bg-[#D8E7E1]"
+                            style={{ color: "#628C84" }}
                             onClick={() =>
                               setDismissedNotifs((d) => [...d, notif.id])
                             }
@@ -508,8 +508,8 @@ export function Header({
                 className={cn(
                   "flex items-center gap-2 h-8 pl-1.5 pr-2.5 rounded-lg",
                   "border border-transparent transition-all duration-150",
-                  "hover:bg-[#EBE6F8] hover:border-[#D8D2E8]",
-                  "focus:outline-none focus-visible:ring-2 focus-visible:ring-[oklch(0.45_0.12_285)/0.4]",
+                  "hover:bg-[#F4FAF7] hover:border-[#D8E7E1]",
+                  "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0B3B36/0.4]",
                 )}
               >
                 <Avatar className="h-6 w-6 shrink-0">
@@ -524,13 +524,13 @@ export function Header({
                 <div className="hidden lg:flex flex-col items-start leading-none">
                   <span
                     className="text-[12px]"
-                    style={{ color: "#0D031B" }}
+                    style={{ color: "#082420" }}
                   >
                     {user.name}
                   </span>
                   <span
                     className="text-[10px] mt-0.5"
-                    style={{ color: "#9A94AA" }}
+                    style={{ color: "#628C84" }}
                   >
                     {roleLabels[user.role]}
                   </span>
@@ -538,7 +538,7 @@ export function Header({
 
                 <ChevronDownIcon
                   className="h-3 w-3 hidden lg:block"
-                  style={{ color: "#B8B2C8" }}
+                  style={{ color: "#8FAEA7" }}
                 />
               </button>
             </DropdownMenuTrigger>
@@ -547,8 +547,8 @@ export function Header({
               align="end"
               className="w-56 rounded-xl border p-1.5"
               style={{
-                borderColor: "#E2DCF0",
-                background: "#FAFAF9",
+                borderColor: "#D8E7E1",
+                background: "#FFFFFF",
                 boxShadow:
                   "0 8px 32px rgba(13,3,27,0.1), 0 2px 8px rgba(13,3,27,0.06)",
               }}
@@ -572,13 +572,13 @@ export function Header({
                 <div className="min-w-0 flex-1">
                   <p
                     className="text-[13px] truncate"
-                    style={{ color: "#0D031B" }}
+                    style={{ color: "#082420" }}
                   >
                     {user.name}
                   </p>
                   <p
                     className="text-[10px] truncate mt-0.5"
-                    style={{ color: "#736C83" }}
+                    style={{ color: "#4B6E67" }}
                   >
                     {user.email}
                   </p>
@@ -597,11 +597,11 @@ export function Header({
                 </div>
               </div>
 
-              <DropdownMenuSeparator style={{ background: "#EEEBF5" }} />
+              <DropdownMenuSeparator style={{ background: "#E4EFEA" }} />
 
               <DropdownMenuItem
-                className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] cursor-pointer hover:bg-[#F4F1FA] focus:bg-[#F4F1FA]"
-                style={{ color: "#3D374C" }}
+                className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] cursor-pointer hover:bg-[#EBF6F1] focus:bg-[#EBF6F1]"
+                style={{ color: "#133D38" }}
               >
                 <span
                   className="flex items-center justify-center w-6 h-6 rounded-md"
@@ -616,8 +616,8 @@ export function Header({
               </DropdownMenuItem>
 
               <DropdownMenuItem
-                className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] cursor-pointer hover:bg-[#F4F1FA] focus:bg-[#F4F1FA]"
-                style={{ color: "#3D374C" }}
+                className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] cursor-pointer hover:bg-[#EBF6F1] focus:bg-[#EBF6F1]"
+                style={{ color: "#133D38" }}
                 onClick={() => router.push("/settings")}
               >
                 <span
@@ -632,10 +632,10 @@ export function Header({
                 Settings
               </DropdownMenuItem>
 
-              <DropdownMenuSeparator style={{ background: "#EEEBF5" }} />
+              <DropdownMenuSeparator style={{ background: "#E4EFEA" }} />
 
               <DropdownMenuItem
-                className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] cursor-pointer hover:bg-red-50 focus:bg-red-50 text-[#736C83] hover:text-red-600"
+                className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] cursor-pointer hover:bg-red-50 focus:bg-red-50 text-[#4B6E67] hover:text-red-600"
                 onClick={handleLogout}
               >
                 <span className="flex items-center justify-center w-6 h-6 rounded-md bg-red-50 group-hover:bg-red-100">

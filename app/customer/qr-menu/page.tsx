@@ -41,7 +41,7 @@ function QRCardItem({ table, baseUrl }: { table: { id: string; number: number; s
 
     const dataUrl = canvasEl.toDataURL("image/png")
     const link = document.createElement("a")
-    link.download = `resto-table-${table.number}-qr.png`
+    link.download = `tabletap-table-${table.number}-qr.png`
     link.href = dataUrl
     link.click()
   }
@@ -80,11 +80,13 @@ function QRCardItem({ table, baseUrl }: { table: { id: string; number: number; s
             value={menuUrl}
             size={160}
             level="H"
-            includeMargin={false}
+            marginSize={2}
+            fgColor="#082420"
+            bgColor="#FFFFFF"
             imageSettings={{
-              src: "/favicon.ico",
-              height: 28,
-              width: 28,
+              src: "/qr-scanner-logo.png",
+              height: 40,
+              width: 40,
               excavate: true,
             }}
           />

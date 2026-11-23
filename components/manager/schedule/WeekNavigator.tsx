@@ -16,8 +16,8 @@ export function WeekNavigator({ activeDay, setActiveDay }: WeekNavigatorProps) {
       <CardContent className="p-3">
         <div className="flex items-center gap-2">
           <button
-            className="flex items-center justify-center w-9 h-9 rounded-xl shrink-0 transition-all hover:bg-[#EBE6F8] hover:-translate-x-0.5"
-            style={{ borderColor: "rgba(11, 59, 54,  0.15)", color: "#736C83" }}
+            className="flex items-center justify-center w-9 h-9 rounded-xl shrink-0 transition-all hover:bg-[#F4FAF7] hover:-translate-x-0.5"
+            style={{ borderColor: "rgba(11, 59, 54,  0.15)", color: "#4B6E67" }}
           >
             <ChevronLeft className="h-4 w-4" />
           </button>
@@ -35,7 +35,7 @@ export function WeekNavigator({ activeDay, setActiveDay }: WeekNavigatorProps) {
                   style={
                     active
                       ? { background: "#0B3B36", color: "white", borderColor: "transparent", boxShadow: "0 3px 10px rgba(11, 59, 54,  0.3)" }
-                      : { background: "transparent", color: "#9A94AA", borderColor: "transparent" }
+                      : { background: "transparent", color: "#628C84", borderColor: "transparent" }
                   }
                 >
                   <span className="hidden sm:block">{day}</span>
@@ -62,8 +62,8 @@ export function WeekNavigator({ activeDay, setActiveDay }: WeekNavigatorProps) {
           </div>
 
           <button
-            className="flex items-center justify-center w-9 h-9 rounded-xl shrink-0 transition-all hover:bg-[#EBE6F8] hover:translate-x-0.5"
-            style={{ borderColor: "rgba(11, 59, 54,  0.15)", color: "#736C83" }}
+            className="flex items-center justify-center w-9 h-9 rounded-xl shrink-0 transition-all hover:bg-[#F4FAF7] hover:translate-x-0.5"
+            style={{ borderColor: "rgba(11, 59, 54,  0.15)", color: "#4B6E67" }}
           >
             <ChevronRight className="h-4 w-4" />
           </button>

@@ -158,7 +158,7 @@ export function GlassLoader({ className, fullScreen = true, autoHideDuration = 7
       >
         {/* Background Light Orbs */}
         {[
-          { w:250, h:250, bg:"#EBE6F8", top:"-40px", left:"-30px",  op:.8, anim:"orb1 8s ease-in-out infinite"  },
+          { w:250, h:250, bg:"#F4FAF7", top:"-40px", left:"-30px",  op:.8, anim:"orb1 8s ease-in-out infinite"  },
           { w:200, h:200, bg:"#D6D0EC", bottom:"-20px", right:"-20px", op:.6, anim:"orb2 10s ease-in-out infinite" },
           { w:180, h:180, bg:"#F3E8FF", top:"50%", left:"50%", mt:-90, ml:-90, op:.5, anim:"orb3 12s ease-in-out infinite" },
         ].map((orb, i) => (
@@ -260,7 +260,7 @@ export function GlassLoader({ className, fullScreen = true, autoHideDuration = 7
                 fontSize:      28,
                 fontWeight:    800,
                 letterSpacing: "normal",
-                color:         "#0D031B", // Dark text for light mode
+                color:         "#082420", // Dark text for light mode
                 textTransform: "uppercase",
                 lineHeight:    1,
                 margin:        0,
@@ -300,7 +300,7 @@ export function GlassLoader({ className, fullScreen = true, autoHideDuration = 7
             style={{
               fontSize:   14,
               fontWeight: 600,
-              color:      "#736C83", // Gray for light mode
+              color:      "#4B6E67", // Gray for light mode
               letterSpacing:"normal",
               minHeight:  20,
               textAlign:  "center",
@@ -315,12 +315,12 @@ export function GlassLoader({ className, fullScreen = true, autoHideDuration = 7
           {/* ── Progress bar ─────────────────────────────────────── */}
           <div className="font-sans" style={{ display:"flex", flexDirection:"column", alignItems:"center", gap:8, width:"100%" }}>
             <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", width:220 }}>
-              <span style={{ fontSize:12, color:"#736C83", letterSpacing:"normal", fontWeight: 700, textTransform:"uppercase" }}>Loading</span>
+              <span style={{ fontSize:12, color:"#4B6E67", letterSpacing:"normal", fontWeight: 700, textTransform:"uppercase" }}>Loading</span>
               <span
                 style={{
                   fontSize:   14,
                   fontWeight: 700,
-                  color:      "#0D031B", // Dark text
+                  color:      "#082420", // Dark text
                   fontVariantNumeric:"tabular-nums",
                   transition: "opacity .3s ease",
                   opacity:    visible ? 1 : 0,

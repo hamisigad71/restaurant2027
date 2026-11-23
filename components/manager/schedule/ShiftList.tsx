@@ -49,10 +49,10 @@ export function ShiftList({ activeDay, todayShifts, activeCount, upcomingCount }
                 <Clock className="h-4 w-4" style={{ color: "#0B3B36" }} />
               </div>
               <div>
-                <CardTitle className="text-[14px] font-bold" style={{ color: "#0D031B" }}>
+                <CardTitle className="text-[14px] font-bold" style={{ color: "#082420" }}>
                   {activeDay}'s Schedule
                 </CardTitle>
-                <p className="text-[10px] font-medium mt-0.5" style={{ color: "#9A94AA" }}>
+                <p className="text-[10px] font-medium mt-0.5" style={{ color: "#628C84" }}>
                   {todayShifts.length} shift{todayShifts.length !== 1 ? "s" : ""} scheduled
                 </p>
               </div>
@@ -91,8 +91,8 @@ export function ShiftList({ activeDay, todayShifts, activeCount, upcomingCount }
                 <Calendar className="h-7 w-7" style={{ color: "var(--icon-primary)" }} />
               </div>
               <div className="text-center">
-                <p className="text-sm font-semibold" style={{ color: "#0D031B" }}>No shifts scheduled</p>
-                <p className="text-xs mt-1" style={{ color: "#9A94AA" }}>
+                <p className="text-sm font-semibold" style={{ color: "#082420" }}>No shifts scheduled</p>
+                <p className="text-xs mt-1" style={{ color: "#628C84" }}>
                   No shifts published for {activeDay}
                 </p>
               </div>
@@ -119,7 +119,7 @@ export function ShiftList({ activeDay, todayShifts, activeCount, upcomingCount }
                     </Avatar>
 
                     <div className="flex-1 min-w-0">
-                      <p className="text-[13px] font-bold truncate" style={{ color: "#0D031B" }}>
+                      <p className="text-[13px] font-bold truncate" style={{ color: "#082420" }}>
                         {s.staff}
                       </p>
                       <div className="flex items-center gap-2 mt-1 flex-wrap">
@@ -129,7 +129,7 @@ export function ShiftList({ activeDay, todayShifts, activeCount, upcomingCount }
                         >
                           {s.role}
                         </span>
-                        <span className="flex items-center gap-1 text-[10px] font-medium" style={{ color: "#9A94AA" }}>
+                        <span className="flex items-center gap-1 text-[10px] font-medium" style={{ color: "#628C84" }}>
                           <Clock className="h-3 w-3" />
                           {s.time}
                         </span>
@@ -147,7 +147,7 @@ export function ShiftList({ activeDay, todayShifts, activeCount, upcomingCount }
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <button
-                          className="opacity-0 group-hover:opacity-100 flex items-center justify-center w-8 h-8 rounded-xl shrink-0 transition-all hover:bg-[#EBE6F8]"
+                          className="opacity-0 group-hover:opacity-100 flex items-center justify-center w-8 h-8 rounded-xl shrink-0 transition-all hover:bg-[#F4FAF7]"
                           style={{ color: "var(--icon-primary)" }}
                         >
                           <MoreVertical className="h-4 w-4" />
@@ -161,10 +161,10 @@ export function ShiftList({ activeDay, todayShifts, activeCount, upcomingCount }
                         <DropdownMenuItem className="flex items-center gap-2 text-[11px] font-semibold rounded-xl px-2.5 py-2 cursor-pointer" style={{ color: "#0B3B36" }}>
                           <Eye className="h-3.5 w-3.5" /> View Details
                         </DropdownMenuItem>
-                        <DropdownMenuItem className="flex items-center gap-2 text-[11px] font-semibold rounded-xl px-2.5 py-2 cursor-pointer" style={{ color: "#3D374C" }}>
+                        <DropdownMenuItem className="flex items-center gap-2 text-[11px] font-semibold rounded-xl px-2.5 py-2 cursor-pointer" style={{ color: "#133D38" }}>
                           <Edit className="h-3.5 w-3.5" /> Edit Shift
                         </DropdownMenuItem>
-                        <DropdownMenuItem className="flex items-center gap-2 text-[11px] font-semibold rounded-xl px-2.5 py-2 cursor-pointer" style={{ color: "#3D374C" }}>
+                        <DropdownMenuItem className="flex items-center gap-2 text-[11px] font-semibold rounded-xl px-2.5 py-2 cursor-pointer" style={{ color: "#133D38" }}>
                           <Bell className="h-3.5 w-3.5" /> Notify Staff
                         </DropdownMenuItem>
                         <DropdownMenuItem className="flex items-center gap-2 text-[11px] font-semibold rounded-xl px-2.5 py-2 cursor-pointer text-red-500">

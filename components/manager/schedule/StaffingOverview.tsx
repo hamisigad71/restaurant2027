@@ -34,7 +34,7 @@ export function StaffingOverview({ activeDay, completedCount, activeCount, upcom
             >
               <TrendingUp className="h-3.5 w-3.5" style={{ color: "oklch(0.55 0.15 75)" }} />
             </div>
-            <CardTitle className="text-[13px] font-bold" style={{ color: "#0D031B" }}>
+            <CardTitle className="text-[13px] font-bold" style={{ color: "#082420" }}>
               Staffing Overview
             </CardTitle>
           </div>
@@ -58,11 +58,11 @@ export function StaffingOverview({ activeDay, completedCount, activeCount, upcom
                 >
                   <stat.icon className="h-3.5 w-3.5" style={{ color: stat.accent }} />
                 </div>
-                <span className="text-[11px] font-semibold" style={{ color: "#736C83" }}>
+                <span className="text-[11px] font-semibold" style={{ color: "#4B6E67" }}>
                   {stat.label}
                 </span>
               </div>
-              <span className="text-lg font-bold tabular-nums" style={{ color: "#0D031B" }}>
+              <span className="text-lg font-bold tabular-nums" style={{ color: "#082420" }}>
                 {stat.value}
               </span>
             </div>
@@ -76,7 +76,7 @@ export function StaffingOverview({ activeDay, completedCount, activeCount, upcom
         style={{ background: "rgba(255,255,255,0.9)", borderColor: "rgba(11, 59, 54,  0.12)" }}
       >
         <CardContent className="px-5 py-4 space-y-4">
-          <p className="text-[11px] font-bold uppercase" style={{ color: "#9A94AA" }}>
+          <p className="text-[11px] font-bold uppercase" style={{ color: "#628C84" }}>
             {activeDay} Breakdown
           </p>
 
@@ -91,9 +91,9 @@ export function StaffingOverview({ activeDay, completedCount, activeCount, upcom
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <row.icon className="h-3.5 w-3.5" style={{ color: row.accent }} />
-                    <span className="text-[11px] font-semibold" style={{ color: "#736C83" }}>{row.label}</span>
+                    <span className="text-[11px] font-semibold" style={{ color: "#4B6E67" }}>{row.label}</span>
                   </div>
-                  <span className="text-[11px] font-bold tabular-nums" style={{ color: "#0D031B" }}>
+                  <span className="text-[11px] font-bold tabular-nums" style={{ color: "#082420" }}>
                     {row.count}/{row.total}
                   </span>
                 </div>

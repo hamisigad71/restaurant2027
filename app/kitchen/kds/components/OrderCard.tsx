@@ -82,7 +82,7 @@ const STATUS_CONFIG = {
     iconBg: "oklch(0.62 0.16 150 / 0.1)", iconColor: "oklch(0.42 0.14 150)",
     statusText: "Ready to serve",
     nextLabel: "Mark Served", nextStatus: "served" as OrderStatus,
-    nextBg: "oklch(0.3 0.08 285)", nextShadow: "rgba(13,3,27,0.2)",
+    nextBg: "#0B3B36", nextShadow: "rgba(13,3,27,0.2)",
   },
 } as const
 
@@ -155,7 +155,7 @@ export function OrderCard({ order, onUpdateStatus, listMode, animDelay = 0 }: Or
   // ─── Grid Mode Render ─────────────────────────────────────────────────────
   return (
     <Card
-      className="relative overflow-hidden border transition-all duration-700 hover:-translate-y-2 hover:shadow-[0_20px_60px_oklch(0.45_0.12_285_/_0.18)] group p-0 rounded-[2.5rem] animate-in zoom-in-95"
+      className="relative overflow-hidden border transition-all duration-700 hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(11, 59, 54, 0.18)] group p-0 rounded-[2.5rem] animate-in zoom-in-95"
       style={{
         background: "linear-gradient(135deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.75) 100%)",
         backdropFilter: "blur(32px) saturate(180%)",
@@ -190,7 +190,7 @@ export function OrderCard({ order, onUpdateStatus, listMode, animDelay = 0 }: Or
       <CardContent className="px-5 pt-4 pb-5 space-y-4">
         <div className="flex items-center justify-between">
           <span className="text-[10px] font-bold uppercase  px-2.5 py-1 rounded-full border" style={{ background: cfg.badgeBg, color: cfg.badgeText, borderColor: cfg.badgeBorder }}>{cfg.label}</span>
-          <div className="flex items-center gap-1 text-[11px] font-mono font-semibold text-[#736C83]">
+          <div className="flex items-center gap-1 text-[11px] font-mono font-semibold text-[#4B6E67]">
             <ClockIcon className="h-3 w-3" /> {timer.display}
           </div>
         </div>
@@ -200,7 +200,7 @@ export function OrderCard({ order, onUpdateStatus, listMode, animDelay = 0 }: Or
         <div className="space-y-3">
           {order.items.slice(0, 3).map(item => (
             <div key={item.id} className="flex items-center justify-between gap-2">
-              <span className="text-[12px] font-semibold truncate text-[#0D031B]">{item.name}</span>
+              <span className="text-[12px] font-semibold truncate text-[#082420]">{item.name}</span>
               <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-black/5">×{item.quantity}</span>
             </div>
           ))}

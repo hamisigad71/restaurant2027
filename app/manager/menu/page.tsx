@@ -183,14 +183,14 @@ function MenuCard({
         <div className="flex items-start justify-between gap-1.5">
           <h3
             className="text-[12px] font-bold leading-tight line-clamp-2 flex-1"
-            style={{ color: "#0D031B" }}
+            style={{ color: "#082420" }}
           >
             {item.name}
           </h3>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <button
-                className="flex items-center justify-center w-6 h-6 rounded-lg shrink-0 transition-colors hover:bg-[#EBE6F8]"
+                className="flex items-center justify-center w-6 h-6 rounded-lg shrink-0 transition-colors hover:bg-[#F4FAF7]"
                 style={{ color: "var(--icon-primary)" }}
               >
                 <MoreHorizontal className="h-3.5 w-3.5" />
@@ -214,7 +214,7 @@ function MenuCard({
               </DropdownMenuItem>
               <DropdownMenuItem
                 className="flex items-center gap-2 text-[11px] font-semibold rounded-xl px-2.5 py-2 cursor-pointer"
-                style={{ color:"#3D374C" }}
+                style={{ color:"#133D38" }}
               >
                 <DollarSign className="h-3.5 w-3.5" />
                 Adjust Price
@@ -266,7 +266,7 @@ function MenuCard({
             }
           </button>
           <button
-            className="flex items-center justify-center gap-0.5 text-[9px] font-bold uppercase px-2 py-1.5 rounded-lg transition-colors hover:bg-[#EBE6F8] w-full"
+            className="flex items-center justify-center gap-0.5 text-[9px] font-bold uppercase px-2 py-1.5 rounded-lg transition-colors hover:bg-[#F4FAF7] w-full"
             style={{ color:"#0B3B36" }}
           >
             Strategy
@@ -314,7 +314,7 @@ export default function ManagerMenuPage() {
 
   return (
     <TooltipProvider>
-      <div className="min-h-screen pb-16" style={{ background:"#F0EBF8" }}>
+      <div className="min-h-screen pb-16" style={{ background:"#F4FAF7" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-5 pt-6 space-y-6">
 
           {/* ── Page header ──────────────────────────────────────── */}
@@ -328,10 +328,10 @@ export default function ManagerMenuPage() {
                   <UtensilsCrossed className="h-4.5 w-4.5 text-white" />
                 </div>
                 <div>
-                  <h1 className="text-[17px] font-bold leading-none" style={{ color:"#0D031B" }}>
+                  <h1 className="text-[17px] font-bold leading-none" style={{ color:"#082420" }}>
                     Menu Management
                   </h1>
-                  <p className="text-[10px] font-bold uppercase mt-0.5" style={{ color:"#9A94AA" }}>
+                  <p className="text-[10px] font-bold uppercase mt-0.5" style={{ color:"#628C84" }}>
                     Dish Orchestration & Price Strategy
                   </p>
                 </div>
@@ -365,10 +365,10 @@ export default function ManagerMenuPage() {
                 >
                   <s.icon className="h-3.5 w-3.5" style={{ color:s.accent }} />
                 </div>
-                <p className="text-xl font-bold tabular-nums leading-none" style={{ color:"#0D031B" }}>
+                <p className="text-xl font-bold tabular-nums leading-none" style={{ color:"#082420" }}>
                   {s.value}
                 </p>
-                <p className="text-[9px] font-bold uppercase mt-0.5" style={{ color:"#9A94AA" }}>
+                <p className="text-[9px] font-bold uppercase mt-0.5" style={{ color:"#628C84" }}>
                   {s.label}
                 </p>
               </div>
@@ -387,7 +387,7 @@ export default function ManagerMenuPage() {
                   style={
                     active
                       ? { background:"#0B3B36", color:"white", borderColor:"transparent", boxShadow:"0 3px 10px rgba(11, 59, 54,  0.3)" }
-                      : { background:"rgba(255,255,255,0.8)", color:"#736C83", borderColor:"rgba(11, 59, 54,  0.12)" }
+                      : { background:"rgba(255,255,255,0.8)", color:"#4B6E67", borderColor:"rgba(11, 59, 54,  0.12)" }
                   }
                 >
                   {cat}
@@ -411,7 +411,7 @@ export default function ManagerMenuPage() {
                 style={{
                   background:"rgba(255,255,255,0.85)",
                   borderColor:"rgba(11, 59, 54,  0.15)",
-                  color:"#0D031B",
+                  color:"#082420",
                 }}
               />
             </div>
@@ -419,7 +419,7 @@ export default function ManagerMenuPage() {
               <TooltipTrigger asChild>
                 <button
                   className="flex items-center gap-2 h-10 px-4 rounded-xl border text-[11px] font-bold uppercase transition-all hover:-translate-y-0.5 shrink-0"
-                  style={{ background:"rgba(255,255,255,0.85)", borderColor:"rgba(11, 59, 54,  0.15)", color:"#736C83" }}
+                  style={{ background:"rgba(255,255,255,0.85)", borderColor:"rgba(11, 59, 54,  0.15)", color:"#4B6E67" }}
                 >
                   <Filter className="h-3.5 w-3.5" />
                   <span className="hidden sm:inline">Filter</span>
@@ -444,8 +444,8 @@ export default function ManagerMenuPage() {
                 <Package className="h-7 w-7" style={{ color:"var(--icon-primary)" }} />
               </div>
               <div className="text-center">
-                <p className="font-bold text-base" style={{ color:"#0D031B" }}>No items found</p>
-                <p className="text-sm mt-1" style={{ color:"#736C83" }}>Try adjusting your search or filter</p>
+                <p className="font-bold text-base" style={{ color:"#082420" }}>No items found</p>
+                <p className="text-sm mt-1" style={{ color:"#4B6E67" }}>Try adjusting your search or filter</p>
               </div>
             </div>
           ) : (
@@ -478,10 +478,10 @@ export default function ManagerMenuPage() {
                   <insight.icon className="h-5 w-5 text-white" />
                 </div>
                 <div className="min-w-0">
-                  <p className="text-[13px] font-bold leading-tight" style={{ color:"#0D031B" }}>
+                  <p className="text-[13px] font-bold leading-tight" style={{ color:"#082420" }}>
                     {insight.title}
                   </p>
-                  <p className="text-[11px] mt-1 leading-relaxed" style={{ color:"#736C83" }}>
+                  <p className="text-[11px] mt-1 leading-relaxed" style={{ color:"#4B6E67" }}>
                     {insight.desc}
                   </p>
                 </div>

@@ -289,7 +289,7 @@ export default function MenuPage() {
               {/* Card Body */}
               <div className="flex flex-col flex-1 px-3 pt-3 pb-3 gap-2">
                 <div className="flex items-start justify-between gap-1.5">
-                  <h3 className="text-[12px] font-bold leading-tight line-clamp-2 text-[#0D031B]">
+                  <h3 className="text-[12px] font-bold leading-tight line-clamp-2 text-[#082420]">
                     {item.name}
                   </h3>
                 </div>

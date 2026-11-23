@@ -1,10 +1,10 @@
 import { 
-  BoltIcon as UtensilsCrossed, 
   BoltIcon as Crown, 
   StarIcon as Star, 
   CheckIcon as Check 
 } from "@heroicons/react/24/outline"
 import { Badge } from "@/components/ui/badge"
+import { TableTapLogo } from "@/components/brand/tabletap-logo"
 import { stats, features, testimonials } from "./constants"
 
 export function BrandPanel() {
@@ -17,7 +17,7 @@ export function BrandPanel() {
     >
       {/* Enhanced Orbs */}
       <div className="absolute -top-32 -right-32 w-[520px] h-[520px] rounded-full opacity-[0.15] pointer-events-none blur-3xl"
-        style={{ background: "radial-gradient(circle, oklch(0.9 0.06 285), transparent 65%)" }} />
+        style={{ background: "radial-gradient(circle, #D9F7E0, transparent 65%)" }} />
       <div className="absolute top-1/3 -left-20 w-[380px] h-[380px] rounded-full opacity-[0.1] pointer-events-none blur-2xl"
         style={{ background: "radial-gradient(circle, oklch(0.75 0.18 150), transparent 70%)" }} />
       <div className="absolute bottom-20 right-1/4 w-[280px] h-[280px] rounded-full opacity-[0.08] pointer-events-none blur-2xl"
@@ -29,19 +29,8 @@ export function BrandPanel() {
 
       <div className="relative z-10 flex flex-col h-full justify-between gap-12">
         {/* Logo */}
-        <div className="flex items-center gap-3.5">
-          <div
-            className="flex items-center justify-center w-12 h-12 rounded-2xl border backdrop-blur-sm"
-            style={{ background: "rgba(255,255,255,0.14)", borderColor: "rgba(255,255,255,0.25)", boxShadow: "0 8px 32px rgba(0,0,0,0.12)" }}
-          >
-            <UtensilsCrossed className="h-5.5 w-5.5 text-white" strokeWidth={2.5} />
-          </div>
-          <div>
-            <p className="text-white text-[22px] font-bold uppercase leading-none">Resto</p>
-            <p className="text-[9px] uppercase mt-1 font-medium" style={{ color: "rgba(255,255,255,0.6)" }}>
-              Grande Cuisine
-            </p>
-          </div>
+        <div className="flex items-center">
+          <TableTapLogo variant="dark" size="lg" />
         </div>
 
         {/* Hero */}

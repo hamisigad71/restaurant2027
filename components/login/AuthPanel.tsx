@@ -1,40 +1,41 @@
-import { 
-  BoltIcon as Zap, 
-  XMarkIcon as X, 
-  ChevronRightIcon as ChevronRight, 
-  EnvelopeIcon as Mail, 
-  LockClosedIcon as Lock, 
-  EyeIcon as Eye, 
-  EyeSlashIcon as EyeOff, 
-  BoltIcon as UtensilsCrossed, 
+import {
+  BoltIcon as Zap,
+  XMarkIcon as X,
+  ChevronRightIcon as ChevronRight,
+  EnvelopeIcon as Mail,
+  LockClosedIcon as Lock,
+  EyeIcon as Eye,
+  EyeSlashIcon as EyeOff,
+  BoltIcon as UtensilsCrossed,
   ShieldCheckIcon as Shield,
   ArrowRightIcon,
-  BoltIcon
-} from "@heroicons/react/24/outline"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
-import { Label } from "@/components/ui/label"
-import { Input } from "@/components/ui/input"
-import Link from "next/link"
-import { cn } from "@/lib/utils"
-import { roleOptions, STAFF_SUB_ROLES, type UserRole } from "./constants"
+  BoltIcon,
+} from "@heroicons/react/24/outline";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { TableTapLogo } from "@/components/brand/tabletap-logo";
+import { roleOptions, STAFF_SUB_ROLES, type UserRole } from "./constants";
 
 interface AuthPanelProps {
-  showStaffPicker: boolean
-  setShowStaffPicker: (v: boolean) => void
-  loadingRole: UserRole | null
-  handleQuickLogin: (role: UserRole) => void
-  handleSubmit: (e: React.FormEvent) => void
-  email: string
-  setEmail: (v: string) => void
-  password: string
-  setPassword: (v: string) => void
-  showPassword: boolean
-  setShowPassword: (v: (prev: boolean) => boolean) => void
-  selectedRole: UserRole
-  setSelectedRole: (role: UserRole) => void
-  isLoading: boolean
+  showStaffPicker: boolean;
+  setShowStaffPicker: (v: boolean) => void;
+  loadingRole: UserRole | null;
+  handleQuickLogin: (role: UserRole) => void;
+  handleSubmit: (e: React.FormEvent) => void;
+  email: string;
+  setEmail: (v: string) => void;
+  password: string;
+  setPassword: (v: string) => void;
+  showPassword: boolean;
+  setShowPassword: (v: (prev: boolean) => boolean) => void;
+  selectedRole: UserRole;
+  setSelectedRole: (role: UserRole) => void;
+  isLoading: boolean;
 }
 
 export function AuthPanel({
@@ -51,24 +52,27 @@ export function AuthPanel({
   setShowPassword,
   selectedRole,
   setSelectedRole,
-  isLoading
+  isLoading,
 }: AuthPanelProps) {
   return (
     <div
-      className="flex flex-col justify-center px-6 py-10 lg:px-10 xl:px-14"
-      style={{ background: "#F8F6FC" }}
+      className="flex flex-col justify-center px-6 py-10 lg:px-10 xl:px-24"
+      style={{ background: "#F4FAF7" }}
     >
       {/* Mobile logo */}
       <div className="flex lg:hidden items-center mb-10 shrink-0">
-        <img src="/logo-full.png" alt="Resto Logo" className="h-12 w-auto object-contain" />
+        <TableTapLogo variant="light" size="md" />
       </div>
 
       <div className="w-full max-w-[440px] mx-auto space-y-7">
         <div className="space-y-2">
-          <h1 className="text-[2rem] font-bold" style={{ color: "#0D031B" }}>
+          <h1 className="text-[2rem] font-bold" style={{ color: "#082420" }}>
             Welcome back
           </h1>
-          <p className="text-[14px] leading-relaxed" style={{ color: "#736C83" }}>
+          <p
+            className="text-[14px] leading-relaxed"
+            style={{ color: "#4B6E67" }}
+          >
             Sign in to access your portal and manage your restaurant
           </p>
         </div>
@@ -76,17 +80,30 @@ export function AuthPanel({
         {/* Quick Demo Access */}
         <Card
           className="border rounded-[20px] shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl"
-          style={{ background: "white", borderColor: "rgba(11, 59, 54,  0.12)" }}
+          style={{
+            background: "white",
+            borderColor: "rgba(11, 59, 54,  0.12)",
+          }}
         >
-          <div className="h-[4px]" style={{ background: "linear-gradient(90deg, #0B3B36 0%, #13584F 100%)" }} />
+          <div
+            className="h-[4px]"
+            style={{
+              background: "linear-gradient(90deg, #0B3B36 0%, #13584F 100%)",
+            }}
+          />
           <CardHeader className="px-6 pt-5 pb-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-lg flex items-center justify-center"
-                  style={{ background: "rgba(11, 59, 54,  0.1)" }}>
+                <div
+                  className="w-8 h-8 rounded-lg flex items-center justify-center"
+                  style={{ background: "rgba(11, 59, 54,  0.1)" }}
+                >
                   <Zap className="h-4 w-4" style={{ color: "#0B3B36" }} />
                 </div>
-                <CardTitle className="text-[12px] font-semibold uppercase" style={{ color: "#3D374C" }}>
+                <CardTitle
+                  className="text-[12px] font-semibold uppercase"
+                  style={{ color: "#133D38" }}
+                >
                   Quick Demo Access
                 </CardTitle>
               </div>
@@ -108,13 +125,16 @@ export function AuthPanel({
               {showStaffPicker ? (
                 <div className="animate-in fade-in zoom-in-95 duration-300">
                   <div className="flex items-center justify-between mb-4">
-                    <p className="text-[12px] font-semibold uppercase" style={{ color: "#0D031B" }}>
+                    <p
+                      className="text-[12px] font-semibold uppercase"
+                      style={{ color: "#082420" }}
+                    >
                       Select Staff Role
                     </p>
                     <button
                       onClick={() => setShowStaffPicker(false)}
                       className="flex items-center justify-center w-7 h-7 rounded-lg transition-all hover:bg-[#E6F0EC] active:scale-95"
-                      style={{ color: "#9A94AA" }}
+                      style={{ color: "#628C84" }}
                     >
                       <X className="h-4 w-4" />
                     </button>
@@ -123,23 +143,43 @@ export function AuthPanel({
                     {STAFF_SUB_ROLES.map((sub) => (
                       <button
                         key={sub.id}
-                        onClick={() => { setShowStaffPicker(false); handleQuickLogin(sub.id as UserRole) }}
+                        onClick={() => {
+                          setShowStaffPicker(false);
+                          handleQuickLogin(sub.id as UserRole);
+                        }}
                         className="group flex items-center gap-2.5 p-3.5 rounded-xl border transition-all duration-200 text-left hover:shadow-md active:scale-[0.98]"
-                        style={{ background: "white", borderColor: "rgba(11, 59, 54,  0.14)" }}
+                        style={{
+                          background: "white",
+                          borderColor: "rgba(11, 59, 54,  0.14)",
+                        }}
                       >
                         <div
                           className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 transition-all duration-200"
-                          style={{ background: "rgba(11, 59, 54,  0.08)", color: "#0B3B36" }}
+                          style={{
+                            background: "rgba(11, 59, 54,  0.08)",
+                            color: "#0B3B36",
+                          }}
                         >
-                          {typeof sub.icon === 'string' ? (
-                            <img src={sub.icon} className="h-5 w-5 brightness-0" style={{ filter: 'invert(17%) sepia(50%) saturate(1475%) hue-rotate(125deg) brightness(94%) contrast(96%)' }} />
+                          {typeof sub.icon === "string" ? (
+                            <img
+                              src={sub.icon}
+                              className="h-5 w-5 brightness-0"
+                              style={{
+                                filter:
+                                  "invert(17%) sepia(50%) saturate(1475%) hue-rotate(125deg) brightness(94%) contrast(96%)",
+                              }}
+                            />
                           ) : (
                             <sub.icon className="h-4 w-4 transition-transform group-hover:scale-110" />
                           )}
                         </div>
                         <div className="min-w-0">
-                          <p className="text-[13px] font-medium leading-none text-[#0D031B]">{sub.label}</p>
-                          <p className="text-[10px] mt-1.5 truncate text-[#9A94AA]">{sub.desc}</p>
+                          <p className="text-[13px] font-medium leading-none text-[#082420]">
+                            {sub.label}
+                          </p>
+                          <p className="text-[10px] mt-1.5 truncate text-[#628C84]">
+                            {sub.desc}
+                          </p>
                         </div>
                       </button>
                     ))}
@@ -148,8 +188,8 @@ export function AuthPanel({
               ) : (
                 <div className="grid grid-cols-2 gap-2.5 animate-in fade-in zoom-in-95 duration-300">
                   {roleOptions.map((opt) => {
-                    const Icon = opt.icon
-                    const busy = loadingRole === opt.role
+                    const Icon = opt.icon;
+                    const busy = loadingRole === opt.role;
                     return (
                       <button
                         key={opt.role}
@@ -159,38 +199,66 @@ export function AuthPanel({
                           "group relative flex items-center gap-2.5 p-4 rounded-xl border transition-all duration-200 text-left overflow-hidden",
                           "disabled:opacity-60 disabled:cursor-not-allowed",
                           !busy && "hover:shadow-md active:scale-[0.98]",
-                          busy && "ring-2 ring-[oklch(0.42_0.14_285_/_0.2)]",
+                          busy && "ring-2 ring-[rgba(11, 59, 54, 0.2)]",
                         )}
                         style={
                           busy
-                            ? { borderColor: "rgba(11, 59, 54,  0.4)", background: "rgba(11, 59, 54,  0.06)" }
-                            : { borderColor: "rgba(11, 59, 54,  0.14)", background: "white" }
+                            ? {
+                                borderColor: "rgba(11, 59, 54,  0.4)",
+                                background: "rgba(11, 59, 54,  0.06)",
+                              }
+                            : {
+                                borderColor: "rgba(11, 59, 54,  0.14)",
+                                background: "white",
+                              }
                         }
                       >
-                        {!busy && <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-[oklch(0.42_0.14_285_/_0.03)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />}
+                        {!busy && (
+                          <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-[rgba(11, 59, 54, 0.03)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        )}
                         <div
                           className="flex items-center justify-center w-10 h-10 rounded-lg shrink-0 transition-all duration-200 relative z-10"
                           style={
                             busy
                               ? { background: "#0B3B36", color: "white" }
-                              : { background: "rgba(11, 59, 54,  0.08)", color: "#0B3B36" }
+                              : {
+                                  background: "rgba(11, 59, 54,  0.08)",
+                                  color: "#0B3B36",
+                                }
                           }
                         >
-                          {busy
-                            ? <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                            : typeof opt.icon === 'string' ? (
-                              <img src={opt.icon} className={cn("h-5 w-5 brightness-0", busy && "invert")} style={!busy ? { filter: 'invert(17%) sepia(50%) saturate(1475%) hue-rotate(125deg) brightness(94%) contrast(96%)' } : undefined} />
-                            ) : (
-                              <opt.icon className="h-4.5 w-4.5 transition-transform group-hover:scale-110" />
-                            )
-                          }
+                          {busy ? (
+                            <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                          ) : typeof opt.icon === "string" ? (
+                            <img
+                              src={opt.icon}
+                              className={cn(
+                                "h-5 w-5 brightness-0",
+                                busy && "invert",
+                              )}
+                              style={
+                                !busy
+                                  ? {
+                                      filter:
+                                        "invert(17%) sepia(50%) saturate(1475%) hue-rotate(125deg) brightness(94%) contrast(96%)",
+                                    }
+                                  : undefined
+                              }
+                            />
+                          ) : (
+                            <opt.icon className="h-4.5 w-4.5 transition-transform group-hover:scale-110" />
+                          )}
                         </div>
                         <div className="min-w-0 relative z-10">
-                          <p className="text-[13px] font-medium leading-none text-[#0D031B]">{opt.label}</p>
-                          <p className="text-[10.5px] mt-1.5 truncate text-[#9A94AA]">{opt.description}</p>
+                          <p className="text-[13px] font-medium leading-none text-[#082420]">
+                            {opt.label}
+                          </p>
+                          <p className="text-[10.5px] mt-1.5 truncate text-[#628C84]">
+                            {opt.description}
+                          </p>
                         </div>
                       </button>
-                    )
+                    );
                   })}
                 </div>
               )}
@@ -200,24 +268,40 @@ export function AuthPanel({
 
         {/* Social login or email form... keeping it slightly simplified for readability */}
         <div className="space-y-4">
-           <div className="flex items-center gap-4">
-              <Separator className="flex-1" style={{ background:"rgba(11, 59, 54,  0.12)" }} />
-              <span className="text-[10px] font-bold uppercase whitespace-nowrap px-1" style={{ color:"var(--icon-primary)" }}>
-                or continue with
-              </span>
-              <Separator className="flex-1" style={{ background:"rgba(11, 59, 54,  0.12)" }} />
-            </div>
-            {/* Social Buttons would go here */}
+          <div className="flex items-center gap-4">
+            <Separator
+              className="flex-1"
+              style={{ background: "rgba(11, 59, 54,  0.12)" }}
+            />
+            <span
+              className="text-[10px] font-bold uppercase whitespace-nowrap px-1"
+              style={{ color: "var(--icon-primary)" }}
+            >
+              or continue with
+            </span>
+            <Separator
+              className="flex-1"
+              style={{ background: "rgba(11, 59, 54,  0.12)" }}
+            />
+          </div>
+          {/* Social Buttons would go here */}
         </div>
 
         <Card
           className="border rounded-[20px] shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl"
-          style={{ background: "white", borderColor: "rgba(11, 59, 54,  0.12)" }}
+          style={{
+            background: "white",
+            borderColor: "rgba(11, 59, 54,  0.12)",
+          }}
         >
           <CardContent className="p-6">
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-[12px] font-bold uppercase flex items-center gap-2" style={{ color: "#3D374C" }}>
+                <Label
+                  htmlFor="email"
+                  className="text-[12px] font-bold uppercase flex items-center gap-2"
+                  style={{ color: "#133D38" }}
+                >
                   <Mail className="h-3.5 w-3.5" style={{ color: "#0B3B36" }} />
                   Email Address
                 </Label>
@@ -226,20 +310,36 @@ export function AuthPanel({
                   type="email"
                   placeholder="name@restaurant.com"
                   value={email}
-                  onChange={e => setEmail(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                   required
                   className="h-12 rounded-xl text-[14px] border-2 transition-all duration-200 pl-4 pr-4 focus:shadow-md"
-                  style={{ background: "#F4FAF7", borderColor: "rgba(11, 59, 54,  0.14)", color: "#0D031B" }}
+                  style={{
+                    background: "#F4FAF7",
+                    borderColor: "rgba(11, 59, 54,  0.14)",
+                    color: "#082420",
+                  }}
                 />
               </div>
 
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <Label htmlFor="password" className="text-[12px] font-bold uppercase flex items-center gap-2" style={{ color: "#3D374C" }}>
-                    <Lock className="h-3.5 w-3.5" style={{ color: "#0B3B36" }} />
+                  <Label
+                    htmlFor="password"
+                    className="text-[12px] font-bold uppercase flex items-center gap-2"
+                    style={{ color: "#133D38" }}
+                  >
+                    <Lock
+                      className="h-3.5 w-3.5"
+                      style={{ color: "#0B3B36" }}
+                    />
                     Password
                   </Label>
-                  <Link href="/forgot-password" title="Forgot password?" className="text-[11px] font-semibold transition-all hover:underline" style={{ color: "#0B3B36" }}>
+                  <Link
+                    href="/forgot-password"
+                    title="Forgot password?"
+                    className="text-[11px] font-semibold transition-all hover:underline"
+                    style={{ color: "#0B3B36" }}
+                  >
                     Forgot password?
                   </Link>
                 </div>
@@ -249,31 +349,45 @@ export function AuthPanel({
                     type={showPassword ? "text" : "password"}
                     placeholder="Enter your password"
                     value={password}
-                    onChange={e => setPassword(e.target.value)}
+                    onChange={(e) => setPassword(e.target.value)}
                     required
                     className="h-12 rounded-xl text-[14px] border-2 transition-all duration-200 pl-4 pr-12 focus:shadow-md"
-                    style={{ background: "#F4FAF7", borderColor: "rgba(11, 59, 54,  0.14)", color: "#0D031B" }}
+                    style={{
+                      background: "#F4FAF7",
+                      borderColor: "rgba(11, 59, 54,  0.14)",
+                      color: "#082420",
+                    }}
                   />
                   <button
                     type="button"
-                    onClick={() => setShowPassword(v => !v)}
+                    onClick={() => setShowPassword((v) => !v)}
                     className="absolute right-4 top-1/2 -translate-y-1/2 transition-all hover:scale-110 active:scale-95"
                     style={{ color: "var(--icon-primary)" }}
                   >
-                    {showPassword ? <EyeOff className="h-4.5 w-4.5" /> : <Eye className="h-4.5 w-4.5" />}
+                    {showPassword ? (
+                      <EyeOff className="h-4.5 w-4.5" />
+                    ) : (
+                      <Eye className="h-4.5 w-4.5" />
+                    )}
                   </button>
                 </div>
               </div>
 
               <div className="space-y-2.5">
-                <Label className="text-[12px] font-bold uppercase flex items-center gap-2" style={{ color: "#3D374C" }}>
-                  <Shield className="h-3.5 w-3.5" style={{ color: "#0B3B36" }} />
+                <Label
+                  className="text-[12px] font-bold uppercase flex items-center gap-2"
+                  style={{ color: "#133D38" }}
+                >
+                  <Shield
+                    className="h-3.5 w-3.5"
+                    style={{ color: "#0B3B36" }}
+                  />
                   Select Portal
                 </Label>
                 <div className="grid grid-cols-4 gap-2">
                   {roleOptions.map((opt) => {
-                    const Icon = opt.icon
-                    const active = selectedRole === opt.role
+                    const Icon = opt.icon;
+                    const active = selectedRole === opt.role;
                     return (
                       <button
                         key={opt.role}
@@ -282,19 +396,49 @@ export function AuthPanel({
                         className="relative flex flex-col items-center gap-2 py-3.5 px-1 rounded-xl border-2 text-[10px] font-bold transition-all duration-200 overflow-hidden active:scale-95"
                         style={
                           active
-                            ? { background: "rgba(11, 59, 54,  0.06)", borderColor: "#0B3B36", color: "#0B3B36", boxShadow: "0 8px 24px rgba(11, 59, 54,  0.15)" }
-                            : { background: "#F4FAF7", borderColor: "rgba(11, 59, 54,  0.14)", color: "#736C83" }
+                            ? {
+                                background: "rgba(11, 59, 54,  0.06)",
+                                borderColor: "#0B3B36",
+                                color: "#0B3B36",
+                                boxShadow: "0 8px 24px rgba(11, 59, 54,  0.15)",
+                              }
+                            : {
+                                background: "#F4FAF7",
+                                borderColor: "rgba(11, 59, 54,  0.14)",
+                                color: "#4B6E67",
+                              }
                         }
                       >
-                        {active && <div className="absolute inset-0 bg-gradient-to-br from-rgba(11, 59, 54,  0.05) to-transparent" />}
-                        {typeof opt.icon === 'string' ? (
-                          <img src={opt.icon} className={cn("h-4 w-4 relative z-10 transition-transform", active && "scale-110 brightness-0")} style={active ? { filter: 'invert(17%) sepia(50%) saturate(1475%) hue-rotate(125deg) brightness(94%) contrast(96%)' } : { opacity: 0.7 }} />
+                        {active && (
+                          <div className="absolute inset-0 bg-gradient-to-br from-rgba(11, 59, 54,  0.05) to-transparent" />
+                        )}
+                        {typeof opt.icon === "string" ? (
+                          <img
+                            src={opt.icon}
+                            className={cn(
+                              "h-4 w-4 relative z-10 transition-transform",
+                              active && "scale-110 brightness-0",
+                            )}
+                            style={
+                              active
+                                ? {
+                                    filter:
+                                      "invert(17%) sepia(50%) saturate(1475%) hue-rotate(125deg) brightness(94%) contrast(96%)",
+                                  }
+                                : { opacity: 0.7 }
+                            }
+                          />
                         ) : (
-                          <Icon className={cn("h-4 w-4 relative z-10 transition-transform", active && "scale-110")} />
+                          <Icon
+                            className={cn(
+                              "h-4 w-4 relative z-10 transition-transform",
+                              active && "scale-110",
+                            )}
+                          />
                         )}
                         <span className="relative z-10">{opt.label}</span>
                       </button>
-                    )
+                    );
                   })}
                 </div>
               </div>
@@ -304,7 +448,8 @@ export function AuthPanel({
                 disabled={isLoading}
                 className="w-full flex items-center justify-center gap-3 h-12 rounded-2xl font-bold text-[13px] uppercase text-white transition-all duration-200 hover:-translate-y-1 hover:shadow-2xl active:translate-y-0 active:scale-[0.98] disabled:opacity-60 disabled:pointer-events-none relative overflow-hidden group"
                 style={{
-                  background: "linear-gradient(135deg, #0B3B36 0%, #062421 100%)",
+                  background:
+                    "linear-gradient(135deg, #0B3B36 0%, #062421 100%)",
                   boxShadow: "0 8px 32px rgba(11, 59, 54,  0.35)",
                 }}
               >
@@ -317,7 +462,10 @@ export function AuthPanel({
                 ) : (
                   <>
                     <span className="relative z-10">Sign in</span>
-                    <ChevronRight className="h-4.5 w-4.5 relative z-10 transition-transform group-hover:translate-x-1" strokeWidth={3} />
+                    <ChevronRight
+                      className="h-4.5 w-4.5 relative z-10 transition-transform group-hover:translate-x-1"
+                      strokeWidth={3}
+                    />
                   </>
                 )}
               </button>
@@ -325,13 +473,18 @@ export function AuthPanel({
           </CardContent>
         </Card>
 
-        <p className="text-center text-[13px]" style={{ color: "#736C83" }}>
+        <p className="text-center text-[13px]" style={{ color: "#4B6E67" }}>
           Don't have an account?{" "}
-          <Link href="/signup" title="Create one" className="font-bold transition-all hover:underline" style={{ color: "#0B3B36" }}>
+          <Link
+            href="/signup"
+            title="Create one"
+            className="font-bold transition-all hover:underline"
+            style={{ color: "#0B3B36" }}
+          >
             Create one
           </Link>
         </p>
       </div>
     </div>
-  )
+  );
 }

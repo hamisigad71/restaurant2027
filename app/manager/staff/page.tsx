@@ -163,7 +163,7 @@ const mockStaff = [
 const roleConfig: Record<string, { bg: string; text: string; icon: any }> = {
   Waiter:    { bg: "bg-sky-50", text: "text-sky-600", icon: UserGroupIcon },
   Kitchen:   { bg: "bg-orange-50", text: "text-orange-600", icon: FlagIcon },
-  Manager:   { bg: "bg-purple-50", text: "text-purple-600", icon: TrophyIcon },
+  Manager:   { bg: "bg-[#D9F7E0]", text: "text-[#0B3B36]", icon: TrophyIcon },
   Host:      { bg: "bg-pink-50", text: "text-pink-600", icon: HeartIcon },
   Bartender: { bg: "bg-rose-50", text: "text-rose-600", icon: BoltIcon },
 }
@@ -248,7 +248,7 @@ export default function ManagerStaffPage() {
   )
 
   return (
-    <div className="flex flex-col min-h-screen" style={{ background: "linear-gradient(135deg, #F8F6FC 0%, #F0EBF8 50%, #E8E3F5 100%)" }}>
+    <div className="flex flex-col min-h-screen" style={{ background: "linear-gradient(135deg, #F4FAF7 0%, #F4FAF7 50%, #E1EFE9 100%)" }}>
       <div className="flex-1 p-4 sm:p-6 lg:p-8 space-y-6 lg:space-y-8">
 
         {/* ── Enhanced Summon Banner ── */}
@@ -297,12 +297,12 @@ export default function ManagerStaffPage() {
                 <img src="/service (1).png" className="h-7 w-7 text-white brightness-0 invert" alt="Service" />
               </div>
               <div>
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium leading-none" style={{ color: "#0D031B" }}>
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium leading-none" style={{ color: "#082420" }}>
                   Personnel Hub
                 </h1>
                 <div className="flex items-center gap-2 mt-1.5">
                   <div className="h-px w-8 bg-gradient-to-r from-[#0B3B36] to-transparent" />
-                  <p className="text-[10px] sm:text-[11px] font-medium uppercase" style={{ color: "#736C83" }}>
+                  <p className="text-[10px] sm:text-[11px] font-medium uppercase" style={{ color: "#4B6E67" }}>
                     Operational Control & Performance
                   </p>
                 </div>
@@ -358,10 +358,10 @@ export default function ManagerStaffPage() {
                   </div>
 
                   <div className="space-y-1">
-                    <p className="text-3xl sm:text-4xl font-semibold leading-none tabular-nums" style={{ color: "#0D031B" }}>
+                    <p className="text-3xl sm:text-4xl font-semibold leading-none tabular-nums" style={{ color: "#082420" }}>
                       {s.value}
                     </p>
-                    <p className="text-[10px] sm:text-[11px] font-bold uppercase" style={{ color: "#736C83" }}>
+                    <p className="text-[10px] sm:text-[11px] font-bold uppercase" style={{ color: "#4B6E67" }}>
                       {s.label}
                     </p>
                   </div>
@@ -369,7 +369,7 @@ export default function ManagerStaffPage() {
                   {/* Sub-metric badge */}
                   <div className="px-3 py-1 rounded-full bg-slate-50 border border-slate-100 flex items-center gap-1.5 transition-colors group-hover:bg-white w-fit">
                     <ArrowTrendingUpIcon className="h-2.5 w-2.5" style={{ color: s.from }} />
-                    <span className="text-[9px] font-bold uppercase" style={{ color: "#9A94AA" }}>
+                    <span className="text-[9px] font-bold uppercase" style={{ color: "#628C84" }}>
                       {s.sub}
                     </span>
                   </div>
@@ -396,7 +396,7 @@ export default function ManagerStaffPage() {
                   className="pl-11 pr-4 h-11 sm:h-12 bg-white border-2 rounded-xl sm:rounded-2xl text-sm transition-all duration-200 focus-visible:ring-0"
                   style={{
                     borderColor: "rgba(11, 59, 54,  0.12)",
-                    color: "#0D031B",
+                    color: "#082420",
                   }}
                 />
               </div>
@@ -407,7 +407,7 @@ export default function ManagerStaffPage() {
                   <SelectTrigger className="h-11 sm:h-12 w-full sm:w-40 bg-white border-2 rounded-xl sm:rounded-2xl text-xs font-medium uppercase transition-all"
                     style={{
                       borderColor: "rgba(11, 59, 54,  0.12)",
-                      color: "#736C83",
+                      color: "#4B6E67",
                     }}>
                     <SelectValue placeholder="Role" />
                   </SelectTrigger>
@@ -507,7 +507,7 @@ export default function ManagerStaffPage() {
                     </div>
 
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-medium text-sm uppercase truncate leading-tight" style={{ color: "#0D031B" }}>
+                      <h3 className="font-medium text-sm uppercase truncate leading-tight" style={{ color: "#082420" }}>
                         {staff.name}
                       </h3>
                       <div className="flex items-center gap-1.5 mt-1.5">
@@ -527,7 +527,7 @@ export default function ManagerStaffPage() {
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <button className="shrink-0 h-8 w-8 flex items-center justify-center rounded-xl transition-all hover:bg-rgba(11, 59, 54,  0.08) active:scale-90"
-                          style={{ color: "#9A94AA" }}>
+                          style={{ color: "#628C84" }}>
                           <EllipsisHorizontalIcon className="h-4 w-4" />
                         </button>
                       </DropdownMenuTrigger>
@@ -575,10 +575,10 @@ export default function ManagerStaffPage() {
                     >
                       <ClockIcon className="h-3.5 w-3.5 shrink-0" style={{ color: "#0B3B36" }} />
                       <div className="min-w-0">
-                        <p className="text-[10px] font-medium leading-tight line-clamp-1" style={{ color: "#0D031B" }}>
+                        <p className="text-[10px] font-medium leading-tight line-clamp-1" style={{ color: "#082420" }}>
                           {staff.shift}
                         </p>
-                        <p className="text-[9px] font-medium uppercase mt-0.5" style={{ color: "#9A94AA" }}>
+                        <p className="text-[9px] font-medium uppercase mt-0.5" style={{ color: "#628C84" }}>
                           Shift
                         </p>
                       </div>
@@ -587,7 +587,7 @@ export default function ManagerStaffPage() {
 
                   {/* Details Row */}
                   <div className="flex items-center justify-between text-[10px] font-medium uppercase">
-                    <span className="flex items-center gap-1.5" style={{ color: "#9A94AA" }}>
+                    <span className="flex items-center gap-1.5" style={{ color: "#628C84" }}>
                       <CalendarIcon className="h-3 w-3" />
                       {staff.shiftsThisWeek} shifts/wk
                     </span>
@@ -608,7 +608,7 @@ export default function ManagerStaffPage() {
                           </span>
                         ))}
                         {staff.tables.length > 3 && (
-                          <span className="text-[9px]" style={{ color: "#C4BAD8" }}>
+                          <span className="text-[9px]" style={{ color: "#A2C5BC" }}>
                             +{staff.tables.length - 3}
                           </span>
                         )}
@@ -619,7 +619,7 @@ export default function ManagerStaffPage() {
                   {/* Performance Progress */}
                   <div className="space-y-2">
                     <div className="flex justify-between items-center text-[9px] font-medium uppercase">
-                      <span style={{ color: "#9A94AA" }}>Performance</span>
+                      <span style={{ color: "#628C84" }}>Performance</span>
                       <span className="tabular-nums" style={{ color: "#0B3B36" }}>
                         {Math.round(staff.rating * 20)}%
                       </span>
@@ -638,7 +638,7 @@ export default function ManagerStaffPage() {
                   {/* Award Stars Section */}
                   <div className="pt-3 border-t space-y-2" style={{ borderColor: "rgba(11, 59, 54,  0.08)" }}>
                     <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-medium uppercase" style={{ color: "#9A94AA" }}>
+                      <span className="text-[10px] font-medium uppercase" style={{ color: "#628C84" }}>
                         Performance Award
                       </span>
                       {awardedFlash === staff.id && (
@@ -671,7 +671,7 @@ export default function ManagerStaffPage() {
                         <button
                           onClick={() => setAwards(prev => { const n = {...prev}; delete n[staff.id]; return n })}
                           className="ml-auto text-[9px] font-medium uppercase transition-colors hover:opacity-70"
-                          style={{ color: "#C4BAD8" }}
+                          style={{ color: "#A2C5BC" }}
                         >
                           Clear
                         </button>
@@ -724,7 +724,7 @@ export default function ManagerStaffPage() {
 
                   {/* View Analytics Link */}
                   <button className="w-full h-8 flex items-center justify-center gap-1 text-[10px] font-medium uppercase transition-all hover:opacity-70 rounded-xl"
-                    style={{ color: "#9A94AA" }}>
+                    style={{ color: "#628C84" }}>
                     View Full Analytics
                     <ChevronRightIcon className="h-3 w-3" />
                   </button>
@@ -754,10 +754,10 @@ export default function ManagerStaffPage() {
                 <CheckCircleIcon className="h-7 w-7 sm:h-8 sm:w-8 text-white" strokeWidth={2.5} />
               </div>
               <div className="space-y-1.5">
-                <h3 className="font-normal text-lg sm:text-xl uppercase leading-none" style={{ color: "#0D031B" }}>
+                <h3 className="font-normal text-lg sm:text-xl uppercase leading-none" style={{ color: "#082420" }}>
                   Operational Saturation
                 </h3>
-                <p className="text-[11px] sm:text-xs font-medium" style={{ color: "#736C83" }}>
+                <p className="text-[11px] sm:text-xs font-medium" style={{ color: "#4B6E67" }}>
                   All station quotas met for the active shift cycle
                 </p>
               </div>
@@ -769,7 +769,7 @@ export default function ManagerStaffPage() {
                 className="h-11 sm:h-12 px-6 sm:px-8 border-2 font-bold rounded-[14px] text-xs uppercase transition-all hover:scale-105 active:scale-95"
                 style={{
                   borderColor: "rgba(11, 59, 54,  0.15)",
-                  color: "#736C83",
+                  color: "#4B6E67",
                 }}
               >
                 View Archive
@@ -794,7 +794,7 @@ export default function ManagerStaffPage() {
           <SheetContent 
             className="sm:max-w-lg p-0 overflow-hidden flex flex-col border-0"
             style={{
-              background: "linear-gradient(135deg, #FFFFFF 0%, #F8F6FC 100%)",
+              background: "linear-gradient(135deg, #FFFFFF 0%, #F4FAF7 100%)",
             }}
           >
             {/* Gradient header bar */}
@@ -816,10 +816,10 @@ export default function ManagerStaffPage() {
                   <SparklesIcon className="h-7 w-7 text-white" strokeWidth={2.5} />
                 </div>
                 <div>
-                  <SheetTitle className="text-2xl sm:text-3xl font-normal uppercase leading-none" style={{ color: "#0D031B" }}>
+                  <SheetTitle className="text-2xl sm:text-3xl font-normal uppercase leading-none" style={{ color: "#082420" }}>
                     Weekly Roster Audit
                   </SheetTitle>
-                  <SheetDescription className="text-[11px] sm:text-xs font-semibold uppercase mt-2" style={{ color: "#736C83" }}>
+                  <SheetDescription className="text-[11px] sm:text-xs font-semibold uppercase mt-2" style={{ color: "#4B6E67" }}>
                     Performance Analysis — Week 14, 2026
                   </SheetDescription>
                 </div>
@@ -852,7 +852,7 @@ export default function ManagerStaffPage() {
                     <p className="text-3xl font-normal leading-none tabular-nums" style={{ color: "#0B3B36" }}>
                       {auditMetrics.totalShifts}
                     </p>
-                    <p className="text-[10px] font-normal uppercase mt-2" style={{ color: "#9A94AA" }}>
+                    <p className="text-[10px] font-normal uppercase mt-2" style={{ color: "#628C84" }}>
                       Total Team Shifts
                     </p>
                   </div>
@@ -862,7 +862,7 @@ export default function ManagerStaffPage() {
                 <div 
                   className="p-6 rounded-[24px] overflow-hidden relative group"
                   style={{
-                    background: "linear-gradient(135deg, #0D031B 0%, oklch(0.15 0.10 285) 100%)",
+                    background: "linear-gradient(135deg, #082420 0%, #03100E 100%)",
                   }}
                 >
                   {/* Decorative orbs */}
@@ -913,7 +913,7 @@ export default function ManagerStaffPage() {
 
                 {/* Enhanced Staff List */}
                 <div className="space-y-3">
-                  <h5 className="text-[11px] font-normal uppercase" style={{ color: "#9A94AA" }}>
+                  <h5 className="text-[11px] font-normal uppercase" style={{ color: "#628C84" }}>
                     Shift Compliance Overview
                   </h5>
                   <div className="space-y-2">
@@ -934,11 +934,11 @@ export default function ManagerStaffPage() {
                           />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-[12px] font-normal uppercase truncate leading-tight" style={{ color: "#0D031B" }}>
+                          <p className="text-[12px] font-normal uppercase truncate leading-tight" style={{ color: "#082420" }}>
                             {s.name}
                           </p>
                           <div className="flex items-center gap-2 mt-1">
-                            <span className="text-[10px] font-medium" style={{ color: "#9A94AA" }}>
+                            <span className="text-[10px] font-medium" style={{ color: "#628C84" }}>
                               {s.shiftsThisWeek} shifts
                             </span>
                             {s.shiftsThisWeek > 5 && (
@@ -976,7 +976,7 @@ export default function ManagerStaffPage() {
                 style={{ background: "oklch(0.95 0.05 50 / 0.3)" }}
               >
                 <ExclamationTriangleIcon className="h-4 w-4 shrink-0 mt-0.5" style={{ color: "oklch(0.65 0.15 45)" }} />
-                <p className="text-[10px] leading-relaxed font-medium" style={{ color: "#736C83" }}>
+                <p className="text-[10px] leading-relaxed font-medium" style={{ color: "#4B6E67" }}>
                   Audit checks verified by AI Core. All shifts accounted for and validated.
                 </p>
               </div>

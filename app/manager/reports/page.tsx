@@ -64,24 +64,24 @@ export default function ManagerReportsPage() {
                       <stop offset="95%" stopColor="oklch(0.72 0.12 75)" stopOpacity={0}/>
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="oklch(0.25 0.02 285 / 0.1)" />
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(11, 59, 54, 0.1)" />
                   <XAxis 
                     dataKey="time" 
-                    stroke="oklch(0.65 0.02 285)" 
+                    stroke="#628C84" 
                     fontSize={10} 
                     tickLine={false} 
                     axisLine={false} 
                     tick={{ dy: 10 }}
                   />
                   <YAxis 
-                    stroke="oklch(0.65 0.02 285)" 
+                    stroke="#628C84" 
                     fontSize={10} 
                     tickLine={false} 
                     axisLine={false} 
                     tickFormatter={(value) => `KSh ${value}`}
                   />
                   <Tooltip 
-                    contentStyle={{ backgroundColor: 'oklch(0.15 0.01 285)', border: 'none', borderRadius: '8px', color: 'white' }}
+                    contentStyle={{ backgroundColor: '#082420', border: 'none', borderRadius: '8px', color: 'white' }}
                     itemStyle={{ color: 'oklch(0.72 0.12 75)', fontSize: '12px' }}
                   />
                   <Area 

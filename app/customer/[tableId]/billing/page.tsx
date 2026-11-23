@@ -117,7 +117,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
       <TooltipProvider>
         <div
           className="min-h-screen flex flex-col items-center justify-center p-8 text-center animate-in fade-in duration-700"
-          style={{ background: "#EBE6F8" }}
+          style={{ background: "#F4FAF7" }}
         >
           {/* Success ring */}
           <div className="relative mb-8">
@@ -137,10 +137,10 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
             </div>
           </div>
 
-          <h1 className="text-4xl font-bold " style={{ color: "#0D031B" }}>
+          <h1 className="text-4xl font-bold " style={{ color: "#082420" }}>
             Paid Successfully!
           </h1>
-          <p className="text-sm mt-2 mb-8" style={{ color: "#736C83" }}>
+          <p className="text-sm mt-2 mb-8" style={{ color: "#4B6E67" }}>
             Hope you enjoyed your experience at Resto.
           </p>
 
@@ -157,10 +157,10 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
             {/* Receipt header */}
             <div className="flex items-center justify-between mb-4">
               <div>
-                <p className="text-[9px] font-bold uppercase " style={{ color: "#AEA6BF" }}>
+                <p className="text-[9px] font-bold uppercase " style={{ color: "#A2C5BC" }}>
                   Official Receipt
                 </p>
-                <p className="text-[11px] font-semibold mt-0.5" style={{ color: "#3D374C" }}>
+                <p className="text-[11px] font-semibold mt-0.5" style={{ color: "#133D38" }}>
                   Table {tableId}
                 </p>
               </div>
@@ -180,9 +180,9 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
                     <img src={getDishImage(item.name)} alt={item.name} className="w-full h-full object-cover" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <span className="text-[12px] font-medium truncate block" style={{ color: "#3D374C" }}>
+                    <span className="text-[12px] font-medium truncate block" style={{ color: "#133D38" }}>
                       {item.name}{" "}
-                      <span style={{ color: "#AEA6BF" }}>×{item.quantity}</span>
+                      <span style={{ color: "#A2C5BC" }}>×{item.quantity}</span>
                     </span>
                   </div>
                   <span className="text-[12px] font-semibold tabular-nums shrink-0" style={{ color: "#0B3B36" }}>
@@ -197,22 +197,22 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
               className="h-px mb-4"
               style={{
                 backgroundImage:
-                  "repeating-linear-gradient(90deg,#D0CBE4 0,#D0CBE4 6px,transparent 6px,transparent 10px)",
+                  "repeating-linear-gradient(90deg,#C8DDD5 0,#C8DDD5 6px,transparent 6px,transparent 10px)",
               }}
             />
 
             <div className="space-y-2">
-              <div className="flex justify-between text-[11px]" style={{ color: "#736C83" }}>
+              <div className="flex justify-between text-[11px]" style={{ color: "#4B6E67" }}>
                 <span>Subtotal</span>
                 <span className="tabular-nums">KSh {subtotal.toLocaleString()}</span>
               </div>
-              <div className="flex justify-between text-[11px]" style={{ color: "#736C83" }}>
+              <div className="flex justify-between text-[11px]" style={{ color: "#4B6E67" }}>
                 <span>Tip</span>
                 <span className="tabular-nums">KSh {tipAmount.toLocaleString()}</span>
               </div>
               <div
                 className="flex justify-between text-[15px] font-bold pt-1"
-                style={{ color: "#0D031B" }}
+                style={{ color: "#082420" }}
               >
                 <span>Total Paid</span>
                 <span className="tabular-nums" style={{ color: "#0B3B36" }}>
@@ -223,7 +223,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
           </div>
 
           {/* Star rating */}
-          <p className="text-[10px] font-bold uppercase  mb-3" style={{ color: "#AEA6BF" }}>
+          <p className="text-[10px] font-bold uppercase  mb-3" style={{ color: "#A2C5BC" }}>
             How was everything today?
           </p>
           <div className="flex gap-2.5 justify-center mb-3">
@@ -243,7 +243,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
             ))}
           </div>
           {rating > 0 && (
-            <p className="text-xs animate-in fade-in mb-6" style={{ color: "#736C83" }}>
+            <p className="text-xs animate-in fade-in mb-6" style={{ color: "#4B6E67" }}>
               {RATING_LABELS[rating]} — Thank you for your feedback!
             </p>
           )}
@@ -298,9 +298,9 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
                 onClick={() => router.back()}
                 className="flex items-center justify-center w-9 h-9 rounded-xl border transition-all hover:scale-105 active:scale-95"
                 style={{
-                  background: "#EBE6F8",
+                  background: "#F4FAF7",
                   borderColor: "rgba(11, 59, 54,  0.15)",
-                  color: "#3D374C",
+                  color: "#133D38",
                 }}
               >
                 <ChevronLeft className="h-4 w-4" />
@@ -312,7 +312,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
           <div className="text-center">
             <h1
               className="text-[15px] font-bold  leading-none"
-              style={{ color: "#0D031B" }}
+              style={{ color: "#082420" }}
             >
               Checkout
             </h1>
@@ -346,7 +346,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
               <div className="flex items-center justify-between mb-3">
                 <p
                   className="text-[9px] font-bold uppercase "
-                  style={{ color: "#AEA6BF" }}
+                  style={{ color: "#A2C5BC" }}
                 >
                   Items Ordered
                 </p>
@@ -364,7 +364,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
                     <div 
                       className="h-6 w-6" 
                       style={{ 
-                        backgroundColor: "#AEA6BF",
+                        backgroundColor: "#A2C5BC",
                         maskImage: 'url(/shopping-cart.png)',
                         maskSize: 'contain',
                         maskRepeat: 'no-repeat',
@@ -376,10 +376,10 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
                       }} 
                     />
                   </div>
-                  <p className="text-sm font-semibold" style={{ color: "#3D374C" }}>
+                  <p className="text-sm font-semibold" style={{ color: "#133D38" }}>
                     No items found
                   </p>
-                  <p className="text-xs" style={{ color: "#9A94AA" }}>
+                  <p className="text-xs" style={{ color: "#628C84" }}>
                     No active orders for this table
                   </p>
                 </div>
@@ -409,13 +409,13 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
                       <div className="flex-1 min-w-0">
                         <p
                           className="text-[13px] font-semibold truncate"
-                          style={{ color: "#0D031B" }}
+                          style={{ color: "#082420" }}
                         >
                           {item.name}
                         </p>
                         <p
                           className="text-[11px] mt-0.5 font-medium"
-                          style={{ color: "#9A94AA" }}
+                          style={{ color: "#628C84" }}
                         >
                           ×{item.quantity} · KSh {item.price.toLocaleString()} each
                         </p>
@@ -437,7 +437,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
             <section>
               <p
                 className="text-[9px] font-bold uppercase  mb-3"
-                style={{ color: "#AEA6BF" }}
+                style={{ color: "#A2C5BC" }}
               >
                 Express Gratitude
               </p>
@@ -466,7 +466,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
                             }
                           : {
                               background: "rgba(255,255,255,0.85)",
-                              color: "#3D374C",
+                              color: "#133D38",
                               borderColor: "rgba(11, 59, 54,  0.14)",
                             }
                       }
@@ -481,7 +481,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
                 <div className="relative mt-3 animate-in slide-in-from-top-2 fade-in duration-300">
                   <span
                     className="absolute left-4 top-1/2 -translate-y-1/2 text-sm font-semibold"
-                    style={{ color: "#9A94AA" }}
+                    style={{ color: "#628C84" }}
                   >
                     KSh
                   </span>
@@ -494,7 +494,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
                     style={{
                       background: "rgba(255,255,255,0.9)",
                       borderColor: "rgba(11, 59, 54,  0.2)",
-                      color: "#0D031B",
+                      color: "#082420",
                     }}
                   />
                 </div>
@@ -505,7 +505,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
             <section>
               <p
                 className="text-[9px] font-bold uppercase  mb-3"
-                style={{ color: "#AEA6BF" }}
+                style={{ color: "#A2C5BC" }}
               >
                 Payment Method
               </p>
@@ -545,13 +545,13 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
                       <div className="flex-1 min-w-0">
                         <p
                           className="text-[13px] font-bold"
-                          style={{ color: "#0D031B" }}
+                          style={{ color: "#082420" }}
                         >
                           {method.label}
                         </p>
                         <p
                           className="text-[11px] mt-0.5"
-                          style={{ color: "#9A94AA" }}
+                          style={{ color: "#628C84" }}
                         >
                           {method.desc}
                         </p>
@@ -562,7 +562,7 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
                         style={
                           active
                             ? { background: "#0B3B36", borderColor: "#0B3B36" }
-                            : { borderColor: "#D0CBE4" }
+                            : { borderColor: "#C8DDD5" }
                         }
                       >
                         {active && (
@@ -601,21 +601,21 @@ export default function BillingPage({ params }: { params: Promise<{ tableId: str
               }}
             >
               <div className="space-y-1">
-                <div className="flex items-center gap-3 text-[11px]" style={{ color: "#736C83" }}>
+                <div className="flex items-center gap-3 text-[11px]" style={{ color: "#4B6E67" }}>
                   <span>Subtotal</span>
-                  <span className="tabular-nums font-medium" style={{ color: "#3D374C" }}>
+                  <span className="tabular-nums font-medium" style={{ color: "#133D38" }}>
                     KSh {subtotal.toLocaleString()}
                   </span>
                 </div>
-                <div className="flex items-center gap-3 text-[11px]" style={{ color: "#736C83" }}>
+                <div className="flex items-center gap-3 text-[11px]" style={{ color: "#4B6E67" }}>
                   <span>Tip</span>
-                  <span className="tabular-nums font-medium" style={{ color: "#3D374C" }}>
+                  <span className="tabular-nums font-medium" style={{ color: "#133D38" }}>
                     KSh {tipAmount.toLocaleString()}
                   </span>
                 </div>
               </div>
               <div className="text-right">
-                <p className="text-[10px] font-bold uppercase " style={{ color: "#AEA6BF" }}>
+                <p className="text-[10px] font-bold uppercase " style={{ color: "#A2C5BC" }}>
                   Grand Total
                 </p>
                 <p

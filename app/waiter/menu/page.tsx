@@ -140,14 +140,14 @@ function MenuCard({
         <div className="flex items-start justify-between gap-1.5">
           <h3
             className="text-[12px] font-bold leading-tight line-clamp-2 flex-1"
-            style={{ color: "#0D031B" }}
+            style={{ color: "#082420" }}
           >
             {item.name}
           </h3>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <button
-                className="flex items-center justify-center w-6 h-6 rounded-lg shrink-0 transition-colors hover:bg-[#EBE6F8]"
+                className="flex items-center justify-center w-6 h-6 rounded-lg shrink-0 transition-colors hover:bg-[#F4FAF7]"
                 style={{ color: "var(--icon-primary)" }}
               >
                 <MoreHorizontal className="h-3.5 w-3.5" />
@@ -171,7 +171,7 @@ function MenuCard({
               </DropdownMenuItem>
               <DropdownMenuItem
                 className="flex items-center gap-2 text-[11px] font-semibold rounded-xl px-2.5 py-2 cursor-pointer"
-                style={{ color:"#3D374C" }}
+                style={{ color:"#133D38" }}
               >
                 <AlertCircle className="h-3.5 w-3.5" />
                 Report Supply Low
@@ -253,7 +253,7 @@ export default function WaiterMenuPage() {
 
   return (
     <TooltipProvider>
-      <div className="min-h-screen pb-16" style={{ background:"#F0EBF8" }}>
+      <div className="min-h-screen pb-16" style={{ background:"#F4FAF7" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-5 pt-6 space-y-6">
 
           {/* ── Page header ──────────────────────────────────────── */}
@@ -265,10 +265,10 @@ export default function WaiterMenuPage() {
               <img src="/menu-nav.png" className="w-full h-full brightness-0 invert object-contain" alt="Menu" style={{ filter: "brightness(0) invert(1)" }} />
             </div>
             <div>
-              <h1 className="text-[17px] font-bold leading-none" style={{ color:"#0D031B" }}>
+              <h1 className="text-[17px] font-bold leading-none" style={{ color:"#082420" }}>
                 Service Menu
               </h1>
-              <p className="text-[10px] font-bold uppercase mt-0.5" style={{ color:"#9A94AA" }}>
+              <p className="text-[10px] font-bold uppercase mt-0.5" style={{ color:"#628C84" }}>
                 Real-time Dish Availability
               </p>
             </div>
@@ -286,7 +286,7 @@ export default function WaiterMenuPage() {
                   style={
                     active
                       ? { background:"#0B3B36", color:"white", borderColor:"transparent", boxShadow:"0 3px 10px rgba(11, 59, 54,  0.3)" }
-                      : { background:"rgba(255,255,255,0.8)", color:"#736C83", borderColor:"rgba(11, 59, 54,  0.12)" }
+                      : { background:"rgba(255,255,255,0.8)", color:"#4B6E67", borderColor:"rgba(11, 59, 54,  0.12)" }
                   }
                 >
                   {cat}
@@ -310,7 +310,7 @@ export default function WaiterMenuPage() {
                 style={{
                   background:"rgba(255,255,255,0.85)",
                   borderColor:"rgba(11, 59, 54,  0.15)",
-                  color:"#0D031B",
+                  color:"#082420",
                 }}
               />
             </div>
@@ -331,8 +331,8 @@ export default function WaiterMenuPage() {
                 <Package className="h-7 w-7" style={{ color:"var(--icon-primary)" }} />
               </div>
               <div className="text-center">
-                <p className="font-bold text-base" style={{ color:"#0D031B" }}>No items found</p>
-                <p className="text-sm mt-1" style={{ color:"#736C83" }}>Try adjusting your search</p>
+                <p className="font-bold text-base" style={{ color:"#082420" }}>No items found</p>
+                <p className="text-sm mt-1" style={{ color:"#4B6E67" }}>Try adjusting your search</p>
               </div>
             </div>
           ) : (

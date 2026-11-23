@@ -72,7 +72,7 @@ export default function CleanersPage() {
 
   return (
     <TooltipProvider>
-      <div className="min-h-screen flex flex-col" style={{ background:"#F0EBF8" }}>
+      <div className="min-h-screen flex flex-col" style={{ background:"#F4FAF7" }}>
 
         {/* ── Header ─────────────────────────────────────────────── */}
         <header
@@ -92,10 +92,10 @@ export default function CleanersPage() {
           </div>
 
           <div className="min-w-0 flex-1">
-            <h1 className="text-[15px] font-bold  leading-none" style={{ color:"#0D031B" }}>
+            <h1 className="text-[15px] font-bold  leading-none" style={{ color:"#082420" }}>
               Housekeeping
             </h1>
-            <p className="text-[10px] font-bold uppercase  mt-0.5" style={{ color:"#9A94AA" }}>
+            <p className="text-[10px] font-bold uppercase  mt-0.5" style={{ color:"#628C84" }}>
               Active Queue · {tables.length} pending
             </p>
           </div>
@@ -146,8 +146,8 @@ export default function CleanersPage() {
                     <ClipboardDocumentListIcon className="h-3.5 w-3.5" style={{ color:"#0B3B36" }} />
                   </div>
                   <div>
-                    <p className="text-[13px] font-bold" style={{ color:"#0D031B" }}>Shift Progress</p>
-                    <p className="text-[10px] mt-0.5" style={{ color:"#9A94AA" }}>
+                    <p className="text-[13px] font-bold" style={{ color:"#082420" }}>Shift Progress</p>
+                    <p className="text-[10px] mt-0.5" style={{ color:"#628C84" }}>
                       {cleanedCount} of {totalTables} tables cleaned today
                     </p>
                   </div>
@@ -170,8 +170,8 @@ export default function CleanersPage() {
                     style={{ background:"#F5F2FB", borderColor:"rgba(11, 59, 54,  0.1)" }}
                   >
                     <s.icon className="h-4 w-4 mb-1.5" style={{ color:s.color }} />
-                    <p className="text-xl font-bold tabular-nums" style={{ color:"#0D031B" }}>{s.value}</p>
-                    <p className="text-[9px] font-bold uppercase  mt-0.5" style={{ color:"#9A94AA" }}>{s.label}</p>
+                    <p className="text-xl font-bold tabular-nums" style={{ color:"#082420" }}>{s.value}</p>
+                    <p className="text-[9px] font-bold uppercase  mt-0.5" style={{ color:"#628C84" }}>{s.label}</p>
                   </div>
                 ))}
               </div>
@@ -188,8 +188,8 @@ export default function CleanersPage() {
                 <SunIcon className="h-10 w-10" style={{ color:"#0B3B36" }} />
               </div>
               <div className="text-center">
-                <p className="text-lg font-bold" style={{ color:"#0D031B" }}>All areas spotless!</p>
-                <p className="text-sm mt-1" style={{ color:"#736C83" }}>
+                <p className="text-lg font-bold" style={{ color:"#082420" }}>All areas spotless!</p>
+                <p className="text-sm mt-1" style={{ color:"#4B6E67" }}>
                   Great work. You'll be notified of new tasks.
                 </p>
               </div>
@@ -234,7 +234,7 @@ export default function CleanersPage() {
                           <div className="flex-1 min-w-0">
                             {/* Name + badge row */}
                             <div className="flex items-center gap-2 mb-1">
-                              <p className="text-[15px] font-bold" style={{ color:"#0D031B" }}>
+                              <p className="text-[15px] font-bold" style={{ color:"#082420" }}>
                                 Table {table.id.replace("T","")}
                               </p>
                               <span
@@ -248,23 +248,23 @@ export default function CleanersPage() {
 
                             {/* Zone + guests */}
                             <div className="flex items-center gap-3 mb-2">
-                              <span className="text-[11px] font-semibold" style={{ color:"#736C83" }}>
+                              <span className="text-[11px] font-semibold" style={{ color:"#4B6E67" }}>
                                 {table.zone}
                               </span>
-                              <span style={{ color:"#D0CBE4" }}>·</span>
-                              <span className="flex items-center gap-1 text-[11px]" style={{ color:"#9A94AA" }}>
+                              <span style={{ color:"#C8DDD5" }}>·</span>
+                              <span className="flex items-center gap-1 text-[11px]" style={{ color:"#628C84" }}>
                                 <UserGroupIcon className="h-3 w-3" />
                                 {table.guests} guests
                               </span>
-                              <span style={{ color:"#D0CBE4" }}>·</span>
-                              <span className="flex items-center gap-1 text-[11px]" style={{ color:"#9A94AA" }}>
+                              <span style={{ color:"#C8DDD5" }}>·</span>
+                              <span className="flex items-center gap-1 text-[11px]" style={{ color:"#628C84" }}>
                                 <ClockIcon className="h-3 w-3" />
                                 {table.time}
                               </span>
                             </div>
 
                             {/* Reason */}
-                            <p className="text-[12px] leading-relaxed" style={{ color:"#736C83" }}>
+                            <p className="text-[12px] leading-relaxed" style={{ color:"#4B6E67" }}>
                               {table.reason}
                             </p>
                           </div>
@@ -285,7 +285,7 @@ export default function CleanersPage() {
                               style={{ background:"#F5F2FB" }}
                             >
                               <step.icon className="h-3.5 w-3.5" style={{ color:"var(--icon-primary)" }} />
-                              <p className="text-[9px] font-bold uppercase  text-center" style={{ color:"#9A94AA" }}>
+                              <p className="text-[9px] font-bold uppercase  text-center" style={{ color:"#628C84" }}>
                                 {step.label}
                               </p>
                             </div>

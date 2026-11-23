@@ -67,7 +67,7 @@ export default function ManagerReservationsPage() {
   })
 
   return (
-    <div className="min-h-screen" style={{ background: "linear-gradient(135deg, #F8F6FC 0%, #F0EBF8 50%, #E8E3F5 100%)" }}>
+    <div className="min-h-screen" style={{ background: "linear-gradient(135deg, #F4FAF7 0%, #F4FAF7 50%, #E1EFE9 100%)" }}>
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-24 space-y-6 sm:space-y-8">
         
         {/* ── Enhanced Header ────────────────────────────────────────────── */}
@@ -83,12 +83,12 @@ export default function ManagerReservationsPage() {
                 <CalendarIcon className="h-6 w-6 sm:h-7 sm:w-7 text-white" strokeWidth={2.5} />
               </div>
               <div>
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium leading-none" style={{ color: "#0D031B" }}>
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium leading-none" style={{ color: "#082420" }}>
                   Reservations
                 </h1>
                 <div className="flex items-center gap-2 mt-1.5">
                   <div className="h-px w-8 bg-gradient-to-r from-[#0B3B36] to-transparent" />
-                  <p className="text-[10px] sm:text-[11px] font-semibold uppercase" style={{ color: "#736C83" }}>
+                  <p className="text-[10px] sm:text-[11px] font-semibold uppercase" style={{ color: "#4B6E67" }}>
                     Guest Booking & Table Management
                   </p>
                 </div>
@@ -132,10 +132,10 @@ export default function ManagerReservationsPage() {
                       <s.icon className="h-5 w-5 text-white" strokeWidth={2.5} />
                     </div>
                     <div>
-                      <p className="text-2xl sm:text-3xl font-normal leading-none tabular-nums" style={{ color: "#0D031B" }}>
+                      <p className="text-2xl sm:text-3xl font-normal leading-none tabular-nums" style={{ color: "#082420" }}>
                         {s.value}
                       </p>
-                      <p className="text-[10px] sm:text-[11px] font-medium uppercase mt-1" style={{ color: "#9A94AA" }}>
+                      <p className="text-[10px] sm:text-[11px] font-medium uppercase mt-1" style={{ color: "#628C84" }}>
                         {s.label}
                       </p>
                     </div>
@@ -154,7 +154,7 @@ export default function ManagerReservationsPage() {
                 </div>
 
                 <div className="mt-3 pt-3 border-t relative z-10" style={{ borderColor: "rgba(11, 59, 54,  0.08)" }}>
-                  <p className="text-[10px] font-medium flex items-center gap-1.5" style={{ color: "#9A94AA" }}>
+                  <p className="text-[10px] font-medium flex items-center gap-1.5" style={{ color: "#628C84" }}>
                     <ChartBarIcon className="h-3 w-3" />
                     vs. yesterday
                   </p>
@@ -180,7 +180,7 @@ export default function ManagerReservationsPage() {
                   className="pl-11 pr-4 h-11 sm:h-12 bg-white border-2 rounded-xl text-sm transition-all duration-200"
                   style={{
                     borderColor: "rgba(11, 59, 54,  0.12)",
-                    color: "#0D031B",
+                    color: "#082420",
                   }}
                 />
               </div>
@@ -193,7 +193,7 @@ export default function ManagerReservationsPage() {
                     className="h-11 sm:h-12 px-5 sm:px-6 gap-2 font-medium rounded-xl text-xs uppercase transition-all hover:scale-105 active:scale-95 border-2"
                     style={{
                       borderColor: "rgba(11, 59, 54,  0.15)",
-                      color: "#736C83",
+                      color: "#4B6E67",
                     }}
                   >
                     <FunnelIcon className="h-4 w-4" strokeWidth={2.5} />
@@ -239,10 +239,10 @@ export default function ManagerReservationsPage() {
                 <UserGroupIcon className="h-5 w-5" style={{ color: "#0B3B36" }} strokeWidth={2.5} />
               </div>
               <div>
-                <CardTitle className="text-sm sm:text-base font-normal uppercase" style={{ color: "#0D031B" }}>
+                <CardTitle className="text-sm sm:text-base font-normal uppercase" style={{ color: "#082420" }}>
                   Scheduled Guests
                 </CardTitle>
-                <p className="text-[10px] font-medium mt-0.5" style={{ color: "#9A94AA" }}>
+                <p className="text-[10px] font-medium mt-0.5" style={{ color: "#628C84" }}>
                   {filteredReservations.length} reservation{filteredReservations.length !== 1 ? 's' : ''} found
                 </p>
               </div>
@@ -254,7 +254,7 @@ export default function ManagerReservationsPage() {
             <div className="hidden lg:block overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead style={{ background: "rgba(11, 59, 54,  0.03)" }}>
-                  <tr className="text-[10px] font-medium uppercase" style={{ color: "#9A94AA" }}>
+                  <tr className="text-[10px] font-medium uppercase" style={{ color: "#628C84" }}>
                     <th className="px-6 py-4">Guest Details</th>
                     <th className="px-6 py-4">Party Size</th>
                     <th className="px-6 py-4">Date & Time</th>
@@ -268,27 +268,27 @@ export default function ManagerReservationsPage() {
                     <tr key={res.id} className="group transition-all hover:bg-rgba(11, 59, 54,  0.02)">
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-2">
-                          <div className="font-medium text-sm uppercase leading-tight" style={{ color: "#0D031B" }}>
+                          <div className="font-medium text-sm uppercase leading-tight" style={{ color: "#082420" }}>
                             {res.guest}
                           </div>
                           {res.vip && (
                             <StarIcon className="h-3.5 w-3.5 fill-amber-400 text-amber-400" strokeWidth={2.5} />
                           )}
                         </div>
-                        <div className="text-[10px] font-medium mt-1" style={{ color: "#9A94AA" }}>{res.id}</div>
+                        <div className="text-[10px] font-medium mt-1" style={{ color: "#628C84" }}>{res.id}</div>
                       </td>
                       <td className="px-6 py-4">
-                        <div className="flex items-center gap-1.5 text-xs font-medium" style={{ color: "#0D031B" }}>
+                        <div className="flex items-center gap-1.5 text-xs font-medium" style={{ color: "#082420" }}>
                           <UserGroupIcon className="h-3.5 w-3.5" style={{ color: "#0B3B36" }} strokeWidth={2.5} />
                           {res.partySize} guests
                         </div>
                       </td>
                       <td className="px-6 py-4">
-                        <div className="flex items-center gap-1.5 text-xs font-medium" style={{ color: "#0D031B" }}>
+                        <div className="flex items-center gap-1.5 text-xs font-medium" style={{ color: "#082420" }}>
                           <ClockIcon className="h-3.5 w-3.5" style={{ color: "#0B3B36" }} strokeWidth={2.5} />
                           {res.time}
                         </div>
-                        <div className="text-[10px] font-medium mt-1" style={{ color: "#9A94AA" }}>{res.date}</div>
+                        <div className="text-[10px] font-medium mt-1" style={{ color: "#628C84" }}>{res.date}</div>
                       </td>
                       <td className="px-6 py-4">
                         {res.table ? (
@@ -335,7 +335,7 @@ export default function ManagerReservationsPage() {
                               size="icon" 
                               className="h-9 w-9 rounded-xl transition-all hover:bg-rgba(11, 59, 54,  0.08) active:scale-90"
                             >
-                              <EllipsisHorizontalIcon className="h-4 w-4" style={{ color: "#9A94AA" }} />
+                              <EllipsisHorizontalIcon className="h-4 w-4" style={{ color: "#628C84" }} />
                             </Button>
                           </DropdownMenuTrigger>
                           <DropdownMenuContent align="end" className="bg-white/98 backdrop-blur-xl border-0 rounded-2xl shadow-2xl w-48">
@@ -382,10 +382,10 @@ export default function ManagerReservationsPage() {
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <div className="flex items-center gap-2">
-                          <h3 className="font-medium text-sm" style={{ color: "#0D031B" }}>{res.guest}</h3>
+                          <h3 className="font-medium text-sm" style={{ color: "#082420" }}>{res.guest}</h3>
                           {res.vip && <StarIcon className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />}
                         </div>
-                        <p className="text-[10px] font-medium mt-0.5" style={{ color: "#9A94AA" }}>{res.id}</p>
+                        <p className="text-[10px] font-medium mt-0.5" style={{ color: "#628C84" }}>{res.id}</p>
                       </div>
                       <Badge 
                         className={cn(
@@ -405,11 +405,11 @@ export default function ManagerReservationsPage() {
                     <div className="grid grid-cols-2 gap-3">
                       <div className="flex items-center gap-1.5">
                         <UserGroupIcon className="h-3.5 w-3.5" style={{ color: "#0B3B36" }} />
-                        <span className="text-xs font-medium" style={{ color: "#0D031B" }}>{res.partySize} guests</span>
+                        <span className="text-xs font-medium" style={{ color: "#082420" }}>{res.partySize} guests</span>
                       </div>
                       <div className="flex items-center gap-1.5">
                         <ClockIcon className="h-3.5 w-3.5" style={{ color: "#0B3B36" }} />
-                        <span className="text-xs font-medium" style={{ color: "#0D031B" }}>{res.time}</span>
+                        <span className="text-xs font-medium" style={{ color: "#082420" }}>{res.time}</span>
                       </div>
                     </div>
 
@@ -448,7 +448,7 @@ export default function ManagerReservationsPage() {
                         <DropdownMenuTrigger asChild>
                           <Button variant="outline" size="icon" className="h-9 w-9 rounded-xl border-2"
                             style={{ borderColor: "rgba(11, 59, 54,  0.15)" }}>
-                            <EllipsisHorizontalIcon className="h-4 w-4" style={{ color: "#9A94AA" }} />
+                            <EllipsisHorizontalIcon className="h-4 w-4" style={{ color: "#628C84" }} />
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end" className="bg-white/98 backdrop-blur-xl border-0 rounded-2xl shadow-2xl w-48">

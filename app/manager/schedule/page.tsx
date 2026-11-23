@@ -18,7 +18,7 @@ export default function ManagerSchedulePage() {
 
   return (
     <TooltipProvider>
-      <div className="min-h-screen pb-16" style={{ background: "#F0EBF8" }}>
+      <div className="min-h-screen pb-16" style={{ background: "#F4FAF7" }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-6 space-y-5">
           <ScheduleHeader />
 

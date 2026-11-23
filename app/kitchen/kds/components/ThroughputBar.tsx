@@ -13,7 +13,7 @@ export function ThroughputBar({ pendingCount, cookingCount, readyCount }: Throug
     <div className="flex items-center gap-4 px-5 py-3 border-b shrink-0" style={{ background: "rgba(255,255,255,0.75)", backdropFilter: "blur(12px)", borderColor: "rgba(11, 59, 54,  0.1)" }}>
       <div className="flex items-center gap-1.5 shrink-0">
         <ArrowTrendingUpIcon className="h-3 w-3" style={{ color: "#0B3B36" }} />
-        <span className="text-[10px] font-bold uppercase " style={{ color: "#736C83" }}>
+        <span className="text-[10px] font-bold uppercase " style={{ color: "#4B6E67" }}>
           Avg 18m
         </span>
       </div>
@@ -33,11 +33,11 @@ export function ThroughputBar({ pendingCount, cookingCount, readyCount }: Throug
         />
       </div>
 
-      <div className="flex items-center gap-3 shrink-0 text-[10px] font-bold uppercase " style={{ color: "#736C83" }}>
+      <div className="flex items-center gap-3 shrink-0 text-[10px] font-bold uppercase " style={{ color: "#4B6E67" }}>
         <span>{pendingCount} pending</span>
-        <span style={{ color: "#D0CBE4" }}>·</span>
+        <span style={{ color: "#C8DDD5" }}>·</span>
         <span>{cookingCount} cooking</span>
-        <span style={{ color: "#D0CBE4" }}>·</span>
+        <span style={{ color: "#C8DDD5" }}>·</span>
         <span>{readyCount} ready</span>
       </div>
     </div>

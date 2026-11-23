@@ -137,7 +137,7 @@ export default function KDSPage() {
     <>
 
 
-      <div className="min-h-screen flex flex-col overflow-hidden" style={{ background: "#F0EBF8" }}>
+      <div className="min-h-screen flex flex-col overflow-hidden" style={{ background: "#F4FAF7" }}>
 
         {/* Header */}
         <KitchenHeader
@@ -188,7 +188,7 @@ export default function KDSPage() {
                       {displayed.length}
                     </span>
                   </div>
-                  <span className="text-[10px]" style={{ color: "#D0CBE4" }}>
+                  <span className="text-[10px]" style={{ color: "#C8DDD5" }}>
                     {viewMode === "grid" ? "Grid view" : "List view"}
                   </span>
                 </div>

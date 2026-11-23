@@ -29,6 +29,7 @@ import { Label }     from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 import { Badge }     from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { TableTapLogo } from "@/components/brand/tabletap-logo"
 import { useAuth, type UserRole } from "@/lib/auth-context"
 import { cn } from "@/lib/utils"
 
@@ -120,7 +121,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen grid lg:grid-cols-[1.1fr_1fr]" style={{ background:"#F8F6FC" }}>
+    <div className="min-h-screen grid lg:grid-cols-[1.1fr_1fr]" style={{ background:"#F4FAF7" }}>
 
       {/* ── LEFT — brand panel ───────────────────────────────────── */}
       <div
@@ -131,7 +132,7 @@ export default function LoginPage() {
       >
         {/* Enhanced Orbs */}
         <div className="absolute -top-32 -right-32 w-[520px] h-[520px] rounded-full opacity-[0.15] pointer-events-none blur-3xl"
-          style={{ background:"radial-gradient(circle, oklch(0.9 0.06 285), transparent 65%)" }} />
+          style={{ background:"radial-gradient(circle, #D9F7E0, transparent 65%)" }} />
         <div className="absolute top-1/3 -left-20 w-[380px] h-[380px] rounded-full opacity-[0.1] pointer-events-none blur-2xl"
           style={{ background:"radial-gradient(circle, oklch(0.75 0.18 150), transparent 70%)" }} />
         <div className="absolute bottom-20 right-1/4 w-[280px] h-[280px] rounded-full opacity-[0.08] pointer-events-none blur-2xl"
@@ -144,8 +145,8 @@ export default function LoginPage() {
         <div className="relative z-10 flex flex-col h-full justify-between gap-12">
 
           {/* Project Logo */}
-          <div className="flex items-center gap-4">
-            <img src="/logo-full.png" alt="Resto Logo" className="h-16 w-auto brightness-0 invert" />
+          <div className="flex items-center">
+            <TableTapLogo variant="dark" size="lg" />
           </div>
 
           {/* Hero */}
@@ -264,21 +265,21 @@ export default function LoginPage() {
       {/* ── RIGHT — auth panel ───────────────────────────────────── */}
       <div
         className="flex flex-col justify-center px-6 py-10 lg:px-10 xl:px-14"
-        style={{ background:"#F8F6FC" }}
+        style={{ background:"#F4FAF7" }}
       >
         {/* Project Logo Mobile */}
         <div className="flex lg:hidden items-center mb-10">
-          <img src="/logo-full.png" alt="Resto Logo" className="h-12 w-auto" />
+          <TableTapLogo variant="light" size="md" />
         </div>
 
         <div className="w-full max-w-[440px] mx-auto space-y-7">
 
           {/* Heading */}
           <div className="space-y-4">
-            <h1 className="text-[2rem] font-bold " style={{ color:"#0D031B" }}>
+            <h1 className="text-[2rem] font-bold " style={{ color:"#082420" }}>
               Welcome back
             </h1>
-            <p className="text-[14px] leading-relaxed" style={{ color:"#736C83" }}>
+            <p className="text-[14px] leading-relaxed" style={{ color:"#4B6E67" }}>
               Sign in to access your portal and manage your restaurant
             </p>
           </div>
@@ -309,7 +310,7 @@ export default function LoginPage() {
                       }} 
                     />
                   </div>
-                  <CardTitle className="text-[12px] font-semibold uppercase " style={{ color:"#3D374C" }}>
+                  <CardTitle className="text-[12px] font-semibold uppercase " style={{ color:"#133D38" }}>
                     Quick Demo Access
                   </CardTitle>
                 </div>
@@ -331,13 +332,13 @@ export default function LoginPage() {
                 {showStaffPicker ? (
                   <div className="animate-in fade-in zoom-in-95 duration-300">
                     <div className="flex items-center justify-between mb-4">
-                      <p className="text-[12px] font-semibold uppercase " style={{ color:"#0D031B" }}>
+                      <p className="text-[12px] font-semibold uppercase " style={{ color:"#082420" }}>
                         Select Staff Role
                       </p>
                       <button
                         onClick={() => setShowStaffPicker(false)}
                         className="flex items-center justify-center w-7 h-7 rounded-lg transition-all hover:bg-[#E6F0EC] active:scale-95"
-                        style={{ color:"#9A94AA" }}
+                        style={{ color:"#628C84" }}
                       >
                         <X className="h-4 w-4" />
                       </button>
@@ -371,10 +372,10 @@ export default function LoginPage() {
                                 return <DynamicIcon className="h-3.5 w-3.5 text-white transition-transform group-hover:scale-110" />
                               })()}
                             </div>
-                            <p className="text-[12px] font-medium leading-none text-[#0D031B] uppercase">{sub.label}</p>
+                            <p className="text-[12px] font-medium leading-none text-[#082420] uppercase">{sub.label}</p>
                           </div>
                           
-                          <p className="relative z-10 text-[9px] font-medium uppercase text-[#9A94AA] truncate w-full">{sub.desc}</p>
+                          <p className="relative z-10 text-[9px] font-medium uppercase text-[#628C84] truncate w-full">{sub.desc}</p>
                         </button>
                       ))}
                     </div>
@@ -392,7 +393,7 @@ export default function LoginPage() {
                             "group relative flex flex-col items-start justify-between p-4 rounded-[20px] border-0 transition-all duration-500 text-left overflow-hidden shadow-sm min-h-[110px]",
                             "disabled:opacity-60 disabled:cursor-not-allowed",
                             !busy && "hover:shadow-2xl hover:-translate-y-1 active:scale-[0.98]",
-                            busy && "ring-2 ring-[oklch(0.42_0.14_285_/_0.2)]",
+                            busy && "ring-2 ring-[rgba(11, 59, 54, 0.2)]",
                           )}
                           style={{
                             background: busy ? "rgba(11, 59, 54,  0.04)" : "white",
@@ -422,10 +423,10 @@ export default function LoginPage() {
                               )}
                             </div>
 
-                            <p className="text-[14px] font-medium text-[#0D031B] uppercase leading-none">{opt.label}</p>
+                            <p className="text-[14px] font-medium text-[#082420] uppercase leading-none">{opt.label}</p>
                           </div>
 
-                          <p className="relative z-10 text-[10px] font-medium uppercase text-[#9A94AA] truncate w-full">{opt.description}</p>
+                          <p className="relative z-10 text-[10px] font-medium uppercase text-[#628C84] truncate w-full">{opt.description}</p>
                         </button>
                       )
                     })}
@@ -473,7 +474,7 @@ export default function LoginPage() {
                   style={{
                     background:"white",
                     borderColor:"rgba(11, 59, 54,  0.16)",
-                    color:"#3D374C",
+                    color:"#133D38",
                   }}
                 >
                   {btn.svg}
@@ -501,7 +502,7 @@ export default function LoginPage() {
 
                 {/* Email */}
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-[12px] font-bold uppercase  flex items-center gap-2" style={{ color:"#3D374C" }}>
+                  <Label htmlFor="email" className="text-[12px] font-bold uppercase  flex items-center gap-2" style={{ color:"#133D38" }}>
                     <Mail className="h-3.5 w-3.5" style={{ color:"#0B3B36" }} />
                     Email Address
                   </Label>
@@ -517,7 +518,7 @@ export default function LoginPage() {
                       style={{
                         background:"#F4FAF7",
                         borderColor:"rgba(11, 59, 54,  0.14)",
-                        color:"#0D031B",
+                        color:"#082420",
                       }}
                     />
                   </div>
@@ -526,7 +527,7 @@ export default function LoginPage() {
                 {/* Password */}
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <Label htmlFor="password" className="text-[12px] font-bold uppercase  flex items-center gap-2" style={{ color:"#3D374C" }}>
+                    <Label htmlFor="password" className="text-[12px] font-bold uppercase  flex items-center gap-2" style={{ color:"#133D38" }}>
                       <Lock className="h-3.5 w-3.5" style={{ color:"#0B3B36" }} />
                       Password
                     </Label>
@@ -550,7 +551,7 @@ export default function LoginPage() {
                       style={{
                         background:"#F4FAF7",
                         borderColor:"rgba(11, 59, 54,  0.14)",
-                        color:"#0D031B",
+                        color:"#082420",
                       }}
                     />
                     <button
@@ -566,7 +567,7 @@ export default function LoginPage() {
 
                 {/* Portal selector */}
                 <div className="space-y-2.5">
-                  <Label className="text-[12px] font-bold uppercase  flex items-center gap-2" style={{ color:"#3D374C" }}>
+                  <Label className="text-[12px] font-bold uppercase  flex items-center gap-2" style={{ color:"#133D38" }}>
                     <Shield className="h-3.5 w-3.5" style={{ color:"#0B3B36" }} />
                     Select Portal
                   </Label>
@@ -591,7 +592,7 @@ export default function LoginPage() {
                               : { 
                                   background:"#F4FAF7", 
                                   borderColor:"rgba(11, 59, 54,  0.14)", 
-                                  color:"#736C83" 
+                                  color:"#4B6E67" 
                                 }
                           }
                         >
@@ -657,7 +658,7 @@ export default function LoginPage() {
             </CardContent>
           </Card>
 
-          <p className="text-center text-[13px]" style={{ color:"#736C83" }}>
+          <p className="text-center text-[13px]" style={{ color:"#4B6E67" }}>
             Don't have an account?{" "}
             <Link href="/signup" className="font-bold transition-all hover:underline" style={{ color:"#0B3B36" }}>
               Create one

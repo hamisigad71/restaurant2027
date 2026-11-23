@@ -29,6 +29,7 @@ import {
   Select, SelectContent, SelectItem,
   SelectTrigger, SelectValue,
 } from "@/components/ui/select"
+import { TableTapLogo } from "@/components/brand/tabletap-logo"
 import { cn } from "@/lib/utils"
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
@@ -89,18 +90,18 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="min-h-screen grid lg:grid-cols-2" style={{ background:"#EBE6F8" }}>
+    <div className="min-h-screen grid lg:grid-cols-2" style={{ background:"#F4FAF7" }}>
 
       {/* ── LEFT — brand panel ───────────────────────────────────── */}
       <div
         className="hidden lg:flex flex-col justify-between p-14 relative overflow-hidden"
         style={{
-          background:"linear-gradient(145deg, #0B3B36 0%, oklch(0.30 0.15 285) 55%, oklch(0.15 0.10 285) 100%)",
+          background:"linear-gradient(145deg, #0B3B36 0%, #062421 55%, #03100E 100%)",
         }}
       >
         {/* Orbs */}
         <div className="absolute -top-40 -right-40 w-[560px] h-[560px] rounded-full opacity-[0.18] pointer-events-none"
-          style={{ background:"radial-gradient(circle, oklch(0.85 0.04 285), transparent 70%)" }} />
+          style={{ background:"radial-gradient(circle, #D9F7E0, transparent 70%)" }} />
         <div className="absolute bottom-0 -left-24 w-[400px] h-[400px] rounded-full opacity-[0.12] pointer-events-none"
           style={{ background:"radial-gradient(circle, oklch(0.7 0.15 150), transparent 70%)" }} />
 
@@ -108,8 +109,9 @@ export default function SignupPage() {
         <div className="relative z-10 flex flex-col h-full justify-between gap-10">
 
           {/* Project Logo */}
-          <div className="flex items-center gap-4">
-            <img src="/logo-full.png" alt="Resto Logo" className="h-14 w-auto brightness-0 invert" />
+          {/* Project Logo */}
+          <div className="flex items-center">
+            <TableTapLogo variant="dark" size="lg" />
           </div>
 
           {/* Hero */}
@@ -175,21 +177,21 @@ export default function SignupPage() {
       </div>
 
       {/* ── RIGHT — form panel ───────────────────────────────────── */}
-      <div className="flex flex-col justify-center px-8 py-10" style={{ background:"#EBE6F8" }}>
+      <div className="flex flex-col justify-center px-8 py-10" style={{ background:"#F4FAF7" }}>
 
         {/* Project Logo Mobile */}
         <div className="flex lg:hidden items-center mb-8">
-          <img src="/logo-full.png" alt="Resto Logo" className="h-10 w-auto" />
+          <TableTapLogo variant="light" size="md" />
         </div>
 
         <div className="w-full max-w-[380px] mx-auto space-y-6">
 
           {/* Heading */}
           <div>
-            <h1 className="text-[1.7rem] font-bold " style={{ color:"#0D031B" }}>
+            <h1 className="text-[1.7rem] font-bold " style={{ color:"#082420" }}>
               Create your account
             </h1>
-            <p className="text-sm mt-1" style={{ color:"#736C83" }}>
+            <p className="text-sm mt-1" style={{ color:"#4B6E67" }}>
               Get started with Smart Restaurant OS
             </p>
           </div>
@@ -201,7 +203,7 @@ export default function SignupPage() {
           >
             <div className="h-[3px]" style={{ background:"#0B3B36" }} />
             <CardHeader className="px-5 pt-4 pb-2">
-              <CardTitle className="text-[11px] font-medium uppercase " style={{ color:"#9A94AA" }}>
+              <CardTitle className="text-[11px] font-medium uppercase " style={{ color:"#628C84" }}>
                 Choose your role
               </CardTitle>
               <CardDescription className="text-[11px] mt-0.5" style={{ color:"var(--icon-primary)" }}>
@@ -221,14 +223,14 @@ export default function SignupPage() {
                       className={cn(
                         "group relative flex items-center gap-2 p-3 rounded-lg border transition-all duration-200 text-left",
                         active
-                          ? "border-[oklch(0.45_0.12_285)/0.4] bg-[oklch(0.45_0.12_285)/0.06]"
-                          : "border-[oklch(0.45_0.12_285)/0.12] bg-white hover:border-[oklch(0.45_0.12_285)/0.35] hover:bg-[oklch(0.45_0.12_285)/0.03]"
+                          ? "border-[#0B3B36/0.4] bg-[#0B3B36/0.06]"
+                          : "border-[#0B3B36/0.12] bg-white hover:border-[#0B3B36/0.35] hover:bg-[#0B3B36/0.03]"
                       )}
                     >
                         <div
                           className={cn(
                             "flex items-center justify-center w-8 h-8 rounded-md shrink-0 transition-all",
-                            !active && "bg-[oklch(0.45_0.12_285)/0.06] text-[oklch(0.45_0.12_285)] group-hover:bg-[oklch(0.45_0.12_285)] group-hover:text-white"
+                            !active && "bg-[#0B3B36/0.06] text-[#0B3B36] group-hover:bg-[#0B3B36] group-hover:text-white"
                           )}
                           style={
                             active
@@ -245,11 +247,11 @@ export default function SignupPage() {
                       <div className="min-w-0">
                         <p
                           className="text-[12px] font-medium leading-none"
-                          style={{ color: active ? "#0B3B36" : "#0D031B" }}
+                          style={{ color: active ? "#0B3B36" : "#082420" }}
                         >
                           {r.label}
                         </p>
-                        <p className="text-[10px] mt-0.5 truncate text-[#9A94AA]">
+                        <p className="text-[10px] mt-0.5 truncate text-[#628C84]">
                           {r.description}
                         </p>
                       </div>
@@ -288,7 +290,7 @@ export default function SignupPage() {
                   key={btn.label}
                   type="button"
                   className="flex items-center justify-center gap-2.5 h-10 rounded-xl border text-[12px] font-medium transition-all hover:-translate-y-0.5 hover:shadow-sm"
-                  style={{ background:"rgba(255,255,255,0.75)", borderColor:"rgba(11, 59, 54,  0.18)", color:"#3D374C" }}
+                  style={{ background:"rgba(255,255,255,0.75)", borderColor:"rgba(11, 59, 54,  0.18)", color:"#133D38" }}
                 >
                   {btn.svg}
                   {btn.label}
@@ -315,34 +317,34 @@ export default function SignupPage() {
 
                 {/* Full name */}
                 <div className="space-y-1.5">
-                  <Label htmlFor="name" className="text-xs font-semibold" style={{ color:"#3D374C" }}>Full Name</Label>
+                  <Label htmlFor="name" className="text-xs font-semibold" style={{ color:"#133D38" }}>Full Name</Label>
                   <Input
                     id="name" type="text" placeholder="John Kamau"
                     value={name} onChange={e => setName(e.target.value)} required
                     className="h-10 rounded-xl text-sm border"
-                    style={{ background:"#F5F2FB", borderColor:"rgba(11, 59, 54,  0.2)", color:"#0D031B" }}
+                    style={{ background:"#F5F2FB", borderColor:"rgba(11, 59, 54,  0.2)", color:"#082420" }}
                   />
                 </div>
 
                 {/* Email */}
                 <div className="space-y-1.5">
-                  <Label htmlFor="email" className="text-xs font-semibold" style={{ color:"#3D374C" }}>Work Email</Label>
+                  <Label htmlFor="email" className="text-xs font-semibold" style={{ color:"#133D38" }}>Work Email</Label>
                   <Input
                     id="email" type="email" placeholder="name@restaurant.com"
                     value={email} onChange={e => setEmail(e.target.value)} required
                     className="h-10 rounded-xl text-sm border"
-                    style={{ background:"#F5F2FB", borderColor:"rgba(11, 59, 54,  0.2)", color:"#0D031B" }}
+                    style={{ background:"#F5F2FB", borderColor:"rgba(11, 59, 54,  0.2)", color:"#082420" }}
                   />
                 </div>
 
                 {/* Role select */}
                 <div className="space-y-1.5">
-                  <Label htmlFor="role-select" className="text-xs font-semibold" style={{ color:"#3D374C" }}>Role</Label>
+                  <Label htmlFor="role-select" className="text-xs font-semibold" style={{ color:"#133D38" }}>Role</Label>
                   <Select value={role} onValueChange={setRole}>
                     <SelectTrigger
                       id="role-select"
                       className="h-10 rounded-xl text-sm border"
-                      style={{ background:"#F5F2FB", borderColor:"rgba(11, 59, 54,  0.2)", color:"#0D031B" }}
+                      style={{ background:"#F5F2FB", borderColor:"rgba(11, 59, 54,  0.2)", color:"#082420" }}
                     >
                       <SelectValue placeholder="Select a role" />
                     </SelectTrigger>
@@ -351,7 +353,7 @@ export default function SignupPage() {
                       style={{ background:"#FDFCFF", borderColor:"rgba(11, 59, 54,  0.15)" }}
                     >
                       {roles.filter(r => r.value !== "staff").map(r => (
-                        <SelectItem key={r.value} value={r.value} className="rounded-xl text-sm text-[#3D374C] focus:bg-[oklch(0.45_0.12_285)/0.08] focus:text-[oklch(0.45_0.12_285)] cursor-pointer">
+                        <SelectItem key={r.value} value={r.value} className="rounded-xl text-sm text-[#133D38] focus:bg-[#0B3B36/0.08] focus:text-[#0B3B36] cursor-pointer">
                           {r.label}
                         </SelectItem>
                       ))}
@@ -360,7 +362,7 @@ export default function SignupPage() {
                         Staff Members
                       </div>
                       {staffSubRoles.map(s => (
-                        <SelectItem key={s.value} value={s.value} className="rounded-xl text-sm text-[#3D374C] focus:bg-[oklch(0.45_0.12_285)/0.08] focus:text-[oklch(0.45_0.12_285)] cursor-pointer">
+                        <SelectItem key={s.value} value={s.value} className="rounded-xl text-sm text-[#133D38] focus:bg-[#0B3B36/0.08] focus:text-[#0B3B36] cursor-pointer">
                           {s.label}
                         </SelectItem>
                       ))}
@@ -372,7 +374,7 @@ export default function SignupPage() {
 
                 {/* Password */}
                 <div className="space-y-1.5">
-                  <Label htmlFor="password" className="text-xs font-semibold" style={{ color:"#3D374C" }}>Password</Label>
+                  <Label htmlFor="password" className="text-xs font-semibold" style={{ color:"#133D38" }}>Password</Label>
                   <div className="relative">
                     <Input
                       id="password"
@@ -382,7 +384,7 @@ export default function SignupPage() {
                       onChange={e => setPassword(e.target.value)}
                       required
                       className="h-10 rounded-xl text-sm border pr-10"
-                      style={{ background:"#F5F2FB", borderColor:"rgba(11, 59, 54,  0.2)", color:"#0D031B" }}
+                      style={{ background:"#F5F2FB", borderColor:"rgba(11, 59, 54,  0.2)", color:"#082420" }}
                     />
                     <button
                       type="button"
@@ -408,7 +410,7 @@ export default function SignupPage() {
                           />
                         ))}
                       </div>
-                      <p className="text-[10px]" style={{ color:"#736C83" }}>
+                      <p className="text-[10px]" style={{ color:"#4B6E67" }}>
                         Strength:{" "}
                         <span className="font-semibold" style={{ color: strength.color }}>
                           {strength.label}
@@ -457,7 +459,7 @@ export default function SignupPage() {
             </CardContent>
           </Card>
 
-          <p className="text-center text-xs" style={{ color:"#736C83" }}>
+          <p className="text-center text-xs" style={{ color:"#4B6E67" }}>
             Already have an account?{" "}
             <Link href="/login" className="font-semibold transition-opacity hover:opacity-70" style={{ color:"#0B3B36" }}>
               Sign in
