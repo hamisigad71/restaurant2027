@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useLayoutEffect, useMemo } from "react"
+import { useState, useEffect, useMemo } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { 
@@ -35,31 +35,18 @@ interface NavItem {
   href: string
 }
 
-export function MobileNav() {
+const PORTAL_PREFIXES = ["/admin", "/manager", "/waiter", "/kitchen"]
+
+export function MobileNav({ rootLevel = false }: { rootLevel?: boolean }) {
   const { user } = useAuth()
   const sidebar = useSidebar()
   const openMobile = sidebar?.openMobile ?? false
   const pathname = usePathname()
-  
+
   const [isVisible, setIsVisible] = useState(true)
-  const [lastScrollY, setLastScrollY] = useState(0)
   const [ripples, setRipples] = useState<{ id: number; x: number; y: number }[]>([])
-  const [isLoaderActive, setIsLoaderActive] = useState(true)
 
-  // Sync with GlassLoader's useLayoutEffect: both fire before paint on pathname change.
-  // This ensures isLoaderActive is true before the first frame renders on any route change.
-  useLayoutEffect(() => {
-    setIsLoaderActive(document.body.hasAttribute("data-loading"))
-  }, [pathname])
-
-  // Also watch for the attribute being removed (when loader finishes)
-  useEffect(() => {
-    const observer = new MutationObserver(() => {
-      setIsLoaderActive(document.body.hasAttribute("data-loading"))
-    })
-    observer.observe(document.body, { attributes: true, attributeFilter: ["data-loading"] })
-    return () => observer.disconnect()
-  }, [])
+  const isPortalRoute = PORTAL_PREFIXES.some((prefix) => pathname.startsWith(prefix))
 
   // Scroll logic: hide on scroll down, show on scroll up
   useEffect(() => {
@@ -152,47 +139,16 @@ export function MobileNav() {
     }, 600)
   }
 
+  if (rootLevel && isPortalRoute) return null
   if (!user && !pathname.startsWith("/customer")) return null
 
   return (
-    <>
-      {/* Add these styles to your global CSS */}
-      <style jsx global>{`
-        @keyframes ripple {
-          0% {
-            transform: scale(0);
-            opacity: 0.5;
-          }
-          100% {
-            transform: scale(2.5);
-            opacity: 0;
-          }
-        }
-        
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-3px); }
-        }
-        
-        @keyframes pulse-glow {
-          0%, 100% { opacity: 0.3; }
-          50% { opacity: 0.6; }
-        }
-
-        .no-tap-highlight {
-          -webkit-tap-highlight-color: transparent;
-          -webkit-touch-callout: none;
-          -webkit-user-select: none;
-          user-select: none;
-        }
-      `}</style>
-
-      <nav 
-        className={cn(
-          "fixed bottom-6 left-4 right-4 z-40 max-w-md mx-auto md:hidden transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] rounded-[32px] shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)]",
-          (isVisible && !openMobile && !isLoaderActive) ? "translate-y-0 opacity-100" : "translate-y-[calc(100%+40px)] opacity-0 invisible pointer-events-none"
-        )}
-      >
+    <nav
+      className={cn(
+        "fixed bottom-6 left-4 right-4 z-40 max-w-md mx-auto md:hidden transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] rounded-[32px] shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)]",
+        (isVisible && !openMobile) ? "translate-y-0 opacity-100" : "translate-y-[calc(100%+40px)] opacity-0 invisible pointer-events-none"
+      )}
+    >
         {/* Main container with floating design */}
         <div className="relative overflow-hidden rounded-[32px]">
           
@@ -260,7 +216,7 @@ export function MobileNav() {
                   {ripples.map(ripple => (
                     <div
                       key={ripple.id}
-                      className="absolute rounded-full bg-rgba(11, 59, 54,  0.2) pointer-events-none"
+                      className="absolute rounded-full bg-[#0B3B36]/20 pointer-events-none"
                       style={{
                         left: ripple.x,
                         top: ripple.y,
@@ -301,7 +257,7 @@ export function MobileNav() {
                         <Icon 
                           className={cn(
                             "h-5.5 w-5.5 transition-all duration-500 relative z-10",
-                            isActive && "drop-shadow-[0_2px_8px_rgba(11, 59, 54, 0.4)]"
+                            isActive && "drop-shadow-[0_2px_8px_rgba(11,59,54,0.4)]"
                           )} 
                           strokeWidth={isActive ? 2.5 : 2} 
                         />
@@ -314,8 +270,8 @@ export function MobileNav() {
                     className={cn(
                       "text-[9px] font-bold uppercase transition-all duration-500 relative",
                       isActive 
-                        ? "text-#0B3B36 opacity-100 translate-y-0" 
-                        : "text-rgba(11, 59, 54,  0.65) opacity-65 translate-y-0.5 group-hover:opacity-100 group-hover:translate-y-0"
+                        ? "text-[#0B3B36] opacity-100 translate-y-0" 
+                        : "text-[#0B3B36]/65 opacity-65 translate-y-0.5 group-hover:opacity-100 group-hover:translate-y-0"
                     )}
                     style={isActive ? { 
                       textShadow: "0 0 8px rgba(11, 59, 54,  0.3)"
@@ -329,19 +285,19 @@ export function MobileNav() {
                     <div className={cn(
                       "w-1 h-1 rounded-full transition-all duration-500",
                       isActive 
-                        ? "opacity-100 scale-100 bg-#0B3B36" 
+                        ? "opacity-100 scale-100 bg-[#0B3B36]" 
                         : "opacity-0 scale-0 bg-transparent"
                     )}>
                       {isActive && (
                         <>
                           {/* Pulsing outer ring */}
                           <div 
-                            className="absolute inset-0 rounded-full bg-#0B3B36"
+                            className="absolute inset-0 rounded-full bg-[#0B3B36]"
                             style={{ animation: "pulse-glow 2s ease-in-out infinite" }}
                           />
                           {/* Static glow */}
                           <div 
-                            className="absolute inset-0 rounded-full blur-sm bg-rgba(11, 59, 54,  0.6)"
+                            className="absolute inset-0 rounded-full blur-sm bg-[#0B3B36]/60"
                           />
                         </>
                       )}
@@ -356,6 +312,5 @@ export function MobileNav() {
         {/* Safe area spacer for devices with notches */}
         <div className="h-safe bg-transparent" />
       </nav>
-    </>
   )
 }

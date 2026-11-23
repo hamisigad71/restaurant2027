@@ -1,5 +1,6 @@
 "use client"
 
+import { useRouter } from "next/navigation"
 import {
   CheckBadgeIcon,
   BellIcon,
@@ -42,6 +43,7 @@ export function NavUser({
   logout: () => void
 }) {
   const { isMobile } = useSidebar()
+  const router = useRouter()
 
   return (
     <SidebarMenu>
@@ -108,7 +110,7 @@ export function NavUser({
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={() => {
               logout()
-              window.location.href = "/login"
+              router.push("/login")
             }}>
               <ArrowRightOnRectangleIcon className="mr-2 h-4 w-4" />
               Log out

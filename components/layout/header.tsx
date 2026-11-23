@@ -201,7 +201,7 @@ const notifications = [
     id: "2",
     icon: ShoppingCartIcon,
     iconColor: "#0B3B36",
-    iconBg: "rgba(11, 59, 54,  0.08)",
+    iconBg: "rgba(11,59,54,0.08)",
     title: "New Order",
     body: "Table 3 placed a new order",
     time: "5m ago",

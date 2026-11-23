@@ -154,7 +154,7 @@ export function TableGrid({ tables, onSelectTable }: TableGridProps) {
         </div>
 
         {/* Zone Filter */}
-        <div className="flex bg-white/50 backdrop-blur-sm p-1.5 rounded-2xl w-fit border border-rgba(11, 59, 54,  0.08) shrink-0">
+        <div className="flex bg-white/50 backdrop-blur-sm p-1.5 rounded-2xl w-fit border border-[#0B3B36]/8 shrink-0">
           {zones.map(zone => (
             <button
               key={zone}

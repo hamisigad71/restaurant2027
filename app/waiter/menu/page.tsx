@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import {
   MagnifyingGlassIcon as Search, 
   AdjustmentsHorizontalIcon as Filter, 
@@ -32,6 +32,7 @@ import {
 } from "@/components/ui/tooltip"
 import { cn } from "@/lib/utils"
 import { MenuItem } from "@/lib/types"
+import { allMenuItems } from "@/lib/menu-data"
 
 // ─── Category mapping ─────────────────────────────────────────────────────────
 const CATEGORY_MAP: Record<string, string> = {
@@ -223,15 +224,9 @@ function MenuCard({
 
 // ─── Waiter Menu Page ────────────────────────────────────────────────────────
 export default function WaiterMenuPage() {
-  const [menuItems,      setMenuItems]      = useState<MenuItem[]>([])
+  const [menuItems,      setMenuItems]      = useState<MenuItem[]>(allMenuItems)
   const [searchQuery,    setSearchQuery]    = useState("")
   const [activeCategory, setActiveCategory] = useState("All Items")
-
-  useEffect(() => {
-    fetch("/api/menu", { cache:"no-store" })
-      .then(res => res.json())
-      .then(setMenuItems)
-  }, [])
 
   const handleToggleAvailability = (id: string) => {
     setMenuItems(prev =>

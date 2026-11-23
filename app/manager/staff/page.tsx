@@ -416,7 +416,7 @@ export default function ManagerStaffPage() {
                       <SelectItem 
                         key={r} 
                         value={r} 
-                        className="text-xs uppercase font-medium focus:bg-rgba(11, 59, 54,  0.08) rounded-xl m-1"
+                        className="text-xs uppercase font-medium focus:bg-[#0B3B36]/8 rounded-xl m-1"
                       >
                         {r === "all" ? "All Roles" : r}
                       </SelectItem>
@@ -526,25 +526,25 @@ export default function ManagerStaffPage() {
 
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
-                        <button className="shrink-0 h-8 w-8 flex items-center justify-center rounded-xl transition-all hover:bg-rgba(11, 59, 54,  0.08) active:scale-90"
+                        <button className="shrink-0 h-8 w-8 flex items-center justify-center rounded-xl transition-all hover:bg-[#0B3B36]/8 active:scale-90"
                           style={{ color: "#628C84" }}>
                           <EllipsisHorizontalIcon className="h-4 w-4" />
                         </button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end" className="bg-white/98 backdrop-blur-xl border-0 rounded-2xl shadow-2xl w-48">
-                        <DropdownMenuItem className="text-xs font-medium rounded-xl m-1 focus:bg-rgba(11, 59, 54,  0.08)" style={{ color: "#0B3B36" }}>
+                        <DropdownMenuItem className="text-xs font-medium rounded-xl m-1 focus:bg-[#0B3B36]/8" style={{ color: "#0B3B36" }}>
                           <UserCircleIcon className="h-3.5 w-3.5 mr-2" />
                           Full Profile
                         </DropdownMenuItem>
-                        <DropdownMenuItem className="text-xs font-medium rounded-xl m-1 focus:bg-rgba(11, 59, 54,  0.08)">
+                        <DropdownMenuItem className="text-xs font-medium rounded-xl m-1 focus:bg-[#0B3B36]/8">
                           <ClockIcon className="h-3.5 w-3.5 mr-2" />
                           Duty Log
                         </DropdownMenuItem>
-                        <DropdownMenuItem className="text-xs font-medium rounded-xl m-1 focus:bg-rgba(11, 59, 54,  0.08)">
+                        <DropdownMenuItem className="text-xs font-medium rounded-xl m-1 focus:bg-[#0B3B36]/8">
                           <ChatBubbleLeftRightIcon className="h-3.5 w-3.5 mr-2" />
                           Send Ping
                         </DropdownMenuItem>
-                        <DropdownMenuSeparator className="bg-rgba(11, 59, 54,  0.05)" />
+                        <DropdownMenuSeparator className="bg-[#0B3B36]/5" />
                         <DropdownMenuItem className="text-xs font-medium rounded-xl m-1 focus:bg-rose-50" style={{ color: "oklch(0.55 0.20 25)" }}>
                           Remove Staff
                         </DropdownMenuItem>

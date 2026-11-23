@@ -155,7 +155,7 @@ export function OrderCard({ order, onUpdateStatus, listMode, animDelay = 0 }: Or
   // ─── Grid Mode Render ─────────────────────────────────────────────────────
   return (
     <Card
-      className="relative overflow-hidden border transition-all duration-700 hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(11, 59, 54, 0.18)] group p-0 rounded-[2.5rem] animate-in zoom-in-95"
+      className="relative overflow-hidden border transition-all duration-700 hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(11,59,54,0.18)] group p-0 rounded-[2.5rem] animate-in zoom-in-95"
       style={{
         background: "linear-gradient(135deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.75) 100%)",
         backdropFilter: "blur(32px) saturate(180%)",

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import {
   PlusIcon as Plus, 
   MagnifyingGlassIcon as Search, 
@@ -39,6 +39,7 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator }  from "@/components/ui/separator"
 import { cn } from "@/lib/utils"
 import { MenuItem } from "@/lib/types"
+import { allMenuItems } from "@/lib/menu-data"
 
 // ─── Category mapping ─────────────────────────────────────────────────────────
 const CATEGORY_MAP: Record<string, string> = {
@@ -280,15 +281,9 @@ function MenuCard({
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function ManagerMenuPage() {
-  const [menuItems,      setMenuItems]      = useState<MenuItem[]>([])
+  const [menuItems,      setMenuItems]      = useState<MenuItem[]>(allMenuItems)
   const [searchQuery,    setSearchQuery]    = useState("")
   const [activeCategory, setActiveCategory] = useState("All Items")
-
-  useEffect(() => {
-    fetch("/api/menu", { cache:"no-store" })
-      .then(res => res.json())
-      .then(setMenuItems)
-  }, [])
 
   const handleToggleAvailability = (id: string) => {
     setMenuItems(prev =>

@@ -3,7 +3,6 @@ import { Quicksand } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { Toaster } from "@/components/ui/sonner"
 import { AuthProvider } from "@/lib/auth-context"
-import { GlassLoader } from "@/components/ui/glass-loader"
 import { MobileNav } from "@/components/layout/mobile-nav"
 import "./globals.css"
 
@@ -36,7 +35,7 @@ export default function RootLayout({
       <body className="font-sans antialiased" suppressHydrationWarning>
         <AuthProvider>
           {children}
-          <MobileNav />
+          <MobileNav rootLevel />
           <Toaster position="top-right" />
         </AuthProvider>
         <Analytics />

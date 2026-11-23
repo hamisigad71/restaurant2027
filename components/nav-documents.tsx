@@ -1,8 +1,8 @@
 "use client"
 
-import type { TablerIcon } from "@tabler/icons-react"
- 
- import {
+import type * as React from "react"
+
+import {
   SidebarGroup,
   SidebarGroupLabel,
   SidebarMenu,
@@ -17,7 +17,7 @@ export function NavDocuments({
   items: {
     name: string
     url: string
-    icon: React.ComponentType<React.SVGProps<SVGSVGElement>> | TablerIcon
+    icon: React.ComponentType<{ className?: string }>
   }[]
 }) {
   return (

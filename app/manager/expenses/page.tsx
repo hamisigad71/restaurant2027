@@ -251,19 +251,19 @@ export default function ManagerExpensesPage() {
                     <DropdownMenuContent align="end" className="bg-white/98 backdrop-blur-xl border-0 rounded-2xl shadow-2xl w-48">
                       <DropdownMenuItem 
                         onClick={() => setFilterStatus("all")}
-                        className="text-xs font-semibold rounded-xl m-1 focus:bg-rgba(11, 59, 54,  0.08)"
+                        className="text-xs font-semibold rounded-xl m-1 focus:bg-[#0B3B36]/8"
                       >
                         All Status
                       </DropdownMenuItem>
                       <DropdownMenuItem 
                         onClick={() => setFilterStatus("paid")}
-                        className="text-xs font-semibold rounded-xl m-1 focus:bg-rgba(11, 59, 54,  0.08)"
+                        className="text-xs font-semibold rounded-xl m-1 focus:bg-[#0B3B36]/8"
                       >
                         Paid Only
                       </DropdownMenuItem>
                       <DropdownMenuItem 
                         onClick={() => setFilterStatus("pending")}
-                        className="text-xs font-semibold rounded-xl m-1 focus:bg-rgba(11, 59, 54,  0.08)"
+                        className="text-xs font-semibold rounded-xl m-1 focus:bg-[#0B3B36]/8"
                       >
                         Pending Only
                       </DropdownMenuItem>
@@ -290,7 +290,7 @@ export default function ManagerExpensesPage() {
                     {filteredExpenses.map((exp) => (
                       <tr 
                         key={exp.id} 
-                        className="group transition-all hover:bg-rgba(11, 59, 54,  0.02)"
+                        className="group transition-all hover:bg-[#0B3B36]/[0.02]"
                       >
                         <td className="px-5 sm:px-6 py-4">
                           <div className="font-normal text-sm uppercase leading-tight" style={{ color: "#082420" }}>
@@ -350,21 +350,21 @@ export default function ManagerExpensesPage() {
                               <Button 
                                 variant="ghost" 
                                 size="icon" 
-                                className="h-9 w-9 rounded-xl transition-all hover:bg-rgba(11, 59, 54,  0.08) active:scale-90"
+                                className="h-9 w-9 rounded-xl transition-all hover:bg-[#0B3B36]/8 active:scale-90"
                               >
                                 <EllipsisHorizontalIcon className="h-4 w-4" style={{ color: "#628C84" }} />
                               </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end" className="bg-white/98 backdrop-blur-xl border-0 rounded-2xl shadow-2xl w-48">
-                              <DropdownMenuItem className="text-xs font-semibold rounded-xl m-1 focus:bg-rgba(11, 59, 54,  0.08)">
+                              <DropdownMenuItem className="text-xs font-semibold rounded-xl m-1 focus:bg-[#0B3B36]/8">
                                 <EyeIcon className="h-3.5 w-3.5 mr-2" />
                                 View Details
                               </DropdownMenuItem>
-                              <DropdownMenuItem className="text-xs font-semibold rounded-xl m-1 focus:bg-rgba(11, 59, 54,  0.08)">
+                              <DropdownMenuItem className="text-xs font-semibold rounded-xl m-1 focus:bg-[#0B3B36]/8">
                                 <PencilIcon className="h-3.5 w-3.5 mr-2" />
                                 Edit Transaction
                               </DropdownMenuItem>
-                              <DropdownMenuItem className="text-xs font-semibold rounded-xl m-1 focus:bg-rgba(11, 59, 54,  0.08)">
+                              <DropdownMenuItem className="text-xs font-semibold rounded-xl m-1 focus:bg-[#0B3B36]/8">
                                 <CloudArrowDownIcon className="h-3.5 w-3.5 mr-2" />
                                 Download Receipt
                               </DropdownMenuItem>

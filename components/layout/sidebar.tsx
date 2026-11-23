@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react"
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import {
   Squares2X2Icon,
@@ -91,6 +91,7 @@ export function AppSidebar({
   portal: "admin" | "manager" | "waiter" | "kitchen";
 }) {
   const pathname = usePathname();
+  const router = useRouter();
   const { user, logout } = useAuth();
 
   const navigation = React.useMemo(() => {
@@ -162,7 +163,7 @@ export function AppSidebar({
             <SidebarMenuButton 
               onClick={() => {
                 logout()
-                window.location.href = "/login"
+                router.push("/login")
               }}
               className="mt-1 text-red-500 hover:text-red-600 hover:bg-red-50 transition-colors"
             >

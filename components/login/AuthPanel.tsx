@@ -78,43 +78,25 @@ export function AuthPanel({
         </div>
 
         {/* Quick Demo Access */}
-        <Card
-          className="border rounded-[20px] shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl"
-          style={{
-            background: "white",
-            borderColor: "rgba(11, 59, 54,  0.12)",
-          }}
-        >
+        <Card className="border border-[#0B3B36]/12 rounded-2xl bg-white shadow-[0_8px_30px_-12px_rgba(11,59,54,0.12)] overflow-hidden">
           <div
-            className="h-[4px]"
+            className="h-[3px]"
             style={{
-              background: "linear-gradient(90deg, #0B3B36 0%, #13584F 100%)",
+              background: "linear-gradient(90deg, #0B3B36 0%, #166558 65%, #7AE72A 100%)",
             }}
           />
           <CardHeader className="px-6 pt-5 pb-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                <div
-                  className="w-8 h-8 rounded-lg flex items-center justify-center"
-                  style={{ background: "rgba(11, 59, 54,  0.1)" }}
-                >
-                  <Zap className="h-4 w-4" style={{ color: "#0B3B36" }} />
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-[#E7F5EE] border border-[#0B3B36]/10">
+                  <Zap className="h-4 w-4 text-[#0B3B36]" />
                 </div>
-                <CardTitle
-                  className="text-[12px] font-semibold uppercase"
-                  style={{ color: "#133D38" }}
-                >
+                <CardTitle className="text-[12px] font-semibold uppercase tracking-[0.06em] text-[#133D38]">
                   Quick Demo Access
                 </CardTitle>
               </div>
-              <Badge
-                className="text-[9px] font-bold px-2.5 py-1 rounded-full border"
-                style={{
-                  background: "rgba(11, 59, 54,  0.08)",
-                  color: "#0B3B36",
-                  borderColor: "rgba(11, 59, 54,  0.25)",
-                }}
-              >
+              <Badge className="bg-[#E7F5EE] text-[#0B3B36] border border-[#0B3B36]/15 text-[10px] font-semibold px-2.5 py-0.5 rounded-full inline-flex items-center gap-1.5 shadow-none hover:bg-[#E7F5EE]">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#4CC718]" />
                 One-click
               </Badge>
             </div>
@@ -123,61 +105,67 @@ export function AuthPanel({
           <CardContent className="px-6 pb-6">
             <div className="min-h-[160px]">
               {showStaffPicker ? (
-                <div className="animate-in fade-in zoom-in-95 duration-300">
-                  <div className="flex items-center justify-between mb-4">
-                    <p
-                      className="text-[12px] font-semibold uppercase"
-                      style={{ color: "#082420" }}
-                    >
+                <div className="animate-in fade-in zoom-in-95 duration-200">
+                  <div className="flex items-center justify-between mb-3.5">
+                    <p className="text-[12px] font-semibold uppercase tracking-[0.05em] text-[#082420]">
                       Select Staff Role
                     </p>
                     <button
+                      type="button"
                       onClick={() => setShowStaffPicker(false)}
-                      className="flex items-center justify-center w-7 h-7 rounded-lg transition-all hover:bg-[#E6F0EC] active:scale-95"
-                      style={{ color: "#628C84" }}
+                      className="inline-flex items-center gap-1 px-2 py-1 rounded-lg text-[11px] font-semibold text-[#4B6E67] hover:text-[#082420] hover:bg-[#E7F5EE] transition-colors active:scale-[0.97]"
                     >
-                      <X className="h-4 w-4" />
+                      <X className="h-3.5 w-3.5" />
+                      Back
                     </button>
                   </div>
-                  <div className="grid grid-cols-2 gap-2.5">
+                  <div className="grid grid-cols-2 gap-3">
                     {STAFF_SUB_ROLES.map((sub) => (
                       <button
                         key={sub.id}
+                        type="button"
                         onClick={() => {
                           setShowStaffPicker(false);
                           handleQuickLogin(sub.id as UserRole);
                         }}
-                        className="group flex items-center gap-2.5 p-3.5 rounded-xl border transition-all duration-200 text-left hover:shadow-md active:scale-[0.98]"
-                        style={{
-                          background: "white",
-                          borderColor: "rgba(11, 59, 54,  0.14)",
-                        }}
+                        className={cn(
+                          "group relative flex flex-col justify-between p-4 rounded-2xl border text-left select-none",
+                          "bg-[#F8FCFA] border-[#0B3B36]/12 shadow-[0_1px_2px_rgba(11,59,54,0.04)]",
+                          "transition-[transform,background-color,border-color,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)]",
+                          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0B3B36]/40 focus-visible:ring-offset-2",
+                          "hover:bg-white hover:border-[#0B3B36]/35 hover:shadow-[0_10px_24px_-10px_rgba(11,59,54,0.22)] active:scale-[0.97]",
+                        )}
                       >
-                        <div
-                          className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 transition-all duration-200"
-                          style={{
-                            background: "rgba(11, 59, 54,  0.08)",
-                            color: "#0B3B36",
-                          }}
-                        >
-                          {typeof sub.icon === "string" ? (
-                            <img
-                              src={sub.icon}
-                              className="h-5 w-5 brightness-0"
-                              style={{
-                                filter:
-                                  "invert(17%) sepia(50%) saturate(1475%) hue-rotate(125deg) brightness(94%) contrast(96%)",
-                              }}
-                            />
-                          ) : (
-                            <sub.icon className="h-4 w-4 transition-transform group-hover:scale-110" />
-                          )}
+                        <div className="flex items-center justify-between w-full">
+                          <div className="flex h-10 w-10 items-center justify-center rounded-xl border shrink-0 bg-[#E7F5EE] border-[#0B3B36]/10 text-[#0B3B36] transition-[background-color,border-color,color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:bg-[#0B3B36] group-hover:border-[#0B3B36] group-hover:text-[#7AE72A]">
+                            {typeof sub.icon === "string" ? (
+                              <div
+                                className="h-5 w-5 bg-current"
+                                style={{
+                                  maskImage: `url(${sub.icon})`,
+                                  maskSize: "contain",
+                                  maskRepeat: "no-repeat",
+                                  maskPosition: "center",
+                                  WebkitMaskImage: `url(${sub.icon})`,
+                                  WebkitMaskSize: "contain",
+                                  WebkitMaskRepeat: "no-repeat",
+                                  WebkitMaskPosition: "center",
+                                }}
+                              />
+                            ) : (
+                              <sub.icon className="h-5 w-5" />
+                            )}
+                          </div>
+                          <ChevronRight
+                            className="h-4 w-4 text-[#0B3B36]/25 transition-[transform,color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:text-[#0B3B36] group-hover:translate-x-0.5"
+                            strokeWidth={2.25}
+                          />
                         </div>
-                        <div className="min-w-0">
-                          <p className="text-[13px] font-medium leading-none text-[#082420]">
+                        <div className="mt-3.5 space-y-0.5 min-w-0 w-full">
+                          <p className="text-[14px] font-bold tracking-[-0.01em] text-[#082420] leading-snug truncate">
                             {sub.label}
                           </p>
-                          <p className="text-[10px] mt-1.5 truncate text-[#628C84]">
+                          <p className="text-[11.5px] font-medium text-[#52756E] leading-snug truncate">
                             {sub.desc}
                           </p>
                         </div>
@@ -186,74 +174,67 @@ export function AuthPanel({
                   </div>
                 </div>
               ) : (
-                <div className="grid grid-cols-2 gap-2.5 animate-in fade-in zoom-in-95 duration-300">
+                <div className="grid grid-cols-2 gap-3 animate-in fade-in zoom-in-95 duration-200">
                   {roleOptions.map((opt) => {
                     const Icon = opt.icon;
                     const busy = loadingRole === opt.role;
                     return (
                       <button
                         key={opt.role}
+                        type="button"
                         onClick={() => handleQuickLogin(opt.role)}
                         disabled={!!loadingRole}
                         className={cn(
-                          "group relative flex items-center gap-2.5 p-4 rounded-xl border transition-all duration-200 text-left overflow-hidden",
+                          "group relative flex flex-col justify-between p-4 rounded-2xl border text-left select-none",
+                          "bg-[#F8FCFA] border-[#0B3B36]/12 shadow-[0_1px_2px_rgba(11,59,54,0.04)]",
+                          "transition-[transform,background-color,border-color,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)]",
+                          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0B3B36]/40 focus-visible:ring-offset-2",
                           "disabled:opacity-60 disabled:cursor-not-allowed",
-                          !busy && "hover:shadow-md active:scale-[0.98]",
-                          busy && "ring-2 ring-[rgba(11, 59, 54, 0.2)]",
+                          !busy &&
+                            "hover:bg-white hover:border-[#0B3B36]/35 hover:shadow-[0_10px_24px_-10px_rgba(11,59,54,0.22)] active:scale-[0.97]",
+                          busy && "bg-[#EDF8F2] border-[#0B3B36] ring-2 ring-[#7AE72A]/45",
                         )}
-                        style={
-                          busy
-                            ? {
-                                borderColor: "rgba(11, 59, 54,  0.4)",
-                                background: "rgba(11, 59, 54,  0.06)",
-                              }
-                            : {
-                                borderColor: "rgba(11, 59, 54,  0.14)",
-                                background: "white",
-                              }
-                        }
                       >
-                        {!busy && (
-                          <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-[rgba(11, 59, 54, 0.03)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                        )}
-                        <div
-                          className="flex items-center justify-center w-10 h-10 rounded-lg shrink-0 transition-all duration-200 relative z-10"
-                          style={
-                            busy
-                              ? { background: "#0B3B36", color: "white" }
-                              : {
-                                  background: "rgba(11, 59, 54,  0.08)",
-                                  color: "#0B3B36",
-                                }
-                          }
-                        >
-                          {busy ? (
-                            <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                          ) : typeof opt.icon === "string" ? (
-                            <img
-                              src={opt.icon}
-                              className={cn(
-                                "h-5 w-5 brightness-0",
-                                busy && "invert",
-                              )}
-                              style={
-                                !busy
-                                  ? {
-                                      filter:
-                                        "invert(17%) sepia(50%) saturate(1475%) hue-rotate(125deg) brightness(94%) contrast(96%)",
-                                    }
-                                  : undefined
-                              }
-                            />
-                          ) : (
-                            <opt.icon className="h-4.5 w-4.5 transition-transform group-hover:scale-110" />
-                          )}
+                        <div className="flex items-center justify-between w-full">
+                          <div
+                            className={cn(
+                              "flex h-10 w-10 items-center justify-center rounded-xl border shrink-0",
+                              "transition-[background-color,border-color,color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)]",
+                              busy
+                                ? "bg-[#0B3B36] border-[#0B3B36] text-[#7AE72A]"
+                                : "bg-[#E7F5EE] border-[#0B3B36]/10 text-[#0B3B36] group-hover:bg-[#0B3B36] group-hover:border-[#0B3B36] group-hover:text-[#7AE72A]",
+                            )}
+                          >
+                            {busy ? (
+                              <div className="h-4 w-4 rounded-full border-2 border-[#7AE72A]/30 border-t-[#7AE72A] animate-spin" />
+                            ) : typeof opt.icon === "string" ? (
+                              <div
+                                className="h-5 w-5 bg-current"
+                                style={{
+                                  maskImage: `url(${opt.icon})`,
+                                  maskSize: "contain",
+                                  maskRepeat: "no-repeat",
+                                  maskPosition: "center",
+                                  WebkitMaskImage: `url(${opt.icon})`,
+                                  WebkitMaskSize: "contain",
+                                  WebkitMaskRepeat: "no-repeat",
+                                  WebkitMaskPosition: "center",
+                                }}
+                              />
+                            ) : (
+                              <Icon className="h-5 w-5" />
+                            )}
+                          </div>
+                          <ChevronRight
+                            className="h-4 w-4 text-[#0B3B36]/25 transition-[transform,color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:text-[#0B3B36] group-hover:translate-x-0.5"
+                            strokeWidth={2.25}
+                          />
                         </div>
-                        <div className="min-w-0 relative z-10">
-                          <p className="text-[13px] font-medium leading-none text-[#082420]">
+                        <div className="mt-3.5 space-y-0.5 min-w-0 w-full">
+                          <p className="text-[14px] font-bold tracking-[-0.01em] text-[#082420] leading-snug truncate">
                             {opt.label}
                           </p>
-                          <p className="text-[10.5px] mt-1.5 truncate text-[#628C84]">
+                          <p className="text-[11.5px] font-medium text-[#52756E] leading-snug truncate">
                             {opt.description}
                           </p>
                         </div>
@@ -410,7 +391,7 @@ export function AuthPanel({
                         }
                       >
                         {active && (
-                          <div className="absolute inset-0 bg-gradient-to-br from-rgba(11, 59, 54,  0.05) to-transparent" />
+                          <div className="absolute inset-0 bg-gradient-to-br from-[#0B3B36]/5 to-transparent" />
                         )}
                         {typeof opt.icon === "string" ? (
                           <img

@@ -25,6 +25,7 @@ import {
   BellAlertIcon as BellRing
 } from "@heroicons/react/24/outline"
 import { MenuItem, CartItem } from "@/lib/types"
+import { allMenuItems } from "@/lib/menu-data"
 import { OrderService, LiveOrder } from "@/lib/order-service"
 import { supabase } from "@/lib/supabase"
 import { toast } from "sonner"
@@ -114,30 +115,13 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
   const { tableId } = use(params)
   const router = useRouter()
 
-  const [menuItems, setMenuItems]           = useState<MenuItem[]>([])
-  const [isLoading, setIsLoading]           = useState(true)
+  const [menuItems, setMenuItems]           = useState<MenuItem[]>(allMenuItems)
+  const [isLoading, setIsLoading]           = useState(false)
   const [cart, setCart]                     = useState<CartItem[]>([])
   const [searchQuery, setSearchQuery]       = useState("")
   const [activeCategory, setActiveCategory] = useState("All")
   const [selectedItem, setSelectedItem]     = useState<MenuItem | null>(null)
   const [itemNotes, setItemNotes]           = useState("")
-
-  // ─── Fetch Menu Data ──────────────────────────────────────────────────────
-  useEffect(() => {
-    async function fetchMenu() {
-      try {
-        const response = await fetch('/api/menu', { cache: 'no-store' })
-        const data = await response.json()
-        setMenuItems(data)
-      } catch (error) {
-        console.error("Failed to fetch menu:", error)
-        toast.error("Failed to load menu items.")
-      } finally {
-        setIsLoading(false)
-      }
-    }
-    fetchMenu()
-  }, [])
 
   const currentTableId = (tableId || "").replace(/^0+/, "")
   const [activeOrders, setActiveOrders]     = useState<LiveOrder[]>([])
@@ -1133,7 +1117,7 @@ export default function CustomerMenuPage({ params }: { params: Promise<{ tableId
                   }}
                   onClick={handleCallWaiter}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-tr from-rgba(11, 59, 54,  0.05) to-transparent opacity-0 group-hover/waiter:opacity-100 transition-opacity" />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-[#0B3B36]/5 to-transparent opacity-0 group-hover/waiter:opacity-100 transition-opacity" />
                   <UtensilsCrossed className="h-5.5 w-5.5 relative z-10 transition-transform group-hover/waiter:-rotate-12" />
                 </button>
               </TooltipTrigger>

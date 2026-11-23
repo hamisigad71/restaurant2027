@@ -148,16 +148,6 @@ function OrdersContent() {
     return unsubscribe;
   }, []);
 
-  // Fetch menu data
-  useEffect(() => {
-    fetch("/api/menu", { cache: "no-store" })
-      .then((res) => res.json())
-      .then(setMenuItems)
-      .catch(() => {
-        toast.error("Failed to load menu items");
-      });
-  }, []);
-
   // Pre-select table from Floor Plan deep-link
   useEffect(() => {
     if (tableParam) {

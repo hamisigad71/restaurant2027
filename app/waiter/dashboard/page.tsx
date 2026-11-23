@@ -289,17 +289,7 @@ export default function WaiterDashboard() {
 
   return (
     <TooltipProvider>
-      <div className="min-h-screen" style={{ background: "#F4FAF7" }}>
-
-        {/* ── Ambient background glow ─────────────────────────────────── */}
-        <div className="fixed inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute top-[-10%] left-[-5%] w-[500px] h-[500px] rounded-full opacity-[0.12]"
-            style={{ background: "radial-gradient(circle, #7C3AED 0%, transparent 70%)", filter: "blur(60px)" }} />
-          <div className="absolute top-[30%] right-[-10%] w-[400px] h-[400px] rounded-full opacity-[0.08]"
-            style={{ background: "radial-gradient(circle, #4338CA 0%, transparent 70%)", filter: "blur(80px)" }} />
-          <div className="absolute bottom-[10%] left-[20%] w-[350px] h-[350px] rounded-full opacity-[0.07]"
-            style={{ background: "radial-gradient(circle, #6C63FF 0%, transparent 70%)", filter: "blur(80px)" }} />
-        </div>
+      <div className="min-h-screen" style={{ background: "linear-gradient(135deg, #F4FAF7 0%, #EBF6F1 50%, #E4F2EC 100%)" }}>
 
         <div className="relative z-10 max-w-screen-xl mx-auto px-4 py-6 space-y-6">
 

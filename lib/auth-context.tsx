@@ -79,8 +79,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
 
   const login = useCallback(async (email: string, password: string, role: UserRole): Promise<boolean> => {
-    // Demo login - in production this would call an API
-    await new Promise((resolve) => setTimeout(resolve, 500))
     setUser(demoUsers[role])
     return true
   }, [])

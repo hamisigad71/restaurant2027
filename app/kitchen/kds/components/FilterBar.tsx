@@ -31,7 +31,7 @@ export function FilterBar({ active, counts, search, onFilter, onSearch }: Filter
           value={search}
           onChange={(e) => onSearch(e.target.value)}
           placeholder="Search table, waiter, or dish..."
-          className="w-full h-10 pl-10 pr-4 rounded-xl text-[12px] font-medium  placeholder:text-[var(--icon-primary)] transition-all bg-white/50 focus:bg-white focus:outline-none focus:ring-1 focus:ring-[rgba(11, 59, 54, 0.2)] border border-transparent focus:border-[rgba(11, 59, 54, 0.15)]"
+          className="w-full h-10 pl-10 pr-4 rounded-xl text-[12px] font-medium  placeholder:text-[var(--icon-primary)] transition-all bg-white/50 focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#0B3B36]/20 border border-transparent focus:border-[#0B3B36]/15"
         />
       </div>
 
