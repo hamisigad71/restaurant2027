@@ -1,21 +1,29 @@
 "use client"
 
 import { useState } from "react"
-import { 
-  DocumentTextIcon as FileText, 
-  ArrowDownTrayIcon as Download, 
-  CalendarIcon as Calendar, 
-  ArrowTrendingUpIcon as TrendingUp, 
-  UserGroupIcon as Users, 
-  ShoppingCartIcon as ShoppingCart, 
+import {
+  DocumentTextIcon as FileText,
+  ArrowDownTrayIcon as Download,
+  CalendarIcon as Calendar,
+  ArrowTrendingUpIcon as TrendingUp,
+  UserGroupIcon as Users,
+  ShoppingCartIcon as ShoppingCart,
   CurrencyDollarIcon as DollarSign,
   ChartBarIcon as BarChart3,
   ChartPieIcon as PieChart,
-  ClockIcon as Clock
+  ClockIcon as Clock,
 } from "@heroicons/react/24/outline"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { Progress } from "@/components/ui/progress"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import {
   Select,
@@ -91,108 +99,99 @@ export default function ReportsPage() {
   const [dateRange, setDateRange] = useState("this-month")
 
   return (
-    <div className="space-y-6">
-      <div>
-        <div className="flex items-center gap-2">
-          <Select value={dateRange} onValueChange={setDateRange}>
-            <SelectTrigger className="w-40 bg-secondary border-border">
-              <Calendar className="h-4 w-4 mr-2" />
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="today">Today</SelectItem>
-              <SelectItem value="this-week">This Week</SelectItem>
-              <SelectItem value="this-month">This Month</SelectItem>
-              <SelectItem value="last-month">Last Month</SelectItem>
-              <SelectItem value="this-year">This Year</SelectItem>
-            </SelectContent>
-          </Select>
-          <Button>
-            <Download className="h-4 w-4 mr-2" />
-            Export
-          </Button>
-        </div>
+    <div className="space-y-6 py-4">
+      <div className="flex items-center justify-end gap-2">
+        <Select value={dateRange} onValueChange={setDateRange}>
+          <SelectTrigger className="w-40">
+            <Calendar className="size-4 mr-2" />
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="today">Today</SelectItem>
+            <SelectItem value="this-week">This Week</SelectItem>
+            <SelectItem value="this-month">This Month</SelectItem>
+            <SelectItem value="last-month">Last Month</SelectItem>
+            <SelectItem value="this-year">This Year</SelectItem>
+          </SelectContent>
+        </Select>
+        <Button>
+          <Download className="size-4" />
+          Export
+        </Button>
       </div>
 
-      {/* Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {summaryData.map((item) => (
-          <Card key={item.title} className="bg-card border-border">
-            <CardContent className="p-4">
-              <div className="flex items-center justify-between">
-                <div className="p-2 rounded-lg bg-primary/10">
-                  <item.icon className="h-5 w-5 text-primary" />
+          <Card key={item.title} size="sm">
+            <CardHeader>
+              <CardDescription className="text-xs font-medium">{item.title}</CardDescription>
+              <CardAction>
+                <div className="flex size-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  <item.icon className="size-4" />
                 </div>
-                <Badge 
-                  variant="secondary" 
-                  className={item.trend === "up" ? "text-green-400" : "text-red-400"}
-                >
-                  {item.change}
-                </Badge>
-              </div>
-              <div className="mt-3">
-                <p className="text-2xl text-foreground">{item.value}</p>
-                <p className="text-sm text-muted-foreground">{item.title}</p>
-              </div>
+              </CardAction>
+            </CardHeader>
+            <CardContent className="flex items-end justify-between gap-2">
+              <CardTitle className="text-2xl font-semibold tabular-nums">{item.value}</CardTitle>
+              <Badge
+                variant="outline"
+                className={
+                  item.trend === "up"
+                    ? "border-success/30 bg-success/10 text-success text-[10px]"
+                    : "border-destructive/30 bg-destructive/10 text-destructive text-[10px]"
+                }
+              >
+                {item.change}
+              </Badge>
             </CardContent>
           </Card>
         ))}
       </div>
 
-      {/* Reports Tabs */}
       <Tabs defaultValue="sales" className="space-y-4">
-        <TabsList className="bg-secondary">
+        <TabsList>
           <TabsTrigger value="sales">
-            <BarChart3 className="h-4 w-4 mr-2" />
+            <BarChart3 />
             Sales
           </TabsTrigger>
           <TabsTrigger value="products">
-            <PieChart className="h-4 w-4 mr-2" />
+            <PieChart />
             Products
           </TabsTrigger>
           <TabsTrigger value="staff">
-            <Users className="h-4 w-4 mr-2" />
+            <Users />
             Staff
           </TabsTrigger>
           <TabsTrigger value="hourly">
-            <Clock className="h-4 w-4 mr-2" />
+            <Clock />
             Peak Hours
           </TabsTrigger>
         </TabsList>
 
-        {/* Sales Report */}
         <TabsContent value="sales" className="space-y-4">
-          <Card className="bg-card border-border">
+          <Card>
             <CardHeader>
               <CardTitle>Sales by Category</CardTitle>
               <CardDescription>Revenue breakdown by product category</CardDescription>
             </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {salesByCategory.map((item) => (
-                  <div key={item.category} className="space-y-2">
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="font-medium">{item.category}</span>
-                      <span className="text-muted-foreground">
-                        KSh {item.sales.toLocaleString()} ({item.percentage}%)
-                      </span>
-                    </div>
-                    <div className="h-2 bg-secondary rounded-full overflow-hidden">
-                      <div 
-                        className="h-full bg-primary rounded-full transition-all"
-                        style={{ width: `${item.percentage}%` }}
-                      />
-                    </div>
+            <CardContent className="space-y-4">
+              {salesByCategory.map((item) => (
+                <div key={item.category} className="space-y-2">
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="font-medium">{item.category}</span>
+                    <span className="text-muted-foreground tabular-nums">
+                      KSh {item.sales.toLocaleString()} ({item.percentage}%)
+                    </span>
                   </div>
-                ))}
-              </div>
+                  <Progress value={item.percentage} className="h-2" />
+                </div>
+              ))}
             </CardContent>
           </Card>
         </TabsContent>
 
-        {/* Products Report */}
         <TabsContent value="products" className="space-y-4">
-          <Card className="bg-card border-border">
+          <Card>
             <CardHeader>
               <CardTitle>Top Selling Products</CardTitle>
               <CardDescription>Best performing menu items this period</CardDescription>
@@ -200,26 +199,26 @@ export default function ReportsPage() {
             <CardContent>
               <Table>
                 <TableHeader>
-                  <TableRow className="border-border hover:bg-transparent">
-                    <TableHead className="text-muted-foreground">Rank</TableHead>
-                    <TableHead className="text-muted-foreground">Product</TableHead>
-                    <TableHead className="text-muted-foreground">Category</TableHead>
-                    <TableHead className="text-muted-foreground text-right">Qty Sold</TableHead>
-                    <TableHead className="text-muted-foreground text-right">Revenue</TableHead>
+                  <TableRow>
+                    <TableHead>Rank</TableHead>
+                    <TableHead>Product</TableHead>
+                    <TableHead>Category</TableHead>
+                    <TableHead className="text-right">Qty Sold</TableHead>
+                    <TableHead className="text-right">Revenue</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {topProducts.map((product) => (
-                    <TableRow key={product.rank} className="border-border">
+                    <TableRow key={product.rank}>
                       <TableCell>
-                        <Badge variant="secondary" className={product.rank <= 3 ? "bg-primary/20 text-primary" : ""}>
+                        <Badge variant={product.rank <= 3 ? "default" : "secondary"}>
                           #{product.rank}
                         </Badge>
                       </TableCell>
                       <TableCell className="font-medium">{product.name}</TableCell>
                       <TableCell className="text-muted-foreground">{product.category}</TableCell>
-                      <TableCell className="text-right">{product.quantity}</TableCell>
-                      <TableCell className="text-right font-medium">
+                      <TableCell className="text-right tabular-nums">{product.quantity}</TableCell>
+                      <TableCell className="text-right font-medium tabular-nums">
                         KSh {product.revenue.toLocaleString()}
                       </TableCell>
                     </TableRow>
@@ -230,9 +229,8 @@ export default function ReportsPage() {
           </Card>
         </TabsContent>
 
-        {/* Staff Report */}
         <TabsContent value="staff" className="space-y-4">
-          <Card className="bg-card border-border">
+          <Card>
             <CardHeader>
               <CardTitle>Staff Performance</CardTitle>
               <CardDescription>Individual staff metrics and ratings</CardDescription>
@@ -240,28 +238,28 @@ export default function ReportsPage() {
             <CardContent>
               <Table>
                 <TableHeader>
-                  <TableRow className="border-border hover:bg-transparent">
-                    <TableHead className="text-muted-foreground">Staff Member</TableHead>
-                    <TableHead className="text-muted-foreground">Role</TableHead>
-                    <TableHead className="text-muted-foreground text-right">Orders</TableHead>
-                    <TableHead className="text-muted-foreground text-right">Revenue</TableHead>
-                    <TableHead className="text-muted-foreground text-right">Rating</TableHead>
+                  <TableRow>
+                    <TableHead>Staff Member</TableHead>
+                    <TableHead>Role</TableHead>
+                    <TableHead className="text-right">Orders</TableHead>
+                    <TableHead className="text-right">Revenue</TableHead>
+                    <TableHead className="text-right">Rating</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {staffPerformance.map((staff) => (
-                    <TableRow key={staff.name} className="border-border">
+                    <TableRow key={staff.name}>
                       <TableCell className="font-medium">{staff.name}</TableCell>
                       <TableCell>
                         <Badge variant="secondary">{staff.role}</Badge>
                       </TableCell>
-                      <TableCell className="text-right">{staff.orders}</TableCell>
-                      <TableCell className="text-right">
+                      <TableCell className="text-right tabular-nums">{staff.orders}</TableCell>
+                      <TableCell className="text-right tabular-nums">
                         KSh {staff.revenue.toLocaleString()}
                       </TableCell>
-                      <TableCell className="text-right">
-                        <span className="flex items-center justify-end gap-1">
-                          <span className="text-yellow-400">&#9733;</span>
+                      <TableCell className="text-right tabular-nums">
+                        <span className="inline-flex items-center gap-1">
+                          <span className="text-warning">&#9733;</span>
                           {staff.rating}
                         </span>
                       </TableCell>
@@ -273,51 +271,42 @@ export default function ReportsPage() {
           </Card>
         </TabsContent>
 
-        {/* Peak Hours Report */}
         <TabsContent value="hourly" className="space-y-4">
-          <Card className="bg-card border-border">
+          <Card>
             <CardHeader>
               <CardTitle>Peak Hours Analysis</CardTitle>
               <CardDescription>Order volume and revenue by hour</CardDescription>
             </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                {hourlyData.map((hour) => {
-                  const maxOrders = Math.max(...hourlyData.map(h => h.orders))
-                  const percentage = (hour.orders / maxOrders) * 100
-                  const isPeak = hour.orders >= maxOrders * 0.8
-                  
-                  return (
-                    <div key={hour.hour} className="flex items-center gap-4">
-                      <span className="w-14 text-sm text-muted-foreground">{hour.hour}</span>
-                      <div className="flex-1 h-8 bg-secondary rounded-lg overflow-hidden relative">
-                        <div 
-                          className={`h-full rounded-lg transition-all ${isPeak ? "bg-primary" : "bg-primary/50"}`}
-                          style={{ width: `${percentage}%` }}
-                        />
-                        <div className="absolute inset-0 flex items-center px-3">
-                          <span className="text-xs font-medium text-foreground">
-                            {hour.orders} orders
-                          </span>
-                        </div>
-                      </div>
-                      <span className="w-24 text-sm text-right font-medium">
-                        KSh {hour.revenue.toLocaleString()}
+            <CardContent className="space-y-3">
+              {hourlyData.map((hour) => {
+                const maxOrders = Math.max(...hourlyData.map((h) => h.orders))
+                const percentage = (hour.orders / maxOrders) * 100
+                const isPeak = hour.orders >= maxOrders * 0.8
+
+                return (
+                  <div key={hour.hour} className="flex items-center gap-4">
+                    <span className="w-14 text-sm text-muted-foreground tabular-nums">
+                      {hour.hour}
+                    </span>
+                    <div className="flex-1 flex items-center gap-3">
+                      <Progress value={percentage} className="h-2.5 flex-1" />
+                      <span className="w-16 text-xs text-muted-foreground tabular-nums">
+                        {hour.orders} orders
                       </span>
-                      {isPeak && (
-                        <Badge className="bg-primary/20 text-primary">Peak</Badge>
-                      )}
                     </div>
-                  )
-                })}
-              </div>
+                    <span className="w-24 text-sm text-right font-medium tabular-nums">
+                      KSh {hour.revenue.toLocaleString()}
+                    </span>
+                    {isPeak && <Badge variant="secondary">Peak</Badge>}
+                  </div>
+                )
+              })}
             </CardContent>
           </Card>
         </TabsContent>
       </Tabs>
 
-      {/* Quick Actions */}
-      <Card className="bg-card border-border">
+      <Card>
         <CardHeader>
           <CardTitle>Generate Reports</CardTitle>
           <CardDescription>Download detailed reports in various formats</CardDescription>
@@ -331,7 +320,7 @@ export default function ReportsPage() {
               { name: "Financial Summary", icon: FileText },
             ].map((report) => (
               <Button key={report.name} variant="outline" className="h-auto py-4 flex-col gap-2">
-                <report.icon className="h-5 w-5" />
+                <report.icon className="size-5" />
                 <span className="text-sm">{report.name}</span>
               </Button>
             ))}

@@ -3,58 +3,68 @@
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
+import { AnimatePresence, motion } from "motion/react"
+import { FAST_TRANSITION } from "@/lib/motion"
 import {
-  SparklesIcon as UtensilsCrossed, 
-  EyeIcon as Eye, 
-  EyeSlashIcon as EyeOff, 
-  ShieldCheckIcon as Shield, 
-  UserGroupIcon as Users,
-  CakeIcon as ChefHat, 
-  ShoppingCartIcon as ShoppingCart, 
-  ArrowRightIcon as ArrowRight, 
+  EyeIcon as Eye,
+  EyeSlashIcon as EyeOff,
+  ShieldCheckIcon as Shield,
   TrophyIcon as Crown,
-  StarIcon as Star, 
-  BoltIcon as Bolt, 
-  CheckIcon as Check, 
-  XMarkIcon as X, 
-  BoltIcon as Sparkles, 
+  StarIcon as Star,
+  BoltIcon as Bolt,
+  CheckIcon as Check,
+  XMarkIcon as X,
+  BoltIcon as Sparkles,
   ArrowTrendingUpIcon as TrendingUp,
-  LockClosedIcon as Lock, 
-  EnvelopeIcon as Mail, 
+  LockClosedIcon as Lock,
+  EnvelopeIcon as Mail,
   ChevronRightIcon as ChevronRight,
 } from "@heroicons/react/24/outline"
-import { Button }    from "@/components/ui/button"
-import { Input }     from "@/components/ui/input"
-import { Label }     from "@/components/ui/label"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+} from "@/components/ui/input-group"
 import { Separator } from "@/components/ui/separator"
-import { Badge }     from "@/components/ui/badge"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Spinner } from "@/components/ui/spinner"
 import { TableTapLogo } from "@/components/brand/tabletap-logo"
 import { useAuth, type UserRole } from "@/lib/auth-context"
 import { cn } from "@/lib/utils"
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const roleOptions = [
-  { role:"admin"   as UserRole, label:"Admin",   description:"Full access",      icon:"/system-administration.png" },
-  { role:"manager" as UserRole, label:"Manager", description:"Ops & reports",    icon:"/manager.png" },
-  { role:"waiter"  as UserRole, label:"Staff",   description:"Waiter & support", icon:"/staff.png" },
-  { role:"kitchen" as UserRole, label:"Kitchen", description:"Preparation",      icon:"/kitchen.png" },
+  { role: "admin" as UserRole, label: "Admin", description: "Full access", icon: "/system-administration.png" },
+  { role: "manager" as UserRole, label: "Manager", description: "Ops & reports", icon: "/manager.png" },
+  { role: "waiter" as UserRole, label: "Staff", description: "Waiter & support", icon: "/staff.png" },
+  { role: "kitchen" as UserRole, label: "Kitchen", description: "Preparation", icon: "/kitchen.png" },
 ]
 
 const defaultRedirects: Record<UserRole, string> = {
-  admin:    "/admin/dashboard",
-  manager:  "/manager/dashboard",
-  waiter:   "/waiter/dashboard",
-  kitchen:  "/kitchen/kds",
+  admin: "/admin/dashboard",
+  manager: "/manager/dashboard",
+  waiter: "/waiter/dashboard",
+  kitchen: "/kitchen/kds",
   customer: "/customer",
-  cleaner:  "/cleaners",
+  cleaner: "/cleaners",
   security: "/security",
 }
 
 const stats = [
-  { value:"5",          label:"Portals",  icon:Sparkles },
-  { value:"99.9%",      label:"Uptime",   icon:TrendingUp },
-  { value:"Real-time",  label:"Sync",     icon:Bolt },
+  { value: "5", label: "Portals", icon: Sparkles },
+  { value: "99.9%", label: "Uptime", icon: TrendingUp },
+  { value: "Real-time", label: "Sync", icon: Bolt },
 ]
 
 const testimonials = [
@@ -75,10 +85,10 @@ const testimonials = [
 ]
 
 const STAFF_SUB_ROLES = [
-  { id:"waiter",   label:"Waiter",   icon:"/staff.png",  desc:"Orders & Tables",       path:"/waiter/dashboard" },
-  { id:"kitchen",  label:"Chef",     icon:"/chef-icon.png",       desc:"Kitchen KDS",            path:"/kitchen/kds"      },
-  { id:"cleaner",  label:"Cleaner",  icon:"/office.png", desc:"Facility Maintenance", path:"/cleaners"         },
-  { id:"security", label:"Security", icon:"/policeman.png",        desc:"Safety & Access",        path:"/security"         },
+  { id: "waiter", label: "Waiter", icon: "/staff.png", desc: "Orders & Tables", path: "/waiter/dashboard" },
+  { id: "kitchen", label: "Chef", icon: "/chef-icon.png", desc: "Kitchen KDS", path: "/kitchen/kds" },
+  { id: "cleaner", label: "Cleaner", icon: "/office.png", desc: "Facility Maintenance", path: "/cleaners" },
+  { id: "security", label: "Security", icon: "/policeman.png", desc: "Safety & Access", path: "/security" },
 ]
 
 const features = [
@@ -87,7 +97,7 @@ const features = [
   "Live Analytics",
   "5 Portals",
   "Real-time Sync",
-  "Cloud Storage"
+  "Cloud Storage",
 ]
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
@@ -95,12 +105,12 @@ export default function LoginPage() {
   const router = useRouter()
   const { login } = useAuth()
 
-  const [showPassword,    setShowPassword]    = useState(false)
-  const [isLoading,       setIsLoading]       = useState(false)
-  const [loadingRole,     setLoadingRole]     = useState<UserRole | null>(null)
-  const [selectedRole,    setSelectedRole]    = useState<UserRole>("admin")
-  const [email,           setEmail]           = useState("")
-  const [password,        setPassword]        = useState("")
+  const [showPassword, setShowPassword] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [loadingRole, setLoadingRole] = useState<UserRole | null>(null)
+  const [selectedRole, setSelectedRole] = useState<UserRole>("admin")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
   const [showStaffPicker, setShowStaffPicker] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -112,7 +122,10 @@ export default function LoginPage() {
   }
 
   const handleQuickLogin = async (role: UserRole) => {
-    if (role === "waiter" && !showStaffPicker) { setShowStaffPicker(true); return }
+    if (role === "waiter" && !showStaffPicker) {
+      setShowStaffPicker(true)
+      return
+    }
     setLoadingRole(role)
     setSelectedRole(role)
     const ok = await login(`${role}@smartrestaurant.co.ke`, "demo123", role)
@@ -121,8 +134,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen grid lg:grid-cols-[1.1fr_1fr]" style={{ background:"#F4FAF7" }}>
-
+    <div className="min-h-screen grid lg:grid-cols-[1.1fr_1fr] bg-background">
       {/* ── LEFT — brand panel ───────────────────────────────────── */}
       <div
         className="hidden lg:flex flex-col justify-between p-12 xl:p-16 relative overflow-hidden"
@@ -130,21 +142,16 @@ export default function LoginPage() {
           background: "linear-gradient(145deg, #0B3B36 0%, #041816 45%, #03100E 100%)",
         }}
       >
-        {/* Enhanced Orbs */}
-        <div className="absolute -top-32 -right-32 w-[520px] h-[520px] rounded-full opacity-[0.15] pointer-events-none blur-3xl"
-          style={{ background:"radial-gradient(circle, #D9F7E0, transparent 65%)" }} />
-        <div className="absolute top-1/3 -left-20 w-[380px] h-[380px] rounded-full opacity-[0.1] pointer-events-none blur-2xl"
-          style={{ background:"radial-gradient(circle, oklch(0.75 0.18 150), transparent 70%)" }} />
-        <div className="absolute bottom-20 right-1/4 w-[280px] h-[280px] rounded-full opacity-[0.08] pointer-events-none blur-2xl"
-          style={{ background:"radial-gradient(circle, oklch(0.8 0.2 200), transparent 70%)" }} />
-
-        {/* Noise texture overlay */}
-        <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none"
-          style={{ backgroundImage:"url(data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E)" }} />
+        <div
+          className="absolute -top-32 -right-32 w-[520px] h-[520px] rounded-full opacity-[0.15] pointer-events-none blur-3xl"
+          style={{ background: "radial-gradient(circle, #D9F7E0, transparent 65%)" }}
+        />
+        <div
+          className="absolute top-1/3 -left-20 w-[380px] h-[380px] rounded-full opacity-[0.1] pointer-events-none blur-2xl"
+          style={{ background: "radial-gradient(circle, oklch(0.75 0.18 150), transparent 70%)" }}
+        />
 
         <div className="relative z-10 flex flex-col h-full justify-between gap-12">
-
-          {/* Project Logo */}
           <div className="flex items-center">
             <TableTapLogo variant="dark" size="lg" />
           </div>
@@ -152,25 +159,27 @@ export default function LoginPage() {
           {/* Hero */}
           <div className="space-y-8 max-w-[480px]">
             <Badge
-              className="flex items-center gap-2 px-3.5 py-2 text-[11px] font-bold rounded-full border w-fit backdrop-blur-sm"
-              style={{ background:"rgba(255,255,255,0.12)", borderColor:"rgba(255,255,255,0.25)", color:"white", boxShadow:"0 4px 16px rgba(0,0,0,0.1)" }}
+              variant="outline"
+              className="gap-2 px-3.5 py-1.5 text-[11px] font-bold bg-white/10 border-white/25 text-white backdrop-blur-sm"
             >
-              <Crown className="h-3.5 w-3.5" style={{ color:"#FDE68A" }} />
+              <Crown className="h-3.5 w-3.5 text-amber-200" />
               Smart Restaurant OS · v2.0
             </Badge>
 
             <div className="space-y-4">
-              <h2 className="text-white text-[2.8rem] xl:text-[3.2rem] font-bold leading-[1.08] ">
+              <h2 className="text-white text-[2.8rem] xl:text-[3.2rem] font-bold leading-[1.08]">
                 The operating system
                 <br />
-                <span style={{ color:"rgba(255,255,255,0.5)" }}>your restaurant</span>{" "}
+                <span className="text-white/50">your restaurant</span>{" "}
                 <span className="relative inline-block">
-                  <em className="not-italic" style={{ color:"rgba(255,255,255,0.95)" }}>deserves.</em>
-                  <div className="absolute -bottom-1 left-0 right-0 h-[3px] rounded-full" 
-                    style={{ background:"linear-gradient(90deg, #FDE68A 0%, transparent 100%)" }} />
+                  <em className="not-italic text-white/95">deserves.</em>
+                  <div
+                    className="absolute -bottom-1 left-0 right-0 h-[3px] rounded-full"
+                    style={{ background: "linear-gradient(90deg, #FDE68A 0%, transparent 100%)" }}
+                  />
                 </span>
               </h2>
-              <p className="text-[15px] leading-[1.7] max-w-[420px]" style={{ color:"rgba(255,255,255,0.65)" }}>
+              <p className="text-[15px] leading-[1.7] max-w-[420px] text-white/65">
                 Manage tables, track orders, display kitchen workflows, and
                 analyse your business — all from one unified, real-time platform built for excellence.
               </p>
@@ -181,183 +190,163 @@ export default function LoginPage() {
               {stats.map((s) => {
                 const Icon = s.icon
                 return (
-                  <div
+                  <Card
                     key={s.label}
-                    className="group rounded-2xl p-4 border space-y-2 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-xl cursor-default"
-                    style={{ 
-                      background:"rgba(255,255,255,0.09)", 
-                      borderColor:"rgba(255,255,255,0.15)",
-                      boxShadow:"0 4px 16px rgba(0,0,0,0.08)"
-                    }}
+                    size="sm"
+                    className="group bg-white/10 border-white/15 text-white backdrop-blur-sm shadow-none transition-colors duration-200 ease-(--ease-out) hover:bg-white/15"
                   >
-                    <div className="flex items-center justify-between">
-                      <p className="text-white text-xl font-bold leading-none">{s.value}</p>
-                      <Icon className="h-4 w-4 opacity-60 group-hover:opacity-100 transition-opacity" style={{ color:"#FDE68A" }} />
-                    </div>
-                    <p className="text-[11px] font-medium" style={{ color:"rgba(255,255,255,0.5)" }}>{s.label}</p>
-                  </div>
+                    <CardContent className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <p className="text-white text-xl font-bold leading-none">{s.value}</p>
+                        <Icon className="h-4 w-4 text-amber-200 opacity-70 group-hover:opacity-100 transition-opacity" />
+                      </div>
+                      <p className="text-[11px] font-medium text-white/55">{s.label}</p>
+                    </CardContent>
+                  </Card>
                 )
               })}
             </div>
 
             {/* Feature pills */}
-            <div className="flex flex-wrap gap-2.5">
-              {features.map((f, i) => (
-                <span
+            <div className="flex flex-wrap gap-2">
+              {features.map((f) => (
+                <Badge
                   key={f}
-                  className="flex items-center gap-2 text-[11px] font-medium rounded-full px-3.5 py-2 border backdrop-blur-sm transition-all duration-200 hover:scale-105 cursor-default"
-                  style={{
-                    background:"rgba(255,255,255,0.09)",
-                    borderColor:"rgba(255,255,255,0.18)",
-                    color:"rgba(255,255,255,0.85)",
-                    animation: `fadeInUp 0.5s ease-out ${i * 0.1}s both`
-                  }}
+                  variant="outline"
+                  className="gap-1.5 px-3 py-1.5 text-[11px] font-medium bg-white/10 border-white/20 text-white/85 backdrop-blur-sm"
                 >
-                  <Check className="h-3 w-3" style={{ color:"#FDE68A" }} />
+                  <Check className="h-3 w-3 text-amber-200" />
                   {f}
-                </span>
+                </Badge>
               ))}
             </div>
           </div>
 
           {/* Testimonials */}
           <div className="space-y-3.5">
-            {testimonials.map((t, i) => (
-              <div
+            {testimonials.map((t) => (
+              <Card
                 key={t.author}
-                className="rounded-2xl p-4.5 border backdrop-blur-sm transition-all duration-300 hover:scale-[1.01] hover:shadow-lg"
-                style={{ 
-                  background:"rgba(255,255,255,0.08)", 
-                  borderColor:"rgba(255,255,255,0.14)",
-                  animation: `fadeInUp 0.6s ease-out ${i * 0.2}s both`
-                }}
+                size="sm"
+                className="bg-white/10 border-white/15 text-white backdrop-blur-sm shadow-none"
               >
-                <div className="flex gap-1 mb-3">
-                  {[...Array(t.rating)].map((_,i) => (
-                    <Star key={i} className="h-3.5 w-3.5 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
-                <p className="text-[13.5px] leading-[1.65] font-medium" style={{ color:"rgba(255,255,255,0.85)" }}>
-                  "{t.text}"
-                </p>
-                <div className="flex items-center gap-3 mt-3.5">
-                  <div
-                    className="w-9 h-9 rounded-full flex items-center justify-center text-[11px] font-bold shrink-0 border"
-                    style={{ 
-                      background:"rgba(255,255,255,0.18)", 
-                      color:"white",
-                      borderColor:"rgba(255,255,255,0.3)"
-                    }}
-                  >
-                    {t.avatar}
+                <CardContent className="space-y-3">
+                  <div className="flex gap-1">
+                    {[...Array(t.rating)].map((_, idx) => (
+                      <Star key={idx} className="h-3.5 w-3.5 fill-yellow-400 text-yellow-400" />
+                    ))}
                   </div>
-                  <div>
-                    <p className="text-[12.5px] font-semibold text-white leading-none">{t.author}</p>
-                    <p className="text-[10.5px] mt-1.5 font-medium" style={{ color:"rgba(255,255,255,0.5)" }}>{t.role}</p>
+                  <p className="text-[13.5px] leading-[1.65] font-medium text-white/85">
+                    &ldquo;{t.text}&rdquo;
+                  </p>
+                  <div className="flex items-center gap-3">
+                    <Avatar className="border border-white/30">
+                      <AvatarFallback className="bg-white/20 text-white text-[11px] font-bold">
+                        {t.avatar}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <p className="text-xs font-semibold text-white leading-none">{t.author}</p>
+                      <p className="text-[11px] mt-1 font-medium text-white/55">{t.role}</p>
+                    </div>
                   </div>
-                </div>
-              </div>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
       </div>
 
       {/* ── RIGHT — auth panel ───────────────────────────────────── */}
-      <div
-        className="flex flex-col justify-center px-6 py-10 lg:px-10 xl:px-14"
-        style={{ background:"#F4FAF7" }}
-      >
-        {/* Project Logo Mobile */}
+      <div className="flex flex-col justify-center px-6 py-10 lg:px-10 xl:px-14 bg-background">
         <div className="flex lg:hidden items-center mb-10">
           <TableTapLogo variant="light" size="md" />
         </div>
 
-        <div className="w-full max-w-[440px] mx-auto space-y-7">
-
-          {/* Heading */}
-          <div className="space-y-4">
-            <h1 className="text-[2rem] font-bold " style={{ color:"#082420" }}>
+        <div className="w-full max-w-[440px] mx-auto space-y-6">
+          <div className="space-y-2">
+            <h1 className="text-3xl font-bold tracking-tight text-foreground">
               Welcome back
             </h1>
-            <p className="text-[14px] leading-relaxed" style={{ color:"#4B6E67" }}>
+            <p className="text-sm text-muted-foreground">
               Sign in to access your portal and manage your restaurant
             </p>
           </div>
 
           {/* ── Quick demo ───────────────────────────────────────── */}
-          <Card className="border border-[#0B3B36]/12 rounded-2xl bg-white shadow-[0_8px_30px_-12px_rgba(11,59,54,0.12)] overflow-hidden">
-            <div
-              className="h-[3px]"
-              style={{ background: "linear-gradient(90deg, #0B3B36 0%, #166558 65%, #7AE72A 100%)" }}
-            />
-            <CardHeader className="px-6 pt-5 pb-3">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-[#E7F5EE] border border-[#0B3B36]/10">
-                    <div
-                      className="h-4.5 w-4.5 bg-[#0B3B36]"
-                      style={{
-                        maskImage: "url(/demo.png)",
-                        maskSize: "contain",
-                        maskRepeat: "no-repeat",
-                        maskPosition: "center",
-                        WebkitMaskImage: "url(/demo.png)",
-                        WebkitMaskSize: "contain",
-                        WebkitMaskRepeat: "no-repeat",
-                        WebkitMaskPosition: "center",
-                      }}
-                    />
-                  </div>
-                  <CardTitle className="text-[12px] font-semibold uppercase tracking-[0.06em] text-[#133D38]">
-                    Quick Demo Access
-                  </CardTitle>
+          <Card size="sm">
+            <CardHeader className="border-b border-border">
+              <div className="flex items-center gap-2.5">
+                <div className="size-8 rounded-lg flex items-center justify-center bg-primary/10 border border-primary/15 text-primary">
+                  <div
+                    className="h-4 w-4 bg-current"
+                    style={{
+                      maskImage: "url(/demo.png)",
+                      maskSize: "contain",
+                      maskRepeat: "no-repeat",
+                      maskPosition: "center",
+                      WebkitMaskImage: "url(/demo.png)",
+                      WebkitMaskSize: "contain",
+                      WebkitMaskRepeat: "no-repeat",
+                      WebkitMaskPosition: "center",
+                    }}
+                  />
                 </div>
-                <Badge className="bg-[#E7F5EE] text-[#0B3B36] border border-[#0B3B36]/15 text-[10px] font-semibold px-2.5 py-0.5 rounded-full inline-flex items-center gap-1.5 shadow-none hover:bg-[#E7F5EE]">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#4CC718]" />
+                <CardTitle className="text-xs uppercase tracking-wider text-muted-foreground">
+                  Quick Demo Access
+                </CardTitle>
+              </div>
+              <CardAction>
+                <Badge variant="secondary" className="gap-1.5 text-[10px]">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
                   One-click
                 </Badge>
-              </div>
+              </CardAction>
             </CardHeader>
 
-            <CardContent className="px-6 pb-6">
+            <CardContent>
               <div className="min-h-[160px]">
-                {showStaffPicker ? (
-                  <div className="animate-in fade-in zoom-in-95 duration-200">
-                    <div className="flex items-center justify-between mb-3.5">
-                      <p className="text-[12px] font-semibold uppercase tracking-[0.05em] text-[#082420]">
-                        Select Staff Role
-                      </p>
-                      <button
-                        type="button"
-                        onClick={() => setShowStaffPicker(false)}
-                        className="inline-flex items-center gap-1 px-2 py-1 rounded-lg text-[11px] font-semibold text-[#4B6E67] hover:text-[#082420] hover:bg-[#E7F5EE] transition-colors active:scale-[0.97]"
-                      >
-                        <X className="h-3.5 w-3.5" />
-                        Back
-                      </button>
-                    </div>
-                    <div className="grid grid-cols-2 gap-3">
-                      {STAFF_SUB_ROLES.map((sub) => (
-                        <button
-                          key={sub.id}
+                <AnimatePresence mode="wait" initial={false}>
+                  {showStaffPicker ? (
+                    <motion.div
+                      key="staff-picker"
+                      initial={{ opacity: 0, x: 8 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -8 }}
+                      transition={FAST_TRANSITION}
+                      className="space-y-3"
+                    >
+                      <div className="flex items-center justify-between">
+                        <p className="text-xs font-semibold uppercase tracking-wide text-foreground">
+                          Select Staff Role
+                        </p>
+                        <Button
                           type="button"
-                          onClick={() => {
-                            setShowStaffPicker(false)
-                            handleQuickLogin(sub.id as UserRole)
-                          }}
-                          className={cn(
-                            "group relative flex flex-col justify-between p-4 rounded-2xl border text-left select-none",
-                            "bg-[#F8FCFA] border-[#0B3B36]/12 shadow-[0_1px_2px_rgba(11,59,54,0.04)]",
-                            "transition-[transform,background-color,border-color,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)]",
-                            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0B3B36]/40 focus-visible:ring-offset-2",
-                            "hover:bg-white hover:border-[#0B3B36]/35 hover:shadow-[0_10px_24px_-10px_rgba(11,59,54,0.22)] active:scale-[0.97]",
-                          )}
+                          variant="ghost"
+                          size="xs"
+                          onClick={() => setShowStaffPicker(false)}
+                          className="gap-1"
                         >
-                          <div className="flex items-center justify-between w-full">
-                            <div className="flex h-10 w-10 items-center justify-center rounded-xl border shrink-0 bg-[#E7F5EE] border-[#0B3B36]/10 text-[#0B3B36] transition-[background-color,border-color,color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:bg-[#0B3B36] group-hover:border-[#0B3B36] group-hover:text-[#7AE72A]">
-                              {typeof sub.icon === "string" ? (
+                          <X className="size-3.5" />
+                          Back
+                        </Button>
+                      </div>
+                      <div className="grid grid-cols-2 gap-3">
+                        {STAFF_SUB_ROLES.map((sub) => (
+                          <Button
+                            key={sub.id}
+                            type="button"
+                            variant="outline"
+                            onClick={() => {
+                              setShowStaffPicker(false)
+                              handleQuickLogin(sub.id as UserRole)
+                            }}
+                            className="group h-auto flex-col items-stretch justify-between p-4 text-left hover:bg-accent"
+                          >
+                            <div className="flex items-center justify-between w-full">
+                              <div className="flex size-10 items-center justify-center rounded-xl border border-primary/15 bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                                 <div
-                                  className="h-5 w-5 bg-current"
+                                  className="size-5 bg-current"
                                   style={{
                                     maskImage: `url(${sub.icon})`,
                                     maskSize: "contain",
@@ -369,100 +358,90 @@ export default function LoginPage() {
                                     WebkitMaskPosition: "center",
                                   }}
                                 />
-                              ) : (
-                                (() => {
-                                  const DynamicIcon = sub.icon as any
-                                  return <DynamicIcon className="h-5 w-5" />
-                                })()
-                              )}
-                            </div>
-                            <ChevronRight
-                              className="h-4 w-4 text-[#0B3B36]/25 transition-[transform,color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:text-[#0B3B36] group-hover:translate-x-0.5"
-                              strokeWidth={2.25}
-                            />
-                          </div>
-
-                          <div className="mt-3.5 space-y-0.5 min-w-0 w-full">
-                            <p className="text-[14px] font-bold tracking-[-0.01em] text-[#082420] leading-snug truncate">
-                              {sub.label}
-                            </p>
-                            <p className="text-[11.5px] font-medium text-[#52756E] leading-snug truncate">
-                              {sub.desc}
-                            </p>
-                          </div>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                ) : (
-                  <div className="grid grid-cols-2 gap-3 animate-in fade-in zoom-in-95 duration-200">
-                    {roleOptions.map((opt) => {
-                      const busy = loadingRole === opt.role
-                      return (
-                        <button
-                          key={opt.role}
-                          type="button"
-                          onClick={() => handleQuickLogin(opt.role)}
-                          disabled={!!loadingRole}
-                          className={cn(
-                            "group relative flex flex-col justify-between p-4 rounded-2xl border text-left select-none",
-                            "bg-[#F8FCFA] border-[#0B3B36]/12 shadow-[0_1px_2px_rgba(11,59,54,0.04)]",
-                            "transition-[transform,background-color,border-color,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)]",
-                            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0B3B36]/40 focus-visible:ring-offset-2",
-                            "disabled:opacity-60 disabled:cursor-not-allowed",
-                            !busy &&
-                              "hover:bg-white hover:border-[#0B3B36]/35 hover:shadow-[0_10px_24px_-10px_rgba(11,59,54,0.22)] active:scale-[0.97]",
-                            busy && "bg-[#EDF8F2] border-[#0B3B36] ring-2 ring-[#7AE72A]/45",
-                          )}
-                        >
-                          <div className="flex items-center justify-between w-full">
-                            <div
-                              className={cn(
-                                "flex h-10 w-10 items-center justify-center rounded-xl border shrink-0",
-                                "transition-[background-color,border-color,color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)]",
-                                busy
-                                  ? "bg-[#0B3B36] border-[#0B3B36] text-[#7AE72A]"
-                                  : "bg-[#E7F5EE] border-[#0B3B36]/10 text-[#0B3B36] group-hover:bg-[#0B3B36] group-hover:border-[#0B3B36] group-hover:text-[#7AE72A]",
-                              )}
-                            >
-                              {busy ? (
-                                <div className="h-4 w-4 rounded-full border-2 border-[#7AE72A]/30 border-t-[#7AE72A] animate-spin" />
-                              ) : (
-                                <div
-                                  className="h-5 w-5 bg-current"
-                                  style={{
-                                    maskImage: `url(${opt.icon})`,
-                                    maskSize: "contain",
-                                    maskRepeat: "no-repeat",
-                                    maskPosition: "center",
-                                    WebkitMaskImage: `url(${opt.icon})`,
-                                    WebkitMaskSize: "contain",
-                                    WebkitMaskRepeat: "no-repeat",
-                                    WebkitMaskPosition: "center",
-                                  }}
-                                />
-                              )}
+                              </div>
+                              <ChevronRight className="size-4 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-foreground" />
                             </div>
 
-                            <ChevronRight
-                              className="h-4 w-4 text-[#0B3B36]/25 transition-[transform,color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:text-[#0B3B36] group-hover:translate-x-0.5"
-                              strokeWidth={2.25}
-                            />
-                          </div>
+                            <div className="mt-3 space-y-0.5 min-w-0 w-full">
+                              <p className="text-sm font-semibold text-foreground leading-snug truncate">
+                                {sub.label}
+                              </p>
+                              <p className="text-xs font-normal text-muted-foreground leading-snug truncate">
+                                {sub.desc}
+                              </p>
+                            </div>
+                          </Button>
+                        ))}
+                      </div>
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="role-picker"
+                      initial={{ opacity: 0, x: -8 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: 8 }}
+                      transition={FAST_TRANSITION}
+                      className="grid grid-cols-2 gap-3"
+                    >
+                      {roleOptions.map((opt) => {
+                        const busy = loadingRole === opt.role
+                        return (
+                          <Button
+                            key={opt.role}
+                            type="button"
+                            variant={busy ? "secondary" : "outline"}
+                            onClick={() => handleQuickLogin(opt.role)}
+                            disabled={!!loadingRole}
+                            className={cn(
+                              "group h-auto flex-col items-stretch justify-between p-4 text-left",
+                              busy && "border-primary ring-2 ring-primary/20",
+                            )}
+                          >
+                            <div className="flex items-center justify-between w-full">
+                              <div
+                                className={cn(
+                                  "flex size-10 items-center justify-center rounded-xl border shrink-0 transition-colors",
+                                  busy
+                                    ? "bg-primary border-primary text-primary-foreground"
+                                    : "bg-primary/10 border-primary/15 text-primary group-hover:bg-primary group-hover:text-primary-foreground",
+                                )}
+                              >
+                                {busy ? (
+                                  <Spinner className="size-4" />
+                                ) : (
+                                  <div
+                                    className="size-5 bg-current"
+                                    style={{
+                                      maskImage: `url(${opt.icon})`,
+                                      maskSize: "contain",
+                                      maskRepeat: "no-repeat",
+                                      maskPosition: "center",
+                                      WebkitMaskImage: `url(${opt.icon})`,
+                                      WebkitMaskSize: "contain",
+                                      WebkitMaskRepeat: "no-repeat",
+                                      WebkitMaskPosition: "center",
+                                    }}
+                                  />
+                                )}
+                              </div>
 
-                          <div className="mt-3.5 space-y-0.5 min-w-0 w-full">
-                            <p className="text-[14px] font-bold tracking-[-0.01em] text-[#082420] leading-snug truncate">
-                              {opt.label}
-                            </p>
-                            <p className="text-[11.5px] font-medium text-[#52756E] leading-snug truncate">
-                              {opt.description}
-                            </p>
-                          </div>
-                        </button>
-                      )
-                    })}
-                  </div>
-                )}
+                              <ChevronRight className="size-4 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-foreground" />
+                            </div>
+
+                            <div className="mt-3 space-y-0.5 min-w-0 w-full">
+                              <p className="text-sm font-semibold text-foreground leading-snug truncate">
+                                {opt.label}
+                              </p>
+                              <p className="text-xs font-normal text-muted-foreground leading-snug truncate">
+                                {opt.description}
+                              </p>
+                            </div>
+                          </Button>
+                        )
+                      })}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             </CardContent>
           </Card>
@@ -470,11 +449,11 @@ export default function LoginPage() {
           {/* Social */}
           <div className="space-y-4">
             <div className="flex items-center gap-4">
-              <Separator className="flex-1" style={{ background:"rgba(11, 59, 54,  0.12)" }} />
-              <span className="text-[10px] font-bold uppercase  whitespace-nowrap px-1" style={{ color:"var(--icon-primary)" }}>
+              <Separator className="flex-1" />
+              <span className="text-[10px] font-semibold uppercase tracking-wider whitespace-nowrap px-1 text-muted-foreground">
                 Social login
               </span>
-              <Separator className="flex-1" style={{ background:"rgba(11, 59, 54,  0.12)" }} />
+              <Separator className="flex-1" />
             </div>
 
             <div className="grid grid-cols-2 gap-3">
@@ -482,216 +461,157 @@ export default function LoginPage() {
                 {
                   label: "Google",
                   svg: (
-                    <svg className="h-4.5 w-4.5" viewBox="0 0 24 24">
-                      <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-                      <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-                      <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
-                      <path d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                    <svg className="size-4" viewBox="0 0 24 24">
+                      <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
+                      <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
+                      <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05" />
+                      <path d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
                     </svg>
                   ),
                 },
                 {
                   label: "Facebook",
                   svg: (
-                    <svg className="h-4.5 w-4.5" fill="#1877F2" viewBox="0 0 24 24">
-                      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    <svg className="size-4" fill="#1877F2" viewBox="0 0 24 24">
+                      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                     </svg>
                   ),
                 },
               ].map((btn) => (
-                <button
-                  key={btn.label}
-                  className="flex items-center justify-center gap-2.5 h-11 rounded-xl border text-[13px] font-semibold transition-all duration-200 hover:shadow-md hover:-translate-y-0.5 active:translate-y-0"
-                  style={{
-                    background:"white",
-                    borderColor:"rgba(11, 59, 54,  0.16)",
-                    color:"#133D38",
-                  }}
-                >
+                <Button key={btn.label} type="button" variant="outline" className="h-11 gap-2.5">
                   {btn.svg}
                   {btn.label}
-                </button>
+                </Button>
               ))}
             </div>
 
             <div className="flex items-center gap-4">
-              <Separator className="flex-1" style={{ background:"rgba(11, 59, 54,  0.12)" }} />
-              <span className="text-[10px] font-bold uppercase  whitespace-nowrap px-1" style={{ color:"var(--icon-primary)" }}>
+              <Separator className="flex-1" />
+              <span className="text-[10px] font-semibold uppercase tracking-wider whitespace-nowrap px-1 text-muted-foreground">
                 or continue with email
               </span>
-              <Separator className="flex-1" style={{ background:"rgba(11, 59, 54,  0.12)" }} />
+              <Separator className="flex-1" />
             </div>
           </div>
 
           {/* ── Manual login form ────────────────────────────────── */}
-          <Card
-            className="border rounded-[20px] shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl"
-            style={{ background:"white", borderColor:"rgba(11, 59, 54,  0.12)" }}
-          >
-            <CardContent className="p-6">
-              <form onSubmit={handleSubmit} className="space-y-5">
+          <Card>
+            <CardContent>
+              <form onSubmit={handleSubmit}>
+                <FieldGroup>
+                  <Field>
+                    <FieldLabel htmlFor="email" className="text-xs font-semibold uppercase tracking-wide flex items-center gap-1.5">
+                      <Mail className="size-3.5 text-primary" />
+                      Email Address
+                    </FieldLabel>
+                    <InputGroup className="h-11">
+                      <InputGroupInput
+                        id="email"
+                        type="email"
+                        placeholder="name@restaurant.com"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                      />
+                    </InputGroup>
+                  </Field>
 
-                {/* Email */}
-                <div className="space-y-2">
-                  <Label htmlFor="email" className="text-[12px] font-bold uppercase  flex items-center gap-2" style={{ color:"#133D38" }}>
-                    <Mail className="h-3.5 w-3.5" style={{ color:"#0B3B36" }} />
-                    Email Address
-                  </Label>
-                  <div className="relative group">
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="name@restaurant.com"
-                      value={email}
-                      onChange={e => setEmail(e.target.value)}
-                      required
-                      className="h-12 rounded-xl text-[14px] border-2 transition-all duration-200 pl-4 pr-4 focus:shadow-md"
-                      style={{
-                        background:"#F4FAF7",
-                        borderColor:"rgba(11, 59, 54,  0.14)",
-                        color:"#082420",
-                      }}
-                    />
-                  </div>
-                </div>
-
-                {/* Password */}
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <Label htmlFor="password" className="text-[12px] font-bold uppercase  flex items-center gap-2" style={{ color:"#133D38" }}>
-                      <Lock className="h-3.5 w-3.5" style={{ color:"#0B3B36" }} />
-                      Password
-                    </Label>
-                    <Link
-                      href="/forgot-password"
-                      className="text-[11px] font-semibold transition-all hover:underline"
-                      style={{ color:"#0B3B36" }}
-                    >
-                      Forgot password?
-                    </Link>
-                  </div>
-                  <div className="relative">
-                    <Input
-                      id="password"
-                      type={showPassword ? "text" : "password"}
-                      placeholder="Enter your password"
-                      value={password}
-                      onChange={e => setPassword(e.target.value)}
-                      required
-                      className="h-12 rounded-xl text-[14px] border-2 transition-all duration-200 pl-4 pr-12 focus:shadow-md"
-                      style={{
-                        background:"#F4FAF7",
-                        borderColor:"rgba(11, 59, 54,  0.14)",
-                        color:"#082420",
-                      }}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(v => !v)}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 transition-all hover:scale-110 active:scale-95"
-                      style={{ color:"var(--icon-primary)" }}
-                    >
-                      {showPassword ? <EyeOff className="h-4.5 w-4.5" /> : <Eye className="h-4.5 w-4.5" />}
-                    </button>
-                  </div>
-                </div>
-
-                {/* Portal selector */}
-                <div className="space-y-2.5">
-                  <Label className="text-[12px] font-bold uppercase  flex items-center gap-2" style={{ color:"#133D38" }}>
-                    <Shield className="h-3.5 w-3.5" style={{ color:"#0B3B36" }} />
-                    Select Portal
-                  </Label>
-                  <div className="grid grid-cols-4 gap-2">
-                    {roleOptions.map((opt) => {
-                      const Icon   = opt.icon
-                      const active = selectedRole === opt.role
-                      return (
-                        <button
-                          key={opt.role}
+                  <Field>
+                    <div className="flex items-center justify-between">
+                      <FieldLabel htmlFor="password" className="text-xs font-semibold uppercase tracking-wide flex items-center gap-1.5">
+                        <Lock className="size-3.5 text-primary" />
+                        Password
+                      </FieldLabel>
+                      <Link
+                        href="/forgot-password"
+                        className="text-xs font-semibold text-primary hover:underline"
+                      >
+                        Forgot password?
+                      </Link>
+                    </div>
+                    <InputGroup className="h-11">
+                      <InputGroupInput
+                        id="password"
+                        type={showPassword ? "text" : "password"}
+                        placeholder="Enter your password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                      />
+                      <InputGroupAddon align="inline-end">
+                        <InputGroupButton
                           type="button"
-                          onClick={() => setSelectedRole(opt.role)}
-                          className="relative flex flex-col items-center gap-2 py-3.5 px-1 rounded-xl border-2 text-[10px] font-bold transition-all duration-200 overflow-hidden active:scale-95"
-                          style={
-                            active
-                              ? { 
-                                  background:"rgba(11, 59, 54,  0.06)", 
-                                  borderColor:"#0B3B36", 
-                                  color:"#0B3B36",
-                                  boxShadow:"0 8px 24px rgba(11, 59, 54,  0.15)"
-                                }
-                              : { 
-                                  background:"#F4FAF7", 
-                                  borderColor:"rgba(11, 59, 54,  0.14)", 
-                                  color:"#4B6E67" 
-                                }
-                          }
+                          size="icon-xs"
+                          variant="ghost"
+                          onClick={() => setShowPassword((v) => !v)}
+                          aria-label={showPassword ? "Hide password" : "Show password"}
                         >
-                          {active && (
-                            <div className="absolute inset-0 bg-gradient-to-br from-[#0B3B36]/5 to-transparent" />
-                          )}
-                          {typeof opt.icon === 'string' ? (
-                            <div 
-                              className={cn("h-4 w-4 relative z-10 transition-transform", active && "scale-110")} 
-                              style={{ 
-                                backgroundColor: '#0B3B36',
-                                opacity: active ? 1 : 0.45,
-                                maskImage: `url(${opt.icon})`,
-                                maskSize: 'contain',
-                                maskRepeat: 'no-repeat',
-                                maskPosition: 'center',
-                                WebkitMaskImage: `url(${opt.icon})`,
-                                WebkitMaskSize: 'contain',
-                                WebkitMaskRepeat: 'no-repeat',
-                                WebkitMaskPosition: 'center'
-                              }} 
-                            />
-                          ) : (() => {
-                            const DynamicIcon = opt.icon as any
-                            return (
-                              <DynamicIcon 
-                                className={cn("h-4 w-4 relative z-10 transition-transform", active && "scale-110")} 
-                                style={{ color: "#0B3B36", opacity: active ? 1 : 0.45 }}
-                              />
-                            )
-                          })()}
-                          <span className="relative z-10">{opt.label}</span>
-                        </button>
-                      )
-                    })}
-                  </div>
-                </div>
+                          {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+                        </InputGroupButton>
+                      </InputGroupAddon>
+                    </InputGroup>
+                  </Field>
 
-                {/* Submit */}
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="w-full flex items-center justify-center gap-3 h-12 rounded-2xl font-bold text-[13px] uppercase  text-white transition-all duration-200 hover:-translate-y-1 hover:shadow-2xl active:translate-y-0 active:scale-[0.98] disabled:opacity-60 disabled:pointer-events-none relative overflow-hidden group"
-                  style={{
-                    background:"linear-gradient(135deg, #0B3B36 0%, #062421 100%)",
-                    boxShadow:"0 8px 32px rgba(11, 59, 54,  0.35)",
-                  }}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000" />
-                  {isLoading ? (
-                    <>
-                      <div className="w-4.5 h-4.5 border-2 border-white/30 border-t-white rounded-full animate-spin relative z-10" />
-                      <span className="relative z-10">Signing in…</span>
-                    </>
-                  ) : (
-                    <>
-                      <span className="relative z-10">Sign in</span>
-                      <ChevronRight className="h-4.5 w-4.5 relative z-10 transition-transform group-hover:translate-x-1" strokeWidth={3} />
-                    </>
-                  )}
-                </button>
+                  <Field>
+                    <FieldLabel className="text-xs font-semibold uppercase tracking-wide flex items-center gap-1.5">
+                      <Shield className="size-3.5 text-primary" />
+                      Select Portal
+                    </FieldLabel>
+                    <div className="grid grid-cols-4 gap-2">
+                      {roleOptions.map((opt) => {
+                        const active = selectedRole === opt.role
+                        return (
+                          <Button
+                            key={opt.role}
+                            type="button"
+                            variant={active ? "secondary" : "outline"}
+                            onClick={() => setSelectedRole(opt.role)}
+                            className={cn(
+                              "h-auto flex-col gap-1.5 py-3 px-1 text-[11px]",
+                              active && "border-primary bg-primary/10 text-primary",
+                            )}
+                          >
+                            <div
+                              className={cn("size-4 bg-current", !active && "opacity-60")}
+                              style={{
+                                maskImage: `url(${opt.icon})`,
+                                maskSize: "contain",
+                                maskRepeat: "no-repeat",
+                                maskPosition: "center",
+                                WebkitMaskImage: `url(${opt.icon})`,
+                                WebkitMaskSize: "contain",
+                                WebkitMaskRepeat: "no-repeat",
+                                WebkitMaskPosition: "center",
+                              }}
+                            />
+                            <span>{opt.label}</span>
+                          </Button>
+                        )
+                      })}
+                    </div>
+                  </Field>
+
+                  <Button type="submit" size="lg" disabled={isLoading} className="w-full h-11 gap-2">
+                    {isLoading ? (
+                      <>
+                        <Spinner className="size-4" />
+                        <span>Signing in…</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Sign in</span>
+                        <ChevronRight className="size-4" />
+                      </>
+                    )}
+                  </Button>
+                </FieldGroup>
               </form>
             </CardContent>
           </Card>
 
-          <p className="text-center text-[13px]" style={{ color:"#4B6E67" }}>
-            Don't have an account?{" "}
-            <Link href="/signup" className="font-bold transition-all hover:underline" style={{ color:"#0B3B36" }}>
+          <p className="text-center text-sm text-muted-foreground">
+            Don&apos;t have an account?{" "}
+            <Link href="/signup" className="font-semibold text-primary hover:underline">
               Create one
             </Link>
           </p>

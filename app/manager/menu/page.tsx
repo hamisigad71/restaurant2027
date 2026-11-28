@@ -1,30 +1,51 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { AnimatePresence, motion } from "motion/react"
+import { SPRING_SNAPPY } from "@/lib/motion"
 import {
-  PlusIcon as Plus, 
-  MagnifyingGlassIcon as Search, 
-  FunnelIcon as Filter, 
-  CurrencyDollarIcon as DollarSign, 
+  PlusIcon as Plus,
+  MagnifyingGlassIcon as Search,
+  FunnelIcon as Filter,
+  CurrencyDollarIcon as DollarSign,
   ArrowTrendingUpIcon as TrendingUp,
-  ExclamationCircleIcon as AlertCircle, 
-  EyeIcon as Eye, 
-  EyeSlashIcon as EyeOff, 
-  ChevronRightIcon as ChevronRight, 
+  ExclamationCircleIcon as AlertCircle,
+  EyeIcon as Eye,
+  EyeSlashIcon as EyeOff,
+  ChevronRightIcon as ChevronRight,
   FireIcon as Flame,
-  StarIcon as Star, 
-  HandThumbUpIcon as Leaf, 
-  BoltIcon as Zap, 
-  PencilSquareIcon as Edit3, 
-  EllipsisHorizontalIcon as MoreHorizontal, 
-  BoltIcon as Sparkles,
-  ArrowRightIcon as UtensilsCrossed, 
+  StarIcon as Star,
+  HandThumbUpIcon as Leaf,
+  BoltIcon as Zap,
+  PencilSquareIcon as Edit3,
+  EllipsisHorizontalIcon as MoreHorizontal,
+  ArrowRightIcon as UtensilsCrossed,
   CubeIcon as Package,
 } from "@heroicons/react/24/outline"
-import { Button }  from "@/components/ui/button"
-import { Input }   from "@/components/ui/input"
-import { Badge }   from "@/components/ui/badge"
-import { Card, CardContent } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+} from "@/components/ui/input-group"
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -33,51 +54,55 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import {
-  Tooltip, TooltipContent, TooltipProvider, TooltipTrigger,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { Separator }  from "@/components/ui/separator"
 import { cn } from "@/lib/utils"
 import { MenuItem } from "@/lib/types"
 import { allMenuItems } from "@/lib/menu-data"
+import { MenuService } from "@/lib/restaurant-store"
+import { toast } from "sonner"
 
-// ─── Category mapping ─────────────────────────────────────────────────────────
 const CATEGORY_MAP: Record<string, string> = {
-  "All Items":   "All Items",
+  "All Items": "All Items",
   "Main Dishes": "main",
-  "Appetizers":  "starters",
-  "Desserts":    "desserts",
-  "Beverages":   "drinks",
-  "Seafood":     "seafood",
-  "Snacks":      "snacks",
+  "Appetizers": "starters",
+  "Desserts": "desserts",
+  "Beverages": "drinks",
+  "Seafood": "seafood",
+  "Snacks": "snacks",
 }
 
 const CATEGORIES = [
-  "All Items", "Main Dishes", "Appetizers",
-  "Seafood", "Snacks", "Desserts", "Beverages", "Vegetarian",
+  "All Items",
+  "Main Dishes",
+  "Appetizers",
+  "Seafood",
+  "Snacks",
+  "Desserts",
+  "Beverages",
+  "Vegetarian",
 ]
 
-// ─── Insights data ────────────────────────────────────────────────────────────
 const INSIGHTS = [
   {
     icon: AlertCircle,
     title: "Supply Risk: Truffles",
     desc: "Inventory for Risotto is critical. Reorder by 22:00 tonight.",
-    accent: "oklch(0.65 0.18 25)",
-    accentBg: "oklch(0.65 0.18 25 / 0.08)",
-    accentBorder: "oklch(0.65 0.18 25 / 0.2)",
+    tone: "border-destructive/25 bg-destructive/5",
+    iconTone: "bg-destructive text-destructive-foreground",
   },
   {
     icon: DollarSign,
     title: "Pricing Opportunity",
     desc: "Salmon margins improved. Suggested price adjustment: +KES 150.",
-    accent: "oklch(0.62 0.16 150)",
-    accentBg: "oklch(0.62 0.16 150 / 0.08)",
-    accentBorder: "oklch(0.62 0.16 150 / 0.2)",
+    tone: "border-success/25 bg-success/5",
+    iconTone: "bg-success text-success-foreground",
   },
 ]
 
-// ─── Menu Card ────────────────────────────────────────────────────────────────
 function MenuCard({
   item,
   onToggleAvailability,
@@ -86,212 +111,161 @@ function MenuCard({
   onToggleAvailability: (id: string) => void
 }) {
   return (
-    <div
-      className="group relative flex flex-col overflow-hidden rounded-lg border bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-      style={{
-        borderColor: "rgba(11, 59, 54,  0.1)",
-        boxShadow: "0 2px 10px rgba(13,3,27,0.06)",
-      }}
+    <Card
+      size="sm"
+      className="group gap-0 py-0 overflow-hidden transition-[border-color,box-shadow] duration-150 ease-(--ease-out) hover:shadow-md h-full"
     >
-      {/* ── Image section ──────────────────────────────────────── */}
-      <div className="relative aspect-[4/3] overflow-hidden rounded-t-lg mx-0 shrink-0">
+      <div className="relative aspect-[4/3] overflow-hidden shrink-0 bg-muted">
         <img
-          src={item.image || "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&q=80"}
+          src={
+            item.image ||
+            "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&q=80"
+          }
           alt={item.name}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+          className="w-full h-full object-cover transition-transform duration-300 ease-(--ease-out) group-hover:scale-105"
           loading="lazy"
         />
-        {/* Scrim */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
 
-        {/* Live/86'd badge — top-left */}
         <div className="absolute top-2.5 left-2.5">
-          <span
-            className="flex items-center gap-1 text-[9px] font-bold uppercase px-2 py-1 rounded-full text-white"
-            style={{
-              background: item.available
-                ? "oklch(0.62 0.16 150 / 0.85)"
-                : "oklch(0.55 0.18 25 / 0.85)",
-              backdropFilter: "blur(6px)",
-            }}
+          <Badge
+            variant={item.available ? "default" : "destructive"}
+            className="text-[10px] uppercase gap-1"
           >
-            <span
-              className={cn("w-1.5 h-1.5 rounded-full", item.available ? "animate-pulse" : "")}
-              style={{ background: "white" }}
-            />
+            <span className="size-1.5 rounded-full bg-current" />
             {item.available ? "Live" : "86'd"}
-          </span>
+          </Badge>
         </div>
 
-        {/* Tag badge — top-right */}
         {(item.popular || item.vegetarian) && (
           <div className="absolute top-2.5 right-2.5">
-            <span
-              className="flex items-center gap-1 text-[9px] font-bold uppercase px-2 py-1 rounded-full text-white"
-              style={{
-                background: item.popular
-                  ? "oklch(0.75 0.15 75 / 0.9)"
-                  : "oklch(0.62 0.16 150 / 0.9)",
-                backdropFilter: "blur(6px)",
-              }}
-            >
-              {item.vegetarian ? <Leaf className="h-2.5 w-2.5" /> : <Flame className="h-2.5 w-2.5" />}
+            <Badge variant="secondary" className="text-[10px] uppercase gap-1">
+              {item.vegetarian ? <Leaf className="size-3" /> : <Flame className="size-3" />}
               {item.popular ? "Popular" : "Veg"}
-            </span>
+            </Badge>
           </div>
         )}
 
-        {/* Price — bottom-left */}
         <div className="absolute bottom-2.5 left-3">
-          <p className="text-white font-bold text-[15px] leading-none tabular-nums drop-shadow">
+          <p className="text-white font-bold text-sm leading-none tabular-nums drop-shadow">
             KES {item.price.toLocaleString()}
           </p>
-          <p className="text-white/65 text-[9px] font-bold uppercase mt-0.5">
+          <p className="text-white/70 text-[10px] font-medium uppercase mt-0.5">
             {item.category}
           </p>
         </div>
 
-        {/* Rating — bottom-right */}
-        <div
-          className="absolute bottom-2.5 right-2.5 flex items-center gap-1 px-2 py-1 rounded-xl"
-          style={{ background:"rgba(0,0,0,0.35)", backdropFilter:"blur(6px)" }}
+        <Badge
+          variant="secondary"
+          className="absolute bottom-2.5 right-2.5 gap-1 bg-black/60 text-white border-0"
         >
-          <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
-          <span className="text-white text-[10px] font-bold">{item.rating ?? 4.5}</span>
-        </div>
+          <Star className="size-3 fill-yellow-400 text-yellow-400" />
+          {item.rating ?? 4.5}
+        </Badge>
 
-        {/* Quick edit — hover overlay */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-          <button
-            className="flex items-center gap-2 px-4 py-2 rounded-xl text-[10px] font-bold uppercase"
-            style={{
-              background: "rgba(255,255,255,0.92)",
-              color: "#0B3B36",
-              backdropFilter: "blur(8px)",
-              boxShadow: "0 4px 16px rgba(0,0,0,0.2)",
-            }}
-          >
-            <Edit3 className="h-3.5 w-3.5" />
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-black/25">
+          <Button size="xs" variant="secondary" className="gap-1.5 uppercase shadow-md">
+            <Edit3 className="size-3.5" />
             Quick Edit
-          </button>
+          </Button>
         </div>
       </div>
 
-      {/* ── Card body ──────────────────────────────────────────── */}
-      <div className="flex flex-col flex-1 px-3 pt-3 pb-3 gap-2">
-
-        {/* Name + context menu */}
-        <div className="flex items-start justify-between gap-1.5">
-          <h3
-            className="text-[12px] font-bold leading-tight line-clamp-2 flex-1"
-            style={{ color: "#082420" }}
-          >
-            {item.name}
-          </h3>
+      <CardHeader className="pt-3 pb-2">
+        <CardTitle className="text-sm leading-snug line-clamp-2">
+          <h3>{item.name}</h3>
+        </CardTitle>
+        <CardAction>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button
-                className="flex items-center justify-center w-6 h-6 rounded-lg shrink-0 transition-colors hover:bg-[#F4FAF7]"
-                style={{ color: "var(--icon-primary)" }}
-              >
-                <MoreHorizontal className="h-3.5 w-3.5" />
-              </button>
+              <Button variant="ghost" size="icon-xs">
+                <MoreHorizontal className="size-3.5" />
+              </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent
-              align="end"
-              className="w-44 rounded-2xl border p-1.5"
-              style={{
-                background:"#FDFCFF",
-                borderColor:"rgba(11, 59, 54,  0.15)",
-                boxShadow:"0 8px 28px rgba(13,3,27,0.12)",
-              }}
-            >
-              <DropdownMenuItem
-                className="flex items-center gap-2 text-[11px] font-semibold rounded-xl px-2.5 py-2 cursor-pointer"
-                style={{ color:"#0B3B36" }}
-              >
-                <Edit3 className="h-3.5 w-3.5" />
+            <DropdownMenuContent align="end" className="w-44">
+              <DropdownMenuItem>
+                <Edit3 className="size-3.5" />
                 Edit Details
               </DropdownMenuItem>
-              <DropdownMenuItem
-                className="flex items-center gap-2 text-[11px] font-semibold rounded-xl px-2.5 py-2 cursor-pointer"
-                style={{ color:"#133D38" }}
-              >
-                <DollarSign className="h-3.5 w-3.5" />
+              <DropdownMenuItem>
+                <DollarSign className="size-3.5" />
                 Adjust Price
               </DropdownMenuItem>
-              <DropdownMenuSeparator style={{ background:"rgba(11, 59, 54,  0.08)" }} />
-              <DropdownMenuItem
-                className="flex items-center gap-2 text-[11px] font-semibold rounded-xl px-2.5 py-2 cursor-pointer text-red-500 hover:text-red-600 focus:text-red-600"
-              >
-                <UtensilsCrossed className="h-3.5 w-3.5" />
+              <DropdownMenuSeparator />
+              <DropdownMenuItem className="text-destructive">
+                <UtensilsCrossed className="size-3.5" />
                 Remove Dish
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-        </div>
+        </CardAction>
+      </CardHeader>
 
-        {/* Popularity row */}
-        <div className="flex items-center justify-between">
-          <div
-            className="flex items-center gap-1 text-[9px] font-bold uppercase"
-            style={{ color: item.popular ? "oklch(0.55 0.15 75)" : "var(--icon-primary)" }}
+      <CardContent className="pb-3 flex-1">
+        <div className="flex items-center justify-between text-[11px]">
+          <span
+            className={cn(
+              "inline-flex items-center gap-1 font-medium uppercase",
+              item.popular ? "text-warning" : "text-primary",
+            )}
           >
-            {item.popular
-              ? <><TrendingUp className="h-3 w-3" /> High Demand</>
-              : <><Zap className="h-3 w-3" /> Medium</>
-            }
-          </div>
-          <span className="text-[9px] font-medium" style={{ color:"var(--icon-primary)" }}>
-            {item.popular ? "100+" : "50+"} orders
+            {item.popular ? (
+              <>
+                <TrendingUp className="size-3" /> High Demand
+              </>
+            ) : (
+              <>
+                <Zap className="size-3" /> Medium
+              </>
+            )}
           </span>
+          <span className="text-muted-foreground">{item.popular ? "100+" : "50+"} orders</span>
         </div>
+      </CardContent>
 
-        {/* Action row */}
-        <div
-          className="flex flex-col gap-2 pt-2 mt-auto border-t"
-          style={{ borderColor:"rgba(11, 59, 54,  0.08)" }}
+      <CardFooter className="border-t pt-2.5 pb-3 flex-col gap-1.5">
+        <Button
+          size="xs"
+          variant={item.available ? "secondary" : "destructive"}
+          className="w-full"
+          onClick={() => onToggleAvailability(item.id)}
         >
-          <button
-            onClick={() => onToggleAvailability(item.id)}
-            className="flex items-center justify-center gap-1 text-[9px] font-bold uppercase px-2 py-1.5 rounded-lg transition-colors w-full"
-            style={
-              item.available
-                ? { color:"oklch(0.42 0.14 150)", background:"oklch(0.62 0.16 150 / 0.08)" }
-                : { color:"oklch(0.55 0.18 25)",  background:"oklch(0.65 0.18 25 / 0.08)"  }
-            }
-          >
-            {item.available
-              ? <><Eye className="h-3 w-3" />Available</>
-              : <><EyeOff className="h-3 w-3" />86'd</>
-            }
-          </button>
-          <button
-            className="flex items-center justify-center gap-0.5 text-[9px] font-bold uppercase px-2 py-1.5 rounded-lg transition-colors hover:bg-[#F4FAF7] w-full"
-            style={{ color:"#0B3B36" }}
-          >
-            Strategy
-            <ChevronRight className="h-3 w-3" />
-          </button>
-        </div>
-      </div>
-    </div>
+          {item.available ? (
+            <>
+              <Eye /> Available
+            </>
+          ) : (
+            <>
+              <EyeOff /> 86&apos;d
+            </>
+          )}
+        </Button>
+        <Button size="xs" variant="ghost" className="w-full">
+          Strategy
+          <ChevronRight />
+        </Button>
+      </CardFooter>
+    </Card>
   )
 }
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
 export default function ManagerMenuPage() {
-  const [menuItems,      setMenuItems]      = useState<MenuItem[]>(allMenuItems)
-  const [searchQuery,    setSearchQuery]    = useState("")
+  const [menuItems, setMenuItems] = useState<MenuItem[]>(allMenuItems)
+  const [searchQuery, setSearchQuery] = useState("")
   const [activeCategory, setActiveCategory] = useState("All Items")
 
+  useEffect(() => {
+    return MenuService.subscribe(setMenuItems)
+  }, [])
+
   const handleToggleAvailability = (id: string) => {
-    setMenuItems(prev =>
-      prev.map(item => item.id === id ? { ...item, available: !item.available } : item),
-    )
+    const toggled = MenuService.toggleAvailability(id)
+    if (toggled) {
+      toast.info(`${toggled.name} marked ${toggled.available ? "Available" : "86'd (Unavailable)"}`)
+    }
   }
 
-  const filtered = menuItems.filter(item => {
+  const filtered = menuItems.filter((item) => {
     const matchSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase())
     let matchCat = activeCategory === "All Items"
     if (activeCategory === "Vegetarian") {
@@ -303,187 +277,159 @@ export default function ManagerMenuPage() {
     return matchSearch && matchCat
   })
 
-  const availableCount    = menuItems.filter(i => i.available).length
-  const unavailableCount  = menuItems.filter(i => !i.available).length
-  const popularCount      = menuItems.filter(i => i.popular).length
+  const availableCount = menuItems.filter((i) => i.available).length
+  const unavailableCount = menuItems.filter((i) => !i.available).length
+  const popularCount = menuItems.filter((i) => i.popular).length
 
   return (
     <TooltipProvider>
-      <div className="min-h-screen pb-16" style={{ background:"#F4FAF7" }}>
+      <div className="min-h-screen pb-16 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-5 pt-6 space-y-6">
-
-          {/* ── Page header ──────────────────────────────────────── */}
           <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
-            <div>
-              <div className="flex items-center gap-2 mb-1.5">
-                <div
-                  className="flex items-center justify-center w-9 h-9 rounded-xl"
-                  style={{ background:"#0B3B36", boxShadow:"0 4px 12px rgba(11, 59, 54,  0.35)" }}
-                >
-                  <UtensilsCrossed className="h-4.5 w-4.5 text-white" />
-                </div>
-                <div>
-                  <h1 className="text-[17px] font-bold leading-none" style={{ color:"#082420" }}>
-                    Menu Management
-                  </h1>
-                  <p className="text-[10px] font-bold uppercase mt-0.5" style={{ color:"#628C84" }}>
-                    Dish Orchestration & Price Strategy
-                  </p>
-                </div>
+            <div className="flex items-center gap-3">
+              <div className="flex size-10 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-sm">
+                <UtensilsCrossed className="size-5" />
+              </div>
+              <div>
+                <h1 className="text-lg font-semibold leading-none text-foreground">
+                  Menu Management
+                </h1>
+                <p className="text-xs font-medium uppercase text-muted-foreground mt-1">
+                  Dish Orchestration &amp; Price Strategy
+                </p>
               </div>
             </div>
 
-            <Button
-              className="flex items-center gap-2 h-10 px-5 rounded-xl font-bold text-[12px] uppercase text-white border-none transition-all hover:opacity-90 hover:-translate-y-0.5 self-start sm:self-auto"
-              style={{ background:"#0B3B36", boxShadow:"0 4px 16px rgba(11, 59, 54,  0.35)" }}
-            >
-              <Plus className="h-4 w-4" />
+            <Button className="gap-2 self-start sm:self-auto">
+              <Plus className="size-4" />
               Add Item
             </Button>
           </div>
 
-          {/* ── KPI strip ────────────────────────────────────────── */}
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-3 gap-4">
             {[
-              { label:"Available",   value:availableCount,   accent:"oklch(0.62 0.16 150)", icon:Eye          },
-              { label:"Unavailable", value:unavailableCount, accent:"oklch(0.65 0.18 25)",  icon:EyeOff       },
-              { label:"Popular",     value:popularCount,     accent:"oklch(0.75 0.15 75)",  icon:TrendingUp   },
-            ].map(s => (
-              <div
-                key={s.label}
-                className="flex flex-col items-center justify-center py-3 px-2 rounded-2xl border text-center"
-                style={{ background:"rgba(255,255,255,0.85)", borderColor:"rgba(11, 59, 54,  0.1)" }}
-              >
-                <div
-                  className="flex items-center justify-center w-7 h-7 rounded-lg mb-1.5"
-                  style={{ background:`${s.accent}18` }}
-                >
-                  <s.icon className="h-3.5 w-3.5" style={{ color:s.accent }} />
-                </div>
-                <p className="text-xl font-bold tabular-nums leading-none" style={{ color:"#082420" }}>
-                  {s.value}
-                </p>
-                <p className="text-[9px] font-bold uppercase mt-0.5" style={{ color:"#628C84" }}>
-                  {s.label}
-                </p>
-              </div>
+              { label: "Available", value: availableCount, tone: "bg-success/10 text-success", icon: Eye },
+              { label: "Unavailable", value: unavailableCount, tone: "bg-destructive/10 text-destructive", icon: EyeOff },
+              { label: "Popular", value: popularCount, tone: "bg-warning/10 text-warning", icon: TrendingUp },
+            ].map((s) => (
+              <Card key={s.label} size="sm">
+                <CardHeader>
+                  <CardDescription className="text-xs uppercase">{s.label}</CardDescription>
+                  <CardAction>
+                    <div className={`flex size-8 items-center justify-center rounded-lg ${s.tone}`}>
+                      <s.icon className="size-4" />
+                    </div>
+                  </CardAction>
+                </CardHeader>
+                <CardContent>
+                  <CardTitle className="text-2xl font-semibold tabular-nums">{s.value}</CardTitle>
+                </CardContent>
+              </Card>
             ))}
           </div>
 
-          {/* ── Category tabs ────────────────────────────────────── */}
-          <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1 -mx-1 px-1">
-            {CATEGORIES.map(cat => {
-              const active = activeCategory === cat
-              return (
-                <button
-                  key={cat}
-                  onClick={() => setActiveCategory(cat)}
-                  className="flex items-center h-9 px-4 rounded-xl text-[10px] font-bold uppercase whitespace-nowrap shrink-0 border transition-all duration-200"
-                  style={
-                    active
-                      ? { background:"#0B3B36", color:"white", borderColor:"transparent", boxShadow:"0 3px 10px rgba(11, 59, 54,  0.3)" }
-                      : { background:"rgba(255,255,255,0.8)", color:"#4B6E67", borderColor:"rgba(11, 59, 54,  0.12)" }
-                  }
-                >
-                  {cat}
-                </button>
-              )
-            })}
-          </div>
+          <Tabs value={activeCategory} onValueChange={setActiveCategory}>
+            <TabsList className="flex-wrap h-auto">
+              {CATEGORIES.map((cat) => {
+                const isActive = activeCategory === cat
+                return (
+                  <TabsTrigger
+                    key={cat}
+                    value={cat}
+                    className="relative data-[state=active]:bg-transparent data-[state=active]:shadow-none"
+                  >
+                    {isActive && (
+                      <motion.span
+                        layoutId="manager-menu-cat"
+                        transition={SPRING_SNAPPY}
+                        aria-hidden="true"
+                        className="absolute inset-0 rounded-md bg-background shadow-sm"
+                      />
+                    )}
+                    <span className="relative z-10">{cat}</span>
+                  </TabsTrigger>
+                )
+              })}
+            </TabsList>
+          </Tabs>
 
-          {/* ── Search + filter ──────────────────────────────────── */}
           <div className="flex gap-2.5">
-            <div className="relative flex-1">
-              <Search
-                className="absolute left-3.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 pointer-events-none"
-                style={{ color:"var(--icon-primary)" }}
-              />
-              <Input
+            <InputGroup className="flex-1 bg-card">
+              <InputGroupAddon>
+                <Search />
+              </InputGroupAddon>
+              <InputGroupInput
                 placeholder="Search dishes…"
                 value={searchQuery}
-                onChange={e => setSearchQuery(e.target.value)}
-                className="h-10 pl-10 rounded-xl border text-sm"
-                style={{
-                  background:"rgba(255,255,255,0.85)",
-                  borderColor:"rgba(11, 59, 54,  0.15)",
-                  color:"#082420",
-                }}
+                onChange={(e) => setSearchQuery(e.target.value)}
               />
-            </div>
+            </InputGroup>
             <Tooltip>
               <TooltipTrigger asChild>
-                <button
-                  className="flex items-center gap-2 h-10 px-4 rounded-xl border text-[11px] font-bold uppercase transition-all hover:-translate-y-0.5 shrink-0"
-                  style={{ background:"rgba(255,255,255,0.85)", borderColor:"rgba(11, 59, 54,  0.15)", color:"#4B6E67" }}
-                >
-                  <Filter className="h-3.5 w-3.5" />
+                <Button variant="outline" className="gap-2 shrink-0">
+                  <Filter className="size-4" />
                   <span className="hidden sm:inline">Filter</span>
-                </button>
+                </Button>
               </TooltipTrigger>
               <TooltipContent>Filter items</TooltipContent>
             </Tooltip>
           </div>
 
-          {/* Count label */}
-          <p className="text-[10px] font-bold uppercase -mt-2" style={{ color:"var(--icon-primary)" }}>
+          <p className="text-xs font-medium uppercase text-muted-foreground">
             {filtered.length} of {menuItems.length} items
           </p>
 
-          {/* ── Menu grid ────────────────────────────────────────── */}
           {filtered.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-20 gap-4">
-              <div
-                className="w-16 h-16 rounded-2xl flex items-center justify-center border"
-                style={{ background:"rgba(255,255,255,0.8)", borderColor:"rgba(11, 59, 54,  0.15)" }}
-              >
-                <Package className="h-7 w-7" style={{ color:"var(--icon-primary)" }} />
-              </div>
-              <div className="text-center">
-                <p className="font-bold text-base" style={{ color:"#082420" }}>No items found</p>
-                <p className="text-sm mt-1" style={{ color:"#4B6E67" }}>Try adjusting your search or filter</p>
-              </div>
-            </div>
+            <Empty className="py-16 border">
+              <EmptyHeader>
+                <EmptyMedia variant="icon">
+                  <Package />
+                </EmptyMedia>
+                <EmptyTitle>No items found</EmptyTitle>
+                <EmptyDescription>Try adjusting your search or filter.</EmptyDescription>
+              </EmptyHeader>
+            </Empty>
           ) : (
-            <div className="grid gap-3 sm:gap-4 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-              {filtered.map(item => (
-                <MenuCard
-                  key={item.id}
-                  item={item}
-                  onToggleAvailability={handleToggleAvailability}
-                />
-              ))}
+            <div className="grid gap-4 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+              <AnimatePresence mode="popLayout" initial={false}>
+                {filtered.map((item) => (
+                  <motion.div
+                    key={item.id}
+                    layout="position"
+                    initial={{ opacity: 0, scale: 0.97 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.96 }}
+                    transition={SPRING_SNAPPY}
+                  >
+                    <MenuCard
+                      item={item}
+                      onToggleAvailability={handleToggleAvailability}
+                    />
+                  </motion.div>
+                ))}
+              </AnimatePresence>
             </div>
           )}
 
-          {/* ── Insights strip ───────────────────────────────────── */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-            {INSIGHTS.map(insight => (
-              <div
-                key={insight.title}
-                className="flex items-start gap-4 p-4 rounded-3xl border"
-                style={{
-                  background: insight.accentBg,
-                  borderColor: insight.accentBorder,
-                }}
-              >
-                <div
-                  className="flex items-center justify-center w-10 h-10 rounded-xl shrink-0"
-                  style={{ background: insight.accent, boxShadow:`0 4px 14px ${insight.accent}50` }}
-                >
-                  <insight.icon className="h-5 w-5 text-white" />
-                </div>
-                <div className="min-w-0">
-                  <p className="text-[13px] font-bold leading-tight" style={{ color:"#082420" }}>
-                    {insight.title}
-                  </p>
-                  <p className="text-[11px] mt-1 leading-relaxed" style={{ color:"#4B6E67" }}>
-                    {insight.desc}
-                  </p>
-                </div>
-              </div>
+            {INSIGHTS.map((insight) => (
+              <Card key={insight.title} size="sm" className={insight.tone}>
+                <CardHeader>
+                  <div className="flex items-start gap-3">
+                    <div
+                      className={`flex size-10 items-center justify-center rounded-lg shrink-0 ${insight.iconTone}`}
+                    >
+                      <insight.icon className="size-5" />
+                    </div>
+                    <div className="space-y-1">
+                      <CardTitle className="text-sm">{insight.title}</CardTitle>
+                      <CardDescription className="text-xs">{insight.desc}</CardDescription>
+                    </div>
+                  </div>
+                </CardHeader>
+              </Card>
             ))}
           </div>
-
         </div>
       </div>
     </TooltipProvider>

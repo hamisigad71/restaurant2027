@@ -1,5 +1,15 @@
-import { ChevronLeftIcon as ChevronLeft, ChevronRightIcon as ChevronRight } from "@heroicons/react/24/outline"
+"use client"
+
+import {
+  ChevronLeftIcon as ChevronLeft,
+  ChevronRightIcon as ChevronRight,
+} from "@heroicons/react/24/outline"
+import { motion } from "motion/react"
+import { SPRING_SNAPPY } from "@/lib/motion"
 import { Card, CardContent } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { cn } from "@/lib/utils"
 import { DAYS, shifts } from "./constants"
 
 interface WeekNavigatorProps {
@@ -9,65 +19,61 @@ interface WeekNavigatorProps {
 
 export function WeekNavigator({ activeDay, setActiveDay }: WeekNavigatorProps) {
   return (
-    <Card
-      className="rounded-3xl shadow-sm overflow-hidden"
-      style={{ background: "rgba(255,255,255,0.9)", borderColor: "rgba(11, 59, 54,  0.12)" }}
-    >
-      <CardContent className="p-3">
-        <div className="flex items-center gap-2">
-          <button
-            className="flex items-center justify-center w-9 h-9 rounded-xl shrink-0 transition-all hover:bg-[#F4FAF7] hover:-translate-x-0.5"
-            style={{ borderColor: "rgba(11, 59, 54,  0.15)", color: "#4B6E67" }}
-          >
-            <ChevronLeft className="h-4 w-4" />
-          </button>
+    <Card size="sm">
+      <CardContent className="flex items-center gap-2">
+        <Button variant="ghost" size="icon-sm" aria-label="Previous week" className="shrink-0">
+          <ChevronLeft className="size-4" />
+        </Button>
 
-          <div className="flex gap-1.5 flex-1 overflow-x-auto no-scrollbar">
-            {DAYS.map(day => {
-              const active = activeDay === day
-              const dayShifts = shifts.filter(s => s.day === day)
-              const hasActive = dayShifts.some(s => s.status === "active")
-              return (
-                <button
-                  key={day}
-                  onClick={() => setActiveDay(day)}
-                  className="relative flex flex-col items-center gap-0.5 px-3 sm:px-5 py-2.5 rounded-xl text-[10px] font-bold uppercase transition-all duration-200 shrink-0"
-                  style={
-                    active
-                      ? { background: "#0B3B36", color: "white", borderColor: "transparent", boxShadow: "0 3px 10px rgba(11, 59, 54,  0.3)" }
-                      : { background: "transparent", color: "#628C84", borderColor: "transparent" }
-                  }
-                >
-                  <span className="hidden sm:block">{day}</span>
-                  <span className="sm:hidden">{day[0]}</span>
-                  {/* Shift count dot */}
-                  {dayShifts.length > 0 && (
-                    <span
-                      className="text-[8px] leading-none font-bold"
-                      style={{ color: active ? "rgba(255,255,255,0.7)" : "var(--icon-primary)" }}
-                    >
-                      {dayShifts.length}
-                    </span>
-                  )}
-                  {/* Active indicator */}
-                  {hasActive && !active && (
-                    <span
-                      className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full animate-pulse"
-                      style={{ background: "oklch(0.62 0.16 150)" }}
-                    />
-                  )}
-                </button>
-              )
-            })}
-          </div>
-
-          <button
-            className="flex items-center justify-center w-9 h-9 rounded-xl shrink-0 transition-all hover:bg-[#F4FAF7] hover:translate-x-0.5"
-            style={{ borderColor: "rgba(11, 59, 54,  0.15)", color: "#4B6E67" }}
-          >
-            <ChevronRight className="h-4 w-4" />
-          </button>
+        <div className="flex gap-1.5 flex-1 overflow-x-auto no-scrollbar">
+          {DAYS.map((day) => {
+            const active = activeDay === day
+            const dayShifts = shifts.filter((s) => s.day === day)
+            const hasActive = dayShifts.some((s) => s.status === "active")
+            return (
+              <Button
+                key={day}
+                variant="ghost"
+                size="sm"
+                onClick={() => setActiveDay(day)}
+                className={cn(
+                  "relative h-auto flex-col gap-0.5 px-3 sm:px-4 py-2 shrink-0",
+                  active && "text-primary-foreground hover:text-primary-foreground hover:bg-transparent",
+                )}
+              >
+                {active && (
+                  <motion.span
+                    layoutId="week-day-pill"
+                    transition={SPRING_SNAPPY}
+                    aria-hidden="true"
+                    className="absolute inset-0 rounded-md bg-primary -z-0"
+                  />
+                )}
+                <span className="relative z-10 hidden sm:inline text-xs font-semibold uppercase">
+                  {day}
+                </span>
+                <span className="relative z-10 sm:hidden text-xs font-semibold uppercase">
+                  {day[0]}
+                </span>
+                {dayShifts.length > 0 && (
+                  <Badge
+                    variant={active ? "secondary" : "outline"}
+                    className="relative z-10 h-4 px-1.5 text-[10px]"
+                  >
+                    {dayShifts.length}
+                  </Badge>
+                )}
+                {hasActive && !active && (
+                  <span className="absolute top-1.5 right-1.5 size-1.5 rounded-full bg-success" />
+                )}
+              </Button>
+            )
+          })}
         </div>
+
+        <Button variant="ghost" size="icon-sm" aria-label="Next week" className="shrink-0">
+          <ChevronRight className="size-4" />
+        </Button>
       </CardContent>
     </Card>
   )

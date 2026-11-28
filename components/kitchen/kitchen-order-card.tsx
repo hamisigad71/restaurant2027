@@ -1,14 +1,23 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { 
-  ClockIcon as Clock, 
-  BoltIcon as ChefHat, 
-  CheckCircleIcon as CheckCircle, 
-  ExclamationTriangleIcon as AlertTriangle 
+import { Alert, AlertTitle } from "@/components/ui/alert"
+import {
+  ClockIcon as Clock,
+  BoltIcon as ChefHat,
+  CheckCircleIcon as CheckCircle,
+  ExclamationTriangleIcon as AlertTriangle,
 } from "@heroicons/react/24/outline"
 import type { Order, OrderStatus } from "@/lib/types"
 import { cn } from "@/lib/utils"
@@ -18,13 +27,13 @@ interface KitchenOrderCardProps {
   onUpdateStatus: (orderId: string, status: OrderStatus) => void
 }
 
-const statusConfig: Record<OrderStatus, { next: OrderStatus | null; action: string; color: string }> = {
-  pending: { next: "cooking", action: "Start Cooking", color: "border-warning bg-warning/5" },
-  confirmed: { next: "cooking", action: "Start Cooking", color: "border-primary bg-primary/5" },
-  cooking: { next: "ready", action: "Mark Ready", color: "border-primary bg-primary/5" },
-  ready: { next: "served", action: "Mark Served", color: "border-success bg-success/5" },
-  served: { next: null, action: "", color: "border-muted" },
-  cancelled: { next: null, action: "", color: "border-destructive" },
+const statusConfig: Record<OrderStatus, { next: OrderStatus | null; action: string }> = {
+  pending: { next: "cooking", action: "Start Cooking" },
+  confirmed: { next: "cooking", action: "Start Cooking" },
+  cooking: { next: "ready", action: "Mark Ready" },
+  ready: { next: "served", action: "Mark Served" },
+  served: { next: null, action: "" },
+  cancelled: { next: null, action: "" },
 }
 
 function formatElapsedTime(dateString: string) {
@@ -32,7 +41,7 @@ function formatElapsedTime(dateString: string) {
   const now = new Date()
   const diffMs = now.getTime() - date.getTime()
   const diffMins = Math.floor(diffMs / 60000)
-  
+
   if (diffMins < 1) return "< 1 min"
   if (diffMins < 60) return `${diffMins} min`
   const diffHours = Math.floor(diffMins / 60)
@@ -42,15 +51,15 @@ function formatElapsedTime(dateString: string) {
 export function KitchenOrderCard({ order, onUpdateStatus }: KitchenOrderCardProps) {
   const [elapsed, setElapsed] = useState(formatElapsedTime(order.createdAt))
   const config = statusConfig[order.status]
-  
-  // Calculate if order is urgent (> 15 minutes)
+
   const elapsedMs = new Date().getTime() - new Date(order.createdAt).getTime()
-  const isUrgent = elapsedMs > 15 * 60 * 1000 && order.status !== "ready" && order.status !== "served"
+  const isUrgent =
+    elapsedMs > 15 * 60 * 1000 && order.status !== "ready" && order.status !== "served"
 
   useEffect(() => {
     const interval = setInterval(() => {
       setElapsed(formatElapsedTime(order.createdAt))
-    }, 30000) // Update every 30 seconds
+    }, 30000)
 
     return () => clearInterval(interval)
   }, [order.createdAt])
@@ -63,73 +72,76 @@ export function KitchenOrderCard({ order, onUpdateStatus }: KitchenOrderCardProp
 
   return (
     <Card
+      size="sm"
       className={cn(
-        "relative overflow-hidden border border-border/50 transition-all duration-200 ease-out bg-card shadow-sm hover:shadow-md hover:-translate-y-0.5",
-        isUrgent && order.status !== "ready" && "ring-2 ring-destructive ring-offset-2 ring-offset-background"
+        "overflow-hidden transition-shadow hover:shadow-md",
+        isUrgent && order.status !== "ready" && "ring-2 ring-destructive ring-offset-2",
       )}
     >
-      {/* Urgent indicator */}
       {isUrgent && order.status !== "ready" && (
-        <div className="bg-destructive text-destructive-foreground py-1 px-3 flex items-center justify-center gap-2 text-[10px]  uppercase">
-          <AlertTriangle className="h-3 w-3" />
-          Urgent Attention Required
+        <div className="px-4">
+          <Alert variant="destructive" className="py-2">
+            <AlertTriangle />
+            <AlertTitle className="text-xs">Urgent attention required</AlertTitle>
+          </Alert>
         </div>
       )}
 
-      <CardHeader className="pb-3 pt-4">
-        <div className="flex items-center justify-between mb-1">
-          <CardTitle className="text-xl font-heading text-foreground">Table {order.tableNumber}</CardTitle>
+      <CardHeader>
+        <CardTitle className="text-lg">Table {order.tableNumber}</CardTitle>
+        <CardDescription className="flex items-center gap-2 text-xs">
+          <span className="inline-flex items-center gap-1">
+            <Clock className="size-3.5" />
+            <span className={cn(isUrgent && "text-destructive font-medium")}>{elapsed}</span>
+          </span>
+          <span>•</span>
+          <span>{order.id}</span>
+        </CardDescription>
+        <CardAction>
           <Badge
             variant="outline"
             className={cn(
-              "text-[10px]  uppercase h-6 px-2 border-transparent",
-              order.status === "pending" && "bg-warning/10 text-warning",
-              order.status === "cooking" && "bg-primary/10 text-primary",
-              order.status === "ready" && "bg-success/10 text-success"
+              "uppercase text-[10px]",
+              order.status === "pending" && "border-warning/30 bg-warning/10 text-warning",
+              order.status === "cooking" && "border-primary/30 bg-primary/10 text-primary",
+              order.status === "ready" && "border-success/30 bg-success/10 text-success",
             )}
           >
-            {order.status === "cooking" && <ChefHat className="h-3 w-3 mr-1" />}
-            {order.status === "ready" && <CheckCircle className="h-3 w-3 mr-1" />}
+            {order.status === "cooking" && <ChefHat />}
+            {order.status === "ready" && <CheckCircle />}
             {order.status}
           </Badge>
-        </div>
-        <div className="flex items-center gap-2 text-[10px] uppercase  text-muted-foreground font-medium">
-          <div className="flex items-center gap-1">
-            <Clock className="h-3 w-3" />
-            <span className={cn(isUrgent ? "text-destructive" : "")}>{elapsed}</span>
-          </div>
-          <span className="text-muted-foreground/30">•</span>
-          <span>{order.id}</span>
-        </div>
+        </CardAction>
       </CardHeader>
 
-      <CardContent className="space-y-3">
-        {/* Order Items */}
-        <div className="space-y-2">
-          {order.items.map((item, index) => (
-            <div key={index} className="flex items-start gap-2 text-sm">
-              <span className="text-primary min-w-[24px]">{item.quantity}x</span>
-              <div className="flex-1">
-                <p className="font-medium">{item.menuItem.name}</p>
-                {item.notes && (
-                  <p className="text-xs text-muted-foreground italic mt-0.5">Note: {item.notes}</p>
-                )}
-              </div>
+      <CardContent className="space-y-2">
+        {order.items.map((item, index) => (
+          <div key={index} className="flex items-start gap-2 text-sm">
+            <span className="font-semibold text-primary min-w-[24px] tabular-nums">
+              {item.quantity}x
+            </span>
+            <div className="flex-1">
+              <p className="font-medium">{item.menuItem.name}</p>
+              {item.notes && (
+                <p className="text-xs text-muted-foreground italic mt-0.5">Note: {item.notes}</p>
+              )}
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
+      </CardContent>
 
-        {/* Action Button */}
-        {config.next && (
+      {config.next && (
+        <CardFooter>
           <Button
-            className="w-full mt-4  uppercase text-[10px] h-9"
+            className="w-full"
+            size="sm"
             variant={order.status === "cooking" ? "default" : "outline"}
             onClick={handleAction}
           >
             {config.action}
           </Button>
-        )}
-      </CardContent>
+        </CardFooter>
+      )}
     </Card>
   )
 }

@@ -6,18 +6,15 @@ export function ScheduleHeader() {
   return (
     <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
       <div className="flex items-center gap-3">
-        <div
-          className="flex items-center justify-center w-10 h-10 rounded-xl shrink-0"
-          style={{ background: "#0B3B36", boxShadow: "0 4px 14px rgba(11, 59, 54,  0.35)" }}
-        >
-          <Calendar className="h-5 w-5 text-white" />
+        <div className="flex size-10 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-sm shrink-0">
+          <Calendar className="size-5" />
         </div>
         <div>
-          <h1 className="text-[17px] font-bold leading-none" style={{ color: "#082420" }}>
+          <h1 className="text-lg font-semibold leading-none text-foreground">
             Staff Schedule
           </h1>
-          <p className="text-[10px] font-bold uppercase mt-0.5" style={{ color: "#628C84" }}>
-            Resource Allocation & Weekly Rostering
+          <p className="text-xs font-medium uppercase text-muted-foreground mt-1">
+            Resource Allocation &amp; Weekly Rostering
           </p>
         </div>
       </div>
@@ -25,23 +22,16 @@ export function ScheduleHeader() {
       <div className="flex items-center gap-2 shrink-0">
         <Tooltip>
           <TooltipTrigger asChild>
-            <Button
-              variant="outline"
-              className="h-10 px-4 gap-2 rounded-xl font-bold text-[11px] uppercase border transition-all hover:-translate-y-0.5"
-              style={{ borderColor: "rgba(11, 59, 54,  0.2)", color: "#4B6E67", background: "rgba(255,255,255,0.8)" }}
-            >
-              <Zap className="h-3.5 w-3.5" />
+            <Button variant="outline" size="sm" className="gap-2">
+              <Zap className="size-4" />
               <span className="hidden sm:inline">Auto-Generate</span>
             </Button>
           </TooltipTrigger>
           <TooltipContent>AI-generate optimal schedule</TooltipContent>
         </Tooltip>
 
-        <Button
-          className="h-10 px-4 gap-2 text-white font-bold rounded-xl border-none text-[11px] uppercase transition-all hover:-translate-y-0.5"
-          style={{ background: "#0B3B36", boxShadow: "0 4px 16px rgba(11, 59, 54,  0.35)" }}
-        >
-          <Plus className="h-3.5 w-3.5" />
+        <Button size="sm" className="gap-2">
+          <Plus className="size-4" />
           Add Shift
         </Button>
       </div>

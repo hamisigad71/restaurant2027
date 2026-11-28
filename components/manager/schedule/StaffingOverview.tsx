@@ -1,14 +1,31 @@
-import { 
-  ArrowTrendingUpIcon as TrendingUp, 
-  CheckIcon as UserCheck, 
-  BriefcaseIcon as Briefcase, 
-  ExclamationCircleIcon as AlertCircle, 
-  CheckCircleIcon as CheckCircle2, 
-  ChartBarIcon as Activity, 
-  ClockIcon as Timer, 
-  ArrowDownTrayIcon as Download 
+import {
+  ArrowTrendingUpIcon as TrendingUp,
+  CheckIcon as UserCheck,
+  BriefcaseIcon as Briefcase,
+  ExclamationCircleIcon as AlertCircle,
+  CheckCircleIcon as CheckCircle2,
+  ChartBarIcon as Activity,
+  ClockIcon as Timer,
+  ArrowDownTrayIcon as Download,
 } from "@heroicons/react/24/outline"
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardFooter,
+  CardDescription,
+} from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Progress } from "@/components/ui/progress"
+import {
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemGroup,
+  ItemMedia,
+  ItemTitle,
+} from "@/components/ui/item"
 
 interface StaffingOverviewProps {
   activeDay: string
@@ -18,127 +35,93 @@ interface StaffingOverviewProps {
   totalShifts: number
 }
 
-export function StaffingOverview({ activeDay, completedCount, activeCount, upcomingCount, totalShifts }: StaffingOverviewProps) {
+export function StaffingOverview({
+  activeDay,
+  completedCount,
+  activeCount,
+  upcomingCount,
+  totalShifts,
+}: StaffingOverviewProps) {
   return (
     <div className="space-y-4">
-      {/* Staffing Overview Card */}
-      <Card
-        className="rounded-3xl shadow-sm overflow-hidden"
-        style={{ background: "rgba(255,255,255,0.9)", borderColor: "rgba(11, 59, 54,  0.12)" }}
-      >
-        <CardHeader className="px-5 py-4">
+      <Card size="sm">
+        <CardHeader>
           <div className="flex items-center gap-2.5">
-            <div
-              className="flex items-center justify-center w-8 h-8 rounded-lg"
-              style={{ background: "oklch(0.75 0.15 75 / 0.12)" }}
-            >
-              <TrendingUp className="h-3.5 w-3.5" style={{ color: "oklch(0.55 0.15 75)" }} />
+            <div className="flex size-8 items-center justify-center rounded-lg bg-warning/10 text-warning">
+              <TrendingUp className="size-4" />
             </div>
-            <CardTitle className="text-[13px] font-bold" style={{ color: "#082420" }}>
-              Staffing Overview
-            </CardTitle>
+            <CardTitle className="text-sm">Staffing Overview</CardTitle>
           </div>
         </CardHeader>
 
-        <CardContent className="px-5 py-4 space-y-3">
-          {[
-            { label: "On Duty", value: "14", icon: UserCheck, accent: "oklch(0.62 0.16 150)" },
-            { label: "Stations Covered", value: "100%", icon: Briefcase, accent: "#0B3B36" },
-            { label: "Overtime Risk", value: "2", icon: AlertCircle, accent: "oklch(0.65 0.18 25)" },
-          ].map(stat => (
-            <div
-              key={stat.label}
-              className="flex items-center justify-between px-3 py-3 rounded-2xl"
-              style={{ background: "#F5F2FB", borderColor: "rgba(11, 59, 54,  0.08)" }}
-            >
-              <div className="flex items-center gap-2.5">
-                <div
-                  className="flex items-center justify-center w-7 h-7 rounded-lg shrink-0"
-                  style={{ background: `${stat.accent}18` }}
-                >
-                  <stat.icon className="h-3.5 w-3.5" style={{ color: stat.accent }} />
-                </div>
-                <span className="text-[11px] font-semibold" style={{ color: "#4B6E67" }}>
-                  {stat.label}
-                </span>
-              </div>
-              <span className="text-lg font-bold tabular-nums" style={{ color: "#082420" }}>
-                {stat.value}
-              </span>
-            </div>
-          ))}
+        <CardContent>
+          <ItemGroup className="gap-2">
+            {[
+              { label: "On Duty", value: "14", icon: UserCheck, color: "text-success bg-success/10" },
+              { label: "Stations Covered", value: "100%", icon: Briefcase, color: "text-primary bg-primary/10" },
+              { label: "Overtime Risk", value: "2", icon: AlertCircle, color: "text-destructive bg-destructive/10" },
+            ].map((stat) => (
+              <Item key={stat.label} variant="muted" size="sm">
+                <ItemMedia variant="icon" className={stat.color}>
+                  <stat.icon className="size-4" />
+                </ItemMedia>
+                <ItemContent>
+                  <ItemTitle className="text-xs text-muted-foreground">{stat.label}</ItemTitle>
+                </ItemContent>
+                <ItemActions>
+                  <span className="text-lg font-semibold tabular-nums">{stat.value}</span>
+                </ItemActions>
+              </Item>
+            ))}
+          </ItemGroup>
         </CardContent>
       </Card>
 
-      {/* Breakdown Card */}
-      <Card
-        className="rounded-3xl shadow-sm overflow-hidden"
-        style={{ background: "rgba(255,255,255,0.9)", borderColor: "rgba(11, 59, 54,  0.12)" }}
-      >
-        <CardContent className="px-5 py-4 space-y-4">
-          <p className="text-[11px] font-bold uppercase" style={{ color: "#628C84" }}>
-            {activeDay} Breakdown
-          </p>
-
+      <Card size="sm">
+        <CardHeader>
+          <CardTitle className="text-sm">{activeDay} Breakdown</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-3">
           {[
-            { label: "Completed", count: completedCount, total: totalShifts, accent: "oklch(0.62 0.16 150)", icon: CheckCircle2 },
-            { label: "Active", count: activeCount, total: totalShifts, accent: "#0B3B36", icon: Activity },
-            { label: "Upcoming", count: upcomingCount, total: totalShifts, accent: "oklch(0.75 0.15 75)", icon: Timer },
-          ].map(row => {
+            { label: "Completed", count: completedCount, total: totalShifts, icon: CheckCircle2, color: "text-success" },
+            { label: "Active", count: activeCount, total: totalShifts, icon: Activity, color: "text-primary" },
+            { label: "Upcoming", count: upcomingCount, total: totalShifts, icon: Timer, color: "text-warning" },
+          ].map((row) => {
             const pct = totalShifts > 0 ? Math.round((row.count / totalShifts) * 100) : 0
             return (
               <div key={row.label} className="space-y-1.5">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <row.icon className="h-3.5 w-3.5" style={{ color: row.accent }} />
-                    <span className="text-[11px] font-semibold" style={{ color: "#4B6E67" }}>{row.label}</span>
+                <div className="flex items-center justify-between text-xs">
+                  <div className="flex items-center gap-2 text-muted-foreground">
+                    <row.icon className={`size-3.5 ${row.color}`} />
+                    <span className="font-medium">{row.label}</span>
                   </div>
-                  <span className="text-[11px] font-bold tabular-nums" style={{ color: "#082420" }}>
+                  <span className="font-semibold tabular-nums">
                     {row.count}/{row.total}
                   </span>
                 </div>
-                <div className="h-1.5 rounded-full overflow-hidden" style={{ background: "rgba(11, 59, 54,  0.08)" }}>
-                  <div
-                    className="h-full rounded-full transition-all duration-500"
-                    style={{ width: `${pct}%`, background: row.accent }}
-                  />
-                </div>
+                <Progress value={pct} className="h-1.5" />
               </div>
             )
           })}
         </CardContent>
       </Card>
 
-      {/* Quotas Card */}
-      <Card
-        className="rounded-3xl shadow-sm overflow-hidden"
-        style={{ background: "#0B3B36", borderColor: "transparent" }}
-      >
-        <CardContent className="px-5 py-5 text-center relative">
-          <div
-            className="flex items-center justify-center w-12 h-12 rounded-2xl mx-auto mb-3"
-            style={{ background: "rgba(255,255,255,0.15)" }}
-          >
-            <CheckCircle2 className="h-6 w-6 text-white" />
+      <Card size="sm" className="bg-primary text-primary-foreground border-primary">
+        <CardHeader className="text-center">
+          <div className="mx-auto mb-1 flex size-10 items-center justify-center rounded-xl bg-primary-foreground/15">
+            <CheckCircle2 className="size-5" />
           </div>
-          <p className="text-white font-bold text-[15px] leading-none">
-            Quotas Satisfied
-          </p>
-          <p className="text-[11px] mt-2 leading-relaxed" style={{ color: "rgba(255,255,255,0.65)" }}>
+          <CardTitle className="text-base">Quotas Satisfied</CardTitle>
+          <CardDescription className="text-primary-foreground/75 text-xs">
             All roles for the current shift period are fully staffed.
-          </p>
-
-          <button
-            className="w-full flex items-center justify-center gap-2 h-10 mt-4 rounded-2xl font-bold text-[11px] uppercase transition-all hover:-translate-y-0.5 hover:shadow-lg"
-            style={{
-              background: "rgba(255,255,255,0.15)",
-              color: "white",
-            }}
-          >
-            <Download className="h-3.5 w-3.5" />
+          </CardDescription>
+        </CardHeader>
+        <CardFooter>
+          <Button variant="secondary" size="sm" className="w-full gap-2">
+            <Download className="size-4" />
             Export Roster
-          </button>
-        </CardContent>
+          </Button>
+        </CardFooter>
       </Card>
     </div>
   )

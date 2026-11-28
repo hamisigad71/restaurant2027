@@ -1,33 +1,54 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
-import { supabase } from "@/lib/supabase"
 import { toast } from "sonner"
 import Link from "next/link"
+import { AnimatePresence, motion } from "motion/react"
+import { SPRING_SNAPPY } from "@/lib/motion"
 import {
-  BellIcon,
   CheckCircleIcon,
   ExclamationCircleIcon,
   ArrowTrendingUpIcon,
   CheckBadgeIcon,
   ArrowRightIcon as ArrowRight,
   ChevronRightIcon,
-  BoltIcon as Crown,
   FireIcon,
   BuildingStorefrontIcon,
   XMarkIcon,
-  BoltIcon,
   PlusIcon,
   CameraIcon,
-  ClipboardDocumentListIcon,
-  CalendarDaysIcon,
   ChartBarIcon,
-  EllipsisHorizontalIcon,
 } from "@heroicons/react/24/outline"
-import { Badge }   from "@/components/ui/badge"
-import { Button }  from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Progress } from "@/components/ui/progress"
+import { Separator } from "@/components/ui/separator"
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty"
+import {
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemDescription,
+  ItemGroup,
+  ItemMedia,
+  ItemSeparator,
+  ItemTitle,
+} from "@/components/ui/item"
 import {
   Tooltip,
   TooltipContent,
@@ -42,8 +63,7 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { cn } from "@/lib/utils"
 import { OrderService, LiveOrder } from "@/lib/order-service"
-
-// ─── Static mock data ────────────────────────────────────────────────────────
+import { SummonService } from "@/lib/restaurant-store"
 
 const tableImages = [
   "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=300&h=200&fit=crop",
@@ -55,129 +75,66 @@ const tableImages = [
   "https://images.unsplash.com/photo-1522792043064-2db24c3a6479?w=300&h=200&fit=crop",
 ]
 
-const sparklinePoints = "M0,40 C10,38 20,32 30,28 C40,24 50,30 60,26 C70,22 80,18 90,16 C100,14 110,20 120,15 C130,10 140,8 150,5"
+const sparklinePoints =
+  "M0,40 C10,38 20,32 30,28 C40,24 50,30 60,26 C70,22 80,18 90,16 C100,14 110,20 120,15 C130,10 140,8 150,5"
 
 const recentActivity = [
-  { icon: CheckCircleIcon,        color: "text-emerald-400", bg: "bg-emerald-500/10",  text: "Table 6 payment processed",  sub: "KES 2,100 · 4m ago",  dot: "#10b981" },
-  { icon: "/shopping-cart.png" as any, color: "text-[#0B3B36]", bg: "bg-[#0B3B36]/10", text: "New order placed — Table 3",  sub: "6 items · 8m ago",   dot: "#7C3AED" },
-  { icon: ExclamationCircleIcon,  color: "text-amber-400",   bg: "bg-amber-500/10",    text: "Table 9 — guests arrived",   sub: "Reserved · 12m ago", dot: "#f59e0b" },
-  { icon: BuildingStorefrontIcon, color: "text-[#0B3B36]",   bg: "bg-[#0B3B36]/10",  text: "Table 2 order updated",      sub: "+2 items · 18m ago", dot: "#7C3AED" },
+  { icon: CheckCircleIcon, tone: "bg-success/10 text-success", text: "Table 6 payment processed", sub: "KES 2,100 · 4m ago" },
+  { icon: "/shopping-cart.png" as string | typeof CheckCircleIcon, tone: "bg-primary/10 text-primary", text: "New order placed — Table 3", sub: "6 items · 8m ago" },
+  { icon: ExclamationCircleIcon, tone: "bg-warning/10 text-warning", text: "Table 9 — guests arrived", sub: "Reserved · 12m ago" },
+  { icon: BuildingStorefrontIcon, tone: "bg-primary/10 text-primary", text: "Table 2 order updated", sub: "+2 items · 18m ago" },
 ]
 
-// ─── Mini Sparkline SVG ───────────────────────────────────────────────────────
 function Sparkline() {
   return (
-    <svg viewBox="0 0 150 50" className="w-full h-10" preserveAspectRatio="none">
+    <svg viewBox="0 0 150 50" className="w-full h-9" preserveAspectRatio="none">
       <defs>
         <linearGradient id="sparkGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#7C3AED" stopOpacity="0.3" />
-          <stop offset="100%" stopColor="#7C3AED" stopOpacity="0" />
+          <stop offset="0%" stopColor="currentColor" stopOpacity="0.3" />
+          <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
         </linearGradient>
       </defs>
       <path d={`${sparklinePoints} L150,50 L0,50 Z`} fill="url(#sparkGrad)" />
-      <path d={sparklinePoints} fill="none" stroke="#7C3AED" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        d={sparklinePoints}
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   )
 }
 
-// ─── Section Header ───────────────────────────────────────────────────────────
-function SectionHeader({
-  icon,
-  iconBg = "bg-[#0B3B36]/15",
-  accentColor = "#7C3AED",
-  title,
-  subtitle,
-  badge,
-  action,
-}: {
-  icon: React.ReactNode
-  iconBg?: string
-  accentColor?: string
-  title: string
-  subtitle: string
-  badge?: React.ReactNode
-  action?: React.ReactNode
-}) {
-  return (
-    <div
-      className="px-6 py-4 flex items-center justify-between"
-      style={{ borderBottom: "1px solid rgba(63, 61, 143, 0.05)" }}
-    >
-      <div className="flex items-center gap-3.5">
-        <div className={cn("w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 shadow-sm", iconBg)}>
-          {icon}
-        </div>
-        <div>
-          <p className="text-[12px] tracking-widest uppercase font-bold text-[#082420]">{title}</p>
-          <p className="text-[10px] tracking-wider uppercase text-[#4B6E67] mt-0.5">{subtitle}</p>
-        </div>
-      </div>
-      <div className="flex items-center gap-2">
-        {badge}
-        {action}
-      </div>
-    </div>
-  )
-}
-
-// ─── Glass Card wrapper ───────────────────────────────────────────────────────
-function GlassCard({
-  children,
-  className,
-  accentColor,
-}: {
-  children: React.ReactNode
-  className?: string
-  accentColor?: string
-}) {
-  return (
-    <div
-      className={cn("overflow-hidden rounded-[20px] relative transition-all duration-300", className)}
-      style={{
-        background: "white",
-        border: "1px solid rgba(63, 61, 143, 0.08)",
-        boxShadow: "0 10px 30px -5px rgba(63, 61, 143, 0.04)",
-      }}
-    >
-      {accentColor && (
-        <div
-          className="absolute top-0 left-0 right-0 h-[1.5px]"
-          style={{ background: `linear-gradient(90deg, ${accentColor} 0%, transparent 60%)`, opacity: 0.7 }}
-        />
-      )}
-      {children}
-    </div>
-  )
-}
-
-// ─── Stat Cards ───────────────────────────────────────────────────────────────
-
 function RevenueCard() {
   return (
-    <div
-      className="rounded-[20px] p-5 flex flex-col gap-2.5 relative overflow-hidden"
-      style={{
-        background: "linear-gradient(135deg, #0B3B36 0%, #302e70 100%)",
-        boxShadow: "0 12px 24px -8px rgba(63, 61, 143, 0.4)",
-      }}
-    >
-      {/* Subtle noise texture */}
-      <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E\")" }} />
-      <div className="flex items-center justify-between">
-        <p className="text-[10px] tracking-widest uppercase text-white/60 font-medium">Today's Revenue</p>
-        <div className="w-7 h-7 rounded-xl bg-white/10 flex items-center justify-center">
-          <ArrowTrendingUpIcon className="h-3.5 w-3.5 text-white/80" />
+    <Card size="sm" className="bg-primary text-primary-foreground border-primary">
+      <CardHeader>
+        <CardDescription className="text-primary-foreground/75 text-xs uppercase font-medium">
+          Today&apos;s Revenue
+        </CardDescription>
+        <CardAction>
+          <div className="flex size-8 items-center justify-center rounded-lg bg-primary-foreground/15">
+            <ArrowTrendingUpIcon className="size-4" />
+          </div>
+        </CardAction>
+      </CardHeader>
+      <CardContent className="space-y-2">
+        <CardTitle className="text-2xl sm:text-3xl font-semibold tabular-nums">
+          KSh 245,650
+        </CardTitle>
+        <div className="text-accent">
+          <Sparkline />
         </div>
-      </div>
-      <p className="text-[2rem] font-bold text-white leading-none tracking-tight">KSh 245,650</p>
-      <Sparkline />
-      <div className="flex items-center gap-1.5 pt-0.5">
-        <div className="flex items-center gap-1 bg-emerald-400/20 rounded-full px-2 py-0.5">
-          <span className="text-emerald-300 text-[10px] font-bold">▲ 18.5%</span>
+        <div className="flex items-center gap-2 text-xs">
+          <Badge variant="secondary" className="text-[10px]">
+            ▲ 18.5%
+          </Badge>
+          <span className="text-primary-foreground/70">vs yesterday</span>
         </div>
-        <span className="text-white/40 text-[10px] tracking-wide">vs yesterday</span>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   )
 }
 
@@ -185,35 +142,42 @@ function MetricCard({
   label,
   value,
   sub,
-  subDot,
-  icon: Icon,
+  iconPath,
 }: {
   label: string
   value: React.ReactNode
   sub: React.ReactNode
-  subDot?: string
-  icon: React.ElementType
+  iconPath: string
 }) {
   return (
-    <div
-      className="rounded-[20px] p-5 flex flex-col gap-3 relative overflow-hidden group hover:shadow-2xl transition-all duration-500 bg-white border border-[#0B3B36]/10 shadow-sm"
-    >
-      <div className="flex items-start justify-between">
-        <p className="text-[10px] tracking-widest uppercase text-[#4B6E67] font-bold">{label}</p>
-        <div className="w-10 h-10 rounded-xl bg-[#0B3B36]/5 border border-[#0B3B36]/5 flex items-center justify-center transition-transform group-hover:scale-110">
-          <Icon className="h-4.5 w-4.5" style={{ color: "#0B3B36" }} />
-        </div>
-      </div>
-      <p className="text-3xl font-bold text-[#082420] leading-none tracking-tight">{value}</p>
-      <div className="flex items-center gap-1.5 mt-auto">
-        {subDot && <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: subDot }} />}
-        <span className="text-[#628C84] text-[10px] tracking-wide font-medium">{sub}</span>
-      </div>
-    </div>
+    <Card size="sm">
+      <CardHeader>
+        <CardDescription className="text-xs uppercase font-medium">{label}</CardDescription>
+        <CardAction>
+          <div className="flex size-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
+            <div
+              className="size-4 bg-primary"
+              style={{
+                maskImage: `url('${iconPath}')`,
+                maskSize: "contain",
+                maskRepeat: "no-repeat",
+                maskPosition: "center",
+                WebkitMaskImage: `url('${iconPath}')`,
+                WebkitMaskSize: "contain",
+                WebkitMaskRepeat: "no-repeat",
+                WebkitMaskPosition: "center",
+              }}
+            />
+          </div>
+        </CardAction>
+      </CardHeader>
+      <CardContent className="space-y-1.5">
+        <CardTitle className="text-2xl sm:text-3xl font-semibold tabular-nums">{value}</CardTitle>
+        <p className="text-xs text-muted-foreground">{sub}</p>
+      </CardContent>
+    </Card>
   )
 }
-
-// ─── Page ────────────────────────────────────────────────────────────────────
 
 export default function WaiterDashboard() {
   const [orders, setOrders] = useState<LiveOrder[]>([])
@@ -231,24 +195,24 @@ export default function WaiterDashboard() {
     }
   }
 
-  const readyOrders = orders.filter(o => o.status === "ready" && !dismissed.includes(o.id))
-  const activeCalls = customerCalls.filter(c => !dismissed.includes(c.id))
+  const readyOrders = orders.filter((o) => o.status === "ready" && !dismissed.includes(o.id))
+  const activeCalls = customerCalls.filter((c) => !dismissed.includes(c.id))
   const combinedAlerts = [
-    ...readyOrders.map(o => ({ ...o, alertType: 'order' as const })),
-    ...activeCalls.map(c => ({ ...c, alertType: 'call' as const }))
+    ...readyOrders.map((o) => ({ ...o, alertType: "order" as const })),
+    ...activeCalls.map((c) => ({ ...c, alertType: "call" as const })),
   ].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
 
-  const activeOrders = orders.filter(o => o.status !== "served" && o.status !== "cancelled")
-  const activeTablesCount = Array.from(new Set(activeOrders.map(o => o.tableId))).length
+  const activeOrders = orders.filter((o) => o.paymentStatus !== "paid" && o.status !== "cancelled")
+  const activeTablesCount = Array.from(new Set(activeOrders.map((o) => o.tableId))).length
 
   useEffect(() => {
     const unsubscribe = OrderService.subscribe((allOrders) => {
-      setOrders(prev => {
-        const newReady = allOrders.filter(o =>
-          o.status === "ready" && !prev.some(p => p.id === o.id && p.status === "ready")
+      setOrders((prev) => {
+        const newReady = allOrders.filter(
+          (o) => o.status === "ready" && !prev.some((p) => p.id === o.id && p.status === "ready"),
         )
         if (newReady.length > 0) {
-          new Audio('/mixkit-bike-notification-bell-590.wav').play().catch(() => {})
+          new Audio("/mixkit-bike-notification-bell-590.wav").play().catch(() => {})
           toast.success(`Order for Table ${newReady[0].tableId} is ready!`)
         }
         return allOrders
@@ -258,536 +222,488 @@ export default function WaiterDashboard() {
   }, [])
 
   useEffect(() => {
-    const channelName = `summons-realtime-${Date.now()}`
-    const channel = supabase
-      .channel(channelName)
-      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'summons' }, (payload) => {
-        const rawName = payload.new?.staff_name || "Staff Member"
-        const staffId = payload.new?.staff_id
-        const isZeroId = String(staffId) === "0"
-        const isTableIdentifier = /table/i.test(String(rawName))
-        const hasTableId = payload.new?.table_id !== undefined && payload.new?.table_id !== null
-        const isCustomerCall = isZeroId || isTableIdentifier || hasTableId
-        const name = rawName.trim()
-
-        try {
-          new Audio(isCustomerCall ? "/mixkit-bike-notification-bell-590.wav" : "/universfield-new-notification-022-370046.mp3").play().catch(() => {})
-        } catch {}
-
-        if (isCustomerCall) {
-          setCustomerCalls(prev => [{ id: payload.new.id || `${Date.now()}`, tableId: name.replace(/table /i, "").trim(), createdAt: new Date().toISOString() }, ...prev])
-          toast.warning("Table Assistance", { description: `${name} is requesting a waiter now.`, duration: 10000 })
-        } else {
-          toast.error("STAFF ALERT: Manager Request", { description: `${name}, please report to the manager's office immediately.`, duration: 12000 })
-        }
-      })
-      .subscribe()
-    return () => { supabase.removeChannel(channel) }
+    const unsubscribe = SummonService.subscribe((alerts) => {
+      setCustomerCalls(
+        alerts
+          .filter((a) => a.isCustomerCall && a.status === "pending")
+          .map((a) => ({
+            id: a.id,
+            tableId: a.tableId || a.staffName.replace(/table\s*/i, "").trim(),
+            createdAt: a.createdAt,
+          })),
+      )
+    })
+    return unsubscribe
   }, [])
 
-  const today = new Date().toLocaleDateString("en-KE", { weekday: "long", day: "numeric", month: "long" })
+  const today = new Date().toLocaleDateString("en-KE", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+  })
 
   return (
     <TooltipProvider>
-      <div className="min-h-screen" style={{ background: "linear-gradient(135deg, #F4FAF7 0%, #EBF6F1 50%, #E4F2EC 100%)" }}>
-
-        <div className="relative z-10 max-w-screen-xl mx-auto px-4 py-6 space-y-6">
-
-          {/* ── Header ──────────────────────────────────────────────────── */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pb-2">
-
-            {/* Left: Avatar + greeting */}
+      <div className="min-h-screen bg-background">
+        <div className="max-w-screen-xl mx-auto px-4 py-6 space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="flex items-center gap-4">
-              <div className="relative group cursor-pointer shrink-0" onClick={() => fileInputRef.current?.click()}>
-                <div className="absolute inset-0 rounded-[24px] blur-xl opacity-40 group-hover:opacity-60 transition-opacity duration-500"
-                  style={{ background: "linear-gradient(135deg, #7C3AED, #4338CA)" }} />
-                <div className="relative h-[72px] w-[72px] rounded-2xl p-[2.5px] shadow-2xl"
-                  style={{ background: "linear-gradient(135deg, #7C3AED, #4338CA)" }}>
-                  <div className="h-full w-full rounded-[14px] overflow-hidden bg-white shadow-inner">
-                    {avatarImage
-                      ? <img src={avatarImage} alt="User" className="h-full w-full object-cover" />
-                      : <div className="h-full w-full flex items-center justify-center text-xl font-bold text-white"
-                          style={{ background: "linear-gradient(135deg, #0B3B36 0%, #4338CA 100%)" }}>WA</div>
-                      }
-                  </div>
-                  <div className="absolute inset-[2.5px] flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[14px]">
-                    <CameraIcon className="h-5 w-5 text-white" />
-                  </div>
+              <div
+                className="relative group cursor-pointer shrink-0"
+                onClick={() => fileInputRef.current?.click()}
+              >
+                <Avatar className="size-16 rounded-2xl border-2 border-primary/20 shadow-sm">
+                  {avatarImage && <AvatarImage src={avatarImage} alt="User" className="object-cover" />}
+                  <AvatarFallback className="rounded-2xl bg-primary text-primary-foreground text-lg font-bold">
+                    WA
+                  </AvatarFallback>
+                </Avatar>
+                <div className="absolute inset-0 flex items-center justify-center bg-black/45 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl">
+                  <CameraIcon className="size-5 text-white" />
                 </div>
-                {/* Online dot */}
-                <div className="absolute bottom-1 right-1 w-3 h-3 rounded-full bg-emerald-400 border-2 border-[#F4FAF7]">
-                  <span className="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-75" />
-                </div>
-                <input type="file" ref={fileInputRef} onChange={handleImageUpload} accept="image/*" className="hidden" />
+                <span className="absolute -bottom-0.5 -right-0.5 size-3.5 rounded-full bg-success border-2 border-background" />
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  onChange={handleImageUpload}
+                  accept="image/*"
+                  className="hidden"
+                />
               </div>
 
-              <div className="flex-1 min-w-0">
-                <p className="text-[10px] tracking-[0.3em] uppercase text-[#4B6E67] font-bold mb-1 opacity-70">{today}</p>
-                <h1 className="text-2xl md:text-3xl font-light text-[#082420] leading-none">
-                  Welcome back, <span className="font-bold whitespace-nowrap" style={{ color: "#0B3B36" }}>Waiter</span>
+              <div className="space-y-1">
+                <p className="text-[11px] uppercase tracking-wider text-muted-foreground font-medium">
+                  {today}
+                </p>
+                <h1 className="text-2xl md:text-3xl font-semibold text-foreground leading-none">
+                  Welcome back, <span className="text-primary">Waiter</span>
                 </h1>
-                <div className="flex items-center gap-2 mt-1.5">
-                  <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full border"
-                    style={{ background: "rgba(16,185,129,0.08)", borderColor: "rgba(16,185,129,0.2)" }}>
-                    <span className="relative flex h-1.5 w-1.5">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
-                    </span>
-                    <span className="text-[9px] tracking-widest uppercase text-emerald-500 font-bold">Shift Active</span>
-                  </div>
-                  <div className="h-4 w-[1px] bg-[#0B3B36]/10 mx-1" />
-                  <span className="text-[9px] tracking-[0.15em] uppercase text-[#0B3B36]/50 font-bold">Alpha Station</span>
+                <div className="flex items-center gap-2 pt-1">
+                  <Badge variant="outline" className="gap-1.5 border-success/30 bg-success/10 text-success">
+                    <span className="size-1.5 rounded-full bg-success" />
+                    Shift Active
+                  </Badge>
+                  <span className="text-xs text-muted-foreground">Alpha Station</span>
                 </div>
               </div>
             </div>
 
-            {/* Right: Actions */}
-            <div className="flex items-center gap-3 shrink-0">
+            <div className="flex items-center gap-2 shrink-0">
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    className="h-10 w-10 md:h-12 md:w-12 rounded-2xl border-[#0B3B36]/10 bg-white text-[#0B3B36]/50 hover:text-[#0B3B36] hover:bg-[#0B3B36]/05 transition-all shadow-sm"
-                  >
-                    <ChartBarIcon className="h-5 w-5" />
+                  <Button variant="outline" size="icon">
+                    <ChartBarIcon className="size-4" />
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>Performance Insights</TooltipContent>
               </Tooltip>
- 
-              <Button
-                asChild
-                className="h-10 md:h-12 px-5 md:px-7 rounded-2xl gap-2.5 text-[10px] tracking-widest uppercase text-white border-0 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl group relative overflow-hidden"
-                style={{
-                  background: "linear-gradient(135deg, #0B3B36 0%, #302e70 100%)",
-                  boxShadow: "0 8px 24px -6px rgba(63, 61, 143, 0.4)",
-                }}
-              >
+
+              <Button asChild className="gap-2">
                 <Link href="/waiter/service-floor">
-                  <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <PlusIcon className="h-4 w-4" />
-                  <span className="font-bold">New Order</span>
+                  <PlusIcon className="size-4" />
+                  New Order
                 </Link>
               </Button>
             </div>
           </div>
 
-          {/* ── Stat Cards Grid ──────────────────────────────────────────── */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             <RevenueCard />
             <MetricCard
               label="Total Orders"
               value="128"
-              sub={<><span className="text-emerald-400 font-semibold">▲ 12.3%</span> vs yesterday</>}
-              icon={() => (
-                <div className="h-4.5 w-4.5" style={{ 
-                  backgroundColor: "#0B3B36",
-                  maskImage: "url('/waiter.png')", maskSize: 'contain', maskRepeat: 'no-repeat', maskPosition: 'center',
-                  WebkitMaskImage: "url('/waiter.png')", WebkitMaskSize: 'contain', WebkitMaskRepeat: 'no-repeat', WebkitMaskPosition: 'center'
-                }} />
-              )}
+              sub="▲ 12.3% vs yesterday"
+              iconPath="/waiter.png"
             />
             <MetricCard
               label="Active Tables"
-              value={<>{activeTablesCount || 18} <span className="text-xl text-[#628C84] font-bold">/ 32</span></>}
+              value={
+                <>
+                  {activeTablesCount || 18}{" "}
+                  <span className="text-lg text-muted-foreground font-medium">/ 32</span>
+                </>
+              }
               sub={`${Math.round(((activeTablesCount || 18) / 32) * 100)}% occupied`}
-              subDot="#10b981"
-              icon={() => (
-                <div className="h-4.5 w-4.5" style={{ 
-                  backgroundColor: "#0B3B36",
-                  maskImage: "url('/dining-table (1).png')", maskSize: 'contain', maskRepeat: 'no-repeat', maskPosition: 'center',
-                  WebkitMaskImage: "url('/dining-table (1).png')", WebkitMaskSize: 'contain', WebkitMaskRepeat: 'no-repeat', WebkitMaskPosition: 'center'
-                }} />
-              )}
+              iconPath="/dining-table (1).png"
             />
             <MetricCard
               label="New Reservations"
               value="12"
               sub="Today"
-              subDot="#10b981"
-              icon={() => (
-                <div className="h-4.5 w-4.5" style={{ 
-                  backgroundColor: "#0B3B36",
-                  maskImage: "url('/calendar.png')", maskSize: 'contain', maskRepeat: 'no-repeat', maskPosition: 'center',
-                  WebkitMaskImage: "url('/calendar.png')", WebkitMaskSize: 'contain', WebkitMaskRepeat: 'no-repeat', WebkitMaskPosition: 'center'
-                }} />
-              )}
+              iconPath="/calendar.png"
             />
           </div>
 
-          {/* ── Main Content Grid ────────────────────────────────────────── */}
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-5">
-
-            {/* ── LEFT column ─────────────────────────────────────────── */}
-            <div className="space-y-5">
-
-              {/* Service Alerts */}
-              <GlassCard accentColor="#f59e0b">
-                <SectionHeader
-                  icon={
-                    <div className="h-4.5 w-4.5" style={{
-                      backgroundColor: "#f59e0b",
-                      maskImage: "url(/rebell.png)", maskSize: "contain", maskRepeat: "no-repeat", maskPosition: "center",
-                      WebkitMaskImage: "url(/rebell.png)", WebkitMaskSize: "contain", WebkitMaskRepeat: "no-repeat", WebkitMaskPosition: "center",
-                    }} />
-                  }
-                  iconBg="bg-amber-500/10"
-                  title="Service Alerts"
-                  subtitle="Kitchen ready · Pickup now"
-                  badge={
-                    <div className="flex items-center gap-1.5 px-3 py-1 rounded-full border border-amber-500/20 bg-amber-500/10">
-                      <FireIcon className="h-2.5 w-2.5 text-amber-400 animate-pulse" />
-                      <span className="text-[9px] tracking-widest uppercase text-amber-400 font-semibold">Live</span>
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-6">
+            <div className="space-y-6">
+              <Card>
+                <CardHeader className="border-b">
+                  <div className="flex items-center gap-3">
+                    <div className="flex size-9 items-center justify-center rounded-lg bg-warning/10">
+                      <div
+                        className="size-4 bg-warning"
+                        style={{
+                          maskImage: "url(/rebell.png)",
+                          maskSize: "contain",
+                          maskRepeat: "no-repeat",
+                          maskPosition: "center",
+                          WebkitMaskImage: "url(/rebell.png)",
+                          WebkitMaskSize: "contain",
+                          WebkitMaskRepeat: "no-repeat",
+                          WebkitMaskPosition: "center",
+                        }}
+                      />
                     </div>
-                  }
-                />
-
-                {combinedAlerts.length === 0 ? (
-                  <div className="flex flex-col items-center justify-center py-14 gap-3">
-                    <div className="w-14 h-14 rounded-[18px] flex items-center justify-center bg-emerald-500/10 border border-emerald-500/15">
-                      <CheckCircleIcon className="h-7 w-7 text-emerald-400" />
-                    </div>
-                    <div className="text-center">
-                      <p className="text-sm font-bold text-[#082420]">All caught up!</p>
-                      <p className="text-[10px] tracking-widest uppercase text-[#628C84] mt-1 font-medium">No pending alerts</p>
+                    <div className="space-y-0.5">
+                      <CardTitle className="text-base">Service Alerts</CardTitle>
+                      <CardDescription className="text-xs">
+                        Kitchen ready · Pickup now
+                      </CardDescription>
                     </div>
                   </div>
-                ) : (
-                  <div>
-                    {combinedAlerts.map((alert, idx) => {
-                      const isOrder = alert.alertType === 'order'
-                      return (
-                        <div
-                          key={alert.id}
-                          className="group flex items-center gap-4 px-5 py-3.5 hover:bg-white/[0.03] transition-colors"
-                          style={{ borderTop: idx > 0 ? "1px solid rgba(255,255,255,0.05)" : undefined }}
-                        >
-                          {/* Table number badge */}
-                          <div
-                            className="w-11 h-11 rounded-2xl flex items-center justify-center text-base font-bold text-white shrink-0"
-                            style={{
-                              background: isOrder
-                                ? "linear-gradient(135deg, #7C3AED, #4338CA)"
-                                : "linear-gradient(135deg, #d97706, #b45309)",
-                              boxShadow: `0 4px 12px ${isOrder ? "rgba(124,58,237,0.35)" : "rgba(245,158,11,0.35)"}`,
-                            }}
-                          >
-                            {alert.tableId}
-                          </div>
+                  <CardAction>
+                    <Badge variant="outline" className="gap-1 border-warning/30 bg-warning/10 text-warning">
+                      <FireIcon className="size-3" />
+                      Live
+                    </Badge>
+                  </CardAction>
+                </CardHeader>
 
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2">
-                              <p className="text-sm font-semibold text-white">Table {alert.tableId}</p>
-                              <span className="px-1.5 py-0.5 rounded-md text-[9px] tracking-wider uppercase font-medium"
-                                style={{
-                                  background: isOrder ? "rgba(124,58,237,0.15)" : "rgba(245,158,11,0.15)",
-                                  color: isOrder ? "#a78bfa" : "#fbbf24",
-                                }}>
-                                {isOrder ? "Ready" : "Assist"}
-                              </span>
-                            </div>
-                            <p className="text-[11px] text-white/40 truncate mt-0.5">
-                              {isOrder
-                                ? `${(alert as any).items.length} items · ${(alert as any).items[0].name}`
-                                : "Customer is requesting assistance"
-                              }
-                            </p>
-                          </div>
+                <CardContent className="p-0">
+                  {combinedAlerts.length === 0 ? (
+                    <Empty className="py-14">
+                      <EmptyHeader>
+                        <EmptyMedia variant="icon">
+                          <CheckCircleIcon className="text-success" />
+                        </EmptyMedia>
+                        <EmptyTitle>All caught up!</EmptyTitle>
+                        <EmptyDescription>No pending alerts</EmptyDescription>
+                      </EmptyHeader>
+                    </Empty>
+                  ) : (
+                    <ItemGroup>
+                      <AnimatePresence mode="popLayout" initial={false}>
+                        {combinedAlerts.map((alert, idx) => {
+                          const isOrder = alert.alertType === "order"
+                          return (
+                            <motion.div
+                              key={alert.id}
+                              layout="position"
+                              initial={{ opacity: 0, y: 6 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              exit={{ opacity: 0, x: 14, scale: 0.96 }}
+                              transition={SPRING_SNAPPY}
+                            >
+                              {idx > 0 && <ItemSeparator />}
+                              <Item className="group rounded-none hover:bg-muted/40">
+                                <ItemMedia>
+                                  <div
+                                    className={cn(
+                                      "flex size-10 items-center justify-center rounded-xl font-bold text-sm",
+                                      isOrder
+                                        ? "bg-primary text-primary-foreground"
+                                        : "bg-warning text-warning-foreground",
+                                    )}
+                                  >
+                                    {alert.tableId}
+                                  </div>
+                                </ItemMedia>
 
-                          <div className="flex items-center gap-1.5 shrink-0">
-                            <Button
-                              size="sm"
-                              className="h-8 px-3.5 text-[10px] tracking-wider uppercase text-white font-semibold border-0 rounded-xl shadow-sm transition-all hover:-translate-y-0.5"
-                              style={{
-                                background: isOrder
-                                  ? "linear-gradient(135deg, #7C3AED, #4338CA)"
-                                  : "linear-gradient(135deg, #059669, #047857)",
-                                boxShadow: isOrder ? "0 4px 12px rgba(124,58,237,0.4)" : "0 4px 12px rgba(5,150,105,0.4)",
-                              }}
-                              onClick={() => {
-                                if (isOrder) OrderService.updateOrderStatus(alert.id, "served")
-                                else setDismissed(d => [...d, alert.id])
-                              }}
-                            >
-                              {isOrder ? "Serve" : "Resolve"}
-                            </Button>
-                            <Button
-                              size="icon"
-                              variant="ghost"
-                              className="h-8 w-8 rounded-xl opacity-0 group-hover:opacity-100 transition-all text-white/30 hover:text-white hover:bg-white/10"
-                              onClick={() => setDismissed(d => [...d, alert.id])}
-                            >
-                              <XMarkIcon className="h-3.5 w-3.5" />
-                            </Button>
-                          </div>
-                        </div>
-                      )
-                    })}
+                                <ItemContent>
+                                  <ItemTitle>
+                                    <span>Table {alert.tableId}</span>
+                                    <Badge
+                                      variant={isOrder ? "default" : "outline"}
+                                      className={cn(
+                                        "text-[10px] uppercase",
+                                        !isOrder && "border-warning/30 bg-warning/10 text-warning",
+                                      )}
+                                    >
+                                      {isOrder ? "Ready" : "Assist"}
+                                    </Badge>
+                                  </ItemTitle>
+                                  <ItemDescription>
+                                    {isOrder
+                                      ? `${(alert as LiveOrder).items.length} items · ${(alert as LiveOrder).items[0]?.name}`
+                                      : "Customer is requesting assistance"}
+                                  </ItemDescription>
+                                </ItemContent>
+
+                                <ItemActions>
+                                  <Button
+                                    size="sm"
+                                    onClick={() => {
+                                      if (isOrder) OrderService.updateOrderStatus(alert.id, "served")
+                                      else SummonService.resolveSummon(alert.id)
+                                    }}
+                                  >
+                                    {isOrder ? "Serve" : "Resolve"}
+                                  </Button>
+                                  <Button
+                                    size="icon-sm"
+                                    variant="ghost"
+                                    className="opacity-70 md:opacity-0 md:group-hover:opacity-100"
+                                    onClick={() => setDismissed((d) => [...d, alert.id])}
+                                    aria-label="Dismiss alert"
+                                  >
+                                    <XMarkIcon className="size-4" />
+                                  </Button>
+                                </ItemActions>
+                              </Item>
+                            </motion.div>
+                          )
+                        })}
+                      </AnimatePresence>
+                    </ItemGroup>
+                  )}
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader className="border-b">
+                  <div className="flex items-center gap-3">
+                    <div className="flex size-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                      <CheckBadgeIcon className="size-5" />
+                    </div>
+                    <div className="space-y-0.5">
+                      <CardTitle className="text-base">My Service Floor</CardTitle>
+                      <CardDescription className="text-xs">Active assignments</CardDescription>
+                    </div>
                   </div>
-                )}
-              </GlassCard>
-
-              {/* My Service Floor */}
-              <GlassCard accentColor="#7C3AED">
-                <SectionHeader
-                  icon={<CheckBadgeIcon className="h-4.5 w-4.5 text-[#0B3B36]" />}
-                  title="My Service Floor"
-                  subtitle="Active assignments"
-                  action={
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="text-[10px] tracking-widest font-semibold uppercase gap-1 text-[#0B3B36] hover:bg-white/5 h-8 px-3 rounded-xl"
-                      asChild
-                    >
-                      <Link href="/waiter/service-floor">
-                        Map <ChevronRightIcon className="h-3 w-3" />
+                  <CardAction>
+                    <Button variant="ghost" size="sm" asChild>
+                      <Link href="/waiter/service-floor" className="gap-1">
+                        Map <ChevronRightIcon className="size-3.5" />
                       </Link>
                     </Button>
-                  }
-                />
+                  </CardAction>
+                </CardHeader>
 
-                <div className="p-4">
-                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-                    {activeOrders.length === 0 ? (
-                      <div className="col-span-full py-12 text-center flex flex-col items-center gap-3">
-                        <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center">
-                          <CheckBadgeIcon className="h-6 w-6 text-white/20" />
-                        </div>
-                        <p className="text-[10px] tracking-widest uppercase text-white/25 font-semibold">No active assignments</p>
-                      </div>
-                    ) : activeOrders.map((t) => {
-                      const tableNum = parseInt(t.tableId) || 0
-                      const status   = t.status || "pending"
-                      const imgSrc   = tableImages[tableNum % tableImages.length]
-                      const statusConfig = {
-                        pending:   { color: "#6366f1", label: "Pending" },
-                        ready:     { color: "#10b981", label: "Ready" },
-                        occupied:  { color: "#8b5cf6", label: "Occupied" },
-                        served:    { color: "#6366f1", label: "Served" },
-                        cancelled: { color: "#ef4444", label: "Cancelled" },
-                      }
-                      const cfg = statusConfig[status as keyof typeof statusConfig] || statusConfig.pending
+                <CardContent>
+                  {activeOrders.length === 0 ? (
+                    <Empty className="py-10">
+                      <EmptyHeader>
+                        <EmptyMedia variant="icon">
+                          <CheckBadgeIcon />
+                        </EmptyMedia>
+                        <EmptyTitle className="text-base">No active assignments</EmptyTitle>
+                        <EmptyDescription>Active table orders will appear here.</EmptyDescription>
+                      </EmptyHeader>
+                    </Empty>
+                  ) : (
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                      {activeOrders.map((t) => {
+                        const tableNum = parseInt(t.tableId) || 0
+                        const status = t.status || "pending"
+                        const imgSrc = tableImages[tableNum % tableImages.length]
+                        const statusLabel =
+                          status.charAt(0).toUpperCase() + status.slice(1)
 
-                      return (
-                        <HoverCard key={t.id} openDelay={200}>
-                          <HoverCardTrigger asChild>
-                            <div
-                              className="group relative flex flex-col rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl"
-                              style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.09)" }}
-                            >
-                              <div className="relative h-24 w-full overflow-hidden">
-                                <img src={imgSrc} alt={`Table ${tableNum}`} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                                <div className="absolute top-2.5 left-2.5 flex items-center gap-1 px-2 py-0.5 rounded-full bg-black/50 backdrop-blur-sm border border-white/10">
-                                  <div className="w-1 h-1 rounded-full" style={{ background: cfg.color }} />
-                                  <span className="text-[8px] tracking-widest uppercase text-white/80">{cfg.label}</span>
+                        return (
+                          <HoverCard key={t.id} openDelay={200}>
+                            <HoverCardTrigger asChild>
+                              <Card
+                                size="sm"
+                                className="group gap-0 py-0 overflow-hidden cursor-pointer transition-[border-color,box-shadow] duration-150 ease-(--ease-out) hover:shadow-md"
+                              >
+                                <div className="relative h-24 w-full overflow-hidden bg-muted">
+                                  <img
+                                    src={imgSrc}
+                                    alt={`Table ${tableNum}`}
+                                    className="w-full h-full object-cover transition-transform duration-300 ease-(--ease-out) group-hover:scale-105"
+                                  />
+                                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent" />
+                                  <Badge
+                                    variant="secondary"
+                                    className="absolute top-2 left-2 text-[10px] uppercase"
+                                  >
+                                    {statusLabel}
+                                  </Badge>
                                 </div>
-                              </div>
-                              <div className="px-3 pb-3 pt-6 flex flex-col items-center relative">
-                                <div className="absolute -top-5 w-10 h-10 rounded-xl flex items-center justify-center border-2 border-[#0f0a1e] shadow-xl"
-                                  style={{ background: "linear-gradient(135deg, #7C3AED, #4338CA)" }}>
-                                  <span className="text-base font-bold text-white">{tableNum}</span>
-                                </div>
-                                <p className="text-[9px] tracking-widest uppercase text-white/35 font-medium">{t.items?.length || 0} items</p>
-                              </div>
-                            </div>
-                          </HoverCardTrigger>
-                          <HoverCardContent
-                            className="w-68 p-0 border-0 rounded-[20px] shadow-2xl overflow-hidden"
-                            style={{ background: "#1a0f3a", border: "1px solid rgba(255,255,255,0.12)" }}
-                            sideOffset={12}
-                          >
-                            <div className="p-4 space-y-3">
+                                <CardContent className="py-3 text-center">
+                                  <p className="text-base font-bold text-foreground">
+                                    Table {tableNum}
+                                  </p>
+                                  <p className="text-xs text-muted-foreground">
+                                    {t.items?.length || 0} items
+                                  </p>
+                                </CardContent>
+                              </Card>
+                            </HoverCardTrigger>
+                            <HoverCardContent className="w-64 p-4 space-y-3" sideOffset={10}>
                               <div className="flex items-center gap-3">
-                                <div className="w-11 h-11 rounded-2xl flex items-center justify-center text-lg font-black text-white shadow-lg"
-                                  style={{ background: "linear-gradient(135deg, #7C3AED, #4338CA)" }}>
+                                <div className="flex size-10 items-center justify-center rounded-lg bg-primary text-primary-foreground font-bold">
                                   {tableNum}
                                 </div>
                                 <div>
-                                  <p className="text-sm font-semibold text-[#082420]">Table {tableNum}</p>
-                                  <div className="flex items-center gap-1.5 mt-0.5">
-                                    <div className="w-1.5 h-1.5 rounded-full" style={{ background: cfg.color }} />
-                                    <p className="text-[9px] tracking-wider uppercase text-[#4B6E67]">{cfg.label} · Section Alpha</p>
-                                  </div>
+                                  <p className="text-sm font-semibold">Table {tableNum}</p>
+                                  <p className="text-xs text-muted-foreground">
+                                    {statusLabel} · Section Alpha
+                                  </p>
                                 </div>
                               </div>
-                              <div className="grid grid-cols-2 gap-2.5">
-                                {[
-                                  { label: "Order ID", value: `#${t.id.slice(-6).toUpperCase()}` },
-                                  { label: "Items", value: `${t.items.length} Units` },
-                                ].map(item => (
-                                  <div key={item.label} className="p-2.5 rounded-[14px] space-y-0.5" style={{ background: "rgba(63, 61, 143, 0.05)" }}>
-                                    <p className="text-[8px] tracking-widest uppercase text-[#628C84] font-bold">{item.label}</p>
-                                    <p className="text-xs font-semibold text-[#0B3B36]">{item.value}</p>
-                                  </div>
-                                ))}
+                              <div className="grid grid-cols-2 gap-2">
+                                <div className="p-2 rounded-lg bg-muted/50">
+                                  <p className="text-[10px] uppercase text-muted-foreground">Order</p>
+                                  <p className="text-xs font-semibold">
+                                    #{t.id.slice(-6).toUpperCase()}
+                                  </p>
+                                </div>
+                                <div className="p-2 rounded-lg bg-muted/50">
+                                  <p className="text-[10px] uppercase text-muted-foreground">Items</p>
+                                  <p className="text-xs font-semibold">{t.items.length} Units</p>
+                                </div>
                               </div>
-                              <Button className="w-full h-9 rounded-xl text-[10px] tracking-widest uppercase gap-1.5 text-white border-0"
-                                style={{ background: "linear-gradient(135deg, #7C3AED, #4338CA)" }}>
-                                Manage Table <ArrowRight className="h-3 w-3" />
+                              <Button size="sm" className="w-full gap-1.5" asChild>
+                                <Link href={`/waiter/service-floor?table=${tableNum}`}>
+                                  Manage Table <ArrowRight className="size-3.5" />
+                                </Link>
                               </Button>
-                            </div>
-                          </HoverCardContent>
-                        </HoverCard>
-                      )
-                    })}
-                  </div>
-                </div>
-              </GlassCard>
+                            </HoverCardContent>
+                          </HoverCard>
+                        )
+                      })}
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
             </div>
 
-            {/* ── RIGHT column ────────────────────────────────────────── */}
             <div className="space-y-4">
-
-              {/* Quick Actions */}
-              <GlassCard>
-                <div className="px-5 py-4" style={{ borderBottom: "1px solid rgba(63, 61, 143, 0.05)" }}>
-                  <p className="text-[11px] tracking-widest uppercase font-bold text-[#082420]">Quick Actions</p>
-                </div>
-                <div className="p-4 space-y-2.5">
-                  <Button
-                    asChild
-                    className="w-full h-12 rounded-2xl gap-2.5 text-[10px] tracking-widest uppercase text-white border-0 transition-all duration-300 hover:-translate-y-0.5 group relative overflow-hidden"
-                    style={{ background: "linear-gradient(135deg, #7C3AED 0%, #4338CA 100%)", boxShadow: "0 6px 20px -4px rgba(124,58,237,0.5)" }}
-                  >
-                    <Link href="/waiter/service-floor" className="flex items-center justify-center">
-                      <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-                      <div 
-                        className="h-4 w-4 bg-white" 
-                        style={{ 
-                          maskImage: "url(/service-floor-nav.png)", maskSize: 'contain', maskRepeat: 'no-repeat', maskPosition: 'center',
-                          WebkitMaskImage: "url(/service-floor-nav.png)", WebkitMaskSize: 'contain', WebkitMaskRepeat: 'no-repeat', WebkitMaskPosition: 'center'
-                        }} 
-                      />
-                      <span>New Order</span>
+              <Card size="sm">
+                <CardHeader className="border-b">
+                  <CardTitle className="text-sm uppercase">Quick Actions</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-2.5">
+                  <Button asChild className="w-full gap-2">
+                    <Link href="/waiter/service-floor">
+                      <PlusIcon className="size-4" />
+                      New Order
                     </Link>
                   </Button>
 
                   <div className="grid grid-cols-3 gap-2">
                     {[
-                      { href: "/waiter/service-floor",  label: "Floor",   icon: "/service-floor-nav.png" },
+                      { href: "/waiter/service-floor", label: "Floor", icon: "/service-floor-nav.png" },
                       { href: "/waiter/order-tracking", label: "Tracker", icon: "/order-tracking-nav.png" },
-                      { href: "/waiter/checkout",       label: "Cashier", icon: "/checkout-nav.png" },
+                      { href: "/waiter/checkout", label: "Cashier", icon: "/checkout-nav.png" },
                     ].map((action) => (
                       <Button
                         key={action.href}
                         asChild
-                        variant="ghost"
-                        className="h-[72px] flex-col gap-1.5 text-[9px] tracking-widest uppercase rounded-2xl border border-white/08 bg-white/04 hover:bg-white/08 text-white/40 hover:text-white/70 transition-all"
+                        variant="outline"
+                        className="h-auto flex-col gap-1.5 py-3 px-2 text-[11px]"
                       >
-                        <Link href={action.href} className="flex flex-col items-center justify-center">
-                          <div className="w-9 h-9 rounded-xl flex items-center justify-center bg-[#0B3B36]/05 border border-[#0B3B36]/10 mb-1">
-                            <div 
-                              className="h-4 w-4 bg-[#0B3B36]" 
-                              style={{ 
-                                maskImage: `url(${action.icon})`, maskSize: 'contain', maskRepeat: 'no-repeat', maskPosition: 'center',
-                                WebkitMaskImage: `url(${action.icon})`, WebkitMaskSize: 'contain', WebkitMaskRepeat: 'no-repeat', WebkitMaskPosition: 'center'
-                              }} 
-                            />
-                          </div>
-                          <span className="text-[#0B3B36] font-bold">{action.label}</span>
+                        <Link href={action.href}>
+                          <div
+                            className="size-4 bg-primary"
+                            style={{
+                              maskImage: `url(${action.icon})`,
+                              maskSize: "contain",
+                              maskRepeat: "no-repeat",
+                              maskPosition: "center",
+                              WebkitMaskImage: `url(${action.icon})`,
+                              WebkitMaskSize: "contain",
+                              WebkitMaskRepeat: "no-repeat",
+                              WebkitMaskPosition: "center",
+                            }}
+                          />
+                          <span>{action.label}</span>
                         </Link>
                       </Button>
                     ))}
                   </div>
-                </div>
-              </GlassCard>
+                </CardContent>
+              </Card>
 
-              {/* Shift Progress */}
-              <GlassCard accentColor="#7C3AED">
-                <SectionHeader
-                  icon={
-                    <div className="h-4.5 w-4.5" style={{
-                      backgroundColor: "#0B3B36",
-                      maskImage: "url(/shift.png)", maskSize: "contain", maskRepeat: "no-repeat", maskPosition: "center",
-                      WebkitMaskImage: "url(/shift.png)", WebkitMaskSize: "contain", WebkitMaskRepeat: "no-repeat", WebkitMaskPosition: "center",
-                    }} />
-                  }
-                  title="Shift Progress"
-                  subtitle="14 covers to target"
-                />
-
-                <div className="p-5 space-y-5">
-                  {/* Main numbers */}
+              <Card size="sm">
+                <CardHeader className="border-b">
+                  <CardTitle className="text-sm">Shift Progress</CardTitle>
+                  <CardDescription className="text-xs">14 covers to target</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
                   <div className="flex items-end justify-between">
                     <div>
-                      <p className="text-[2.4rem] leading-none font-bold text-[#082420] tracking-tight">75<span className="text-xl text-[#628C84]">%</span></p>
-                      <p className="text-[9px] tracking-widest uppercase text-[#628C84] mt-1 font-bold">Quota Met</p>
+                      <p className="text-3xl font-bold tabular-nums">75%</p>
+                      <p className="text-xs uppercase text-muted-foreground">Quota Met</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-2xl font-bold tabular-nums text-[#0B3B36]">42</p>
-                      <p className="text-[9px] tracking-widest uppercase text-[#628C84] mt-1 font-bold">Served Today</p>
+                      <p className="text-2xl font-bold tabular-nums text-primary">42</p>
+                      <p className="text-xs uppercase text-muted-foreground">Served Today</p>
                     </div>
                   </div>
 
-                  {/* Progress bar */}
-                  <div className="space-y-2">
-                    <div className="h-2.5 w-full rounded-full overflow-hidden bg-[#0B3B36]/05 border border-[#0B3B36]/10">
-                      <div
-                        className="h-full rounded-full relative overflow-hidden"
-                        style={{ width: "75%", background: "linear-gradient(90deg, #7C3AED, #6d28d9)" }}
-                      >
-                        <div className="absolute inset-0 bg-white/20 animate-pulse" style={{ borderRadius: "inherit" }} />
-                      </div>
-                    </div>
-                    <p className="text-[9px] tracking-wide text-[#628C84] font-medium">Excellent pace · 14 to target of 56</p>
+                  <div className="space-y-1.5">
+                    <Progress value={75} className="h-2" />
+                    <p className="text-xs text-muted-foreground">
+                      Excellent pace · 14 to target of 56
+                    </p>
                   </div>
 
-                  {/* Micro stats */}
+                  <Separator />
+
                   <div className="grid grid-cols-3 gap-2">
                     {[
-                      { value: "4.8",     label: "Rating",  color: "#34d399", bg: "rgba(52,211,153,0.07)" },
-                      { value: "3.5m",    label: "Wait",    color: "#a78bfa", bg: "rgba(167,139,250,0.07)" },
-                      { value: "KES 850", label: "Avg",     color: "#fb923c", bg: "rgba(251,146,60,0.07)" },
+                      { value: "4.8", label: "Rating" },
+                      { value: "3.5m", label: "Wait" },
+                      { value: "KES 850", label: "Avg" },
                     ].map((m) => (
-                      <div
-                        key={m.label}
-                        className="rounded-2xl p-3 flex flex-col items-center gap-1 border border-white/05"
-                        style={{ background: m.bg }}
-                      >
-                        <p className="text-sm tabular-nums font-bold" style={{ color: m.color }}>{m.value}</p>
-                        <p className="text-[8px] tracking-widest uppercase text-[#628C84] font-bold">{m.label}</p>
+                      <div key={m.label} className="rounded-lg bg-muted/50 p-2.5 text-center">
+                        <p className="text-sm font-semibold tabular-nums">{m.value}</p>
+                        <p className="text-[10px] uppercase text-muted-foreground">{m.label}</p>
                       </div>
                     ))}
                   </div>
-                </div>
-              </GlassCard>
+                </CardContent>
+              </Card>
 
-              {/* Activity Stream */}
-              <GlassCard>
-                <div className="px-5 py-4" style={{ borderBottom: "1px solid rgba(63, 61, 143, 0.05)" }}>
-                  <p className="text-[11px] tracking-widest uppercase font-bold text-[#082420]">Activity Stream</p>
-                </div>
-                <ScrollArea className="h-[240px]">
-                  <div>
-                    {recentActivity.map((item, i) => {
-                      const Icon = item.icon
-                      return (
-                        <div
-                          key={i}
-                          className="flex items-center gap-3.5 px-5 py-3 hover:bg-[#0B3B36]/05 transition-all cursor-pointer group"
-                          style={{ borderTop: i > 0 ? "1px solid rgba(63, 61, 143, 0.05)" : undefined }}
-                        >
-                          <div className={cn("w-9 h-9 rounded-2xl flex items-center justify-center shrink-0 transition-transform group-hover:scale-105 shadow-sm", item.bg)}>
-                            {typeof Icon === 'string'
-                              ? <div className="h-4 w-4" style={{ backgroundColor: item.dot, maskImage: `url(${Icon})`, maskSize: 'contain', maskRepeat: 'no-repeat', maskPosition: 'center', WebkitMaskImage: `url(${Icon})`, WebkitMaskSize: 'contain', WebkitMaskRepeat: 'no-repeat', WebkitMaskPosition: 'center' }} />
-                              : <Icon className={cn("h-4 w-4", item.color)} />
-                            }
+              <Card size="sm">
+                <CardHeader className="border-b">
+                  <CardTitle className="text-sm uppercase">Activity Stream</CardTitle>
+                </CardHeader>
+                <CardContent className="p-0">
+                  <ScrollArea className="h-[240px]">
+                    <ItemGroup>
+                      {recentActivity.map((item, i) => {
+                        const Icon = item.icon
+                        return (
+                          <div key={i}>
+                            {i > 0 && <ItemSeparator />}
+                            <Item size="sm" className="rounded-none hover:bg-muted/40">
+                              <ItemMedia variant="icon" className={item.tone}>
+                                {typeof Icon === "string" ? (
+                                  <div
+                                    className="size-4 bg-current"
+                                    style={{
+                                      maskImage: `url(${Icon})`,
+                                      maskSize: "contain",
+                                      maskRepeat: "no-repeat",
+                                      maskPosition: "center",
+                                      WebkitMaskImage: `url(${Icon})`,
+                                      WebkitMaskSize: "contain",
+                                      WebkitMaskRepeat: "no-repeat",
+                                      WebkitMaskPosition: "center",
+                                    }}
+                                  />
+                                ) : (
+                                  <Icon className="size-4" />
+                                )}
+                              </ItemMedia>
+                              <ItemContent>
+                                <ItemTitle className="text-xs truncate">{item.text}</ItemTitle>
+                                <ItemDescription className="text-[11px]">{item.sub}</ItemDescription>
+                              </ItemContent>
+                              <ItemActions>
+                                <ArrowRight className="size-3.5 text-muted-foreground" />
+                              </ItemActions>
+                            </Item>
                           </div>
-                          <div className="flex-1 min-w-0">
-                            <p className="text-[12px] text-[#082420] truncate group-hover:text-[#0B3B36] transition-colors font-bold">{item.text}</p>
-                            <p className="text-[9px] tracking-wide uppercase text-[#628C84] mt-0.5 font-bold">{item.sub}</p>
-                          </div>
-                          <ArrowRight className="h-3.5 w-3.5 shrink-0 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 text-[#0B3B36]" />
-                        </div>
-                      )
-                    })}
-                  </div>
-                </ScrollArea>
-              </GlassCard>
-
+                        )
+                      })}
+                    </ItemGroup>
+                  </ScrollArea>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>

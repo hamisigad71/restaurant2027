@@ -1,8 +1,9 @@
 "use client"
 
-import { createContext, useContext, useState, useCallback, type ReactNode } from "react"
+import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from "react"
 
 export type UserRole = "admin" | "manager" | "waiter" | "kitchen" | "customer" | "cleaner" | "security"
+export type PortalKey = "admin" | "manager" | "waiter" | "kitchen" | "cleaner" | "security"
 
 export interface User {
   id: string
@@ -16,12 +17,33 @@ export interface User {
 interface AuthContextType {
   user: User | null
   isAuthenticated: boolean
+  isAuthReady: boolean
   login: (email: string, password: string, role: UserRole) => Promise<boolean>
   logout: () => void
   switchRole: (role: UserRole) => void
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
+const AUTH_STORAGE_KEY = "tabletap_auth_user"
+
+export const defaultPortalPath: Record<UserRole, string> = {
+  admin: "/admin/dashboard",
+  manager: "/manager/dashboard",
+  waiter: "/waiter/dashboard",
+  kitchen: "/kitchen/kds",
+  customer: "/customer",
+  cleaner: "/cleaners",
+  security: "/security",
+}
+
+export const portalAllowedRoles: Record<PortalKey, UserRole[]> = {
+  admin: ["admin"],
+  manager: ["admin", "manager"],
+  waiter: ["admin", "manager", "waiter"],
+  kitchen: ["admin", "manager", "kitchen"],
+  cleaner: ["admin", "manager", "cleaner"],
+  security: ["admin", "manager", "security"],
+}
 
 // Demo users for different roles
 const demoUsers: Record<UserRole, User> = {
@@ -77,18 +99,52 @@ const demoUsers: Record<UserRole, User> = {
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
+  const [isAuthReady, setIsAuthReady] = useState(false)
 
-  const login = useCallback(async (email: string, password: string, role: UserRole): Promise<boolean> => {
-    setUser(demoUsers[role])
+  useEffect(() => {
+    try {
+      const saved = sessionStorage.getItem(AUTH_STORAGE_KEY)
+      if (saved) {
+        const parsed = JSON.parse(saved)
+        if (parsed?.role && demoUsers[parsed.role as UserRole]) {
+          setUser(parsed)
+        }
+      }
+    } catch {
+      // Ignore storage access errors
+    } finally {
+      setIsAuthReady(true)
+    }
+  }, [])
+
+  const login = useCallback(async (_email: string, _password: string, role: UserRole): Promise<boolean> => {
+    const nextUser = demoUsers[role]
+    setUser(nextUser)
+    try {
+      sessionStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(nextUser))
+    } catch {
+      // Ignore storage errors
+    }
     return true
   }, [])
 
   const logout = useCallback(() => {
     setUser(null)
+    try {
+      sessionStorage.removeItem(AUTH_STORAGE_KEY)
+    } catch {
+      // Ignore storage errors
+    }
   }, [])
 
   const switchRole = useCallback((role: UserRole) => {
-    setUser(demoUsers[role])
+    const nextUser = demoUsers[role]
+    setUser(nextUser)
+    try {
+      sessionStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(nextUser))
+    } catch {
+      // Ignore storage errors
+    }
   }, [])
 
   return (
@@ -96,6 +152,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       value={{
         user,
         isAuthenticated: !!user,
+        isAuthReady,
         login,
         logout,
         switchRole,

@@ -2,18 +2,24 @@
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Switch } from "@/components/ui/switch"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { FieldGroup, Field, FieldLabel } from "@/components/ui/field"
 import { Separator } from "@/components/ui/separator"
-import { 
-  BuildingStorefrontIcon, 
-  BellIcon, 
-  PaintBrushIcon, 
-  GlobeAltIcon, 
-  CheckBadgeIcon 
+import {
+  BuildingStorefrontIcon,
+  BellIcon,
+  PaintBrushIcon,
+  GlobeAltIcon,
+  CheckBadgeIcon,
 } from "@heroicons/react/24/outline"
 
 export default function SettingsPage() {
@@ -21,7 +27,7 @@ export default function SettingsPage() {
 
   const handleSave = async () => {
     setIsSaving(true)
-    await new Promise(resolve => setTimeout(resolve, 1000))
+    await new Promise((resolve) => setTimeout(resolve, 1000))
     setIsSaving(false)
   }
 
@@ -29,44 +35,30 @@ export default function SettingsPage() {
     <div className="flex flex-col min-h-screen">
       <div className="flex-1 py-4 px-0">
         <Tabs defaultValue="profile" className="space-y-6">
-          <TabsList className="bg-secondary/50 p-1">
-            <TabsTrigger
-              value="profile"
-              className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground  uppercase text-[10px]"
-            >
-              <BuildingStorefrontIcon className="h-3.5 w-3.5" />
+          <TabsList>
+            <TabsTrigger value="profile">
+              <BuildingStorefrontIcon />
               Profile
             </TabsTrigger>
-            <TabsTrigger
-              value="notifications"
-              className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground  uppercase text-[10px]"
-            >
-              <BellIcon className="h-3.5 w-3.5" />
+            <TabsTrigger value="notifications">
+              <BellIcon />
               Notifications
             </TabsTrigger>
-            <TabsTrigger
-              value="appearance"
-              className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground  uppercase text-[10px]"
-            >
-              <PaintBrushIcon className="h-3.5 w-3.5" />
+            <TabsTrigger value="appearance">
+              <PaintBrushIcon />
               Appearance
             </TabsTrigger>
-            <TabsTrigger
-              value="regional"
-              className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground  uppercase text-[10px]"
-            >
-              <GlobeAltIcon className="h-3.5 w-3.5" />
+            <TabsTrigger value="regional">
+              <GlobeAltIcon />
               Regional
             </TabsTrigger>
           </TabsList>
 
-          {/* Profile Tab */}
           <TabsContent value="profile" className="space-y-6">
-            <Card className="bg-card border-border/50 shadow-sm overflow-hidden">
-              <div className="absolute top-0 left-0 w-1 h-full bg-primary opacity-50" />
-              <CardHeader className="pb-6">
-                <CardTitle className="text-xl font-heading text-foreground">Restaurant Profile</CardTitle>
-                <CardDescription className="text-xs uppercase  font-medium opacity-70">Core Identity and Branding</CardDescription>
+            <Card>
+              <CardHeader>
+                <CardTitle>Restaurant Profile</CardTitle>
+                <CardDescription>Core identity and branding</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <FieldGroup>
@@ -75,7 +67,7 @@ export default function SettingsPage() {
                     <Input
                       id="restaurantName"
                       defaultValue="Resto Grande Cuisine"
-                      className="bg-secondary/50 border-border max-w-md font-heading text-lg py-6"
+                      className="max-w-md font-semibold"
                     />
                   </Field>
                   <Field>
@@ -83,7 +75,7 @@ export default function SettingsPage() {
                     <Input
                       id="tagline"
                       defaultValue="Authentic African Cuisine"
-                      className="bg-secondary border-border max-w-md"
+                      className="max-w-md"
                     />
                   </Field>
                   <Field>
@@ -91,7 +83,7 @@ export default function SettingsPage() {
                     <Input
                       id="phone"
                       defaultValue="+254 712 345 678"
-                      className="bg-secondary border-border max-w-md"
+                      className="max-w-md"
                     />
                   </Field>
                   <Field>
@@ -100,7 +92,7 @@ export default function SettingsPage() {
                       id="email"
                       type="email"
                       defaultValue="info@urbankitchen.co.ke"
-                      className="bg-secondary border-border max-w-md"
+                      className="max-w-md"
                     />
                   </Field>
                   <Field>
@@ -108,12 +100,12 @@ export default function SettingsPage() {
                     <Input
                       id="address"
                       defaultValue="123 Kenyatta Avenue, Nairobi"
-                      className="bg-secondary border-border max-w-md"
+                      className="max-w-md"
                     />
                   </Field>
                 </FieldGroup>
 
-                <Separator className="bg-border" />
+                <Separator />
 
                 <div>
                   <h3 className="text-sm font-medium mb-4">Business Hours</h3>
@@ -121,17 +113,17 @@ export default function SettingsPage() {
                     <div className="flex items-center justify-between">
                       <span className="text-sm">Monday - Friday</span>
                       <div className="flex items-center gap-2">
-                        <Input defaultValue="08:00" className="w-24 bg-secondary border-border" />
+                        <Input defaultValue="08:00" className="w-24" />
                         <span className="text-muted-foreground">to</span>
-                        <Input defaultValue="22:00" className="w-24 bg-secondary border-border" />
+                        <Input defaultValue="22:00" className="w-24" />
                       </div>
                     </div>
                     <div className="flex items-center justify-between">
                       <span className="text-sm">Saturday - Sunday</span>
                       <div className="flex items-center gap-2">
-                        <Input defaultValue="10:00" className="w-24 bg-secondary border-border" />
+                        <Input defaultValue="10:00" className="w-24" />
                         <span className="text-muted-foreground">to</span>
-                        <Input defaultValue="23:00" className="w-24 bg-secondary border-border" />
+                        <Input defaultValue="23:00" className="w-24" />
                       </div>
                     </div>
                   </div>
@@ -140,104 +132,113 @@ export default function SettingsPage() {
             </Card>
           </TabsContent>
 
-          {/* Notifications Tab */}
           <TabsContent value="notifications" className="space-y-6">
-            <Card className="bg-card border-border">
+            <Card>
               <CardHeader>
                 <CardTitle>Notification Preferences</CardTitle>
                 <CardDescription>Manage how you receive alerts and updates</CardDescription>
               </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="font-medium">New Orders</p>
-                      <p className="text-sm text-muted-foreground">Get notified when a new order is placed</p>
-                    </div>
-                    <Switch defaultChecked />
+              <CardContent className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="font-medium">New Orders</p>
+                    <p className="text-sm text-muted-foreground">
+                      Get notified when a new order is placed
+                    </p>
                   </div>
-                  <Separator className="bg-border" />
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="font-medium">Order Ready</p>
-                      <p className="text-sm text-muted-foreground">Alert when kitchen marks order as ready</p>
-                    </div>
-                    <Switch defaultChecked />
+                  <Switch defaultChecked />
+                </div>
+                <Separator />
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="font-medium">Order Ready</p>
+                    <p className="text-sm text-muted-foreground">
+                      Alert when kitchen marks order as ready
+                    </p>
                   </div>
-                  <Separator className="bg-border" />
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="font-medium">Low Stock Alerts</p>
-                      <p className="text-sm text-muted-foreground">Warning when inventory runs low</p>
-                    </div>
-                    <Switch defaultChecked />
+                  <Switch defaultChecked />
+                </div>
+                <Separator />
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="font-medium">Low Stock Alerts</p>
+                    <p className="text-sm text-muted-foreground">
+                      Warning when inventory runs low
+                    </p>
                   </div>
-                  <Separator className="bg-border" />
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="font-medium">Daily Summary</p>
-                      <p className="text-sm text-muted-foreground">Receive daily sales summary via email</p>
-                    </div>
-                    <Switch />
+                  <Switch defaultChecked />
+                </div>
+                <Separator />
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="font-medium">Daily Summary</p>
+                    <p className="text-sm text-muted-foreground">
+                      Receive daily sales summary via email
+                    </p>
                   </div>
-                  <Separator className="bg-border" />
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="font-medium">Sound Notifications</p>
-                      <p className="text-sm text-muted-foreground">Play sound for important alerts</p>
-                    </div>
-                    <Switch defaultChecked />
+                  <Switch />
+                </div>
+                <Separator />
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="font-medium">Sound Notifications</p>
+                    <p className="text-sm text-muted-foreground">
+                      Play sound for important alerts
+                    </p>
                   </div>
+                  <Switch defaultChecked />
                 </div>
               </CardContent>
             </Card>
           </TabsContent>
 
-          {/* Appearance Tab */}
           <TabsContent value="appearance" className="space-y-6">
-            <Card className="bg-card border-border">
+            <Card>
               <CardHeader>
                 <CardTitle>Appearance Settings</CardTitle>
                 <CardDescription>Customize the look and feel of your dashboard</CardDescription>
               </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="font-medium">Dark Mode</p>
-                      <p className="text-sm text-muted-foreground">Use dark theme for the dashboard</p>
-                    </div>
-                    <Switch defaultChecked />
+              <CardContent className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="font-medium">Dark Mode</p>
+                    <p className="text-sm text-muted-foreground">
+                      Use dark theme for the dashboard
+                    </p>
                   </div>
-                  <Separator className="bg-border" />
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="font-medium">Compact Mode</p>
-                      <p className="text-sm text-muted-foreground">Reduce spacing for more content</p>
-                    </div>
-                    <Switch />
+                  <Switch defaultChecked />
+                </div>
+                <Separator />
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="font-medium">Compact Mode</p>
+                    <p className="text-sm text-muted-foreground">
+                      Reduce spacing for more content
+                    </p>
                   </div>
-                  <Separator className="bg-border" />
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="font-medium">Show Animations</p>
-                      <p className="text-sm text-muted-foreground">Enable UI animations and transitions</p>
-                    </div>
-                    <Switch defaultChecked />
+                  <Switch />
+                </div>
+                <Separator />
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="font-medium">Show Animations</p>
+                    <p className="text-sm text-muted-foreground">
+                      Enable UI animations and transitions
+                    </p>
                   </div>
+                  <Switch defaultChecked />
                 </div>
               </CardContent>
             </Card>
           </TabsContent>
 
-          {/* Regional Tab */}
           <TabsContent value="regional" className="space-y-6">
-            <Card className="bg-card border-border">
+            <Card>
               <CardHeader>
                 <CardTitle>Regional Settings</CardTitle>
                 <CardDescription>Configure regional and localization options</CardDescription>
               </CardHeader>
-              <CardContent className="space-y-6">
+              <CardContent>
                 <FieldGroup>
                   <Field>
                     <FieldLabel htmlFor="currency">Currency</FieldLabel>
@@ -245,7 +246,7 @@ export default function SettingsPage() {
                       id="currency"
                       defaultValue="KES (Kenyan Shilling)"
                       disabled
-                      className="bg-secondary border-border max-w-md"
+                      className="max-w-md"
                     />
                   </Field>
                   <Field>
@@ -254,7 +255,7 @@ export default function SettingsPage() {
                       id="timezone"
                       defaultValue="Africa/Nairobi (EAT)"
                       disabled
-                      className="bg-secondary border-border max-w-md"
+                      className="max-w-md"
                     />
                   </Field>
                   <Field>
@@ -262,7 +263,7 @@ export default function SettingsPage() {
                     <Input
                       id="dateFormat"
                       defaultValue="DD/MM/YYYY"
-                      className="bg-secondary border-border max-w-md"
+                      className="max-w-md"
                     />
                   </Field>
                   <Field>
@@ -271,7 +272,7 @@ export default function SettingsPage() {
                       id="taxRate"
                       type="number"
                       defaultValue="16"
-                      className="bg-secondary border-border max-w-md"
+                      className="max-w-md"
                     />
                   </Field>
                 </FieldGroup>
@@ -280,14 +281,9 @@ export default function SettingsPage() {
           </TabsContent>
         </Tabs>
 
-        {/* Save Button */}
-        <div className="mt-8 flex justify-end">
-          <Button 
-            onClick={handleSave} 
-            disabled={isSaving}
-            className="px-8  uppercase text-[11px] h-11"
-          >
-            <CheckBadgeIcon className="h-4 w-4 mr-2" />
+        <div className="mt-6 flex justify-end">
+          <Button onClick={handleSave} disabled={isSaving} size="lg">
+            <CheckBadgeIcon className="size-4" />
             {isSaving ? "Saving..." : "Apply Global Settings"}
           </Button>
         </div>

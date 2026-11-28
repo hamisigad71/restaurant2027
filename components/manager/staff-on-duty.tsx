@@ -1,8 +1,23 @@
 "use client"
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { UserIcon, ShieldCheckIcon, BriefcaseIcon } from "@heroicons/react/24/outline"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import {
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemDescription,
+  ItemGroup,
+  ItemMedia,
+  ItemTitle,
+} from "@/components/ui/item"
 
 const staffOnDuty = [
   { id: "1", name: "John Doe", role: "waiter", status: "Active", tables: [4, 5, 6] },
@@ -13,34 +28,45 @@ const staffOnDuty = [
 
 export function StaffOnDuty() {
   return (
-    <Card className="bg-card border-border/50 shadow-sm relative overflow-hidden">
+    <Card>
       <CardHeader>
-        <CardTitle className="text-xl font-heading text-foreground">Personnel on Duty</CardTitle>
-        <p className="text-[10px] uppercase text-muted-foreground font-medium">Active shift oversight</p>
+        <CardTitle className="text-lg">Personnel on Duty</CardTitle>
+        <CardDescription>Active shift oversight</CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="space-y-4">
+        <ItemGroup className="gap-2.5">
           {staffOnDuty.map((staff) => (
-            <div key={staff.id} className="flex items-center gap-4 p-4 rounded-xl border border-border/50 bg-card hover:bg-muted/10 transition-colors">
-              <div className="h-10 w-10 rounded-full bg-muted flex items-center justify-center text-muted-foreground">
-                {staff.name.charAt(0)}
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-heading text-foreground">{staff.name}</p>
-                <div className="flex items-center gap-2 mt-0.5">
-                  <span className="text-[10px] uppercase text-muted-foreground">{staff.role}</span>
-                  <span className="w-1 h-1 rounded-full bg-muted-foreground/30" />
-                  <span className="text-[10px] font-medium text-primary">
-                    {staff.role === 'waiter' ? `${(staff as any).tables?.length || 0} tables` : `${(staff as any).orders || 0} orders`}
+            <Item key={staff.id} variant="outline" size="sm">
+              <ItemMedia>
+                <Avatar className="size-9">
+                  <AvatarFallback className="text-xs font-medium">
+                    {staff.name.charAt(0)}
+                  </AvatarFallback>
+                </Avatar>
+              </ItemMedia>
+              <ItemContent>
+                <ItemTitle>{staff.name}</ItemTitle>
+                <ItemDescription className="flex items-center gap-2 text-xs">
+                  <span className="uppercase">{staff.role}</span>
+                  <span>•</span>
+                  <span className="text-primary font-medium">
+                    {staff.role === "waiter"
+                      ? `${staff.tables?.length || 0} tables`
+                      : `${staff.orders || 0} orders`}
                   </span>
-                </div>
-              </div>
-              <Badge variant="outline" className="text-[9px] uppercase px-2 h-5 text-success border-success/20 bg-success/5">
-                {staff.status}
-              </Badge>
-            </div>
+                </ItemDescription>
+              </ItemContent>
+              <ItemActions>
+                <Badge
+                  variant="outline"
+                  className="text-[10px] uppercase text-success border-success/30 bg-success/10"
+                >
+                  {staff.status}
+                </Badge>
+              </ItemActions>
+            </Item>
           ))}
-        </div>
+        </ItemGroup>
       </CardContent>
     </Card>
   )

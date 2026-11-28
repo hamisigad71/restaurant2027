@@ -67,7 +67,7 @@ export function BrandPanel() {
               return (
                 <div
                   key={s.label}
-                  className="group rounded-2xl p-4 border space-y-2 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-xl cursor-default"
+                  className="group rounded-2xl p-4 border space-y-2 backdrop-blur-sm transition-[border-color,background-color] duration-200 ease-(--ease-out) cursor-default"
                   style={{
                     background: "rgba(255,255,255,0.09)",
                     borderColor: "rgba(255,255,255,0.15)",
@@ -86,15 +86,14 @@ export function BrandPanel() {
 
           {/* Feature pills */}
           <div className="flex flex-wrap gap-2.5">
-            {features.map((f, i) => (
+            {features.map((f) => (
               <span
                 key={f}
-                className="flex items-center gap-2 text-[11px] font-medium rounded-full px-3.5 py-2 border backdrop-blur-sm transition-all duration-200 hover:scale-105 cursor-default"
+                className="flex items-center gap-2 text-[11px] font-medium rounded-full px-3.5 py-2 border backdrop-blur-sm transition-colors duration-150 cursor-default"
                 style={{
                   background: "rgba(255,255,255,0.09)",
                   borderColor: "rgba(255,255,255,0.18)",
                   color: "rgba(255,255,255,0.85)",
-                  animation: `fadeInUp 0.5s ease-out ${i * 0.1}s both`
                 }}
               >
                 <Check className="h-3 w-3" style={{ color: "#FDE68A" }} />
@@ -106,14 +105,13 @@ export function BrandPanel() {
 
         {/* Testimonials */}
         <div className="space-y-3.5">
-          {testimonials.map((t, i) => (
+          {testimonials.map((t) => (
             <div
               key={t.author}
-              className="rounded-2xl p-4.5 border backdrop-blur-sm transition-all duration-300 hover:scale-[1.01] hover:shadow-lg"
+              className="rounded-2xl p-4.5 border backdrop-blur-sm transition-colors duration-200"
               style={{
                 background: "rgba(255,255,255,0.08)",
                 borderColor: "rgba(255,255,255,0.14)",
-                animation: `fadeInUp 0.6s ease-out ${i * 0.2}s both`
               }}
             >
               <div className="flex gap-1 mb-3">

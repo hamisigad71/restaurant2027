@@ -1,18 +1,49 @@
-import { 
-  ClockIcon as Clock, 
-  ChartBarIcon as Activity, 
-  ClockIcon as Timer, 
-  EllipsisVerticalIcon as MoreVertical, 
-  EyeIcon as Eye, 
-  PencilIcon as Edit, 
-  BellIcon as Bell, 
-  TrashIcon as Trash2, 
-  CalendarIcon as Calendar 
+import {
+  ClockIcon as Clock,
+  ChartBarIcon as Activity,
+  ClockIcon as Timer,
+  EllipsisVerticalIcon as MoreVertical,
+  EyeIcon as Eye,
+  PencilIcon as Edit,
+  BellIcon as Bell,
+  TrashIcon as Trash2,
+  CalendarIcon as Calendar,
 } from "@heroicons/react/24/outline"
-import { Card, CardHeader, CardTitle } from "@/components/ui/card"
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty"
+import {
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemDescription,
+  ItemGroup,
+  ItemMedia,
+  ItemSeparator,
+  ItemTitle,
+} from "@/components/ui/item"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import { ROLE_CONFIG, STATUS_CONFIG } from "./constants"
 
 interface Shift {
@@ -32,152 +63,130 @@ interface ShiftListProps {
   upcomingCount: number
 }
 
-export function ShiftList({ activeDay, todayShifts, activeCount, upcomingCount }: ShiftListProps) {
+export function ShiftList({
+  activeDay,
+  todayShifts,
+  activeCount,
+  upcomingCount,
+}: ShiftListProps) {
   return (
     <div className="lg:col-span-2">
-      <Card
-        className="rounded-3xl shadow-sm overflow-hidden"
-        style={{ background: "rgba(255,255,255,0.9)", borderColor: "rgba(11, 59, 54,  0.12)" }}
-      >
-        <CardHeader className="px-5 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div
-                className="flex items-center justify-center w-9 h-9 rounded-xl"
-                style={{ background: "rgba(11, 59, 54,  0.1)" }}
-              >
-                <Clock className="h-4 w-4" style={{ color: "#0B3B36" }} />
-              </div>
-              <div>
-                <CardTitle className="text-[14px] font-bold" style={{ color: "#082420" }}>
-                  {activeDay}'s Schedule
-                </CardTitle>
-                <p className="text-[10px] font-medium mt-0.5" style={{ color: "#628C84" }}>
-                  {todayShifts.length} shift{todayShifts.length !== 1 ? "s" : ""} scheduled
-                </p>
-              </div>
+      <Card>
+        <CardHeader className="border-b">
+          <div className="flex items-center gap-3">
+            <div className="flex size-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
+              <Clock className="size-4" />
             </div>
-
-            <div className="hidden sm:flex items-center gap-1.5">
-              {activeCount > 0 && (
-                <span
-                  className="flex items-center gap-1 text-[9px] font-bold uppercase px-2 py-1 rounded-full"
-                  style={{ background: "rgba(11, 59, 54,  0.1)", color: "#0B3B36" }}
-                >
-                  <Activity className="h-2.5 w-2.5 animate-pulse" />
-                  {activeCount} active
-                </span>
-              )}
-              {upcomingCount > 0 && (
-                <span
-                  className="flex items-center gap-1 text-[9px] font-bold uppercase px-2 py-1 rounded-full"
-                  style={{ background: "oklch(0.75 0.15 75 / 0.1)", color: "oklch(0.55 0.15 75)" }}
-                >
-                  <Timer className="h-2.5 w-2.5" />
-                  {upcomingCount} upcoming
-                </span>
-              )}
+            <div className="space-y-1">
+              <CardTitle>{activeDay}&apos;s Schedule</CardTitle>
+              <CardDescription>
+                {todayShifts.length} shift{todayShifts.length !== 1 ? "s" : ""} scheduled
+              </CardDescription>
             </div>
           </div>
+          <CardAction className="hidden sm:flex items-center gap-1.5">
+            {activeCount > 0 && (
+              <Badge variant="secondary" className="gap-1">
+                <Activity className="size-3" />
+                {activeCount} active
+              </Badge>
+            )}
+            {upcomingCount > 0 && (
+              <Badge variant="outline" className="gap-1 text-warning border-warning/30 bg-warning/10">
+                <Timer className="size-3" />
+                {upcomingCount} upcoming
+              </Badge>
+            )}
+          </CardAction>
         </CardHeader>
 
-        <ScrollArea className="max-h-[520px]">
-          {todayShifts.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-20 gap-4">
-              <div
-                className="w-14 h-14 rounded-2xl flex items-center justify-center"
-                style={{ background: "#F5F2FB", borderColor: "rgba(11, 59, 54,  0.15)" }}
-              >
-                <Calendar className="h-7 w-7" style={{ color: "var(--icon-primary)" }} />
-              </div>
-              <div className="text-center">
-                <p className="text-sm font-semibold" style={{ color: "#082420" }}>No shifts scheduled</p>
-                <p className="text-xs mt-1" style={{ color: "#628C84" }}>
-                  No shifts published for {activeDay}
-                </p>
-              </div>
-            </div>
-          ) : (
-            <div>
-              {todayShifts.map(s => {
-                const role = ROLE_CONFIG[s.role as keyof typeof ROLE_CONFIG]
-                const status = STATUS_CONFIG[s.status as keyof typeof STATUS_CONFIG]
-                const StatusIcon = status.icon
+        <CardContent className="p-0">
+          <ScrollArea className="max-h-[520px]">
+            {todayShifts.length === 0 ? (
+              <Empty className="py-16">
+                <EmptyHeader>
+                  <EmptyMedia variant="icon">
+                    <Calendar />
+                  </EmptyMedia>
+                  <EmptyTitle>No shifts scheduled</EmptyTitle>
+                  <EmptyDescription>No shifts published for {activeDay}.</EmptyDescription>
+                </EmptyHeader>
+              </Empty>
+            ) : (
+              <ItemGroup>
+                {todayShifts.map((s, idx) => {
+                  const role = ROLE_CONFIG[s.role as keyof typeof ROLE_CONFIG]
+                  const status = STATUS_CONFIG[s.status as keyof typeof STATUS_CONFIG]
+                  const StatusIcon = status.icon
 
-                return (
-                  <div
-                    key={s.id}
-                    className="group flex items-center gap-4 px-5 py-4 transition-colors hover:bg-[#F5F2FB]"
-                  >
-                    <Avatar className="h-11 w-11 shrink-0">
-                      <AvatarFallback
-                        className="text-xs font-bold"
-                        style={{ background: `${role.avatar}15`, color: role.avatar }}
-                      >
-                        {s.avatar}
-                      </AvatarFallback>
-                    </Avatar>
+                  return (
+                    <div key={s.id}>
+                      {idx > 0 && <ItemSeparator />}
+                      <Item className="group rounded-none hover:bg-muted/40">
+                        <ItemMedia>
+                          <Avatar className="size-10">
+                            <AvatarFallback
+                              className="text-xs font-semibold"
+                              style={{ background: `${role.avatar}15`, color: role.avatar }}
+                            >
+                              {s.avatar}
+                            </AvatarFallback>
+                          </Avatar>
+                        </ItemMedia>
 
-                    <div className="flex-1 min-w-0">
-                      <p className="text-[13px] font-bold truncate" style={{ color: "#082420" }}>
-                        {s.staff}
-                      </p>
-                      <div className="flex items-center gap-2 mt-1 flex-wrap">
-                        <span
-                          className="text-[9px] font-bold uppercase px-2 py-0.5 rounded-full border"
-                          style={{ background: role.bg, color: role.text, borderColor: role.border }}
-                        >
-                          {s.role}
-                        </span>
-                        <span className="flex items-center gap-1 text-[10px] font-medium" style={{ color: "#628C84" }}>
-                          <Clock className="h-3 w-3" />
-                          {s.time}
-                        </span>
-                      </div>
+                        <ItemContent>
+                          <ItemTitle className="truncate">{s.staff}</ItemTitle>
+                          <ItemDescription className="flex items-center gap-2 flex-wrap">
+                            <Badge variant="outline" className="text-[10px] uppercase">
+                              {s.role}
+                            </Badge>
+                            <span className="inline-flex items-center gap-1 text-xs">
+                              <Clock className="size-3" />
+                              {s.time}
+                            </span>
+                          </ItemDescription>
+                        </ItemContent>
+
+                        <ItemActions>
+                          <Badge variant="secondary" className="hidden sm:inline-flex gap-1">
+                            <StatusIcon className="size-3" />
+                            {status.label}
+                          </Badge>
+
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button
+                                variant="ghost"
+                                size="icon-sm"
+                                className="opacity-70 group-hover:opacity-100"
+                              >
+                                <MoreVertical className="size-4" />
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end" className="w-44">
+                              <DropdownMenuItem className="gap-2 cursor-pointer">
+                                <Eye className="size-4" /> View Details
+                              </DropdownMenuItem>
+                              <DropdownMenuItem className="gap-2 cursor-pointer">
+                                <Edit className="size-4" /> Edit Shift
+                              </DropdownMenuItem>
+                              <DropdownMenuItem className="gap-2 cursor-pointer">
+                                <Bell className="size-4" /> Notify Staff
+                              </DropdownMenuItem>
+                              <DropdownMenuItem className="gap-2 cursor-pointer text-destructive">
+                                <Trash2 className="size-4" /> Cancel Shift
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </ItemActions>
+                      </Item>
                     </div>
-
-                    <span
-                      className="hidden sm:flex items-center gap-1.5 text-[9px] font-bold uppercase px-2.5 py-1.5 rounded-full shrink-0"
-                      style={{ background: status.bg, color: status.text, borderColor: status.border }}
-                    >
-                      <StatusIcon className="h-3 w-3" />
-                      {status.label}
-                    </span>
-
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <button
-                          className="opacity-0 group-hover:opacity-100 flex items-center justify-center w-8 h-8 rounded-xl shrink-0 transition-all hover:bg-[#F4FAF7]"
-                          style={{ color: "var(--icon-primary)" }}
-                        >
-                          <MoreVertical className="h-4 w-4" />
-                        </button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent
-                        align="end"
-                        className="w-44 rounded-2xl p-1.5"
-                        style={{ background: "#FDFCFF", borderColor: "rgba(11, 59, 54,  0.15)", boxShadow: "0 8px 28px rgba(13,3,27,0.12)" }}
-                      >
-                        <DropdownMenuItem className="flex items-center gap-2 text-[11px] font-semibold rounded-xl px-2.5 py-2 cursor-pointer" style={{ color: "#0B3B36" }}>
-                          <Eye className="h-3.5 w-3.5" /> View Details
-                        </DropdownMenuItem>
-                        <DropdownMenuItem className="flex items-center gap-2 text-[11px] font-semibold rounded-xl px-2.5 py-2 cursor-pointer" style={{ color: "#133D38" }}>
-                          <Edit className="h-3.5 w-3.5" /> Edit Shift
-                        </DropdownMenuItem>
-                        <DropdownMenuItem className="flex items-center gap-2 text-[11px] font-semibold rounded-xl px-2.5 py-2 cursor-pointer" style={{ color: "#133D38" }}>
-                          <Bell className="h-3.5 w-3.5" /> Notify Staff
-                        </DropdownMenuItem>
-                        <DropdownMenuItem className="flex items-center gap-2 text-[11px] font-semibold rounded-xl px-2.5 py-2 cursor-pointer text-red-500">
-                          <Trash2 className="h-3.5 w-3.5" /> Cancel Shift
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </div>
-                )
-              })}
-            </div>
-          )}
-        </ScrollArea>
+                  )
+                })}
+              </ItemGroup>
+            )}
+          </ScrollArea>
+        </CardContent>
       </Card>
     </div>
   )

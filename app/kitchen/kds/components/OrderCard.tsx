@@ -1,36 +1,38 @@
 "use client"
 import { useState, useEffect } from "react"
-import { 
-  ClockIcon, 
-  FireIcon, 
-  CheckCircleIcon, 
-  ArrowRightIcon, 
-  BoltIcon,
-  CakeIcon
-} from "@heroicons/react/24/outline"
 import {
-  FireIcon as FireIconSolid,
-  CheckCircleIcon as CheckCircleIconSolid,
-  BoltIcon as BoltIconSolid
-} from "@heroicons/react/24/solid"
-import { Card, CardContent } from "@/components/ui/card"
+  ClockIcon,
+  FireIcon,
+  CheckCircleIcon,
+  ArrowRightIcon,
+} from "@heroicons/react/24/outline"
+import { BoltIcon as BoltIconSolid } from "@heroicons/react/24/solid"
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { cn } from "@/lib/utils"
 import type { KitchenOrder, OrderStatus } from "../lib/types"
 
-// ─── Imagery ──────────────────────────────────────────────────────────────────
 const DISH_IMAGES: Record<string, string> = {
-  "Grilled Sea Bass":  "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400&q=80",
-  "Filet Mignon":      "https://images.unsplash.com/photo-1558030006-450675393462?w=400&q=80",
+  "Grilled Sea Bass": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400&q=80",
+  "Filet Mignon": "https://images.unsplash.com/photo-1558030006-450675393462?w=400&q=80",
   "Lobster Thermidor": "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&q=80",
-  "Beef Wellington":   "https://images.unsplash.com/photo-1546964124-0cce460f38ef?w=400&q=80",
-  "Caesar Salad":      "https://images.unsplash.com/photo-1546793665-c74683f339c1?w=400&q=80",
-  "Pasta Carbonara":   "https://images.unsplash.com/photo-1612874742237-6526221588e3?w=400&q=80",
-  "Margherita Pizza":  "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&q=80",
-  "Tiramisu":          "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=400&q=80",
-  "Crème Brûlée":      "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400&q=80",
-  "Cappuccino":        "https://images.unsplash.com/photo-1534778101976-62847782c213?w=400&q=80",
-  "Croissant":         "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&q=80",
+  "Beef Wellington": "https://images.unsplash.com/photo-1546964124-0cce460f38ef?w=400&q=80",
+  "Caesar Salad": "https://images.unsplash.com/photo-1546793665-c74683f339c1?w=400&q=80",
+  "Pasta Carbonara": "https://images.unsplash.com/photo-1612874742237-6526221588e3?w=400&q=80",
+  "Margherita Pizza": "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&q=80",
+  "Tiramisu": "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=400&q=80",
+  "Crème Brûlée": "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400&q=80",
+  "Cappuccino": "https://images.unsplash.com/photo-1534778101976-62847782c213?w=400&q=80",
+  "Croissant": "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&q=80",
   "Chocolate Fondant": "https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=400&q=80",
 }
 const FALLBACK = "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&q=80"
@@ -39,12 +41,12 @@ function getDishImage(name: string) {
   const EXTENDED: Record<string, string> = {
     ...DISH_IMAGES,
     "Chicken Skewers": "https://i.pinimg.com/736x/a4/1b/72/a41b7293c9ca093447acf115b8f76eae.jpg",
-    "Burrata":         "https://i.pinimg.com/736x/78/47/b4/7847b46b356ae578693105051bfaf4d1.jpg",
-    "Calamari":        "https://i.pinimg.com/1200x/82/18/35/82183552a9adad429d834f4cee48a99c.jpg",
-    "Samosa":          "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80",
-    " Nyama Choma":    "https://images.unsplash.com/photo-1544025162-d76694265947?w=400",
-    "Pilau":           "https://i.pinimg.com/1200x/1c/36/77/1c3677d96b0f166ba6498c0c94e5f0c2.jpg",
-    "Wings":           "https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=400",
+    "Burrata": "https://i.pinimg.com/736x/78/47/b4/7847b46b356ae578693105051bfaf4d1.jpg",
+    "Calamari": "https://i.pinimg.com/1200x/82/18/35/82183552a9adad429d834f4cee48a99c.jpg",
+    "Samosa": "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80",
+    "Nyama Choma": "https://images.unsplash.com/photo-1544025162-d76694265947?w=400",
+    "Pilau": "https://i.pinimg.com/1200x/1c/36/77/1c3677d96b0f166ba6498c0c94e5f0c2.jpg",
+    "Wings": "https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=400",
   }
   for (const [k, v] of Object.entries(EXTENDED)) {
     if (name.toLowerCase().includes(k.toLowerCase())) return v
@@ -52,45 +54,38 @@ function getDishImage(name: string) {
   return FALLBACK
 }
 
-// ─── Status config ────────────────────────────────────────────────────────────
 const STATUS_CONFIG = {
   pending: {
-    label: "New Order", Icon: ClockIcon,
-    cardAccent: "#0B3B36",
-    cardBg: "rgba(255,255,255,0.85)",
-    badgeBg: "rgba(11, 59, 54,  0.08)", badgeText: "#0B3B36", badgeBorder: "rgba(11, 59, 54,  0.15)",
-    iconBg: "rgba(11, 59, 54,  0.1)", iconColor: "#0B3B36",
-    statusText: "Waiting to start",
-    nextLabel: "Start Cooking", nextStatus: "cooking" as OrderStatus,
-    nextBg: "#0B3B36", nextShadow: "rgba(11, 59, 54,  0.3)",
+    label: "New Order",
+    Icon: ClockIcon,
+    badgeClass: "bg-secondary text-secondary-foreground border-border",
+    nextLabel: "Start Cooking",
+    nextStatus: "cooking" as OrderStatus,
+    btnVariant: "default" as const,
   },
   cooking: {
-    label: "Preparing", Icon: FireIcon,
-    cardAccent: "#0B3B36",
-    cardBg: "rgba(255,255,255,0.85)",
-    badgeBg: "rgba(11, 59, 54,  0.1)", badgeText: "#0B3B36", badgeBorder: "rgba(11, 59, 54,  0.2)",
-    iconBg: "rgba(11, 59, 54,  0.12)", iconColor: "#0B3B36",
-    statusText: "In the kitchen",
-    nextLabel: "Mark Ready", nextStatus: "ready" as OrderStatus,
-    nextBg: "oklch(0.62 0.16 150)", nextShadow: "oklch(0.62 0.16 150 / 0.3)",
+    label: "Preparing",
+    Icon: FireIcon,
+    badgeClass: "bg-primary/10 text-primary border-primary/20",
+    nextLabel: "Mark Ready",
+    nextStatus: "ready" as OrderStatus,
+    btnVariant: "default" as const,
   },
   ready: {
-    label: "Ready", Icon: CheckCircleIcon,
-    cardAccent: "oklch(0.62 0.16 150)",
-    cardBg: "rgba(255,255,255,0.92)",
-    badgeBg: "oklch(0.62 0.16 150 / 0.1)", badgeText: "oklch(0.42 0.14 150)", badgeBorder: "oklch(0.62 0.16 150 / 0.2)",
-    iconBg: "oklch(0.62 0.16 150 / 0.1)", iconColor: "oklch(0.42 0.14 150)",
-    statusText: "Ready to serve",
-    nextLabel: "Mark Served", nextStatus: "served" as OrderStatus,
-    nextBg: "#0B3B36", nextShadow: "rgba(13,3,27,0.2)",
+    label: "Ready",
+    Icon: CheckCircleIcon,
+    badgeClass: "bg-success/10 text-success border-success/20",
+    nextLabel: "Mark Served",
+    nextStatus: "served" as OrderStatus,
+    btnVariant: "outline" as const,
   },
 } as const
 
-// ─── Timer hook ───────────────────────────────────────────────────────────────
 function useElapsed(createdAt: string) {
   const [elapsed, setElapsed] = useState(0)
   useEffect(() => {
-    const update = () => setElapsed(Math.floor((Date.now() - new Date(createdAt).getTime()) / 1000))
+    const update = () =>
+      setElapsed(Math.floor((Date.now() - new Date(createdAt).getTime()) / 1000))
     update()
     const id = setInterval(update, 1000)
     return () => clearInterval(id)
@@ -101,124 +96,137 @@ function useElapsed(createdAt: string) {
 }
 
 interface OrderCardProps {
-  order: KitchenOrder;
-  onUpdateStatus: (id: string, s: OrderStatus) => void;
-  listMode?: boolean;
-  animDelay?: number;
+  order: KitchenOrder
+  onUpdateStatus: (id: string, s: OrderStatus) => void
+  listMode?: boolean
 }
 
-export function OrderCard({ order, onUpdateStatus, listMode, animDelay = 0 }: OrderCardProps) {
-  const cfg = (STATUS_CONFIG as any)[order.status]
+export function OrderCard({ order, onUpdateStatus, listMode }: OrderCardProps) {
+  const cfg = STATUS_CONFIG[order.status as keyof typeof STATUS_CONFIG]
   const timer = useElapsed(order.createdAt)
-  const primary = order.items.find(i => i.category === "main") ?? order.items[0]
+  const primary = order.items.find((i) => i.category === "main") ?? order.items[0]
   const totalQty = order.items.reduce((s, i) => s + i.quantity, 0)
 
   if (!cfg) return null
 
-  // ─── List Mode Render ─────────────────────────────────────────────────────
   if (listMode) {
     return (
-      <div 
-        className="flex items-center gap-4 p-3 rounded-2xl border bg-white/70 backdrop-blur-xl transition-all hover:bg-white/90 animate-in fade-in slide-in-from-right-4"
-        style={{ animationDelay: `${animDelay}ms` }}
+      <Card
+        size="sm"
+        className="group transition-shadow duration-150 ease-(--ease-out) hover:shadow-md"
       >
-        <div className="w-12 h-12 rounded-xl overflow-hidden shrink-0">
-          <img src={primary.image || getDishImage(primary.name)} className="w-full h-full object-cover" alt="" />
-        </div>
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2">
-            <span className="font-bold text-sm">Table {order.tableNumber}</span>
-            <span className="text-[10px] text-muted-foreground font-mono">{order.id}</span>
+        <CardContent className="flex items-center gap-4">
+          <div className="size-12 rounded-lg overflow-hidden shrink-0 border">
+            <img
+              src={primary.image || getDishImage(primary.name)}
+              className="w-full h-full object-cover"
+              alt={primary.name}
+            />
           </div>
-          <div className="flex items-center gap-3 mt-1">
-            <span className="text-[11px] font-medium" style={{ color: cfg.badgeText }}>{cfg.label}</span>
-            <span className="text-[10px] text-muted-foreground">{totalQty} items</span>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2">
+              <div className="font-semibold text-sm">T{order.tableNumber}</div>
+              <span className="text-xs text-muted-foreground font-mono">{order.id}</span>
+            </div>
+            <div className="flex items-center gap-2 mt-1">
+              <Badge variant="outline" className={cn("text-[10px]", cfg.badgeClass)}>
+                {cfg.label}
+              </Badge>
+              <span className="text-xs text-muted-foreground">{totalQty} items</span>
+            </div>
           </div>
-        </div>
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-1.5 px-2 py-1 rounded-lg bg-black/5 font-mono text-[11px]">
-            <ClockIcon className="h-3 w-3" />
-            {timer.display}
+          <div className="flex items-center gap-3 shrink-0">
+            <Badge variant="secondary" className="font-mono gap-1">
+              <ClockIcon className="size-3" />
+              {timer.display}
+            </Badge>
+            <Button
+              size="sm"
+              variant={cfg.btnVariant}
+              onClick={() => onUpdateStatus(order.id, cfg.nextStatus)}
+            >
+              {cfg.nextLabel}
+            </Button>
           </div>
-          <button 
-            onClick={() => onUpdateStatus(order.id, cfg.nextStatus)}
-            className="px-4 py-2 rounded-xl text-[10px] font-bold uppercase  text-white transition-all hover:scale-105 active:scale-95"
-            style={{ background: cfg.nextBg }}
-          >
-            {cfg.nextLabel}
-          </button>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     )
   }
 
-  // ─── Grid Mode Render ─────────────────────────────────────────────────────
   return (
     <Card
-      className="relative overflow-hidden border transition-all duration-700 hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(11,59,54,0.18)] group p-0 rounded-[2.5rem] animate-in zoom-in-95"
-      style={{
-        background: "linear-gradient(135deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.75) 100%)",
-        backdropFilter: "blur(32px) saturate(180%)",
-        borderColor: "rgba(255,255,255,0.5)",
-        boxShadow: "0 8px 32px rgba(13,3,27,0.06), inset 0 0 0 1px rgba(255,255,255,0.4)",
-        animationDelay: `${animDelay}ms`
-      }}
+      size="sm"
+      className="group relative gap-0 py-0 overflow-hidden transition-[border-color,box-shadow] duration-150 ease-(--ease-out) hover:shadow-md h-full"
     >
-      <div 
-        className="absolute top-0 inset-x-0 h-1 blur-md transition-all duration-500" 
-        style={{ background: cfg.cardAccent, opacity: order.status === "cooking" ? 0.8 : 0.4 }} 
-      />
-
       {order.priority === "urgent" && (
-        <div className="absolute top-4 right-4 z-20">
-          <span className="flex items-center gap-1 text-[9px] font-bold uppercase  px-2.5 py-1 rounded-full text-white" style={{ background: "oklch(0.65 0.18 25)", boxShadow: "0 2px 8px oklch(0.65 0.18 25 / 0.45)" }}>
-            <BoltIconSolid className="h-2 w-2" /> Urgent
-          </span>
-        </div>
+        <Badge
+          variant="destructive"
+          className="absolute top-3 right-3 z-20 gap-1 uppercase text-[10px]"
+        >
+          <BoltIconSolid className="size-2.5" /> Urgent
+        </Badge>
       )}
 
-      <div className="relative h-44 overflow-hidden mx-3 mt-3 rounded-[2rem]">
-        <img src={primary.image || getDishImage(primary.name)} alt="" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+      <div className="relative h-40 overflow-hidden bg-muted">
+        <img
+          src={primary.image || getDishImage(primary.name)}
+          alt={primary.name}
+          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent" />
         <div className="absolute bottom-3 left-3">
-          <div className="flex items-center justify-center px-4 py-1.5 rounded-xl text-white font-bold text-base" style={{ background: cfg.cardAccent, boxShadow: `0 4px 12px ${cfg.cardAccent}55` }}>
+          <div className="inline-flex items-center justify-center px-3 py-1 rounded-lg bg-primary text-primary-foreground font-bold text-sm shadow-sm">
             T{order.tableNumber}
           </div>
         </div>
       </div>
 
-      <CardContent className="px-5 pt-4 pb-5 space-y-4">
-        <div className="flex items-center justify-between">
-          <span className="text-[10px] font-bold uppercase  px-2.5 py-1 rounded-full border" style={{ background: cfg.badgeBg, color: cfg.badgeText, borderColor: cfg.badgeBorder }}>{cfg.label}</span>
-          <div className="flex items-center gap-1 text-[11px] font-mono font-semibold text-[#4B6E67]">
-            <ClockIcon className="h-3 w-3" /> {timer.display}
+      <CardHeader className="pt-4 pb-3">
+        <CardTitle className="text-sm flex items-center gap-2">
+          <Badge variant="outline" className={cn("text-[10px] uppercase", cfg.badgeClass)}>
+            {cfg.label}
+          </Badge>
+        </CardTitle>
+        <CardAction>
+          <span className="inline-flex items-center gap-1 text-xs font-mono text-muted-foreground">
+            <ClockIcon className="size-3.5" />
+            {timer.display}
+          </span>
+        </CardAction>
+      </CardHeader>
+
+      <Separator />
+
+      <CardContent className="py-3 space-y-2 flex-1">
+        {order.items.slice(0, 3).map((item) => (
+          <div key={item.id} className="flex items-center justify-between gap-2 text-sm">
+            <span className="font-medium truncate text-foreground">{item.name}</span>
+            <Badge variant="secondary" className="text-[10px] shrink-0">
+              ×{item.quantity}
+            </Badge>
           </div>
-        </div>
-
-        <Separator style={{ background: "rgba(0,0,0,0.06)" }} />
-
-        <div className="space-y-3">
-          {order.items.slice(0, 3).map(item => (
-            <div key={item.id} className="flex items-center justify-between gap-2">
-              <span className="text-[12px] font-semibold truncate text-[#082420]">{item.name}</span>
-              <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-black/5">×{item.quantity}</span>
-            </div>
-          ))}
-          {order.items.length > 3 && (
-            <p className="text-[10px] text-center font-bold text-[var(--icon-primary)] uppercase ">+{order.items.length - 3} more items</p>
-          )}
-        </div>
-
-        <button
-          onClick={() => onUpdateStatus(order.id, cfg.nextStatus)}
-          className="w-full flex items-center gap-2.5 px-4 py-4 rounded-2xl font-bold text-[11px]  uppercase text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl active:translate-y-0 active:scale-[0.98] overflow-hidden relative group/btn mt-2"
-          style={{ background: cfg.nextBg, boxShadow: `0 8px 24px ${cfg.nextShadow}` }}
-        >
-          <cfg.Icon className="h-4 w-4 relative z-10 transition-transform group-hover/btn:scale-125" />
-          <span className="relative z-10 flex-1 text-left">{cfg.nextLabel}</span>
-          <ArrowRightIcon className="h-3 w-3 relative z-10 transition-transform group-hover/btn:translate-x-0.5" />
-        </button>
+        ))}
+        {order.items.length > 3 && (
+          <p className="text-[11px] text-center font-medium text-muted-foreground">
+            +{order.items.length - 3} more items
+          </p>
+        )}
       </CardContent>
+
+      <CardFooter className="pb-4 pt-1">
+        <Button
+          variant={cfg.btnVariant}
+          size="sm"
+          className="w-full justify-between"
+          onClick={() => onUpdateStatus(order.id, cfg.nextStatus)}
+        >
+          <span className="inline-flex items-center gap-2">
+            <cfg.Icon className="size-4" />
+            {cfg.nextLabel}
+          </span>
+          <ArrowRightIcon className="size-3.5" />
+        </Button>
+      </CardFooter>
     </Card>
   )
 }

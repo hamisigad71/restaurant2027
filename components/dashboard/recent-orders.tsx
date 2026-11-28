@@ -1,6 +1,14 @@
 "use client"
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { useState, useEffect, useMemo } from "react"
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import {
   Table,
@@ -11,6 +19,8 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { mockOrders } from "@/lib/mock-data"
+import { OrderService, LiveOrder } from "@/lib/order-service"
+import { calculateBillTotals } from "@/lib/restaurant-store"
 import type { OrderStatus } from "@/lib/types"
 import { cn } from "@/lib/utils"
 
@@ -19,7 +29,7 @@ const statusConfig: Record<OrderStatus, { label: string; color: string; bgColor:
   confirmed: { label: "Confirmed", color: "text-primary", bgColor: "bg-primary/10 border-primary/20" },
   cooking: { label: "Cooking", color: "text-primary", bgColor: "bg-primary/10 border-primary/20" },
   ready: { label: "Ready", color: "text-success", bgColor: "bg-success/10 border-success/20" },
-  served: { label: "Served", color: "text-muted-foreground", bgColor: "bg-muted/10 border-border" },
+  served: { label: "Served", color: "text-muted-foreground", bgColor: "bg-muted border-border" },
   cancelled: { label: "Cancelled", color: "text-destructive", bgColor: "bg-destructive/10 border-destructive/20" },
 }
 
@@ -28,7 +38,7 @@ function formatTimeAgo(dateString: string) {
   const now = new Date()
   const diffMs = now.getTime() - date.getTime()
   const diffMins = Math.floor(diffMs / 60000)
-  
+
   if (diffMins < 1) return "Just now"
   if (diffMins < 60) return `${diffMins}m ago`
   const diffHours = Math.floor(diffMins / 60)
@@ -37,45 +47,85 @@ function formatTimeAgo(dateString: string) {
 }
 
 export function RecentOrders() {
+  const [liveOrders, setLiveOrders] = useState<LiveOrder[]>([])
+
+  useEffect(() => {
+    return OrderService.subscribe(setLiveOrders)
+  }, [])
+
+  const rows = useMemo(() => {
+    const mappedLive = liveOrders.map((o) => {
+      const sub = o.items.reduce((s, i) => s + i.price * i.quantity, 0)
+      return {
+        id: o.id,
+        tableNumber: o.tableId,
+        itemCount: o.items.length,
+        status: o.status as OrderStatus,
+        paymentLabel: o.paymentStatus === "paid" ? "Paid" : "Unpaid",
+        total: typeof o.total === "number" ? o.total : calculateBillTotals(sub).total,
+        createdAt: o.createdAt,
+      }
+    })
+    const baseline = mockOrders.map((o) => ({
+      id: o.id,
+      tableNumber: String(o.tableNumber),
+      itemCount: o.items.length,
+      status: o.status,
+      paymentLabel: o.status === "served" ? "Paid" : "Unpaid",
+      total: o.total,
+      createdAt: o.createdAt,
+    }))
+    return [...mappedLive, ...baseline].slice(0, 10)
+  }, [liveOrders])
+
   return (
-    <Card className="bg-card border-border/50 shadow-sm relative overflow-hidden group">
-      <div className="absolute top-0 left-0 w-1 h-full bg-primary opacity-50" />
+    <Card>
       <CardHeader>
-        <CardTitle className="text-xl font-heading text-foreground">Recent Activity</CardTitle>
-        <p className="text-[10px] uppercase text-muted-foreground font-medium">Real-time order log</p>
+        <CardTitle className="text-lg">Recent Activity</CardTitle>
+        <CardDescription>Real-time order log</CardDescription>
+        <CardAction>
+          <Badge variant="secondary">{rows.length} orders</Badge>
+        </CardAction>
       </CardHeader>
       <CardContent>
         <Table>
           <TableHeader>
-            <TableRow className="border-border/50 hover:bg-transparent">
-              <TableHead className="text-[10px] uppercase text-muted-foreground">Order ID</TableHead>
-              <TableHead className="text-[10px] uppercase text-muted-foreground">Location</TableHead>
-              <TableHead className="text-[10px] uppercase text-muted-foreground">Quantity</TableHead>
-              <TableHead className="text-[10px] uppercase text-muted-foreground">Status</TableHead>
-              <TableHead className="text-[10px] uppercase text-muted-foreground text-right">Revenue</TableHead>
-              <TableHead className="text-[10px] uppercase text-muted-foreground text-right">Elapsed</TableHead>
+            <TableRow>
+              <TableHead>Order ID</TableHead>
+              <TableHead>Location</TableHead>
+              <TableHead>Quantity</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead className="text-right">Revenue</TableHead>
+              <TableHead className="text-right">Elapsed</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {mockOrders.map((order) => {
-              const config = statusConfig[order.status]
+            {rows.map((order) => {
+              const config = statusConfig[order.status] ?? statusConfig.pending
               return (
-                <TableRow key={order.id} className="border-border/50 hover:bg-muted/30 transition-colors">
-                  <TableCell className="font-heading text-sm text-foreground">{order.id}</TableCell>
-                  <TableCell className="font-medium">Table {order.tableNumber}</TableCell>
-                  <TableCell className="text-muted-foreground text-xs">{order.items.length} items</TableCell>
-                  <TableCell>
-                    <Badge
-                      variant="outline"
-                      className={cn("text-[9px] uppercase  px-2 h-5 border-current/20", config.color, config.bgColor)}
-                    >
-                      {config.label}
-                    </Badge>
+                <TableRow key={order.id}>
+                  <TableCell className="font-medium">{order.id}</TableCell>
+                  <TableCell>Table {order.tableNumber}</TableCell>
+                  <TableCell className="text-muted-foreground text-xs">
+                    {order.itemCount} items
                   </TableCell>
-                  <TableCell className="text-right font-heading text-sm text-primary">
+                  <TableCell>
+                    <div className="flex items-center gap-1.5">
+                      <Badge
+                        variant="outline"
+                        className={cn("text-[10px] uppercase", config.color, config.bgColor)}
+                      >
+                        {config.label}
+                      </Badge>
+                      <Badge variant="outline" className="text-[10px] uppercase text-muted-foreground">
+                        {order.paymentLabel}
+                      </Badge>
+                    </div>
+                  </TableCell>
+                  <TableCell className="text-right font-semibold tabular-nums text-primary">
                     KSh {order.total.toLocaleString()}
                   </TableCell>
-                  <TableCell className="text-right text-[10px] font-medium text-muted-foreground uppercase">
+                  <TableCell className="text-right text-xs text-muted-foreground">
                     {formatTimeAgo(order.createdAt)}
                   </TableCell>
                 </TableRow>

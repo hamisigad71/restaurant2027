@@ -1,6 +1,6 @@
 export default function CustomerBaseError() {
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center justify-center p-6 text-center animate-in fade-in zoom-in duration-500">
+    <div className="min-h-dvh bg-background flex flex-col items-center justify-center p-6 text-center animate-in fade-in zoom-in-95 duration-200 ease-(--ease-out)">
       <img
         src="/qr-scanner-logo.png"
         alt="TableTap QR Scanner"

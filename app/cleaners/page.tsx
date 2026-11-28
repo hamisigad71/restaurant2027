@@ -1,177 +1,200 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { 
-  BoltIcon as SparklesIcon, 
-  CheckCircleIcon, 
-  ClockIcon, 
-  ExclamationTriangleIcon, 
-  BoltIcon, 
-  UserGroupIcon, 
-  ClipboardDocumentListIcon, 
-  CloudIcon, 
-  SunIcon 
-} from "@heroicons/react/24/outline"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge }     from "@/components/ui/badge"
-import { Button }    from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
-import { Progress }  from "@/components/ui/progress"
+import { useRouter } from "next/navigation"
+import { AnimatePresence, motion } from "motion/react"
+import { FAST_TRANSITION, SPRING_SNAPPY } from "@/lib/motion"
 import {
-  Tooltip, TooltipContent, TooltipProvider, TooltipTrigger,
-} from "@/components/ui/tooltip"
+  BoltIcon as SparklesIcon,
+  CheckCircleIcon,
+  ClockIcon,
+  BoltIcon,
+  UserGroupIcon,
+  ClipboardDocumentListIcon,
+  CloudIcon,
+  SunIcon,
+} from "@heroicons/react/24/outline"
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Progress } from "@/components/ui/progress"
+import { Spinner } from "@/components/ui/spinner"
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty"
 import { cn } from "@/lib/utils"
 import { toast } from "sonner"
-
-// ─── Types & data ─────────────────────────────────────────────────────────────
-interface DirtyTable {
-  id:      string
-  time:    string
-  urgency: "high" | "medium" | "low"
-  reason:  string
-  zone:    string
-  guests:  number
-}
-
-const INITIAL_TABLES: DirtyTable[] = [
-  { id:"T04", time:"10m ago", urgency:"high",   reason:"Guests just left — full clean required",      zone:"Main Dining",    guests:4 },
-  { id:"T07", time:"25m ago", urgency:"medium",  reason:"Liquid spill reported by waiter",             zone:"Bar Side",       guests:2 },
-  { id:"T12", time:"1h ago",  urgency:"low",     reason:"Routine post-shift sanitization",             zone:"Private Dining", guests:6 },
-  { id:"T09", time:"18m ago", urgency:"medium",  reason:"Food debris, needs full wipe-down",           zone:"Main Dining",    guests:3 },
-]
+import { defaultPortalPath, portalAllowedRoles, useAuth } from "@/lib/auth-context"
+import { CleaningService, CleaningTask, TableService } from "@/lib/restaurant-store"
+import { mockTables } from "@/lib/mock-data"
+import { SummonsListener } from "@/components/layout/summons-listener"
 
 const URGENCY_CONFIG = {
-  high:   { label:"Urgent",  accent:"oklch(0.65 0.18 25)", bg:"oklch(0.65 0.18 25 / 0.08)", border:"oklch(0.65 0.18 25 / 0.3)", icon:BoltIcon,          barBg:"oklch(0.65 0.18 25)", ctaBg:"oklch(0.65 0.18 25)" },
-  medium: { label:"Due",     accent:"oklch(0.75 0.15 75)", bg:"oklch(0.75 0.15 75 / 0.06)", border:"oklch(0.75 0.15 75 / 0.2)", icon:ClockIcon,        barBg:"oklch(0.75 0.15 75)", ctaBg:"#0B3B36" },
-  low:    { label:"Routine", accent:"#0B3B36", bg:"rgba(11, 59, 54,  0.05)", border:"rgba(11, 59, 54,  0.15)", icon:SparklesIcon, barBg:"#0B3B36", ctaBg:"#0B3B36" },
+  high: {
+    label: "Urgent",
+    badgeVariant: "destructive" as const,
+    tileClass: "bg-destructive/10 text-destructive",
+    borderClass: "border-destructive/30",
+    buttonVariant: "destructive" as const,
+    icon: BoltIcon,
+  },
+  medium: {
+    label: "Due",
+    badgeVariant: "secondary" as const,
+    tileClass: "bg-amber-500/10 text-amber-600 dark:text-amber-400",
+    borderClass: "border-amber-500/25",
+    buttonVariant: "default" as const,
+    icon: ClockIcon,
+  },
+  low: {
+    label: "Routine",
+    badgeVariant: "outline" as const,
+    tileClass: "bg-primary/10 text-primary",
+    borderClass: "border-border",
+    buttonVariant: "default" as const,
+    icon: SparklesIcon,
+  },
 }
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function CleanersPage() {
-  const [tables,      setTables]      = useState<DirtyTable[]>(INITIAL_TABLES)
-  const [animatingId, setAnimatingId] = useState<string | null>(null)
+  const { user, isAuthenticated, isAuthReady } = useAuth()
+  const router = useRouter()
+
+  const [tables, setTables] = useState<CleaningTask[]>([])
   const [cleanedCount, setCleanedCount] = useState(0)
+  const [totalTables, setTotalTables] = useState(mockTables.length)
 
-  const highCount   = tables.filter(t => t.urgency === "high").length
-  const medCount    = tables.filter(t => t.urgency === "medium").length
-  const totalTables = 16 // total in restaurant
-  const cleanPct    = Math.round((cleanedCount / totalTables) * 100)
+  const isAuthorized = !!user && portalAllowedRoles.cleaner.includes(user.role)
 
-  const handleClean = (table: DirtyTable) => {
-    setAnimatingId(table.id)
-    toast.success(`Table ${table.id.replace("T","")} marked clean`, {
-      description: table.zone,
+  useEffect(() => {
+    if (!isAuthReady) return
+    if (!isAuthenticated || !user) {
+      router.replace("/login")
+      return
+    }
+    if (!portalAllowedRoles.cleaner.includes(user.role)) {
+      router.replace(defaultPortalPath[user.role])
+    }
+  }, [isAuthReady, isAuthenticated, user, router])
+
+  useEffect(() => {
+    const unsubClean = CleaningService.subscribe((state) => {
+      setTables(state.tasks)
+      setCleanedCount(state.cleanedCount)
+    })
+    const unsubTables = TableService.subscribe((floorTables) => {
+      setTotalTables(floorTables.length || mockTables.length)
+    })
+    return () => {
+      unsubClean()
+      unsubTables()
+    }
+  }, [])
+
+  if (!isAuthReady || !isAuthenticated || !user || !isAuthorized) {
+    return (
+      <div className="flex h-screen items-center justify-center bg-background">
+        <div className="flex items-center gap-2 text-xs uppercase text-muted-foreground font-heading">
+          <Spinner className="size-4" />
+          <span>TableTap Loading...</span>
+        </div>
+      </div>
+    )
+  }
+
+  const highCount = tables.filter((t) => t.urgency === "high").length
+  const cleanPct = totalTables > 0 ? Math.min(100, Math.round((cleanedCount / totalTables) * 100)) : 0
+
+  const handleClean = (table: CleaningTask) => {
+    toast.success(`Table ${table.tableNumber} marked clean`, {
+      description: `${table.zone} · Now Available on Service Floor`,
       icon: <SparklesIcon className="h-4 w-4" />,
     })
-    setTimeout(() => {
-      setTables(prev => prev.filter(t => t.id !== table.id))
-      setCleanedCount(prev => prev + 1)
-      setAnimatingId(null)
-    }, 350)
+    CleaningService.markCleaned(table.id)
   }
 
   return (
-    <TooltipProvider>
-      <div className="min-h-screen flex flex-col" style={{ background:"#F4FAF7" }}>
-
+    <>
+      <SummonsListener />
+      <div className="min-h-screen flex flex-col bg-background">
         {/* ── Header ─────────────────────────────────────────────── */}
-        <header
-          className="px-5 py-4 border-b sticky top-0 z-20 flex items-center gap-4 shrink-0"
-          style={{
-            background: "rgba(253,252,255,0.92)",
-            backdropFilter: "blur(20px)",
-            borderColor: "rgba(11, 59, 54,  0.1)",
-            boxShadow: "0 1px 12px rgba(11, 59, 54,  0.06)",
-          }}
-        >
-          <div
-            className="flex items-center justify-center w-10 h-10 rounded-xl shrink-0"
-            style={{ background:"#0B3B36", boxShadow:"0 4px 14px rgba(11, 59, 54,  0.35)" }}
-          >
-            <SparklesIcon className="h-5 w-5 text-white" strokeWidth={2} />
+        <header className="px-5 py-4 border-b border-border bg-background/95 backdrop-blur sticky top-0 z-20 flex items-center gap-4 shrink-0">
+          <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-primary text-primary-foreground shadow-sm shrink-0">
+            <SparklesIcon className="h-5 w-5" strokeWidth={2} />
           </div>
 
           <div className="min-w-0 flex-1">
-            <h1 className="text-[15px] font-bold  leading-none" style={{ color:"#082420" }}>
+            <h1 className="text-sm font-semibold leading-none text-foreground">
               Housekeeping
             </h1>
-            <p className="text-[10px] font-bold uppercase  mt-0.5" style={{ color:"#628C84" }}>
+            <p className="text-[11px] font-medium uppercase tracking-wide mt-1 text-muted-foreground">
               Active Queue · {tables.length} pending
             </p>
           </div>
 
-          {/* Priority counts */}
           <div className="hidden sm:flex items-center gap-2">
             {highCount > 0 && (
-              <Badge
-                className="flex items-center gap-1.5 text-[10px] font-bold px-2.5 py-1 rounded-full border"
-                style={{
-                  background:"oklch(0.65 0.18 25 / 0.1)",
-                  color:"oklch(0.55 0.18 25)",
-                  borderColor:"oklch(0.65 0.18 25 / 0.25)",
-                }}
-              >
-                <BoltIcon className="h-2.5 w-2.5 fill-current" />
+              <Badge variant="destructive" className="gap-1">
+                <BoltIcon className="size-3" />
                 {highCount} urgent
               </Badge>
             )}
-            <Badge
-              className="text-[10px] font-bold px-2.5 py-1 rounded-full border"
-              style={{
-                background:"rgba(11, 59, 54,  0.1)",
-                color:"#0B3B36",
-                borderColor:"rgba(11, 59, 54,  0.2)",
-              }}
-            >
-              {tables.length} total
-            </Badge>
+            <Badge variant="secondary">{tables.length} total</Badge>
           </div>
         </header>
 
         <div className="flex-1 p-4 lg:p-6 max-w-2xl mx-auto w-full space-y-5">
-
           {/* ── Shift progress card ───────────────────────────────── */}
-          <Card
-            className="border rounded-3xl overflow-hidden shadow-sm"
-            style={{ background:"rgba(255,255,255,0.9)", borderColor:"rgba(11, 59, 54,  0.12)" }}
-          >
-            <div className="h-[3px]" style={{ background:"#0B3B36" }} />
-            <CardContent className="px-5 py-4">
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center gap-2.5">
-                  <div
-                    className="flex items-center justify-center w-8 h-8 rounded-lg"
-                    style={{ background:"rgba(11, 59, 54,  0.1)" }}
-                  >
-                    <ClipboardDocumentListIcon className="h-3.5 w-3.5" style={{ color:"#0B3B36" }} />
-                  </div>
-                  <div>
-                    <p className="text-[13px] font-bold" style={{ color:"#082420" }}>Shift Progress</p>
-                    <p className="text-[10px] mt-0.5" style={{ color:"#628C84" }}>
-                      {cleanedCount} of {totalTables} tables cleaned today
-                    </p>
-                  </div>
+          <Card size="sm">
+            <CardHeader>
+              <div className="flex items-center gap-2.5">
+                <div className="flex items-center justify-center size-8 rounded-lg bg-primary/10 text-primary">
+                  <ClipboardDocumentListIcon className="size-4" />
                 </div>
-                <p className="text-2xl font-bold tabular-nums" style={{ color:"#0B3B36" }}>
-                  {cleanPct}%
-                </p>
+                <div>
+                  <CardTitle className="text-sm">Shift Progress</CardTitle>
+                  <CardDescription className="text-xs">
+                    {cleanedCount} of {totalTables} tables cleaned today
+                  </CardDescription>
+                </div>
               </div>
-              <Progress value={cleanPct} className="h-2 rounded-full" style={{ background:"rgba(0,0,0,0.06)" }} />
+              <CardAction>
+                <span className="text-2xl font-bold tabular-nums text-primary">
+                  {cleanPct}%
+                </span>
+              </CardAction>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <Progress value={cleanPct} className="h-2" />
 
-              <div className="grid grid-cols-3 gap-3 mt-4">
+              <div className="grid grid-cols-3 gap-3">
                 {[
-                  { label:"Cleaned",  value:cleanedCount, icon:CheckCircleIcon, color:"oklch(0.62 0.16 150)" },
-                  { label:"Pending",  value:tables.length, icon:ClockIcon,        color:"oklch(0.75 0.15 75)"  },
-                  { label:"Urgent",   value:highCount,     icon:BoltIcon,         color:"oklch(0.65 0.18 25)"  },
-                ].map(s => (
+                  { label: "Cleaned", value: cleanedCount, icon: CheckCircleIcon, color: "text-emerald-600 dark:text-emerald-400" },
+                  { label: "Pending", value: tables.length, icon: ClockIcon, color: "text-amber-600 dark:text-amber-400" },
+                  { label: "Urgent", value: highCount, icon: BoltIcon, color: "text-destructive" },
+                ].map((s) => (
                   <div
                     key={s.label}
-                    className="flex flex-col items-center py-3 rounded-xl border"
-                    style={{ background:"#F5F2FB", borderColor:"rgba(11, 59, 54,  0.1)" }}
+                    className="flex flex-col items-center py-3 rounded-xl border border-border bg-muted/50"
                   >
-                    <s.icon className="h-4 w-4 mb-1.5" style={{ color:s.color }} />
-                    <p className="text-xl font-bold tabular-nums" style={{ color:"#082420" }}>{s.value}</p>
-                    <p className="text-[9px] font-bold uppercase  mt-0.5" style={{ color:"#628C84" }}>{s.label}</p>
+                    <s.icon className={cn("size-4 mb-1.5", s.color)} />
+                    <p className="text-xl font-bold tabular-nums text-foreground">{s.value}</p>
+                    <p className="text-[10px] font-semibold uppercase tracking-wide mt-0.5 text-muted-foreground">
+                      {s.label}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -180,139 +203,126 @@ export default function CleanersPage() {
 
           {/* ── Queue ────────────────────────────────────────────── */}
           {tables.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-20 gap-4">
-              <div
-                className="w-20 h-20 rounded-3xl flex items-center justify-center border"
-                style={{ background:"rgba(255,255,255,0.9)", borderColor:"rgba(11, 59, 54,  0.15)" }}
-              >
-                <SunIcon className="h-10 w-10" style={{ color:"#0B3B36" }} />
-              </div>
-              <div className="text-center">
-                <p className="text-lg font-bold" style={{ color:"#082420" }}>All areas spotless!</p>
-                <p className="text-sm mt-1" style={{ color:"#4B6E67" }}>
-                  Great work. You'll be notified of new tasks.
-                </p>
-              </div>
-            </div>
+            <Empty className="py-16 border border-dashed border-border rounded-xl bg-card">
+              <EmptyHeader>
+                <EmptyMedia variant="icon">
+                  <SunIcon className="size-6 text-primary" />
+                </EmptyMedia>
+                <EmptyTitle>All areas spotless!</EmptyTitle>
+                <EmptyDescription>
+                  Great work. You&apos;ll be notified of new tasks.
+                </EmptyDescription>
+              </EmptyHeader>
+            </Empty>
           ) : (
             <div className="space-y-3">
-              {/* Sort by urgency: high → medium → low */}
-              {[...tables]
-                .sort((a,b) => {
-                  const order = { high:0, medium:1, low:2 }
-                  return order[a.urgency] - order[b.urgency]
-                })
-                .map((table) => {
-                  const cfg    = URGENCY_CONFIG[table.urgency]
-                  const Icon   = cfg.icon
-                  const isAnim = animatingId === table.id
+              <AnimatePresence mode="popLayout" initial={false}>
+                {[...tables]
+                  .sort((a, b) => {
+                    const order = { high: 0, medium: 1, low: 2 }
+                    return order[a.urgency] - order[b.urgency]
+                  })
+                  .map((table) => {
+                    const cfg = URGENCY_CONFIG[table.urgency]
+                    const Icon = cfg.icon
 
-                  return (
-                    <Card
-                      key={table.id}
-                      className={cn(
-                        "relative overflow-hidden border rounded-3xl shadow-sm transition-all duration-300",
-                        isAnim ? "opacity-0 -translate-y-2 scale-95" : "opacity-100 translate-y-0 scale-100",
-                      )}
-                      style={{ background:"rgba(255,255,255,0.9)", borderColor:cfg.border }}
-                    >
-                      {/* Top accent strip */}
-                      <div className="absolute top-0 inset-x-0 h-[3px] rounded-t-3xl" style={{ background:cfg.barBg }} />
-
-                      <CardContent className="px-5 pt-5 pb-4">
-
-                        {/* Row 1: table number + urgency + time */}
+                    return (
+                      <motion.div
+                        key={table.id}
+                        layout="position"
+                        initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -8, scale: 0.96 }}
+                        transition={SPRING_SNAPPY}
+                      >
+                        <Card
+                          size="sm"
+                          className={cn(
+                            "transition-[border-color,box-shadow] duration-150 ease-(--ease-out)",
+                            cfg.borderClass,
+                          )}
+                        >
+                      <CardContent className="space-y-4">
                         <div className="flex items-start gap-4">
-                          {/* Table number tile */}
                           <div
-                            className="flex items-center justify-center w-14 h-14 rounded-2xl shrink-0 font-bold text-2xl"
-                            style={{ background:cfg.bg, color:cfg.accent }}
+                            className={cn(
+                              "flex items-center justify-center w-14 h-14 rounded-xl shrink-0 font-bold text-2xl tabular-nums",
+                              cfg.tileClass,
+                            )}
                           >
-                            {table.id.replace("T","")}
+                            {String(table.tableNumber).padStart(2, "0")}
                           </div>
 
                           <div className="flex-1 min-w-0">
-                            {/* Name + badge row */}
                             <div className="flex items-center gap-2 mb-1">
-                              <p className="text-[15px] font-bold" style={{ color:"#082420" }}>
-                                Table {table.id.replace("T","")}
+                              <p className="text-sm font-semibold text-foreground">
+                                Table {String(table.tableNumber).padStart(2, "0")}
                               </p>
-                              <span
-                                className="flex items-center gap-1 text-[9px] font-bold uppercase  px-2 py-0.5 rounded-full"
-                                style={{ background:cfg.bg, color:cfg.accent }}
-                              >
-                                <Icon className="h-2.5 w-2.5" />
+                              <Badge variant={cfg.badgeVariant} className="gap-1 text-[10px] uppercase">
+                                <Icon className="size-3" />
                                 {cfg.label}
-                              </span>
+                              </Badge>
                             </div>
 
-                            {/* Zone + guests */}
-                            <div className="flex items-center gap-3 mb-2">
-                              <span className="text-[11px] font-semibold" style={{ color:"#4B6E67" }}>
-                                {table.zone}
-                              </span>
-                              <span style={{ color:"#C8DDD5" }}>·</span>
-                              <span className="flex items-center gap-1 text-[11px]" style={{ color:"#628C84" }}>
-                                <UserGroupIcon className="h-3 w-3" />
+                            <div className="flex flex-wrap items-center gap-2 mb-2 text-xs text-muted-foreground">
+                              <span className="font-medium text-foreground/80">{table.zone}</span>
+                              <span>·</span>
+                              <span className="flex items-center gap-1">
+                                <UserGroupIcon className="size-3.5" />
                                 {table.guests} guests
                               </span>
-                              <span style={{ color:"#C8DDD5" }}>·</span>
-                              <span className="flex items-center gap-1 text-[11px]" style={{ color:"#628C84" }}>
-                                <ClockIcon className="h-3 w-3" />
+                              <span>·</span>
+                              <span className="flex items-center gap-1">
+                                <ClockIcon className="size-3.5" />
                                 {table.time}
                               </span>
                             </div>
 
-                            {/* Reason */}
-                            <p className="text-[12px] leading-relaxed" style={{ color:"#4B6E67" }}>
+                            <p className="text-xs leading-relaxed text-muted-foreground">
                               {table.reason}
                             </p>
                           </div>
                         </div>
 
-                        {/* Checklist */}
-                        <div
-                          className="grid grid-cols-3 gap-2 mt-4 px-1"
-                        >
+                        <div className="grid grid-cols-3 gap-2">
                           {[
-                            { label:"Wipe surfaces", icon:CloudIcon },
-                            { label:"Clear dishes",  icon:SparklesIcon },
-                            { label:"Air & reset",   icon:SunIcon      },
-                          ].map(step => (
+                            { label: "Wipe surfaces", icon: CloudIcon },
+                            { label: "Clear dishes", icon: SparklesIcon },
+                            { label: "Air & reset", icon: SunIcon },
+                          ].map((step) => (
                             <div
                               key={step.label}
-                              className="flex flex-col items-center gap-1 py-2 rounded-xl"
-                              style={{ background:"#F5F2FB" }}
+                              className="flex flex-col items-center gap-1 py-2 rounded-lg bg-muted/60"
                             >
-                              <step.icon className="h-3.5 w-3.5" style={{ color:"var(--icon-primary)" }} />
-                              <p className="text-[9px] font-bold uppercase  text-center" style={{ color:"#628C84" }}>
+                              <step.icon className="size-3.5 text-primary" />
+                              <p className="text-[10px] font-semibold uppercase text-center text-muted-foreground">
                                 {step.label}
                               </p>
                             </div>
                           ))}
                         </div>
-
-                        {/* CTA */}
-                        <button
-                          onClick={() => handleClean(table)}
-                          className="w-full flex items-center justify-center gap-2.5 h-12 rounded-2xl mt-4 font-bold text-[12px] uppercase  text-white transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] relative overflow-hidden group"
-                          style={{
-                            background: cfg.ctaBg,
-                            boxShadow: `0 4px 16px ${cfg.accent}40`,
-                          }}
-                        >
-                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-                          <CheckCircleIcon className="h-4 w-4 relative z-10" />
-                          <span className="relative z-10">Mark as Clean</span>
-                        </button>
                       </CardContent>
+
+                      <CardFooter>
+                        <Button
+                          onClick={() => handleClean(table)}
+                          variant={cfg.buttonVariant}
+                          size="lg"
+                          className="w-full gap-2 font-semibold"
+                        >
+                          <CheckCircleIcon className="size-4" />
+                          <span>Mark as Clean</span>
+                        </Button>
+                      </CardFooter>
                     </Card>
-                  )
-                })}
+                  </motion.div>
+                )
+              })}
+              </AnimatePresence>
             </div>
           )}
         </div>
       </div>
-    </TooltipProvider>
+    </>
   )
 }

@@ -3,39 +3,20 @@
 import { useState, useEffect, useMemo } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { 
-  HomeIcon, 
-  CakeIcon, 
-  ShoppingCartIcon, 
-  BellIcon, 
-  UserGroupIcon, 
-  Cog6ToothIcon, 
-  ClipboardDocumentListIcon, 
-  Squares2X2Icon,
-  MapPinIcon, 
-  ShoppingBagIcon, 
-  CalculatorIcon, 
-  ChartBarIcon,
-  ShieldCheckIcon, 
-  PaintBrushIcon, 
-  FireIcon 
-} from "@heroicons/react/24/outline"
-import { 
-  HomeIcon as HomeIconSolid,
-  ShoppingCartIcon as ShoppingCartIconSolid,
-  BellIcon as BellIconSolid
-} from "@heroicons/react/24/solid"
+import { motion } from "motion/react"
 import { useAuth, UserRole } from "@/lib/auth-context"
 import { useSidebar } from "@/components/ui/sidebar"
+import { SPRING_SNAPPY } from "@/lib/motion"
 import { cn } from "@/lib/utils"
 
 interface NavItem {
   label: string
-  icon: any
+  icon: string
   href: string
 }
 
 const PORTAL_PREFIXES = ["/admin", "/manager", "/waiter", "/kitchen"]
+const HIDDEN_ROUTES = new Set(["/", "/login", "/signup", "/forgot-password"])
 
 export function MobileNav({ rootLevel = false }: { rootLevel?: boolean }) {
   const { user } = useAuth()
@@ -44,26 +25,24 @@ export function MobileNav({ rootLevel = false }: { rootLevel?: boolean }) {
   const pathname = usePathname()
 
   const [isVisible, setIsVisible] = useState(true)
-  const [ripples, setRipples] = useState<{ id: number; x: number; y: number }[]>([])
 
   const isPortalRoute = PORTAL_PREFIXES.some((prefix) => pathname.startsWith(prefix))
 
-  // Scroll logic: hide on scroll down, show on scroll up
   useEffect(() => {
     let lastY = 0
-    const handleScroll = (e: any) => {
-      const currentScrollY = e.target === document 
-        ? window.scrollY 
-        : (e.target.scrollTop || 0)
-      
-      if (Math.abs(currentScrollY - lastY) < 5) return
+    const handleScroll = (e: Event) => {
+      const target = e.target as Document | HTMLElement
+      const currentScrollY =
+        target === document ? window.scrollY : (target as HTMLElement).scrollTop || 0
+
+      if (Math.abs(currentScrollY - lastY) < 6) return
 
       if (currentScrollY < 20 || currentScrollY < lastY) {
         setIsVisible(true)
       } else if (currentScrollY > lastY && currentScrollY > 70) {
         setIsVisible(false)
       }
-      
+
       lastY = currentScrollY
     }
 
@@ -105,10 +84,8 @@ export function MobileNav({ rootLevel = false }: { rootLevel?: boolean }) {
         { label: "System", icon: "/operation.png", href: "/kitchen/kds" },
       ],
       customer: [
-        { label: "Home", icon: "/home.png", href: customerPrefix },
         { label: "Menu", icon: "/menu-nav.png", href: customerPrefix },
-        { label: "Orders", icon: "/food-delivery.png", href: `${customerPrefix}/status` },
-        { label: "Pay", icon: "/checkout-nav.png", href: `${customerPrefix}/billing` },
+        { label: "Bill & Pay", icon: "/checkout-nav.png", href: `${customerPrefix}/billing` },
       ],
       cleaner: [
         { label: "Tasks", icon: "/office.png", href: "/cleaners" },
@@ -117,200 +94,74 @@ export function MobileNav({ rootLevel = false }: { rootLevel?: boolean }) {
       security: [
         { label: "Watch", icon: "/policeman.png", href: "/security" },
         { label: "Logs", icon: "/report.png", href: "/security" },
-      ]
+      ],
     }
     return configs[role] || configs.customer
   }, [role, pathname])
 
-  const activeIndex = navItems.findIndex(item => 
-    pathname === item.href || (item.href !== '/' && item.href !== '#' && pathname.startsWith(item.href))
-  )
-
-  const handleTap = (e: React.MouseEvent, index: number) => {
-    const rect = e.currentTarget.getBoundingClientRect()
-    const x = e.clientX - rect.left
-    const y = e.clientY - rect.top
-    
-    const newRipple = { id: Date.now(), x, y }
-    setRipples(prev => [...prev, newRipple])
-    
-    setTimeout(() => {
-      setRipples(prev => prev.filter(r => r.id !== newRipple.id))
-    }, 600)
-  }
-
+  if (HIDDEN_ROUTES.has(pathname)) return null
   if (rootLevel && isPortalRoute) return null
   if (!user && !pathname.startsWith("/customer")) return null
 
   return (
     <nav
       className={cn(
-        "fixed bottom-6 left-4 right-4 z-40 max-w-md mx-auto md:hidden transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] rounded-[32px] shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)]",
-        (isVisible && !openMobile) ? "translate-y-0 opacity-100" : "translate-y-[calc(100%+40px)] opacity-0 invisible pointer-events-none"
+        "fixed bottom-[calc(1rem+env(safe-area-inset-bottom,0px))] left-4 right-4 z-40 max-w-md mx-auto md:hidden transition-[transform,opacity] duration-250 ease-(--ease-out) rounded-2xl shadow-lg border border-border/80 bg-card/95 backdrop-blur-xl",
+        isVisible && !openMobile
+          ? "translate-y-0 opacity-100"
+          : "translate-y-[calc(100%+40px)] opacity-0 pointer-events-none",
       )}
     >
-        {/* Main container with floating design */}
-        <div className="relative overflow-hidden rounded-[32px]">
-          
-          {/* Sophisticated multi-layer background */}
-          <div className="absolute inset-0 rounded-[32px] overflow-hidden">
-            {/* Base layer - frosted glass effect */}
-            <div 
-              className="absolute inset-0 backdrop-blur-2xl rounded-[32px]"
-              style={{ 
-                background: "linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.92) 100%)"
-              }}
-            />
-            
-            {/* Noise texture overlay for premium feel */}
-            <div 
-              className="absolute inset-0 opacity-[0.015] mix-blend-overlay rounded-[32px]"
-              style={{ 
-                backgroundImage: "url(data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E)",
-                backgroundSize: "128px 128px"
-              }}
-            />
-          </div>
+      <div className="relative flex items-center justify-around px-1.5 py-1.5">
+        {navItems.map((item, i) => {
+          const isExact = pathname === item.href
+          const isParent =
+            item.href !== "/" && item.href !== "#" && pathname.startsWith(item.href)
+          const isActive = isExact || isParent
 
-          {/* Elegant border system */}
-          <div className="absolute inset-0 rounded-[32px] border-2" 
-            style={{ borderColor: "rgba(115, 108, 131, 0.06)" }} />
-          <div className="absolute inset-0 rounded-[32px] border border-white/60" />
-          
-          {/* Top highlight */}
-          <div className="absolute top-0 left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-white/50 to-transparent" />
-
-          {/* Content */}
-          <div className="relative flex items-center justify-around px-2 py-2">
-            
-            {/* Animated Active Indicator - NOW A PERFECT SQUARE */}
-            <div 
-              className="absolute h-14 w-14 transition-all duration-300 ease-out z-0 flex items-center justify-center top-1/2 -translate-y-1/2"
-              style={{
-                width: `${100 / navItems.length}%`,
-                left: `${(activeIndex === -1 ? 0 : activeIndex) * (100 / navItems.length)}%`,
-              }}
+          return (
+            <Link
+              key={`${item.href}-${i}`}
+              href={item.href}
+              className="flex-1 flex flex-col items-center justify-center gap-1 py-2.5 min-h-14 relative z-10 no-tap-highlight rounded-xl active:scale-95 transition-transform duration-100 ease-(--ease-out)"
             >
-              {/* Inner Square Wrapper - MINIMALIST (No BG/Border) */}
-              <div className="relative w-12 h-12">
-                {/* Background and border removed as per request */}
-              </div>
-            </div>
+              {isActive && (
+                <motion.span
+                  layoutId="mobile-nav-pill"
+                  transition={SPRING_SNAPPY}
+                  aria-hidden="true"
+                  className="absolute inset-1 rounded-xl bg-primary/10 -z-10"
+                />
+              )}
 
-            {/* Navigation Items */}
-            {navItems.map((item, i) => {
-              const Icon = item.icon
-              const isExact = pathname === item.href
-              const isParent = item.href !== '/' && item.href !== '#' && pathname.startsWith(item.href)
-              const isActive = isExact || isParent
-              
-              return (
-                <Link 
-                  key={i} 
-                  href={item.href}
-                  onClick={(e) => handleTap(e, i)}
-                  className="flex-1 flex flex-col items-center gap-1.5 py-3 group relative z-10 no-tap-highlight overflow-hidden"
-                  style={{ minHeight: "64px" }}
-                >
-                  {/* Ripple effects */}
-                  {ripples.map(ripple => (
-                    <div
-                      key={ripple.id}
-                      className="absolute rounded-full bg-[#0B3B36]/20 pointer-events-none"
-                      style={{
-                        left: ripple.x,
-                        top: ripple.y,
-                        width: "8px",
-                        height: "8px",
-                        transform: "translate(-50%, -50%)",
-                        animation: "ripple 0.6s ease-out forwards"
-                      }}
-                    />
-                  ))}
+              <div
+                className="size-5 transition-[opacity,background-color] duration-150"
+                style={{
+                  backgroundColor: isActive ? "var(--primary)" : "var(--muted-foreground)",
+                  WebkitMaskImage: `url(${item.icon})`,
+                  WebkitMaskSize: "contain",
+                  WebkitMaskRepeat: "no-repeat",
+                  WebkitMaskPosition: "center",
+                  maskImage: `url(${item.icon})`,
+                  maskSize: "contain",
+                  maskRepeat: "no-repeat",
+                  maskPosition: "center",
+                  opacity: isActive ? 1 : 0.75,
+                }}
+              />
 
-                  {/* Icon container with sophisticated hover */}
-                  <div className="relative">
-                    <div 
-                      className={cn(
-                        "p-2.5 rounded-none transition-all duration-500 relative",
-                        isActive 
-                          ? "text-[#0B3B36] scale-100" 
-                          : "text-[#4B6E67] group-hover:text-[#0B3B36] group-active:scale-90"
-                      )}
-                      style={isActive ? { animation: "float 3s ease-in-out infinite" } : {}}
-                    >
-                      {/* Icon glow removed */}
-                      
-                      {typeof Icon === 'string' ? (
-                        <div 
-                          className="h-5.5 w-5.5 transition-all duration-500 relative z-10" 
-                          style={{ 
-                            backgroundColor: isActive ? "#0B3B36" : "rgba(11, 59, 54,  0.65)",
-                            WebkitMaskImage: `url(${Icon})`,
-                            WebkitMaskSize: "contain",
-                            WebkitMaskRepeat: "no-repeat",
-                            WebkitMaskPosition: "center",
-                            opacity: isActive ? 1 : 0.8
-                          }} 
-                        />
-                      ) : (
-                        <Icon 
-                          className={cn(
-                            "h-5.5 w-5.5 transition-all duration-500 relative z-10",
-                            isActive && "drop-shadow-[0_2px_8px_rgba(11,59,54,0.4)]"
-                          )} 
-                          strokeWidth={isActive ? 2.5 : 2} 
-                        />
-                      )}
-                    </div>
-                  </div>
-                  
-                  {/* Label with refined typography */}
-                  <span 
-                    className={cn(
-                      "text-[9px] font-bold uppercase transition-all duration-500 relative",
-                      isActive 
-                        ? "text-[#0B3B36] opacity-100 translate-y-0" 
-                        : "text-[#0B3B36]/65 opacity-65 translate-y-0.5 group-hover:opacity-100 group-hover:translate-y-0"
-                    )}
-                    style={isActive ? { 
-                      textShadow: "0 0 8px rgba(11, 59, 54,  0.3)"
-                    } : {}}
-                  >
-                    {item.label}
-                  </span>
-
-                  {/* Active indicator dot with pulse */}
-                  <div className="absolute -bottom-0.5 left-1/2 -translate-x-1/2">
-                    <div className={cn(
-                      "w-1 h-1 rounded-full transition-all duration-500",
-                      isActive 
-                        ? "opacity-100 scale-100 bg-[#0B3B36]" 
-                        : "opacity-0 scale-0 bg-transparent"
-                    )}>
-                      {isActive && (
-                        <>
-                          {/* Pulsing outer ring */}
-                          <div 
-                            className="absolute inset-0 rounded-full bg-[#0B3B36]"
-                            style={{ animation: "pulse-glow 2s ease-in-out infinite" }}
-                          />
-                          {/* Static glow */}
-                          <div 
-                            className="absolute inset-0 rounded-full blur-sm bg-[#0B3B36]/60"
-                          />
-                        </>
-                      )}
-                    </div>
-                  </div>
-                </Link>
-              )
-            })}
-          </div>
-        </div>
-
-        {/* Safe area spacer for devices with notches */}
-        <div className="h-safe bg-transparent" />
-      </nav>
+              <span
+                className={cn(
+                  "text-[10px] font-semibold uppercase tracking-tight leading-none transition-colors duration-150",
+                  isActive ? "text-primary" : "text-muted-foreground",
+                )}
+              >
+                {item.label}
+              </span>
+            </Link>
+          )
+        })}
+      </div>
+    </nav>
   )
 }

@@ -1,90 +1,100 @@
 "use client"
 
-import { 
-  ClockIcon, 
-  CheckCircleIcon, 
-  FireIcon, 
-  QueueListIcon, 
-  UserGroupIcon, 
-  ArrowUpRightIcon,
+import {
+  ClockIcon,
+  FireIcon,
+  QueueListIcon,
+  UserGroupIcon,
   BellIcon,
-  ExclamationCircleIcon,
-  ChartBarIcon, 
-  BoltIcon
+  ChartBarIcon,
+  BoltIcon,
 } from "@heroicons/react/24/outline"
-import { 
-  CheckCircleIcon as CheckCircleIconSolid, 
+import {
+  CheckCircleIcon as CheckCircleIconSolid,
   ExclamationCircleIcon as ExclamationCircleIconSolid,
-  FireIcon as FireIconSolid
+  FireIcon as FireIconSolid,
 } from "@heroicons/react/24/solid"
-import { 
-  ArrowUpRightIcon as ArrowUpRightIconMini 
-} from "@heroicons/react/20/solid"
+import { ArrowUpRightIcon as ArrowUpRightIconMini } from "@heroicons/react/20/solid"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
 
 export default function IconDemo() {
   return (
-    <div className="p-8 space-y-12 bg-slate-50 min-h-screen">
+    <div className="p-8 space-y-8 bg-background min-h-screen">
       <section>
-        <h2 className="text-2xl font-bold mb-6 text-slate-800">Heroicons: Modern & Clean</h2>
-        <p className="text-slate-600 mb-8">
+        <h2 className="text-2xl font-bold mb-2">Heroicons: Modern &amp; Clean</h2>
+        <p className="text-muted-foreground mb-6">
           Optimized for Tailwind CSS. Clean, consistent, and highly readable.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* Outline Style - Default */}
-          <div className="p-6 bg-white rounded-2xl shadow-sm border border-slate-200">
-            <h3 className="text-lg font-semibold mb-4 text-slate-900">24x24 Outline</h3>
-            <div className="flex gap-4">
-              <FireIcon className="h-10 w-10 text-orange-500" />
-              <QueueListIcon className="h-10 w-10 text-slate-700" />
-              <BellIcon className="h-10 w-10 text-yellow-500" />
-              <ChartBarIcon className="h-10 w-10 text-emerald-500" />
-            </div>
-            <p className="mt-4 text-sm text-slate-500">Perfect for navigation and general UI layout.</p>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Card>
+            <CardHeader>
+              <CardTitle>24x24 Outline</CardTitle>
+              <CardDescription>Perfect for navigation and general UI layout.</CardDescription>
+            </CardHeader>
+            <CardContent className="flex gap-4">
+              <FireIcon className="size-10 text-orange-500" />
+              <QueueListIcon className="size-10 text-foreground" />
+              <BellIcon className="size-10 text-yellow-500" />
+              <ChartBarIcon className="size-10 text-emerald-500" />
+            </CardContent>
+          </Card>
 
-          {/* Solid Style - Impact */}
-          <div className="p-6 bg-white rounded-2xl shadow-sm border border-slate-200">
-            <h3 className="text-lg font-semibold mb-4 text-slate-900">24x24 Solid</h3>
-            <div className="flex gap-4">
-              <CheckCircleIconSolid className="h-10 w-10 text-emerald-500" />
-              <ExclamationCircleIconSolid className="h-10 w-10 text-rose-500" />
-              <FireIconSolid className="h-10 w-10 text-orange-500" />
-              <BoltIcon className="h-10 w-10 text-amber-500" />
-            </div>
-            <p className="mt-4 text-sm text-slate-500">Great for badges, active states, and focus areas.</p>
-          </div>
+          <Card>
+            <CardHeader>
+              <CardTitle>24x24 Solid</CardTitle>
+              <CardDescription>Great for badges, active states, and focus areas.</CardDescription>
+            </CardHeader>
+            <CardContent className="flex gap-4">
+              <CheckCircleIconSolid className="size-10 text-emerald-500" />
+              <ExclamationCircleIconSolid className="size-10 text-rose-500" />
+              <FireIconSolid className="size-10 text-orange-500" />
+              <BoltIcon className="size-10 text-amber-500" />
+            </CardContent>
+          </Card>
 
-          {/* Mini/Micro - Dense UI */}
-          <div className="p-6 bg-white rounded-2xl shadow-sm border border-slate-200">
-            <h3 className="text-lg font-semibold mb-4 text-slate-900">20x20 Mini</h3>
-            <div className="flex items-center gap-4">
-              <button className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-sm font-medium transition-colors">
+          <Card>
+            <CardHeader>
+              <CardTitle>20x20 Mini</CardTitle>
+              <CardDescription>Optimized for small buttons and input icons.</CardDescription>
+            </CardHeader>
+            <CardContent className="flex items-center gap-4">
+              <Button size="sm" className="gap-1.5">
                 View Details
-                <ArrowUpRightIconMini className="h-4 w-4" />
-              </button>
-              <div className="flex gap-2">
-                <UserGroupIcon className="h-6 w-6 text-slate-400" />
-                <ClockIcon className="h-6 w-6 text-slate-400" />
+                <ArrowUpRightIconMini className="size-4" />
+              </Button>
+              <div className="flex gap-2 text-muted-foreground">
+                <UserGroupIcon className="size-6" />
+                <ClockIcon className="size-6" />
               </div>
-            </div>
-            <p className="mt-4 text-sm text-slate-500">Optimized for small buttons and input icons.</p>
-          </div>
+            </CardContent>
+          </Card>
         </div>
       </section>
 
-      <section className="p-8 bg-slate-900 rounded-3xl text-white">
-        <h2 className="text-xl font-bold mb-4">How to Use Heroicons</h2>
-        <pre className="bg-black/20 p-4 rounded-xl text-sm overflow-x-auto text-[#A2C5BC] border border-white/10">
-          {`// Import from either outline or solid sets
+      <Card className="bg-primary text-primary-foreground border-primary">
+        <CardHeader>
+          <CardTitle>How to Use Heroicons</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <pre className="bg-black/20 p-4 rounded-lg text-sm overflow-x-auto text-primary-foreground/90 border border-primary-foreground/10">
+            {`// Import from either outline or solid sets
 import { BeakerIcon } from "@heroicons/react/24/outline"
 import { BeakerIcon as BeakerIconSolid } from "@heroicons/react/24/solid"
 import { BeakerIcon as BeakerIconMini } from "@heroicons/react/20/solid"
 
 // Use with Tailwind classes
-<BeakerIcon className="h-6 w-6 text-[#0B3B36]" />`}
-        </pre>
-      </section>
+<BeakerIcon className="h-6 w-6 text-primary" />`}
+          </pre>
+        </CardContent>
+      </Card>
     </div>
   )
 }

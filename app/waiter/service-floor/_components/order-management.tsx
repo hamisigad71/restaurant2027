@@ -1,92 +1,72 @@
 "use client";
 
 import { useState } from "react";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { AnimatePresence, motion } from "motion/react";
+import { FAST_TRANSITION, SPRING_SNAPPY } from "@/lib/motion";
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { ButtonGroup } from "@/components/ui/button-group";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
-import { Input } from "@/components/ui/input";
+import { Progress } from "@/components/ui/progress";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+} from "@/components/ui/input-group";
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty";
 import {
   UserGroupIcon as Users,
   ArrowLeftIcon as ArrowLeft,
   PlusIcon as Plus,
-  AcademicCapIcon as ChefHat,
-  BeakerIcon as Wine,
-  CakeIcon as Cookie,
-  GiftIcon as IceCream,
   ArrowRightIcon as ArrowRight,
   MinusIcon as Minus,
   TrashIcon as Trash2,
   ShoppingCartIcon as ShoppingCart,
   MagnifyingGlassIcon as Search,
   BriefcaseIcon as UtensilsCrossed,
-  SparklesIcon as Crown,
-  BoltIcon as Sparkles,
-  Squares2X2Icon as AllIcon,
-  ShoppingBagIcon as MainIcon,
   ArrowTrendingUpIcon as TrendingUp,
-  ClockIcon as Clock,
-  XMarkIcon as X,
   CheckIcon as Check,
-  QueueListIcon as SeafoodIcon,
   StarIcon as Star,
   EllipsisHorizontalIcon as MoreHorizontal,
 } from "@heroicons/react/24/outline";
 import type { Table, TableStatus, MenuItem, OrderItem } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
-// ─── CONFIGURATION ────────────────────────────────────────────────────────────
-
 const statusConfig: Record<
   TableStatus,
-  {
-    label: string;
-    Icon: any;
-    gradient: string;
-    badge: string;
-    selectable: boolean;
-  }
+  { label: string; dot: string; selectable: boolean }
 > = {
-  available: {
-    label: "Available",
-    Icon: ChefHat,
-    gradient: "from-emerald-500 to-emerald-600",
-    badge: "bg-emerald-500",
-    selectable: true,
-  },
-  occupied: {
-    label: "Occupied",
-    Icon: Users,
-    gradient: "from-slate-500 to-slate-600",
-    badge: "bg-slate-500",
-    selectable: true,
-  },
-  reserved: {
-    label: "Reserved",
-    Icon: ShoppingCart,
-    gradient: "from-amber-500 to-amber-600",
-    badge: "bg-amber-500",
-    selectable: false,
-  },
-  cleaning: {
-    label: "Cleaning",
-    Icon: Crown,
-    gradient: "from-blue-500 to-blue-600",
-    badge: "bg-blue-500",
-    selectable: false,
-  },
+  available: { label: "Available", dot: "bg-success", selectable: true },
+  occupied: { label: "Occupied", dot: "bg-primary", selectable: true },
+  reserved: { label: "Reserved", dot: "bg-warning", selectable: false },
+  cleaning: { label: "Cleaning", dot: "bg-sky-500", selectable: false },
 };
 
 const categories = [
-  { id: "all", label: "All", icon: AllIcon },
-  { id: "starters", label: "Appetizers", icon: ChefHat },
-  { id: "main", label: "Main Dishes", icon: MainIcon },
-  { id: "drinks", label: "Beverages", icon: Wine },
-  { id: "snacks", label: "Snacks", icon: Cookie },
-  { id: "desserts", label: "Desserts", icon: IceCream },
-  { id: "seafood", label: "Seafood", icon: SeafoodIcon },
+  { id: "all", label: "All" },
+  { id: "starters", label: "Appetizers" },
+  { id: "main", label: "Main Dishes" },
+  { id: "drinks", label: "Beverages" },
+  { id: "snacks", label: "Snacks" },
+  { id: "desserts", label: "Desserts" },
+  { id: "seafood", label: "Seafood" },
 ];
 
 const categoryImages: Record<string, string> = {
@@ -111,8 +91,6 @@ const tableImages = [
   "https://images.unsplash.com/photo-1481833761820-0509d3217039?w=300&h=200&fit=crop",
 ];
 
-// ─── ENHANCED TABLE GRID ──────────────────────────────────────────────────────
-
 interface TableGridProps {
   tables: Table[];
   onSelectTable: (table: Table) => void;
@@ -120,180 +98,171 @@ interface TableGridProps {
 
 export function TableGrid({ tables, onSelectTable }: TableGridProps) {
   const [activeZone, setActiveZone] = useState<string>("all");
-  
   const zones = ["all", "A", "B", "C"];
-  
-  const filteredTables = activeZone === "all" 
-    ? tables 
-    : tables.filter(t => t.zone === activeZone);
-    
-  const availableCount = tables.filter(t => t.status === "available").length;
-  const occupiedCount = tables.filter(t => t.status === "occupied").length;
+
+  const filteredTables =
+    activeZone === "all" ? tables : tables.filter((t) => t.zone === activeZone);
+
+  const availableCount = tables.filter((t) => t.status === "available").length;
+  const occupiedCount = tables.filter((t) => t.status === "occupied").length;
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8">
-      {/* Interactive Floor Plan Header */}
-      <div className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
-        <div className="flex items-center gap-4">
-          <div 
-            className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg p-2"
-            style={{
-              background: "linear-gradient(135deg, #0B3B36 0%, #062421 100%)",
-            }}
-          >
-            <img src="/service-floor-nav.png" className="w-full h-full brightness-0 invert object-contain" alt="Service Floor" />
+    <div className="p-4 sm:p-6 lg:p-8 space-y-6">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <div className="flex size-12 items-center justify-center rounded-xl bg-primary p-2 shadow-sm">
+            <img
+              src="/service-floor-nav.png"
+              className="w-full h-full brightness-0 invert object-contain"
+              alt="Service Floor"
+            />
           </div>
           <div>
-            <h1 className="text-2xl sm:text-3xl font-bold" style={{ color: "#082420" }}>
+            <h1 className="text-2xl sm:text-3xl font-semibold text-foreground">
               Interactive Floor Plan
             </h1>
-            <p className="text-sm font-medium mt-1" style={{ color: "#4B6E67" }}>
+            <p className="text-sm text-muted-foreground">
               {availableCount} available • {occupiedCount} occupied
             </p>
           </div>
         </div>
 
-        {/* Zone Filter */}
-        <div className="flex bg-white/50 backdrop-blur-sm p-1.5 rounded-2xl w-fit border border-[#0B3B36]/8 shrink-0">
-          {zones.map(zone => (
-            <button
-              key={zone}
-              onClick={() => setActiveZone(zone)}
-              className={cn(
-                "px-5 py-2.5 rounded-xl text-[11px] font-bold uppercase transition-all duration-300",
-                activeZone === zone 
-                  ? "bg-white text-[#0B3B36] shadow-lg" 
-                  : "text-[#4B6E67] hover:text-[#0B3B36]"
-              )}
-            >
-              Zone {zone.toUpperCase()}
-            </button>
-          ))}
-        </div>
+        <Tabs value={activeZone} onValueChange={setActiveZone}>
+          <TabsList>
+            {zones.map((zone) => {
+              const isActive = activeZone === zone;
+              return (
+                <TabsTrigger
+                  key={zone}
+                  value={zone}
+                  className="relative uppercase text-xs data-[state=active]:bg-transparent data-[state=active]:shadow-none"
+                >
+                  {isActive && (
+                    <motion.span
+                      layoutId="waiter-zone-pill"
+                      transition={SPRING_SNAPPY}
+                      aria-hidden="true"
+                      className="absolute inset-0 rounded-md bg-background shadow-sm"
+                    />
+                  )}
+                  <span className="relative z-10">Zone {zone.toUpperCase()}</span>
+                </TabsTrigger>
+              );
+            })}
+          </TabsList>
+        </Tabs>
       </div>
 
-      {/* Legend */}
-      <div className="flex items-center gap-6 flex-wrap mb-8">
+      <div className="flex items-center gap-5 flex-wrap">
         {[
-          { label: "Available", color: "bg-emerald-500" },
-          { label: "Occupied", color: "bg-[#0B3B36]" },
-          { label: "Reserved", color: "bg-amber-500" },
-          { label: "Cleaning", color: "bg-blue-500" },
-        ].map(item => (
+          { label: "Available", color: "bg-success" },
+          { label: "Occupied", color: "bg-primary" },
+          { label: "Reserved", color: "bg-warning" },
+          { label: "Cleaning", color: "bg-sky-500" },
+        ].map((item) => (
           <div key={item.label} className="flex items-center gap-2">
-            <div className={cn("w-2 h-2 rounded-full shadow-sm", item.color)} />
-            <span className="text-xs font-bold text-[#4B6E67]">{item.label}</span>
+            <span className={cn("size-2 rounded-full", item.color)} />
+            <span className="text-xs font-medium text-muted-foreground">{item.label}</span>
           </div>
         ))}
       </div>
 
-      {/* Enhanced Grid - 1 column on small mobile, 2 columns on larger mobile */}
-      <div className="grid grid-cols-2 min-[480px]:grid-cols-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-2.5 sm:gap-4 lg:gap-5">
-        {filteredTables.length === 0 ? (
-          <div className="col-span-full flex flex-col items-center justify-center py-16 sm:py-24 gap-4">
-            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl flex items-center justify-center" 
-              style={{ background: "rgba(11, 59, 54,  0.08)" }}>
-              <UtensilsCrossed className="h-8 w-8 sm:h-10 sm:w-10" style={{ color: "#A2C5BC" }} strokeWidth={2.5} />
-            </div>
-            <p className="text-sm font-bold uppercase" style={{ color: "#628C84" }}>No tables found in this zone</p>
-          </div>
-        ) : (
-          filteredTables.map((table, index) => {
+      {filteredTables.length === 0 ? (
+        <Empty className="py-16 border">
+          <EmptyHeader>
+            <EmptyMedia variant="icon">
+              <UtensilsCrossed />
+            </EmptyMedia>
+            <EmptyTitle>No tables found in this zone</EmptyTitle>
+            <EmptyDescription>Select another zone to view tables.</EmptyDescription>
+          </EmptyHeader>
+        </Empty>
+      ) : (
+        <div className="grid grid-cols-2 min-[480px]:grid-cols-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-3 sm:gap-4">
+          {filteredTables.map((table, index) => {
             const config = statusConfig[table.status];
             const imgSrc = tableImages[index % tableImages.length];
-            const Icon = config.Icon;
-            
+
             return (
               <Card
                 key={table.id}
+                size="sm"
                 onClick={() => config.selectable && onSelectTable(table)}
                 className={cn(
-                  "group relative overflow-hidden border-0 rounded-xl shadow-md transition-all duration-500",
+                  "group relative gap-0 py-0 overflow-hidden transition-[border-color,box-shadow,opacity] duration-150 ease-(--ease-out)",
                   config.selectable
-                    ? "cursor-pointer hover:shadow-2xl hover:-translate-y-2 active:translate-y-0 active:scale-95"
-                    : "cursor-not-allowed opacity-60"
+                    ? "cursor-pointer hover:shadow-md hover:border-primary/40"
+                    : "cursor-not-allowed opacity-60",
                 )}
-                style={{ boxShadow: "0 4px 24px rgba(0,0,0,0.08)" }}
               >
-
-
-                {/* Enhanced Image */}
-                <div className="relative h-24 sm:h-40 overflow-hidden">
+                <div className="relative h-28 sm:h-36 overflow-hidden bg-muted">
                   <img
                     src={imgSrc}
                     alt={`Table ${table.number}`}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
 
-                  {/* Status badge */}
                   <div className="absolute top-2 left-2">
-                    <Badge className={cn("text-[8px] sm:text-[9px] font-bold uppercase px-2 py-0.5 rounded-lg border-0 text-white shadow-lg", config.badge)}>
+                    <Badge variant="secondary" className="text-[10px] uppercase">
                       {config.label}
                     </Badge>
                   </div>
 
-                  {/* Capacity */}
-                  <div className="absolute top-2 right-2 flex items-center gap-1 px-2 py-1 rounded-lg text-white backdrop-blur-md border border-white/20"
-                    style={{ background: "rgba(0,0,0,0.4)" }}>
-                    <Users className="h-3 w-3" strokeWidth={2.5} />
-                    <span className="text-[10px] font-bold">{table.seats}</span>
-                  </div>
+                  <Badge
+                    variant="secondary"
+                    className="absolute top-2 right-2 gap-1 bg-black/60 text-white border-0 text-[10px]"
+                  >
+                    <Users className="size-3" />
+                    {table.seats}
+                  </Badge>
 
-                  {/* Table number */}
                   <div className="absolute bottom-2 left-2.5">
-                    <span className="text-[9px] text-white/60 uppercase font-semibold block leading-none mb-0.5">Table</span>
-                    <span className="text-xl sm:text-3xl text-white font-bold leading-none">
+                    <span className="text-[9px] text-white/70 uppercase font-semibold block leading-none mb-0.5">
+                      Table
+                    </span>
+                    <span className="text-xl sm:text-2xl text-white font-bold leading-none">
                       {String(table.number).padStart(2, "0")}
                     </span>
                   </div>
                 </div>
 
-                {/* Details */}
-                <CardContent className="p-2 sm:p-4 space-y-2">
+                <CardContent className="py-3 space-y-2">
                   <div className="flex justify-between items-end">
                     <div>
-                      <p className="text-[9px] uppercase font-semibold" style={{ color: "#628C84" }}>Zone</p>
-                      <p className="text-xs font-bold mt-0.5" style={{ color: "#082420" }}>{table.zone || "\u2014"}</p>
+                      <p className="text-[10px] uppercase text-muted-foreground font-medium">Zone</p>
+                      <p className="text-xs font-semibold text-foreground">
+                        {table.zone || "—"}
+                      </p>
                     </div>
                     <div className="text-right">
-                      <p className="text-[9px] uppercase font-semibold" style={{ color: "#628C84" }}>Status</p>
-                      <div className="flex items-center gap-1 justify-end mt-0.5">
-                        <div className={cn("w-1.5 h-1.5 rounded-full bg-gradient-to-br", config.gradient)} />
-                        <p className="text-xs font-bold" style={{ color: "#082420" }}>{config.label}</p>
+                      <p className="text-[10px] uppercase text-muted-foreground font-medium">
+                        Status
+                      </p>
+                      <div className="flex items-center gap-1 justify-end">
+                        <span className={cn("size-1.5 rounded-full", config.dot)} />
+                        <p className="text-xs font-semibold text-foreground">{config.label}</p>
                       </div>
                     </div>
                   </div>
-
-                  {/* Action hint */}
-                  {config.selectable && (
-                    <div className="pt-2 border-t opacity-0 group-hover:opacity-100 transition-opacity duration-300" 
-                      style={{ borderColor: "rgba(11, 59, 54,  0.08)" }}>
-                      <div className="flex items-center justify-center gap-1.5">
-                        <span className="text-[9px] font-bold uppercase" style={{ color: "#0B3B36" }}>
-                          Select Table
-                        </span>
-                        <ArrowRight className="h-3 w-3" style={{ color: "#0B3B36" }} strokeWidth={2.5} />
-                      </div>
-                    </div>
-                  )}
                 </CardContent>
 
-                {/* Hover overlay */}
                 {config.selectable && (
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#0B3B36]/0 to-[#0B3B36]/0 group-hover:from-[#0B3B36]/5 group-hover:to-[#0B3B36]/10 transition-all duration-500 pointer-events-none" />
+                  <CardFooter className="border-t py-2 justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span className="inline-flex items-center gap-1 text-[10px] font-semibold uppercase text-primary">
+                      Select Table <ArrowRight className="size-3" />
+                    </span>
+                  </CardFooter>
                 )}
               </Card>
             );
-          })
-        )}
-      </div>
+          })}
+        </div>
+      )}
     </div>
   );
 }
-
-// ─── ENHANCED MENU GRID ───────────────────────────────────────────────────────
 
 interface MenuGridProps {
   items: MenuItem[];
@@ -322,238 +291,173 @@ export function MenuGrid({
 
   return (
     <div className="flex flex-col">
-      {/* Enhanced Header */}
-      <div 
-        className="px-3 sm:px-6 py-4 sm:py-5 border-b backdrop-blur-xl sticky top-[40px] md:top-[44px] lg:top-[54px] z-20"
-        style={{
-          background: "rgba(255,255,255,0.92)",
-          borderColor: "rgba(11, 59, 54,  0.08)",
-        }}
-      >
-        {/* Gradient accent */}
-        <div className="absolute top-0 left-0 right-0 h-[2px]"
-          style={{ background: "linear-gradient(90deg, #0B3B36 0%, #13584F 50%, #0B3B36 100%)" }}
-        />
+      <div className="px-4 sm:px-6 py-4 border-b bg-card/90 backdrop-blur-md sticky top-12 z-20 space-y-3">
+        <div className="flex items-center gap-3">
+          <Button variant="outline" size="icon-sm" onClick={onBack}>
+            <ArrowLeft className="size-4" />
+          </Button>
 
-        <div className="flex flex-col gap-4">
-          {/* Title row */}
-          <div className="flex items-center gap-3">
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={onBack}
-              className="h-10 w-10 rounded-xl border-2 shrink-0 transition-all hover:scale-105 active:scale-95"
-              style={{
-                borderColor: "rgba(11, 59, 54,  0.15)",
-                color: "#0B3B36",
-              }}
-            >
-              <ArrowLeft className="h-4 w-4" strokeWidth={2.5} />
-            </Button>
-
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2 flex-wrap">
-                <h2 className="text-xl sm:text-2xl font-bold" style={{ color: "#082420" }}>
-                  Grande Menu
-                </h2>
-                {selectedTable && (
-                  <Badge className="text-[10px] font-bold px-2.5 py-1 rounded-lg border-0 text-white shadow-md"
-                    style={{ background: "#0B3B36" }}>
-                    Table {selectedTable.number.toString().padStart(2, "0")}
-                  </Badge>
-                )}
-              </div>
-              <p className="text-[11px] font-semibold mt-1" style={{ color: "#4B6E67" }}>
-                {filtered.length} item{filtered.length !== 1 ? "s" : ""} available
-              </p>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2 flex-wrap">
+              <h2 className="text-lg sm:text-xl font-semibold text-foreground">Grande Menu</h2>
+              {selectedTable && (
+                <Badge>Table {selectedTable.number.toString().padStart(2, "0")}</Badge>
+              )}
             </div>
-
-            {/* Search - desktop */}
-            <div className="relative w-64 shrink-0 hidden sm:block">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4" style={{ color: "#A2C5BC" }} strokeWidth={2.5} />
-              <Input
-                placeholder="Search menu…"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="pl-10 h-10 border-2 rounded-xl text-sm"
-                style={{
-                  borderColor: "rgba(11, 59, 54,  0.12)",
-                  color: "#082420",
-                }}
-              />
-            </div>
+            <p className="text-xs text-muted-foreground">
+              {filtered.length} item{filtered.length !== 1 ? "s" : ""} available
+            </p>
           </div>
 
-          {/* Search - mobile */}
-          <div className="relative sm:hidden">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4" style={{ color: "#A2C5BC" }} strokeWidth={2.5} />
-            <Input
+          <InputGroup className="w-60 hidden sm:flex">
+            <InputGroupAddon>
+              <Search />
+            </InputGroupAddon>
+            <InputGroupInput
               placeholder="Search menu…"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="pl-10 h-10 border-2 rounded-xl text-sm"
-              style={{
-                borderColor: "rgba(11, 59, 54,  0.12)",
-                color: "#082420",
-              }}
             />
-          </div>
+          </InputGroup>
+        </div>
 
-          {/* Enhanced Category tabs - scrollable on mobile */}
-          <ScrollArea className="w-full">
-            <Tabs value={activeCategory} onValueChange={onCategoryChange}>
-              <TabsList className="bg-white border-2 p-1 h-auto gap-1 rounded-xl inline-flex w-full sm:w-auto"
-                style={{ borderColor: "rgba(11, 59, 54,  0.12)" }}>
-                {categories.map((cat) => (
+        <InputGroup className="sm:hidden">
+          <InputGroupAddon>
+            <Search />
+          </InputGroupAddon>
+          <InputGroupInput
+            placeholder="Search menu…"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </InputGroup>
+
+        <ScrollArea className="w-full">
+          <Tabs value={activeCategory} onValueChange={onCategoryChange}>
+            <TabsList>
+              {categories.map((cat) => {
+                const isActive = activeCategory === cat.id;
+                return (
                   <TabsTrigger
                     key={cat.id}
                     value={cat.id}
-                    className={cn(
-                      "px-3 py-2 text-[10px] font-bold uppercase rounded-lg transition-all duration-300 whitespace-nowrap",
-                      "data-[state=active]:text-white data-[state=active]:shadow-md",
-                      "text-[#4B6E67]"
-                    )}
-                    style={{
-                      background: activeCategory === cat.id
-                        ? "linear-gradient(135deg, #0B3B36 0%, #062421 100%)"
-                        : "transparent"
-                    }}
+                    className="relative data-[state=active]:bg-transparent data-[state=active]:shadow-none"
                   >
-                    {cat.label}
-                  </TabsTrigger>
-                ))}
-              </TabsList>
-            </Tabs>
-          </ScrollArea>
-        </div>
-      </div>
-
-      <div className="flex-1">
-        <div className="px-3 sm:px-6 lg:px-8 py-4 sm:py-8 pb-24 w-full">
-          {filtered.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-16 sm:py-24 gap-4">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl flex items-center justify-center"
-                style={{ background: "rgba(11, 59, 54,  0.08)" }}>
-                <div 
-                  className="h-8 w-8 sm:h-10 sm:w-10" 
-                  style={{ 
-                    backgroundColor: "#A2C5BC",
-                    WebkitMaskImage: `url('/dining-table.png')`,
-                    WebkitMaskRepeat: "no-repeat",
-                    WebkitMaskSize: "contain",
-                    WebkitMaskPosition: "center"
-                  }} 
-                />
-              </div>
-              <div className="text-center">
-                <p className="text-sm font-bold" style={{ color: "#082420" }}>No items found</p>
-                <p className="text-xs mt-1" style={{ color: "#628C84" }}>Try a different category or search term</p>
-              </div>
-            </div>
-          ) : (
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-5">
-              {filtered.map((item) => {
-                const imgSrc = item.image || categoryImages[item.category] || 
-                  "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=300&h=200&fit=crop";
-                
-                return (
-                  <Card
-                    key={item.id}
-                    className="group relative flex flex-col overflow-hidden rounded-xl border bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-                    style={{
-                      borderColor: "rgba(11, 59, 54,  0.1)",
-                      boxShadow: "0 2px 10px rgba(13,3,27,0.06)",
-                    }}
-                  >
-                    {/* ── Image section ──────────────────────────────────────── */}
-                    <div className="relative aspect-[4/3] overflow-hidden rounded-t-lg mx-0 shrink-0">
-                      <img
-                        src={imgSrc}
-                        alt={item.name}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-                        loading="lazy"
+                    {isActive && (
+                      <motion.span
+                        layoutId="waiter-cat-pill"
+                        transition={SPRING_SNAPPY}
+                        aria-hidden="true"
+                        className="absolute inset-0 rounded-md bg-background shadow-sm"
                       />
-                      {/* Scrim */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-80" />
-
-                      {/* Live badge — top-left */}
-                      <div className="absolute top-2 left-2">
-                        <span
-                          className="flex items-center gap-1 text-[8px] font-bold uppercase px-2 py-0.5 rounded-full text-white"
-                          style={{
-                            background: "oklch(0.62 0.16 150 / 0.85)",
-                            backdropFilter: "blur(6px)",
-                          }}
-                        >
-                          <span className="w-1 h-1 rounded-full bg-white animate-pulse" />
-                          Live
-                        </span>
-                      </div>
-
-                      {/* Price — bottom-left */}
-                      <div className="absolute bottom-2 left-2">
-                        <p className="text-white font-bold text-[14px] leading-none tabular-nums drop-shadow-sm">
-                          KES {item.price.toLocaleString()}
-                        </p>
-                        <p className="text-white/70 text-[8px] font-bold uppercase mt-0.5">
-                          {item.category}
-                        </p>
-                      </div>
-
-                      {/* Rating — bottom-right */}
-                      <div
-                        className="absolute bottom-2 right-2 flex items-center gap-0.5 px-1.5 py-0.5 rounded-lg"
-                        style={{ background:"rgba(0,0,0,0.35)", backdropFilter:"blur(4px)" }}
-                      >
-                        <Star className="h-2.5 w-2.5 fill-yellow-400 text-yellow-400" />
-                        <span className="text-white text-[9px] font-bold">4.8</span>
-                      </div>
-                    </div>
-
-                    {/* ── Card body ──────────────────────────────────────────── */}
-                    <div className="flex flex-col flex-1 p-2 gap-2">
-                      <div className="flex items-start justify-between gap-1">
-                        <h3
-                          className="text-[12px] font-bold leading-tight line-clamp-2 flex-1"
-                          style={{ color: "#082420" }}
-                        >
-                          {item.name}
-                        </h3>
-                        <MoreHorizontal className="h-3.5 w-3.5 opacity-40 shrink-0" />
-                      </div>
-
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-1 text-[8px] font-bold uppercase opacity-60" style={{ color: "#0B3B36" }}>
-                          <TrendingUp className="h-2.5 w-2.5" /> High Demand
-                        </div>
-                        <span className="text-[8px] opacity-40 font-bold uppercase">50+ orders</span>
-                      </div>
-
-                      <button
-                        onClick={() => onAddItem(item)}
-                        className="mt-auto flex items-center justify-center gap-1 text-[9px] font-bold uppercase py-1.5 rounded-lg transition-all active:scale-95"
-                        style={{ 
-                          color:"oklch(0.42 0.14 150)", 
-                          background:"oklch(0.62 0.16 150 / 0.08)",
-                          border: "1px solid oklch(0.62 0.16 150 / 0.15)"
-                        }}
-                      >
-                        <ShoppingCart className="h-3 w-3" />
-                        Add to Order
-                      </button>
-                    </div>
-                  </Card>
+                    )}
+                    <span className="relative z-10">{cat.label}</span>
+                  </TabsTrigger>
                 );
               })}
-            </div>
-          )}
-        </div>
+            </TabsList>
+          </Tabs>
+        </ScrollArea>
+      </div>
+
+      <div className="px-4 sm:px-6 lg:px-8 py-6 pb-24">
+        {filtered.length === 0 ? (
+          <Empty className="py-16 border">
+            <EmptyHeader>
+              <EmptyMedia variant="icon">
+                <Search />
+              </EmptyMedia>
+              <EmptyTitle>No items found</EmptyTitle>
+              <EmptyDescription>Try a different category or search term.</EmptyDescription>
+            </EmptyHeader>
+          </Empty>
+        ) : (
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+            {filtered.map((item) => {
+              const imgSrc =
+                item.image ||
+                categoryImages[item.category] ||
+                "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=300&h=200&fit=crop";
+
+              return (
+                <Card
+                  key={item.id}
+                  size="sm"
+                  className="group gap-0 py-0 overflow-hidden transition-[border-color,box-shadow] duration-150 ease-(--ease-out) hover:shadow-md"
+                >
+                  <div className="relative aspect-[4/3] overflow-hidden shrink-0 bg-muted">
+                    <img
+                      src={imgSrc}
+                      alt={item.name}
+                      className="w-full h-full object-cover transition-transform duration-300 ease-(--ease-out) group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+
+                    <Badge
+                      variant="default"
+                      className="absolute top-2 left-2 text-[9px] uppercase gap-1"
+                    >
+                      <span className="size-1.5 rounded-full bg-current" />
+                      Live
+                    </Badge>
+
+                    <div className="absolute bottom-2 left-2.5">
+                      <p className="text-white font-bold text-sm leading-none tabular-nums">
+                        KES {item.price.toLocaleString()}
+                      </p>
+                      <p className="text-white/70 text-[9px] font-medium uppercase mt-0.5">
+                        {item.category}
+                      </p>
+                    </div>
+
+                    <Badge
+                      variant="secondary"
+                      className="absolute bottom-2 right-2 gap-1 bg-black/60 text-white border-0 text-[10px]"
+                    >
+                      <Star className="size-2.5 fill-yellow-400 text-yellow-400" />
+                      4.8
+                    </Badge>
+                  </div>
+
+                  <CardHeader className="pt-3 pb-1">
+                    <CardTitle className="text-xs leading-snug line-clamp-2">
+                      {item.name}
+                    </CardTitle>
+                    <CardAction>
+                      <MoreHorizontal className="size-3.5 text-muted-foreground" />
+                    </CardAction>
+                  </CardHeader>
+
+                  <CardContent className="pb-2 flex-1">
+                    <div className="flex items-center justify-between text-[10px] text-muted-foreground">
+                      <span className="inline-flex items-center gap-1 uppercase font-medium">
+                        <TrendingUp className="size-3 text-primary" /> High Demand
+                      </span>
+                      <span>50+ orders</span>
+                    </div>
+                  </CardContent>
+
+                  <CardFooter className="pt-0 pb-3">
+                    <Button
+                      size="xs"
+                      variant="secondary"
+                      className="w-full"
+                      onClick={() => onAddItem(item)}
+                    >
+                      <ShoppingCart className="size-3" />
+                      Add to Order
+                    </Button>
+                  </CardFooter>
+                </Card>
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );
 }
-
-// ─── ENHANCED ORDER CART ──────────────────────────────────────────────────────
 
 interface OrderCartProps {
   table: Table | null;
@@ -577,210 +481,148 @@ export function OrderCart({
   const total = subtotal + tax;
 
   return (
-    <Card className="w-full h-full flex flex-col overflow-hidden border-0 rounded-[24px] shadow-xl"
-      style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.08)" }}>
-      
-      {/* Enhanced Header */}
-      <CardHeader className="shrink-0 p-0">
-        <div className="px-5 pt-5 pb-4 border-b"
-          style={{
-            background: "linear-gradient(135deg, rgba(11, 59, 54,  0.04) 0%, rgba(11, 59, 54,  0.02) 100%)",
-            borderColor: "rgba(11, 59, 54,  0.08)",
-          }}>
-          
-          {/* Gradient accent */}
-          <div className="absolute top-0 left-0 right-0 h-[3px]"
-            style={{ background: "linear-gradient(90deg, #0B3B36 0%, #13584F 50%, #0B3B36 100%)" }}
-          />
-
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center shadow-md"
-                style={{ background: "linear-gradient(135deg, #0B3B36 0%, #062421 100%)" }}>
-                <ShoppingCart className="h-5 w-5 text-white" strokeWidth={2.5} />
-              </div>
-              <div>
-                <p className="text-sm font-bold leading-tight" style={{ color: "#082420" }}>Guest Order</p>
-                <p className="text-[10px] font-medium mt-0.5" style={{ color: "#4B6E67" }}>Selection overview</p>
-              </div>
-            </div>
-
-            {table ? (
-              <Badge className="text-[11px] font-bold px-3 py-1 rounded-lg border-0 text-white shadow-md"
-                style={{ background: "#0B3B36" }}>
-                Table {table.number.toString().padStart(2, "0")}
-              </Badge>
-            ) : (
-              <Badge variant="outline" className="text-[11px] px-3 py-1 rounded-lg border-2"
-                style={{ borderColor: "#A2C5BC", color: "#4B6E67" }}>
-                No Table
-              </Badge>
-            )}
+    <Card className="w-full h-full gap-0 py-0 overflow-hidden border-0 shadow-none">
+      <CardHeader className="py-4 border-b bg-muted/30">
+        <div className="flex items-center gap-3">
+          <div className="flex size-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+            <ShoppingCart className="size-4" />
           </div>
-
-          {/* Enhanced Progress */}
-          {items.length > 0 && (
-            <div className="mt-4 flex items-center gap-2.5">
-              <div className="h-2 flex-1 rounded-full overflow-hidden"
-                style={{ background: "rgba(11, 59, 54,  0.1)" }}>
-                <div
-                  className="h-full rounded-full transition-all duration-500"
-                  style={{
-                    width: `${Math.min((items.length / 10) * 100, 100)}%`,
-                    background: "linear-gradient(90deg, #0B3B36 0%, #13584F 100%)",
-                  }}
-                />
-              </div>
-              <span className="text-[10px] font-bold shrink-0" style={{ color: "#0B3B36" }}>
-                {items.length} item{items.length !== 1 ? "s" : ""}
-              </span>
-            </div>
-          )}
+          <div>
+            <CardTitle className="text-sm">Guest Order</CardTitle>
+            <CardDescription className="text-xs">Selection overview</CardDescription>
+          </div>
         </div>
+        <CardAction>
+          {table ? (
+            <Badge>Table {table.number.toString().padStart(2, "0")}</Badge>
+          ) : (
+            <Badge variant="outline">No Table</Badge>
+          )}
+        </CardAction>
+
+        {items.length > 0 && (
+          <div className="col-span-full mt-2 flex items-center gap-2.5">
+            <Progress value={Math.min((items.length / 10) * 100, 100)} className="h-1.5 flex-1" />
+            <span className="text-xs font-medium text-primary shrink-0">
+              {items.length} item{items.length !== 1 ? "s" : ""}
+            </span>
+          </div>
+        )}
       </CardHeader>
 
-      {/* Body */}
       <CardContent className="flex-1 flex flex-col p-0 overflow-hidden min-h-0">
         {items.length === 0 ? (
-          <div className="flex-1 flex flex-col items-center justify-center p-6 gap-4">
-            <div className="w-16 h-16 rounded-2xl flex items-center justify-center"
-              style={{ background: "rgba(11, 59, 54,  0.08)" }}>
-              <ShoppingCart className="h-8 w-8" style={{ color: "#A2C5BC" }} strokeWidth={2.5} />
-            </div>
-            <div className="text-center">
-              <p className="text-sm font-bold" style={{ color: "#082420" }}>Cart is empty</p>
-              <p className="text-xs mt-1 leading-relaxed" style={{ color: "#628C84" }}>
+          <Empty className="py-12">
+            <EmptyHeader>
+              <EmptyMedia variant="icon">
+                <ShoppingCart />
+              </EmptyMedia>
+              <EmptyTitle className="text-base">Cart is empty</EmptyTitle>
+              <EmptyDescription>
                 {table ? "Browse the menu and add items" : "Select a table to get started"}
-              </p>
-            </div>
-          </div>
+              </EmptyDescription>
+            </EmptyHeader>
+          </Empty>
         ) : (
           <>
-            {/* Cart Items */}
             <ScrollArea className="flex-1 min-h-0">
               <div className="p-4 space-y-2.5">
-                {items.map((item, index) => (
-                  <div
-                    key={item.menuItem.id}
-                    className="flex items-center gap-3 px-3 py-3 rounded-xl border-2 transition-all hover:shadow-md"
-                    style={{
-                      background: "rgba(11, 59, 54,  0.02)",
-                      borderColor: "rgba(11, 59, 54,  0.08)",
-                    }}
-                  >
-                    {/* Index */}
-                    <div className="w-6 h-6 rounded-lg shrink-0 flex items-center justify-center text-[11px] font-bold border"
-                      style={{
-                        background: "white",
-                        borderColor: "rgba(11, 59, 54,  0.2)",
-                        color: "#0B3B36",
-                      }}>
-                      {index + 1}
-                    </div>
+                <AnimatePresence mode="popLayout" initial={false}>
+                  {items.map((item, index) => (
+                    <motion.div
+                      key={item.menuItem.id}
+                      layout="position"
+                      initial={{ opacity: 0, y: 6, scale: 0.98 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, x: 14, scale: 0.96 }}
+                      transition={FAST_TRANSITION}
+                      className="flex items-center gap-3 px-3 py-2.5 rounded-lg border bg-muted/20"
+                    >
+                      <Badge variant="outline" className="size-6 p-0 justify-center shrink-0">
+                        {index + 1}
+                      </Badge>
 
-                    {/* Info */}
-                    <div className="flex-1 min-w-0">
-                      <p className="text-[13px] font-bold truncate leading-tight" style={{ color: "#082420" }}>
-                        {item.menuItem.name}
-                      </p>
-                      <p className="text-[11px] font-semibold mt-1" style={{ color: "#4B6E67" }}>
-                        KES {item.menuItem.price.toLocaleString()}
-                      </p>
-                    </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium truncate text-foreground">
+                          {item.menuItem.name}
+                        </p>
+                        <p className="text-xs text-muted-foreground tabular-nums">
+                          KES {item.menuItem.price.toLocaleString()}
+                        </p>
+                      </div>
 
-                    {/* Controls */}
-                    <div className="flex items-center gap-1.5 shrink-0">
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        className="h-7 w-7 rounded-lg border-2 transition-all hover:scale-110 active:scale-95"
-                        onClick={() => onUpdateQuantity(item.menuItem.id, item.quantity - 1)}
-                        style={{
-                          borderColor: "rgba(11, 59, 54,  0.2)",
-                          color: "#0B3B36",
-                        }}
-                      >
-                        <Minus className="h-3 w-3" strokeWidth={2.5} />
-                      </Button>
-                      
-                      <span className="w-6 text-center text-sm font-bold" style={{ color: "#082420" }}>
-                        {item.quantity}
-                      </span>
-                      
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        className="h-7 w-7 rounded-lg border-2 transition-all hover:scale-110 active:scale-95"
-                        onClick={() => onUpdateQuantity(item.menuItem.id, item.quantity + 1)}
-                        style={{
-                          borderColor: "rgba(11, 59, 54,  0.2)",
-                          color: "#0B3B36",
-                        }}
-                      >
-                        <Plus className="h-3 w-3" strokeWidth={2.5} />
-                      </Button>
-                      
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-7 w-7 rounded-lg ml-1 text-red-400 hover:text-red-600 hover:bg-red-50 transition-all hover:scale-110 active:scale-95"
-                        onClick={() => onRemoveItem(item.menuItem.id)}
-                      >
-                        <Trash2 className="h-3.5 w-3.5" strokeWidth={2.5} />
-                      </Button>
-                    </div>
-                  </div>
-                ))}
+                      <div className="flex items-center gap-1 shrink-0">
+                        <ButtonGroup>
+                          <Button
+                            variant="outline"
+                            size="icon-xs"
+                            onClick={() => onUpdateQuantity(item.menuItem.id, item.quantity - 1)}
+                          >
+                            <Minus className="size-3" />
+                          </Button>
+                          <span className="inline-flex items-center justify-center w-7 text-xs font-semibold tabular-nums border-y bg-background">
+                            {item.quantity}
+                          </span>
+                          <Button
+                            variant="outline"
+                            size="icon-xs"
+                            onClick={() => onUpdateQuantity(item.menuItem.id, item.quantity + 1)}
+                          >
+                            <Plus className="size-3" />
+                          </Button>
+                        </ButtonGroup>
+
+                        <Button
+                          variant="ghost"
+                          size="icon-xs"
+                          className="text-destructive hover:bg-destructive/10 hover:text-destructive ml-1"
+                          onClick={() => onRemoveItem(item.menuItem.id)}
+                        >
+                          <Trash2 className="size-3.5" />
+                        </Button>
+                      </div>
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
               </div>
             </ScrollArea>
 
-            {/* Enhanced Summary */}
-            <div className="shrink-0 border-t" style={{ borderColor: "rgba(11, 59, 54,  0.08)" }}>
-              <div className="px-5 pt-4 pb-3 space-y-2">
-                <div className="flex justify-between items-center">
-                  <span className="text-xs font-semibold" style={{ color: "#4B6E67" }}>Subtotal</span>
-                  <span className="text-xs font-bold" style={{ color: "#082420" }}>KES {subtotal.toLocaleString()}</span>
+            <div className="shrink-0 border-t bg-card">
+              <div className="px-5 pt-3.5 pb-3 space-y-1.5 text-xs">
+                <div className="flex justify-between text-muted-foreground">
+                  <span>Subtotal</span>
+                  <span className="font-medium text-foreground tabular-nums">
+                    KES {subtotal.toLocaleString()}
+                  </span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-xs font-semibold" style={{ color: "#4B6E67" }}>VAT (16%)</span>
-                  <span className="text-xs font-bold" style={{ color: "#082420" }}>KES {tax.toLocaleString()}</span>
+                <div className="flex justify-between text-muted-foreground">
+                  <span>VAT (16%)</span>
+                  <span className="font-medium text-foreground tabular-nums">
+                    KES {tax.toLocaleString()}
+                  </span>
                 </div>
-                
-                <Separator style={{ background: "rgba(11, 59, 54,  0.08)" }} />
-                
-                <div className="flex justify-between items-end pt-1">
-                  <span className="text-sm font-bold" style={{ color: "#082420" }}>Total</span>
+                <Separator className="my-2" />
+                <div className="flex justify-between items-baseline">
+                  <span className="text-sm font-semibold text-foreground">Total</span>
                   <div className="text-right">
-                    <p className="text-2xl font-bold leading-tight" style={{ color: "#0B3B36" }}>
+                    <p className="text-xl font-bold text-primary tabular-nums">
                       KES {total.toLocaleString()}
                     </p>
-                    <p className="text-[9px] font-medium mt-0.5" style={{ color: "#A2C5BC" }}>Inclusive of VAT</p>
+                    <p className="text-[10px] text-muted-foreground">Inclusive of VAT</p>
                   </div>
                 </div>
               </div>
 
               <div className="flex gap-2 px-4 pb-4">
-                <Button
-                  variant="outline"
-                  className="flex-1 h-10 text-xs font-bold uppercase rounded-xl border-2 transition-all hover:scale-105 active:scale-95"
-                  onClick={onClearCart}
-                  style={{
-                    borderColor: "rgba(11, 59, 54,  0.15)",
-                    color: "#4B6E67",
-                  }}
-                >
+                <Button variant="outline" className="flex-1" onClick={onClearCart}>
                   Clear
                 </Button>
                 <Button
-                  className="flex-[2] h-10 text-xs font-bold uppercase rounded-xl gap-2 border-0 text-white transition-all hover:-translate-y-0.5 hover:shadow-xl active:translate-y-0 active:scale-95 disabled:opacity-50"
+                  className="flex-[2] gap-2"
                   onClick={onPlaceOrder}
                   disabled={!table}
-                  style={{
-                    background: "linear-gradient(135deg, #0B3B36 0%, #062421 100%)",
-                    boxShadow: "0 4px 16px rgba(11, 59, 54,  0.3)",
-                  }}
                 >
-                  <Check className="h-4 w-4" strokeWidth={2.5} />
+                  <Check className="size-4" />
                   Place Order
                 </Button>
               </div>

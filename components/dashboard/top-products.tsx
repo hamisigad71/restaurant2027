@@ -1,7 +1,14 @@
 "use client"
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
+import { Item, ItemActions, ItemContent, ItemGroup, ItemTitle } from "@/components/ui/item"
 import { mockMenuItems } from "@/lib/mock-data"
 
 const topProducts = [
@@ -12,40 +19,39 @@ const topProducts = [
   { item: mockMenuItems[8], quantity: 52, revenue: 13000 },
 ]
 
-const maxQuantity = Math.max(...topProducts.map(p => p.quantity))
+const maxQuantity = Math.max(...topProducts.map((p) => p.quantity))
 
 export function TopProducts() {
   return (
-    <Card className="bg-card border-border/50 shadow-sm relative overflow-hidden group">
+    <Card>
       <CardHeader>
-        <CardTitle className="text-xl font-heading text-foreground">Top Performing Selection</CardTitle>
-        <p className="text-[10px] uppercase text-muted-foreground font-medium">Best sellers this period</p>
+        <CardTitle className="text-lg">Top Performing Selection</CardTitle>
+        <CardDescription>Best sellers this period</CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="space-y-6">
+        <ItemGroup className="gap-4">
           {topProducts.map((product, index) => (
-            <div key={product.item.id} className="flex items-center gap-4 group/item">
-              <span className="text-xs font-heading text-muted-foreground/50 w-4 group-hover/item:text-primary transition-colors">
+            <Item key={product.item.id} size="sm" className="p-0 gap-3 flex-nowrap">
+              <span className="text-xs font-medium text-muted-foreground w-4 tabular-nums">
                 {index + 1}
               </span>
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center justify-between mb-2">
-                  <p className="text-sm font-heading text-foreground truncate">{product.item.name}</p>
-                  <span className="text-[10px] uppercase text-muted-foreground font-medium">{product.quantity} units sold</span>
+              <ItemContent className="min-w-0 gap-1.5">
+                <div className="flex items-center justify-between gap-2">
+                  <ItemTitle className="truncate">{product.item.name}</ItemTitle>
+                  <span className="text-xs text-muted-foreground shrink-0">
+                    {product.quantity} units
+                  </span>
                 </div>
-                <Progress
-                  value={(product.quantity / maxQuantity) * 100}
-                  className="h-1.5 bg-primary/10"
-                />
-              </div>
-              <div className="text-right ml-4">
-                <span className="text-sm font-heading text-primary whitespace-nowrap">
+                <Progress value={(product.quantity / maxQuantity) * 100} className="h-1.5" />
+              </ItemContent>
+              <ItemActions className="shrink-0">
+                <span className="text-sm font-semibold tabular-nums text-primary whitespace-nowrap">
                   KSh {product.revenue.toLocaleString()}
                 </span>
-              </div>
-            </div>
+              </ItemActions>
+            </Item>
           ))}
-        </div>
+        </ItemGroup>
       </CardContent>
     </Card>
   )

@@ -33,7 +33,7 @@ export default function ForgotPasswordPage() {
           <TableTapLogo variant="light" size="md" />
         </div>
 
-        <Card className="border-border bg-card">
+        <Card>
           <CardHeader className="text-center pb-4">
             <CardTitle className="text-2xl">Reset password</CardTitle>
             <CardDescription>
@@ -67,7 +67,6 @@ export default function ForgotPasswordPage() {
                     type="email"
                     placeholder="name@restaurant.com"
                     required
-                    className="bg-secondary border-border"
                   />
                 </Field>
 

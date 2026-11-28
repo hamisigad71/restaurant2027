@@ -57,6 +57,7 @@ const allNavItems: NavItem[] = [
   { name: "Analytics", href: "/admin/analytics", icon: "/graphic-progression.png", permission: "analytics", portal: "admin" },
   { name: "Inventory", href: "/admin/inventory", icon: "/logistics.png", permission: "inventory", portal: "admin" },
   { name: "Menu", href: "/admin/menu", icon: "/menu-nav.png", permission: "menu", portal: "admin" },
+  { name: "Table QR Codes", href: "/customer/qr-menu", icon: "/dining-table.png", permission: "menu", portal: "admin" },
   { name: "Staff", href: "/admin/staff", icon: "/staff.png", permission: "staff", portal: "admin" },
   { name: "Payments", href: "/admin/payments", icon: CreditCardIcon, permission: "payments", portal: "admin" },
   { name: "Reports", href: "/admin/reports", icon: "/graphic-progression.png", permission: "reports", portal: "admin" },
@@ -67,6 +68,7 @@ const allNavItems: NavItem[] = [
   { name: "Orders", href: "/manager/orders", icon: "/food-delivery.png", permission: "orders", portal: "manager" },
   { name: "Inventory", href: "/manager/inventory", icon: "/logistics.png", permission: "inventory", portal: "manager" },
   { name: "Menu", href: "/manager/menu", icon: "/menu-nav.png", permission: "menu", portal: "manager" },
+  { name: "Table QR Codes", href: "/customer/qr-menu", icon: "/dining-table.png", permission: "menu", portal: "manager" },
   { name: "Staff Oversight", href: "/manager/staff", icon: "/staff.png", permission: "staff", portal: "manager" },
   { name: "Reservations", href: "/manager/reservations", icon: "/calendar.png", permission: "reservations", portal: "manager" },
   { name: "Expenses", href: "/manager/expenses", icon: "/expences.png", permission: "expenses", portal: "manager" },
@@ -78,6 +80,7 @@ const allNavItems: NavItem[] = [
   { name: "Service Floor", href: "/waiter/service-floor", icon: "/service-floor-nav.png", permission: "orders", portal: "waiter" },
   { name: "Order Tracking", href: "/waiter/order-tracking", icon: "/food-delivery.png", permission: "orders", portal: "waiter" },
   { name: "Menu", href: "/waiter/menu", icon: "/menu-nav.png", permission: "orders", portal: "waiter" },
+  { name: "Table QR Codes", href: "/customer/qr-menu", icon: "/dining-table.png", permission: "orders", portal: "waiter" },
   { name: "Checkout", href: "/waiter/checkout", icon: "/checkout-nav.png", permission: "orders", portal: "waiter" },
   
   // Kitchen
